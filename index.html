@@ -300,9 +300,14 @@
   }
 
   function nextSong() {
-    songIndex = (songIndex + 1) % songs.length;
-    loadSong();
-  }
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * songs.length);
+  } while (newIndex === songIndex); // 防止连续重复
+  songIndex = newIndex;
+  loadSong();
+}
+  
 
   loadSong();
 

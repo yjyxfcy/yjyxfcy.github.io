@@ -346,7 +346,7 @@
       artist: "许嵩",
       url: "/music/1.mp3"
     },
-        {
+    {
       title: "半城烟沙",
       artist: "许嵩",
       url: "/music/2.mp3"
@@ -767,28 +767,32 @@
   const player = document.getElementById("song-player");
 
   function loadSong() {
-    const song = songs[songIndex];
-    document.getElementById("song-title").innerText = song.title;
-    document.getElementById("song-artist").innerText = song.artist;
-    player.src = song.url;
-    player.load();
+    const s = songs[songIndex];
+    document.getElementById("song-title").innerText = s.title;
+    document.getElementById("song-artist").innerText = s.artist;
+    player.src = s.url;
+    player.currentTime = songTime;
     player.play();
   }
 
   function nextSong() {
-    songIndex = (songIndex + 1) % songs.length;
+    songIndex = (parseInt(songIndex) + 1) % songs.length;
+    localStorage.setItem("songIndex", songIndex);
+    songTime = 0;
+    localStorage.setItem("songTime", 0);
     loadSong();
   }
 
-  // 播放结束 → 自动下一首
-  player.addEventListener("ended", () => {
-    nextSong();
+  player.addEventListener("timeupdate", () => {
+    localStorage.setItem("songTime", player.currentTime);
   });
+
+  player.addEventListener("ended", nextSong);
 
   loadSong();
   document.addEventListener("pjax:complete", () => {
-  if (!player.paused) player.play();
-});
+    if (!player.paused) player.play();
+  });
   // 📜 今日诗词 API
   function loadPoem() {
     fetch("https://v1.jinrishici.com/all.json")

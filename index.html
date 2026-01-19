@@ -273,9 +273,19 @@
   // 🎵 你的歌单（你可以自己加！）
   const songs = [
     {
-      //title: "白马非马",
-      //artist: "许嵩",
-      //url: "/music/1.mp3"
+      title: "晴天",
+      artist: "周杰伦",
+      url: "https://y.qq.com/n/ryqq_v2/songDetail/0039MnYb0qxYhV"
+    },
+    {
+      title: "年少有为",
+      artist: "李荣浩",
+      url: "https://y.qq.com/n/ryqq_v2/songDetail/004DXFlC0nsTCZ"
+    },
+    {
+      title: "起风了",
+      artist: "买辣椒也用券",
+      url: "https://y.qq.com/n/ryqq_v2/songDetail/0004jPDk2eB2dt"
     }
   ];
 
@@ -290,14 +300,8 @@
   }
 
   function nextSong() {
-  let newIndex;
-  do {
-    newIndex = Math.floor(Math.random() * songs.length);
-  } while (newIndex === songIndex); // 防止连续重复
-  songIndex = newIndex;
-  loadSong();
-}
-
+    songIndex = (songIndex + 1) % songs.length;
+    loadSong();
   }
 
   loadSong();

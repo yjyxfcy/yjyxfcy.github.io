@@ -808,38 +808,68 @@
       url: "/music/84.mp3"
     }
   ];
+let playQueue = JSON.parse(localStorage.getItem("playQueue")) || [];
+let currentIndex = parseInt(localStorage.getItem("currentIndex")) || 0;
+let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
 
-  let songIndex = Math.floor(Math.random() * songs.length);
-  const player = document.getElementById("song-player");
+function shuffle(array) {
+  let arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
-  function loadSong() {
-    const s = songs[songIndex];
-    document.getElementById("song-title").innerText = s.title;
-    document.getElementById("song-artist").innerText = s.artist;
-    player.src = s.url;
-    player.currentTime = songTime;
-    player.play();
+function initQueue() {
+  playQueue = shuffle(songs);
+  currentIndex = 0;
+  localStorage.setItem("playQueue", JSON.stringify(playQueue));
+  localStorage.setItem("currentIndex", 0);
+}
+
+if (playQueue.length === 0) {
+  initQueue();
+}
+
+const player = document.getElementById("song-player");
+
+function loadSong() {
+  const s = playQueue[currentIndex];
+  document.getElementById("song-title").innerText = s.title;
+  document.getElementById("song-artist").innerText = s.artist;
+  player.src = s.url;
+  player.currentTime = songTime;
+  player.play();
+}
+
+function nextSong() {
+  currentIndex++;
+
+  if (currentIndex >= playQueue.length) {
+    initQueue(); // 全部播完 → 重新洗牌
   }
 
-  function nextSong() {
-    let newIndex;
-  do {
-    newIndex = Math.floor(Math.random() * songs.length);
-  } while (newIndex === songIndex); // 防止连续重复
-  songIndex = newIndex;
+  songTime = 0;
+  localStorage.setItem("songTime", 0);
+  localStorage.setItem("currentIndex", currentIndex);
   loadSong();
-  }
+}
 
-  player.addEventListener("timeupdate", () => {
-    localStorage.setItem("songTime", player.currentTime);
-  });
+// 记住播放进度
+player.addEventListener("timeupdate", () => {
+  localStorage.setItem("songTime", player.currentTime);
+});
 
-  player.addEventListener("ended", nextSong);
+// 播完自动下一首
+player.addEventListener("ended", nextSong);
 
-  loadSong();
-  document.addEventListener("pjax:complete", () => {
-    if (!player.paused) player.play();
-  });
+// PJAX 切页不重置
+document.addEventListener("pjax:complete", () => {
+  if (!player.paused) player.play();
+});
+
+loadSong();
   // 📜 今日诗词 API
   function loadPoem() {
     fetch("https://v1.jinrishici.com/all.json")

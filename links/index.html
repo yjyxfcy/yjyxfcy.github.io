@@ -889,11 +889,12 @@
   }
 
   function nextSong() {
-    songIndex = (parseInt(songIndex) + 1) % songs.length;
-    localStorage.setItem("songIndex", songIndex);
-    songTime = 0;
-    localStorage.setItem("songTime", 0);
-    loadSong();
+    let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * songs.length);
+  } while (newIndex === songIndex); // 防止连续重复
+  songIndex = newIndex;
+  loadSong();
   }
 
   player.addEventListener("timeupdate", () => {

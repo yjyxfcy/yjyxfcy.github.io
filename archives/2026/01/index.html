@@ -808,7 +808,9 @@
   });
 
   loadSong();
-
+  document.addEventListener("pjax:complete", () => {
+  if (!player.paused) player.play();
+});
   // 📜 今日诗词 API
   function loadPoem() {
     fetch("https://v1.jinrishici.com/all.json")

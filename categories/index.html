@@ -299,7 +299,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>本网站基于Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid开发</span></a><br> 感谢 <a href="https://chat.openai.com" target="_blank">ChatGPT</a> 的帮助<br> © 2026 <a href="https://yjyxfcy.github.io/" target="_blank"> Yjy&apos;s Blog </a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>本网站基于Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid开发</span></a><br> © 2026 <a href="https://yjyxfcy.github.io/" target="_blank"> Yjy&apos;s Blog </a> 
     </div>
   
   
@@ -331,6 +331,555 @@
   
   
 </div>
+<div class="daily-wrapper">
+  <!-- 今日推歌 -->
+  <div class="daily-card">
+    <h3>🎵 今日推歌</h3>
+    <div id="song-title" class="song-title"></div>
+    <div id="song-artist" class="song-artist"></div>
+    <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
+    <button class="daily-btn" onclick="nextSong()">换一首</button>
+  </div>
+
+  <!-- 今日诗词 -->
+  <div class="daily-card">
+    <h3>📜 今日诗词</h3>
+    <div id="poem-content" class="poem-content">加载中...</div>
+    <div id="poem-info" class="poem-info"></div>
+    <button class="daily-btn" onclick="loadPoem()">换一首</button>
+  </div>
+</div>
+
+<script>
+  // 🎵 你的歌单（你可以自己加！）
+  const songs = [
+    {
+      title: "白马非马",
+      artist: "许嵩",
+      url: "/music/1.mp3"
+    },
+        {
+      title: "半城烟沙",
+      artist: "许嵩",
+      url: "/music/2.mp3"
+    },
+    {
+      title: "伴虎",
+      artist: "许嵩",
+      url: "/music/3.mp3"
+    },
+    {
+      title: "拆东墙",
+      artist: "许嵩",
+      url: "/music/4.mp3"
+    },
+    {
+      title: "尘世美",
+      artist: "许嵩",
+      url: "/music/5.mp3"
+    },
+    {
+      title: "弹指一挥间",
+      artist: "许嵩",
+      url: "/music/6.mp3"
+    },
+    {
+      title: "断桥残雪",
+      artist: "许嵩",
+      url: "/music/7.mp3"
+    },
+    {
+      title: "放肆",
+      artist: "许嵩",
+      url: "/music/8.mp3"
+    },
+    {
+      title: "蝴蝶的时间",
+      artist: "许嵩",
+      url: "/music/9.mp3"
+    },
+    {
+      title: "画平生",
+      artist: "许嵩",
+      url: "/music/10.mp3"
+    },
+    {
+      title: "幻听",
+      artist: "许嵩",
+      url: "/music/11.mp3"
+    },
+    {
+      title: "将芯比心",
+      artist: "许嵩",
+      url: "/music/12.mp3"
+    },
+    {
+      title: "今年勇",
+      artist: "许嵩",
+      url: "/music/13.mp3"
+    },
+    {
+      title: "绝代风华",
+      artist: "许嵩",
+      url: "/music/14.mp3"
+    },
+    {
+      title: "科幻",
+      artist: "许嵩",
+      url: "/music/15.mp3"
+    },
+    {
+      title: "温泉",
+      artist: "许嵩 刘美麟",
+      url: "/music/16.mp3"
+    },
+    {
+      title: "庐州月",
+      artist: "许嵩",
+      url: "/music/17.mp3"
+    },
+    {
+      title: "惊鸿一面",
+      artist: "许嵩 黄龄",
+      url: "/music/18.mp3"
+    },
+    {
+      title: "书香年华",
+      artist: "许嵩 孙涛",
+      url: "/music/19.mp3"
+    },
+    {
+      title: "江湖",
+      artist: "许嵩",
+      url: "/music/20.mp3"
+    },
+    {
+      title: "曼陀山庄",
+      artist: "许嵩",
+      url: "/music/21.mp3"
+    },
+    {
+      title: "玫瑰花的葬礼",
+      artist: "许嵩",
+      url: "/music/22.mp3"
+    },
+    {
+      title: "明智之举",
+      artist: "许嵩",
+      url: "/music/23.mp3"
+    },
+    {
+      title: "庞贝",
+      artist: "许嵩",
+      url: "/music/24.mp3"
+    },
+    {
+      title: "平行宇宙",
+      artist: "许嵩",
+      url: "/music/25.mp3"
+    },
+    {
+      title: "七夕",
+      artist: "许嵩",
+      url: "/music/26.mp3"
+    },
+    {
+      title: "千百度",
+      artist: "许嵩",
+      url: "/music/27.mp3"
+    },
+    {
+      title: "千古",
+      artist: "许嵩",
+      url: "/music/28.mp3"
+    },
+    {
+      title: "清明雨上",
+      artist: "许嵩",
+      url: "/music/29.mp3"
+    },
+    {
+      title: "如果当时",
+      artist: "许嵩",
+      url: "/music/30.mp3"
+    },
+    {
+      title: "如谜",
+      artist: "许嵩",
+      url: "/music/31.mp3"
+    },
+    {
+      title: "如约而至",
+      artist: "许嵩",
+      url: "/music/32.mp3"
+    },
+    {
+      title: "山水之间",
+      artist: "许嵩",
+      url: "/music/33.mp3"
+    },
+    {
+      title: "摄影艺术",
+      artist: "许嵩",
+      url: "/music/34.mp3"
+    },
+    {
+      title: "诗画中国",
+      artist: "许嵩 谭维维",
+      url: "/music/35.mp3"
+    },
+    {
+      title: "天龙八部之宿敌",
+      artist: "许嵩",
+      url: "/music/36.mp3"
+    },
+    {
+      title: "惟爱你",
+      artist: "许嵩",
+      url: "/music/37.mp3"
+    },
+    {
+      title: "我乐意",
+      artist: "许嵩",
+      url: "/music/38.mp3"
+    },
+    {
+      title: "乌鸦",
+      artist: "许嵩",
+      url: "/music/39.mp3"
+    },
+    {
+      title: "梧桐灯",
+      artist: "许嵩",
+      url: "/music/40.mp3"
+    },
+    {
+      title: "想象之中",
+      artist: "许嵩",
+      url: "/music/41.mp3"
+    },
+    {
+      title: "心有所向",
+      artist: "许嵩",
+      url: "/music/42.mp3"
+    },
+    {
+      title: "星座书上",
+      artist: "许嵩",
+      url: "/music/43.mp3"
+    },
+    {
+      title: "雅俗共赏",
+      artist: "许嵩",
+      url: "/music/44.mp3"
+    },
+    {
+      title: "燕归巢",
+      artist: "许嵩",
+      url: "/music/45.mp3"
+    },
+    {
+      title: "有何不可",
+      artist: "许嵩",
+      url: "/music/46.mp3"
+    },
+    {
+      title: "宇宙之大",
+      artist: "许嵩",
+      url: "/music/47.mp3"
+    },
+    {
+      title: "雨幕",
+      artist: "许嵩",
+      url: "/music/48.mp3"
+    },
+    {
+      title: "在那不遥远的地方",
+      artist: "许嵩",
+      url: "/music/49.mp3"
+    },
+    {
+      title: "早发白帝城",
+      artist: "许嵩",
+      url: "/music/50.mp3"
+    },
+    {
+      title: "只有你",
+      artist: "许嵩",
+      url: "/music/51.mp3"
+    },
+    {
+      title: "纸上雪",
+      artist: "许嵩",
+      url: "/music/52.mp3"
+    },
+    {
+      title: "最佳歌手",
+      artist: "许嵩",
+      url: "/music/53.mp3"
+    },
+    {
+      title: "摆脱",
+      artist: "许嵩",
+      url: "/music/54.mp3"
+    },
+    {
+      title: "超市",
+      artist: "许嵩",
+      url: "/music/55.mp3"
+    },
+    {
+      title: "大千世界",
+      artist: "许嵩",
+      url: "/music/56.mp3"
+    },
+    {
+      title: "多余的解释",
+      artist: "许嵩",
+      url: "/music/57.mp3"
+    },
+    {
+      title: "隔代",
+      artist: "许嵩",
+      url: "/music/58.mp3"
+    },
+    {
+      title: "素颜",
+      artist: "许嵩 何曼婷",
+      url: "/music/59.mp3"
+    },
+    {
+      title: "河山大好",
+      artist: "许嵩",
+      url: "/music/60.mp3"
+    },
+    {
+      title: "胡萝卜须",
+      artist: "许嵩",
+      url: "/music/61.mp3"
+    },
+    {
+      title: "灰色头像",
+      artist: "许嵩",
+      url: "/music/62.mp3"
+    },
+    {
+      title: "降温",
+      artist: "许嵩",
+      url: "/music/63.mp3"
+    },
+    {
+      title: "揽仙歌",
+      artist: "许嵩",
+      url: "/music/64.mp3"
+    },
+    {
+      title: "浪",
+      artist: "许嵩",
+      url: "/music/65.mp3"
+    },
+    {
+      title: "老古董",
+      artist: "许嵩",
+      url: "/music/66.mp3"
+    },
+    {
+      title: "留香",
+      artist: "许嵩",
+      url: "/music/67.mp3"
+    },
+    {
+      title: "柳成荫",
+      artist: "许嵩",
+      url: "/music/68.mp3"
+    },
+    {
+      title: "内线",
+      artist: "许嵩",
+      url: "/music/69.mp3"
+    },
+    {
+      title: "七号公园",
+      artist: "许嵩",
+      url: "/music/70.mp3"
+    },
+    {
+      title: "亲情式的爱情",
+      artist: "许嵩",
+      url: "/music/71.mp3"
+    },
+    {
+      title: "全球变冷",
+      artist: "许嵩",
+      url: "/music/72.mp3"
+    },
+    {
+      title: "认错",
+      artist: "许嵩",
+      url: "/music/73.mp3"
+    },
+    {
+      title: "三尺",
+      artist: "许嵩",
+      url: "/music/74.mp3"
+    },
+    {
+      title: "双人旁",
+      artist: "许嵩",
+      url: "/music/75.mp3"
+    },
+    {
+      title: "天知道",
+      artist: "许嵩",
+      url: "/music/76.mp3"
+    },
+    {
+      title: "通关",
+      artist: "许嵩",
+      url: "/music/77.mp3"
+    },
+    {
+      title: "我想牵着你的手",
+      artist: "许嵩",
+      url: "/music/78.mp3"
+    },
+    {
+      title: "小烦恼没什么大不了",
+      artist: "许嵩",
+      url: "/music/79.mp3"
+    },
+    {
+      title: "野路",
+      artist: "许嵩",
+      url: "/music/80.mp3"
+    },
+    {
+      title: "野人",
+      artist: "许嵩",
+      url: "/music/81.mp3"
+    },
+    {
+      title: "医生",
+      artist: "许嵩",
+      url: "/music/82.mp3"
+    },
+    {
+      title: "艺术家们",
+      artist: "许嵩",
+      url: "/music/83.mp3"
+    },
+    {
+      title: "有桃花",
+      artist: "许嵩",
+      url: "/music/84.mp3"
+    }
+  ];
+
+  let songIndex = Math.floor(Math.random() * songs.length);
+  const player = document.getElementById("song-player");
+
+  function loadSong() {
+    const song = songs[songIndex];
+    document.getElementById("song-title").innerText = song.title;
+    document.getElementById("song-artist").innerText = song.artist;
+    player.src = song.url;
+    player.load();
+    player.play();
+  }
+
+  function nextSong() {
+    songIndex = (songIndex + 1) % songs.length;
+    loadSong();
+  }
+
+  // 播放结束 → 自动下一首
+  player.addEventListener("ended", () => {
+    nextSong();
+  });
+
+  loadSong();
+
+  // 📜 今日诗词 API
+  function loadPoem() {
+    fetch("https://v1.jinrishici.com/all.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("poem-content").innerText = data.content;
+        document.getElementById("poem-info").innerText =
+          `—— ${data.author}《${data.origin}》`;
+      })
+      .catch(() => {
+        document.getElementById("poem-content").innerText = "获取失败";
+      });
+  }
+
+  loadPoem();
+</script>
+
+<style>
+  .daily-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .daily-card {
+    flex: 1;
+    min-width: 260px;
+    padding: 1.2rem;
+    border-radius: 18px;
+    background: var(--card-bg-color);
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    text-align: center;
+
+    /* 👇 关键对齐代码 */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .daily-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .song-title {
+    font-weight: bold;
+    margin-top: 0.3rem;
+  }
+
+  .song-artist {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  .daily-btn {
+    margin-top: auto;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+
+  .daily-btn:hover {
+    background: #ff6f91;
+  }
+
+  .poem-content {
+    font-size: 1rem;
+    line-height: 2.2;
+    margin: 0.5rem 0;
+  }
+
+  .poem-info {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+</style>
 
   </footer>
 

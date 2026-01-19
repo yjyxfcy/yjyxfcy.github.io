@@ -300,14 +300,14 @@
   }
 
   function nextSong() {
-  let newIndex;
-  do {
-    newIndex = Math.floor(Math.random() * songs.length);
-  } while (newIndex === songIndex); // 防止连续重复
-  songIndex = newIndex;
-  loadSong();
-}
-  
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * songs.length);
+    } while (newIndex === songIndex); // 防止连续重复
+    songIndex = newIndex;
+    loadSong();
+  }
+
 
   loadSong();
 
@@ -329,72 +329,69 @@
 </script>
 
 <style>
-.daily-wrapper {
-  display: flex;
-  gap: 1rem;
-  margin: 2rem 0;
-  flex-wrap: wrap;
-}
+  .daily-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
 
-.daily-card {
-  flex: 1;
-  min-width: 260px;
-  padding: 1.2rem;
-  border-radius: 18px;
-  background: var(--card-bg-color);
-  box-shadow: var(--box-shadow);
-  transition: all 0.3s ease;
-  text-align: center;
+  .daily-card {
+    flex: 1;
+    min-width: 260px;
+    padding: 1.2rem;
+    border-radius: 18px;
+    background: var(--card-bg-color);
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    text-align: center;
 
-  /* 👇 关键对齐代码 */
-  display: flex;
-  flex-direction: column;
-}
+    /* 👇 关键对齐代码 */
+    display: flex;
+    flex-direction: column;
+  }
 
-.daily-card:hover {
-  transform: translateY(-4px);
-}
+  .daily-card:hover {
+    transform: translateY(-4px);
+  }
 
-.song-title {
-  font-weight: bold;
-  margin-top: 0.3rem;
-}
+  .song-title {
+    font-weight: bold;
+    margin-top: 0.3rem;
+  }
 
-.song-artist {
-  font-size: 0.85rem;
-  opacity: 0.7;
-}
+  .song-artist {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
 
-.daily-btn {
-  margin-top: auto;
-  padding: 0.2rem 0.7rem;
-  font-size: 0.8rem;
-  border-radius: 14px;
-  border: none;
-  background: #ff8fab;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
+  .daily-btn {
+    margin-top: auto;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
 
 
-.daily-btn:hover {
-  background: #ff6f91;
-}
+  .daily-btn:hover {
+    background: #ff6f91;
+  }
 
-.poem-content {
-  font-size: 1rem;
-  line-height: 2.2;
-  margin: 0.5rem 0;
-}
+  .poem-content {
+    font-size: 1rem;
+    line-height: 2.2;
+    margin: 0.5rem 0;
+  }
 
-.poem-info {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
+  .poem-info {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
 </style>
-
 
 
   <div class="row mx-auto index-card">

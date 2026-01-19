@@ -250,22 +250,25 @@
                 
 
 <h1 style="display: none">Yjy</h1>
-<div class="daily-wrap">
-  <div class="daily-card poetry">
-    <div class="daily-title">📜 今日诗词</div>
-    <div id="poetry-text" class="typing"></div>
-    <button class="daily-btn" onclick="loadPoetry()">换一句</button>
-  </div>
+<div class="daily-container">
+  <div class="daily-grid">
+    <div class="daily-card poetry">
+      <div class="daily-title">📜 今日诗词</div>
+      <div id="poetry-text" class="typing"></div>
+      <button class="daily-btn" onclick="loadPoetry()">换一句</button>
+    </div>
 
-  <div class="daily-card music">
-    <div class="daily-title">🎧 今日推歌</div>
-    <img id="music-cover" class="music-cover" />
-    <div id="music-name"></div>
-    <div id="music-artist"></div>
-    <audio id="music-player" controls></audio>
-    <button class="daily-btn" onclick="loadMusic()">换一首</button>
+    <div class="daily-card music">
+      <div class="daily-title">🎧 今日推歌</div>
+      <img id="music-cover" class="music-cover" />
+      <div id="music-name" class="music-name"></div>
+      <div id="music-artist" class="music-artist"></div>
+      <audio id="music-player" controls></audio>
+      <button class="daily-btn" onclick="loadMusic()">换一首</button>
+    </div>
   </div>
 </div>
+
 
 
   <div class="row mx-auto index-card">

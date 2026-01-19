@@ -250,6 +250,23 @@
                 
 
 <h1 style="display: none">Yjy</h1>
+<div class="daily-wrap">
+  <div class="daily-card poetry">
+    <div class="daily-title">📜 今日诗词</div>
+    <div id="poetry-text" class="typing"></div>
+    <button class="daily-btn" onclick="loadPoetry()">换一句</button>
+  </div>
+
+  <div class="daily-card music">
+    <div class="daily-title">🎧 今日推歌</div>
+    <img id="music-cover" class="music-cover" />
+    <div id="music-name"></div>
+    <div id="music-artist"></div>
+    <audio id="music-player" controls></audio>
+    <button class="daily-btn" onclick="loadMusic()">换一首</button>
+  </div>
+</div>
+
 
   <div class="row mx-auto index-card">
     
@@ -423,6 +440,61 @@
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
+
+<script>
+async function loadPoetry() {
+  const el = document.getElementById("poetry-text");
+  el.innerHTML = "加载中...";
+
+  try {
+    const res = await fetch("https://v1.jinrishici.com/all.json");
+    const data = await res.json();
+    typeWriter(data.content + " —— " + data.author);
+  } catch {
+    el.innerHTML = "加载失败";
+  }
+}
+
+function typeWriter(text) {
+  const el = document.getElementById("poetry-text");
+  el.innerHTML = "";
+  let i = 0;
+  const timer = setInterval(() => {
+    el.innerHTML += text[i];
+    i++;
+    if (i >= text.length) clearInterval(timer);
+  }, 60);
+}
+
+loadPoetry();
+</script>
+
+<script>
+const musicList = [
+  {
+    name: "River",
+    artist: "Joni Mitchell",
+    url: "https://example.com/1.mp3",
+    cover: "https://picsum.photos/300/300?1"
+  },
+  {
+    name: "Mystery of Love",
+    artist: "Sufjan Stevens",
+    url: "https://example.com/2.mp3",
+    cover: "https://picsum.photos/300/300?2"
+  }
+];
+
+function loadMusic() {
+  const song = musicList[Math.floor(Math.random() * musicList.length)];
+  document.getElementById("music-name").innerText = song.name;
+  document.getElementById("music-artist").innerText = song.artist;
+  document.getElementById("music-cover").src = song.cover;
+  document.getElementById("music-player").src = song.url;
+}
+
+loadMusic();
+</script>
 
 
   

@@ -526,6 +526,61 @@
 <!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
+<script>
+async function loadPoetry() {
+  const el = document.getElementById("poetry-text");
+  el.innerHTML = "加载中...";
+
+  try {
+    const res = await fetch("https://v1.jinrishici.com/all.json");
+    const data = await res.json();
+    typeWriter(data.content + " —— " + data.author);
+  } catch {
+    el.innerHTML = "加载失败";
+  }
+}
+
+function typeWriter(text) {
+  const el = document.getElementById("poetry-text");
+  el.innerHTML = "";
+  let i = 0;
+  const timer = setInterval(() => {
+    el.innerHTML += text[i];
+    i++;
+    if (i >= text.length) clearInterval(timer);
+  }, 60);
+}
+
+loadPoetry();
+</script>
+
+<script>
+const musicList = [
+  {
+    name: "River",
+    artist: "Joni Mitchell",
+    url: "https://example.com/1.mp3",
+    cover: "https://picsum.photos/300/300?1"
+  },
+  {
+    name: "Mystery of Love",
+    artist: "Sufjan Stevens",
+    url: "https://example.com/2.mp3",
+    cover: "https://picsum.photos/300/300?2"
+  }
+];
+
+function loadMusic() {
+  const song = musicList[Math.floor(Math.random() * musicList.length)];
+  document.getElementById("music-name").innerText = song.name;
+  document.getElementById("music-artist").innerText = song.artist;
+  document.getElementById("music-cover").src = song.cover;
+  document.getElementById("music-player").src = song.url;
+}
+
+loadMusic();
+</script>
+
 
   
 

@@ -250,28 +250,150 @@
                 
 
 <h1 style="display: none">Yjy</h1>
-<div class="apple-daily-container">
-  <div class="apple-daily-grid">
+<div class="daily-wrapper">
+  <!-- 今日推歌 -->
+  <div class="daily-card">
+    <h3>🎵 今日推歌</h3>
+    <img id="song-cover" class="song-cover" src="" srcset="/img/loading.gif" lazyload />
+    <div id="song-title" class="song-title"></div>
+    <div id="song-artist" class="song-artist"></div>
+    <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
+    <button class="daily-btn" onclick="nextSong()">换一首</button>
+  </div>
 
-    <div class="apple-card poetry-card">
-      <div class="apple-title">📜 今日诗词</div>
-      <div id="poetry-text" class="typing-text"></div>
-      <button class="apple-btn" onclick="loadPoetry()">换一句</button>
-    </div>
-
-    <div class="apple-card music-card">
-      <div class="apple-title">🎧 今日推歌</div>
-      <img id="music-cover" class="music-cover"/>
-      <div id="music-name" class="music-name"></div>
-      <div id="music-artist" class="music-artist"></div>
-      <audio id="music-player" controls></audio>
-      <button class="apple-btn" onclick="loadMusic()">换一首</button>
-    </div>
-
+  <!-- 今日诗词 -->
+  <div class="daily-card">
+    <h3>📜 今日诗词</h3>
+    <div id="poem-content" class="poem-content">加载中...</div>
+    <div id="poem-info" class="poem-info"></div>
+    <button class="daily-btn" onclick="loadPoem()">换一首</button>
   </div>
 </div>
 
+<script>
+  // 🎵 你的歌单（你可以自己加！）
+  const songs = [
+    {
+      title: "晴天",
+      artist: "周杰伦",
+      cover: "https://y.qq.com/music/photo_new/T002R300x300M000001fNHEf1SFEFN.jpg",
+      url: "https://music.163.com/song/media/outer/url?id=186016.mp3"
+    },
+    {
+      title: "年少有为",
+      artist: "李荣浩",
+      cover: "https://y.qq.com/music/photo_new/T002R300x300M000003Xf4kU3Tz3vM.jpg",
+      url: "https://music.163.com/song/media/outer/url?id=1330348068.mp3"
+    },
+    {
+      title: "起风了",
+      artist: "买辣椒也用券",
+      cover: "https://y.qq.com/music/photo_new/T002R300x300M000003OUlho2HcRHC.jpg",
+      url: "https://music.163.com/song/media/outer/url?id=1330348068.mp3"
+    }
+  ];
 
+  let songIndex = localStorage.getItem("dailySongIndex") || 0;
+
+  function loadSong() {
+    const song = songs[songIndex];
+    document.getElementById("song-cover").src = song.cover;
+    document.getElementById("song-title").innerText = song.title;
+    document.getElementById("song-artist").innerText = song.artist;
+    document.getElementById("song-player").src = song.url;
+    localStorage.setItem("dailySongIndex", songIndex);
+  }
+
+  function nextSong() {
+    songIndex = (songIndex + 1) % songs.length;
+    loadSong();
+  }
+
+  loadSong();
+
+  // 📜 今日诗词 API
+  function loadPoem() {
+    fetch("https://v1.jinrishici.com/all.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("poem-content").innerText = data.content;
+        document.getElementById("poem-info").innerText =
+          `—— ${data.author}《${data.origin}》`;
+      })
+      .catch(() => {
+        document.getElementById("poem-content").innerText = "获取失败";
+      });
+  }
+
+  loadPoem();
+</script>
+
+<style>
+  .daily-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .daily-card {
+    flex: 1;
+    min-width: 260px;
+    padding: 1.2rem;
+    border-radius: 18px;
+    background: var(--card-bg-color);
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .daily-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .song-cover {
+    width: 120px;
+    border-radius: 12px;
+    margin: 0.5rem auto;
+    display: block;
+  }
+
+  .song-title {
+    font-weight: bold;
+    margin-top: 0.3rem;
+  }
+
+  .song-artist {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  .daily-btn {
+    margin-top: 0.8rem;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .daily-btn:hover {
+    background: #ff6f91;
+  }
+
+  .poem-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0.5rem 0;
+  }
+
+  .poem-info {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+</style>
 
 
 
@@ -447,71 +569,6 @@
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
-
-<script>
-async function loadPoetry() {
-  const el = document.getElementById("poetry-text");
-  el.innerHTML = "";
-  try {
-    const res = await fetch("https://v1.jinrishici.com/all.json");
-    const data = await res.json();
-    typeWriter(data.content + " —— " + data.author);
-  } catch {
-    el.innerHTML = "加载失败";
-  }
-}
-
-function typeWriter(text) {
-  const el = document.getElementById("poetry-text");
-  el.innerHTML = "";
-  let i = 0;
-  const timer = setInterval(() => {
-    el.innerHTML += text[i];
-    i++;
-    if (i >= text.length) clearInterval(timer);
-  }, 45);
-}
-
-loadPoetry();
-</script>
-
-<script>
-const musicByTime = {
-  morning: [
-    {name:"晴天", artist:"周杰伦", cover:"https://picsum.photos/500?1", url:"https://music.163.com/song/media/outer/url?id=186016.mp3"}
-  ],
-  afternoon: [
-    {name:"Shape of You", artist:"Ed Sheeran", cover:"https://picsum.photos/500?2", url:"https://music.163.com/song/media/outer/url?id=451703096.mp3"}
-  ],
-  night: [
-    {name:"River", artist:"Joni Mitchell", cover:"https://picsum.photos/500?3", url:"https://music.163.com/song/media/outer/url?id=16232635.mp3"}
-  ],
-  late: [
-    {name:"Nuvole Bianche", artist:"Einaudi", cover:"https://picsum.photos/500?4", url:"https://music.163.com/song/media/outer/url?id=28403111.mp3"}
-  ]
-};
-
-function getTimePeriod() {
-  const h = new Date().getHours();
-  if (h >= 6 && h < 11) return "morning";
-  if (h >= 11 && h < 18) return "afternoon";
-  if (h >= 18 && h < 23) return "night";
-  return "late";
-}
-
-function loadMusic() {
-  const period = getTimePeriod();
-  const list = musicByTime[period];
-  const song = list[Math.floor(Math.random() * list.length)];
-
-  document.getElementById("music-name").innerText = song.name;
-  document.getElementById("music-artist").innerText = song.artist;
-  document.getElementById("music-cover").src = song.cover;
-  document.getElementById("music-player").src = song.url;
-}
-
-loadMusic();
-</script>
 
 
   

@@ -539,25 +539,27 @@
     }
   ];
 
-  let songIndex = localStorage.getItem("dailySongIndex") || 0;
+  let songIndex = Math.floor(Math.random() * songs.length);
+  const player = document.getElementById("song-player");
 
   function loadSong() {
     const song = songs[songIndex];
     document.getElementById("song-title").innerText = song.title;
     document.getElementById("song-artist").innerText = song.artist;
-    document.getElementById("song-player").src = song.url;
-    localStorage.setItem("dailySongIndex", songIndex);
+    player.src = song.url;
+    player.load();
+    player.play();
   }
 
   function nextSong() {
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * songs.length);
-    } while (newIndex === songIndex); // 防止连续重复
-    songIndex = newIndex;
+    songIndex = (songIndex + 1) % songs.length;
     loadSong();
   }
 
+  // 播放结束 → 自动下一首
+  player.addEventListener("ended", () => {
+    nextSong();
+  });
 
   loadSong();
 

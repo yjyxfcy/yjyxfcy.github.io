@@ -273,20 +273,110 @@
   // 🎵 你的歌单（你可以自己加！）
   const songs = [
     {
-      title: "晴天",
-      artist: "周杰伦",
-      url: "https://y.qq.com/n/ryqq_v2/songDetail/0039MnYb0qxYhV"
+      title: "白马非马",
+      artist: "许嵩",
+      url: "/music/许嵩-白马非马.mp3"
     },
     {
-      title: "年少有为",
-      artist: "李荣浩",
-      url: "https://y.qq.com/n/ryqq_v2/songDetail/004DXFlC0nsTCZ"
+      title: "半城烟沙",
+      artist: "许嵩",
+      url: "/music/许嵩-半城烟沙(网游《天龙八部2》主题曲).mp3"
     },
     {
-      title: "起风了",
-      artist: "买辣椒也用券",
-      url: "https://y.qq.com/n/ryqq_v2/songDetail/0004jPDk2eB2dt"
-    }
+      title: "伴虎",
+      artist: "许嵩",
+      url: "/music/许嵩-伴虎.mp3"
+    },
+    {
+      title: "拆东墙",
+      artist: "许嵩",
+      url: "/music/许嵩-拆东墙.mp3"
+    },
+    {
+      title: "尘世美",
+      artist: "许嵩",
+      url: "/music/许嵩-尘世美.mp3"
+    },
+    {
+      title: "弹指一挥间",
+      artist: "许嵩",
+      url: "/music/许嵩-弹指一挥间.mp3"
+    },
+    {
+      title: "半城烟沙",
+      artist: "许嵩",
+      url: "/music/许嵩-半城烟沙(网游《天龙八部2》主题曲).mp3"
+    },
+    {
+      title: "断桥残雪",
+      artist: "许嵩",
+      url: "/music/许嵩-断桥残雪.mp3"
+    },
+    {
+      title: "半城烟沙",
+      artist: "许嵩",
+      url: "/music/许嵩-半城烟沙(网游《天龙八部2》主题曲).mp3"
+    },
+    {
+      title: "放肆",
+      artist: "许嵩",
+      url: "/music/许嵩-放肆 (游戏《天龙八部》怀旧版主题曲).mp3"
+    },
+    {
+      title: "半城烟沙",
+      artist: "许嵩",
+      url: "/music/许嵩-半城烟沙(网游《天龙八部2》主题曲).mp3"
+    },
+    {
+      title: "蝴蝶的时间",
+      artist: "许嵩",
+      url: "/music/许嵩-蝴蝶的时间(网络剧《梁山伯与祝英台新传》主题曲).mp3"
+    },
+    {
+      title: "画平生",
+      artist: "许嵩",
+      url: "/music/许嵩-画平生（电影《花千骨》主题曲）.mp3"
+    },
+    {
+      title: "幻听",
+      artist: "许嵩",
+      url: "/music/许嵩-幻听.mp3"
+    },
+    {
+      title: "半城烟沙",
+      artist: "许嵩",
+      url: "/music/许嵩-半城烟沙(网游《天龙八部2》主题曲).mp3"
+    },
+    {
+      title: "将芯比心",
+      artist: "许嵩",
+      url: "/music/许嵩-将芯比心（《2024中国·AI盛典》主题曲）.mp3"
+    },
+    {
+      title: "今年勇",
+      artist: "许嵩",
+      url: "/music/许嵩-今年勇(游戏《神武2》主题曲).mp3"
+    },
+    {
+      title: "绝代风华",
+      artist: "许嵩",
+      url: "/music/许嵩-绝代风华(游戏《天下3》十周年主题曲).mp3"
+    },
+    {
+      title: "科幻",
+      artist: "许嵩",
+      url: "/music/许嵩-科幻.mp3"
+    },
+    {
+      title: "温泉",
+      artist: "许嵩 刘美麟",
+      url: "/music/许嵩刘美麟-温泉.mp3"
+    },
+    {
+      title: "庐州月",
+      artist: "许嵩",
+      url: "/music/许嵩-庐州月.mp3"
+    },
   ];
 
   let songIndex = localStorage.getItem("dailySongIndex") || 0;
@@ -300,8 +390,14 @@
   }
 
   function nextSong() {
-    songIndex = (songIndex + 1) % songs.length;
-    loadSong();
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * songs.length);
+  } while (newIndex === songIndex); // 防止连续重复
+  songIndex = newIndex;
+  loadSong();
+}
+
   }
 
   loadSong();

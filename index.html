@@ -254,7 +254,6 @@
   <!-- 今日推歌 -->
   <div class="daily-card">
     <h3>🎵 今日推歌</h3>
-    <img id="song-cover" class="song-cover" src="" srcset="/img/loading.gif" lazyload />
     <div id="song-title" class="song-title"></div>
     <div id="song-artist" class="song-artist"></div>
     <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
@@ -276,12 +275,12 @@
     {
       title: "晴天",
       artist: "周杰伦",
-      url: "https://music.163.com/song/media/outer/url?id=186016.mp3"
+      url: "https://y.qq.com/n/ryqq_v2/songDetail/0039MnYb0qxYhV"
     },
     {
       title: "年少有为",
       artist: "李荣浩",
-      url: "https://music.163.com/song/media/outer/url?id=1330348068.mp3"
+      url: "https://y.qq.com/n/ryqq_v2/songDetail/004DXFlC0nsTCZ"
     },
     {
       title: "起风了",
@@ -294,7 +293,6 @@
 
   function loadSong() {
     const song = songs[songIndex];
-    document.getElementById("song-cover").src = song.cover;
     document.getElementById("song-title").innerText = song.title;
     document.getElementById("song-artist").innerText = song.artist;
     document.getElementById("song-player").src = song.url;
@@ -346,13 +344,6 @@
 
   .daily-card:hover {
     transform: translateY(-4px);
-  }
-
-  .song-cover {
-    width: 120px;
-    border-radius: 12px;
-    margin: 0.5rem auto;
-    display: block;
   }
 
   .song-title {

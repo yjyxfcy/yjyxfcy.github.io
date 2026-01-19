@@ -250,24 +250,28 @@
                 
 
 <h1 style="display: none">Yjy</h1>
-<div class="daily-container">
-  <div class="daily-grid">
-    <div class="daily-card poetry">
-      <div class="daily-title">📜 今日诗词</div>
-      <div id="poetry-text" class="typing"></div>
-      <button class="daily-btn" onclick="loadPoetry()">换一句</button>
+<div class="apple-daily-container">
+  <div class="apple-daily-grid">
+
+    <div class="apple-card poetry-card">
+      <div class="apple-title">📜 今日诗词</div>
+      <div id="poetry-text" class="typing-text"></div>
+      <button class="apple-btn" onclick="loadPoetry()">换一句</button>
     </div>
 
-    <div class="daily-card music">
-      <div class="daily-title">🎧 今日推歌</div>
-      <img id="music-cover" class="music-cover" />
+    <div class="apple-card music-card">
+      <div class="apple-title">🎧 今日推歌</div>
+      <img id="music-cover" class="music-cover"/>
       <div id="music-name" class="music-name"></div>
       <div id="music-artist" class="music-artist"></div>
       <audio id="music-player" controls></audio>
-      <button class="daily-btn" onclick="loadMusic()">换一首</button>
+      <button class="apple-btn" onclick="loadMusic()">换一首</button>
     </div>
+
   </div>
 </div>
+
+
 
 
 
@@ -447,8 +451,7 @@
 <script>
 async function loadPoetry() {
   const el = document.getElementById("poetry-text");
-  el.innerHTML = "加载中...";
-
+  el.innerHTML = "";
   try {
     const res = await fetch("https://v1.jinrishici.com/all.json");
     const data = await res.json();
@@ -466,30 +469,41 @@ function typeWriter(text) {
     el.innerHTML += text[i];
     i++;
     if (i >= text.length) clearInterval(timer);
-  }, 60);
+  }, 45);
 }
 
 loadPoetry();
 </script>
 
 <script>
-const musicList = [
-  {
-    name: "River",
-    artist: "Joni Mitchell",
-    url: "https://example.com/1.mp3",
-    cover: "https://picsum.photos/300/300?1"
-  },
-  {
-    name: "Mystery of Love",
-    artist: "Sufjan Stevens",
-    url: "https://example.com/2.mp3",
-    cover: "https://picsum.photos/300/300?2"
-  }
-];
+const musicByTime = {
+  morning: [
+    {name:"晴天", artist:"周杰伦", cover:"https://picsum.photos/500?1", url:"https://music.163.com/song/media/outer/url?id=186016.mp3"}
+  ],
+  afternoon: [
+    {name:"Shape of You", artist:"Ed Sheeran", cover:"https://picsum.photos/500?2", url:"https://music.163.com/song/media/outer/url?id=451703096.mp3"}
+  ],
+  night: [
+    {name:"River", artist:"Joni Mitchell", cover:"https://picsum.photos/500?3", url:"https://music.163.com/song/media/outer/url?id=16232635.mp3"}
+  ],
+  late: [
+    {name:"Nuvole Bianche", artist:"Einaudi", cover:"https://picsum.photos/500?4", url:"https://music.163.com/song/media/outer/url?id=28403111.mp3"}
+  ]
+};
+
+function getTimePeriod() {
+  const h = new Date().getHours();
+  if (h >= 6 && h < 11) return "morning";
+  if (h >= 11 && h < 18) return "afternoon";
+  if (h >= 18 && h < 23) return "night";
+  return "late";
+}
 
 function loadMusic() {
-  const song = musicList[Math.floor(Math.random() * musicList.length)];
+  const period = getTimePeriod();
+  const list = musicByTime[period];
+  const song = list[Math.floor(Math.random() * list.length)];
+
   document.getElementById("music-name").innerText = song.name;
   document.getElementById("music-artist").innerText = song.artist;
   document.getElementById("music-cover").src = song.cover;

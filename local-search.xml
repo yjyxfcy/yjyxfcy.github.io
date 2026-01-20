@@ -4,6 +4,32 @@
   
   
   <entry>
+    <title>CV Final Project</title>
+    <link href="/2026/01/20/CV%20Final%20Project/"/>
+    <url>/2026/01/20/CV%20Final%20Project/</url>
+    
+    <content type="html"><![CDATA[<p>这是北京大学信息科学技术学院计算机视觉(2025秋)的<a href="https://miniature-chopper-420.notion.site/Computer-Vision-2be2d6fbd10c8187bdc6ec3e9ad7886e#2be2d6fbd10c81818189ffe3f041e311">大作业</a>，由<a href="https://github.com/gry1024">gry1024</a>、<a href="https://github.com/dreamawakener">dreamawakener</a>和<a href="https://github.com/yjyxfcy">yjyxfcy</a>合作完成，主要实现了<a href="https://miniature-chopper-420.notion.site/Comparison-Between-Gatys-style-and-Lapstyle-Style-Transfer-2be2d6fbd10c81e3bddfe84aafc304f2">Neural Style Transfer</a>的基本功能并加以创新。<br><a href="https://github.com/gry1024/Neural-Style-Transfer">项目github链接</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>VCL Final Project</title>
+    <link href="/2026/01/20/VCL%20Final%20Project/"/>
+    <url>/2026/01/20/VCL%20Final%20Project/</url>
+    
+    <content type="html"><![CDATA[<p>这是北京大学信息科学技术学院可视计算与交互概论(2025秋)的<a href="https://vcl.pku.edu.cn/course/vci/project">大作业</a>，我选择了Path Tracing来实现，并与Whitted Ray Tracing做了对比。<br><a href="https://github.com/yjyxfcy/vcl-final-project">项目github链接</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2026/01/16/hello-world/"/>
     <url>/2026/01/16/hello-world/</url>

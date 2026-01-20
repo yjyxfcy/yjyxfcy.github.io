@@ -75,3 +75,18 @@
     grid-template-columns: 1fr;
   }
 }
+.navbar .blog-title {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem; /* 文字和图标间距 */
+}
+
+.navbar .blog-title a {
+  color: inherit; /* 和文字同色 */
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.navbar .blog-title a:hover {
+  color: #4078c0; /* GitHub 蓝 */
+}

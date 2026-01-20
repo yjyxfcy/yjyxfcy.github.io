@@ -450,9 +450,12 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>本博客基于Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid开发</span></a><br> © 2026 <a href="https://yjyxfcy.github.io/" target="_blank"> Yjy&apos;s Blog </a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>本博客基于 Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid 开发</span></a><br>
+© 2026 <a href="https://yjyxfcy.github.io/" target="_blank"> Yjy&apos;s Blog </a> <br>
+<span id="site-runtime"></span><br> 
     </div>
   
+
   
     <div class="statistics">
   
@@ -480,8 +483,11 @@
 </div>
 
   
+
   
 </div>
+
+<!-- 你的 daily 卡片 -->
 <div class="daily-wrapper">
   <!-- 今日推歌 -->
   <div class="daily-card">
@@ -1628,6 +1634,32 @@ loadSong();
     opacity: 0.7;
   }
 </style>
+
+<!-- ====== 运行时间 + 文章数统计 ====== -->
+<script>
+  const startTime = new Date("2025-01-01T00:00:00"); // ← 改成你建站时间
+
+  function updateRuntime() {
+    const now = new Date();
+    let diff = Math.floor((now - startTime) / 1000);
+
+    const days = Math.floor(diff / 86400);
+    diff %= 86400;
+    const hours = Math.floor(diff / 3600);
+    diff %= 3600;
+    const minutes = Math.floor(diff / 60);
+    const seconds = diff % 60;
+
+    const el = document.getElementById("site-runtime");
+    if (el) {
+      el.innerHTML = `本博客已稳定运行 <b>${days}</b> 天 <b>${hours}</b> 小时 <b>${minutes}</b> 分钟 <b>${seconds}</b> 秒`;
+    }
+  }
+
+  setInterval(updateRuntime, 1000);
+  updateRuntime();
+</script>
+
 
   </footer>
 

@@ -1503,31 +1503,46 @@ if(poemCollapsed){
 /* ========= 拖拽功能 ========= */
 function makeDraggable(card, header) {
   let offsetX = 0, offsetY = 0, isDragging = false;
+  let startX = 0, startY = 0;
 
   const startDrag = (e) => {
-    isDragging = true;
-    const rect = card.getBoundingClientRect();
+    isDragging = false;
     if(e.type.startsWith("touch")){
-      offsetX = e.touches[0].clientX - rect.left;
-      offsetY = e.touches[0].clientY - rect.top;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      const rect = card.getBoundingClientRect();
+      offsetX = startX - rect.left;
+      offsetY = startY - rect.top;
     } else {
-      offsetX = e.clientX - rect.left;
-      offsetY = e.clientY - rect.top;
+      startX = e.clientX;
+      startY = e.clientY;
+      const rect = card.getBoundingClientRect();
+      offsetX = startX - rect.left;
+      offsetY = startY - rect.top;
     }
     e.preventDefault();
   }
 
   const drag = (e) => {
-    if(!isDragging) return;
     let x, y;
     if(e.type.startsWith("touch")){
       x = e.touches[0].clientX - offsetX;
       y = e.touches[0].clientY - offsetY;
+      if(Math.abs(e.touches[0].clientX - startX) < 5 &&
+         Math.abs(e.touches[0].clientY - startY) < 5){
+        return; // 移动很小，忽略
+      }
+      isDragging = true;
     } else {
       x = e.clientX - offsetX;
       y = e.clientY - offsetY;
+      if(Math.abs(e.clientX - startX) < 2 &&
+         Math.abs(e.clientY - startY) < 2){
+        return;
+      }
+      isDragging = true;
     }
-    // 限制不出屏幕
+
     const maxX = window.innerWidth - card.offsetWidth;
     const maxY = window.innerHeight - card.offsetHeight;
     x = Math.min(Math.max(0, x), maxX);
@@ -1535,16 +1550,22 @@ function makeDraggable(card, header) {
 
     card.style.left = x + "px";
     card.style.top = y + "px";
-    card.style.right = "auto"; // 避免 right 干扰
+    card.style.right = "auto";
     card.style.bottom = "auto";
   }
 
-  const stopDrag = () => { isDragging = false; }
+  const stopDrag = (e) => {
+    // 如果拖拽距离太小，则触发点击
+    if(!isDragging && e.type.startsWith("touchend")){
+      header.click();
+    }
+    isDragging = false;
+  }
 
   header.addEventListener("mousedown", startDrag);
-  header.addEventListener("touchstart", startDrag);
+  header.addEventListener("touchstart", startDrag, {passive:false});
   document.addEventListener("mousemove", drag);
-  document.addEventListener("touchmove", drag);
+  document.addEventListener("touchmove", drag, {passive:false});
   document.addEventListener("mouseup", stopDrag);
   document.addEventListener("touchend", stopDrag);
 }
@@ -1643,7 +1664,9 @@ loadSong();
   border: none;
   cursor: pointer;
   outline: none;
-  font-size: 12px;
+  font-size: 14px;
+  padding: 6px 8px;
+  touch-action: manipulation;
 }
 
 .card-body { padding: 8px; }

@@ -300,14 +300,14 @@
   <footer>
     <!-- 你的 daily 卡片 -->
 <div id="music-widget" class="float-card left">
-  <div class="card-header">
+  <div class="card-header" id="music-header">
     <span class="header-title">🎵 今日推歌</span>
     <button id="toggle-music-btn" onclick="toggleMusicCard()">—</button>
   </div>
   <div class="card-body" id="music-card-body">
     <div id="music-title">未播放</div>
     <div class="music-time">
-      <span id="current-time">00:00</span>  <span id="duration">00:00</span>
+      <span id="current-time">00:00</span> <span id="duration">00:00</span>
     </div>
     <input type="range" id="music-progress" value="0" min="0" max="100" step="0.1">
     <div class="music-controls">
@@ -319,9 +319,8 @@
   <div class="mini-widget" id="music-mini" onclick="toggleMusicCard()">🎵</div>
 </div>
 
-<!-- 📜 诗词悬浮卡片 -->
 <div id="poem-widget" class="float-card right">
-  <div class="card-header">
+  <div class="card-header" id="poem-header">
     <span class="header-title">📜 今日诗词</span>
     <button id="toggle-poem-btn" onclick="togglePoemCard()">—</button>
   </div>
@@ -1395,7 +1394,6 @@ function togglePoemCard() {
   }
 }
 
-// 初始化显示状态
 if(musicCollapsed){
   musicBody.style.display = "none";
   musicMini.style.display = "flex";
@@ -1410,6 +1408,59 @@ if(poemCollapsed){
   poemBody.style.display = "block";
   poemMini.style.display = "none";
 }
+
+/* ========= 拖拽功能 ========= */
+function makeDraggable(card, header) {
+  let offsetX = 0, offsetY = 0, isDragging = false;
+
+  const startDrag = (e) => {
+    isDragging = true;
+    const rect = card.getBoundingClientRect();
+    if(e.type.startsWith("touch")){
+      offsetX = e.touches[0].clientX - rect.left;
+      offsetY = e.touches[0].clientY - rect.top;
+    } else {
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+    }
+    e.preventDefault();
+  }
+
+  const drag = (e) => {
+    if(!isDragging) return;
+    let x, y;
+    if(e.type.startsWith("touch")){
+      x = e.touches[0].clientX - offsetX;
+      y = e.touches[0].clientY - offsetY;
+    } else {
+      x = e.clientX - offsetX;
+      y = e.clientY - offsetY;
+    }
+    // 限制不出屏幕
+    const maxX = window.innerWidth - card.offsetWidth;
+    const maxY = window.innerHeight - card.offsetHeight;
+    x = Math.min(Math.max(0, x), maxX);
+    y = Math.min(Math.max(0, y), maxY);
+
+    card.style.left = x + "px";
+    card.style.top = y + "px";
+    card.style.right = "auto"; // 避免 right 干扰
+    card.style.bottom = "auto";
+  }
+
+  const stopDrag = () => { isDragging = false; }
+
+  header.addEventListener("mousedown", startDrag);
+  header.addEventListener("touchstart", startDrag);
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("touchmove", drag);
+  document.addEventListener("mouseup", stopDrag);
+  document.addEventListener("touchend", stopDrag);
+}
+
+// 初始化拖拽
+makeDraggable(document.getElementById("music-widget"), document.getElementById("music-header"));
+makeDraggable(document.getElementById("poem-widget"), document.getElementById("poem-header"));
 
 // ------------------ 播放器 ------------------
 function shuffleSongs() {
@@ -1472,6 +1523,7 @@ loadSong();
   position: fixed;
   bottom: 20px;
   width: 260px;
+  max-width: 90%;
   backdrop-filter: blur(12px);
   background: rgba(255,255,255,0.95);
   border-radius: 14px;
@@ -1486,12 +1538,13 @@ loadSong();
 .float-card.right { right: 20px; }
 
 .card-header {
-  padding: 8px 8px;
+  padding: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
   background: rgba(0,0,0,0.05);
+  cursor: move; /* 提示可拖拽 */
 }
 
 .card-header button {
@@ -1502,9 +1555,7 @@ loadSong();
   font-size: 12px;
 }
 
-.card-body {
-  padding: 8px;
-}
+.card-body { padding: 8px; }
 
 .music-time {
   font-size: 12px;
@@ -1513,10 +1564,7 @@ loadSong();
   justify-content: space-between;
 }
 
-#music-progress {
-  width: 100%;
-  margin: 6px 0;
-}
+#music-progress { width: 100%; margin: 6px 0; }
 
 .music-controls {
   display: flex;
@@ -1541,11 +1589,7 @@ loadSong();
 .music-controls button:hover { transform: scale(1.1); }
 .music-controls button:active { transform: scale(0.95); }
 
-.typewriter {
-  min-height: 60px;
-  line-height: 1.8;
-  white-space: pre-line;
-}
+.typewriter { min-height: 60px; line-height: 1.8; white-space: pre-line; }
 
 .change-btn {
   margin-top: 8px;
@@ -1557,7 +1601,7 @@ loadSong();
   cursor: pointer;
 }
 
-/* mini widget */
+/* ========= mini widget ========= */
 .mini-widget {
   display: none;
   position: absolute;
@@ -1575,12 +1619,20 @@ loadSong();
   box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
-.float-card.left .mini-widget {
-  left: -80px; /* 悬浮在左侧边缘 */
+.float-card.left .mini-widget { left: -80px; }
+.float-card.right .mini-widget { right: -80px; }
+
+/* ========= 移动端适配 ========= */
+@media screen and (max-width: 500px) {
+  .float-card { width: 90%; bottom: 10px; font-size: 12px; }
+  .music-controls button { width: 32px; height: 32px; font-size: 16px; }
+  .mini-widget { width: 36px; font-size: 16px; }
+  .float-card.left .mini-widget { left: -60px; }
+  .float-card.right .mini-widget { right: -60px; }
 }
 
-.float-card.right .mini-widget {
-  right: -80px; /* 悬浮在右侧边缘 */
+@media screen and (max-width: 360px) {
+  .float-card { width: 95%; }
 }
 </style>
 

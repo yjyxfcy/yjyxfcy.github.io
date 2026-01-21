@@ -305,29 +305,41 @@
 
   <footer>
     <!-- 你的 daily 卡片 -->
-<div class="daily-wrapper">
-  <!-- 今日推歌 -->
-  <div class="daily-card">
-    <h3>🎵 每日推歌</h3>
-    <div id="song-title" class="song-title"></div>
-    <div id="song-artist" class="song-artist"></div>
-    <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
-    <button class="daily-btn" onclick="nextSong()">换一首</button>
+<!-- 🎵 音乐悬浮卡片 -->
+<div id="music-widget" class="float-card left">
+  <div class="card-header">
+    <span>🎵 今日推歌</span>
+    <button onclick="toggleMusicCard()">—</button>
   </div>
 
-  <!-- 今日诗词 -->
-  <div class="daily-card">
-    <h3>📜 每日诗词</h3>
-    <div id="poem-content" class="poem-content">加载中...</div>
-    <div id="poem-info" class="poem-info"></div>
-    <button class="daily-btn" onclick="loadPoem()">换一首</button>
+  <div class="card-body">
+    <div id="music-title">未播放</div>
+
+    <div class="music-controls">
+      <button onclick="prevSong()">⏮</button>
+      <button onclick="togglePlay()" id="play-btn">▶</button>
+      <button onclick="nextSong()">⏭</button>
+    </div>
+  </div>
+</div>
+
+<!-- 📜 诗词悬浮卡片 -->
+<div id="poem-widget" class="float-card right">
+  <div class="card-header">
+    <span>📜 今日诗词</span>
+    <button onclick="togglePoemCard()">—</button>
+  </div>
+
+  <div class="card-body">
+    <div id="poem-text" class="typewriter"></div>
+    <button class="change-btn" onclick="nextPoem()">换一首</button>
   </div>
 </div>
 
 <script>
-  // 🎵 你的歌单（你可以自己加！）
-  const songs = [
-    {
+<audio id="audio-player"></audio>
+const songs = [
+  {
       title: "白马非马",
       artist: "许嵩",
       url: "/music/1.mp3"
@@ -1337,70 +1349,53 @@
       artist: "纯音乐",
       url: "/music/203.mp3"
     }
-  ];
-let playQueue = JSON.parse(localStorage.getItem("playQueue")) || [];
-let currentIndex = parseInt(localStorage.getItem("currentIndex")) || 0;
-let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
+];
 
-function shuffle(array) {
-  let arr = array.slice();
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
+let shuffled = [];
+let currentIndex = 0;
+const audio = document.getElementById("audio-player");
+const titleEl = document.getElementById("music-title");
+const playBtn = document.getElementById("play-btn");
 
-function initQueue() {
-  playQueue = shuffle(songs);
+function shuffleSongs() {
+  shuffled = [...songs].sort(() => Math.random() - 0.5);
   currentIndex = 0;
-  localStorage.setItem("playQueue", JSON.stringify(playQueue));
-  localStorage.setItem("currentIndex", 0);
 }
-
-if (playQueue.length === 0) {
-  initQueue();
-}
-
-const player = document.getElementById("song-player");
 
 function loadSong() {
-  const s = playQueue[currentIndex];
-  document.getElementById("song-title").innerText = s.title;
-  document.getElementById("song-artist").innerText = s.artist;
-  player.src = s.url;
-  player.currentTime = songTime;
-  player.play();
+  audio.src = shuffled[currentIndex];
+  titleEl.innerText = shuffled[currentIndex].split("/").pop();
+}
+
+function togglePlay() {
+  if (audio.paused) {
+    audio.play();
+    playBtn.innerText = "⏸";
+  } else {
+    audio.pause();
+    playBtn.innerText = "▶";
+  }
 }
 
 function nextSong() {
   currentIndex++;
-
-  if (currentIndex >= playQueue.length) {
-    initQueue(); // 全部播完 → 重新洗牌
-  }
-
-  songTime = 0;
-  localStorage.setItem("songTime", 0);
-  localStorage.setItem("currentIndex", currentIndex);
+  if (currentIndex >= shuffled.length) shuffleSongs();
   loadSong();
+  audio.play();
 }
 
-// 记住播放进度
-player.addEventListener("timeupdate", () => {
-  localStorage.setItem("songTime", player.currentTime);
-});
+function prevSong() {
+  currentIndex--;
+  if (currentIndex < 0) currentIndex = shuffled.length - 1;
+  loadSong();
+  audio.play();
+}
 
-// 播完自动下一首
-player.addEventListener("ended", nextSong);
+audio.addEventListener("ended", nextSong);
 
-// PJAX 切页不重置
-document.addEventListener("pjax:complete", () => {
-  if (!player.paused) player.play();
-});
-
+// 初始化
+shuffleSongs();
 loadSong();
-  // 📜 今日诗词 API
   function loadPoem() {
     fetch("https://v1.jinrishici.com/all.json")
       .then(res => res.json())
@@ -1416,71 +1411,76 @@ loadSong();
 
   loadPoem();
 </script>
-
 <style>
-  .daily-wrapper {
-    display: flex;
-    gap: 1rem;
-    margin: 2rem 0;
-    flex-wrap: wrap;
-  }
+.float-card {
+  position: fixed;
+  bottom: 20px;
+  width: 260px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.85);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  font-size: 14px;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
 
-  .daily-card {
-    flex: 1;
-    min-width: 260px;
-    padding: 1.2rem;
-    border-radius: 18px;
-    background: var(--card-bg-color);
-    box-shadow: var(--box-shadow);
-    transition: all 0.3s ease;
-    text-align: center;
+.float-card.left { left: 20px; }
+.float-card.right { right: 20px; }
 
-    /* 👇 关键对齐代码 */
-    display: flex;
-    flex-direction: column;
-  }
+.card-header {
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  background: rgba(0,0,0,0.05);
+}
 
-  .daily-card:hover {
-    transform: translateY(-4px);
-  }
+.card-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-  .song-title {
-    font-weight: bold;
-    margin-top: 0.3rem;
-  }
+.card-body {
+  padding: 12px;
+}
 
-  .song-artist {
-    font-size: 0.85rem;
-    opacity: 0.7;
-  }
+.music-controls {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
 
-  .daily-btn {
-    margin-top: auto;
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    border: none;
-    background: #ff8fab;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
-  }
+.music-controls button {
+  border: none;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
 
+.typewriter {
+  min-height: 60px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
 
-  .daily-btn:hover {
-    background: #ff6f91;
-  }
-
-  .poem-content {
-    font-size: 1rem;
-    line-height: 2.2;
-    margin: 0.5rem 0;
-  }
-
-  .poem-info {
-    font-size: 0.8rem;
-    opacity: 0.7;
-  }
+.change-btn {
+  margin-top: 8px;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  background: none;
+  cursor: pointer;
+}
 </style>
+
 
 <!-- ====== 运行时间 + 文章数统计 ====== -->
 <script>

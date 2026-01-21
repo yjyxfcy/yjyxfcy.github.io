@@ -314,7 +314,7 @@
 <div id="music-widget" class="float-card left">
   <div class="card-header" id="music-header">
     <span class="header-title">🎵 每日推歌(图标可拖动~)</span>
-    <button id="toggle-music-btn" onclick="toggleMusicCard()">—</button>
+    <button id="toggle-music-btn" onclick="toggleMusicCard()"></button>
   </div>
   <div class="card-body" id="music-card-body">
     <div id="music-title">未播放</div>
@@ -334,7 +334,7 @@
 <div id="poem-widget" class="float-card right">
   <div class="card-header" id="poem-header">
     <span class="header-title">📜 每日诗词(图标可拖动~)</span>
-    <button id="toggle-poem-btn" onclick="togglePoemCard()">—</button>
+    <button id="toggle-poem-btn" onclick="togglePoemCard()"></button>
   </div>
   <div class="card-body" id="poem-card-body">
     <div id="poem-text" class="typewriter">加载中...</div>
@@ -1384,7 +1384,7 @@ function toggleMusicCard() {
   if(musicBody.style.display === "none"){
     musicBody.style.display = "block";
     musicMini.style.display = "none";
-    document.getElementById("toggle-music-btn").innerText = "—";
+    //document.getElementById("toggle-music-btn").innerText = "—";
     localStorage.setItem("musicCollapsed", "false");
   } else {
     musicBody.style.display = "none";
@@ -1397,7 +1397,7 @@ function togglePoemCard() {
   if(poemBody.style.display === "none"){
     poemBody.style.display = "block";
     poemMini.style.display = "none";
-    document.getElementById("toggle-poem-btn").innerText = "—";
+    //document.getElementById("toggle-poem-btn").innerText = "—";
     localStorage.setItem("poemCollapsed", "false");
   } else {
     poemBody.style.display = "none";
@@ -1420,7 +1420,16 @@ if(poemCollapsed){
   poemBody.style.display = "block";
   poemMini.style.display = "none";
 }
+const musicHeader = document.querySelector("#music-widget .card-header");
+musicHeader.addEventListener("click", () => {
+  toggleMusicCard();
+});
 
+// 诗词卡片
+const poemHeader = document.querySelector("#poem-widget .card-header");
+poemHeader.addEventListener("click", () => {
+  togglePoemCard();
+});
 /* ========= 拖拽功能 ========= */
 function makeDraggable(card, header) {
   let offsetX = 0, offsetY = 0, isDragging = false;
@@ -1557,7 +1566,6 @@ loadSong();
   font-weight: 600;
   background: rgba(0,0,0,0.05);
   cursor: move; /* 提示可拖拽 */
-  
 }
 
 .card-header button {
@@ -1565,9 +1573,7 @@ loadSong();
   border: none;
   cursor: pointer;
   outline: none;
-  padding: 6px 8px; /* 增加点击面积 */
-  font-size: 14px;
-  touch-action: manipulation; /* 防止浏览器延迟 */
+  font-size: 12px;
 }
 
 .card-body { padding: 8px; }

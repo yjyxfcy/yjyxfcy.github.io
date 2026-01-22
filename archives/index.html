@@ -1348,6 +1348,9 @@ let playQueue = JSON.parse(localStorage.getItem("playQueue")) || [];
 let currentIndex = parseInt(localStorage.getItem("currentIndex")) || 0;
 let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
 
+if (localStorage.getItem("isPlaying") === null) {
+  localStorage.setItem("isPlaying", "false");
+}
 function shuffle(array) {
   let arr = array.slice();
   for (let i = arr.length - 1; i > 0; i--) {
@@ -1376,7 +1379,11 @@ function loadSong() {
   document.getElementById("song-artist").innerText = s.artist;
   player.src = s.url;
   player.currentTime = songTime;
+  const isPlaying = localStorage.getItem("isPlaying") === "true";
+
+if (isPlaying) {
   player.play();
+}
 }
 
 function nextSong() {
@@ -1400,9 +1407,12 @@ player.addEventListener("timeupdate", () => {
 // 播完自动下一首
 player.addEventListener("ended", nextSong);
 
-// PJAX 切页不重置
-document.addEventListener("pjax:complete", () => {
-  if (!player.paused) player.play();
+player.addEventListener("play", () => {
+  localStorage.setItem("isPlaying", "true");
+});
+
+player.addEventListener("pause", () => {
+  localStorage.setItem("isPlaying", "false");
 });
 
 loadSong();

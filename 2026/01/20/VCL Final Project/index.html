@@ -561,44 +561,29 @@
 
   <footer>
     <!-- 你的 daily 卡片 -->
-<div id="music-widget" class="float-card left">
-  <div class="card-header" id="music-header">
-    <span class="header-title">🎵 每日推歌(图标可拖动~)</span>
-    <button id="toggle-music-btn" onclick="toggleMusicCard()"></button>
+<div class="daily-wrapper">
+  <!-- 今日推歌 -->
+  <div class="daily-card">
+    <h3>🎵 每日推歌</h3>
+    <div id="song-title" class="song-title"></div>
+    <div id="song-artist" class="song-artist"></div>
+    <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
+    <button class="daily-btn" onclick="nextSong()">换一首</button>
   </div>
-  <div class="card-body" id="music-card-body">
-    <div id="music-title">未播放</div>
-    <div class="music-time">
-      <span id="current-time">00:00</span> <span id="duration">00:00</span>
-    </div>
-    <input type="range" id="music-progress" value="0" min="0" max="100" step="0.1">
-    <div class="music-controls">
-      <button onclick="prevSong()">⏮</button>
-      <button onclick="togglePlay()" id="play-btn">▶</button>
-      <button onclick="nextSong()">⏭</button>
-    </div>
-  </div>
-  <div class="mini-widget" id="music-mini" onclick="toggleMusicCard()">🎵</div>
-</div>
 
-<div id="poem-widget" class="float-card right">
-  <div class="card-header" id="poem-header">
-    <span class="header-title">📜 每日诗词(图标可拖动~)</span>
-    <button id="toggle-poem-btn" onclick="togglePoemCard()"></button>
+  <!-- 今日诗词 -->
+  <div class="daily-card">
+    <h3>📜 每日诗词</h3>
+    <div id="poem-content" class="poem-content">加载中...</div>
+    <div id="poem-info" class="poem-info"></div>
+    <button class="daily-btn" onclick="loadPoem()">换一首</button>
   </div>
-  <div class="card-body" id="poem-card-body">
-    <div id="poem-text" class="typewriter">加载中...</div>
-    <button class="change-btn" onclick="nextPoem()">换一首</button>
-  </div>
-  <div class="mini-widget" id="poem-mini" onclick="togglePoemCard()">📜</div>
 </div>
-
-<audio id="audio-player"></audio>
 
 <script>
-/* ========= 🎵 音乐 ========= */
-const songs = [
-  {
+  // 🎵 你的歌单（你可以自己加！）
+  const songs = [
+    {
       title: "白马非马",
       artist: "许嵩",
       url: "/music/1.mp3"
@@ -1608,292 +1593,149 @@ const songs = [
       artist: "纯音乐",
       url: "/music/203.mp3"
     }
-];
-
-let shuffled = [];
+  ];
+let playQueue = JSON.parse(localStorage.getItem("playQueue")) || [];
 let currentIndex = parseInt(localStorage.getItem("currentIndex")) || 0;
-let savedTime = parseFloat(localStorage.getItem("songTime")) || 0;
-const audio = document.getElementById("audio-player");
-const titleEl = document.getElementById("music-title");
-const playBtn = document.getElementById("play-btn");
-const progress = document.getElementById("music-progress");
-const currentTimeEl = document.getElementById("current-time");
-const durationEl = document.getElementById("duration");
+let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
 
-const musicBody = document.getElementById("music-card-body");
-const poemBody = document.getElementById("poem-card-body");
-const musicMini = document.getElementById("music-mini");
-const poemMini = document.getElementById("poem-mini");
-
-let isSeeking = false;
-const musicCollapsed = localStorage.getItem("musicCollapsed") === "true";
-const poemCollapsed = localStorage.getItem("poemCollapsed") === "true";
-
-// ------------------ 卡片收起/展开 ------------------
-function toggleMusicCard() {
-  if(musicBody.style.display === "none"){
-    musicBody.style.display = "block";
-    musicMini.style.display = "none";
-    //document.getElementById("toggle-music-btn").innerText = "—";
-    localStorage.setItem("musicCollapsed", "false");
-  } else {
-    musicBody.style.display = "none";
-    musicMini.style.display = "flex";
-    localStorage.setItem("musicCollapsed", "true");
+function shuffle(array) {
+  let arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
 }
 
-function togglePoemCard() {
-  if(poemBody.style.display === "none"){
-    poemBody.style.display = "block";
-    poemMini.style.display = "none";
-    //document.getElementById("toggle-poem-btn").innerText = "—";
-    localStorage.setItem("poemCollapsed", "false");
-  } else {
-    poemBody.style.display = "none";
-    poemMini.style.display = "flex";
-    localStorage.setItem("poemCollapsed", "true");
-  }
+function initQueue() {
+  playQueue = shuffle(songs);
+  currentIndex = 0;
+  localStorage.setItem("playQueue", JSON.stringify(playQueue));
+  localStorage.setItem("currentIndex", 0);
 }
 
-if(musicCollapsed){
-  musicBody.style.display = "none";
-  musicMini.style.display = "flex";
-} else {
-  musicBody.style.display = "block";
-  musicMini.style.display = "none";
-}
-if(poemCollapsed){
-  poemBody.style.display = "none";
-  poemMini.style.display = "flex";
-} else {
-  poemBody.style.display = "block";
-  poemMini.style.display = "none";
-}
-const musicHeader = document.querySelector("#music-widget .card-header");
-musicHeader.addEventListener("click", () => {
-  toggleMusicCard();
-});
-
-// 诗词卡片
-const poemHeader = document.querySelector("#poem-widget .card-header");
-poemHeader.addEventListener("click", () => {
-  togglePoemCard();
-});
-/* ========= 拖拽功能 ========= */
-function makeDraggable(card, header) {
-  let offsetX = 0, offsetY = 0, isDragging = false;
-
-  const startDrag = (e) => {
-    isDragging = true;
-    const rect = card.getBoundingClientRect();
-    if(e.type.startsWith("touch")){
-      offsetX = e.touches[0].clientX - rect.left;
-      offsetY = e.touches[0].clientY - rect.top;
-    } else {
-      offsetX = e.clientX - rect.left;
-      offsetY = e.clientY - rect.top;
-    }
-    e.preventDefault();
-  }
-
-  const drag = (e) => {
-    if(!isDragging) return;
-    let x, y;
-    if(e.type.startsWith("touch")){
-      x = e.touches[0].clientX - offsetX;
-      y = e.touches[0].clientY - offsetY;
-    } else {
-      x = e.clientX - offsetX;
-      y = e.clientY - offsetY;
-    }
-    // 限制不出屏幕
-    const maxX = window.innerWidth - card.offsetWidth;
-    const maxY = window.innerHeight - card.offsetHeight;
-    x = Math.min(Math.max(0, x), maxX);
-    y = Math.min(Math.max(0, y), maxY);
-
-    card.style.left = x + "px";
-    card.style.top = y + "px";
-    card.style.right = "auto"; // 避免 right 干扰
-    card.style.bottom = "auto";
-  }
-
-  const stopDrag = () => { isDragging = false; }
-
-  header.addEventListener("mousedown", startDrag);
-  header.addEventListener("touchstart", startDrag);
-  document.addEventListener("mousemove", drag);
-  document.addEventListener("touchmove", drag);
-  document.addEventListener("mouseup", stopDrag);
-  document.addEventListener("touchend", stopDrag);
+if (playQueue.length === 0) {
+  initQueue();
 }
 
-// 初始化拖拽
-makeDraggable(document.getElementById("music-widget"), document.getElementById("music-header"));
-makeDraggable(document.getElementById("poem-widget"), document.getElementById("poem-header"));
-
-// ------------------ 播放器 ------------------
-function shuffleSongs() {
-  shuffled = [...songs].sort(() => Math.random() - 0.5);
-  if(currentIndex >= shuffled.length) currentIndex = 0;
-}
+const player = document.getElementById("song-player");
 
 function loadSong() {
-  if(shuffled.length === 0) return;
-  const song = shuffled[currentIndex];
-  audio.src = song.url;
-  titleEl.innerText = `${song.title} — ${song.artist}`;
-  audio.currentTime = savedTime || 0;
+  const s = playQueue[currentIndex];
+  document.getElementById("song-title").innerText = s.title;
+  document.getElementById("song-artist").innerText = s.artist;
+  player.src = s.url;
+  player.currentTime = songTime;
+  player.play();
 }
 
-function togglePlay() {
-  if(audio.paused){ audio.play(); playBtn.innerText = "⏸"; }
-  else { audio.pause(); playBtn.innerText = "▶"; }
-}
+function nextSong() {
+  currentIndex++;
 
-function prevSong() { currentIndex--; if(currentIndex<0)currentIndex=shuffled.length-1; savedTime=0; loadSong(); audio.play(); playBtn.innerText="⏸"; }
-function nextSong() { currentIndex++; if(currentIndex>=shuffled.length)shuffleSongs(); savedTime=0; loadSong(); audio.play(); playBtn.innerText="⏸"; }
-
-function formatTime(sec){ const m=Math.floor(sec/60).toString().padStart(2,"0"); const s=Math.floor(sec%60).toString().padStart(2,"0"); return `${m}:${s}`; }
-
-audio.addEventListener("timeupdate", ()=>{
-  if(!isSeeking){
-    progress.value=audio.currentTime/audio.duration*100||0;
-    currentTimeEl.innerText=formatTime(audio.currentTime);
-    durationEl.innerText=formatTime(audio.duration||0);
-    localStorage.setItem("songTime", audio.currentTime);
-    localStorage.setItem("currentIndex", currentIndex);
+  if (currentIndex >= playQueue.length) {
+    initQueue(); // 全部播完 → 重新洗牌
   }
+
+  songTime = 0;
+  localStorage.setItem("songTime", 0);
+  localStorage.setItem("currentIndex", currentIndex);
+  loadSong();
+}
+
+// 记住播放进度
+player.addEventListener("timeupdate", () => {
+  localStorage.setItem("songTime", player.currentTime);
 });
 
-progress.addEventListener("mousedown", ()=>isSeeking=true);
-progress.addEventListener("touchstart", ()=>isSeeking=true);
-progress.addEventListener("mouseup", ()=>{ isSeeking=false; audio.currentTime=progress.value/100*audio.duration; });
-progress.addEventListener("touchend", ()=>{ isSeeking=false; audio.currentTime=progress.value/100*audio.duration; });
-progress.addEventListener("input", ()=>{ currentTimeEl.innerText=formatTime(progress.value/100*audio.duration); });
+// 播完自动下一首
+player.addEventListener("ended", nextSong);
 
-audio.addEventListener("ended", nextSong);
+// PJAX 切页不重置
+document.addEventListener("pjax:complete", () => {
+  if (!player.paused) player.play();
+});
 
-// ------------------ 诗词 ------------------
-function loadPoem(){
-  fetch("https://v1.jinrishici.com/all.json")
-  .then(res=>res.json())
-  .then(data=>{ document.getElementById("poem-text").innerText = data.content + `\n—— ${data.author}《${data.origin}》`; })
-  .catch(()=>{ document.getElementById("poem-text").innerText = "获取失败"; });
-}
-function nextPoem(){ loadPoem(); }
-loadPoem();
-
-shuffleSongs();
 loadSong();
+  // 📜 今日诗词 API
+  function loadPoem() {
+    fetch("https://v1.jinrishici.com/all.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("poem-content").innerText = data.content;
+        document.getElementById("poem-info").innerText =
+          `—— ${data.author}《${data.origin}》`;
+      })
+      .catch(() => {
+        document.getElementById("poem-content").innerText = "获取失败";
+      });
+  }
+
+  loadPoem();
 </script>
 
 <style>
-.float-card {
-  position: fixed;
-  bottom: 15px;
-  width: 210px;
-  max-width: 90%;
-  background: rgba(255,255,255,0.1); 
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(255,255,255,0.1);
-  font-size: 14px;
-  z-index: 9999;
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
+  .daily-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
 
-.float-card.left { left: 20px; }
-.float-card.right { right: 20px; }
+  .daily-card {
+    flex: 1;
+    min-width: 260px;
+    padding: 1.2rem;
+    border-radius: 18px;
+    background: var(--card-bg-color);
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    text-align: center;
 
-.card-header {
-  padding: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  background: rgba(255,255,255,0.1); 
-  cursor: move; /* 提示可拖拽 */
-}
+    /* 👇 关键对齐代码 */
+    display: flex;
+    flex-direction: column;
+  }
 
-.card-header button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  font-size: 12px;
-}
+  .daily-card:hover {
+    transform: translateY(-4px);
+  }
 
-.card-body { padding: 8px; }
+  .song-title {
+    font-weight: bold;
+    margin-top: 0.3rem;
+  }
 
-.music-time {
-  font-size: 12px;
-  margin-bottom: 4px;
-  display: flex;
-  justify-content: space-between;
-}
+  .song-artist {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
 
-#music-progress { width: 100%; margin: 6px 0; }
-
-.music-controls {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-}
-
-.music-controls button {
-  border: none;
-  background: #fff;
-  color: #009cff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-  transition: all 0.2s;
-}
-
-.music-controls button:hover { transform: scale(1.1); }
-.music-controls button:active { transform: scale(0.95); }
-
-.typewriter { min-height: 60px; line-height: 1.8; white-space: pre-line; }
-
-.change-btn {
-  margin-top: 8px;
-  font-size: 10px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid #ccc;
-  background: none;
-  cursor: pointer;
-}
-.change-btn:hover { transform: scale(1.1); }
-.change-btn:active { transform: scale(0.95); }
-/* ========= mini widget ========= */
-.mini-widget {
-  display: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 40px;
-  background: rgba(255,255,255,0.9);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  user-select: none;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-}
-
-.float-card.left .mini-widget { left: -80px; }
-.float-card.right .mini-widget { right: -80px; }
+  .daily-btn {
+    margin-top: auto;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
 
 
+  .daily-btn:hover {
+    background: #ff6f91;
+  }
+
+  .poem-content {
+    font-size: 1rem;
+    line-height: 2.2;
+    margin: 0.5rem 0;
+  }
+
+  .poem-info {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
 </style>
 
 <!-- ====== 运行时间 + 文章数统计 ====== -->

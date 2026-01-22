@@ -1391,6 +1391,7 @@ function nextSong() {
 
   if (currentIndex >= playQueue.length) {
     initQueue(); // 全部播完 → 重新洗牌
+    currentIndex = 0;
   }
 
   songTime = 0;
@@ -1404,8 +1405,10 @@ player.addEventListener("timeupdate", () => {
   localStorage.setItem("songTime", player.currentTime);
 });
 
-// 播完自动下一首
-player.addEventListener("ended", nextSong);
+player.addEventListener("ended", () => {
+  localStorage.setItem("isPlaying", "true");
+  nextSong();
+});
 
 player.addEventListener("play", () => {
   localStorage.setItem("isPlaying", "true");

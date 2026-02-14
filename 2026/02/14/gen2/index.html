@@ -51,7 +51,7 @@
 <meta property="og:image" content="http://example.com/2026/02/14/gen2/2.20.png">
 <meta property="og:image" content="http://example.com/2026/02/14/gen2/2.22.png">
 <meta property="article:published_time" content="2026-02-14T06:52:54.044Z">
-<meta property="article:modified_time" content="2026-02-14T13:32:54.547Z">
+<meta property="article:modified_time" content="2026-02-14T13:39:13.654Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/02/14/gen2/2.1.png">
@@ -345,7 +345,7 @@
 <h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><p>nlp的挑战：<br>Long term dependency -&gt; Attention<br>Sophisticated meaning -&gt; Feed forward network<br>Word order matters a lot -&gt; Positional encoding</p>
 <h3 id="Attention-is-all-you-need"><a href="#Attention-is-all-you-need" class="headerlink" title="Attention is all you need"></a>Attention is all you need</h3><img src="2.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
-<p>老生常谈的话题了，ai引论我们曾经速通过，这里再次回顾一下<br>假设每个word被表示为$d$维词向量$x_{i}$，我们希望用注意力机制将每个$x_{i}$变为$z_{i}$，以更好获取上下文相关信息<br>Hash表是一种注意力机制，由(key,value)对组成，查询query到达时找出对应的key并返回value，若无法匹配则返回empty。<br>Attention机制是一种软性的Hash表，给出query后每个key都要进行匹配计算，取其加权平均得出最终的value</p>
+<p>老生常谈的话题了，ai引论我们曾经速通过，这里再次回顾一下<br>假设每个word被表示为$d$维词向量$x_{i}$，我们希望用注意力机制将每个$x_{i}$变为$z_{i}$，以更好获取上下文相关信息<br>Hash表是一种注意力机制，由(key,value)对组成，查询query到达时找出对应的key并返回value，若无法匹配则返回empty<br>Attention机制是一种软性的Hash表，给出query后每个key都要进行匹配计算，取其加权平均得出最终的value</p>
 <img src="2.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 上图即为经典的注意力机制的逐词计算过程，下面给出矩阵版本
 

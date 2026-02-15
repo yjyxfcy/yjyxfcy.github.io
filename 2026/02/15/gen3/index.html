@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.12.png">
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.13.png">
 <meta property="article:published_time" content="2026-02-15T07:02:56.359Z">
-<meta property="article:modified_time" content="2026-02-15T09:22:15.368Z">
+<meta property="article:modified_time" content="2026-02-15T09:30:52.090Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/02/15/gen3/3.1.png">
@@ -260,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.7k 字
+          3.8k 字
         
       </span>
     
@@ -271,7 +271,7 @@
         
         
         
-          31 分钟
+          32 分钟
         
       </span>
     
@@ -365,19 +365,19 @@ f为凸函数，由$Jansen$不等式，$D_{f}(P||Q)=\int f(\frac{p(x)}{q(x)})q(x
 还有一种情况，当$f(t)=-(t+1)log\frac{t+1}{2}+tlogt$时，代入可得$D_{f}(P||Q)=KL(Q||M)+KL(Q||M)$，其中$M=\frac{P+Q}{2}$，这被称为Jensen-Shannon散度，简称JS散度</p>
 <h3 id="GAN">GAN</h3>
 <p>我们的GAN模型就是采用了这种看起来十分复杂的JS散度，目标是将其最小化<br>
-我们认为$P \sim P_<em>$，$Q \sim P_{\theta}$，其中$P_</em>$为真实数据分布，$P_{\theta}$为模型生成的分布</p>
+我们认为$P \sim P_{\ast}$，$Q \sim P_{\theta}$，其中$P_{\ast}$为真实数据分布，$P_{\theta}$为模型生成的分布</p>
 <img src="3.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <p>如图，即为最小化上面的JS散度<br>
-然而，无论是估计$P_<em>$还是$P_{\theta}$，都有不小的难度<br>
-$P_</em>$为ground truth真实分布，难以获取<br>
+然而，无论是估计$P_{\ast}$还是$P_{\theta}$，都有不小的难度<br>
+$P_{\ast}$为ground truth真实分布，难以获取<br>
 $P_{\theta}$是从极复杂的神经网络中生成的，也难以估计<br>
 但是我们注意到</p>
 <img src="3.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>所以如果$\frac{P_<em>(x)}{P_{\theta}(x)+P_</em>(x)}$趋近于0，那就说明数据$x$几乎没有可能来自于$P_<em>$，大概率来自$P_{\theta}$，反之若其趋近于1，则$x$大概率来自$P_</em>$<br>
-那么我们就可以构建一个二元分类器$D_{\theta}(x)=\frac{P_<em>(x)}{P_{\theta}(x)+P_</em>(x)}$，来判定$x$到底是从真实分布还是模型生成的分布中采样，我们的目标就变成了<br>
-$Minimize$    $E_{x \sim P_<em>}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
+<p>所以如果$\frac{P_{\ast}(x)}{P_{\theta}(x)+P_{\ast}(x)}$趋近于0，那就说明数据$x$几乎没有可能来自于$P_{\ast}$，大概率来自$P_{\theta}$，反之若其趋近于1，则$x$大概率来自$P_{\ast}$<br>
+那么我们就可以构建一个二元分类器$D_{\theta}(x)=\frac{P_{\ast}(x)}{P_{\theta}(x)+P_{\ast}(x)}$，来判定$x$到底是从真实分布还是模型生成的分布中采样，我们的目标就变成了<br>
+$Minimize$    $E_{x \sim P_{\ast}}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
 上式可以进一步化简，由于$x$是从满足标准正态分布的noise $z$中生成而来的，设生成函数为$G_{\theta}$，原式变为<br>
-$Minimize$    $E_{x \sim P_</em>}[logD_{\theta}(x)]+E_{z \sim N(0,I)}[log(1-D_{\theta}(G_{\theta}(z)))]$<br>
+$Minimize$    $E_{x \sim P_{\ast}}[logD_{\theta}(x)]+E_{z \sim N(0,I)}[log(1-D_{\theta}(G_{\theta}(z)))]$<br>
 于是便有了$D_{\theta}$与$G_{\theta}$分别的训练过程</p>
 <img src="3.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <img src="3.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
@@ -385,7 +385,7 @@ $Minimize$    $E_{x \sim P_</em>}[logD_{\theta}(x)]+E_{z \sim N(0,I)}[log(1-D_{\
 判别器的目标是区分出样本到底是真是假，是真实数据还是模型生成的数据<br>
 而生成器的目标是以假乱真，希望生成“很像是真实数据的样本”骗过判别器<br>
 于是总的优化目标即为<br>
-$\min_{G_{\theta}} \max_{D_{\theta}} E_{x \sim P_*}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
+$\min_{G_{\theta}} \max_{D_{\theta}} E_{x \sim P_{\ast}}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
 这就是所谓的对抗训练，颇有博弈论中minmax博弈的风采，判别器和生成器在无数次对抗中互相竞争共同进化，又有种自然选择的魅力</p>
 <img src="3.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 上面即为GAN原始论文的训练方法，先训判别器再训生成器，经典的梯度下降

@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.12.png">
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.13.png">
 <meta property="article:published_time" content="2026-02-15T07:02:56.359Z">
-<meta property="article:modified_time" content="2026-02-15T08:46:39.196Z">
+<meta property="article:modified_time" content="2026-02-15T09:22:15.368Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/02/15/gen3/3.1.png">
@@ -347,8 +347,8 @@ GAN是一种隐式模型，让我们看看显式模型和隐式模型都有哪�
 一般来说nlp更常用显式，cv更常用隐式，但并不绝对<br>
 那么对于GAN这种隐式模型来说，要如何评估生成数据与真实数据之间的差距呢？</p>
 <h3 id="衡量差距的办法">衡量差距的办法</h3>
-<p>对于两个点，可以用最简单的欧几里得距离，$d=|x_{A}-x_{B}|<em>2$<br>
-对于$S</em>{A}$和$S_{B}$两个点集，可以用下面的办法<br>
+<p>对于两个点，可以用最简单的欧几里得距离，$d=|x_{A}-x_{B}|$<br>
+对于$S_{A}$和$S_{B}$两个点集，可以用下面的办法<br>
 <img src="3.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>如果是对于两个分布呢？我们引入f-散度的概念<br>
 假设分布$P(x)$，$Q(x)$的概率密度函数分别为$p(x)$，$q(x)$<br>
@@ -365,19 +365,19 @@ f为凸函数，由$Jansen$不等式，$D_{f}(P||Q)=\int f(\frac{p(x)}{q(x)})q(x
 还有一种情况，当$f(t)=-(t+1)log\frac{t+1}{2}+tlogt$时，代入可得$D_{f}(P||Q)=KL(Q||M)+KL(Q||M)$，其中$M=\frac{P+Q}{2}$，这被称为Jensen-Shannon散度，简称JS散度</p>
 <h3 id="GAN">GAN</h3>
 <p>我们的GAN模型就是采用了这种看起来十分复杂的JS散度，目标是将其最小化<br>
-我们认为$P \sim P^<em>$，$Q \sim P_{\theta}$，其中$P^</em>$为真实数据分布，$P_{\theta}$为模型生成的分布</p>
+我们认为$P \sim P_<em>$，$Q \sim P_{\theta}$，其中$P_</em>$为真实数据分布，$P_{\theta}$为模型生成的分布</p>
 <img src="3.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <p>如图，即为最小化上面的JS散度<br>
-然而，无论是估计$P^<em>$还是$P_{\theta}$，都有不小的难度<br>
-$P^</em>$为ground truth真实分布，难以获取<br>
+然而，无论是估计$P_<em>$还是$P_{\theta}$，都有不小的难度<br>
+$P_</em>$为ground truth真实分布，难以获取<br>
 $P_{\theta}$是从极复杂的神经网络中生成的，也难以估计<br>
 但是我们注意到</p>
 <img src="3.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>所以如果$\frac{P^<em>(x)}{P_{\theta}(x)+P^</em>(x)}$趋近于0，那就说明数据$x$几乎没有可能来自于$P^<em>$，大概率来自$P_{\theta}$，反之若其趋近于1，则$x$大概率来自$P^</em>$<br>
-那么我们就可以构建一个二元分类器$D_{\theta}(x)=\frac{P^<em>(x)}{P_{\theta}(x)+P^</em>(x)}$，来判定$x$到底是从真实分布还是模型生成的分布中采样，我们的目标就变成了<br>
-$Minimize$    $E_{x \sim P^<em>}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
+<p>所以如果$\frac{P_<em>(x)}{P_{\theta}(x)+P_</em>(x)}$趋近于0，那就说明数据$x$几乎没有可能来自于$P_<em>$，大概率来自$P_{\theta}$，反之若其趋近于1，则$x$大概率来自$P_</em>$<br>
+那么我们就可以构建一个二元分类器$D_{\theta}(x)=\frac{P_<em>(x)}{P_{\theta}(x)+P_</em>(x)}$，来判定$x$到底是从真实分布还是模型生成的分布中采样，我们的目标就变成了<br>
+$Minimize$    $E_{x \sim P_<em>}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
 上式可以进一步化简，由于$x$是从满足标准正态分布的noise $z$中生成而来的，设生成函数为$G_{\theta}$，原式变为<br>
-$Minimize$    $E_{x \sim P^</em>}[logD_{\theta}(x)]+E_{z \sim N(0,I)}[log(1-D_{\theta}(G_{\theta}(z)))]$<br>
+$Minimize$    $E_{x \sim P_</em>}[logD_{\theta}(x)]+E_{z \sim N(0,I)}[log(1-D_{\theta}(G_{\theta}(z)))]$<br>
 于是便有了$D_{\theta}$与$G_{\theta}$分别的训练过程</p>
 <img src="3.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <img src="3.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
@@ -385,7 +385,7 @@ $Minimize$    $E_{x \sim P^</em>}[logD_{\theta}(x)]+E_{z \sim N(0,I)}[log(1-D_{\
 判别器的目标是区分出样本到底是真是假，是真实数据还是模型生成的数据<br>
 而生成器的目标是以假乱真，希望生成“很像是真实数据的样本”骗过判别器<br>
 于是总的优化目标即为<br>
-$\min_{G_{\theta}} \max_{D_{\theta}} E_{x \sim P^*}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
+$\min_{G_{\theta}} \max_{D_{\theta}} E_{x \sim P_*}[logD_{\theta}(x)]+E_{x \sim P_{\theta}}[log(1-D_{\theta}(x))]$<br>
 这就是所谓的对抗训练，颇有博弈论中minmax博弈的风采，判别器和生成器在无数次对抗中互相竞争共同进化，又有种自然选择的魅力</p>
 <img src="3.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 上面即为GAN原始论文的训练方法，先训判别器再训生成器，经典的梯度下降
@@ -411,8 +411,7 @@ $(X,X’)\sim \gamma$表示从联合分布中抽取一对随机变量，然后�
 <img src="3.10.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <p>由于所有满足1-Lipchitz的函数太多，无法一一枚举，所以我们考虑使用神经网络，其中$\theta’$为参数，那么$f_\theta’$即为所有满足条件函数的集合，由神经网络的对称性，绝对值也可以去除<br>
 然而，神经网络终究与1-Lipchitz函数族无法等同，所以我们仍然得对函数进行一些约束，即对函数进行weight clipping，本质就是通过剪切让神经网络生成的函数更接近1-Lipchitz函数，由于背后数学原理较为复杂，笔者高数水平有限，很遗憾这里无法详细证明，感兴趣的读者可自行阅读相关论文<br>
-ppt内容：只有“粗糙的”数分证明<br>
-有界闭集里的连续函数，其Lipchitz系数有限</p>
+ppt内容：只有“粗糙的”数分定理(有界闭集里的连续函数，其Lipchitz系数有限)</p>
 <img src="3.11.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <p>然而weight clipping只能确保Lipchitz系数有限，不可确保其系数为1，所以还需采取gradient penalty方法<br>
 一个可微函数为1-Lipchitz当且仅当其梯度的范数处处为1<br>

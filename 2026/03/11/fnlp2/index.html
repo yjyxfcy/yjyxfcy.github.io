@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://example.com/2026/03/11/fnlp2/2.7.png">
 <meta property="og:image" content="http://example.com/2026/03/11/fnlp2/2.8.png">
 <meta property="article:published_time" content="2026-03-11T13:40:06.517Z">
-<meta property="article:modified_time" content="2026-03-11T15:18:15.955Z">
+<meta property="article:modified_time" content="2026-03-11T15:20:10.231Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/03/11/fnlp2/2.1.png">
@@ -349,12 +349,12 @@
 <h3 id="如何评估一个词义消歧系统"><a href="#如何评估一个词义消歧系统" class="headerlink" title="如何评估一个词义消歧系统"></a>如何评估一个词义消歧系统</h3><img src="2.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
 <p>假设我们在处理一个二元的词义消歧任务(只有Positive和Negative两种可能)，如上列出经典的2×2列联表</p>
-<p>tp：实际真，你预测的也是真<br>fp：实际假，你却预测成了真<br>fn：实际真，你却预测成了假<br>tn：实际假，你预测的也是假<br>那么自然就有准确率$Accuracy&#x3D;\frac{tp+tn}{tp+fp+fn+tn}$<br>当然我们还有别的指标<br>$Precision_{positive}&#x3D;\frac{tp}{tp+fp}$表示你所预测的真中实际也为真的概率，也即你预测真的准确率<br>$Recall_{positive}&#x3D;\frac{tp}{tp+fn}$表示实际为真中被你预测为真的概率，称作召回率，大概是你把实际为真的数据“召唤”回来的概率<br>$F_{\beta}&#x3D;\frac{1+\beta^{2}}{\frac{1}{Pre}+\frac{\beta^{2}}{Rec}}$为准确率和召回率的加权调和平均，特别的$F_{1}&#x3D;\frac{2×Pre×Rec}{Pre+Rec}$<br>Macro F1:对所有类别取平均值<br>Micro F1:对所有实例取平均值</p>
+<p>tp：实际真，你预测的也是真<br>fp：实际假，你却预测成了真<br>fn：实际真，你却预测成了假<br>tn：实际假，你预测的也是假<br>那么自然就有准确率$Accuracy&#x3D;\frac{tp+tn}{tp+fp+fn+tn}$<br>当然我们还有别的指标<br>$Precision_{positive}&#x3D;\frac{tp}{tp+fp}$表示你所预测的真中实际也为真的概率，也即你预测真的准确率<br>$Recall_{positive}&#x3D;\frac{tp}{tp+fn}$表示实际为真中被你预测为真的概率，称作召回率，大概是你把实际为真的数据“召唤”回来的概率<br>$F_{\beta}&#x3D;\frac{1+\beta^{2}}{\frac{1}{Pre}+\frac{\beta^{2}}{Rec}}$为准确率和召回率的加权调和平均，特别的$F_{1}&#x3D;\frac{2×Pre×Rec}{Pre+Rec}$<br>Macro F1：对所有类别取平均值<br>Micro F1：对所有实例取平均值</p>
 <h4 id="一个小问题"><a href="#一个小问题" class="headerlink" title="一个小问题"></a>一个小问题</h4><p>Lexi是一名全科医生，她的主要职责之一是听取患者的主诉，并快速判断该患者是否具有高卒中风险（中风），是否需要立即送往急诊科。您认为Lexi的最佳评估指标是什么？</p>
 <p>答案是召回率，因为本来没病被判断成有病(fp)问题不大，但是本来有病你却误判成没病(fn)问题就很大了，所以召回率比精确率更重要，这就是所谓的宁可信其有不可信其无，宁可错杀三千不肯放过一个()</p>
 <h3 id="其它需要注意的点"><a href="#其它需要注意的点" class="headerlink" title="其它需要注意的点"></a>其它需要注意的点</h3><p>如果我们缺乏注释，我们的语言不断演变，最终不得不处理一种全新的语言<br>所以我们需要假设！<br>Most Frequent Sense：直接采用这个词最常用的意思<br>例如plant这个词，工厂的意思比植物的意思更常见，那我们就无脑地把每个plant都标注为工厂</p>
 <p>One Sense per Discourse：词汇往往会在特定语境中保持语义恒定性<br>还是以plant为例，如果一段话中plant出现10次，那么大概率都是同一个意思，这时如果判断出其中一次意思是植物，那么剩余的九次应该也是植物之意</p>
-<p>One Sense per Collocation:一个词在相同搭配中往往保留含义<br>如plant与industrial共同出现，那么这时的plant基本是工厂之意</p>
+<p>One Sense per Collocation：一个词在相同搭配中往往保留含义<br>如plant与industrial共同出现，那么这时的plant基本是工厂之意</p>
 <p>Lesk：假设词汇与上下文有相同主题，对于有歧义的词，计算同时出现在上下文和字典定义中的词汇数量，选择次数最多的为词汇解释</p>
 <img src="2.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
@@ -364,7 +364,7 @@
 <p>在预训练时代，我们直接编码上下文，encoder,decoder……在此不多赘述</p>
 <img src="2.8.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
-<p>当然还有多语言任务，如英语和俄语，这里需要使用WiC: Word-in-Context数据集</p>
+<p>当然还有多语言任务，如英语和俄语，这里需要使用WiC： Word-in-Context数据集</p>
 <p>视觉消歧任务：给定一个词和有限的上下文，任务是从一堆图像中选出与这个词预期含义相对应的图像，nlp与cv的结合</p>
 
                 

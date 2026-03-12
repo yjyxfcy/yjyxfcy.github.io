@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://example.com/2026/03/11/fnlp2/2.7.png">
 <meta property="og:image" content="http://example.com/2026/03/11/fnlp2/2.8.png">
 <meta property="article:published_time" content="2026-03-11T13:40:06.517Z">
-<meta property="article:modified_time" content="2026-03-11T15:20:10.231Z">
+<meta property="article:modified_time" content="2026-03-12T07:18:18.296Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/03/11/fnlp2/2.1.png">
@@ -317,7 +317,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月11日 晚上
+                    本文最后更新于 2026年3月12日 下午
                   
                 
               </p>
@@ -342,7 +342,7 @@
 <p>对于词义消歧来说，我们首先给出一些定义，$\omega$为目标词汇，$S&#x3D;s_{1},s_{2},…,s_{n}$为$\omega$的Sense Inventory(所有词义的集合)，$C$为$\omega$的上下文，$V&#x3D;v_{1},v_{2},…,v_{j}$为上下文特征词汇，然后假设$\omega$的真正意思是$s^{\ast}$，满足对上下文$C$来说遍历所有可能的$s_{k}$，$P(s^{\ast}|C)$最大。</p>
 <img src="2.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
-<p>那么由贝叶斯公式，此处忽略$P(C)$，即可得出$s^{\ast}&#x3D;\argmax_{s_{k}} P(C|s_{k})P(s_{k})$，而为了简化计算，我们采用独立性假设，即上下文特征中每个词都是独立不相干的！请注意这种假设并不正确，事实上词汇总有一定相关性，但这样一来就可以像上面一样极大简化计算</p>
+<p>那么由贝叶斯公式，此处忽略$P(C)$，即可得出$s^{\ast}&#x3D;argmax_{s_{k}} P(C|s_{k})P(s_{k})$，而为了简化计算，我们采用独立性假设，即上下文特征中每个词都是独立不相干的！请注意这种假设并不正确，事实上词汇总有一定相关性，但这样一来就可以像上面一样极大简化计算</p>
 <img src="2.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
 <p>由此，我们通过直接统计，用频率估计概率，即可一一算出$P(v_{x}|s_{k})$和$P(s_{k})$<br>测试时，给定未见过的实例及其上下文$C’$，对于$C’$所有上下文特征$v_{x}$，进行上面的计算，即可选出$s^{\ast}$</p>
@@ -423,7 +423,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年3月11日</div>
+          <div>2026年3月12日</div>
         </div>
       
       

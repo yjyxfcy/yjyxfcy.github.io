@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Neural Language Models</title>
+    <link href="/2026/03/19/fnlp5/"/>
+    <url>/2026/03/19/fnlp5/</url>
+    
+    <content type="html"><![CDATA[<p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p><p>第五部分：Neural Language Models</p><span id="more"></span><h3 id="语言模型作为分类问题"><a href="#语言模型作为分类问题" class="headerlink" title="语言模型作为分类问题"></a>语言模型作为分类问题</h3><p>语言模型的核心是计算条件概率$p(\omega_i|\omega_1,\omega_2,…,\omega_{i-1})$<br>可以将其看作一个分类问题，给定上下文$h_{1:i-1}$，预测下一个词$\omega_i$是词汇表中的哪一个<br>在 1990 年代，人们尝试使用前面讲过的对数线性模型来做语言模型<br><img src="5.1.png" style="max-width: 100%; height: auto;"></p><p>其中$f$是特征函数，需要手工设计大量特征（如上下文词、词性等）。<br>优点：理论上可以避免零概率问题，且能融合任意特征。<br>缺点：特征工程复杂，计算开销大，优化困难（尤其在 1990 年代硬件条件下）被认为不实用</p><h3 id="神经网络基础"><a href="#神经网络基础" class="headerlink" title="神经网络基础"></a>神经网络基础</h3><p>经典的线性神经网络：$z&#x3D;\Sigma_i (\omega_i x_i+b)$<br>加一个非线性的激活函数$f$，令$y&#x3D;f(z)$即可<br>下面介绍了几种经典的激活函数<br>$y&#x3D;sigmoid(z)&#x3D;\frac{1}{1+e^{-z}}$<br>$y&#x3D;tanh(z)&#x3D;\frac{e^z-e^{-z}}{e^z+e^{-z}}$<br>$y&#x3D;RELU(z)&#x3D;max(z,0)$</p><h3 id="NLM-1阶段-前馈神经网络"><a href="#NLM-1阶段-前馈神经网络" class="headerlink" title="NLM-1阶段 前馈神经网络"></a>NLM-1阶段 前馈神经网络</h3><img src="5.2.png" style="max-width: 100%; height: auto;"><p>如上，其实就是把线性层和非线性层缝合了<br>$m_{\omega_j}$是词$\omega_j$的词嵌入，通过查找矩阵$M$得到，矩阵$M$为$V×d$维，$\omega_{i}^{T}M&#x3D;m_i$<br>矩阵$M$也可以视为参数，在训练中学习，无需提前给出<br>$A_j$,$T_j$为线性变换参数，$b$,$u$为偏置<br>采用了$tanh$为激活函数，最后进行$softmax$</p><p>关于参数：<br>设词汇表大小$V$，，嵌入维度$d$，隐藏层维度$H$，上下文长度$n$<br>词嵌入矩阵$M$：$V×d$<br>直接连接矩阵$A$：$(n-1)×d×V$<br>隐藏层输入矩阵$T$：$(n-1)×d×H$<br>隐藏层到输出矩阵$W$：$H×V$、<br>偏置$b$,$u$</p><p>在Bengio et al. (2003)的实验中，$V\approx18000$，$d&#x3D;30$ or $60$，$H&#x3D;50$ or $100$，$n&#x3D;6$，总参数量为$460V+3w$</p><p>简化版本：连续词袋（CBOW）<br>若将$A$矩阵设为$0$，并对多个词的嵌入取平均，可以得到连续词袋模型（CBOW），进一步减少参数。</p><p>由上可知它仍属于n-gram语言模型，但为何表现更优？<br>主要是神经网络线性层与非线性层的多层结构可以达到纯线性模型无法实现的效果</p><p>关于训练：经典的MLE和SGD<br>多数情况下，对数似然函数是非凸的，若只使用cpu的话速度极慢</p><p>模型没有位置编码？无法识别big blue ball and blue big ball的区别</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>自然语言处理基础</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Language Modelling</title>
     <link href="/2026/03/18/fnlp4/"/>
     <url>/2026/03/18/fnlp4/</url>

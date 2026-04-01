@@ -21,25 +21,41 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hi, I am Yjy. Welcome to my personal homepage.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类 - 自然语言处理基础">
-<meta property="og:url" content="http://example.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/index.html">
+    <meta name="description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第六部分：Distributional Semantics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Distributional Semantics">
+<meta property="og:url" content="http://example.com/2026/03/25/fnlp6/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="Hi, I am Yjy. Welcome to my personal homepage.">
+<meta property="og:description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第六部分：Distributional Semantics">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2026/03/25/fnlp6/6.1.png">
+<meta property="og:image" content="http://example.com/2026/03/25/fnlp6/6.2.png">
+<meta property="og:image" content="http://example.com/2026/03/25/fnlp6/6.3.png">
+<meta property="og:image" content="http://example.com/2026/03/25/fnlp6/6.4.png">
+<meta property="og:image" content="http://example.com/2026/03/25/fnlp6/6.5.png">
+<meta property="og:image" content="http://example.com/2026/03/25/fnlp6/6.6.png">
+<meta property="og:image" content="http://example.com/2026/03/25/fnlp6/6.7.png">
+<meta property="article:published_time" content="2026-03-25T03:14:13.488Z">
+<meta property="article:modified_time" content="2026-04-01T14:36:20.300Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/03/25/fnlp6/6.1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>分类 - 自然语言处理基础 - Yjy</title>
+  <title>Distributional Semantics - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -104,7 +120,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -204,15 +220,69 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p10.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p1.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="分类 - 自然语言处理基础"></span>
+            <span id="subtitle" data-typed-text="Distributional Semantics"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-25 11:14" pubdate>
+          2026年3月25日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          38 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
 
         
       </div>
@@ -228,70 +298,410 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 6 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2026</p>
-    
-    <a href="/2026/03/25/fnlp6/" class="list-group-item list-group-item-action">
-      <time>03-25</time>
-      <div class="list-group-item-title">Distributional Semantics</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Distributional Semantics</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年4月1日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
+<p>第六部分：Distributional Semantics</p>
+<span id="more"></span>
+<h3 id="词义问题">词义问题</h3>
+<h4 id="传统方法">传统方法</h4>
+<p>WordNet 是一个大型英语词汇数据库，它将名词、动词、形容词和副词组织成同义词集合（synset），每个synset代表一个不同的概念。<br>
+以 bank 为例：<br>
+Synset 1（河岸）：sloping land beside a body of water<br>
+Synset 2（金融机构）：depository financial institution<br>
+每个词可能有多个词义（sense），WordNet 显式地编码了这些信息</p>
+<p>词之间：同义词、反义词、相似词、相关词、褒义贬义词</p>
+<h4 id="评估数据集">评估数据集</h4>
+<p>WordSim353：用于评估词相似度（Similarity）和相关度（Relatedness）的数据集<br>
+相似度：如 tiger - cat (7.35)，侧重“同类”。<br>
+相关度：如 computer - keyboard (7.62)，侧重“共现”。</p>
+<p>SimLex-999：另一个数据集，更关注相似度而非相关度<br>
+（如 vanish - disappear 得分9.8，而 hole - agreement 得分0.3）</p>
+<p>语义场（Semantic Field）：指某个特定语义域中的一组词，如医院相关的（surgeon, scalpel, nurse），餐厅相关的（waiter, menu, plate）</p>
+<h3 id="词汇表示">词汇表示</h3>
+<p>朴素表示：将每个词视为原子，用独热向量表示<br>
+例如：$[0,0,…,1,0,…,0]$<br>
+向量的维度等于词汇表大小（可能达到5万甚至1300万）<br>
+问题：占用空间大，表述稀疏</p>
+<p>基于特征的POS标注器：<br>
+<img src="6.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>如上，从unigram bigram 前缀 后缀四个方面来提取特征<br>
+发现低频词的准确率较低，具有挑战性</p>
+<h3 id="分布语义学">分布语义学</h3>
+<p>经典问题：buffalo的一词多义<br>
+Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo.这是一个完整的句子()<br>
+同义词问题：adept, expert, good, practiced, proficient, skillful<br>
+全新词汇问题：tezguino这种语言学家胡编乱造的词</p>
+<h4 id="核心理念：分布假说">核心理念：分布假说</h4>
+<p>一个直觉：可以通过上下文判断词义！<br>
+(无聊的定义：分布语义学是一套基于语言使用语境来表征词义的技术体系。)</p>
+<p>一阶共现：词与词在文本中邻近出现，如 wrote 和 book<br>
+二阶共现：词与词有相似的邻居，如 wrote 和 said 都常与某人说话或写作相关</p>
+<h4 id="向量空间模型">向量空间模型</h4>
+<p>核心思想：将词嵌入到一个低维的实数向量空间中,避免出现独热向量那种维度极高的情况<br>
+这类模型通常被称为嵌入模型或向量空间模型（VSM）<br>
+也就是老生常谈的word embeddings</p>
+<p>如何构建：<br>
+定义上下文：例如，取目标词左右各 w 个词作为上下文。<br>
+构建共现矩阵：行是目标词，列是上下文词，值为共现次数。</p>
+<p>例如，语料库中有句子：</p>
+<p>… and the cute kitten purred and then …</p>
+<p>… the cute furry cat purred and miaowed …</p>
+<p>… that the small kitten miaowed and she …</p>
+<p>基于此，可以构建出 kitten 和 cat 的稀疏向量，如：</p>
+<p>kitten = [0, 1, 0, 0, 1, 1, 0, 1] (对应上下文词: bit, cute, furry, loud, miaowed, purred, …)</p>
+<p>cat = [0, 1, 1, 0, 1, 0, 0, 0]</p>
+<p>dog = [1, 0, 1, 1, 0, 0, 1, 0]</p>
+<p>其中the, that, and, …这种词称为停用词，不计入向量中<br>
+当然也需要考虑词汇的变形，比如miaow和miaowed,dog和dogs</p>
+<p>窗口大小w的值取决于你的目标：<br>
+较短窗口对应更多句法表示，较长窗口对应更多语义表示。</p>
+<h4 id="权重：点互信息（PMI）">权重：点互信息（PMI）</h4>
+<p>问题：原始共现次数受高频词（如 the, and）影响，无法准确衡量词之间的关联强度<br>
+所以我们引入Pointwise mutual information(PMI)，即为ai引论中讲过的互信息</p>
+<p>$PMI(X,Y)=log\frac{P(x,y)}{P(x)P(y)}$</p>
+<p>计算两个事件（词 x 和上下文 y）共现的概率是否高于随机独立共现的概率<br>
+PPMI：将负的PMI值设为0，只保留正相关。<br>
+作用：可以凸显出与特定词有强关联的上下文词。例如，apricot 如果只与 sugar 共现，其PMI值就会很高。<br>
+<img src="6.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>上面是一个例子</p>
+<p>$PPMI(apricot,sugar)=log_2 \frac{1<em>19}{2</em>2}$</p>
+<p>PMI算法存在对罕见事件的偏差问题，极少数词汇的PMI值会异常偏高。<br>
+解决方案：采用拉普拉斯平滑法（加一法）处理数据</p>
+<h4 id="相似度计算">相似度计算</h4>
+<p>余弦相似度：测量两个向量之间的夹角<br>
+<img src="6.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>夹角越小，余弦值越接近1，表示词越相似<br>
+该指标忽略了向量的长度（即词频），只关注方向（即词的分布模式）</p>
+<p>使用句法定义词的上下文(Zellig Harris,1968)<br>
+若两个词具有相似的句法语境，即定义为相似词，例如duty和responsibility</p>
+<p>对于文档？我们建立文档矩阵<br>
+<img src="6.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>然而该矩阵似乎并不友好，更方便的还是TF-IDF(<a target="_blank" rel="noopener" href="https://yjyxfcy.github.io/2026/03/18/fnlp3/">详见之前的笔记</a>)</p>
+<h4 id="降维">降维</h4>
+<p>降维的目的在于防止稀疏，PPMI向量仍然是高维且稀疏的<br>
+目标就是获得低维稠密的向量</p>
+<p>潜在语义分析(LSA)：<br>
+对词-文档矩阵$A$进行奇异值分解</p>
+<p>$A=M × diag(s) × C^{T}$</p>
+<p>这样一来保留了最大的$k$个奇异值，得到低维词向量$M$</p>
+<p>概率潜在语义分析(PLSA):<br>
+<img src="6.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>引入主题作为隐变量，每篇文档$d$由$K$个主题混合而成<br>
+但是PLSA 无法为训练数据之外的文本分配概率</p>
+<h4 id="神经网络">神经网络</h4>
+<p>词嵌入(Word Embeddings)：词被表示为低维、稠密的实数向量，如 $[0.456, 0.193, 5.391, …]$</p>
+<p>Word2Vec：一个代表性的预测模型，有两种结构</p>
+<p>连续词袋模型(CBOW)：用上下文词预测中心词，$p(word|context)$<br>
+<img src="6.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>Skip-gram：用中心词预测上下文词，$p(context|word)$<br>
+<img src="6.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>每个词对应两个向量，当词为目标词使用$w$，词为上下文使用$c$</p>
+<p>优势：相比基于计数的方法，预测模型能更好地捕捉复杂的语义关系，并在下游任务中表现更好。</p>
+<p>内部评估(Intrinsic)：直接测试词向量的相似度与人类判断的相关性，或进行类比推理测试(如“北京：中国 ∷ 巴黎：？”)。<br>
+外部评估(Extrinsic)：将词向量作为特征输入到下游NLP任务(如分类器)中，观察任务性能是否提升。</p>
+<h3 id="上下文表示">上下文表示</h3>
+<p>静态的word embedding无法解决一词多义问题<br>
+所以我们需要上下文表示，即语境化词嵌入(Contextualized Word Embeddings)</p>
+<h4 id="quiz">quiz</h4>
+<p>给定由$T$个词组成的训练语料库(词汇量为$V$)，我们考虑上下文大小$m×2$(目标词左侧$m$个词，右侧$m$个词)。针对给定训练实例$(w，c)$，请写出训练目标函数，并推导模型参数的导数。</p>
+<h5 id="背景回顾">背景回顾</h5>
+<p>Skip-gram 模型给定目标词 (w)，预测上下文词 (c)，条件概率为：<br>
+[<br>
+p(c|w) = \frac{1}{Z_w}\exp\big(\mathbf{c}_c^\top \mathbf{w}_w\big)<br>
+]<br>
+其中<br>
+(\mathbf{w}<em>w) 为词 (w) 作为中心词的向量<br>
+(\mathbf{c}<em>c) 为词 (c) 作为上下文词的向量<br>
+(Z_w = \sum</em>{c’\in V}\exp\big(\mathbf{c}</em>{c’}^\top \mathbf{w}_w\big)) 为归一化因子<br>
+语料长度为 (T)，窗口大小为 (2m)</p>
+<h5 id="写出训练目标函数">写出训练目标函数</h5>
+<p>Skip-gram 的训练目标是最大化语料中所有(目标词，上下文词)对的对数似然，等价于最小化负对数似然(损失函数)<br>
+对第$t$个位置的目标词$\omega_t$，其上下文为$[\omega_{t-m},\ldots,\omega_{t-1},\omega_{t+1},\ldots,\omega_{t+m}]$，共$2m$个上下文词，遍历语料中$T$个目标词，总对数似然函数为：<br>
+[<br>
+\mathcal{L} = \sum_{t=1}^T \sum_{\substack{-m\le j\le m\j\neq 0}}<br>
+\log p(w_{t+j}|w_t)<br>
+]<br>
+代入概率表达式：<br>
+[<br>
+\mathcal{L} = \sum_{t=1}^T \sum_{\substack{-m\le j\le m\j\neq 0}}<br>
+\left[<br>
+\mathbf{c}<em>{w</em>{t+j}}^\top \mathbf{w}<em>{w_t}-<br>
+\log\left( \sum</em>{c’\in V}\exp\big(\mathbf{c}<em>{c’}^\top \mathbf{w}</em>{w_t}\big) \right)<br>
+\right]<br>
+]</p>
+<p>损失函数（负对数似然）：<br>
+[<br>
+J = -\mathcal{L}<br>
+]</p>
+<p>记单个样本对数似然：<br>
+[<br>
+l(w,c) = \log p(c|w)<br>
+= \mathbf{c}_c^\top \mathbf{w}_w - \log Z_w<br>
+]</p>
+<p>对中心词向量 (\mathbf{w}<em>w) 求导<br>
+[<br>
+\begin{aligned}<br>
+\frac{\partial l}{\partial \mathbf{w}<em>w}<br>
+&amp;= \mathbf{c}<em>c - \frac{1}{Z_w}\sum</em>{c’\in V}\exp(\mathbf{c}</em>{c’}^\top \mathbf{w}<em>w)\mathbf{c}</em>{c’} \<br>
+&amp;= \mathbf{c}<em>c - \sum</em>{c’\in V}p(c’|w)\mathbf{c}</em>{c’}<br>
+\end{aligned}<br>
+]</p>
+<p>对真实上下文词向量 (\mathbf{c}_c) 求导<br>
+[<br>
+\begin{aligned}<br>
+\frac{\partial l}{\partial \mathbf{c}_c}<br>
+&amp;= \mathbf{w}_w - \frac{1}{Z_w}\exp(\mathbf{c}_c^\top \mathbf{w}_w)\mathbf{w}_w \<br>
+&amp;= \big(1-p(c|w)\big)\mathbf{w}_w<br>
+\end{aligned}<br>
+]</p>
+<p>对负样本词向量 (\mathbf{c}<em>{c’}\ (c’\neq c)) 求导<br>
+[<br>
+\frac{\partial l}{\partial \mathbf{c}</em>{c’}}<br>
+= -p(c’|w)\mathbf{w}_w<br>
+]</p>
+<p>故损失函数对应的梯度为上述导数的相反数(负对数似然)：<br>
+[<br>
+\begin{aligned}<br>
+\frac{\partial J}{\partial \mathbf{w}<em>w}<br>
+&amp;= \sum</em>{c’\in V}p(c’|w)\mathbf{c}_{c’} - \mathbf{c}_c,\[4pt]<br>
+\frac{\partial J}{\partial \mathbf{c}_c}<br>
+&amp;= \big(p(c|w)-1\big)\mathbf{w}<em>w,\[4pt]<br>
+\frac{\partial J}{\partial \mathbf{c}</em>{c’}}<br>
+&amp;= p(c’|w)\mathbf{w}_w,\quad c’\neq c.<br>
+\end{aligned}<br>
+]</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
   
     
-    <a href="/2026/03/19/fnlp5/" class="list-group-item list-group-item-action">
-      <time>03-19</time>
-      <div class="list-group-item-title">Neural Language Models</div>
-    </a>
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" class="category-chain-item">自然语言处理基础</a>
   
+  
+
+      </span>
     
-    <a href="/2026/03/18/fnlp4/" class="list-group-item list-group-item-action">
-      <time>03-18</time>
-      <div class="list-group-item-title">Language Modelling</div>
-    </a>
   
-    
-    <a href="/2026/03/18/fnlp3/" class="list-group-item list-group-item-action">
-      <time>03-18</time>
-      <div class="list-group-item-title">Classification – Log-linear Models</div>
-    </a>
+</span>
+
+    </div>
   
-    
-    <a href="/2026/03/11/fnlp2/" class="list-group-item list-group-item-action">
-      <time>03-11</time>
-      <div class="list-group-item-title">Word Sense Disambiguation</div>
-    </a>
   
-    
-    <a href="/2026/03/11/fnlp1/" class="list-group-item list-group-item-action">
-      <time>03-11</time>
-      <div class="list-group-item-title">Introduction</div>
-    </a>
+</div>
+
+
+              
   
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Distributional Semantics</div>
+      <div>http://example.com/2026/03/25/fnlp6/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年4月1日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/19/fnlp5/" title="Neural Language Models">
+                        <span class="hidden-mobile">Neural Language Models</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
 </div>
 
 
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -3053,6 +3463,142 @@ loadSong();
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

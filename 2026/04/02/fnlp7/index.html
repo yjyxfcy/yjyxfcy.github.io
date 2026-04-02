@@ -23,14 +23,14 @@
   
     <meta name="description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第七部分：Sequence Tagging - Hidden Markov Models">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sequence Tagging - Hidden Markov Models">
+<meta property="og:title" content="序列标注 - 隐马尔可夫模型">
 <meta property="og:url" content="http://example.com/2026/04/02/fnlp7/index.html">
 <meta property="og:site_name" content="Yjy">
 <meta property="og:description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第七部分：Sequence Tagging - Hidden Markov Models">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2026/04/02/fnlp7/7.1.png">
 <meta property="article:published_time" content="2026-04-02T02:05:21.580Z">
-<meta property="article:modified_time" content="2026-04-02T03:41:43.099Z">
+<meta property="article:modified_time" content="2026-04-02T07:38:12.459Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/04/02/fnlp7/7.1.png">
@@ -39,7 +39,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Sequence Tagging - Hidden Markov Models - Yjy</title>
+  <title>序列标注 - 隐马尔可夫模型 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -220,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Sequence Tagging - Hidden Markov Models"></span>
+            <span id="subtitle" data-typed-text="序列标注 - 隐马尔可夫模型"></span>
           
         </div>
 
@@ -305,12 +305,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Sequence Tagging - Hidden Markov Models</h1>
+            <h1 id="seo-header">序列标注 - 隐马尔可夫模型</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年4月2日 中午
+                    本文最后更新于 2026年4月2日 下午
                   
                 
               </p>
@@ -374,11 +374,11 @@
 <p>回溯：根据记录的回溯指针 $path(i, u, v)$，从最后一个标签对开始，逐步向前推演出整个最优标签序列</p>
 <p>时间复杂度：$O(n * |S|^3)$，远优于指数级暴力搜索。如果使用一阶HMM(只依赖前一个标签)，复杂度可降至 $O(n * |S|²)$</p>
 <h3 id="总结">总结</h3>
-<h5 id="HMM的优点">HMM的优点</h5>
+<h4 id="HMM的优点">HMM的优点</h4>
 <p>模型简洁，有清晰的数学公式<br>
 参数估计简单直接(基于计数)<br>
 解码算法(维特比)优雅高效</p>
-<h5 id="HMM的局限性">HMM的局限性</h5>
+<h4 id="HMM的局限性">HMM的局限性</h4>
 <p>需要大量的高质量标注数据<br>
 模型假设(马尔可夫假设)可能过于简化，不能灵活地引入复杂的特征(如词的拼写、大小写、前后缀等)<br>
 无法“学习”特征，所有知识都来源于共现计数</p>
@@ -421,7 +421,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Sequence Tagging - Hidden Markov Models</div>
+      <div>序列标注 - 隐马尔可夫模型</div>
       <div>http://example.com/2026/04/02/fnlp7/</div>
     </div>
     <div class="license-meta">
@@ -475,8 +475,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/03/25/fnlp6/" title="Distributional Semantics">
-                        <span class="hidden-mobile">Distributional Semantics</span>
+                      <a href="/2026/03/25/fnlp6/" title="分布语义学">
+                        <span class="hidden-mobile">分布语义学</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

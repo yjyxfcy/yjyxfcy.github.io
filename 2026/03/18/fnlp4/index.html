@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://example.com/2026/03/18/fnlp4/4.12.png">
 <meta property="og:image" content="http://example.com/2026/03/18/fnlp4/4.13.png">
 <meta property="article:published_time" content="2026-03-18T11:10:07.093Z">
-<meta property="article:modified_time" content="2026-04-06T03:58:00.329Z">
+<meta property="article:modified_time" content="2026-04-08T11:37:43.288Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/03/18/fnlp4/4.1.png">
@@ -322,7 +322,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年4月6日 中午
+                    本文最后更新于 2026年4月8日 晚上
                   
                 
               </p>
@@ -340,7 +340,9 @@
 <h3 id="为什么需要语言模型"><a href="#为什么需要语言模型" class="headerlink" title="为什么需要语言模型"></a>为什么需要语言模型</h3><p>语言模型可以解决许多任务：<br>语音识别，例如recognize speech 与 wreck a nice beach 发音相似，但语言模型会选择更合理的那个<br>还有机器翻译、文本生成、句子补全等，不再一一介绍<br><img src="4.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>上述所有情况都满足此公式<br>其中比较有意思的是surprisal理论，一个词在上下文中出现的概率越低，其信息量&#x2F;惊奇度越高，读者理解起来就越困难<br>$Surprisal(\omega)&#x3D;-log_2 p(\omega|history_{\omega})$</p>
 <h3 id="N-gram-语言模型"><a href="#N-gram-语言模型" class="headerlink" title="N-gram 语言模型"></a>N-gram 语言模型</h3><p>句子作为词语序列：$\omega_1,\omega_2,…,\omega_n$<br>句子作为随机变量序列$X_1,X_2,…,X_n$<br>由概率的链式法则，我们有：<br><img src="4.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>但是当$n$很大的时候，似乎不好处理？<br>所以我们要做(马尔可夫)假设！假设当前词的概率分布只与先前的几个词相关，于是就有了N-gram模型<br>完全不考虑历史的模型称作unigram,考虑一个的是bigram，两个的是trigram，三个以上就有4-gram,5-gram等……<br><img src="4.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"><br><img src="4.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>但是当$n$很大的时候，似乎不好处理？<br>所以我们要做(马尔可夫)假设！假设当前词的概率分布只与先前的几个词相关，于是就有了N-gram模型<br>完全不考虑历史的模型称作unigram,考虑一个的是bigram，两个的是trigram，三个以上就有4-gram,5-gram等……<br><img src="4.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<img src="4.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>上面就是trigram的定义及例子，注意此处标点符号和终止符STOP也被算作了一个词</p>
 <p>给定一个语料库，我们可以统计各种N-gram的出现次数<br><img src="4.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>所以训练数据越多模型一定越好吗？并不一定<br>这是由于数据的稀疏性，某些N-gram从未出现，导致概率为0<br>一般trigram就足够用了</p>
@@ -428,7 +430,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年4月6日</div>
+          <div>2026年4月8日</div>
         </div>
       
       

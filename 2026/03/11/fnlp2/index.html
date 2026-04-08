@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://example.com/2026/03/11/fnlp2/2.7.png">
 <meta property="og:image" content="http://example.com/2026/03/11/fnlp2/2.8.png">
 <meta property="article:published_time" content="2026-03-11T13:40:06.517Z">
-<meta property="article:modified_time" content="2026-04-06T03:57:11.214Z">
+<meta property="article:modified_time" content="2026-04-08T11:37:27.955Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/03/11/fnlp2/2.1.png">
@@ -317,7 +317,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年4月6日 中午
+                    本文最后更新于 2026年4月8日 晚上
                   
                 
               </p>
@@ -330,7 +330,8 @@
 <span id="more"></span>
 <h3 id="词义消歧任务"><a href="#词义消歧任务" class="headerlink" title="词义消歧任务"></a>词义消歧任务</h3><p>背景：一词多义问题<br>一个”can”可能有6种不同的意思，“长”这种多音字也不好对付<br>我们必须在所有可能里选出适当的那个意思&#x2F;读音<br>(新冠时期经典笑话：Be Positive!Be patient!)</p>
 <p>给定一个语义模糊的单词及其具体语境，我们需要确定其含义<br>对于计算机来说，<br>输入：目标词、上下文、这个词可能的所有语义<br>模型：提取多种特征并与现有知识进行比较<br>输出：该语境中目标词的语义标签</p>
-<p>计算机应该预先掌握目标词所有可能的含义，称为Sense Inventory，可以从词典、WordNet中找，WordNet是一个庞大的英语词汇数据库<br><img src="2.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"><br>如上，这是WordNet对bank这个词一词多义的解释</p>
+<p>计算机应该预先掌握目标词所有可能的含义，称为Sense Inventory，可以从词典、WordNet中找，WordNet是一个庞大的英语词汇数据库<br><img src="2.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>如上，这是WordNet对bank这个词一词多义的解释</p>
 <h3 id="机器学习方法在词义消歧中的应用"><a href="#机器学习方法在词义消歧中的应用" class="headerlink" title="机器学习方法在词义消歧中的应用"></a>机器学习方法在词义消歧中的应用</h3><p>有监督学习、半监督学习、无监督学习等方法</p>
 <h4 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h4><p>1.获取训练数据(带标签)<br>2.为每个实例提取多种特征<br>3.建立数学模型<br>4.给出未见过的实例，预测最合适的标签<br>选择范围广泛，性能有竞争力，但对数据质量要求较高</p>
 <h4 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h4><p>1.获取少量人工标注语料库作为种子<br>2.通过bootstrap获取更多标注样本<br>3.重复上述过程，遵循监督学习的方法<br>易于获取大量训练数据，但难以评估数据质量，应用时需要很多trick</p>
@@ -426,7 +427,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年4月6日</div>
+          <div>2026年4月8日</div>
         </div>
       
       

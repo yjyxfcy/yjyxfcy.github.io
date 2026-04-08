@@ -21,25 +21,38 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hi, I am Yjy. Welcome to my personal homepage.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://example.com/categories/index.html">
+    <meta name="description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第八部分：Neural Sequence Modelling and Beyond">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神经序列建模及其扩展">
+<meta property="og:url" content="http://example.com/2026/04/08/fnlp8/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="Hi, I am Yjy. Welcome to my personal homepage.">
+<meta property="og:description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第八部分：Neural Sequence Modelling and Beyond">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2026/04/08/fnlp8/8.1.png">
+<meta property="og:image" content="http://example.com/2026/04/08/fnlp8/8.2.png">
+<meta property="og:image" content="http://example.com/2026/04/08/fnlp8/8.3.png">
+<meta property="og:image" content="http://example.com/2026/04/08/fnlp8/8.4.png">
+<meta property="article:published_time" content="2026-04-08T03:20:37.212Z">
+<meta property="article:modified_time" content="2026-04-08T10:59:27.143Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/04/08/fnlp8/8.1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>分类 - Yjy</title>
+  <title>神经序列建模及其扩展 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -104,7 +117,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -204,15 +217,69 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p10.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p1.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="分类"></span>
+            <span id="subtitle" data-typed-text="神经序列建模及其扩展"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-08 11:20" pubdate>
+          2026年4月8日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
 
         
       </div>
@@ -228,297 +295,274 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">神经序列建模及其扩展</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
                 
+                  
+                    本文最后更新于 2026年4月8日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
+<p>第八部分：Neural Sequence Modelling and Beyond</p>
+<span id="more"></span>
+<h3 id="回顾RNN"><a href="#回顾RNN" class="headerlink" title="回顾RNN"></a>回顾RNN</h3><h4 id="RNN的基本结构"><a href="#RNN的基本结构" class="headerlink" title="RNN的基本结构"></a>RNN的基本结构</h4><img src="8.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>用于语言建模：用隐藏状态 $s_{t-1}$ 记忆历史信息 $w_1…w_{t-1}$<br>用于序列标注：每个位置输出一个标签(如 DET, ADJ, NOUN)<br>训练目标：最大化下一个词或标签的对数似然</p>
+<p>问题：梯度消失&#x2F;爆炸，难以捕捉长距离依赖</p>
+<h4 id="LSTM-长短期记忆网络"><a href="#LSTM-长短期记忆网络" class="headerlink" title="LSTM(长短期记忆网络)"></a>LSTM(长短期记忆网络)</h4><img src="8.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
 
+<p>引入细胞状态 $c_t$ 作为长期记忆。</p>
+<p>三个门：<br>输入门 $i_t$：决定写多少新信息。<br>遗忘门 $f_t$：决定擦除多少旧信息。<br>输出门 $o_t$：决定暴露多少记忆。</p>
+<p>公式清晰，适合长序列建模。</p>
+<h4 id="GRU-门控循环单元"><a href="#GRU-门控循环单元" class="headerlink" title="GRU(门控循环单元)"></a>GRU(门控循环单元)</h4><img src="8.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 
 
+<p>简化版LSTM，只有两个门：<br>重置门 $r_t$：决定忽略多少历史信息。<br>更新门 $z_t$：决定保留多少旧状态。</p>
+<p>没有独立的细胞状态，计算更轻量。</p>
+<h4 id="二者对比"><a href="#二者对比" class="headerlink" title="二者对比"></a>二者对比</h4><p>GRU训练更快</p>
+<p>LSTM理论上更擅长捕捉长期依赖</p>
+<p>LSTM具有对记忆内容的可控暴露特性，而GRU则不具备该特性</p>
+<h3 id="神经序列标注器"><a href="#神经序列标注器" class="headerlink" title="神经序列标注器"></a>神经序列标注器</h3><p>传统时代：<br>SOTA为条件随机场(Conditional Random Field, CRF)<br>有语言问题、不在词汇表的问题、标签偏差等</p>
+<p>神经网络时代：<br>无需特征工程，没有语言障碍<br>有多种NN捕捉上下文信息，前向&#x2F;反向传播</p>
+<p>典型模型<br>BiLSTM + CRF(Lample et al., 2016)<br>Flair：上下文字符串嵌入<br>LUKE：基于Transformer的实体感知自注意力<br>FLERT：利用文档级特征提升NER性能</p>
+<p>性能演进(CoNLL03)<br>从2016年之前的91.87%逐步提升到94%以上<br>近年主流模型大多基于Transformer(BERT、XLNet、PL-Marker等)</p>
+<h3 id="序列到序列学习-seq2seq"><a href="#序列到序列学习-seq2seq" class="headerlink" title="序列到序列学习 (seq2seq)"></a>序列到序列学习 (seq2seq)</h3><p>核心思想：<br>编码器(Encoder)将输入序列编码为固定向量 $v$<br>解码器(Decoder)基于 $v$ 和已生成的词逐步输出目标序列</p>
+<p>典型工作：Sutskever et al., 2014<br><img src="8.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>其中encoder将输入的句子映射为一个固定长度的向量<br>decoder则是一个以输入序列为条件的语言模型<br>LSTM学习长程时间依赖性</p>
+<p>将机器翻译任务转换为seq2seq转换问题<br>给定输入序列$x_1,x_2,…,x_t$(例如英语句子)<br>目标是生成输出序列$y_1,y_2,…,y_{t’}$(例如对应的法语句子)</p>
+<p>$p(y_1,y_2,…,y_{t’})&#x3D;\Pi_{i&#x3D;1}^{t’} p(y_i|y_1,…,y_{i-1},v)$</p>
+<p>此处$v$是encoder通过LSTM将输入序列编码得到的固定向量</p>
+<p>Sutskever等人还发现了：<br>更多参数通常会有更好的性能，采用双LSTM进行输入输出处理<br>深度网络优于浅层网络<br>输入反向处理优于原始处理</p>
+<p>问题：固定向量 v 成为瓶颈，难以对齐长句子中的对应词(如“爱”和“love”)？</p>
+<h3 id="注意力机制-Attention"><a href="#注意力机制-Attention" class="headerlink" title="注意力机制(Attention)"></a>注意力机制(Attention)</h3><p>这一部分就完全是老生常谈的Transformer了(终于讲到你啦！)<br>ai引论、生成模型基础乃至计算机视觉中都一再提到了，此处不再赘述<br>想要了解可以去看笔者的<a target="_blank" rel="noopener" href="https://yjyxfcy.github.io/2026/02/14/gen2/">生成模型基础笔记</a>，详细讲解了Transformer的结构和原理</p>
+<p>一些trick：<br>自注意力机制、多头注意力、归一化点积、位置编码<br>层归一化、标签平滑、attn_mask、残差连接、dropout</p>
+<h6 id="笔者按：Attention-is-all-you-need！"><a href="#笔者按：Attention-is-all-you-need！" class="headerlink" title="笔者按：Attention is all you need！"></a>笔者按：Attention is all you need！</h6>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
-<div class="category-list">
+<span class="category-chains">
   
   
     
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="自然语言处理基础"
-        id="heading-d1c2799bf7edb28cbf6ec48bbd0b850b" role="tab" data-toggle="collapse" href="#collapse-d1c2799bf7edb28cbf6ec48bbd0b850b"
-        aria-expanded="false"
-      >
-        自然语言处理基础
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>8</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-d1c2799bf7edb28cbf6ec48bbd0b850b"
-           role="tabpanel" aria-labelledby="heading-d1c2799bf7edb28cbf6ec48bbd0b850b">
+      <span class="category-chain">
         
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2026/04/08/fnlp8/" title="神经序列建模及其扩展"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">神经序列建模及其扩展</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/04/02/fnlp7/" title="序列标注 - 隐马尔可夫模型"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">序列标注 - 隐马尔可夫模型</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/03/25/fnlp6/" title="分布语义学"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">分布语义学</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/03/19/fnlp5/" title="自然语言模型"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">自然语言模型</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/03/18/fnlp4/" title="语言模型"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">语言模型</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/03/18/fnlp3/" title="分类 - 对数线性模型"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">分类 - 对数线性模型</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/03/11/fnlp2/" title="词义消歧"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">词义消歧</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/03/11/fnlp1/" title="课程介绍"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">课程介绍</span>
-        </a>
-      
-    
-  </div>
+  <a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" class="category-chain-item">自然语言处理基础</a>
+  
+  
 
-        
-      </div>
+      </span>
+    
+  
+</span>
+
     </div>
   
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="生成模型基础"
-        id="heading-320c54b9a1e78533008165d336e2f160" role="tab" data-toggle="collapse" href="#collapse-320c54b9a1e78533008165d336e2f160"
-        aria-expanded="false"
-      >
-        生成模型基础
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>4</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-320c54b9a1e78533008165d336e2f160"
-           role="tabpanel" aria-labelledby="heading-320c54b9a1e78533008165d336e2f160">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2026/02/21/gen4/" title="调试"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">调试</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/02/15/gen3/" title="生成对抗模型(GAN)"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">生成对抗模型(GAN)</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/02/14/gen2/" title="自回归模型(Transformer&amp;AR)"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">自回归模型(Transformer&amp;AR)</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/02/13/gen1/" title="变分自编码器(VAE)"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">变分自编码器(VAE)</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="大作业"
-        id="heading-3f141fe9175f44ed52d685954568221d" role="tab" data-toggle="collapse" href="#collapse-3f141fe9175f44ed52d685954568221d"
-        aria-expanded="false"
-      >
-        大作业
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/%E5%A4%A7%E4%BD%9C%E4%B8%9A/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>2</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-3f141fe9175f44ed52d685954568221d"
-           role="tabpanel" aria-labelledby="heading-3f141fe9175f44ed52d685954568221d">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2026/01/20/CV%20Final%20Project/" title="CV Final Project"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">CV Final Project</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2026/01/20/VCL%20Final%20Project/" title="VCL Final Project"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VCL Final Project</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="测试"
-        id="heading-db06c78d1e24cf708a14ce81c9b617ec" role="tab" data-toggle="collapse" href="#collapse-db06c78d1e24cf708a14ce81c9b617ec"
-        aria-expanded="false"
-      >
-        测试
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/%E6%B5%8B%E8%AF%95/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-db06c78d1e24cf708a14ce81c9b617ec"
-           role="tabpanel" aria-labelledby="heading-db06c78d1e24cf708a14ce81c9b617ec">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2026/01/16/hello-world/" title="Hello World"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Hello World</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
   
 </div>
 
 
-              </div>
-            </div>
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>神经序列建模及其扩展</div>
+      <div>http://example.com/2026/04/08/fnlp8/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年4月8日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年4月8日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/02/fnlp7/" title="序列标注 - 隐马尔可夫模型">
+                        <span class="hidden-mobile">序列标注 - 隐马尔可夫模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -3280,6 +3324,142 @@ loadSong();
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

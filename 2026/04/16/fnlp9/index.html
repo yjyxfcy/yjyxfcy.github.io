@@ -21,25 +21,38 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hi, I am Yjy. Welcome to my personal homepage.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://example.com/archives/2026/01/index.html">
+    <meta name="description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第九部分：Syntactic Analysis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="句法分析Ⅰ">
+<meta property="og:url" content="http://example.com/2026/04/16/fnlp9/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="Hi, I am Yjy. Welcome to my personal homepage.">
+<meta property="og:description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第九部分：Syntactic Analysis">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2026/04/16/fnlp9/9.1.png">
+<meta property="og:image" content="http://example.com/2026/04/16/fnlp9/9.2.png">
+<meta property="og:image" content="http://example.com/2026/04/16/fnlp9/9.3.png">
+<meta property="og:image" content="http://example.com/2026/04/16/fnlp9/9.4.png">
+<meta property="article:published_time" content="2026-04-16T02:05:24.799Z">
+<meta property="article:modified_time" content="2026-04-16T03:37:13.362Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/04/16/fnlp9/9.1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>归档 - Yjy</title>
+  <title>句法分析Ⅰ - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -104,7 +117,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -204,15 +217,69 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p9.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p1.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="句法分析Ⅰ"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-16 10:05" pubdate>
+          2026年4月16日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
 
         
       </div>
@@ -228,52 +295,266 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 16 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2026</p>
-    
-    <a href="/2026/01/20/CV%20Final%20Project/" class="list-group-item list-group-item-action">
-      <time>01-20</time>
-      <div class="list-group-item-title">CV Final Project</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">句法分析Ⅰ</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年4月16日 中午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
+<p>第九部分：Syntactic Analysis</p>
+<span id="more"></span>
+<h3 id="句法结构"><a href="#句法结构" class="headerlink" title="句法结构"></a>句法结构</h3><h4 id="为什么需要句法分析？"><a href="#为什么需要句法分析？" class="headerlink" title="为什么需要句法分析？"></a>为什么需要句法分析？</h4><p>语言不仅仅是词的序列，还遵循隐性的语法规则<br>相同的词序列可能因结构不同而有不同含义：</p>
+<p>Jane ate spaghetti with fork(用叉子吃)</p>
+<p>Jane ate spaghetti with meatballs(吃肉丸意大利面)</p>
+<p>句法分析可以揭示这种结构差异。</p>
+<h4 id="组成成分-Constituent"><a href="#组成成分-Constituent" class="headerlink" title="组成成分(Constituent)"></a>组成成分(Constituent)</h4><p>一组词可以作为一个整体单元(如名词短语NP、动词短语VP)</p>
+<p>判断是否为成分的方法：</p>
+<p>是否能出现在特定位置(如NP常出现在动词前)<br>是否能整体移动<br>是否能与其他成分并列</p>
+<p>例子：Harry the Horse、a high-class spot 等都是NP</p>
+<h4 id="短语结构树-Phrase-Structure-Tree"><a href="#短语结构树-Phrase-Structure-Tree" class="headerlink" title="短语结构树(Phrase Structure Tree)"></a>短语结构树(Phrase Structure Tree)</h4><p>将句子组织为嵌套结构，形成树状图<br><img src="9.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="语法与解析"><a href="#语法与解析" class="headerlink" title="语法与解析"></a>语法与解析</h3><h4 id="上下文无关文法-CFG"><a href="#上下文无关文法-CFG" class="headerlink" title="上下文无关文法(CFG)"></a>上下文无关文法(CFG)</h4><p>形式化定义：</p>
+<p>终结符(单词)<br>非终结符(如NP、VP)<br>起始符号 S<br>产生式规则：A → β</p>
+<p>例子：<br>S → NP VP<br>NP → Det N<br>VP → V NP</p>
+<h4 id="乔姆斯基范式-CNF"><a href="#乔姆斯基范式-CNF" class="headerlink" title="乔姆斯基范式(CNF)"></a>乔姆斯基范式(CNF)</h4><p>每条规则必须是：</p>
+<p>A → B C(两个非终结符)</p>
+<p>A → w(一个终结符)</p>
+<p>任何CFG都可以转换为CNF，便于解析</p>
+<h4 id="概率上下文无关文法-PCFG"><a href="#概率上下文无关文法-PCFG" class="headerlink" title="概率上下文无关文法(PCFG)"></a>概率上下文无关文法(PCFG)</h4><p>为每条产生规则$A_i \rightarrow \beta_i$分配一个概率$$q(A_i \rightarrow \beta_i)$$<br>那么概率树$t$的概率为所有规则概率的乘积<br>$$P(t) &#x3D; \prod_{i} q(A_i \rightarrow \beta_i)$$<br>对于任意非终结符$A_i$，有$$\sum_{\beta} q(A_i \rightarrow \beta |A_i) &#x3D; 1$$<br>下面是一个实例，便于理解<br><img src="9.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>MLE：从训练数据中估计每个规则的概率<br>$$q_{ML}(A_i \rightarrow \beta) &#x3D; \frac{count(A_i \rightarrow \beta)}{count(A_i)}$$</p>
+<h4 id="CKY解析算法"><a href="#CKY解析算法" class="headerlink" title="CKY解析算法"></a>CKY解析算法</h4><p>给出一个PCFG和句子$s$，定义$T(s)$为以$s$为输出结果的树的集合，我们想要找到$$\hat{t} &#x3D; argmax_{t \in T(s)} P(t)$$</p>
+<p>采用CKY算法进行动态规划<br>定义$\pi[i,j,X]$为从词序$i$到$j$生成非终结符$X$的最大概率<br>然后根据规则填充如下表格：<br><img src="9.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<img src="9.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<h3 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h3><p>使用标注精确率(Labeled Precision)、标注召回率(Labeled Recall)、F1值</p>
+<p>常见做法：<br>在Penn Treebank上训练(02-21节),测试在23节上,词性标签序列上的F1通常在70%左右</p>
+<h6 id="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣"><a href="#笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣" class="headerlink" title="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣"></a>笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣</h6>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
   
     
-    <a href="/2026/01/20/VCL%20Final%20Project/" class="list-group-item list-group-item-action">
-      <time>01-20</time>
-      <div class="list-group-item-title">VCL Final Project</div>
-    </a>
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" class="category-chain-item">自然语言处理基础</a>
   
+  
+
+      </span>
     
-    <a href="/2026/01/16/hello-world/" class="list-group-item list-group-item-action">
-      <time>01-16</time>
-      <div class="list-group-item-title">Hello World</div>
-    </a>
   
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>句法分析Ⅰ</div>
+      <div>http://example.com/2026/04/16/fnlp9/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年4月16日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年4月16日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/08/fnlp8/" title="神经序列建模及其扩展">
+                        <span class="hidden-mobile">神经序列建模及其扩展</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
 </div>
 
 
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -3035,6 +3316,142 @@ loadSong();
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

@@ -21,12 +21,12 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第三部分：GAN">
+    <meta name="description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第三讲：GAN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="生成对抗模型(GAN)">
 <meta property="og:url" content="http://example.com/2026/02/15/gen3/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第三部分：GAN">
+<meta property="og:description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第三讲：GAN">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.1.png">
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.2.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.12.png">
 <meta property="og:image" content="http://example.com/2026/02/15/gen3/3.13.png">
 <meta property="article:published_time" content="2026-02-15T07:02:56.359Z">
-<meta property="article:modified_time" content="2026-04-06T03:56:15.395Z">
+<meta property="article:modified_time" content="2026-04-18T07:11:08.694Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/02/15/gen3/3.1.png">
@@ -322,7 +322,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年4月6日 中午
+                    本文最后更新于 2026年4月18日 下午
                   
                 
               </p>
@@ -331,7 +331,7 @@
               <div class="markdown-body">
                 
                 <p>北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p>
-<p>第三部分：GAN</p>
+<p>第三讲：GAN</p>
 <span id="more"></span>
 <h3 id="从复杂分布到简单分布"><a href="#从复杂分布到简单分布" class="headerlink" title="从复杂分布到简单分布"></a>从复杂分布到简单分布</h3><p>假设随机变量$X$服从极为复杂的分布$Q$，那么要如何从$Q$中生成数据呢？<br>已知我们有$Q$的分布函数$F(x)$，及其逆函数$F^{-1}(x)$<br>算法是这样的，先从一个均匀分布中sample出$Z$，然后令$X&#x3D;F^{-1}(Z) \sim Q$，则有<br>$P(X&lt;t)&#x3D;P(F^{-1}(Z)&lt;t)&#x3D;P(Z&lt;F(t))&#x3D;F(t)$</p>
 <p>这证明了任何复杂分布的样本都可以由简单分布生成<br>前面讲过，VAE具有浅层性，无法go deep，所以生成的图片没有那么”real”<br>如果要通过复杂函数从满足正态分布的noise中生成图像，那么更好的做法是下面的GAN(Generative Adversarial Network，生成对抗网络)<br>GAN是一种隐式模型，让我们看看显式模型和隐式模型都有哪些区别<br><img src="3.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
@@ -439,7 +439,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年4月6日</div>
+          <div>2026年4月18日</div>
         </div>
       
       

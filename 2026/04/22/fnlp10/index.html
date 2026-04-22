@@ -21,25 +21,40 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hi, I am Yjy. Welcome to my personal homepage.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://example.com/archives/page/2/index.html">
+    <meta name="description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第十讲：Syntactic Analysis II">
+<meta property="og:type" content="article">
+<meta property="og:title" content="句法分析 II">
+<meta property="og:url" content="http://example.com/2026/04/22/fnlp10/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="Hi, I am Yjy. Welcome to my personal homepage.">
+<meta property="og:description" content="北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第十讲：Syntactic Analysis II">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2026/04/22/fnlp10/10.1.png">
+<meta property="og:image" content="http://example.com/2026/04/22/fnlp10/10.2.png">
+<meta property="og:image" content="http://example.com/2026/04/22/fnlp10/10.3.png">
+<meta property="og:image" content="http://example.com/2026/04/22/fnlp10/10.4.png">
+<meta property="og:image" content="http://example.com/2026/04/22/fnlp10/10.5.png">
+<meta property="og:image" content="http://example.com/2026/04/22/fnlp10/10.6.png">
+<meta property="article:published_time" content="2026-04-22T02:18:17.335Z">
+<meta property="article:modified_time" content="2026-04-22T11:10:22.850Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2026/04/22/fnlp10/10.1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>归档 - Yjy</title>
+  <title>句法分析 II - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -104,7 +119,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -204,15 +219,69 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p9.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p1.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="句法分析 II"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-22 10:18" pubdate>
+          2026年4月22日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
 
         
       </div>
@@ -228,82 +297,266 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 17 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2026</p>
-    
-    <a href="/2026/02/21/gen4/" class="list-group-item list-group-item-action">
-      <time>02-21</time>
-      <div class="list-group-item-title">调试</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">句法分析 II</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年4月22日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
+<p>第十讲：Syntactic Analysis II</p>
+<span id="more"></span>
+<h3 id="依存结构"><a href="#依存结构" class="headerlink" title="依存结构"></a>依存结构</h3><h4 id="依存关系"><a href="#依存关系" class="headerlink" title="依存关系"></a>依存关系</h4><p>我认为语言最本质的特性，也是迄今为止发现的最令人费解的特性，就是所谓的“结构依赖性”。————诺姆·乔姆斯基<br><img src="10.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>上面是一个例子，展示了词与词之间的依存关系<br>依存关系本质上是一种二元关系，其中一个是核心词(head)，另一个是依存词(dependent)</p>
+<img src="10.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>如上图，依存关系可以被表示为一条有向弧，从核心词指向依存词</p>
+<p>Universal Dependencies(UD)项目定义了37种常见关系(如 nsubj, obj, iobj, det, case, conj 等)</p>
+<h4 id="依存图-树"><a href="#依存图-树" class="headerlink" title="依存图(树)"></a>依存图(树)</h4><p>大部分情况下依存关系可以用树表示，但也有一些特殊情况，例如下面这个句子，所以为了满足一般性，我们还是用依存图来表示<br><img src="10.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>一个合法的依存图通常满足：</p>
+<p>连通性：所有节点通过弧相连<br>无环性：不能有循环依赖<br>单头约束：每个词只能有一个核心词<br>投射性(projectivity)：如果词 $i$ 是词 $j$ 的核心，则 $i$ 和 $j$ 之间的所有词都必须直接或间接从属于 $i$，即弧不能交叉</p>
+<p>不过，大多数理论框架并不假设投射性，需要非投射性结构来解释长距离依赖关系及自由词序现象</p>
+<h4 id="依存结构和短语结构的对比"><a href="#依存结构和短语结构的对比" class="headerlink" title="依存结构和短语结构的对比"></a>依存结构和短语结构的对比</h4><img src="10.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<h3 id="依存句法分析"><a href="#依存句法分析" class="headerlink" title="依存句法分析"></a>依存句法分析</h3><p>花园小径句：语法正确，但是句子开头容易让人产生错觉<br>The old man the boat. 此处man为动词……</p>
+<p>结构预测的两种方法<br>离散优化：定义评分函数并寻找得分最高的结构，如前面学过的viterbi，CKY算法等(dp)<br>增量搜索：搜索状态为当前构建的部分结构，每次操作逐步拓展结构，经常采用贪心，可以用beam search来提升性能</p>
+<h4 id="基于转移的依存解析框架"><a href="#基于转移的依存解析框架" class="headerlink" title="基于转移的依存解析框架"></a>基于转移的依存解析框架</h4><p>本节课的重中之重，用stack来解决依存句法问题，但是ppt讲的太过形式化，导致笔者看不懂一点，这里姑且采用ds老师的解析……大家自行品味吧</p>
+<img src="10.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<img src="10.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<h4 id="解析器学习"><a href="#解析器学习" class="headerlink" title="解析器学习"></a>解析器学习</h4><p>训练：使用树库(如UD Treebanks)，通过有监督学习训练一个分类器(感知机、对数线性模型、神经网络等)来预测每个状态下应该执行哪个动作</p>
+<p>解码：贪心搜索(每次取最高概率的动作)，也可用beam search提高准确率</p>
+<h4 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h4><p>无标签依附分数(UAS)：只判断每个词的核心词是否正确(忽略标签)</p>
+<p>有标签依附分数(LAS)：同时判断核心词和关系标签是否正确</p>
+<p>通常以句子中正确依附的词的比例来报告</p>
+<h6 id="笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www"><a href="#笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www" class="headerlink" title="笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www"></a>笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www</h6>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
   
     
-    <a href="/2026/02/15/gen3/" class="list-group-item list-group-item-action">
-      <time>02-15</time>
-      <div class="list-group-item-title">生成对抗模型(GAN)</div>
-    </a>
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" class="category-chain-item">自然语言处理基础</a>
   
-    
-    <a href="/2026/02/14/gen2/" class="list-group-item list-group-item-action">
-      <time>02-14</time>
-      <div class="list-group-item-title">自回归模型(Transformer&amp;AR)</div>
-    </a>
   
+
+      </span>
     
-    <a href="/2026/02/13/gen1/" class="list-group-item list-group-item-action">
-      <time>02-13</time>
-      <div class="list-group-item-title">变分自编码器(VAE)</div>
-    </a>
   
-    
-    <a href="/2026/01/20/CV%20Final%20Project/" class="list-group-item list-group-item-action">
-      <time>01-20</time>
-      <div class="list-group-item-title">CV Final Project</div>
-    </a>
+</span>
+
+    </div>
   
-    
-    <a href="/2026/01/20/VCL%20Final%20Project/" class="list-group-item list-group-item-action">
-      <time>01-20</time>
-      <div class="list-group-item-title">VCL Final Project</div>
-    </a>
-  
-    
-    <a href="/2026/01/16/hello-world/" class="list-group-item list-group-item-action">
-      <time>01-16</time>
-      <div class="list-group-item-title">Hello World</div>
-    </a>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>句法分析 II</div>
+      <div>http://example.com/2026/04/22/fnlp10/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年4月22日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年4月22日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/16/fnlp9/" title="句法分析Ⅰ">
+                        <span class="hidden-mobile">句法分析Ⅰ</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -3065,6 +3318,142 @@ loadSong();
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

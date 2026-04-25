@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://example.com/2026/03/18/fnlp4/4.12.png">
 <meta property="og:image" content="http://example.com/2026/03/18/fnlp4/4.13.png">
 <meta property="article:published_time" content="2026-03-18T11:10:07.093Z">
-<meta property="article:modified_time" content="2026-04-18T07:10:37.342Z">
+<meta property="article:modified_time" content="2026-04-25T06:35:17.052Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2026/03/18/fnlp4/4.1.png">
@@ -322,7 +322,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年4月18日 下午
+                    本文最后更新于 2026年4月25日 下午
                   
                 
               </p>
@@ -335,8 +335,8 @@
 <span id="more"></span>
 <h3 id="一些补充"><a href="#一些补充" class="headerlink" title="一些补充"></a>一些补充</h3><p>生成模型与判别模型：<br><img src="4.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>这里的内容主要是对ai引论中划分训练集、验证集与测试集的回顾，只不过这里将validation set称作development set，本质是同一个东西<br>还有经典的K折交叉检验<br><img src="4.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h3 id="什么是语言模型"><a href="#什么是语言模型" class="headerlink" title="什么是语言模型"></a>什么是语言模型</h3><p>我们先看几句话：<br>the dog barks<br>the dog laughs<br>dog the dog bark a laugh smile<br>前两句话看起来还比较有章法，但第三句就有点“胡言乱语”了<br>从概率论角度，那么出现第三句话的概率远低于前两句！<br>语言模型就是要给所有可能的词序列（句子）分配一个概率，使得合理的句子概率高，不合理的句子概率低</p>
-<p>用严谨的概率论来说，假如有一个有限的词表$V$,所有由这些词构成的句子（包括不同长度）组成集合$S$<br>我们想要一个概率分布$p$满足：<br>$\sum_{s \in S}p(s)&#x3D;1,p(s)\ge 0$<br>其中p(the dog barks)很大，p(the dog laughs)较大，p(dog the dog bark a laugh smile)极小</p>
+<h3 id="什么是语言模型"><a href="#什么是语言模型" class="headerlink" title="什么是语言模型"></a>什么是语言模型</h3><p>我们先看几句话：<br>the dog barks<br>the dog laughs<br>dog the dog bark a laugh smile<br>前两句话看起来还比较有章法，但第三句就有点“胡言乱语”了<br>从概率论角度，那么出现第三句话的概率远低于前两句！<br>语言模型就是要给所有可能的词序列(句子)分配一个概率，使得合理的句子概率高，不合理的句子概率低</p>
+<p>用严谨的概率论来说，假如有一个有限的词表$V$,所有由这些词构成的句子(包括不同长度)组成集合$S$<br>我们想要一个概率分布$p$满足：<br>$\sum_{s \in S}p(s)&#x3D;1,p(s)\ge 0$<br>其中p(the dog barks)很大，p(the dog laughs)较大，p(dog the dog bark a laugh smile)极小</p>
 <h3 id="为什么需要语言模型"><a href="#为什么需要语言模型" class="headerlink" title="为什么需要语言模型"></a>为什么需要语言模型</h3><p>语言模型可以解决许多任务：<br>语音识别，例如recognize speech 与 wreck a nice beach 发音相似，但语言模型会选择更合理的那个<br>还有机器翻译、文本生成、句子补全等，不再一一介绍<br><img src="4.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>上述所有情况都满足此公式<br>其中比较有意思的是surprisal理论，一个词在上下文中出现的概率越低，其信息量&#x2F;惊奇度越高，读者理解起来就越困难<br>$Surprisal(\omega)&#x3D;-log_2 p(\omega|history_{\omega})$</p>
 <h3 id="N-gram-语言模型"><a href="#N-gram-语言模型" class="headerlink" title="N-gram 语言模型"></a>N-gram 语言模型</h3><p>句子作为词语序列：$\omega_1,\omega_2,…,\omega_n$<br>句子作为随机变量序列$X_1,X_2,…,X_n$<br>由概率的链式法则，我们有：<br><img src="4.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
@@ -347,7 +347,7 @@
 <p>给定一个语料库，我们可以统计各种N-gram的出现次数<br><img src="4.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>所以训练数据越多模型一定越好吗？并不一定<br>这是由于数据的稀疏性，某些N-gram从未出现，导致概率为0<br>一般trigram就足够用了</p>
 <h3 id="如何评估模型"><a href="#如何评估模型" class="headerlink" title="如何评估模型"></a>如何评估模型</h3><p>一个优秀的语言模型应该为更可能出现在该语言中的句子分配较高概率<br>最优语言模型应该能对未见过的测试集进行最佳预测</p>
-<p>对于某个数据集$D$,我们可以用语言模型：<br>计算每个句子出现的概率，$p(s)&#x3D;p(\omega_1,\omega_2,…,\omega_n)$<br>对于整个数据集进行似然估计，计算$\Pi_{s \in D}p(s)$<br>然后对于$D$中共$M$个词(包括STOP)进行归一化，得到$（\Pi_{s \in D}p(s))^{\frac{1}{M}}$<br>对其取对数，得到$\frac{1}{M} \Sigma_{s \in D}log p(s)$<br>极大似然估计等价于最小化交叉熵损失$-\frac{1}{M} \Sigma_{s \in D}log p(s)$</p>
+<p>对于某个数据集$D$,我们可以用语言模型：<br>计算每个句子出现的概率，$p(s)&#x3D;p(\omega_1,\omega_2,…,\omega_n)$<br>对于整个数据集进行似然估计，计算$\Pi_{s \in D}p(s)$<br>然后对于$D$中共$M$个词(包括STOP)进行归一化，得到$(\Pi_{s \in D}p(s))^{\frac{1}{M}}$<br>对其取对数，得到$\frac{1}{M} \Sigma_{s \in D}log p(s)$<br>极大似然估计等价于最小化交叉熵损失$-\frac{1}{M} \Sigma_{s \in D}log p(s)$</p>
 <p>现在我们定义困惑度$perplexity(D)&#x3D;2^{-\frac{1}{M} \Sigma_{s \in D}log p(s)}$<br>极大似然估计越大，困惑度越低，代表模型预测的越好</p>
 <p>困惑度可以理解为分支因子的平均值：模型在每个位置上平均有多少个等概率的词可以选择<br>如果困惑度为1，代表下一个出现的词只有一种可能，于是模型就非常精确<br>如果模型满足均匀分布，所有$p&#x3D;\frac{1}{|V|}$，那么困惑度即为$|V|$，也即每次都得在$|V|$个词中随机选择<br>一般情况下困惑度$\ge 1$，好的语言模型能把困惑度控制在$1.4 \sim 1.5$</p>
 <p>注意事项：<br>比较困惑度时，词汇表必须相同。<br>困惑度并不完全等同于下游任务性能，但它是常用的内部评价指标。</p>
@@ -372,7 +372,7 @@
 <p>上面是重新分配之后的结果<br>注意到大多数情况下$r^{\ast}&#x3D;r-0.75$<br>所以我们或许可以对每次计数减去一个固定数值$d$？<br><img src="4.13.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <h5 id="Kneser-Ney-Smoothing"><a href="#Kneser-Ney-Smoothing" class="headerlink" title="Kneser-Ney Smoothing"></a>Kneser-Ney Smoothing</h5><p>对于上述方法的一种综合，结合了线性插值和回退概率，广受欢迎，限于篇幅这里不再赘述</p>
 <h3 id="总结：N-gram模型的优缺点"><a href="#总结：N-gram模型的优缺点" class="headerlink" title="总结：N-gram模型的优缺点"></a>总结：N-gram模型的优缺点</h3><p>优点：<br>构建简单，可处理大规模语料<br>概率评分自然适用于许多任务<br>平滑技术能有效处理稀疏性</p>
-<p>缺点：<br>无法捕捉长距离依赖（受限于 n 的大小）<br>无法处理同义词、语义相似性（词被视为原子符号）<br>参数数量随 n 指数增长，存储和计算成本高<br>数据稀疏问题依然存在，尤其高阶模型</p>
+<p>缺点：<br>无法捕捉长距离依赖(受限于 n 的大小)<br>无法处理同义词、语义相似性(词被视为原子符号)<br>参数数量随 n 指数增长，存储和计算成本高<br>数据稀疏问题依然存在，尤其高阶模型</p>
 <h6 id="笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解"><a href="#笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解" class="headerlink" title="笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解"></a>笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解</h6>
                 
               </div>
@@ -430,7 +430,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年4月18日</div>
+          <div>2026年4月25日</div>
         </div>
       
       

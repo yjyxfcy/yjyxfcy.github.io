@@ -333,61 +333,98 @@
                 <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第三讲：Classification – Log-linear Models</p>
 <span id="more"></span>
-<h3 id="生成模型与判别模型"><a href="#生成模型与判别模型" class="headerlink" title="生成模型与判别模型"></a>生成模型与判别模型</h3><p>回顾上一讲的监督学习：已知有$(x_{1},y_{1}),…,(x_{k},y_{k})$等多组数据，$x_{i}$为数据样本，$y_{i}$为样本对应的标签，我们的目标即为找到函数$g$，使得$y&#x3D;g(x)$</p>
-<p>从概率论的角度，$g(x)&#x3D;argmax_{y} p(y|x)$，所以我们有两种模型<br>判别模型：直接学习$p(y|x)$<br>常见的有逻辑回归、SVM、神经网络、KNN、决策树(详见ai引论)<br>生成模型：先学习$p(x,y)$<br>常见的有朴素贝叶斯、隐马尔科夫链、VAE、GAN、Diffusion(详见生成模型基础)</p>
+<h3 id="生成模型与判别模型">生成模型与判别模型</h3>
+<p>回顾上一讲的监督学习：已知有$(x_{1},y_{1}),…,(x_{k},y_{k})$等多组数据，$x_{i}$为数据样本，$y_{i}$为样本对应的标签，我们的目标即为找到函数$g$，使得$y=g(x)$</p>
+<p>从概率论的角度，$g(x)=argmax_{y} p(y|x)$，所以我们有两种模型<br>
+判别模型：直接学习$p(y|x)$<br>
+常见的有逻辑回归、SVM、神经网络、KNN、决策树(详见ai引论)<br>
+生成模型：先学习$p(x,y)$<br>
+常见的有朴素贝叶斯、隐马尔科夫链、VAE、GAN、Diffusion(详见生成模型基础)</p>
 <img src="3.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>如上，生成模型从联合分布$p(x,y)$出发来学习条件分布$p(y|x)$，最后得出$g(x)$</p>
-<h4 id="贝叶斯模型"><a href="#贝叶斯模型" class="headerlink" title="贝叶斯模型"></a>贝叶斯模型</h4><p>数据生成分布：$x \sim p(x|y)$<br>模型先验分布：$ y \sim p(y)$<br>则$p(y|x)$与$p(x|y)p(y)$成正比<br>但实际操作中$p(x|y)$分布往往很复杂，导致$p(y|x)$不好求</p>
-<p>所以我们必须做出一些假设：<br>$y$服从关于$\gamma$的多项式分布<br>$x|y \sim p(x|\theta_{y})$<br>先验部分$\gamma \sim Dirichlet(\beta)$<br>$\theta_{1},\theta_{2},…,\stackrel{\text{i.i.d.}}{\sim} p(\theta)$<br>于是我们有$p(x,y|\gamma,\theta)&#x3D;p(x|y,\theta)p(y|\gamma)$</p>
-<p>下面是Blei et al.,2023提出的一个典型例子<br>针对语料库中的每份文档：<br>随机或从分布中选择$N$<br>选择$\theta \sim Dirichlet(\alpha)$</p>
-<p>对于这$N$个单词中的每个词：<br>选择一个话题$z$服从关于$\theta$的多项式分布<br>从$p(\omega|z,\beta)$中选择一个词$\omega$</p>
+<h4 id="贝叶斯模型">贝叶斯模型</h4>
+<p>数据生成分布：$x \sim p(x|y)$<br>
+模型先验分布：$ y \sim p(y)$<br>
+则$p(y|x)$与$p(x|y)p(y)$成正比<br>
+但实际操作中$p(x|y)$分布往往很复杂，导致$p(y|x)$不好求</p>
+<p>所以我们必须做出一些假设：<br>
+$y$服从关于$\gamma$的多项式分布<br>
+$x|y \sim p(x|\theta_{y})$<br>
+先验部分$\gamma \sim Dirichlet(\beta)$<br>
+$\theta_{1},\theta_{2},…,\stackrel{\text{i.i.d.}}{\sim} p(\theta)$<br>
+于是我们有$p(x,y|\gamma,\theta)=p(x|y,\theta)p(y|\gamma)$</p>
+<p>下面是Blei et al.,2023提出的一个典型例子<br>
+针对语料库中的每份文档：<br>
+随机或从分布中选择$N$<br>
+选择$\theta \sim Dirichlet(\alpha)$</p>
+<p>对于这$N$个单词中的每个词：<br>
+选择一个话题$z$服从关于$\theta$的多项式分布<br>
+从$p(\omega|z,\beta)$中选择一个词$\omega$</p>
 <img src="3.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>这被称作后验狄利克雷分配(Latent Dirichlet Allocation)，是最常用的话题模型之一，适用于大规模数据挖掘</p>
-<h4 id="判别模型"><a href="#判别模型" class="headerlink" title="判别模型"></a>判别模型</h4><p>仅基于观测的$x$来预测$y$，建立条件概率$p(y|x)$模型，无需强制独立假设，便于整合多种特征，通常准确率更高，但可能面临过拟合风险</p>
-<h3 id="特征表示"><a href="#特征表示" class="headerlink" title="特征表示"></a>特征表示</h3><p>特征是描述输入数据$x$的某种证据，通常与预测标签$y$相关</p>
-<p>cv中特征可以是：形状、颜色、纹理、大小、周围物体等<br>而在nlp中，特征可能是：<br>目标词本身、词性、前缀、后缀、是否大写<br>上下文词、词性、形态信息<br>这些特征的频次</p>
-<p>总而言之在nlp中，特征通常表示为$x$与$y$的函数，即$f_{i}(x,y) \in R$，更常见的是二元或指示函数<br>例如在进行bank这个词的词义消歧时<br><img src="3.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>也即如果前一个词是”transfer”，标签为金融，则该特征激活</p>
+<h4 id="判别模型">判别模型</h4>
+<p>仅基于观测的$x$来预测$y$，建立条件概率$p(y|x)$模型，无需强制独立假设，便于整合多种特征，通常准确率更高，但可能面临过拟合风险</p>
+<h3 id="特征表示">特征表示</h3>
+<p>特征是描述输入数据$x$的某种证据，通常与预测标签$y$相关</p>
+<p>cv中特征可以是：形状、颜色、纹理、大小、周围物体等<br>
+而在nlp中，特征可能是：<br>
+目标词本身、词性、前缀、后缀、是否大写<br>
+上下文词、词性、形态信息<br>
+这些特征的频次</p>
+<p>总而言之在nlp中，特征通常表示为$x$与$y$的函数，即$f_{i}(x,y) \in R$，更常见的是二元或指示函数<br>
+例如在进行bank这个词的词义消歧时<br>
+<img src="3.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>也即如果前一个词是&quot;transfer&quot;，标签为金融，则该特征激活</p>
 <p>如果要用$m$个维度来描述一个实例，即有$m$个特征，那么每个维度的特征组合起来就成为了一个特征向量$[f_{1}(x,y),…,f_{m}(x,y)]$，比如$[1,0,0,…,1]$</p>
 <img src="3.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>上面是一个nlp中的特征实例，可以看出，特征可能是前几个词、后几个词，以及是否在句首、是否大写等，Sp,Po,En分别为不同领域(标签)</p>
 <p>词袋模型：将文本表示为一个向量，每个维度对应一个词，值可以是</p>
-<p>One-hot(独热)：出现1，没出现0<br>词频统计：统计出现了多少次<br>TF-IDF：下面介绍(与ai引论中的公式略有不同,TF进行了对数归一化)</p>
-<p>考虑词$t$，文档$d$，则$TF_{t,d}&#x3D;1+log_{10}count(t,d)$,if $count(t,d)&gt;0$<br>otherwise，$TF_{t,d}&#x3D;0$<br>$IDF_{t}&#x3D;log_{10} \frac{N}{DF_{t}}$,其中$N$为文档总数，$DF_{t}$为包含词$t$的文档数<br>$TF-IDF&#x3D;TF*IDF$</p>
-<p>TF为词频，IDF为逆文档频率，TF高说明这个词在某文档中为高频词，IDF高则说明这个词在整个语料中又低频出现，所以若TF-IDF较高，那么这个词很可能是关键词&#x2F;主题词</p>
-<h3 id="基于特征的判别模型"><a href="#基于特征的判别模型" class="headerlink" title="基于特征的判别模型"></a>基于特征的判别模型</h3><p>假设一个线性分类器形如$\lambda_{f(x,y)}f(x,y)$，其中$\lambda$为权重，构建一个线性函数将$f(x,y)$映射到标签$y$，可能需要对于每一个$f_{i}(x,y)$分配权重$\lambda_{f_{i}(x,y)}$，然后针对实例$x$的每一个标签$y$，我们计算得分：</p>
-<p>$score(x,y)&#x3D;\Sigma_{i}\lambda_{f_{i}(x,y)}f_{i}(x,y)$</p>
+<p>One-hot(独热)：出现1，没出现0<br>
+词频统计：统计出现了多少次<br>
+TF-IDF：下面介绍(与ai引论中的公式略有不同,TF进行了对数归一化)</p>
+<p>考虑词$t$，文档$d$，则$TF_{t,d}=1+log_{10}count(t,d)$,if $count(t,d)&gt;0$<br>
+otherwise，$TF_{t,d}=0$<br>
+$IDF_{t}=log_{10} \frac{N}{DF_{t}}$,其中$N$为文档总数，$DF_{t}$为包含词$t$的文档数<br>
+$TF-IDF=TF*IDF$</p>
+<p>TF为词频，IDF为逆文档频率，TF高说明这个词在某文档中为高频词，IDF高则说明这个词在整个语料中又低频出现，所以若TF-IDF较高，那么这个词很可能是关键词/主题词</p>
+<h3 id="基于特征的判别模型">基于特征的判别模型</h3>
+<p>假设一个线性分类器形如$\lambda_{f(x,y)}f(x,y)$，其中$\lambda$为权重，构建一个线性函数将$f(x,y)$映射到标签$y$，可能需要对于每一个$f_{i}(x,y)$分配权重$\lambda_{f_{i}(x,y)}$，然后针对实例$x$的每一个标签$y$，我们计算得分：</p>
+<p>$score(x,y)=\Sigma_{i}\lambda_{f_{i}(x,y)}f_{i}(x,y)$</p>
 <p>预测时选择得分最高的标签：</p>
-<p>$y^{\ast}&#x3D;argmax_{y} \Sigma_{i}\lambda_{f_{i}(x,y)}f_{i}(x,y)$</p>
-<p>关键在于为不同特征选择&#x2F;学习合适的权重$\lambda$<br>将得分转化为概率，就得到了我们的老朋友：逻辑回归<br><img src="3.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>$y^{\ast}=argmax_{y} \Sigma_{i}\lambda_{f_{i}(x,y)}f_{i}(x,y)$</p>
+<p>关键在于为不同特征选择/学习合适的权重$\lambda$<br>
+将得分转化为概率，就得到了我们的老朋友：逻辑回归<br>
+<img src="3.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <img src="3.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<p>进一步，我们将求和改写为向量内积，然后对原式取对数，即有上面的结果<br>其中前一项为线性项，后一项为正则化项，这就是Log-Linear Model</p>
-<h4 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h4><img src="3.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<p>由于这里的数学推导实在过多，我就不手打公式了，如上图<br>已知训练数据$(x_1,y_1),…,(x_k,y_k)$，那么我们对$\lambda$进行极大似然估计，概率连乘，之后再取对数，即得到$LL(\mathbf{\lambda})$，$L(\lambda)$越大，模型越好<br>所以我们要$maximize LL(\lambda)$，分别对于每一个$\lambda_{f_i}$求偏导，令偏导数为0</p>
+<p>进一步，我们将求和改写为向量内积，然后对原式取对数，即有上面的结果<br>
+其中前一项为线性项，后一项为正则化项，这就是Log-Linear Model</p>
+<h4 id="模型训练">模型训练</h4>
+<img src="3.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<p>由于这里的数学推导实在过多，我就不手打公式了，如上图<br>
+已知训练数据$(x_1,y_1),…,(x_k,y_k)$，那么我们对$\lambda$进行极大似然估计，概率连乘，之后再取对数，即得到$LL(\mathbf{\lambda})$，$L(\lambda)$越大，模型越好<br>
+所以我们要$maximize LL(\lambda)$，分别对于每一个$\lambda_{f_i}$求偏导，令偏导数为0</p>
 <img src="3.8.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>前一项被称为经验计数，后一项为预期计数，我们希望二者尽可能相等</p>
-<h4 id="模型优化"><a href="#模型优化" class="headerlink" title="模型优化"></a>模型优化</h4><p>我们采用经典的梯度上升法，初始化所有$\lambda$均为0，然后逐步迭代直至收敛<br><img src="3.9.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="模型优化">模型优化</h4>
+<p>我们采用经典的梯度上升法，初始化所有$\lambda$均为0，然后逐步迭代直至收敛<br>
+<img src="3.9.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>更高级的方法当然是随机梯度上升，速度更快</p>
 <img src="3.10.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<p>是不是听起来有点奇怪？我们在ai引论和cv中一再提及的都是随机梯度下降(SGD)，怎么偏偏到你这变成上升了？<br>这是由于最大化对数似然等价于最小化交叉熵损失！</p>
+<p>是不是听起来有点奇怪？我们在ai引论和cv中一再提及的都是随机梯度下降(SGD)，怎么偏偏到你这变成上升了？<br>
+这是由于最大化对数似然等价于最小化交叉熵损失！</p>
 <img src="3.11.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>这么一改就可以用SGD了~</p>
-<h4 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h4><p>看上去模型已经很完美了，是这样吗？<br>并非如此，如果某个特征(如“NFL”)在训练集中100%出现在“Sports”类别中，模型会将该特征的权重推向无穷大，导致过拟合！<br>所以我们要采取依旧经典的正则化</p>
+<h4 id="正则化">正则化</h4>
+<p>看上去模型已经很完美了，是这样吗？<br>
+并非如此，如果某个特征(如“NFL”)在训练集中100%出现在“Sports”类别中，模型会将该特征的权重推向无穷大，导致过拟合！<br>
+所以我们要采取依旧经典的正则化</p>
 <img src="3.12.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>如上，在损失函数中加入正则化项，于是在梯度更新时也增加了正则项</p>
 <img src="3.13.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<p>上面是正则化的一般形式，其中$p$取2即为我们最常用的L2正则化<br>
+当然还有$p$取1的L1正则化，但是没有L2那么常用，可能产生稀疏解</p>
+<h6 id="笔者按：这一讲内容极为繁杂，数学公式推导多多，但皆为ai引论讲过之理，温故知新实乃不二法门也，年少不知爱引论爱我之深，直至今日方才醒悟，欲说还休，不亦悲夫！">笔者按：这一讲内容极为繁杂，数学公式推导多多，但皆为ai引论讲过之理，温故知新实乃不二法门也，年少不知爱引论爱我之深，直至今日方才醒悟，欲说还休，不亦悲夫！</h6>
 
-<p>上面是正则化的一般形式，其中$p$取2即为我们最常用的L2正则化<br>当然还有$p$取1的L1正则化，但是没有L2那么常用，可能产生稀疏解</p>
-<h6 id="笔者按：这一讲内容极为繁杂，数学公式推导多多，但皆为ai引论讲过之理，温故知新实乃不二法门也，年少不知爱引论爱我之深，直至今日方才醒悟，欲说还休，不亦悲夫！"><a href="#笔者按：这一讲内容极为繁杂，数学公式推导多多，但皆为ai引论讲过之理，温故知新实乃不二法门也，年少不知爱引论爱我之深，直至今日方才醒悟，欲说还休，不亦悲夫！" class="headerlink" title="笔者按：这一讲内容极为繁杂，数学公式推导多多，但皆为ai引论讲过之理，温故知新实乃不二法门也，年少不知爱引论爱我之深，直至今日方才醒悟，欲说还休，不亦悲夫！"></a>笔者按：这一讲内容极为繁杂，数学公式推导多多，但皆为ai引论讲过之理，温故知新实乃不二法门也，年少不知爱引论爱我之深，直至今日方才醒悟，欲说还休，不亦悲夫！</h6>
                 
               </div>
             
@@ -554,6 +591,15 @@
     <i class="iconfont icon-list"></i>
     <span>目录</span>
   </p>
+  <div class="toc-reading-progress" aria-label="Reading progress">
+    <div class="toc-reading-progress-row">
+      <span>阅读进度</span>
+      <span id="toc-reading-progress-text">0%</span>
+    </div>
+    <div class="toc-reading-progress-track">
+      <div id="toc-reading-progress-bar"></div>
+    </div>
+  </div>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -3386,6 +3432,28 @@ loadSong();
       toc.css('visibility', 'visible');
     }
 
+    var progressText = document.getElementById('toc-reading-progress-text');
+    var progressBar = document.getElementById('toc-reading-progress-bar');
+    var article = document.querySelector('.markdown-body');
+
+    function updateReadingProgress() {
+      if (!progressText || !progressBar || !article) { return; }
+      var rect = article.getBoundingClientRect();
+      var articleTop = window.pageYOffset + rect.top;
+      var articleHeight = article.scrollHeight;
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      var readableHeight = Math.max(articleHeight - viewportHeight * 0.55, 1);
+      var read = window.pageYOffset - articleTop + viewportHeight * 0.25;
+      var percent = Math.min(100, Math.max(0, Math.round(read / readableHeight * 100)));
+
+      progressText.textContent = percent + '%';
+      progressBar.style.width = percent + '%';
+    }
+
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
         tocbot.refresh();
@@ -3396,6 +3464,8 @@ loadSong();
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
         }
+        article = document.querySelector('.markdown-body');
+        updateReadingProgress();
       }
     });
   });

@@ -292,6 +292,7 @@ sup > a::before,
 }
 .navbar .navbar-brand {
   color: var(--navbar-text-color);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.45);
 }
 .navbar .navbar-toggler .animated-icon span {
   background-color: var(--navbar-text-color);
@@ -299,6 +300,7 @@ sup > a::before,
 .navbar .nav-item .nav-link {
   display: block;
   color: var(--navbar-text-color);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.45);
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 .navbar .nav-item .nav-link:hover {
@@ -457,9 +459,56 @@ sup > a::before,
   max-width: calc(960px - 6rem);
   width: 80%;
   overflow-wrap: break-word;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.55);
 }
 .banner-text .typed-cursor {
   margin: 0 0.2rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-user-color-scheme]) .navbar:not(.top-nav-collapse):not(.navbar-col-show) .navbar-brand,
+  :root:not([data-user-color-scheme]) .navbar:not(.top-nav-collapse):not(.navbar-col-show) .nav-item .nav-link {
+    color: #f6f8fb;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95);
+  }
+  :root:not([data-user-color-scheme]) .navbar:not(.top-nav-collapse):not(.navbar-col-show) .navbar-toggler .animated-icon span {
+    background-color: #f6f8fb;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.8);
+  }
+  :root:not([data-user-color-scheme]) .banner-text {
+    color: #f7f9fc;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.95);
+  }
+  :root:not([data-user-color-scheme]) .banner-text .h2 {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    border-radius: 0.85rem;
+    background: rgba(0,0,0,0.22);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+  }
+}
+@media not print {
+  [data-user-color-scheme="dark"] .navbar:not(.top-nav-collapse):not(.navbar-col-show) .navbar-brand,
+  [data-user-color-scheme="dark"] .navbar:not(.top-nav-collapse):not(.navbar-col-show) .nav-item .nav-link {
+    color: #f6f8fb;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.95);
+  }
+  [data-user-color-scheme="dark"] .navbar:not(.top-nav-collapse):not(.navbar-col-show) .navbar-toggler .animated-icon span {
+    background-color: #f6f8fb;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.8);
+  }
+  [data-user-color-scheme="dark"] .banner-text {
+    color: #f7f9fc;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.95);
+  }
+  [data-user-color-scheme="dark"] .banner-text .h2 {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    border-radius: 0.85rem;
+    background: rgba(0,0,0,0.22);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+  }
 }
 @media (max-width: 767px) {
   #subtitle,
@@ -1301,10 +1350,12 @@ i.iconfont {
   padding: 0.7rem 0.25rem;
   border-bottom: 1px solid var(--line-color);
   color: var(--text-color);
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 .index-simple-item:focus,
 .index-simple-item:hover {
   color: var(--link-hover-color);
+  background-color: rgba(48,169,222,0.07);
   text-decoration: none;
 }
 .index-simple-item time {
@@ -1323,6 +1374,40 @@ i.iconfont {
 }
 .index-simple-title .index-pin {
   margin-right: 0.25rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-user-color-scheme]) .index-simple-item {
+    border-bottom-color: rgba(255,255,255,0.1);
+    color: #e4e8ef;
+  }
+  :root:not([data-user-color-scheme]) .index-simple-item:focus,
+  :root:not([data-user-color-scheme]) .index-simple-item:hover {
+    color: #62c7f2;
+    background-color: rgba(98,199,242,0.1);
+  }
+  :root:not([data-user-color-scheme]) .index-simple-item time {
+    color: #aeb7c4;
+  }
+  :root:not([data-user-color-scheme]) .index-simple-title {
+    color: inherit;
+  }
+}
+@media not print {
+  [data-user-color-scheme="dark"] .index-simple-item {
+    border-bottom-color: rgba(255,255,255,0.1);
+    color: #e4e8ef;
+  }
+  [data-user-color-scheme="dark"] .index-simple-item:focus,
+  [data-user-color-scheme="dark"] .index-simple-item:hover {
+    color: #62c7f2;
+    background-color: rgba(98,199,242,0.1);
+  }
+  [data-user-color-scheme="dark"] .index-simple-item time {
+    color: #aeb7c4;
+  }
+  [data-user-color-scheme="dark"] .index-simple-title {
+    color: inherit;
+  }
 }
 .index-img img {
   display: block;

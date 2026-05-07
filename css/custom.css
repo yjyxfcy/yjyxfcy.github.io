@@ -75,6 +75,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+#language-switcher .dropdown-menu {
+  min-width: 8rem;
+}
+
+#language-switcher .language-option.active {
+  font-weight: 600;
+}
 .navbar .blog-title {
   display: flex;
   align-items: center;

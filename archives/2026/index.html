@@ -3292,7 +3292,7 @@ loadSong();
       if (!subtitle || !typing) {
         return;
       }
-      var text = subtitle.getAttribute('data-typed-text');
+      var text = subtitle.getAttribute('data-typed-text') || subtitle.innerHTML || subtitle.textContent;
       
         typing(text);
       

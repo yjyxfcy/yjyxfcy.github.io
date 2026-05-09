@@ -41,6 +41,15 @@
     return normalizeLang(params.get('lang') || localStorage.getItem(STORAGE_KEY) || navigator.language);
   }
 
+  function restartTyping(element, value) {
+    element.setAttribute('data-typed-text', value);
+    if (window.Fluid && Fluid.plugins && typeof Fluid.plugins.typing === 'function' && 'Typed' in window) {
+      Fluid.plugins.typing(value);
+      return true;
+    }
+    return false;
+  }
+
   function applyLanguage(lang) {
     var pack = packs[lang] || {};
     document.documentElement.setAttribute('lang', lang);
@@ -49,11 +58,11 @@
     document.querySelectorAll('[data-i18n-key]').forEach(function(element) {
       var value = getByPath(pack, element.getAttribute('data-i18n-key'));
       if (typeof value === 'string') {
+        if (element.hasAttribute('data-typed-text') && restartTyping(element, value)) {
+          return;
+        }
         if (element.getAttribute('data-i18n-html') === 'true') {
           element.innerHTML = value;
-          if (element.hasAttribute('data-typed-text')) {
-            element.setAttribute('data-typed-text', value);
-          }
         } else {
           element.textContent = value;
         }

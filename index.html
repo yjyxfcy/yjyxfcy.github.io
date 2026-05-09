@@ -272,7 +272,12 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-i18n-key="home.slogan" data-i18n-html="true">你好呀！我是 Yjy，PKU 信科智能专业大二学生。<br>
+            <span id="subtitle" data-i18n-key="home.slogan" data-i18n-html="true" data-typed-text="你好呀！我是 Yjy，PKU 信科智能专业大二学生。&lt;br&gt;
+正在 AI 方向继续学习和探索。&lt;br&gt;
+我喜欢文学、历史、音乐和旅行。&lt;br&gt;
+欢迎来到我的博客！&lt;br&gt;
+&lt;a href=&#34;/about/&#34; target=&#34;_blank&#34;&gt;更多关于我&lt;/a&gt;
+">你好呀！我是 Yjy，PKU 信科智能专业大二学生。<br>
 正在 AI 方向继续学习和探索。<br>
 我喜欢文学、历史、音乐和旅行。<br>
 欢迎来到我的博客！<br>
@@ -3184,7 +3189,7 @@ loadSong();
       if (!subtitle || !typing) {
         return;
       }
-      var text = subtitle.getAttribute('data-typed-text');
+      var text = subtitle.getAttribute('data-typed-text') || subtitle.innerHTML || subtitle.textContent;
       
         typing(text);
       

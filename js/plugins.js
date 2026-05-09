@@ -10,11 +10,15 @@ Fluid.plugins = {
 
   typing: function(text) {
     if (!('Typed' in window)) { return; }
+    if (Fluid.plugins.typedInstance) {
+      Fluid.plugins.typedInstance.destroy();
+      Fluid.plugins.typedInstance = null;
+    }
 
     var typed = new window.Typed('#subtitle', {
       strings: [
         '  ',
-        text
+        text || ''
       ],
       cursorChar: CONFIG.typing.cursorChar,
       typeSpeed : CONFIG.typing.typeSpeed,
@@ -28,6 +32,8 @@ Fluid.plugins = {
     jQuery(document).ready(function() {
       typed.start();
     });
+    Fluid.plugins.typedInstance = typed;
+    return typed;
   },
 
   fancyBox: function(selector) {

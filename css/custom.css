@@ -1,3 +1,143 @@
+/* ===== 霞鹜文楷字体 ===== */
+@import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css');
+
+/* ===== 滚动条美化 ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4c6c9;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a6a6a6;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #687582;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #9da8b3;
+}
+
+/* ===== 首页文章卡片 ===== */
+.post-card-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.post-card {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  flex-direction: column;
+}
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.dark .post-card {
+  background: rgba(37,45,56,0.85);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+}
+.dark .post-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+
+/* 封面图 */
+.post-card-cover {
+  display: block;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.post-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.post-card:hover .post-card-cover img {
+  transform: scale(1.05);
+}
+
+/* 卡片内容 */
+.post-card-body {
+  padding: 1.2rem 1.5rem 1.4rem;
+}
+.post-card-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.post-card-title a {
+  color: #1a202c;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.post-card-title a:hover {
+  color: #0366d6;
+}
+.dark .post-card-title a {
+  color: #c4c6c9;
+}
+.dark .post-card-title a:hover {
+  color: #1589e9;
+}
+.post-card-title i {
+  color: #e36209;
+  margin-right: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.post-card-date {
+  display: block;
+  font-size: 0.85rem;
+  color: #718096;
+  margin-bottom: 0.6rem;
+}
+.dark .post-card-date {
+  color: #a7a9ad;
+}
+
+/* 摘要文字 */
+.post-card-excerpt {
+  color: #4a5568;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dark .post-card-excerpt {
+  color: #a7a9ad;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .post-card-cover {
+    height: 140px;
+  }
+  .post-card-body {
+    padding: 1rem 1.2rem 1.2rem;
+  }
+}
+
+/* ===== 原有的 Apple Daily 样式 ===== */
 .apple-daily-container {
   max-width: 1100px;
   margin: 3rem auto;
@@ -76,6 +216,7 @@
   }
 }
 
+/* ===== 语言切换器 ===== */
 #language-switcher .dropdown-menu {
   min-width: 8rem;
 }
@@ -86,15 +227,51 @@
 .navbar .blog-title {
   display: flex;
   align-items: center;
-  gap: 0.3rem; /* 文字和图标间距 */
+  gap: 0.3rem;
 }
 
 .navbar .blog-title a {
-  color: inherit; /* 和文字同色 */
+  color: inherit;
   font-size: 1rem;
   transition: color 0.2s;
 }
 
 .navbar .blog-title a:hover {
-  color: #4078c0; /* GitHub 蓝 */
+  color: #4078c0;
 }
+
+/* ===== 链接 hover 动效 ===== */
+a {
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* ===== 代码块圆角 ===== */
+figure.highlight {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ===== 页面加载淡入 ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.post-card {
+  animation: fadeInUp 0.5s ease both;
+}
+.post-card:nth-child(1) { animation-delay: 0.05s; }
+.post-card:nth-child(2) { animation-delay: 0.1s; }
+.post-card:nth-child(3) { animation-delay: 0.15s; }
+.post-card:nth-child(4) { animation-delay: 0.2s; }
+.post-card:nth-child(5) { animation-delay: 0.25s; }
+.post-card:nth-child(6) { animation-delay: 0.3s; }
+.post-card:nth-child(7) { animation-delay: 0.35s; }
+.post-card:nth-child(8) { animation-delay: 0.4s; }
+.post-card:nth-child(9) { animation-delay: 0.45s; }
+.post-card:nth-child(10) { animation-delay: 0.5s; }

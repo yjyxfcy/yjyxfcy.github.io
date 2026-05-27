@@ -29,8 +29,11 @@
 <meta property="og:description" content="北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第九章：NP完全">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/05/26/sf2/2.1.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/05/26/sf2/2.2.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/05/26/sf2/2.3.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/05/26/sf2/2.4.png">
 <meta property="article:published_time" content="2026-05-26T09:04:33.390Z">
-<meta property="article:modified_time" content="2026-05-26T16:05:49.353Z">
+<meta property="article:modified_time" content="2026-05-27T08:06:45.884Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://yjyxfcy.github.io/2026/05/26/sf2/2.1.png">
@@ -310,7 +313,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.2k 字
+          7.6k 字
         
       </span>
     
@@ -321,7 +324,7 @@
         
         
         
-          35 分钟
+          63 分钟
         
       </span>
     
@@ -372,7 +375,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年5月27日 凌晨
+                    本文最后更新于 2026年5月27日 下午
                   
                 
               </p>
@@ -425,7 +428,47 @@
 <li>找到$\Pi’$为NP完全，且$\Pi’ \le_p \Pi$</li>
 </ul>
 <p>后面的叙述中我们会把NP完全简称为<strong>NPC</strong>(NP Complete)</p>
-<h4 id="NPC问题的证明"><a href="#NPC问题的证明" class="headerlink" title="NPC问题的证明"></a>NPC问题的证明</h4>
+<h4 id="第一个NPC问题：Cook-levin定理"><a href="#第一个NPC问题：Cook-levin定理" class="headerlink" title="第一个NPC问题：Cook-levin定理"></a>第一个NPC问题：Cook-levin定理</h4><p>在ai引论中我们学习过命题逻辑，合取范式析取范式等，例如：<br>$F_1&#x3D;(\lnot x_1 \land x_2 \land \lnot x_3) \rightarrow (x_1 \land \lnot x_2)$<br>$F_2&#x3D;(x_1 \lor x_2) \land (\lnot x_1 \lor x_2 \lor x_3)\land \lnot x_2$<br>$F_3&#x3D;(x_1 \lor \lnot x_2 \lor x_3)\land(\lnot x_1 \lor \lnot x_2 \lor x_3)\land x_2 \land \lnot x_3$<br>这里$F_1$是合式公式，但不是合取范式，$F_2,F_3$都是合取范式<br>合取范式括号之间用$\land$连接，析取范式则用$\lor$</p>
+<p>给定每个变元的真假值称为变元的赋值，如果赋值$t$使得$F$为真，则称$t$为$F$的成真赋值，如果$F$存在成真赋值，称$F$为可满足的<br>例如令$t(x_1)&#x3D;t(x_3)&#x3D;1,t(x_2)&#x3D;0$，可知$t$为$F_1,F_2$的成真赋值，故$F_1,F_2$都是可满足的，$t$不为$F_3$成真赋值，事实上$F_3$本身就不可满足，找不到解</p>
+<p><strong>SAT问题</strong>：任给一个合取范式，问它是否是可满足的<br><strong>Cook-levin定理</strong>：SAT是NPC问题，证明过难从略</p>
+<h3 id="几个NPC问题"><a href="#几个NPC问题" class="headerlink" title="几个NPC问题"></a>几个NPC问题</h3><p>接下来我们会从第一个NPC：SAT问题开始，利用多项式时间变换证明别的NPC，关系如图所示<br><img src="2.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="MAX-SAT和3SAT"><a href="#MAX-SAT和3SAT" class="headerlink" title="MAX-SAT和3SAT"></a>MAX-SAT和3SAT</h4><p>设判定问题$\Pi&#x3D;&lt;D,Y&gt;$,$\Pi’&#x3D;&lt;D’,Y’&gt;$,如果$D’ \subseteq D$,$Y’&#x3D;D’\cap Y$,那么$\Pi’$实际上是$\Pi$的特殊情况，称作$\Pi$的子问题<br>例如HC的一个子问题是：给定一个平面图G，问G是否为哈密顿图</p>
+<p>接下来我们看MAX-SAT：任给关于$x_1,x_2,…,x_n$的简单析取范式$C_1,C_2,…,C_m$，问是否存在关于$x_1,x_2,…,x_n$的赋值，使得$C_1,C_2,…,C_m$中至少$K$个为真<br>当$K&#x3D;m$时，MAX-SAT就变为了SAT，所以SAT是MAX-SAT的子问题</p>
+<p>显然一般情况总会难于特殊情况，如果子问题NP难，那么原问题显然更是NP难<br>于是我们来证明：<strong>MAX-SAT是NPC</strong><br>显然MAX-SAT$\in $NP，任意猜想一个赋值验证即可<br>SAT $\le_p$ MAXSAT也是非常容易证明的，从而MAX-SAT是NPC的</p>
+<p>下面考虑SAT的一个子问题：3SAT<br>合取范式中每个简单析取范式恰好三个文字，称为3元合取范式<br>3SAT：任给一个3元合取范式，问其是否是可满足的<br>于是我们来证明：<strong>3SAT是NPC</strong><br>由于3SAT为SAT特殊情况，故3SAT$\in $NP</p>
+<p>接下来要证明SAT$\le_p$ 3SAT<br>任给一个合取范式$F$，要构造对应3元合取范式$F’&#x3D;f(F)$，使得$F$可满足$\iff$$F’$可满足<br>设$F&#x3D;\land_{1 \le j \le m}C_j$，$C_j$为简单析取范式<br>对应$F’&#x3D;\land_{1 \le j \le m}F’_j$，其中$F’_j$对应$C_j$，为3元合取范式，并且$C_j$可满足$\iff$ $F’_j$可满足<br>下面我们分情况讨论构造$F’_j$<br><img src="2.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>看上去十分高深，说穿了就是凑数法，如果$C_j$变元少于3个就补上，多于3个就把它平摊，最后用奇妙的办法让赋值结果一样即可<br>显然该构造可以在多项式时间内完成，故3SAT是NPC得证</p>
+<p>这里用到的方法叫做<strong>局部替换法</strong>，因为此处两个问题的结构非常相似</p>
+<h4 id="顶点覆盖、团和独立集"><a href="#顶点覆盖、团和独立集" class="headerlink" title="顶点覆盖、团和独立集"></a>顶点覆盖、团和独立集</h4><p>设无向图$G&#x3D;&lt;V,E&gt;$，$V’ \subseteq V$<br>如果$G$每一条边都至少有一个顶点在$V’$中，称$V’$为$G$的一个顶点覆盖<br>如果对于任意$u,v \in V’,u \neq v$都有$(u,v) \in E$，则称$V’$为$G$的一个团<br>如果对于任意$u,v \in V’$都有$(u,v) \notin E$，则称$V’$为$G$的一个独立集</p>
+<p>引理：下列命题等价</p>
+<ul>
+<li>$V’$是$G$顶点覆盖</li>
+<li>$V-V’$是$G$独立集</li>
+<li>$V-V’$是补图$\bar{G}&#x3D;&lt;V,\bar{E}&gt;$的团</li>
+</ul>
+<p>下面我们考虑这样的三个问题：</p>
+<ul>
+<li>顶点覆盖(VC):正整数$K \le |V|$，问$G$是否存在顶点数不超过$K$的顶点覆盖</li>
+<li>团：正整数$J \le |V|$，问$G$是否存在顶点数不少于$J$的团</li>
+<li>独立集：正整数$J \le |V|$，问$G$是否存在顶点数不少于$J$的独立集</li>
+</ul>
+<p>显然，这三个问题都属于NP，并且根据引理，很容易将这三个问题通过多项式时间互相变换，所以只需证明其中一个NPC，即可得到另外两个NPC<br>下面我们证明：<strong>VC是NPC问题</strong></p>
+<p>首先不难证明VC$\in$NP，任意猜想一个顶点集合验证即可<br>下面我们证明3SAT$\le_p$VC<br>ppt中的证明实在过于晦涩难懂，我们这里稍加简化<br>3SAT中每个变元$x_i$做成两个点$x_i$和$\bar{x_i}$，中间连一条边<br>顶点覆盖必须在这两个点之中选一个，这相当于给$x_i$赋值</p>
+<p>3SAT每个子句都只有三个变元可以做成一个三角形，那么顶点覆盖必须在这个三角形中选两个点，剩下没选的那个点对应的文字，就是子句中为真的那个，最终整个图需要$n+2m$个顶点，其中$n$为变量数，$m$为子句数，这样3SAT有解$\iff$这个图有大小恰好为$n+2m$的顶点覆盖</p>
+<p>由于3SAT是NPC，所以VC也是NPC<br>这里采用的方法称为<strong>构件设计法</strong></p>
+<h4 id="其他常见NPC问题-了解即可"><a href="#其他常见NPC问题-了解即可" class="headerlink" title="其他常见NPC问题(了解即可)"></a>其他常见NPC问题(了解即可)</h4><p>有向哈密顿回路：任给有向图，问其中是否存在哈密顿回路<br>恰好覆盖：是否能用一些彼此不交的子集恰好拼出某个集合<br>子集和：给定正整数集合，问其是否存在子集，子集之和刚好为某个给定正整数<br>装箱：知道$n$件物品各自重量，共有$K$个箱子，每只箱子重量上限不超过$B$，问是否能用$K$个箱子装完所有物品<br>双机调度问题：前面几章有提到过，大概就是两台一样的机器和完全没有先后顺序要求的$n$项作业，问是否能在ddl之前合理分配作业让两台机器做，从而完成所有作业<br>整数线性规划：$A_{m\times n}$整数矩阵，$b_{m \times 1}$向量，问是否存在$x_{n \times 1}$向量，且$x$的每一维都是正整数，使得$Ax \ge b$</p>
+<p>具体证明方法如下，不再一一讨论<br><img src="2.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="从判定问题到优化问题：Turing归约"><a href="#从判定问题到优化问题：Turing归约" class="headerlink" title="从判定问题到优化问题：Turing归约"></a>从判定问题到优化问题：Turing归约</h3><p>设$\pi_1,\pi_2$为搜索问题或优化问题，$A$是利用解$\pi_2$的”假想子程序“$s$来解$\pi_1$的算法<br>只要$s,A$都是多项式时间的，那么我们称<br>算法$A$是从$\pi_1$到$\pi_2$多项式时间的<strong>Turing归约</strong><br>这时也称$\pi_1$<strong>Turing归约到</strong>$\pi_2$，记作$\pi_1 \propto_T \pi_2$<br>本质上相当于只要你多项式时间能解出$\pi_2$，那多项式时间之内$\pi_1$也迎刃而解<br>显然，多项式变换是特殊的Turing归约</p>
+<p>设$\pi$是搜索问题，如果存在NPC问题$\pi’$，$\pi’ \propto_T \pi$，则称$\pi$为<strong>NP-hard</strong><br>这意味着从多项式可计算角度来说，$\pi$至少和NPC问题一样难<br>许多NPC对应的优化问题都是NP-hard<br>反之也有许多优化问题可以Turing归约到对应判定问题，称作<strong>NP-easy</strong><br>NP-hard+NP-easy称为<strong>NP等价</strong></p>
+<p>例如货郎问题的优化问题(给出一条最短的巡回路线)是NP等价的<br>首先它是NP-hard，这个十分显然，下面我们证明它是NP-easy(能用判定问题黑箱解决)<br>解法：</p>
+<ul>
+<li>用二分法猜一个最短长度B*（介于最小可能和最大可能之间）。</li>
+<li>每次调用判定问题的黑箱，问“有没有长度不超过B的路线？”</li>
+<li>根据答案缩小范围，最后找到B*。</li>
+<li>再一步步构造出具体路线（比如先选第一个城市，再试第二个…）</li>
+</ul>
+<p>同样可以证明六个基本NPC问题对应的优化问题都是NP-等价的</p>
+<h6 id="笔者按：终于更完了这一章……头晕脑胀ing，NP这些抽象概念和抽象证明实在是害人不浅，但是这些没学好的话第十章也不方便更新，凑合着写完了长篇大论，日后想必还需要多多复习"><a href="#笔者按：终于更完了这一章……头晕脑胀ing，NP这些抽象概念和抽象证明实在是害人不浅，但是这些没学好的话第十章也不方便更新，凑合着写完了长篇大论，日后想必还需要多多复习" class="headerlink" title="笔者按：终于更完了这一章……头晕脑胀ing，NP这些抽象概念和抽象证明实在是害人不浅，但是这些没学好的话第十章也不方便更新，凑合着写完了长篇大论，日后想必还需要多多复习"></a>笔者按：终于更完了这一章……头晕脑胀ing，NP这些抽象概念和抽象证明实在是害人不浅，但是这些没学好的话第十章也不方便更新，凑合着写完了长篇大论，日后想必还需要多多复习</h6>
                 
               </div>
             

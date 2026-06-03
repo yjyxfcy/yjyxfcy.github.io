@@ -21,25 +21,39 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hi, I am Yjy. Welcome to my personal homepage.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="文章">
-<meta property="og:url" content="https://yjyxfcy.github.io/archives/2026/page/2/index.html">
+    <meta name="description" content="北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="随机算法">
+<meta property="og:url" content="https://yjyxfcy.github.io/2026/06/03/sf5/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="Hi, I am Yjy. Welcome to my personal homepage.">
+<meta property="og:description" content="北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.1.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.2.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.3.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.4.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.5.png">
+<meta property="article:published_time" content="2026-06-03T02:05:43.612Z">
+<meta property="article:modified_time" content="2026-06-03T03:21:47.112Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>文章 - Yjy</title>
+  <title>随机算法 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -107,7 +121,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -266,15 +280,69 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p9.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p7.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="文章"></span>
+            <span id="subtitle" data-typed-text="随机算法"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-06-03 10:05" pubdate>
+          2026年6月3日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
 
         
       </div>
@@ -290,262 +358,276 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">随机算法</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
                 
-
-
-  <div class="archive-card-list">
-    <p class="archive-total">共计 22 篇文章</p>
-    
-    
-    
+                  
+                    本文最后更新于 2026年6月3日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学信息科学技术学院<br>算法设计与分析(2026春)的课程笔记</p>
+<p>第十一章：随机算法</p>
+<span id="more"></span>
+<p>在经历了复杂度下限分析、NP完全、近似算法等一系列抽象内容的洗礼后，我们终于苦尽甘来，熬到了比较简单的一章：随机算法</p>
+<h3 id="Las-Vegas型随机算法"><a href="#Las-Vegas型随机算法" class="headerlink" title="Las Vegas型随机算法"></a>Las Vegas型随机算法</h3><h4 id="随机快排"><a href="#随机快排" class="headerlink" title="随机快排"></a>随机快排</h4><p>顾名思义，就是在选择pivot时随机选择一个元素，而不是每次固定选择某一个元素，然后递归的方式和普通快排相同</p>
+<p>随机选取pivot，其位于排序后第$i$个位置($i&#x3D;0,1,…,n-1$)的概率为$\frac{1}{n}$，故<br>$T(n)&#x3D;n-1+\frac{1}{n}(\Sigma_{i&#x3D;0}^{n-1} \ T(i)+T(n-i-1))&#x3D;n-1+\frac{2}{n}\Sigma_{i&#x3D;1}^{n-1}T(i)$<br>我们归纳证明$T(n) \le 2n ln n$<br>$n&#x3D;1$时显然，假设对于$1,2,…n-1$时都成立，则$n$时<br>$T(n)\le n-1+\frac{2}{n}\Sigma_{i&#x3D;1}^{n-1}2ilni\le n-1+\frac{2}{n} \int_1^{n} 2xlnx \ dx$<br>$\le n-1+2n lnn-n+\frac{1}{n} \le 2nlnn$<br>所以上界可以从$\Theta(n logn)$精确到$2nlnn$</p>
+<h4 id="随机选择"><a href="#随机选择" class="headerlink" title="随机选择"></a>随机选择</h4><p>从数组$A$的$p$到$r$下标选第$k$小的数<br>if $p&#x3D;r$ return;<br>否则在$p,r$之中随机选出下标$i$，假设有$j$个数小于等于$A[i]$<br>若$k\le j$，就从$p$到$p+j-1$下标选第$k$小的数<br>否则就从$p+j$到$r$下标选第$k-j$小的数<br>递归调用即可</p>
+<p>假设$1,2,…n$中每个数被选到概率相同，且第$k$个数总是出现在被划分后两个数组中较大者，则<br>$T(n)\le \frac{2}{n}\Sigma_{i&#x3D;\frac{n}{2}}^{n-1}T(i)+O(n)$<br>类似地我们可归纳证明$T(n) \le cn$</p>
+<h4 id="n皇后随机放置"><a href="#n皇后随机放置" class="headerlink" title="n皇后随机放置"></a>n皇后随机放置</h4><p>对于每一行，先筛选出所有合法位置，再随机选一个位置放置皇后<br>改进：与回溯相结合<br>$stopVegas$个用随机放，剩下$n-stopVegas$仍用经典的回溯</p>
+<p>对于不同的$ stopVegas $值，设<br>$p $为算法成功概率<br>$s $为一次成功搜索访问的结点数的平均值<br>$e $为一次不成功搜索访问的结点数的平均值<br>$t $为算法找到一个解的平均时间<br>则$t&#x3D;ps+(1-p)(e+t) \rightarrow t&#x3D;s+e\frac{1-p}{p}$<br><img src="5.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>Las Vegas型随机算法主要是修改确定性算法得到，一般把某一步确定性选择变为随机选择，可以与确定性算法相结合使用，有可能改进确定性算法的平均时间复杂度<br>这种算法的特点是要么得不到解，如果有解，解一定是正确的，但运行时间时短时长，本身是一个随机变量，因此我们更关心它的平均运行时间<br>我们把期望运行时间是输入规模的多项式 且总是给出正确答案的 随机算法称为<strong>有效的 Las Vegas型随机算法</strong></p>
+<h3 id="Monte-Calo型随机随机算法"><a href="#Monte-Calo型随机随机算法" class="headerlink" title="Monte Calo型随机随机算法"></a>Monte Calo型随机随机算法</h3><h4 id="主元素测试"><a href="#主元素测试" class="headerlink" title="主元素测试"></a>主元素测试</h4><p>我们将出现次数超过一半以上的元素称为主元素<br>输入$n$个元素的数组$T$，判断其是否存在主元素<br>我们定义算法$M(T,n)$</p>
+<ul>
+<li>在$1,2,…n$中随机选取下标$i$，$x&#x3D;T[i]$</li>
+<li>统计$x$在$T$中出现次数，若$&gt; \frac{n}{2}$ return true，否则return false</li>
+</ul>
+<p>显然这个算法是不准确的，如果回答true那倒好，说明确实有主元素，但如果回答false，难以断言就一定没有主元素<br>我们调用时，如果回答true就结束，回答false就再调用<br>那么调用$k$次正确的概率为<br>$p+(1-p)p+…+(1-p)^{k-1}p&#x3D;1-(1-p)^{k}$<br>由于当回答true时，数组里至少$\frac{n}{2}$个元素都是$x$，所以选中$x$的概率$p&gt; \frac{1}{2}$<br>因此$1-(1-p)^{k} &gt; 1-2^{-k}$<br><img src="5.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>改进：对于任意给定$\epsilon&gt;0$，要使出错概率不超过$\epsilon$<br>则$2^{-k} \le \epsilon$<br>两边取以2为底的对数，有<br>$-k \le log \epsilon$<br>$k \ge -log \epsilon$<br>故$k \ge \lceil log\frac{1}{\epsilon} \rceil$<br>我们取$k&#x3D;\lceil log\frac{1}{\epsilon} \rceil$，调用$k$次算法，即可保证出错概率不超过$\epsilon$</p>
+<h4 id="串相等测试"><a href="#串相等测试" class="headerlink" title="串相等测试"></a>串相等测试</h4><p>$A$有一个长串$x$，$B$也有一个长串$y$，$A,B$两人希望知道$x,y$是否相等<br>那你说，这不简单吗，直接让$A$把$x$发给$B$，$B$进行一个比较就好，然而由于串过长，发送时占用资源过多，$A,B$希望你找到更好的办法<br>于是你打算让$A$对$x$采用$f$操作，导出一个$f(x)$发给$B$，$B$也用相同操作导出$f(y)$，若$f(x) \neq f(y)$即可断言$x \neq y$，但是当$f(x)&#x3D;f(y)$时依然无法断言$x&#x3D;y$</p>
+<p>我们假设$x,y$二进制表示分别为$I(x),I(y)$<br>令$I_p(x)&#x3D; I(x ) \ mod \ p$<br>$A$将素数$p$和$I_p(x)$传给$B$，当$p$不太大时，传的就是短串<br>问题还是如上面所说，而且这里还有新问题，what if $p | (I(x)-I(y))$？<br>我们选择随机选择素数$p$进行测试<br>出错的必要条件：$x,y$位数相同，$p | (I(x)-I(y))$</p>
+<p>下面我们介绍关于素数的一些性质<br>函数$\pi(t)$定义为小于$t$的不同素数个数<br>例如$\pi(20)&#x3D;8 \ (2,3,5,7,11,13,17,19)$<br>于是我们有素数定理：$\pi(t)\approx \frac{t}{lnt}$<br>如果$k&lt;2^n$，$n$不太小，则整除$k$的不同素数个数小于$\pi(n)$<br><img src="5.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>由此，我们可以估计出错概率<br><img src="5.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>我们重复执行$j$次，每次都随机选择小于$M$的素数<br>令$j&#x3D;\lceil loglogn \rceil$，则出错概率<br>$(\frac{1}{n})^j \le \frac{1}{n^{\lceil loglogn \rceil}}$</p>
+<h4 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h4><p>输入：二进制串$x,y$，长度分别为$n,m$，$n \ge m$<br>输入：若$y$在$x$中，输入$y$出现的第一个位置，否则输出0<br>这个东西很眼熟对不对？本质上就是数算中学的字符串匹配(简化版)<br>不必多说，朴素匹配复杂度$O(mn)$，KMP算法复杂度$O(m+n)$</p>
+<p>但是今天！我们要尝试用随机算法<br>设$x(j)&#x3D;x_jx_{j+1}…x_{j+m-1}$<br>我们将$x(j)$和$y$逐字符比较改为$I_p(x(j))$和$I_p(y)$的比较<br>由二进制性质，$x(j+1)&#x3D;2x(j)-2^mx_j+x_{j+m}$<br>令$W_p&#x3D;2^m(mod \ p)$<br>则$I_p(x(j+1))&#x3D;(2I_p(x(j))-W_px_j+x_{j+m})(mod \ p)$<br>由此公式，从$I_p(x(j))$计算$I_p(x(j+1))$只需要常数时间</p>
+<p>于是我们有如下算法：<br>从随机选取小于$M$的素数$p$<br>然后取$j$从$1$开始，一直循环到$n-m+1$<br>采取上面的迭代方式，如果出现了$I_p(x(j))&#x3D;I_p(y)$就return j<br>否则如果循环完了还没结果就return 0</p>
+<p>时间复杂度$O(m+n)$<br>出错条件和出错概率如下：<br><img src="5.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>Monte Calo型随机算法不但运行时间是随机变量，而且计算结果也是随机事件<br>我们把总是在多项式时间内运行 且出错概率不超过$\frac{1}{3}$的随机算法称为<strong>有效的Monte Calo型随机算法</strong><br>当然其实只要算法执行足够多次，出错概率可以变得任意小，也不需要这个$\frac{1}{3}$</p>
+<h6 id="笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……准备好迎接无情的期末吧"><a href="#笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……准备好迎接无情的期末吧" class="headerlink" title="笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……准备好迎接无情的期末吧"></a>笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……准备好迎接无情的期末吧</h6>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
         
-        <p class="archive-year">2026</p>
-      
-      
-      <a href="/2026/03/19/fnlp5/" class="archive-card" style="--archive-card-img: url('/img/p1.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-03-19 11:13">
-            2026年03月19日
-          </time>
-          <h2 class="archive-card-title">自然语言模型</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第五讲：Neural Language Models</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>18 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">自然语言处理基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+  <a href="/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/" class="category-chain-item">算法设计与分析</a>
+  
+  
+
+      </span>
     
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>随机算法</div>
+      <div>https://yjyxfcy.github.io/2026/06/03/sf5/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
       
       
-      <a href="/2026/03/18/fnlp4/" class="archive-card" style="--archive-card-img: url('/img/p2.avif');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-03-18 19:10">
-            2026年03月18日
-          </time>
-          <h2 class="archive-card-title">语言模型</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第四讲：Language Modelling</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>24 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年6月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年6月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
-          
-            <span class="archive-card-tag">自然语言处理基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
+        </div>
       
-      
-      <a href="/2026/03/18/fnlp3/" class="archive-card" style="--archive-card-img: url('/img/p3.avif');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-03-18 18:28">
-            2026年03月18日
-          </time>
-          <h2 class="archive-card-title">分类 - 对数线性模型</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第三讲：Classification – Log-linear Models</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>24 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">自然语言处理基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
-      
-      
-      <a href="/2026/03/11/fnlp2/" class="archive-card" style="--archive-card-img: url('/img/p4.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-03-11 21:40">
-            2026年03月11日
-          </time>
-          <h2 class="archive-card-title">词义消歧</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第二讲：Word Sense Disambiguation</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>21 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">自然语言处理基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
-      
-      
-      <a href="/2026/03/11/fnlp1/" class="archive-card" style="--archive-card-img: url('/img/p5.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-03-11 21:10">
-            2026年03月11日
-          </time>
-          <h2 class="archive-card-title">课程介绍</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第一讲：Introduction</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>8 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">自然语言处理基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
-      
-      
-      <a href="/2026/02/21/gen4/" class="archive-card" style="--archive-card-img: url('/img/p6.avif');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-02-21 14:24">
-            2026年02月21日
-          </time>
-          <h2 class="archive-card-title">调试</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第四讲：Debug</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>8 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">生成模型基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
-      
-      
-      <a href="/2026/02/15/gen3/" class="archive-card" style="--archive-card-img: url('/img/p7.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-02-15 15:02">
-            2026年02月15日
-          </time>
-          <h2 class="archive-card-title">生成对抗模型(GAN)</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第三讲：GAN</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>32 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">生成模型基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
-      
-      
-      <a href="/2026/02/14/gen2/" class="archive-card" style="--archive-card-img: url('/img/p8.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-02-14 14:52">
-            2026年02月14日
-          </time>
-          <h2 class="archive-card-title">自回归模型(Transformer&amp;AR)</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第二讲：Transformer&amp;amp;AR</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>26 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">生成模型基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
-      
-      
-      <a href="/2026/02/13/gen1/" class="archive-card" style="--archive-card-img: url('/img/p9.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-02-13 14:37">
-            2026年02月13日
-          </time>
-          <h2 class="archive-card-title">变分自编码器(VAE)</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第一讲：VAE</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>28 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">生成模型基础</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
-      
-      
-      <a href="/2026/01/20/CV%20Final%20Project/" class="archive-card" style="--archive-card-img: url('/img/p10.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-01-20 10:58">
-            2026年01月20日
-          </time>
-          <h2 class="archive-card-title">CV Final Project</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 计算机视觉(2025秋)的大作业仓库链接</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>2 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">大作业</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2026/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2026/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2026/page/3/#board">3</a><a class="extend next" rel="next" href="/archives/2026/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-
-              </div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/05/31/sf4/" title="网络流">
+                        <span class="hidden-mobile">网络流</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-          </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
         </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-reading-progress" aria-label="Reading progress">
+    <div class="toc-reading-progress-row">
+      <span>阅读进度</span>
+      <span id="toc-reading-progress-text">0%</span>
+    </div>
+    <div class="toc-reading-progress-track">
+      <div id="toc-reading-progress-bar"></div>
+    </div>
+  </div>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -3308,6 +3390,166 @@ loadSong();
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    var progressText = document.getElementById('toc-reading-progress-text');
+    var progressBar = document.getElementById('toc-reading-progress-bar');
+    var article = document.querySelector('.markdown-body');
+
+    function updateReadingProgress() {
+      if (!progressText || !progressBar || !article) { return; }
+      var rect = article.getBoundingClientRect();
+      var articleTop = window.pageYOffset + rect.top;
+      var articleHeight = article.scrollHeight;
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      var readableHeight = Math.max(articleHeight - viewportHeight * 0.55, 1);
+      var read = window.pageYOffset - articleTop + viewportHeight * 0.25;
+      var percent = Math.min(100, Math.max(0, Math.round(read / readableHeight * 100)));
+
+      progressText.textContent = percent + '%';
+      progressBar.style.width = percent + '%';
+    }
+
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        article = document.querySelector('.markdown-body');
+        updateReadingProgress();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

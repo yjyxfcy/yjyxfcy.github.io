@@ -749,7 +749,6 @@ sup > a::before,
   color: #ff4500;
 }
 #toc {
-  visibility: hidden;
   background: var(--board-bg-color);
   border-radius: 0.8rem;
   padding: 1.25rem 1rem;
@@ -891,6 +890,40 @@ sup > a::before,
   top: 2rem;
   padding: 1.5rem 0;
 }
+.toc-body .toc {
+  list-style: none;
+  padding-inline-start: 0;
+  position: relative;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--line-color);
+}
+.toc-body .toc ol,
+.toc-body .toc .toc-child {
+  list-style: none;
+  padding-left: 1rem;
+}
+.toc-body .toc .toc-item {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0.1rem 0;
+}
+.toc-body .toc .toc-link {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.35rem;
+  color: var(--sec-text-color);
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease, padding-left 0.2s ease;
+}
+.toc-body .toc .toc-link:hover {
+  color: var(--link-hover-color);
+  background-color: var(--link-hover-bg-color);
+  padding-left: 0.7rem;
+}
 html {
   font-size: 17px;
   letter-spacing: 0.02em;
@@ -898,7 +931,7 @@ html {
 html,
 body {
   height: 100%;
-  font-family: var(--font-family-sans-serif);
+  font-family: "LXGW WenKai", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   overflow-wrap: break-word;
 }
 body {
@@ -1633,7 +1666,7 @@ figure.highlight td.code > pre {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: var(--font-family-sans-serif);
+  font-family: "LXGW WenKai", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }

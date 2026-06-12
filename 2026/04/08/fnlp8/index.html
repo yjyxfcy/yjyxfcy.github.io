@@ -124,7 +124,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong><span>Yjy&apos;s blog</span> <a href="https://github.com/yjyxfcy" target="_white"><i class="iconfont icon-github-fill"></i>GitHub</a> <span>与你若只如初见，何须感伤离别</span></strong>
+      <strong>Yjy's blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -386,74 +386,37 @@
                 <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第八讲：Neural Sequence Modelling and Beyond</p>
 <span id="more"></span>
-<h3 id="回顾RNN">回顾RNN</h3>
-<h4 id="RNN的基本结构">RNN的基本结构</h4>
-<img src="8.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>用于语言建模：用隐藏状态 $s_{t-1}$ 记忆历史信息 $w_1…w_{t-1}$<br>
-用于序列标注：每个位置输出一个标签(如 DET, ADJ, NOUN)<br>
-训练目标：最大化下一个词或标签的对数似然</p>
-<p>问题：梯度消失/爆炸，难以捕捉长距离依赖</p>
-<h4 id="LSTM-长短期记忆网络">LSTM(长短期记忆网络)</h4>
-<img src="8.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h3 id="回顾RNN"><a href="#回顾RNN" class="headerlink" title="回顾RNN"></a>回顾RNN</h3><h4 id="RNN的基本结构"><a href="#RNN的基本结构" class="headerlink" title="RNN的基本结构"></a>RNN的基本结构</h4><img src="8.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>用于语言建模：用隐藏状态 $s_{t-1}$ 记忆历史信息 $w_1…w_{t-1}$<br>用于序列标注：每个位置输出一个标签(如 DET, ADJ, NOUN)<br>训练目标：最大化下一个词或标签的对数似然</p>
+<p>问题：梯度消失&#x2F;爆炸，难以捕捉长距离依赖</p>
+<h4 id="LSTM-长短期记忆网络"><a href="#LSTM-长短期记忆网络" class="headerlink" title="LSTM(长短期记忆网络)"></a>LSTM(长短期记忆网络)</h4><img src="8.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>引入细胞状态 $c_t$ 作为长期记忆。</p>
-<p>三个门：<br>
-输入门 $i_t$：决定写多少新信息。<br>
-遗忘门 $f_t$：决定擦除多少旧信息。<br>
-输出门 $o_t$：决定暴露多少记忆。</p>
+<p>三个门：<br>输入门 $i_t$：决定写多少新信息。<br>遗忘门 $f_t$：决定擦除多少旧信息。<br>输出门 $o_t$：决定暴露多少记忆。</p>
 <p>公式清晰，适合长序列建模。</p>
-<h4 id="GRU-门控循环单元">GRU(门控循环单元)</h4>
-<img src="8.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>简化版LSTM，只有两个门：<br>
-重置门 $r_t$：决定忽略多少历史信息。<br>
-更新门 $z_t$：决定保留多少旧状态。</p>
+<h4 id="GRU-门控循环单元"><a href="#GRU-门控循环单元" class="headerlink" title="GRU(门控循环单元)"></a>GRU(门控循环单元)</h4><img src="8.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>简化版LSTM，只有两个门：<br>重置门 $r_t$：决定忽略多少历史信息。<br>更新门 $z_t$：决定保留多少旧状态。</p>
 <p>没有独立的细胞状态，计算更轻量。</p>
-<h4 id="二者对比">二者对比</h4>
-<p>GRU训练更快</p>
+<h4 id="二者对比"><a href="#二者对比" class="headerlink" title="二者对比"></a>二者对比</h4><p>GRU训练更快</p>
 <p>LSTM理论上更擅长捕捉长期依赖</p>
 <p>LSTM具有对记忆内容的可控暴露特性，而GRU则不具备该特性</p>
-<h3 id="神经序列标注器">神经序列标注器</h3>
-<p>传统时代：<br>
-SOTA为条件随机场(Conditional Random Field, CRF)<br>
-有语言问题、不在词汇表的问题、标签偏差等</p>
-<p>神经网络时代：<br>
-无需特征工程，没有语言障碍<br>
-有多种NN捕捉上下文信息，前向/反向传播</p>
-<p>典型模型<br>
-BiLSTM + CRF(Lample et al., 2016)<br>
-Flair：上下文字符串嵌入<br>
-LUKE：基于Transformer的实体感知自注意力<br>
-FLERT：利用文档级特征提升NER性能</p>
-<p>性能演进(CoNLL03)<br>
-从2016年之前的91.87%逐步提升到94%以上<br>
-近年主流模型大多基于Transformer(BERT、XLNet、PL-Marker等)</p>
-<h3 id="序列到序列学习-seq2seq">序列到序列学习 (seq2seq)</h3>
-<p>核心思想：<br>
-编码器(Encoder)将输入序列编码为固定向量 $v$<br>
-解码器(Decoder)基于 $v$ 和已生成的词逐步输出目标序列</p>
-<p>典型工作：Sutskever et al., 2014<br>
-<img src="8.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>其中encoder将输入的句子映射为一个固定长度的向量<br>
-decoder则是一个以输入序列为条件的语言模型<br>
-LSTM学习长程时间依赖性</p>
-<p>将机器翻译任务转换为seq2seq转换问题<br>
-给定输入序列$x_1,x_2,…,x_t$(例如英语句子)<br>
-目标是生成输出序列$y_1,y_2,…,y_{t’}$(例如对应的法语句子)</p>
-<p>$p(y_1,y_2,…,y_{t’})=\Pi_{i=1}^{t’} p(y_i|y_1,…,y_{i-1},v)$</p>
+<h3 id="神经序列标注器"><a href="#神经序列标注器" class="headerlink" title="神经序列标注器"></a>神经序列标注器</h3><p>传统时代：<br>SOTA为条件随机场(Conditional Random Field, CRF)<br>有语言问题、不在词汇表的问题、标签偏差等</p>
+<p>神经网络时代：<br>无需特征工程，没有语言障碍<br>有多种NN捕捉上下文信息，前向&#x2F;反向传播</p>
+<p>典型模型<br>BiLSTM + CRF(Lample et al., 2016)<br>Flair：上下文字符串嵌入<br>LUKE：基于Transformer的实体感知自注意力<br>FLERT：利用文档级特征提升NER性能</p>
+<p>性能演进(CoNLL03)<br>从2016年之前的91.87%逐步提升到94%以上<br>近年主流模型大多基于Transformer(BERT、XLNet、PL-Marker等)</p>
+<h3 id="序列到序列学习-seq2seq"><a href="#序列到序列学习-seq2seq" class="headerlink" title="序列到序列学习 (seq2seq)"></a>序列到序列学习 (seq2seq)</h3><p>核心思想：<br>编码器(Encoder)将输入序列编码为固定向量 $v$<br>解码器(Decoder)基于 $v$ 和已生成的词逐步输出目标序列</p>
+<p>典型工作：Sutskever et al., 2014<br><img src="8.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>其中encoder将输入的句子映射为一个固定长度的向量<br>decoder则是一个以输入序列为条件的语言模型<br>LSTM学习长程时间依赖性</p>
+<p>将机器翻译任务转换为seq2seq转换问题<br>给定输入序列$x_1,x_2,…,x_t$(例如英语句子)<br>目标是生成输出序列$y_1,y_2,…,y_{t’}$(例如对应的法语句子)</p>
+<p>$p(y_1,y_2,…,y_{t’})&#x3D;\Pi_{i&#x3D;1}^{t’} p(y_i|y_1,…,y_{i-1},v)$</p>
 <p>此处$v$是encoder通过LSTM将输入序列编码得到的固定向量</p>
-<p>Sutskever等人还发现了：<br>
-更多参数通常会有更好的性能，采用双LSTM进行输入输出处理<br>
-深度网络优于浅层网络<br>
-输入反向处理优于原始处理</p>
+<p>Sutskever等人还发现了：<br>更多参数通常会有更好的性能，采用双LSTM进行输入输出处理<br>深度网络优于浅层网络<br>输入反向处理优于原始处理</p>
 <p>问题：固定向量 v 成为瓶颈，难以对齐长句子中的对应词(如“爱”和“love”)？</p>
-<h3 id="注意力机制-Attention">注意力机制(Attention)</h3>
-<p>这一部分就完全是老生常谈的Transformer了(终于讲到你啦！)<br>
-ai引论、生成模型基础乃至计算机视觉中都一再提到了，此处不再赘述<br>
-想要了解可以去看笔者的<a href="https://yjyxfcy.github.io/2026/02/14/gen2/">生成模型基础笔记</a>，详细讲解了Transformer的结构和原理</p>
-<p>一些trick：<br>
-自注意力机制、多头注意力、归一化点积、位置编码<br>
-层归一化、标签平滑、attn_mask、残差连接、dropout</p>
-<h6 id="笔者按：Attention-is-all-you-need！">笔者按：Attention is all you need！</h6>
-
+<h3 id="注意力机制-Attention"><a href="#注意力机制-Attention" class="headerlink" title="注意力机制(Attention)"></a>注意力机制(Attention)</h3><p>这一部分就完全是老生常谈的Transformer了(终于讲到你啦！)<br>ai引论、生成模型基础乃至计算机视觉中都一再提到了，此处不再赘述<br>想要了解可以去看笔者的<a href="https://yjyxfcy.github.io/2026/02/14/gen2/">生成模型基础笔记</a>，详细讲解了Transformer的结构和原理</p>
+<p>一些trick：<br>自注意力机制、多头注意力、归一化点积、位置编码<br>层归一化、标签平滑、attn_mask、残差连接、dropout</p>
+<h6 id="笔者按：Attention-is-all-you-need！"><a href="#笔者按：Attention-is-all-you-need！" class="headerlink" title="笔者按：Attention is all you need！"></a>笔者按：Attention is all you need！</h6>
                 
               </div>
             
@@ -629,7 +592,9 @@ ai引论、生成模型基础乃至计算机视觉中都一再提到了，此处
       <div id="toc-reading-progress-bar"></div>
     </div>
   </div>
-  <div class="toc-body" id="toc-body"></div>
+  <div class="toc-body" id="toc-body">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E9%A1%BERNN"><span class="toc-text">回顾RNN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RNN%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">RNN的基本结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LSTM-%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C"><span class="toc-text">LSTM(长短期记忆网络)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GRU-%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83"><span class="toc-text">GRU(门控循环单元)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E8%80%85%E5%AF%B9%E6%AF%94"><span class="toc-text">二者对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E5%BA%8F%E5%88%97%E6%A0%87%E6%B3%A8%E5%99%A8"><span class="toc-text">神经序列标注器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%88%B0%E5%BA%8F%E5%88%97%E5%AD%A6%E4%B9%A0-seq2seq"><span class="toc-text">序列到序列学习 (seq2seq)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6-Attention"><span class="toc-text">注意力机制(Attention)</span></a></li></ol>
+  </div>
 </div>
 
 
@@ -638,6 +603,7 @@ ai引论、生成模型基础乃至计算机视觉中都一再提到了，此处
 
 
     </div>
+
   </div>
 </div>
 
@@ -3458,9 +3424,6 @@ loadSong();
       includeTitleTags: true,
       headingsOffset  : -boardTop,
     }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
 
     var progressText = document.getElementById('toc-reading-progress-text');
     var progressBar = document.getElementById('toc-reading-progress-bar');
@@ -3487,13 +3450,6 @@ loadSong();
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
         tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
         article = document.querySelector('.markdown-body');
         updateReadingProgress();
       }

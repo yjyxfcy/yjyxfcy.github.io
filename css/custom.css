@@ -405,6 +405,15 @@ figure.highlight {
   }
 }
 
+/* ===== 目录加宽 ===== */
+.side-col .sidebar {
+  width: 115%;
+  margin-left: -1.2rem;
+}
+#toc {
+  padding: 1rem 0.6rem;
+}
+
 @media (max-width: 767px) {
   .post-content {
     padding-left: 1.1rem;

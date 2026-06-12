@@ -281,8 +281,8 @@ figure.highlight {
   max-width: 780px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 0rem;
+  padding-right: 1rem;
 }
 
 .markdown-body {

@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/05/31/sf4/4.9.png">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/05/31/sf4/4.10.png">
 <meta property="article:published_time" content="2026-05-31T12:18:01.762Z">
-<meta property="article:modified_time" content="2026-06-01T16:46:14.127Z">
+<meta property="article:modified_time" content="2026-06-13T06:41:22.239Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://yjyxfcy.github.io/2026/05/31/sf4/4.1.png">
@@ -381,7 +381,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年6月2日 凌晨
+                    本文最后更新于 2026年6月13日 下午
                   
                 
               </p>
@@ -516,7 +516,7 @@
 <li>容量条件：$\forall e \in E, 0 \le f(e) \le c_e$</li>
 <li>需求条件：$\forall v \in V,f^{in}(v)-f^{out}(v)&#x3D;d_v$</li>
 </ul>
-<p>从经济学的角度来说()，由于没有外部因素，供需是平衡的<br>因此有$\Sigma_{v:d_v &gt;0}d_v&#x3D;\Sigma_{v:d_v &lt;0}-d_v$，我们记这个和为$D$<br>于是可以用最大流进行建模，记所有发点的集合$S$，收点集合$T$<br>我们增加超结点$s^{\ast}$和$t^{\ast}$，构建单发点单收点的容量网络$G’$<br>$\forall v \in S$，加边$e&#x3D;&lt;s^{\ast},v&gt;,c_e&#x3D;-d_v$<br>$\forall v \in T$，加边$e&#x3D;v,&lt;t^{\ast}&gt;,c_e&#x3D;d_v$</p>
+<p>从经济学的角度来说()，由于没有外部因素，供需是平衡的<br>因此有$\Sigma_{v:d_v &gt;0}d_v&#x3D;\Sigma_{v:d_v &lt;0}-d_v$，我们记这个和为$D$<br>于是可以用最大流进行建模，记所有发点的集合$S$，收点集合$T$<br>我们增加超结点$s^{\ast}$和$t^{\ast}$，构建单发点单收点的容量网络$G’$<br>$\forall v \in S$，加边$e&#x3D;&lt;s^{\ast},v&gt;,c_e&#x3D;-d_v$<br>$\forall v \in T$，加边$e&#x3D;&lt;v,t^{\ast}&gt;,c_e&#x3D;d_v$</p>
 <p>具体算法：</p>
 <ul>
 <li>将$G$转换为对应$G’$</li>
@@ -524,8 +524,8 @@
 <li>若$v(f)&#x3D;D$，则$G$存在需求$d_v$的可行流通，否则不存在</li>
 </ul>
 <p>扩展：带下界的可行流通，$\forall e \in E,l_e \le f(e) \le c_e$，需求条件不变</p>
-<h4 id="运输问题"><a href="#运输问题" class="headerlink" title="运输问题"></a>运输问题</h4><p>有$m$个产地$A_1,A_2,…,A_m$，$n$个销地$B_1,B_2,…,B_n$<br>$A_i$产量$a_i$，$B_j$销量$b_j$，从$A_i$到$B_j$单位运费$w_{ij}$<br>我们假设产销平衡，$\Sigma_{i&#x3D;1}^{m}a_i&#x3D;Sigma_{j&#x3D;1}^{n}b_j$<br>求使总运费最少的运输方案</p>
-<p>我们设运输方案为$x$，即在$A_i,B_j$之间运输$x_{ij}$的货物<br>则有$x_{ij} \ge 0$<br>$\Sigma_{i&#x3D;1}^{m}x_{ij}&#x3D;a_i$<br>$\Sigma_{j&#x3D;1}^{n}x_{ij}&#x3D;b_j$<br>总费用$w(x)&#x3D;\Sigma_{i&#x3D;1}^{m}\Sigma_{j&#x3D;1}^{n}w_{ij}x_{ij}$<br>我们要求使得$w(x)$最小的方案$x$</p>
+<h4 id="运输问题"><a href="#运输问题" class="headerlink" title="运输问题"></a>运输问题</h4><p>有$m$个产地$A_1,A_2,…,A_m$，$n$个销地$B_1,B_2,…,B_n$<br>$A_i$产量$a_i$，$B_j$销量$b_j$，从$A_i$到$B_j$单位运费$w_{ij}$<br>我们假设产销平衡，$\Sigma_{i&#x3D;1}^{m}a_i&#x3D;\Sigma_{j&#x3D;1}^{n}b_j$<br>求使总运费最少的运输方案</p>
+<p>我们设运输方案为$x$，即在$A_i,B_j$之间运输$x_{ij}$的货物<br>则有$x_{ij} \ge 0$<br>$\Sigma_{j&#x3D;1}^{n}x_{ij}&#x3D;a_i$<br>$\Sigma_{i&#x3D;1}^{m}x_{ij}&#x3D;b_j$<br>总费用$w(x)&#x3D;\Sigma_{i&#x3D;1}^{m}\Sigma_{j&#x3D;1}^{n}w_{ij}x_{ij}$<br>我们要求使得$w(x)$最小的方案$x$</p>
 <p>建模时，依旧是添加$s,t$，组成容量费用网络$N&#x3D;&lt;V,E,c,w,s,t&gt;$<br>如图所示<br><img src="4.9.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>其中：</p>
 <ul>
@@ -595,7 +595,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年6月2日</div>
+          <div>2026年6月13日</div>
         </div>
       
       

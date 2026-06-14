@@ -2589,60 +2589,107 @@ input[type=checkbox] {
 .about-icons > a > i {
   font-size: 1.5rem;
 }
+#category-bar-card {
+  background: var(--board-bg-color);
+  border-radius: 0.8rem;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1px solid var(--line-color);
+}
+.category-bar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--line-color);
+}
+.category-bar-header,
+.category-bar-header > i {
+  font-size: 1.15rem;
+}
+.category-bar-header i {
+  color: var(--link-hover-color);
+}
 .category-bar .category-list {
-  max-height: 85vh;
+  max-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
 .category-bar .category-list::-webkit-scrollbar {
   display: none;
 }
-.category-bar .category-list > .category-sub > a {
-  font-weight: bold;
-  font-size: 1.2rem;
+.category-bar .category-list .list-group-item {
+  padding: 0;
+  border: none;
+  background: none;
 }
 .category-bar .category-list .category-item-action i {
   margin: 0;
+  font-size: 0.8rem;
 }
-.category-bar .category-list .category-subitem.list-group-item {
+.category-bar .category-list .category .category-item,
+.category-bar .category-list .category-sub .category-item,
+.category-bar .category-list .category .category-subitem,
+.category-bar .category-list .category-sub .category-subitem {
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.35rem;
+  color: var(--text-color);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.category-bar .category-list .category .category-item:hover,
+.category-bar .category-list .category-sub .category-item:hover,
+.category-bar .category-list .category .category-subitem:hover,
+.category-bar .category-list .category-sub .category-subitem:hover {
+  color: var(--link-hover-color);
+  background-color: var(--link-hover-bg-color);
+  text-decoration: none;
+}
+.category-bar .category-list .category-collapse {
   padding-left: 0.5rem;
-  padding-right: 0;
 }
 .category-bar .category-list .category-collapse .category-post-list {
+  position: relative;
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--line-color);
 }
 .category-bar .category-list .category-collapse .category-post {
-  font-size: 0.9rem;
-  line-height: 1.75;
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
-.category-bar .category-list .category-item-action:hover {
-  background-color: initial;
+.category-bar .category-list .list-group-item-action {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.35rem;
+  color: var(--sec-text-color);
+  transition: color 0.2s ease, background-color 0.2s ease, padding-left 0.2s ease;
+  text-decoration: none;
 }
-.category-bar .list-group-item {
-  padding: 0;
-}
-.category-bar .list-group-item.active {
+.category-bar .category-list .list-group-item-action:focus,
+.category-bar .category-list .list-group-item-action:hover {
   color: var(--link-hover-color);
-  background-color: initial;
-  font-weight: bold;
-  font-family: "iconfont";
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
+  background-color: var(--link-hover-bg-color);
+  padding-left: 0.7rem;
 }
-.category-bar .list-group-item.active::before {
-  content: "\e61f";
-  font-weight: initial;
-  margin-right: 0.25rem;
+.category-bar .category-list .list-group-item-action.active {
+  font-weight: 600;
+  color: var(--link-hover-color) !important;
+  background-color: var(--link-hover-bg-color);
+  border-radius: 0.35rem;
+  padding-left: 0.7rem !important;
 }
-.category-bar .list-group-count {
-  margin-left: 0.2rem;
-  margin-right: 0.2rem;
-  font-size: 0.9em;
+.category-bar .category-list .list-group-item-action.active::before {
+  content: none;
 }
-.category-bar .list-group-item-action:focus,
-.category-bar .list-group-item-action:hover {
-  background-color: initial;
+.category-bar .category-list .list-group-count {
+  color: var(--sec-text-color);
+  font-weight: 400;
+  font-size: 0.85em;
 }
 .category-chains {
   display: flex;
@@ -2661,10 +2708,10 @@ input[type=checkbox] {
   align-items: center;
 }
 .category .category-item {
-  font-size: 1.25rem;
+  font-size: 1.05rem;
 }
 .category .category-subitem {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 .category .category-collapse {
   padding-left: 1.25rem;

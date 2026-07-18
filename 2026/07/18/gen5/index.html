@@ -21,25 +21,40 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hi, I am Yjy. Welcome to my personal homepage.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类 - 算法设计与分析">
-<meta property="og:url" content="https://yjyxfcy.github.io/categories/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/index.html">
+    <meta name="description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第五讲：Flow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Normalizing Flow">
+<meta property="og:url" content="https://yjyxfcy.github.io/2026/07/18/gen5/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="Hi, I am Yjy. Welcome to my personal homepage.">
+<meta property="og:description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第五讲：Flow">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/07/18/gen5/5.1.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/07/18/gen5/5.2.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/07/18/gen5/5.3.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/07/18/gen5/5.4.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/07/18/gen5/5.5.png">
+<meta property="og:image" content="https://yjyxfcy.github.io/2026/07/18/gen5/5.6.png">
+<meta property="article:published_time" content="2026-07-18T07:39:28.317Z">
+<meta property="article:modified_time" content="2026-07-18T09:03:30.210Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yjyxfcy.github.io/2026/07/18/gen5/5.1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>分类 - 算法设计与分析 - Yjy</title>
+  <title>Normalizing Flow - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -107,7 +122,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -266,15 +281,69 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p10.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p8.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="分类 - 算法设计与分析"></span>
+            <span id="subtitle" data-typed-text="Normalizing Flow"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-18 15:39" pubdate>
+          2026年7月18日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
 
         
       </div>
@@ -290,146 +359,383 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="archive-card-list">
-    <p class="archive-total">共计 5 篇文章</p>
-    
-    
-    
       
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar">
+    
+
+<div id="category-bar-card">
+  <p class="category-bar-header">
+    <i class="iconfont icon-category"></i>
+    <span>分类文章</span>
+  </p>
+  
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="生成模型基础"
+        id="heading-320c54b9a1e78533008165d336e2f160" role="tab" data-toggle="collapse" href="#collapse-320c54b9a1e78533008165d336e2f160"
+        aria-expanded="true"
+      >
+        生成模型基础
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-320c54b9a1e78533008165d336e2f160"
+           role="tabpanel" aria-labelledby="heading-320c54b9a1e78533008165d336e2f160">
         
-        <p class="archive-year">2026</p>
-      
-      
-      <a href="/2026/06/03/sf5/" class="archive-card" style="--archive-card-img: url('/img/p1.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-06-03 10:05">
-            2026年06月03日
-          </time>
-          <h2 class="archive-card-title">随机算法</h2>
+        
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>39 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">算法设计与分析</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+  <div class="category-post-list">
+    
     
       
       
-      <a href="/2026/05/31/sf4/" class="archive-card" style="--archive-card-img: url('/img/p1.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-05-31 20:18">
-            2026年05月31日
-          </time>
-          <h2 class="archive-card-title">网络流</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第七章：网络流</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>54 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">算法设计与分析</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+        <a href="/2026/07/18/gen5/" title="Normalizing Flow"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Normalizing Flow</span>
+        </a>
+      
     
       
       
-      <a href="/2026/05/27/sf3/" class="archive-card" style="--archive-card-img: url('/img/p1.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-05-27 18:31">
-            2026年05月27日
-          </time>
-          <h2 class="archive-card-title">近似算法</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十章：近似算法</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>34 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">算法设计与分析</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+        <a href="/2026/02/13/gen1/" title="变分自编码器(VAE)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">变分自编码器(VAE)</span>
+        </a>
+      
     
       
       
-      <a href="/2026/05/26/sf2/" class="archive-card" style="--archive-card-img: url('/img/p1.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-05-26 17:04">
-            2026年05月26日
-          </time>
-          <h2 class="archive-card-title">NP完全</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第九章：NP完全</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>46 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">算法设计与分析</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+        <a href="/2026/02/15/gen3/" title="生成对抗模型(GAN)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">生成对抗模型(GAN)</span>
+        </a>
+      
     
       
       
-      <a href="/2026/05/25/sf1/" class="archive-card" style="--archive-card-img: url('/img/p1.jpg');">
-        <article class="archive-card-inner">
-          <time class="archive-card-date" datetime="2026-05-25 21:31">
-            2026年05月25日
-          </time>
-          <h2 class="archive-card-title">问题复杂度</h2>
-          
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第八章：问题复杂度</p>
-          
-          <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>43 min read</span>
-            <span><i class="archive-card-lang-icon"></i>Chinese</span>
-          </div>
-          
-            <span class="archive-card-tag">算法设计与分析</span>
-          
-        </article>
-        <span class="archive-card-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+        <a href="/2026/02/14/gen2/" title="自回归模型(Transformer&amp;AR)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">自回归模型(Transformer&amp;AR)</span>
+        </a>
+      
     
+      
+      
+        <a href="/2026/02/21/gen4/" title="调试"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">调试</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+</div>
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Normalizing Flow</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年7月18日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p>
+<p>第五讲：Flow</p>
+<span id="more"></span>
+
+<p>一期非常久违的更新(填坑)，今天让我们走进flow matching的世界<br>先回顾一样下我们之前学过的三种生成模型：</p>
+<ul>
+<li>VAE：浅层、非序列、重建</li>
+<li>AR：深层、序列、MLE</li>
+<li>GAN：深层、非序列、近似距离</li>
+</ul>
+<p>而今天我们的主角Flow则是：深层、非序列、MLE</p>
+<h3 id="初步分析"><a href="#初步分析" class="headerlink" title="初步分析"></a>初步分析</h3><p>首先我们有图像$x$，噪音$z$，生成模型$g(z)$<br>我们从标准正态分布$N(0,I)$中sample出$z$，然后把$z$喂给$g(z;\theta)$，最终得到$x$，其中$\theta$为参数<br>那么，应该如何估计$p(x;\theta)$呢？</p>
+<p>一种简单的方式是，假设$g$反函数存在，则有：<br><img src="5.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>接下来我们看一个更一般的情况：变量变换定理<br>$Z$为一个随机变量，概率密度函数为$p_{Z}(z)$<br>$X&#x3D;g(Z)$，且$x$的概率密度函数为$p_{X}(x)$<br>假设$g$反函数存在，且为了方便设$g$单增<br>再假设$g,g^{-1}$都可微，于是有：<br>$P(X&lt;x)&#x3D;P(g(Z)&lt;x)&#x3D;P(z&lt;g^{-1}(x))&#x3D;\int_{-\infty}^{g^{-1}(x)}p_{Z}(z) dz$<br>两边同时求导，便有：<br>$p_{X}(x)&#x3D;(g^{-1}(x))’p_{Z}(z)$</p>
+<p>又$g(g^{-1}(x))&#x3D;x$<br>两边求导有$g’(z)(g^{-1}(x))’&#x3D;1$<br>代入，亦可得出：<br>$p_{X}(x)g’(z)&#x3D;p_{Z}(z)$</p>
+<h3 id="多维情况"><a href="#多维情况" class="headerlink" title="多维情况"></a>多维情况</h3><p>设$Z,X$均为$d$维随机向量，其余条件不变<br>$g:R^d \rightarrow R^d $反函数存在，且$g,g^{-1}$可微(这一条件我们称作<strong>微分同胚</strong>)<br>我们设Jacobi行列式$D_g(z)&#x3D;\dfrac{\partial(g_1,…,g_d)}{\partial(z_1,…,z_d)}$<br>那么类似地，我们可以推出<br>$p_{X}(x)&#x3D;|detD_{g^{-1}}(x)|p_{Z}(z)$<br><img src="5.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>如上图，反函数$g^{-1}$的作用恰好就是把复杂的分布$p_{X}(x)$ <strong>normalizing</strong> 为简单的分布$p_Z(z)$，从相反的方向 <strong>flow</strong> 过去，因此这种模型被称为<strong>normalizing flow</strong></p>
+<p>根据之前的推导，我们也可以类似得出<br><img src="5.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>总之就是从标准正态分布sample出$z$之后，$z$就可以和$x$互相flow来flow去</p>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>在实际应用中，我们可以通过参数化$f$或者$g$来解决问题，根据不同场景具体分析</p>
+<h4 id="density-estimation"><a href="#density-estimation" class="headerlink" title="density estimation"></a>density estimation</h4><p>给定样本$x$，将其输入模型，输出$p(x)$的估计值<br>具体应用比如：假设有一组生成图像，需要选出质量最佳的那一张</p>
+<p>此时根据$P_X(x)&#x3D;p_Z(f(x))|det D_f(x)|$，参数化$f$即可<br>因为我们不知道$Z$概率分布，如果参数化$g$还得求反函数，十分麻烦</p>
+<h4 id="sampling"><a href="#sampling" class="headerlink" title="sampling"></a>sampling</h4><p>给定噪声$z$，将其输入模型，输出复杂分布$p_X(x)$的样本<br>具体应用场景显然就是生成模型</p>
+<p>此时对$g$参数化就更方便，因为$x&#x3D;g(z)$和$x&#x3D;f^{-1}(z)$相比的话，显然前者更简单，不需要求反函数</p>
+<h3 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h3><p>讲了这么多flow的应用，但是在真实的神经网络中，存在许多非线性变换，卷积操作，这些行为都不一定保证能有反函数，更不用说要求出反函数了，如何是好？<br>科学家们想到的办法是：<br>寻找某个function class，这个class中的函数易于计算，反函数存在，并且能算出Jacobi行列式</p>
+<p>直接找到一个属于该class的函数，一步到位把$x$变成$z$显然是极为困难的<br>我们就分多步进行，只需保证每一步的函数都属于这个class即可<br>定义$x_n&#x3D;g_1 ·g_2·…·g_n(z)$，代表经过$n$次函数的结果<br>于是$p_{X}(x)&#x3D;|detD_{g^{-1}}(x)|p_{Z}(z)$<br>$&#x3D;p_{Z}(z)|detD_{g_1^{-1}}(x_1)|…|detD_{g_n^{-1}}(x_n)|$</p>
+<h3 id="一些特殊flow"><a href="#一些特殊flow" class="headerlink" title="一些特殊flow"></a>一些特殊flow</h3><p>接下来我们会在normalizing flow的基础上，介绍几种特殊的flow，都是对一般情况的改进</p>
+<h4 id="element-flow"><a href="#element-flow" class="headerlink" title="element flow"></a>element flow</h4><p>即在normalizing flow基础上加以限制，每一个维度都不和其他维度相关联，这样Jacobi矩阵为对角阵，行列式非常好算<br>$g(z)&#x3D;(h(z_1),…,h(z_d))$<br>其中若每个$h$都可逆，则$g$也可逆<br>$h$可以是任意合理的激活函数，比如RELU</p>
+<h3 id="linear-flow"><a href="#linear-flow" class="headerlink" title="linear flow"></a>linear flow</h3><p>顾名思义就是最简单的线性层：$g(z)&#x3D;Az+b$，$A$为$d$维方阵<br>如果$A$可逆，那么$g$反函数存在，$g^{-1}(x)&#x3D;A^{-1}(x-b)$<br>$D_g(z)&#x3D;A,D_{g^{-1}}(x)&#x3D;A^{-1}$<br>$|detD_g(z)|&#x3D;|A|,|detD_{g^{-1}}(x)|&#x3D;|A^{-1}|$<br>这种方法主要问题在于计算量太大，计算矩阵行列式要$O(d^3)$</p>
+<p>改进：<br>如果$A$为对角元非零的上(下)三角阵，那么它可逆，并且行列式易于计算<br>行列式$O(d)$，算逆矩阵$O(d^2)$</p>
+<p>如果$A$为正交矩阵，显然$A$可逆，且$A^{-1}&#x3D;A^{T}$<br>于是$|detD_g(z)|&#x3D;|detD_{g^{-1}}(x)|&#x3D;1$，这样就十分方便<br>如何在训练中确保$A$正交呢？我们一般采用<strong>Householder transform</strong><br>(这个方法在数值分析课上会重点讲述，这里不加赘述，放一张图就好)<br><img src="5.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>如果从结构角度看，<strong>MLP也可以看成是linear flow与element flow的叠加</strong><br>(读者可以思考一下为什么这么说)</p>
+<h3 id="residual-flow-1"><a href="#residual-flow-1" class="headerlink" title="residual flow 1"></a>residual flow 1</h3><p>$g(z)&#x3D;h+h(z)$<br>我们设$z$的前$d_1$维为$z_1$，后$d-d_1$维为$z_2$<br>$h1:R^{d-d_1} \rightarrow R^{d_1}$<br>$h2:R^{d_1} \rightarrow R^{d-d_1}$<br>$x_1&#x3D;z_1+h_1(z_2)$<br>$x_2&#x3D;z_2+h_2(x_1)$<br>$x&#x3D;(x_1,x_2)&#x3D;g(z)$</p>
+<p>反向求解则有：<br>$z_2&#x3D;x_2-h_2(x_1)$<br>$z_1&#x3D;x_1-h_1(x_2-h_2(x_1))$</p>
+<h3 id="residual-flow-2"><a href="#residual-flow-2" class="headerlink" title="residual flow 2"></a>residual flow 2</h3><p>2相比1的升级版在于：<br>如果满足Lipschitz条件，即$Lip(h)&lt;1$，即可证明$g(z)$反函数存在<br>然而这种方法效率极低，虽然理论上$g(z)$反函数存在，但是实际解很难求出，只能逼近求近似解</p>
+<h3 id="continuous-flow"><a href="#continuous-flow" class="headerlink" title="continuous flow"></a>continuous flow</h3><p>这里就牵扯到常微分方程数值解的知识了，笔者在学完数值分析回来之后，对此理解又加深了一层<br>定义常微分方程：$\dfrac{dx}{dt}&#x3D;f(x,t)$<br>初值$x(t_0)&#x3D;z$<br>需要找到目标函数$x^{\ast}(t)$满足上述条件</p>
+<p>大多数情况下难以获得解析解，因此需要采用数值方法，对于任意$t_1$估算$x(t_1)$<br>当然在此之前需要确保ODE的解唯一存在，回顾一下高数下的Picard 定理<br><img src="5.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>传统的ODE会将式子改写为$\dfrac{dx}{dt}&#x3D;f(x,t,\theta),x(0)&#x3D;z$<br>将时间维度取消就得到了time independent ODE $\dfrac{dx}{dt}&#x3D;f(x,\theta),x(0)&#x3D;z$<br>我们已知噪音$z$和参数$\theta$后，解这个ODE，得出$x(1)$就是我们需要的图片输出，并且容易证明ODE也是可逆的(见下图)，所以ODE某种意义上也是normalizing flow<br><img src="5.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">生成模型基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Normalizing Flow</div>
+      <div>https://yjyxfcy.github.io/2026/07/18/gen5/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月18日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年7月18日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
 
 
-
-
-
-              </div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/06/03/sf5/" title="随机算法">
+                        <span class="hidden-mobile">随机算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-          </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
         </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-reading-progress" aria-label="Reading progress">
+    <div class="toc-reading-progress-row">
+      <span>阅读进度</span>
+      <span id="toc-reading-progress-text">0%</span>
+    </div>
+    <div class="toc-reading-progress-track">
+      <div id="toc-reading-progress-bar"></div>
+    </div>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%AD%A5%E5%88%86%E6%9E%90"><span class="toc-text">初步分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BB%B4%E6%83%85%E5%86%B5"><span class="toc-text">多维情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#density-estimation"><span class="toc-text">density estimation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sampling"><span class="toc-text">sampling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%91%E6%88%98"><span class="toc-text">挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8Aflow"><span class="toc-text">一些特殊flow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#element-flow"><span class="toc-text">element flow</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linear-flow"><span class="toc-text">linear flow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#residual-flow-1"><span class="toc-text">residual flow 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#residual-flow-2"><span class="toc-text">residual flow 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#continuous-flow"><span class="toc-text">continuous flow</span></a></li></ol>
+  </div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -3192,6 +3498,156 @@ loadSong();
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+
+    var progressText = document.getElementById('toc-reading-progress-text');
+    var progressBar = document.getElementById('toc-reading-progress-bar');
+    var article = document.querySelector('.markdown-body');
+
+    function updateReadingProgress() {
+      if (!progressText || !progressBar || !article) { return; }
+      var rect = article.getBoundingClientRect();
+      var articleTop = window.pageYOffset + rect.top;
+      var articleHeight = article.scrollHeight;
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      var readableHeight = Math.max(articleHeight - viewportHeight * 0.55, 1);
+      var read = window.pageYOffset - articleTop + viewportHeight * 0.25;
+      var percent = Math.min(100, Math.max(0, Math.round(read / readableHeight * 100)));
+
+      progressText.textContent = percent + '%';
+      progressBar.style.width = percent + '%';
+    }
+
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        article = document.querySelector('.markdown-body');
+        updateReadingProgress();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

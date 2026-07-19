@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/07/19/gen6/6.11.png">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/07/19/gen6/6.13.jpg">
 <meta property="article:published_time" content="2026-07-19T06:39:46.549Z">
-<meta property="article:modified_time" content="2026-07-19T10:26:10.748Z">
+<meta property="article:modified_time" content="2026-07-19T10:59:56.052Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://yjyxfcy.github.io/2026/07/19/gen6/6.1.png">
@@ -582,7 +582,7 @@ $\tilde{\mu_t}(x_t,x_0)=\dfrac{1}{\sqrt{1-\beta_t}}(x_t-\dfrac{\beta_t}{\sqrt{1-
 $\mu_\theta(x_t,t)=\dfrac{1}{\sqrt{1-\beta_t}}(x_t-\dfrac{\beta_t}{\sqrt{1-\alpha_t}}\epsilon_\theta(x_t,t))$<br>
 这样一来KL散度的公式又可以改写为<br>
 $\dfrac{\beta_t^2}{2\sigma_t^2(1-\beta)(1-\alpha_t)}\lVert \epsilon-\epsilon_\theta(x_t,t) \rVert_2^2$<br>
-忽略系数，将$x_t$表达式代入，训练过程就变为<br>
+忽略系数，将$x_t$表达式代入，变为<br>
 minimize $\lVert \epsilon-\epsilon_\theta(\sqrt{\alpha_{t}}x_0+\sqrt{1-\alpha_{t}\epsilon},t) \rVert_2^2$<br>
 这便是diffusion的训练过程！<br>
 <img src="6.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
@@ -612,7 +612,7 @@ ODE正向和反向过程显然是一致的，但SDE则不然<br>
 前向可以直接计算，反向还是需要加上score function这一项，难以直接计算，必须采用神经网络估计<br>
 <img src="6.9.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <h6 id="笔者按：终于啃完了这块硬骨头，虽然所有的数学推导本人都似懂非懂，全盘忘却……计划还要写一个附录来再补充一下DDPM的数学推导">笔者按：终于啃完了这块硬骨头，虽然所有的数学推导本人都似懂非懂，全盘忘却……计划还要写一个附录来再补充一下DDPM的数学推导</h6>
-<h3 id="附录：两道作业题，DDPM最重要的两个推导">附录：两道作业题，DDPM最重要的两个推导</h3>
+<h3 id="附录">附录</h3>
 <img src="6.10.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <img src="6.12.jpg" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
 <img src="6.11.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
@@ -787,7 +787,7 @@ ODE正向和反向过程显然是一致的，但SDE则不然<br>
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%95%E4%B8%BAdiffusion"><span class="toc-text">何为diffusion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">前向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">反向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDPM"><span class="toc-text">DDPM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDPM-and-score-function"><span class="toc-text">DDPM and score function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDPM%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-text">DDPM与随机微分方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E4%B8%A4%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98%EF%BC%8CDDPM%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%8E%A8%E5%AF%BC"><span class="toc-text">附录：两道作业题，DDPM最重要的两个推导</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%95%E4%B8%BAdiffusion"><span class="toc-text">何为diffusion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">前向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">反向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDPM"><span class="toc-text">DDPM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDPM-and-score-function"><span class="toc-text">DDPM and score function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDPM%E4%B8%8E%E9%9A%8F%E6%9C%BA%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-text">DDPM与随机微分方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-text">附录</span></a></li></ol>
   </div>
 </div>
 

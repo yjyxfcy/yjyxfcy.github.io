@@ -715,6 +715,7 @@
     <h3>🎵 每日推歌</h3>
     <div id="song-title" class="song-title"></div>
     <div id="song-artist" class="song-artist"></div>
+    <div id="song-reason" class="song-reason"></div>
     <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
     <button class="daily-btn" onclick="nextSong()">换一首</button>
   </div>
@@ -732,2527 +733,5660 @@
   // 🎵 你的歌单（你可以自己加！）
   const songs = [
     {
+      id: 1,
       title: "白马非马",
       artist: "许嵩",
-      url: "/music/1.mp3"
+      url: "/music/1.mp3",
+      genre: ["流行"],
+      mood: ["孤独", "惆怅", "清醒"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["自我", "人生"]
     },
     {
+      id: 2,
       title: "半城烟沙",
       artist: "许嵩",
-      url: "/music/2.mp3"
+      url: "/music/2.mp3",
+      genre: ["中国风"],
+      mood: ["苍凉", "禅意", "悲悯"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "战争"]
     },
     {
+      id: 3,
       title: "伴虎",
       artist: "许嵩",
-      url: "/music/3.mp3"
+      url: "/music/3.mp3",
+      genre: ["中国风", "摇滚"],
+      mood: ["大气", "悲怆", "讽刺"],
+      energy: "激昂",
+      weather: [],
+      theme: ["历史", "现实"]
     },
     {
+      id: 4,
       title: "拆东墙",
       artist: "许嵩",
-      url: "/music/4.mp3"
+      url: "/music/4.mp3",
+      genre: ["嘻哈", "中国风"],
+      mood: ["悲悯", "讽刺", "淡然"],
+      energy: "中速",
+      weather: [],
+      theme: ["现实", "社会"]
     },
     {
+      id: 5,
       title: "尘世美",
       artist: "许嵩",
-      url: "/music/5.mp3"
+      url: "/music/5.mp3",
+      genre: ["流行", "嘻哈"],
+      mood: ["甜蜜", "轻快", "唯美"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 6,
       title: "弹指一挥间",
       artist: "许嵩",
-      url: "/music/6.mp3"
+      url: "/music/6.mp3",
+      genre: ["中国风"],
+      mood: ["凄美", "深情", "思念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "离别", "历史"]
     },
     {
+      id: 7,
       title: "断桥残雪",
       artist: "许嵩",
-      url: "/music/7.mp3"
+      url: "/music/7.mp3",
+      genre: ["中国风"],
+      mood: ["凄美", "哀婉", "思念"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 8,
       title: "放肆",
       artist: "许嵩",
-      url: "/music/8.mp3"
+      url: "/music/8.mp3",
+      genre: ["中国风", "摇滚"],
+      mood: ["豪迈", "霸气", "潇洒"],
+      energy: "激昂",
+      weather: [],
+      theme: ["江湖", "武侠"]
     },
     {
+      id: 9,
       title: "蝴蝶的时间",
       artist: "许嵩",
-      url: "/music/9.mp3"
+      url: "/music/9.mp3",
+      genre: ["流行", "中国风"],
+      mood: ["凄美", "哀伤", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 10,
       title: "画平生",
       artist: "许嵩",
-      url: "/music/10.mp3"
+      url: "/music/10.mp3",
+      genre: ["中国风"],
+      mood: ["深情", "思念", "凄美"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 11,
       title: "幻听",
       artist: "许嵩",
-      url: "/music/11.mp3"
+      url: "/music/11.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["深情", "伤感", "纯粹"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 12,
       title: "将芯比心",
       artist: "许嵩",
-      url: "/music/12.mp3"
+      url: "/music/12.mp3",
+      genre: ["流行"],
+      mood: ["浪漫", "温暖", "轻盈"],
+      energy: "轻快",
+      weather: [],
+      theme: ["科技", "人文"]
     },
     {
+      id: 13,
       title: "今年勇",
       artist: "许嵩",
-      url: "/music/13.mp3"
+      url: "/music/13.mp3",
+      genre: ["中国风"],
+      mood: ["豪迈", "洒脱", "进取"],
+      energy: "激昂",
+      weather: [],
+      theme: ["武侠", "进取"]
     },
     {
+      id: 14,
       title: "绝代风华",
       artist: "许嵩",
-      url: "/music/14.mp3"
+      url: "/music/14.mp3",
+      genre: ["中国风"],
+      mood: ["隐逸", "深情", "回忆"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "爱情"]
     },
     {
+      id: 15,
       title: "科幻",
       artist: "许嵩",
-      url: "/music/15.mp3"
+      url: "/music/15.mp3",
+      genre: ["流行", "R&B", "电子"],
+      mood: ["梦幻", "感伤", "温柔"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "宇宙", "回忆"]
     },
     {
+      id: 16,
       title: "温泉",
       artist: "许嵩 刘美麟",
-      url: "/music/16.mp3"
+      url: "/music/16.mp3",
+      genre: ["流行", "蓝调"],
+      mood: ["甜蜜", "治愈", "温柔"],
+      energy: "轻快",
+      weather: ["夏"],
+      theme: ["爱情"]
     },
     {
+      id: 17,
       title: "庐州月",
       artist: "许嵩",
-      url: "/music/17.mp3"
+      url: "/music/17.mp3",
+      genre: ["中国风"],
+      mood: ["思念", "苍凉", "怅惘"],
+      energy: "舒缓",
+      weather: ["夜"],
+      theme: ["乡愁", "思念"]
     },
     {
+      id: 18,
       title: "惊鸿一面",
       artist: "许嵩 黄龄",
-      url: "/music/18.mp3"
+      url: "/music/18.mp3",
+      genre: ["中国风"],
+      mood: ["婉约", "温暖", "豁达"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "古风"]
     },
     {
+      id: 19,
       title: "书香年华",
       artist: "许嵩 孙涛",
-      url: "/music/19.mp3"
+      url: "/music/19.mp3",
+      genre: ["流行"],
+      mood: ["轻快", "文雅", "正能量"],
+      energy: "轻快",
+      weather: [],
+      theme: ["传统", "劝学"]
     },
     {
+      id: 20,
       title: "江湖",
       artist: "许嵩",
-      url: "/music/20.mp3"
+      url: "/music/20.mp3",
+      genre: ["中国风", "电子"],
+      mood: ["侠义", "苍凉", "豪情"],
+      energy: "激昂",
+      weather: [],
+      theme: ["江湖", "武侠"]
     },
     {
+      id: 21,
       title: "曼陀山庄",
       artist: "许嵩",
-      url: "/music/21.mp3"
+      url: "/music/21.mp3",
+      genre: ["中国风"],
+      mood: ["凄美", "爱恨", "苍凉"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["江湖", "爱情"]
     },
     {
+      id: 22,
       title: "玫瑰花的葬礼",
       artist: "许嵩",
-      url: "/music/22.mp3"
+      url: "/music/22.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["伤感", "悲痛", "克制"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "悼念"]
     },
     {
+      id: 23,
       title: "明智之举",
       artist: "许嵩",
-      url: "/music/23.mp3"
+      url: "/music/23.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["释然", "怀旧", "自省"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "自我"]
     },
     {
+      id: 24,
       title: "庞贝",
       artist: "许嵩",
-      url: "/music/24.mp3"
+      url: "/music/24.mp3",
+      genre: ["流行"],
+      mood: ["深沉", "安静", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "灾难"]
     },
     {
+      id: 25,
       title: "平行宇宙",
       artist: "许嵩",
-      url: "/music/25.mp3"
+      url: "/music/25.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["平静", "孤独", "回忆"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "回忆", "科幻"]
     },
     {
+      id: 26,
       title: "七夕",
       artist: "许嵩",
-      url: "/music/26.mp3"
+      url: "/music/26.mp3",
+      genre: ["中国风"],
+      mood: ["相思", "浪漫", "坚定"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["爱情", "传统"]
     },
     {
+      id: 27,
       title: "千百度",
       artist: "许嵩",
-      url: "/music/27.mp3"
+      url: "/music/27.mp3",
+      genre: ["中国风", "R&B"],
+      mood: ["温婉", "寻觅", "怅惘"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "思念"]
     },
     {
+      id: 28,
       title: "千古",
       artist: "许嵩",
-      url: "/music/28.mp3"
+      url: "/music/28.mp3",
+      genre: ["中国风"],
+      mood: ["感伤", "眷恋", "洒脱"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 29,
       title: "清明雨上",
       artist: "许嵩",
-      url: "/music/29.mp3"
+      url: "/music/29.mp3",
+      genre: ["中国风"],
+      mood: ["哀思", "凄婉", "怀念"],
+      energy: "舒缓",
+      weather: ["雨"],
+      theme: ["悼亡", "思念"]
     },
     {
+      id: 30,
       title: "如果当时",
       artist: "许嵩",
-      url: "/music/30.mp3"
+      url: "/music/30.mp3",
+      genre: ["中国风", "爵士"],
+      mood: ["无奈", "自嘲", "怀念"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 31,
       title: "如谜",
       artist: "许嵩",
-      url: "/music/31.mp3"
+      url: "/music/31.mp3",
+      genre: ["中国风", "电子"],
+      mood: ["神秘", "婉转", "寻觅"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "武侠"]
     },
     {
+      id: 32,
       title: "如约而至",
       artist: "许嵩",
-      url: "/music/32.mp3"
+      url: "/music/32.mp3",
+      genre: ["民谣摇滚", "蓝调摇滚"],
+      mood: ["明快", "温暖", "怀念"],
+      energy: "中速",
+      weather: [],
+      theme: ["友情", "约定"]
     },
     {
+      id: 33,
       title: "山水之间",
       artist: "许嵩",
-      url: "/music/33.mp3"
+      url: "/music/33.mp3",
+      genre: ["中国风"],
+      mood: ["清雅", "悠远", "禅意"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["山水", "隐逸"]
     },
     {
+      id: 34,
       title: "摄影艺术",
       artist: "许嵩",
-      url: "/music/34.mp3"
+      url: "/music/34.mp3",
+      genre: ["流行", "摇滚"],
+      mood: ["萧索", "回忆", "落寞"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 35,
       title: "诗画中国",
       artist: "许嵩 谭维维",
-      url: "/music/35.mp3"
+      url: "/music/35.mp3",
+      genre: ["中国风"],
+      mood: ["悠远", "大气", "诗意"],
+      energy: "中速",
+      weather: [],
+      theme: ["传统", "家国"]
     },
     {
+      id: 36,
       title: "天龙八部之宿敌",
       artist: "许嵩",
-      url: "/music/36.mp3"
+      url: "/music/36.mp3",
+      genre: ["中国风"],
+      mood: ["内敛", "柔情", "缠绵"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "爱情"]
     },
     {
+      id: 37,
       title: "惟爱你",
       artist: "许嵩",
-      url: "/music/37.mp3"
+      url: "/music/37.mp3",
+      genre: ["流行"],
+      mood: ["坚定", "深情", "浪漫"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 38,
       title: "我乐意",
       artist: "许嵩",
-      url: "/music/38.mp3"
+      url: "/music/38.mp3",
+      genre: ["流行"],
+      mood: ["甜蜜", "清新", "随性"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "校园"]
     },
     {
+      id: 39,
       title: "乌鸦",
       artist: "许嵩",
-      url: "/music/39.mp3"
+      url: "/music/39.mp3",
+      genre: ["流行"],
+      mood: ["孤独", "倔强", "感伤"],
+      energy: "中速",
+      weather: [],
+      theme: ["自我", "孤独"]
     },
     {
+      id: 40,
       title: "梧桐灯",
       artist: "许嵩",
-      url: "/music/40.mp3"
+      url: "/music/40.mp3",
+      genre: ["流行", "电子"],
+      mood: ["阴郁", "回忆", "悲伤"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 41,
       title: "想象之中",
       artist: "许嵩",
-      url: "/music/41.mp3"
+      url: "/music/41.mp3",
+      genre: ["流行", "R&B", "电子"],
+      mood: ["阴郁", "慵懒", "内敛"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "想象"]
     },
     {
+      id: 42,
       title: "心有所向",
       artist: "许嵩",
-      url: "/music/42.mp3"
+      url: "/music/42.mp3",
+      genre: ["流行摇滚", "民乐"],
+      mood: ["励志", "畅快", "大气"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "励志"]
     },
     {
+      id: 43,
       title: "星座书上",
       artist: "许嵩",
-      url: "/music/43.mp3"
+      url: "/music/43.mp3",
+      genre: ["流行"],
+      mood: ["浪漫", "伤感", "倾诉"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 44,
       title: "雅俗共赏",
       artist: "许嵩",
-      url: "/music/44.mp3"
+      url: "/music/44.mp3",
+      genre: ["流行"],
+      mood: ["思辨", "诙谐", "深沉"],
+      energy: "中速",
+      weather: [],
+      theme: ["人生", "哲思"]
     },
     {
+      id: 45,
       title: "燕归巢",
       artist: "许嵩",
-      url: "/music/45.mp3"
+      url: "/music/45.mp3",
+      genre: ["中国风", "电子"],
+      mood: ["乡愁", "清雅", "思念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["乡愁", "归思"]
     },
     {
+      id: 46,
       title: "有何不可",
       artist: "许嵩",
-      url: "/music/46.mp3"
+      url: "/music/46.mp3",
+      genre: ["流行"],
+      mood: ["温暖", "俏皮", "浪漫"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 47,
       title: "宇宙之大",
       artist: "许嵩",
-      url: "/music/47.mp3"
+      url: "/music/47.mp3",
+      genre: ["流行", "世界音乐"],
+      mood: ["梦幻", "孤寂", "浪漫"],
+      energy: "舒缓",
+      weather: ["夜"],
+      theme: ["宇宙", "孤独", "爱情"]
     },
     {
+      id: 48,
       title: "雨幕",
       artist: "许嵩",
-      url: "/music/48.mp3"
+      url: "/music/48.mp3",
+      genre: ["中国风"],
+      mood: ["悬疑", "内敛", "感伤"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["江湖", "爱情"]
     },
     {
+      id: 49,
       title: "在那不遥远的地方",
       artist: "许嵩",
-      url: "/music/49.mp3"
+      url: "/music/49.mp3",
+      genre: ["电子", "民乐", "跨界"],
+      mood: ["励志", "开阔", "希望"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "青春"]
     },
     {
+      id: 50,
       title: "早发白帝城",
       artist: "许嵩",
-      url: "/music/50.mp3"
+      url: "/music/50.mp3",
+      genre: ["中国风"],
+      mood: ["磅礴", "豪迈", "缠绵"],
+      energy: "激昂",
+      weather: [],
+      theme: ["历史", "诗意"]
     },
     {
+      id: 51,
       title: "只有你",
       artist: "许嵩",
-      url: "/music/51.mp3"
+      url: "/music/51.mp3",
+      genre: ["流行"],
+      mood: ["温柔", "浪漫", "热烈"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 52,
       title: "纸上雪",
       artist: "许嵩",
-      url: "/music/52.mp3"
+      url: "/music/52.mp3",
+      genre: ["中国风"],
+      mood: ["静心", "洒脱", "诗意"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["诗意", "传统"]
     },
     {
+      id: 53,
       title: "最佳歌手",
       artist: "许嵩",
-      url: "/music/53.mp3"
+      url: "/music/53.mp3",
+      genre: ["流行", "蓝调"],
+      mood: ["怀旧", "成熟", "感伤"],
+      energy: "中速",
+      weather: [],
+      theme: ["成长", "自我", "告别"]
     },
     {
+      id: 54,
       title: "摆脱",
       artist: "许嵩",
-      url: "/music/54.mp3"
+      url: "/music/54.mp3",
+      genre: ["流行"],
+      mood: ["轻快", "悲观", "俏皮"],
+      energy: "轻快",
+      weather: [],
+      theme: ["自我", "都市"]
     },
     {
+      id: 55,
       title: "超市",
       artist: "许嵩",
-      url: "/music/55.mp3"
+      url: "/music/55.mp3",
+      genre: ["流行", "弗拉明戈"],
+      mood: ["怀旧", "温暖", "回忆"],
+      energy: "轻快",
+      weather: [],
+      theme: ["亲情", "回忆"]
     },
     {
+      id: 56,
       title: "大千世界",
       artist: "许嵩",
-      url: "/music/56.mp3"
+      url: "/music/56.mp3",
+      genre: ["乡村布鲁斯", "摇滚"],
+      mood: ["明快", "悲悯", "哲思"],
+      energy: "中速",
+      weather: [],
+      theme: ["人生", "禅意"]
     },
     {
+      id: 57,
       title: "多余的解释",
       artist: "许嵩",
-      url: "/music/57.mp3"
+      url: "/music/57.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["无奈", "心酸", "故事感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 58,
       title: "隔代",
       artist: "许嵩",
-      url: "/music/58.mp3"
+      url: "/music/58.mp3",
+      genre: ["流行"],
+      mood: ["温馨", "思念", "感动"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "回忆"]
     },
     {
+      id: 59,
       title: "素颜",
       artist: "许嵩 何曼婷",
-      url: "/music/59.mp3"
+      url: "/music/59.mp3",
+      genre: ["流行"],
+      mood: ["清新", "怀念", "青春"],
+      energy: "轻快",
+      weather: [],
+      theme: ["青春", "校园", "爱情"]
     },
     {
+      id: 60,
       title: "河山大好",
       artist: "许嵩",
-      url: "/music/60.mp3"
+      url: "/music/60.mp3",
+      genre: ["中国风", "R&B"],
+      mood: ["轻快", "洒脱", "活力"],
+      energy: "轻快",
+      weather: [],
+      theme: ["旅行", "生活"]
     },
     {
+      id: 61,
       title: "胡萝卜须",
       artist: "许嵩",
-      url: "/music/61.mp3"
+      url: "/music/61.mp3",
+      genre: ["流行"],
+      mood: ["黑色幽默", "诡谲", "慵懒"],
+      energy: "中速",
+      weather: [],
+      theme: ["成长", "寓言", "自我"]
     },
     {
+      id: 62,
       title: "灰色头像",
       artist: "许嵩",
-      url: "/music/62.mp3"
+      url: "/music/62.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["伤感", "回忆", "怀旧"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 63,
       title: "降温",
       artist: "许嵩",
-      url: "/music/63.mp3"
+      url: "/music/63.mp3",
+      genre: ["流行", "实验"],
+      mood: ["冷清", "疏离", "思辨"],
+      energy: "中速",
+      weather: [],
+      theme: ["都市", "现实"]
     },
     {
+      id: 64,
       title: "揽仙歌",
       artist: "许嵩",
-      url: "/music/64.mp3"
+      url: "/music/64.mp3",
+      genre: ["中国风"],
+      mood: ["洒脱", "通透", "念旧"],
+      energy: "中速",
+      weather: [],
+      theme: ["仙侠", "问道"]
     },
     {
+      id: 65,
       title: "浪",
       artist: "许嵩",
-      url: "/music/65.mp3"
+      url: "/music/65.mp3",
+      genre: ["蓝调", "爵士", "电子"],
+      mood: ["欢快", "慵懒", "浪漫"],
+      energy: "轻快",
+      weather: [],
+      theme: ["自我", "自由"]
     },
     {
+      id: 66,
       title: "老古董",
       artist: "许嵩",
-      url: "/music/66.mp3"
+      url: "/music/66.mp3",
+      genre: ["布鲁斯摇滚", "中国风"],
+      mood: ["复古", "坚定", "洒脱"],
+      energy: "中速",
+      weather: [],
+      theme: ["自我", "传统"]
     },
     {
+      id: 67,
       title: "留香",
       artist: "许嵩",
-      url: "/music/67.mp3"
+      url: "/music/67.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["细腻", "轻松", "浪漫"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 68,
       title: "柳成荫",
       artist: "许嵩",
-      url: "/music/68.mp3"
+      url: "/music/68.mp3",
+      genre: ["迷幻摇滚", "流行"],
+      mood: ["轻快", "释然", "松弛"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["人生", "释怀"]
     },
     {
+      id: 69,
       title: "内线",
       artist: "许嵩",
-      url: "/music/69.mp3"
+      url: "/music/69.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["凄美", "无奈", "伤感"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "信任"]
     },
     {
+      id: 70,
       title: "七号公园",
       artist: "许嵩",
-      url: "/music/70.mp3"
+      url: "/music/70.mp3",
+      genre: ["流行"],
+      mood: ["忧伤", "迷惘", "冷清"],
+      energy: "舒缓",
+      weather: ["夜"],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 71,
       title: "亲情式的爱情",
       artist: "许嵩",
-      url: "/music/71.mp3"
+      url: "/music/71.mp3",
+      genre: ["流行"],
+      mood: ["感动", "感伤", "深刻"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "亲情"]
     },
     {
+      id: 72,
       title: "全球变冷",
       artist: "许嵩",
-      url: "/music/72.mp3"
+      url: "/music/72.mp3",
+      genre: ["流行", "电子"],
+      mood: ["反思", "温暖", "呼唤"],
+      energy: "中速",
+      weather: [],
+      theme: ["现实", "社会关怀"]
     },
     {
+      id: 73,
       title: "认错",
       artist: "许嵩",
-      url: "/music/73.mp3"
+      url: "/music/73.mp3",
+      genre: ["流行"],
+      mood: ["心碎", "无奈", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "分手"]
     },
     {
+      id: 74,
       title: "三尺",
       artist: "许嵩",
-      url: "/music/74.mp3"
+      url: "/music/74.mp3",
+      genre: ["摇滚"],
+      mood: ["躁动", "痛快", "讽刺"],
+      energy: "激昂",
+      weather: [],
+      theme: ["现实", "批判"]
     },
     {
+      id: 75,
       title: "双人旁",
       artist: "许嵩",
-      url: "/music/75.mp3"
+      url: "/music/75.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["温暖", "怀旧", "心动"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 76,
       title: "天知道",
       artist: "许嵩",
-      url: "/music/76.mp3"
+      url: "/music/76.mp3",
+      genre: ["流行", "摇滚"],
+      mood: ["励志", "燃", "坚定"],
+      energy: "激昂",
+      weather: [],
+      theme: ["励志", "游戏"]
     },
     {
+      id: 77,
       title: "通关",
       artist: "许嵩",
-      url: "/music/77.mp3"
+      url: "/music/77.mp3",
+      genre: ["流行", "摇滚"],
+      mood: ["畅快", "随性", "豪情"],
+      energy: "激昂",
+      weather: [],
+      theme: ["人生", "游戏", "友情"]
     },
     {
+      id: 78,
       title: "我想牵着你的手",
       artist: "许嵩",
-      url: "/music/78.mp3"
+      url: "/music/78.mp3",
+      genre: ["流行"],
+      mood: ["甜蜜", "清新", "浪漫"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 79,
       title: "小烦恼没什么大不了",
       artist: "许嵩",
-      url: "/music/79.mp3"
+      url: "/music/79.mp3",
+      genre: ["爵士", "流行"],
+      mood: ["轻快", "明媚", "治愈"],
+      energy: "轻快",
+      weather: [],
+      theme: ["生活", "乐观"]
     },
     {
+      id: 80,
       title: "野路",
       artist: "许嵩",
-      url: "/music/80.mp3"
+      url: "/music/80.mp3",
+      genre: ["流行", "电子"],
+      mood: ["迷离", "洒脱", "悬疑"],
+      energy: "中速",
+      weather: [],
+      theme: ["自我", "自由"]
     },
     {
+      id: 81,
       title: "野人",
       artist: "许嵩",
-      url: "/music/81.mp3"
+      url: "/music/81.mp3",
+      genre: ["流行"],
+      mood: ["哲思", "孤独", "力量"],
+      energy: "中速",
+      weather: [],
+      theme: ["思想", "自我"]
     },
     {
+      id: 82,
       title: "医生",
       artist: "许嵩",
-      url: "/music/82.mp3"
+      url: "/music/82.mp3",
+      genre: ["流行"],
+      mood: ["无奈", "伤感", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "疗愈"]
     },
     {
+      id: 83,
       title: "艺术家们",
       artist: "许嵩",
-      url: "/music/83.mp3"
+      url: "/music/83.mp3",
+      genre: ["流行"],
+      mood: ["讽刺", "不屑", "直白"],
+      energy: "中速",
+      weather: [],
+      theme: ["现实", "批判"]
     },
     {
+      id: 84,
       title: "有桃花",
       artist: "许嵩",
-      url: "/music/84.mp3"
+      url: "/music/84.mp3",
+      genre: ["流行", "复古"],
+      mood: ["欢乐", "悲情", "荒诞"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "表白"]
     },
     {
+      id: 85,
       title: "光辉岁月",
       artist: "Beyond",
-      url: "/music/85.mp3"
+      url: "/music/85.mp3",
+      genre: ["流行摇滚"],
+      mood: ["励志", "自由", "感慨"],
+      energy: "激昂",
+      weather: [],
+      theme: ["自由", "梦想"]
     },
     {
+      id: 86,
       title: "真的爱你",
       artist: "Beyond",
-      url: "/music/86.mp3"
+      url: "/music/86.mp3",
+      genre: ["摇滚"],
+      mood: ["温暖", "感恩", "深情"],
+      energy: "激昂",
+      weather: [],
+      theme: ["亲情", "母爱"]
     },
     {
+      id: 87,
       title: "有点甜",
       artist: "汪苏泷 BY2",
-      url: "/music/87.mp3"
+      url: "/music/87.mp3",
+      genre: ["流行"],
+      mood: ["甜蜜", "青春", "清新"],
+      energy: "轻快",
+      weather: ["夏"],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 88,
       title: "永不失联的爱",
       artist: "Eric周兴哲",
-      url: "/music/88.mp3"
+      url: "/music/88.mp3",
+      genre: ["流行"],
+      mood: ["深情", "孤独", "守望"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "承诺"]
     },
     {
+      id: 89,
       title: "多远都要在一起",
       artist: "G.E.M邓紫棋",
-      url: "/music/89.mp3"
+      url: "/music/89.mp3",
+      genre: ["流行"],
+      mood: ["深情", "坚定", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "异地"]
     },
     {
+      id: 90,
       title: "光年之外",
       artist: "G.E.M邓紫棋",
-      url: "/music/90.mp3"
+      url: "/music/90.mp3",
+      genre: ["流行", "电子"],
+      mood: ["深情", "激昂", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "科幻", "宇宙"]
     },
     {
+      id: 91,
       title: "后会无期",
       artist: "G.E.M邓紫棋",
-      url: "/music/91.mp3"
+      url: "/music/91.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["凄美", "告别", "释然"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["离别", "电影"]
     },
     {
+      id: 92,
       title: "来自天堂的魔鬼",
       artist: "G.E.M邓紫棋",
-      url: "/music/92.mp3"
+      url: "/music/92.mp3",
+      genre: ["电子", "摇滚", "流行"],
+      mood: ["暗黑", "撕扯", "魅惑"],
+      energy: "激昂",
+      weather: ["夜"],
+      theme: ["爱情", "诱惑"]
     },
     {
+      id: 93,
       title: "泡沫",
       artist: "G.E.M邓紫棋",
-      url: "/music/93.mp3"
+      url: "/music/93.mp3",
+      genre: ["流行"],
+      mood: ["悲伤", "深情", "破碎"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "失恋"]
     },
     {
+      id: 94,
       title: "白鸽",
       artist: "GAI周延",
-      url: "/music/94.mp3"
+      url: "/music/94.mp3",
+      genre: ["说唱", "流行"],
+      mood: ["忧郁", "希望", "热血"],
+      energy: "激昂",
+      weather: [],
+      theme: ["成长", "自由"]
     },
     {
+      id: 95,
       title: "故湘，风",
       artist: "GAI周延",
-      url: "/music/95.mp3"
+      url: "/music/95.mp3",
+      genre: ["说唱", "民乐"],
+      mood: ["乡愁", "深情", "大气"],
+      energy: "中速",
+      weather: [],
+      theme: ["乡愁", "亲情"]
     },
     {
+      id: 96,
       title: "兰花草",
       artist: "GAI周延",
-      url: "/music/96.mp3"
+      url: "/music/96.mp3",
+      genre: ["中国风", "说唱"],
+      mood: ["励志", "豪迈", "少年气"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "进取"]
     },
     {
+      id: 97,
       title: "长路漫漫任我闯",
       artist: "GAI周延",
-      url: "/music/97.mp3"
+      url: "/music/97.mp3",
+      genre: ["说唱", "民族风"],
+      mood: ["苍凉", "豪迈", "孤勇"],
+      energy: "激昂",
+      weather: [],
+      theme: ["江湖", "侠客"]
     },
     {
+      id: 98,
       title: "Show Yourself",
       artist: "Idina Menzel",
-      url: "/music/98.mp3"
+      url: "/music/98.mp3",
+      genre: ["音乐剧", "流行"],
+      mood: ["振奋", "自我觉醒", "恢弘"],
+      energy: "激昂",
+      weather: ["雪"],
+      theme: ["自我", "成长", "电影"]
     },
     {
+      id: 99,
       title: "Some Things Never Change",
       artist: "Frozen 2",
-      url: "/music/99.mp3"
+      url: "/music/99.mp3",
+      genre: ["音乐剧", "流行"],
+      mood: ["温馨", "轻快", "乐观"],
+      energy: "轻快",
+      weather: [],
+      theme: ["亲情", "友情", "电影"]
     },
     {
+      id: 100,
       title: "Counting Stars",
       artist: "OneRepublic",
-      url: "/music/100.mp3"
+      url: "/music/100.mp3",
+      genre: ["流行摇滚", "民谣流行"],
+      mood: ["明快", "昂扬", "希望"],
+      energy: "轻快",
+      weather: ["夜"],
+      theme: ["梦想", "人生"]
     },
     {
+      id: 101,
       title: "三国恋",
       artist: "Tank",
-      url: "/music/101.mp3"
+      url: "/music/101.mp3",
+      genre: ["中国风", "摇滚"],
+      mood: ["苍凉", "迷惘", "凄美"],
+      energy: "激昂",
+      weather: [],
+      theme: ["历史", "战争", "爱情"]
     },
     {
+      id: 102,
       title: "想见你想见你想见你",
       artist: "八三夭",
-      url: "/music/102.mp3"
+      url: "/music/102.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["深情", "思念", "守候"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "穿越", "电视剧"]
     },
     {
+      id: 103,
       title: "红色高跟鞋",
       artist: "蔡健雅",
-      url: "/music/103.mp3"
+      url: "/music/103.mp3",
+      genre: ["流行", "爵士"],
+      mood: ["慵懒", "热烈", "自信"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "都市"]
     },
     {
+      id: 104,
       title: "落叶归根",
       artist: "单依纯 王力宏",
-      url: "/music/104.mp3"
+      url: "/music/104.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["乡愁", "离愁", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["乡愁", "回归"]
     },
     {
+      id: 105,
       title: "珠玉",
       artist: "单依纯",
-      url: "/music/105.mp3"
+      url: "/music/105.mp3",
+      genre: ["流行"],
+      mood: ["空灵", "复杂", "自我"],
+      energy: "中速",
+      weather: [],
+      theme: ["自我", "时光"]
     },
     {
+      id: 106,
       title: "特别的人",
       artist: "方大同",
-      url: "/music/106.mp3"
+      url: "/music/106.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["深情", "温柔", "等待"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 107,
       title: "童话",
       artist: "光良",
-      url: "/music/107.mp3"
+      url: "/music/107.mp3",
+      genre: ["流行"],
+      mood: ["温柔", "治愈", "伤感"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "信念"]
     },
     {
+      id: 108,
       title: "盗将行",
       artist: "花粥 马雨阳",
-      url: "/music/108.mp3"
+      url: "/music/108.mp3",
+      genre: ["民谣", "古风"],
+      mood: ["江湖气", "幽默", "苍凉"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "爱情"]
     },
     {
+      id: 109,
       title: "带我去很远地方",
       artist: "黄霄雲",
-      url: "/music/109.mp3"
+      url: "/music/109.mp3",
+      genre: ["流行摇滚"],
+      mood: ["明快", "自由", "奔跑"],
+      energy: "激昂",
+      weather: ["夜"],
+      theme: ["远方", "梦想", "旅行"]
     },
     {
+      id: 110,
       title: "晚夜微雨问海棠",
       artist: "镜予歌 陈亦洺 喧笑",
-      url: "/music/110.mp3"
+      url: "/music/110.mp3",
+      genre: ["古风"],
+      mood: ["唯美", "百转千回", "深情"],
+      energy: "舒缓",
+      weather: ["雨", "夜"],
+      theme: ["古风", "爱情"]
     },
     {
+      id: 111,
       title: "愿得一人心",
       artist: "李行亮",
-      url: "/music/111.mp3"
+      url: "/music/111.mp3",
+      genre: ["流行"],
+      mood: ["温暖", "深情", "安静"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "承诺"]
     },
     {
+      id: 112,
       title: "爱的代价",
       artist: "李宗盛",
-      url: "/music/112.mp3"
+      url: "/music/112.mp3",
+      genre: ["流行", "民谣"],
+      mood: ["释然", "怀念", "温柔"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "成长"]
     },
     {
+      id: 113,
       title: "宁夏",
       artist: "梁静茹",
-      url: "/music/113.mp3"
+      url: "/music/113.mp3",
+      genre: ["流行"],
+      mood: ["宁静", "思念", "单纯"],
+      energy: "舒缓",
+      weather: ["夏", "夜"],
+      theme: ["思念", "夏天"]
     },
     {
+      id: 114,
       title: "勇气",
       artist: "梁静茹",
-      url: "/music/114.mp3"
+      url: "/music/114.mp3",
+      genre: ["流行"],
+      mood: ["疗伤", "坚定", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "勇气"]
     },
     {
+      id: 115,
       title: "背对背拥抱",
       artist: "林俊杰",
-      url: "/music/115.mp3"
+      url: "/music/115.mp3",
+      genre: ["流行", "摇滚"],
+      mood: ["呐喊", "遗憾", "珍惜"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "误会"]
     },
     {
+      id: 116,
       title: "不为谁而作的歌",
       artist: "林俊杰",
-      url: "/music/116.mp3"
+      url: "/music/116.mp3",
+      genre: ["流行"],
+      mood: ["迷茫", "感恩", "释然"],
+      energy: "激昂",
+      weather: [],
+      theme: ["人生", "感恩"]
     },
     {
+      id: 117,
       title: "小酒窝",
       artist: "林俊杰 蔡卓妍",
-      url: "/music/117.mp3"
+      url: "/music/117.mp3",
+      genre: ["流行"],
+      mood: ["甜蜜", "清新", "浪漫"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "初恋"]
     },
     {
+      id: 118,
       title: "曹操",
       artist: "林俊杰",
-      url: "/music/118.mp3"
+      url: "/music/118.mp3",
+      genre: ["摇滚", "电子"],
+      mood: ["霸气", "磅礴", "豪迈"],
+      energy: "激昂",
+      weather: [],
+      theme: ["历史", "枭雄"]
     },
     {
+      id: 119,
       title: "翅膀",
       artist: "林俊杰",
-      url: "/music/119.mp3"
+      url: "/music/119.mp3",
+      genre: ["流行"],
+      mood: ["温暖", "坚定", "励志"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "陪伴"]
     },
     {
+      id: 120,
       title: "当你",
       artist: "林俊杰",
-      url: "/music/120.mp3"
+      url: "/music/120.mp3",
+      genre: ["流行"],
+      mood: ["甜蜜", "温柔", "心动"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "暗恋"]
     },
     {
+      id: 121,
       title: "关键词",
       artist: "林俊杰",
-      url: "/music/121.mp3"
+      url: "/music/121.mp3",
+      genre: ["中国风", "流行"],
+      mood: ["深情", "含蓄", "温暖"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 122,
       title: "记得",
       artist: "林俊杰",
-      url: "/music/122.mp3"
+      url: "/music/122.mp3",
+      genre: ["流行"],
+      mood: ["感伤", "温馨", "无奈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 123,
       title: "江南",
       artist: "林俊杰",
-      url: "/music/123.mp3"
+      url: "/music/123.mp3",
+      genre: ["中国风", "R&B"],
+      mood: ["凄美", "哀伤", "深情"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["爱情"]
     },
     {
+      id: 124,
       title: "被风吹过的夏天",
       artist: "林俊杰",
-      url: "/music/124.mp3"
+      url: "/music/124.mp3",
+      genre: ["流行"],
+      mood: ["甜蜜", "清新", "幸福"],
+      energy: "轻快",
+      weather: ["夏", "风"],
+      theme: ["爱情", "夏天"]
     },
     {
+      id: 125,
       title: "可惜没如果",
       artist: "林俊杰",
-      url: "/music/125.mp3"
+      url: "/music/125.mp3",
+      genre: ["流行"],
+      mood: ["遗憾", "懊悔", "心碎"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "错过"]
     },
     {
+      id: 126,
       title: "她说",
       artist: "林俊杰",
-      url: "/music/126.mp3"
+      url: "/music/126.mp3",
+      genre: ["流行"],
+      mood: ["温柔", "哀伤", "落寞"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 127,
       title: "心墙",
       artist: "林俊杰",
-      url: "/music/127.mp3"
+      url: "/music/127.mp3",
+      genre: ["流行"],
+      mood: ["温柔", "暗恋", "期待"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "暗恋"]
     },
     {
+      id: 128,
       title: "一千年以后",
       artist: "林俊杰",
-      url: "/music/128.mp3"
+      url: "/music/128.mp3",
+      genre: ["流行", "电子"],
+      mood: ["深情", "宿命", "浪漫"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "时间"]
     },
     {
+      id: 129,
       title: "愿与愁",
       artist: "林俊杰",
-      url: "/music/129.mp3"
+      url: "/music/129.mp3",
+      genre: ["流行"],
+      mood: ["磅礴", "细腻", "忧伤"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱", "时间", "宇宙"]
     },
     {
+      id: 130,
       title: "醉赤壁",
       artist: "林俊杰",
-      url: "/music/130.mp3"
+      url: "/music/130.mp3",
+      genre: ["中国风"],
+      mood: ["浪漫", "柔情", "古典"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["历史", "爱情"]
     },
     {
+      id: 131,
       title: "凤凰花开的路口",
       artist: "林志炫",
-      url: "/music/131.mp3"
+      url: "/music/131.mp3",
+      genre: ["抒情流行"],
+      mood: ["伤感", "怀念", "温暖"],
+      energy: "舒缓",
+      weather: ["夏"],
+      theme: ["毕业", "离别", "友情"]
     },
     {
+      id: 132,
       title: "逝去的歌",
       artist: "旅行团乐队",
-      url: "/music/132.mp3"
+      url: "/music/132.mp3",
+      genre: ["流行", "摇滚"],
+      mood: ["缅怀", "失落", "感恩"],
+      energy: "中速",
+      weather: [],
+      theme: ["离别", "回忆"]
     },
     {
+      id: 133,
       title: "起风了",
       artist: "买辣椒也用券",
-      url: "/music/133.mp3"
+      url: "/music/133.mp3",
+      genre: ["流行", "民谣"],
+      mood: ["感慨", "怀念", "温柔"],
+      energy: "中速",
+      weather: ["风"],
+      theme: ["青春", "回忆", "成长"]
     },
     {
+      id: 134,
       title: "给你给我",
       artist: "毛不易",
-      url: "/music/134.mp3"
+      url: "/music/134.mp3",
+      genre: ["流行", "民谣"],
+      mood: ["温暖", "感动", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "亲情", "付出"]
     },
     {
+      id: 135,
       title: "无名的人",
       artist: "毛不易",
-      url: "/music/135.mp3"
+      url: "/music/135.mp3",
+      genre: ["流行", "民谣"],
+      mood: ["深沉", "坚韧", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["平凡", "奋斗", "电影"]
     },
     {
+      id: 136,
       title: "像我这样的人",
       artist: "毛不易",
-      url: "/music/136.mp3"
+      url: "/music/136.mp3",
+      genre: ["流行", "民谣"],
+      mood: ["自省", "迷茫", "温柔"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["自我", "平凡"]
     },
     {
+      id: 137,
       title: "消愁",
       artist: "毛不易",
-      url: "/music/137.mp3"
+      url: "/music/137.mp3",
+      genre: ["民谣"],
+      mood: ["沧桑", "迷茫", "释然"],
+      energy: "中速",
+      weather: [],
+      theme: ["人生", "成长"]
     },
     {
+      id: 138,
       title: "一程山路",
       artist: "毛不易",
-      url: "/music/138.mp3"
+      url: "/music/138.mp3",
+      genre: ["抒情流行"],
+      mood: ["温柔", "禅意", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["旅途", "人生"]
     },
     {
+      id: 139,
       title: "忽然之间",
       artist: "莫文蔚",
-      url: "/music/139.mp3"
+      url: "/music/139.mp3",
+      genre: ["抒情流行"],
+      mood: ["遗憾", "怀念", "脆弱"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "生命"]
     },
     {
+      id: 140,
       title: "盛夏的果实",
       artist: "莫文蔚",
-      url: "/music/140.mp3"
+      url: "/music/140.mp3",
+      genre: ["流行"],
+      mood: ["慵懒", "忧伤", "释然"],
+      energy: "舒缓",
+      weather: ["夏"],
+      theme: ["爱情", "失恋", "成长"]
     },
     {
+      id: 141,
       title: "明天，你好",
       artist: "牛奶咖啡",
-      url: "/music/141.mp3"
+      url: "/music/141.mp3",
+      genre: ["流行"],
+      mood: ["励志", "感伤", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["成长", "告别", "勇气"]
     },
     {
+      id: 142,
       title: "那些花儿",
       artist: "朴树",
-      url: "/music/142.mp3"
+      url: "/music/142.mp3",
+      genre: ["民谣"],
+      mood: ["忧伤", "怀念", "温暖"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["青春", "回忆", "友情"]
     },
     {
+      id: 143,
       title: "平凡之路",
       artist: "朴树",
-      url: "/music/143.mp3"
+      url: "/music/143.mp3",
+      genre: ["新民谣", "流行"],
+      mood: ["温暖", "忧伤", "释然"],
+      energy: "中速",
+      weather: [],
+      theme: ["人生", "平凡", "电影"]
     },
     {
+      id: 144,
       title: "山外小楼夜听雨",
       artist: "任然",
-      url: "/music/144.mp3"
+      url: "/music/144.mp3",
+      genre: ["中国风"],
+      mood: ["思念", "疗愈", "孤寂"],
+      energy: "舒缓",
+      weather: ["雨", "夜"],
+      theme: ["思念", "古风"]
     },
     {
+      id: 145,
       title: "亲爱的你啊",
       artist: "任素汐",
-      url: "/music/145.mp3"
+      url: "/music/145.mp3",
+      genre: ["流行"],
+      mood: ["温柔", "心疼", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["成长", "救赎"]
     },
     {
+      id: 146,
       title: "千秋迭梦",
       artist: "尚辰 镜予歌 陈亦洺",
-      url: "/music/146.mp3"
+      url: "/music/146.mp3",
+      genre: ["古风"],
+      mood: ["豪情", "少年气", "羁绊"],
+      energy: "中速",
+      weather: [],
+      theme: ["古风", "江湖", "同人"]
     },
     {
+      id: 147,
       title: "写给黄淮",
       artist: "邵帅",
-      url: "/music/147.mp3"
+      url: "/music/147.mp3",
+      genre: ["民谣"],
+      mood: ["深情", "遗憾", "怀念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["校园", "青春", "寄托"]
     },
     {
+      id: 148,
       title: "无与伦比的美丽",
       artist: "苏打绿",
-      url: "/music/148.mp3"
+      url: "/music/148.mp3",
+      genre: ["民谣摇滚", "抒情摇滚"],
+      mood: ["温柔", "感动", "陪伴"],
+      energy: "中速",
+      weather: [],
+      theme: ["友情", "陪伴"]
     },
     {
+      id: 149,
       title: "时间的风",
       artist: "唐汉霄",
-      url: "/music/149.MP3"
+      url: "/music/149.MP3",
+      genre: ["流行"],
+      mood: ["思念", "温柔", "坚定"],
+      energy: "中速",
+      weather: ["风"],
+      theme: ["爱情", "异地", "电影"]
     },
     {
+      id: 150,
       title: "凌香里",
       artist: "唐汉霄",
-      url: "/music/150.mp3"
+      url: "/music/150.mp3",
+      genre: ["流行", "童谣"],
+      mood: ["怀旧", "怅然", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["乡愁", "童年", "回忆"]
     },
     {
+      id: 151,
       title: "无名之辈",
       artist: "唐汉霄",
-      url: "/music/151.mp3"
+      url: "/music/151.mp3",
+      genre: ["流行摇滚", "说唱"],
+      mood: ["热血", "励志", "坚持"],
+      energy: "激昂",
+      weather: [],
+      theme: ["梦想", "平凡", "电影"]
     },
     {
+      id: 152,
       title: "夜空中最亮的星",
       artist: "逃跑计划",
-      url: "/music/152.mp3"
+      url: "/music/152.mp3",
+      genre: ["流行摇滚"],
+      mood: ["治愈", "希望", "坚定"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["梦想", "星空", "坚持"]
     },
     {
+      id: 153,
       title: "巴赫旧约",
       artist: "汪苏泷",
-      url: "/music/153.mp3"
+      url: "/music/153.mp3",
+      genre: ["古典", "R&B"],
+      mood: ["无奈", "青春", "神秘"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "校园"]
     },
     {
+      id: 154,
       title: "耿",
       artist: "汪苏泷",
-      url: "/music/154.mp3"
+      url: "/music/154.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["温暖", "悲伤", "怀念"],
+      energy: "舒缓",
+      weather: ["夏"],
+      theme: ["青春", "毕业", "电影"]
     },
     {
+      id: 155,
       title: "忽而今夏",
       artist: "汪苏泷",
-      url: "/music/155.mp3"
+      url: "/music/155.mp3",
+      genre: ["流行"],
+      mood: ["细腻", "无奈", "牵挂"],
+      energy: "中速",
+      weather: ["夏"],
+      theme: ["爱情", "青春", "电视剧"]
     },
     {
+      id: 156,
       title: "年轮",
       artist: "汪苏泷",
-      url: "/music/156.mp3"
+      url: "/music/156.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["凄美", "哀伤", "遗憾"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "时光", "电视剧"]
     },
     {
+      id: 157,
       title: "晴",
       artist: "汪苏泷",
-      url: "/music/157.mp3"
+      url: "/music/157.mp3",
+      genre: ["流行"],
+      mood: ["云淡风轻", "思念", "纠结"],
+      energy: "舒缓",
+      weather: ["晴"],
+      theme: ["爱情", "释然"]
     },
     {
+      id: 158,
       title: "三国杀",
       artist: "汪苏泷",
-      url: "/music/158.mp3"
+      url: "/music/158.mp3",
+      genre: ["中国风", "流行摇滚"],
+      mood: ["豪迈", "悲壮", "武侠"],
+      energy: "中速",
+      weather: [],
+      theme: ["历史", "游戏", "爱情"]
     },
     {
+      id: 159,
       title: "我想念",
       artist: "汪苏泷",
-      url: "/music/159.mp3"
+      url: "/music/159.mp3",
+      genre: ["流行"],
+      mood: ["思念", "伤情", "浓烈"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "思念", "电视剧"]
     },
     {
+      id: 160,
       title: "像晴天像雨天",
       artist: "汪苏泷",
-      url: "/music/160.mp3"
+      url: "/music/160.mp3",
+      genre: ["流行"],
+      mood: ["甜蜜", "心动", "浪漫"],
+      energy: "轻快",
+      weather: ["晴", "雨"],
+      theme: ["爱情", "告白"]
     },
     {
+      id: 161,
       title: "小星星",
       artist: "汪苏泷",
-      url: "/music/161.mp3"
+      url: "/music/161.mp3",
+      genre: ["流行"],
+      mood: ["暗恋", "甜蜜", "执着"],
+      energy: "轻快",
+      weather: ["夜"],
+      theme: ["爱情", "初恋"]
     },
     {
+      id: 162,
       title: "最美的相约",
       artist: "王蓓 王上",
-      url: "/music/162.mp3"
+      url: "/music/162.mp3",
+      genre: ["流行"],
+      mood: ["温暖", "激昂", "青春"],
+      energy: "轻快",
+      weather: [],
+      theme: ["青春", "家国"]
     },
     {
+      id: 163,
       title: "匆匆那年",
       artist: "王菲",
-      url: "/music/163.mp3"
+      url: "/music/163.mp3",
+      genre: ["流行"],
+      mood: ["遗憾", "怀念", "空灵"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "爱情", "电影"]
     },
     {
+      id: 164,
       title: "如愿",
       artist: "王菲",
-      url: "/music/164.mp3"
+      url: "/music/164.mp3",
+      genre: ["流行"],
+      mood: ["温暖", "感动", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["亲情", "家国", "传承"]
     },
     {
+      id: 165,
       title: "世界赠予我的",
       artist: "王菲",
-      url: "/music/165.mp3"
+      url: "/music/165.mp3",
+      genre: ["流行"],
+      mood: ["温暖", "宁静", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["人生", "感恩"]
     },
     {
+      id: 166,
       title: "爱错",
       artist: "王力宏 单依纯",
-      url: "/music/166.mp3"
+      url: "/music/166.mp3",
+      genre: ["流行摇滚", "R&B"],
+      mood: ["悲伤", "深情", "遗憾"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "错过"]
     },
     {
+      id: 167,
       title: "第一天",
       artist: "五月天",
-      url: "/music/167.mp3"
+      url: "/music/167.mp3",
+      genre: ["摇滚", "快歌"],
+      mood: ["活力", "欢快", "甜蜜"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "友情", "爱情"]
     },
     {
+      id: 168,
       title: "倔强",
       artist: "五月天",
-      url: "/music/168.mp3"
+      url: "/music/168.mp3",
+      genre: ["流行摇滚", "英式摇滚"],
+      mood: ["倔强", "励志", "不妥协"],
+      energy: "激昂",
+      weather: [],
+      theme: ["梦想", "坚持"]
     },
     {
+      id: 169,
       title: "如烟",
       artist: "五月天",
-      url: "/music/169.mp3"
+      url: "/music/169.mp3",
+      genre: ["流行摇滚"],
+      mood: ["怀念", "思考", "浪漫"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "时间", "人生"]
     },
     {
+      id: 170,
       title: "突然好想你",
       artist: "五月天",
-      url: "/music/170.mp3"
+      url: "/music/170.mp3",
+      genre: ["抒情摇滚"],
+      mood: ["思念", "酸涩", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 171,
       title: "温柔",
       artist: "五月天",
-      url: "/music/171.mp3"
+      url: "/music/171.mp3",
+      genre: ["流行摇滚", "抒情摇滚"],
+      mood: ["深情", "感伤", "祝福"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "放手"]
     },
     {
+      id: 172,
       title: "笑忘歌",
       artist: "五月天",
-      url: "/music/172.mp3"
+      url: "/music/172.mp3",
+      genre: ["流行摇滚"],
+      mood: ["治愈", "怀念", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "友情", "纯真"]
     },
     {
+      id: 173,
       title: "知足",
       artist: "五月天",
-      url: "/music/173.mp3"
+      url: "/music/173.mp3",
+      genre: ["流行", "钢琴情歌"],
+      mood: ["眷恋", "释然", "伤感"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "放手", "珍惜"]
     },
     {
+      id: 174,
       title: "无羁",
       artist: "肖战 王一博",
-      url: "/music/174.mp3"
+      url: "/music/174.mp3",
+      genre: ["古风", "国风"],
+      mood: ["侠义", "羁绊", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "知己", "电视剧"]
     },
     {
+      id: 175,
       title: "青柠",
       artist: "徐秉龙 桃十五",
-      url: "/music/175.mp3"
+      url: "/music/175.mp3",
+      genre: ["流行", "民谣"],
+      mood: ["清新", "甜蜜", "羞涩"],
+      energy: "轻快",
+      weather: ["夏"],
+      theme: ["爱情", "初恋"]
     },
     {
+      id: 176,
       title: "身骑白马",
       artist: "徐佳莹",
-      url: "/music/176.mp3"
+      url: "/music/176.mp3",
+      genre: ["戏腔流行", "流行"],
+      mood: ["倔强", "深情", "悲壮"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "坚守"]
     },
     {
+      id: 177,
       title: "后会无期",
       artist: "徐良 汪苏泷",
-      url: "/music/177.mp3"
+      url: "/music/177.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["温柔", "遗憾", "青春"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["青春", "离别", "爱情"]
     },
     {
+      id: 178,
       title: "推开世界的门",
       artist: "杨乃文",
-      url: "/music/178.mp3"
+      url: "/music/178.mp3",
+      genre: ["流行", "民谣摇滚"],
+      mood: ["孤独", "洒脱", "辽阔"],
+      energy: "中速",
+      weather: [],
+      theme: ["成长", "自我", "和解"]
     },
     {
+      id: 179,
       title: "不老梦",
       artist: "银临",
-      url: "/music/179.mp3"
+      url: "/music/179.mp3",
+      genre: ["古风"],
+      mood: ["凄美", "哀恸", "执念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["古风", "爱情"]
     },
     {
+      id: 180,
       title: "棠梨煎雪",
       artist: "银临",
-      url: "/music/180.mp3"
+      url: "/music/180.mp3",
+      genre: ["古风"],
+      mood: ["悠然", "清新", "甜而不腻"],
+      energy: "轻快",
+      weather: ["雪"],
+      theme: ["田园", "友情", "诗意"]
     },
     {
+      id: 181,
       title: "当年情",
       artist: "张国荣",
-      url: "/music/181.mp3"
+      url: "/music/181.mp3",
+      genre: ["中国风"],
+      mood: ["豪情", "柔情", "霸气"],
+      energy: "激昂",
+      weather: [],
+      theme: ["武侠", "爱情"]
     },
     {
+      id: 182,
       title: "天下",
       artist: "张杰",
-      url: "/music/182.mp3"
+      url: "/music/182.mp3",
+      genre: ["流行"],
+      mood: ["励志", "温暖", "力量"],
+      energy: "中速",
+      weather: [],
+      theme: ["亲情", "友情", "支持"]
     },
     {
+      id: 183,
       title: "有形的翅膀",
       artist: "张韶涵",
-      url: "/music/183.mp3"
+      url: "/music/183.mp3",
+      genre: ["主旋律", "流行"],
+      mood: ["大气", "温暖", "喜悦"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["家国", "城市"]
     },
     {
+      id: 184,
       title: "灯火里的中国",
       artist: "张也 周深",
-      url: "/music/184.mp3"
+      url: "/music/184.mp3",
+      genre: ["民谣"],
+      mood: ["舒缓", "怀念", "温情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["城市", "乡愁", "爱情"]
     },
     {
+      id: 185,
       title: "成都",
       artist: "赵雷",
-      url: "/music/185.mp3"
+      url: "/music/185.mp3",
+      genre: ["民谣"],
+      mood: ["哀伤", "怀旧", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "旧时光"]
     },
     {
+      id: 186,
       title: "程艾影",
       artist: "赵雷",
-      url: "/music/186.mp3"
+      url: "/music/186.mp3",
+      genre: ["民谣"],
+      mood: ["温柔", "忧郁", "质朴"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "异乡"]
     },
     {
+      id: 187,
       title: "南方姑娘",
       artist: "赵雷",
-      url: "/music/187.mp3"
+      url: "/music/187.mp3",
+      genre: ["民谣"],
+      mood: ["温暖", "思念", "感人"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "母亲"]
     },
     {
+      id: 188,
       title: "我记得",
       artist: "赵雷",
-      url: "/music/188.mp3"
+      url: "/music/188.mp3",
+      genre: ["民谣"],
+      mood: ["热血", "青春", "洒脱"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "旅途", "友情"]
     },
     {
+      id: 189,
       title: "我们的时光",
       artist: "赵雷",
-      url: "/music/189.mp3"
+      url: "/music/189.mp3",
+      genre: ["流行", "苦情"],
+      mood: ["忧郁", "苍凉", "撕心裂肺"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "失恋"]
     },
     {
+      id: 190,
       title: "黄昏",
       artist: "周传雄",
-      url: "/music/190.mp3"
+      url: "/music/190.mp3",
+      genre: ["中国风", "流行"],
+      mood: ["寂寞", "孤独", "落寞"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 191,
       title: "寂寞沙洲冷",
       artist: "周传雄",
-      url: "/music/191.mp3"
+      url: "/music/191.mp3",
+      genre: ["中国风", "摇滚"],
+      mood: ["落寞", "执着", "悠远"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "承诺"]
     },
     {
+      id: 192,
       title: "青花",
       artist: "周传雄",
-      url: "/music/192.mp3"
+      url: "/music/192.mp3",
+      genre: ["武侠", "流行"],
+      mood: ["大气", "悲怆", "哲理"],
+      energy: "激昂",
+      weather: [],
+      theme: ["武侠", "佛理", "电视剧"]
     },
     {
+      id: 193,
       title: "难念的经",
       artist: "周华健",
-      url: "/music/193.mp3"
+      url: "/music/193.mp3",
+      genre: ["流行", "空灵"],
+      mood: ["空灵", "温柔", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "守护", "动画电影"]
     },
     {
+      id: 194,
       title: "大鱼",
       artist: "周深",
-      url: "/music/194.mp3"
+      url: "/music/194.mp3",
+      genre: ["流行民谣"],
+      mood: ["孤独", "温柔", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["孤独", "陪伴", "自我"]
     },
     {
+      id: 195,
       title: "化身孤岛的鲸",
       artist: "周深",
-      url: "/music/195.mp3"
+      url: "/music/195.mp3",
+      genre: ["流行", "大气"],
+      mood: ["震撼", "悲壮", "信念"],
+      energy: "激昂",
+      weather: [],
+      theme: ["科幻", "人类", "命运", "电影"]
     },
     {
+      id: 196,
       title: "人是_",
       artist: "周深",
-      url: "/music/196.mp3"
+      url: "/music/196.mp3",
+      genre: ["流行", "英文经典"],
+      mood: ["励志", "温暖", "感恩"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "感恩"]
     },
     {
+      id: 197,
       title: "翅膀+I believe I can fly",
       artist: "林俊杰 张艺兴",
-      url: "/music/197.mp3"
+      url: "/music/197.mp3",
+      genre: ["古典", "摇滚", "迷幻"],
+      mood: ["沉重", "哲理", "华丽"],
+      energy: "中速",
+      weather: [],
+      theme: ["命运", "坚持", "神话"]
     },
     {
+      id: 198,
       title: "未了",
       artist: "苏打绿",
-      url: "/music/198.mp3"
+      url: "/music/198.mp3",
+      genre: ["流行"],
+      mood: ["阳光", "大气", "轻快"],
+      energy: "轻快",
+      weather: ["晴"],
+      theme: ["梦想", "希望"]
     },
     {
+      id: 199,
       title: "梦想天空分外蓝",
       artist: "陈奕迅",
-      url: "/music/199.mp3"
+      url: "/music/199.mp3",
+      genre: ["另类摇滚", "电音"],
+      mood: ["恢宏", "悲怆", "内省"],
+      energy: "激昂",
+      weather: [],
+      theme: ["电竞", "重生", "斗志"]
     },
     {
+      id: 200,
       title: "Phoenix",
       artist: "英雄联盟",
-      url: "/music/200.mp3"
+      url: "/music/200.mp3",
+      genre: ["纯音乐", "国风"],
+      mood: ["空灵", "宁静", "温柔"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["传统", "神话", "山水"]
     },
     {
+      id: 201,
       title: "青城山下白素贞",
       artist: "纯音乐",
-      url: "/music/201.mp3"
+      url: "/music/201.mp3",
+      genre: ["纯音乐", "和风"],
+      mood: ["明媚", "生机", "悠扬"],
+      energy: "轻快",
+      weather: ["春"],
+      theme: ["春天", "希望"]
     },
     {
+      id: 202,
       title: "雪花",
       artist: "北京爱乐合唱团",
-      url: "/music/202.mp3"
+      url: "/music/202.mp3",
+      genre: ["流行", "粤语"],
+      mood: ["深情", "无奈", "凄美"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "放手"]
     },
     {
+      id: 203,
       title: "春よ、来い",
       artist: "纯音乐",
-      url: "/music/203.mp3"
+      url: "/music/203.mp3",
+      genre: ["流行"],
+      mood: ["孤独", "压抑", "寂寥"],
+      energy: "舒缓",
+      weather: ["夜"],
+      theme: ["孤独", "都市"]
     },
     {
+      id: 204,
       title: "富士山下",
       artist: "陈奕迅",
-      url: "/music/204.mp3"
+      url: "/music/204.mp3",
+      genre: ["流行"],
+      mood: ["温柔", "治愈", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "时光", "电影"]
     },
     {
+      id: 205,
       title: "孤独患者",
       artist: "陈奕迅",
-      url: "/music/205.mp3"
+      url: "/music/205.mp3",
+      genre: ["流行摇滚"],
+      mood: ["恬淡", "忧伤", "治愈"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "等待"]
     },
     {
+      id: 206,
       title: "因为爱情",
       artist: "陈奕迅 王菲",
-      url: "/music/206.mp3"
+      url: "/music/206.mp3",
+      genre: ["抒情流行"],
+      mood: ["凄美", "悲伤", "遗憾"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "成长", "错过"]
     },
     {
+      id: 207,
       title: "下一个天亮",
       artist: "郭静",
-      url: "/music/207.mp3"
+      url: "/music/207.mp3",
+      genre: ["古风", "国风"],
+      mood: ["古典", "悲怆", "诗意"],
+      energy: "中速",
+      weather: [],
+      theme: ["诗词", "传统"]
     },
     {
+      id: 208,
       title: "后来",
       artist: "刘若英",
-      url: "/music/208.mp3"
+      url: "/music/208.mp3",
+      genre: ["流行"],
+      mood: ["缠绵", "思念", "伤感"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "思念"]
     },
     {
+      id: 209,
       title: "琵琶行",
       artist: "奇然 沈谧仁",
-      url: "/music/209.mp3"
+      url: "/music/209.mp3",
+      genre: ["流行"],
+      mood: ["温暖", "惬意", "乐观"],
+      energy: "轻快",
+      weather: [],
+      theme: ["生活", "治愈", "电影"]
     },
     {
+      id: 210,
       title: "红豆",
       artist: "王菲",
-      url: "/music/210.mp3"
+      url: "/music/210.mp3",
+      genre: ["流行", "粤语"],
+      mood: ["成熟", "释然", "哲思"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "人生", "等待"]
     },
     {
+      id: 211,
       title: "小美满",
       artist: "周深",
-      url: "/music/211.mp3"
+      url: "/music/211.mp3",
+      genre: ["抒情流行"],
+      mood: ["遗憾", "释然", "怅惘"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "时间", "错过"]
     },
     {
+      id: 212,
       title: "葡萄成熟时",
       artist: "陈奕迅",
-      url: "/music/212.mp3"
+      url: "/music/212.mp3",
+      genre: ["流行", "抒情"],
+      mood: ["温暖", "安静", "甜蜜"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "思念"]
     },
     {
+      id: 213,
       title: "十年",
       artist: "陈奕迅",
-      url: "/music/213.mp3"
+      url: "/music/213.mp3",
+      genre: ["流行", "英伦", "放克"],
+      mood: ["轻快", "俏皮", "甜蜜"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 214,
       title: "好安静",
       artist: "汪苏泷",
-      url: "/music/214.mp3"
+      url: "/music/214.mp3",
+      genre: ["流行"],
+      mood: ["淡然", "遗憾", "洒脱"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "分手"]
     },
     {
+      id: 215,
       title: "万有引力",
       artist: "汪苏泷",
-      url: "/music/215.mp3"
+      url: "/music/215.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["隐忍", "矛盾", "包容"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "包容"]
     },
     {
+      id: 216,
       title: "不煽情",
       artist: "许嵩",
-      url: "/music/216.mp3"
+      url: "/music/216.mp3",
+      genre: ["蓝调", "流行"],
+      mood: ["浪漫", "幽默", "闲情"],
+      energy: "中速",
+      weather: [],
+      theme: ["生活", "电影", "爱情"]
     },
     {
+      id: 217,
       title: "装糊涂",
       artist: "许嵩",
-      url: "/music/217.mp3"
+      url: "/music/217.mp3",
+      genre: ["流行"],
+      mood: ["怀念", "伤感", "惆怅"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["爱情", "冬天"]
     },
     {
+      id: 218,
       title: "羡慕",
       artist: "许嵩",
-      url: "/music/218.mp3"
+      url: "/music/218.mp3",
+      genre: ["流行"],
+      mood: ["励志", "温暖", "感恩"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "成长"]
     },
     {
+      id: 219,
       title: "又小雪",
       artist: "许嵩",
-      url: "/music/219.mp3"
+      url: "/music/219.mp3",
+      genre: ["电子舞曲"],
+      mood: ["律动", "轻快", "释然"],
+      energy: "激昂",
+      weather: [],
+      theme: ["感情", "放手"]
     },
     {
+      id: 220,
       title: "2021听风捕梦",
       artist: "群星",
-      url: "/music/220.mp3"
+      url: "/music/220.mp3",
+      genre: ["流行", "R&B"],
+      mood: ["温柔", "抚慰", "浪漫"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "希望"]
     },
     {
+      id: 221,
       title: "All Falls Down",
       artist: "Alan Walker",
-      url: "/music/221.MP3"
+      url: "/music/221.MP3",
+      genre: ["流行", "电子", "另类摇滚"],
+      mood: ["燃", "决心", "力量"],
+      energy: "激昂",
+      weather: [],
+      theme: ["电竞", "奋斗"]
     },
     {
+      id: 222,
       title: "Angel",
       artist: "陶喆",
-      url: "/music/222.MP3"
+      url: "/music/222.MP3",
+      genre: ["合成器流行"],
+      mood: ["欢快", "伤感", "纠结"],
+      energy: "轻快",
+      weather: ["夏"],
+      theme: ["爱情", "夏日"]
     },
     {
+      id: 223,
       title: "Burn It All Down",
       artist: "英雄联盟",
-      url: "/music/223.MP3"
+      url: "/music/223.MP3",
+      genre: ["复古迪斯科", "电子"],
+      mood: ["热血", "青春", "不妥协"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "希望", "时光"]
     },
     {
+      id: 224,
       title: "Cruel Summer",
       artist: "Taylor Swift",
-      url: "/music/224.MP3"
+      url: "/music/224.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["壮阔", "希望", "昂扬"],
+      energy: "激昂",
+      weather: ["晴"],
+      theme: ["爱情", "天空", "动画电影"]
     },
     {
+      id: 225,
       title: "Forever Young",
       artist: "朴树",
-      url: "/music/225.MP3"
+      url: "/music/225.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["燃", "热血", "史诗"],
+      energy: "激昂",
+      weather: [],
+      theme: ["电竞", "传奇", "坚持"]
     },
     {
+      id: 226,
       title: "グランドエスケープ",
       artist: "Radwimps 三浦透子",
-      url: "/music/226.MP3"
+      url: "/music/226.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["哀伤", "缅怀", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["思念", "治愈"]
     },
     {
+      id: 227,
       title: "Legends Never Die",
       artist: "英雄联盟",
-      url: "/music/227.MP3"
+      url: "/music/227.MP3",
+      genre: ["乡村流行"],
+      mood: ["浪漫", "甜蜜", "青春"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "童话"]
     },
     {
+      id: 228,
       title: "Lemon",
       artist: "米津玄师",
-      url: "/music/228.MP3"
+      url: "/music/228.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "浪漫", "永恒"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 229,
       title: "Love Story",
       artist: "Taylor Swift",
-      url: "/music/229.MP3"
+      url: "/music/229.MP3",
+      genre: ["流行", "R&B"],
+      mood: ["伤感", "怀念", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 230,
       title: "Lover",
       artist: "Taylor Swift",
-      url: "/music/230.MP3"
+      url: "/music/230.MP3",
+      genre: ["流行", "轻音乐"],
+      mood: ["清澈", "励志", "温暖"],
+      energy: "轻快",
+      weather: [],
+      theme: ["梦想", "成长"]
     },
     {
+      id: 231,
       title: "Melody",
       artist: "陶喆",
-      url: "/music/231.MP3"
+      url: "/music/231.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["伤感", "深情", "怀念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 232,
       title: "Proud Of You",
       artist: "冯曦妤",
-      url: "/music/232.MP3"
+      url: "/music/232.MP3",
+      genre: ["流行", "轻音乐"],
+      mood: ["励志", "温暖", "治愈"],
+      energy: "轻快",
+      weather: [],
+      theme: ["梦想", "亲情"]
     },
     {
+      id: 233,
       title: "リセット",
       artist: "向井太一",
-      url: "/music/233.MP3"
+      url: "/music/233.MP3",
+      genre: ["J-Pop", "R&B"],
+      mood: ["清爽", "治愈", "激励"],
+      energy: "中速",
+      weather: ["风"],
+      theme: ["青春", "运动"]
     },
     {
+      id: 234,
       title: "Runaway",
       artist: "陶喆",
-      url: "/music/234.MP3"
+      url: "/music/234.MP3",
+      genre: ["摇滚", "民谣"],
+      mood: ["冲破束缚", "自由", "冲动"],
+      energy: "激昂",
+      weather: [],
+      theme: ["自由", "逃离", "自我"]
     },
     {
+      id: 235,
       title: "See You Again",
       artist: "Wiz Khalifa&Charlie Puth",
-      url: "/music/235.MP3"
+      url: "/music/235.MP3",
+      genre: ["抒情", "说唱"],
+      mood: ["哀伤", "怀念", "祝福"],
+      energy: "中速",
+      weather: [],
+      theme: ["友情", "告别", "电影"]
     },
     {
+      id: 236,
       title: "Something Just Like This",
       artist: "The Chainsmokers&Coldplay",
-      url: "/music/236.MP3"
+      url: "/music/236.MP3",
+      genre: ["电子", "未来贝斯", "流行摇滚"],
+      mood: ["温暖", "治愈", "希望"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "平凡"]
     },
     {
+      id: 237,
       title: "Sparks Fly",
       artist: "Taylor Swift",
-      url: "/music/237.MP3"
+      url: "/music/237.MP3",
+      genre: ["乡村流行", "摇滚"],
+      mood: ["欢快", "热情", "心动"],
+      energy: "轻快",
+      weather: ["夜"],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 238,
       title: "Susan说",
       artist: "陶喆",
-      url: "/music/238.MP3"
+      url: "/music/238.MP3",
+      genre: ["R&B", "中国风"],
+      mood: ["抒情", "婉转", "浪漫"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "京剧", "古典"]
     },
     {
+      id: 239,
       title: "Take Me To Your Heart",
       artist: "Michael Learns to Rock",
-      url: "/music/239.MP3"
+      url: "/music/239.MP3",
+      genre: ["抒情摇滚", "流行"],
+      mood: ["温暖", "深情", "浪漫"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "经典"]
     },
     {
+      id: 240,
       title: "Try Everything",
       artist: "Shakira",
-      url: "/music/240.MP3"
+      url: "/music/240.MP3",
+      genre: ["拉丁流行", "舞曲"],
+      mood: ["动感", "励志", "活力"],
+      energy: "激昂",
+      weather: [],
+      theme: ["梦想", "尝试", "动画电影"]
     },
     {
+      id: 241,
       title: "Viva La Vida",
       artist: "Coldplay",
-      url: "/music/241.MP3"
+      url: "/music/241.MP3",
+      genre: ["另类摇滚", "流行"],
+      mood: ["恢弘", "悲怆", "激昂"],
+      energy: "激昂",
+      weather: [],
+      theme: ["历史", "权力", "生命"]
     },
     {
+      id: 242,
       title: "Waka Waka",
       artist: "Shakira",
-      url: "/music/242.MP3"
+      url: "/music/242.MP3",
+      genre: ["世界音乐", "拉丁"],
+      mood: ["欢快", "激情", "非洲风情"],
+      energy: "激昂",
+      weather: [],
+      theme: ["体育", "团结"]
     },
     {
+      id: 243,
       title: "Wavin' Flag",
       artist: "K'naan",
-      url: "/music/243.MP3"
+      url: "/music/243.MP3",
+      genre: ["说唱", "世界音乐"],
+      mood: ["希望", "自由", "燃"],
+      energy: "中速",
+      weather: [],
+      theme: ["和平", "自由", "体育"]
     },
     {
+      id: 244,
       title: "We Are One (Ole Ola)",
       artist: "Pitbull Jennifer Lopez Claudia Leitte",
-      url: "/music/244.MP3"
+      url: "/music/244.MP3",
+      genre: ["拉丁流行"],
+      mood: ["欢快", "热血", "团结"],
+      energy: "激昂",
+      weather: [],
+      theme: ["体育", "团结"]
     },
     {
+      id: 245,
       title: "We'll Meet Again",
       artist: "The Fat Rat",
-      url: "/music/245.MP3"
+      url: "/music/245.MP3",
+      genre: ["电子", "流行"],
+      mood: ["压抑", "昂扬", "希望"],
+      energy: "激昂",
+      weather: [],
+      theme: ["重逢", "告别"]
     },
     {
+      id: 246,
       title: "Young And Beautiful",
       artist: "Lana Del Rey",
-      url: "/music/246.MP3"
+      url: "/music/246.MP3",
+      genre: ["复古流行", "爵士", "巴洛克"],
+      mood: ["忧郁", "华丽", "宿命"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "时光", "电影"]
     },
     {
+      id: 247,
       title: "Young",
       artist: "TFBoys",
-      url: "/music/247.MP3"
+      url: "/music/247.MP3",
+      genre: ["流行"],
+      mood: ["迷茫", "坚定", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "成长", "梦想"]
     },
     {
+      id: 248,
       title: "阿拉斯加海湾",
       artist: "蓝心羽",
-      url: "/music/248.MP3"
+      url: "/music/248.MP3",
+      genre: ["流行"],
+      mood: ["遗憾", "温柔", "伤感"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "遗憾"]
     },
     {
+      id: 249,
       title: "爱，很简单",
       artist: "陶喆",
-      url: "/music/249.MP3"
+      url: "/music/249.MP3",
+      genre: ["流行", "R&B"],
+      mood: ["深情", "纯粹", "浪漫"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "告白"]
     },
     {
+      id: 250,
       title: "爱我还是他",
       artist: "陶喆",
-      url: "/music/250.MP3"
+      url: "/music/250.MP3",
+      genre: ["流行", "R&B"],
+      mood: ["挣扎", "煎熬", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "抉择"]
     },
     {
+      id: 251,
       title: "安河桥",
       artist: "宋东野",
-      url: "/music/251.MP3"
+      url: "/music/251.MP3",
+      genre: ["民谣"],
+      mood: ["怀旧", "感伤", "温暖"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["童年", "回忆", "城市"]
     },
     {
+      id: 252,
       title: "暗恋",
       artist: "陶喆",
-      url: "/music/252.MP3"
+      url: "/music/252.MP3",
+      genre: ["英伦摇滚", "现代摇滚"],
+      mood: ["渴望", "游移", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "暗恋"]
     },
     {
+      id: 253,
       title: "半晴天",
       artist: "陶喆",
-      url: "/music/253.MP3"
+      url: "/music/253.MP3",
+      genre: ["流行", "R&B"],
+      mood: ["温馨", "励志", "患得患失"],
+      energy: "中速",
+      weather: ["晴"],
+      theme: ["爱情", "毕业", "希望"]
     },
     {
+      id: 254,
       title: "不该",
       artist: "周杰伦 张惠妹",
-      url: "/music/254.MP3"
+      url: "/music/254.MP3",
+      genre: ["流行"],
+      mood: ["唯美", "哀伤", "遗憾"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["爱情", "回忆", "对唱"]
     },
     {
+      id: 255,
       title: "不将就",
       artist: "李荣浩",
-      url: "/music/255.MP3"
+      url: "/music/255.MP3",
+      genre: ["流行"],
+      mood: ["深情", "无奈", "坚定"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "执着", "电影"]
     },
     {
+      id: 256,
       title: "不能说的秘密",
       artist: "周杰伦",
-      url: "/music/256.MP3"
+      url: "/music/256.MP3",
+      genre: ["英式摇滚"],
+      mood: ["悬疑", "浪漫", "孤独"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "校园", "电影"]
     },
     {
+      id: 257,
       title: "不染",
       artist: "毛不易",
-      url: "/music/257.MP3"
+      url: "/music/257.MP3",
+      genre: ["古风", "流行"],
+      mood: ["宿命", "清冷", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["仙侠", "爱情"]
     },
     {
+      id: 258,
       title: "不完美小孩",
       artist: "TFBoys",
-      url: "/music/258.MP3"
+      url: "/music/258.MP3",
+      genre: ["流行"],
+      mood: ["温情", "感恩", "柔软"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "成长", "感恩"]
     },
     {
+      id: 259,
       title: "猜不透",
       artist: "丁当",
-      url: "/music/259.MP3"
+      url: "/music/259.MP3",
+      genre: ["流行", "R&B", "抒情摇滚"],
+      mood: ["心痛", "困惑", "坚强"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "猜疑"]
     },
     {
+      id: 260,
       title: "才二十三",
       artist: "方大同",
-      url: "/music/260.MP3"
+      url: "/music/260.MP3",
+      genre: ["新灵魂乐", "流行"],
+      mood: ["哲思", "怀念", "淡然"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["时间", "成长", "人生"]
     },
     {
+      id: 261,
       title: "沧海一声笑(Live)",
       artist: "GAI周延",
-      url: "/music/261.MP3"
+      url: "/music/261.MP3",
+      genre: ["说唱", "国风"],
+      mood: ["豪迈", "狂傲", "热血"],
+      energy: "激昂",
+      weather: [],
+      theme: ["江湖", "武侠", "经典"]
     },
     {
+      id: 262,
       title: "侧脸",
       artist: "雨果",
-      url: "/music/262.MP3"
+      url: "/music/262.MP3",
+      genre: ["流行"],
+      mood: ["心酸", "伤感", "洒脱"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "分手", "成长"]
     },
     {
+      id: 263,
       title: "曾经的你",
       artist: "许巍",
-      url: "/music/263.MP3"
+      url: "/music/263.MP3",
+      genre: ["摇滚"],
+      mood: ["怀念", "释然", "励志"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "梦想"]
     },
     {
+      id: 264,
       title: "茶啊少年",
       artist: "唐汉霄",
-      url: "/music/264.MP3"
+      url: "/music/264.MP3",
+      genre: ["流行"],
+      mood: ["热血", "青春", "活泼"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "影视OST"]
     },
     {
+      id: 265,
       title: "赤伶",
       artist: "HITA",
-      url: "/music/265.MP3"
+      url: "/music/265.MP3",
+      genre: ["古风"],
+      mood: ["悲壮", "凄美", "坚定"],
+      energy: "中速",
+      weather: [],
+      theme: ["家国", "历史"]
     },
     {
+      id: 266,
       title: "春风十里",
       artist: "鹿先森乐队",
-      url: "/music/266.MP3"
+      url: "/music/266.MP3",
+      genre: ["民谣"],
+      mood: ["深情", "温暖", "思念"],
+      energy: "中速",
+      weather: ["春", "风"],
+      theme: ["爱情"]
     },
     {
+      id: 267,
       title: "春庭雪",
       artist: "橙翼",
-      url: "/music/267.MP3"
+      url: "/music/267.MP3",
+      genre: ["古风"],
+      mood: ["哀愁", "遗憾", "深情"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 268,
       title: "打上花火",
       artist: "米津玄师&DAOKO",
-      url: "/music/268.MP3"
+      url: "/music/268.MP3",
+      genre: ["流行", "电子"],
+      mood: ["青春", "浪漫", "甜蜜"],
+      energy: "中速",
+      weather: ["夏", "夜"],
+      theme: ["青春", "爱情", "影视OST"]
     },
     {
+      id: 269,
       title: "大约在冬季",
       artist: "齐秦",
-      url: "/music/269.MP3"
+      url: "/music/269.MP3",
+      genre: ["流行"],
+      mood: ["深情", "思念", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 270,
       title: "大丈夫",
       artist: "Radwimps",
-      url: "/music/270.MP3"
+      url: "/music/270.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "治愈", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 271,
       title: "单车",
       artist: "陈奕迅",
-      url: "/music/271.MP3"
+      url: "/music/271.MP3",
+      genre: ["流行"],
+      mood: ["深情", "怀念", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["亲情"]
     },
     {
+      id: 272,
       title: "当",
       artist: "动力火车",
-      url: "/music/272.MP3"
+      url: "/music/272.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["豪迈", "深情", "热血"],
+      energy: "激昂",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 273,
       title: "稻香",
       artist: "周杰伦",
-      url: "/music/273.MP3"
+      url: "/music/273.MP3",
+      genre: ["流行", "嘻哈", "民谣"],
+      mood: ["治愈", "励志", "温暖"],
+      energy: "轻快",
+      weather: ["夏"],
+      theme: ["童年", "故乡", "梦想"]
     },
     {
+      id: 274,
       title: "等你下课",
       artist: "周杰伦",
-      url: "/music/274.MP3"
+      url: "/music/274.MP3",
+      genre: ["流行"],
+      mood: ["甜蜜", "青涩", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "爱情"]
     },
     {
+      id: 275,
       title: "东风破",
       artist: "周杰伦",
-      url: "/music/275.MP3"
+      url: "/music/275.MP3",
+      genre: ["中国风", "R&B"],
+      mood: ["哀愁", "深情", "凄美"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 276,
       title: "动物世界",
       artist: "薛之谦",
-      url: "/music/276.MP3"
+      url: "/music/276.MP3",
+      genre: ["流行"],
+      mood: ["压抑", "冷峻", "讽刺"],
+      energy: "中速",
+      weather: [],
+      theme: ["社会", "爱情"]
     },
     {
+      id: 277,
       title: "二十二",
       artist: "陶喆",
-      url: "/music/277.MP3"
+      url: "/music/277.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["青春", "迷惘", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "成长"]
     },
     {
+      id: 278,
       title: "发如雪",
       artist: "周杰伦",
-      url: "/music/278.MP3"
+      url: "/music/278.MP3",
+      genre: ["中国风"],
+      mood: ["凄美", "深情", "苍凉"],
+      energy: "中速",
+      weather: ["雪"],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 279,
       title: "方的言(Live)",
       artist: "薛之谦",
-      url: "/music/279.MP3"
+      url: "/music/279.MP3",
+      genre: ["流行"],
+      mood: ["温情", "思念", "励志"],
+      energy: "中速",
+      weather: [],
+      theme: ["故乡", "梦想"]
     },
     {
+      id: 280,
       title: "飞机场的10:30",
       artist: "陶喆",
-      url: "/music/280.MP3"
+      url: "/music/280.MP3",
+      genre: ["R&B"],
+      mood: ["深情", "思念", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
-        {
+    {
+      id: 281,
       title: "飞云之下",
       artist: "韩红 林俊杰",
-      url: "/music/281.MP3"
+      url: "/music/281.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "治愈", "励志"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想"]
     },
     {
+      id: 282,
       title: "粉色信笺",
       artist: "许嵩",
-      url: "/music/282.MP3"
+      url: "/music/282.MP3",
+      genre: ["流行"],
+      mood: ["青涩", "思念", "朦胧"],
+      energy: "中速",
+      weather: ["雪"],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 283,
       title: "枫",
       artist: "周杰伦",
-      url: "/music/283.MP3"
+      url: "/music/283.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["伤感", "思念", "萧瑟"],
+      energy: "中速",
+      weather: ["风"],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 284,
       title: "蜂鸟",
       artist: "吴青峰",
-      url: "/music/284.MP3"
+      url: "/music/284.MP3",
+      genre: ["流行"],
+      mood: ["励志", "坚定", "希望"],
+      energy: "轻快",
+      weather: [],
+      theme: ["梦想", "自我"]
     },
     {
+      id: 285,
       title: "干杯",
       artist: "五月天",
-      url: "/music/285.MP3"
+      url: "/music/285.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["怀念", "洒脱", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["友情", "青春"]
     },
     {
+      id: 286,
       title: "刚刚好",
       artist: "薛之谦",
-      url: "/music/286.MP3"
+      url: "/music/286.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "深情", "释然"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "分手"]
     },
     {
+      id: 287,
       title: "刚好遇见你",
       artist: "李玉刚",
-      url: "/music/287.MP3"
+      url: "/music/287.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "感动", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["回忆", "相遇"]
     },
     {
+      id: 288,
       title: "告白气球",
       artist: "周杰伦",
-      url: "/music/288.MP3"
+      url: "/music/288.MP3",
+      genre: ["流行", "R&B"],
+      mood: ["甜蜜", "浪漫", "轻快"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情"]
     },
-        {
+    {
+      id: 289,
       title: "搁浅",
       artist: "周杰伦",
-      url: "/music/289.MP3"
+      url: "/music/289.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "压抑", "愧疚"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "分手"]
     },
     {
+      id: 290,
       title: "歌颂者",
       artist: "吴青峰",
-      url: "/music/290.MP3"
+      url: "/music/290.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "坚定", "感恩"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "自我"]
     },
     {
+      id: 291,
       title: "给我一首歌的时间",
       artist: "周杰伦",
-      url: "/music/291.MP3"
+      url: "/music/291.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["深情", "浪漫", "遗憾"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 292,
       title: "光亮",
       artist: "周深",
-      url: "/music/292.MP3"
+      url: "/music/292.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["苍凉", "坚定", "希望"],
+      energy: "中速",
+      weather: [],
+      theme: ["历史", "希望", "影视OST"]
     },
     {
+      id: 293,
       title: "裹着心的光",
       artist: "林俊杰",
-      url: "/music/293.MP3"
+      url: "/music/293.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "治愈", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["希望", "陪伴"]
     },
     {
+      id: 294,
       title: "爱にできることはまだあるかい",
       artist: "Radwimps",
-      url: "/music/294.MP3"
+      url: "/music/294.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["深情", "伤感", "希望"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 295,
       title: "海阔天空",
       artist: "Beyond",
-      url: "/music/295.MP3"
+      url: "/music/295.MP3",
+      genre: ["摇滚"],
+      mood: ["励志", "豪迈", "坚定"],
+      energy: "激昂",
+      weather: [],
+      theme: ["梦想", "自由"]
     },
     {
+      id: 296,
       title: "海鸥",
       artist: "逃跑计划",
-      url: "/music/296.MP3"
+      url: "/music/296.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["治愈", "释然", "孤独"],
+      energy: "中速",
+      weather: ["风"],
+      theme: ["自由", "治愈"]
     },
-        {
+    {
+      id: 297,
       title: "好好",
       artist: "五月天",
-      url: "/music/297.MP3"
+      url: "/music/297.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "温暖", "释然"],
+      energy: "中速",
+      weather: [],
+      theme: ["友情", "青春", "影视OST"]
     },
     {
+      id: 298,
       title: "浩瀚",
       artist: "张杰",
-      url: "/music/298.MP3"
+      url: "/music/298.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["豪迈", "深情", "大气"],
+      energy: "激昂",
+      weather: [],
+      theme: ["江湖", "影视OST"]
     },
     {
+      id: 299,
       title: "河流(Live)",
       artist: "川川",
-      url: "/music/299.MP3"
+      url: "/music/299.MP3",
+      genre: ["民谣", "摇滚"],
+      mood: ["深情", "沧桑", "思念"],
+      energy: "中速",
+      weather: [],
+      theme: ["故乡", "人生"]
     },
     {
+      id: 300,
       title: "黑色柳丁",
       artist: "陶喆",
-      url: "/music/300.MP3"
+      url: "/music/300.MP3",
+      genre: ["摇滚", "R&B"],
+      mood: ["压抑", "孤独", "悲愤"],
+      energy: "中速",
+      weather: [],
+      theme: ["社会", "孤独"]
     },
     {
+      id: 301,
       title: "红尘客栈",
       artist: "周杰伦",
-      url: "/music/301.MP3"
+      url: "/music/301.MP3",
+      genre: ["中国风"],
+      mood: ["潇洒", "深情", "苍凉"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "爱情"]
     },
     {
+      id: 302,
       title: "红玫瑰",
       artist: "陈奕迅",
-      url: "/music/302.MP3"
+      url: "/music/302.MP3",
+      genre: ["流行"],
+      mood: ["无奈", "深情", "压抑"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 303,
       title: "红绣花",
       artist: "门尼",
-      url: "/music/303.MP3"
+      url: "/music/303.MP3",
+      genre: ["摇滚", "民谣"],
+      mood: ["深情", "思念", "悲壮"],
+      energy: "中速",
+      weather: ["夏"],
+      theme: ["爱情", "故乡"]
     },
     {
+      id: 304,
       title: "蝴蝶",
       artist: "陶喆",
-      url: "/music/304.MP3"
+      url: "/music/304.MP3",
+      genre: ["摇滚", "R&B"],
+      mood: ["治愈", "坚定", "感恩"],
+      energy: "中速",
+      weather: [],
+      theme: ["亲情", "希望"]
     },
     {
+      id: 305,
       title: "花海",
       artist: "周杰伦",
-      url: "/music/305.MP3"
+      url: "/music/305.MP3",
+      genre: ["流行"],
+      mood: ["深情", "遗憾", "浪漫"],
+      energy: "中速",
+      weather: ["春"],
+      theme: ["爱情"]
     },
     {
+      id: 306,
       title: "花火大会",
       artist: "Radwimps",
-      url: "/music/306.MP3"
+      url: "/music/306.MP3",
+      genre: ["流行", "原声"],
+      mood: ["浪漫", "温暖", "绚丽"],
+      energy: "中速",
+      weather: ["夏", "夜"],
+      theme: ["影视OST"]
     },
     {
+      id: 307,
       title: "花开忘忧",
       artist: "周深",
-      url: "/music/307.MP3"
+      url: "/music/307.MP3",
+      genre: ["流行", "民谣"],
+      mood: ["温暖", "治愈", "感动"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "回忆"]
     },
     {
+      id: 308,
       title: "黄昏之时",
       artist: "Radwimps",
-      url: "/music/308.MP3"
+      url: "/music/308.MP3",
+      genre: ["原声"],
+      mood: ["温柔", "梦幻", "怀念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["影视OST"]
     },
     {
+      id: 309,
       title: "灰色と青",
       artist: "米津玄师 菅田将晖",
-      url: "/music/309.MP3"
+      url: "/music/309.MP3",
+      genre: ["流行"],
+      mood: ["怀念", "青春", "温柔"],
+      energy: "中速",
+      weather: ["夏"],
+      theme: ["青春", "友情"]
     },
     {
+      id: 310,
       title: "スパークル",
       artist: "Radwimps",
-      url: "/music/310.MP3"
+      url: "/music/310.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["深情", "浪漫", "希望"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 311,
       title: "羁绊",
       artist: "许嵩",
-      url: "/music/311.MP3"
+      url: "/music/311.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["深情", "忧伤", "温柔"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "江湖", "影视OST"]
     },
     {
+      id: 312,
       title: "记念",
       artist: "雷雨心",
-      url: "/music/312.MP3"
+      url: "/music/312.MP3",
+      genre: ["流行"],
+      mood: ["怀念", "青春", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "校园"]
     },
-        {
+    {
+      id: 313,
       title: "寂寞的季节",
       artist: "陶喆",
-      url: "/music/313.MP3"
+      url: "/music/313.MP3",
+      genre: ["流行"],
+      mood: ["孤独", "伤感", "怀念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "孤独"]
     },
     {
+      id: 314,
       title: "嘉宾",
       artist: "张远",
-      url: "/music/314.MP3"
+      url: "/music/314.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "苦涩", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "分手"]
     },
     {
+      id: 315,
       title: "剑魂",
       artist: "李炜",
-      url: "/music/315.MP3"
+      url: "/music/315.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["潇洒", "青涩", "豪迈"],
+      energy: "中速",
+      weather: ["雨", "夜"],
+      theme: ["江湖", "影视OST"]
     },
     {
+      id: 316,
       title: "剑心",
       artist: "张杰",
-      url: "/music/316.MP3"
+      url: "/music/316.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["热血", "豪迈", "坚定"],
+      energy: "激昂",
+      weather: [],
+      theme: ["江湖", "影视OST"]
     },
     {
+      id: 317,
       title: "江湖天下",
       artist: "汪苏泷",
-      url: "/music/317.MP3"
+      url: "/music/317.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["深情", "思念", "遗憾"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "爱情", "影视OST"]
     },
     {
+      id: 318,
       title: "江湖之间",
       artist: "曹雨航 朝歌夜弦",
-      url: "/music/318.MP3"
+      url: "/music/318.MP3",
+      genre: ["古风"],
+      mood: ["深情", "苍凉", "洒脱"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "爱情"]
     },
     {
+      id: 319,
       title: "将故事写成我们",
       artist: "林俊杰",
-      url: "/music/319.MP3"
+      url: "/music/319.MP3",
+      genre: ["流行"],
+      mood: ["深情", "浪漫", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 320,
       title: "戒烟",
       artist: "李荣浩",
-      url: "/music/320.MP3"
+      url: "/music/320.MP3",
+      genre: ["流行"],
+      mood: ["洒脱", "深情", "诙谐"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 321,
       title: "锦鲤抄",
       artist: "银临 云の泣",
-      url: "/music/321.MP3"
+      url: "/music/321.MP3",
+      genre: ["古风"],
+      mood: ["凄美", "深情", "怀念"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "传奇"]
     },
     {
+      id: 322,
       title: "九儿",
       artist: "韩红",
-      url: "/music/322.MP3"
+      url: "/music/322.MP3",
+      genre: ["流行", "民歌"],
+      mood: ["悲壮", "深情", "坚强"],
+      energy: "激昂",
+      weather: [],
+      theme: ["家国", "影视OST"]
     },
     {
+      id: 323,
       title: "就是爱你",
       artist: "陶喆",
-      url: "/music/323.MP3"
+      url: "/music/323.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["温暖", "浪漫", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 324,
       title: "就是哪吒",
       artist: "唐汉霄",
-      url: "/music/324.MP3"
+      url: "/music/324.MP3",
+      genre: ["摇滚", "电子"],
+      mood: ["热血", "叛逆", "坚定"],
+      energy: "激昂",
+      weather: [],
+      theme: ["自我", "抗争", "影视OST"]
     },
     {
+      id: 325,
       title: "菊花台",
       artist: "周杰伦",
-      url: "/music/325.MP3"
+      url: "/music/325.MP3",
+      genre: ["中国风"],
+      mood: ["哀伤", "思念", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别", "影视OST"]
     },
     {
+      id: 326,
       title: "开始懂了",
       artist: "孙燕姿",
-      url: "/music/326.MP3"
+      url: "/music/326.MP3",
+      genre: ["流行"],
+      mood: ["释然", "伤感", "清醒"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "成长"]
     },
     {
+      id: 327,
       title: "看得最远的地方",
       artist: "毛不易",
-      url: "/music/327.MP3"
+      url: "/music/327.MP3",
+      genre: ["流行"],
+      mood: ["治愈", "温暖", "励志"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "希望"]
     },
     {
+      id: 328,
       title: "刻在我心底的名字(Live)",
       artist: "五月天",
-      url: "/music/328.MP3"
+      url: "/music/328.MP3",
+      genre: ["流行"],
+      mood: ["深情", "怀念", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
-        {
+    {
+      id: 329,
       title: "兰亭序",
       artist: "周杰伦",
-      url: "/music/329.MP3"
+      url: "/music/329.MP3",
+      genre: ["中国风"],
+      mood: ["深情", "惆怅", "浪漫"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 330,
       title: "蓝莲花",
       artist: "许巍",
-      url: "/music/330.MP3"
+      url: "/music/330.MP3",
+      genre: ["摇滚"],
+      mood: ["坚定", "释然", "励志"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "信念"]
     },
     {
+      id: 331,
       title: "老街",
       artist: "李荣浩",
-      url: "/music/331.MP3"
+      url: "/music/331.MP3",
+      genre: ["流行"],
+      mood: ["怀念", "伤感", "孤独"],
+      energy: "中速",
+      weather: [],
+      theme: ["故乡", "回忆"]
     },
     {
+      id: 332,
       title: "老男孩",
       artist: "筷子兄弟",
-      url: "/music/332.MP3"
+      url: "/music/332.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["怀念", "励志", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "梦想"]
     },
     {
+      id: 333,
       title: "恋曲1980",
       artist: "罗大佑",
-      url: "/music/333.MP3"
+      url: "/music/333.MP3",
+      genre: ["民谣", "流行"],
+      mood: ["释然", "深情", "青春"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 334,
       title: "天天",
       artist: "陶喆",
-      url: "/music/334.MP3"
+      url: "/music/334.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["甜蜜", "思念", "浪漫"],
+      energy: "中速",
+      weather: ["晴", "雨"],
+      theme: ["爱情"]
     },
     {
+      id: 335,
       title: "夜曲",
       artist: "周杰伦",
-      url: "/music/335.MP3"
+      url: "/music/335.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["凄美", "悲伤", "绝望"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["爱情", "失去"]
     },
     {
+      id: 336,
       title: "凉凉",
       artist: "杨宗纬 张碧晨",
-      url: "/music/336.MP3"
+      url: "/music/336.MP3",
+      genre: ["流行"],
+      mood: ["忧伤", "深情", "凄美"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 337,
       title: "すずめ",
       artist: "十明",
-      url: "/music/337.MP3"
+      url: "/music/337.MP3",
+      genre: ["流行"],
+      mood: ["希望", "治愈", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["成长", "希望", "影视OST"]
     },
     {
+      id: 338,
       title: "流沙",
       artist: "陶喆",
-      url: "/music/338.MP3"
+      url: "/music/338.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["伤感", "深情", "挣扎"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
-        {
+    {
+      id: 339,
       title: "绿光",
       artist: "孙燕姿",
-      url: "/music/339.MP3"
+      url: "/music/339.MP3",
+      genre: ["流行", "电子"],
+      mood: ["活泼", "振奋", "希望"],
+      energy: "轻快",
+      weather: [],
+      theme: ["希望", "梦想"]
     },
     {
+      id: 340,
       title: "麻雀",
       artist: "李荣浩",
-      url: "/music/340.MP3"
+      url: "/music/340.MP3",
+      genre: ["流行"],
+      mood: ["倔强", "温柔", "希望"],
+      energy: "中速",
+      weather: [],
+      theme: ["平凡", "梦想"]
     },
     {
+      id: 341,
       title: "漫长的告白",
       artist: "双笙",
-      url: "/music/341.MP3"
+      url: "/music/341.MP3",
+      genre: ["流行"],
+      mood: ["甜蜜", "温柔", "青春"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "爱情", "影视OST"]
     },
     {
+      id: 342,
       title: "慢慢喜欢你",
       artist: "莫文蔚",
-      url: "/music/342.MP3"
+      url: "/music/342.MP3",
+      genre: ["流行"],
+      mood: ["甜蜜", "温柔", "浪漫"],
+      energy: "舒缓",
+      weather: ["春"],
+      theme: ["爱情"]
     },
     {
+      id: 343,
       title: "なんでもないや",
       artist: "Radwimps",
-      url: "/music/343.MP3"
+      url: "/music/343.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["青春", "释然", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "爱情", "影视OST"]
     },
     {
+      id: 344,
       title: "没想到",
       artist: "许嵩",
-      url: "/music/344.MP3"
+      url: "/music/344.MP3",
+      genre: ["流行"],
+      mood: ["深情", "浪漫", "温柔"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 345,
       title: "玫瑰少年(Live)",
       artist: "蔡依林 五月天",
-      url: "/music/345.MP3"
+      url: "/music/345.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["励志", "坚定", "勇敢"],
+      energy: "激昂",
+      weather: [],
+      theme: ["自我", "抗争"]
     },
     {
+      id: 346,
       title: "美丽的神话",
       artist: "韩红 孙楠",
-      url: "/music/346.MP3"
+      url: "/music/346.MP3",
+      genre: ["流行"],
+      mood: ["深情", "凄美", "坚定"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 347,
       title: "梦灯笼",
       artist: "Radwimps",
-      url: "/music/347.MP3"
+      url: "/music/347.MP3",
+      genre: ["摇滚", "电子"],
+      mood: ["青春", "热血", "希望"],
+      energy: "轻快",
+      weather: [],
+      theme: ["青春", "梦想", "影视OST"]
     },
     {
+      id: 348,
       title: "米店",
       artist: "张玮玮",
-      url: "/music/348.MP3"
+      url: "/music/348.MP3",
+      genre: ["民谣"],
+      mood: ["温柔", "深情", "恬淡"],
+      energy: "舒缓",
+      weather: ["雨", "春"],
+      theme: ["爱情", "远方"]
     },
     {
+      id: 349,
       title: "明明就",
       artist: "周杰伦",
-      url: "/music/349.MP3"
+      url: "/music/349.MP3",
+      genre: ["流行"],
+      mood: ["深情", "倔强", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 350,
       title: "明日坐标",
       artist: "林俊杰",
-      url: "/music/350.MP3"
+      url: "/music/350.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "坚定", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["友情", "梦想", "影视OST"]
     },
     {
+      id: 351,
       title: "明天会更好",
       artist: "卓依婷",
-      url: "/music/351.MP3"
+      url: "/music/351.MP3",
+      genre: ["流行"],
+      mood: ["希望", "温暖", "励志"],
+      energy: "中速",
+      weather: [],
+      theme: ["希望", "公益"]
     },
     {
+      id: 352,
       title: "莫莉(Live)",
       artist: "唐汉霄",
-      url: "/music/352.MP3"
+      url: "/music/352.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "感动", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "成长"]
     },
     {
+      id: 353,
       title: "牧马城市",
       artist: "毛不易",
-      url: "/music/353.MP3"
+      url: "/music/353.MP3",
+      genre: ["流行"],
+      mood: ["坚韧", "迷惘", "沧桑"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "城市"]
     },
     {
+      id: 354,
       title: "那些你很冒险的梦",
       artist: "林俊杰",
-      url: "/music/354.MP3"
+      url: "/music/354.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "深情", "无奈"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "梦想"]
     },
-        {
+    {
+      id: 355,
       title: "那些年",
       artist: "胡夏",
-      url: "/music/355.MP3"
+      url: "/music/355.MP3",
+      genre: ["流行"],
+      mood: ["怀念", "青春", "遗憾"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "爱情", "影视OST"]
     },
     {
+      id: 356,
       title: "那一天",
       artist: "鞠婧祎",
-      url: "/music/356.MP3"
+      url: "/music/356.MP3",
+      genre: ["流行"],
+      mood: ["青春", "怀念", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "校园", "影视OST"]
     },
     {
+      id: 357,
       title: "你曾是少年",
       artist: "S.H.E",
-      url: "/music/357.MP3"
+      url: "/music/357.MP3",
+      genre: ["流行"],
+      mood: ["青春", "励志", "感动"],
+      energy: "轻快",
+      weather: [],
+      theme: ["青春", "梦想", "影视OST"]
     },
     {
+      id: 358,
       title: "你从未离去",
       artist: "白挺",
-      url: "/music/358.MP3"
+      url: "/music/358.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "伤感", "治愈"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["陪伴", "友情", "影视OST"]
     },
     {
+      id: 359,
       title: "你听得到",
       artist: "周杰伦",
-      url: "/music/359.MP3"
+      url: "/music/359.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["温馨", "甜蜜", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 360,
       title: "逆光",
       artist: "孙燕姿",
-      url: "/music/360.MP3"
+      url: "/music/360.MP3",
+      genre: ["流行"],
+      mood: ["坚定", "希望", "倔强"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "希望"]
     },
     {
+      id: 361,
       title: "匿名的安慰",
       artist: "王心凌",
-      url: "/music/361.MP3"
+      url: "/music/361.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "治愈", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["感恩", "成长"]
     },
     {
+      id: 362,
       title: "年少有为",
       artist: "李荣浩",
-      url: "/music/362.MP3"
+      url: "/music/362.MP3",
+      genre: ["流行"],
+      mood: ["遗憾", "伤感", "沧桑"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "遗憾"]
     },
-        {
+    {
+      id: 363,
       title: "泡沫",
       artist: "G.E.M.邓紫棋",
-      url: "/music/363.MP3"
+      url: "/music/363.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "压抑", "释然"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "欺骗"]
     },
     {
+      id: 364,
       title: "陪你",
       artist: "陶喆",
-      url: "/music/364.MP3"
+      url: "/music/364.MP3",
+      genre: ["中国风", "R&B"],
+      mood: ["深情", "温暖", "坚定"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "陪伴"]
     },
     {
+      id: 365,
       title: "陪你度过漫长岁月",
       artist: "陈奕迅",
-      url: "/music/365.MP3"
+      url: "/music/365.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "治愈", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["陪伴", "爱情", "影视OST"]
     },
     {
+      id: 366,
       title: "偏偏喜欢你",
       artist: "陈百强",
-      url: "/music/366.MP3"
+      url: "/music/366.MP3",
+      genre: ["流行", "中国风"],
+      mood: ["深情", "苦涩", "忧郁"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 367,
       title: "蒲公英的约定",
       artist: "周杰伦",
-      url: "/music/367.MP3"
+      url: "/music/367.MP3",
+      genre: ["流行", "民谣"],
+      mood: ["怀念", "青涩", "惆怅"],
+      energy: "中速",
+      weather: ["夏"],
+      theme: ["青春", "爱情"]
     },
     {
+      id: 368,
       title: "普通",
       artist: "唐汉霄",
-      url: "/music/368.MP3"
+      url: "/music/368.MP3",
+      genre: ["流行"],
+      mood: ["励志", "倔强", "热血"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "梦想", "影视OST"]
     },
     {
+      id: 369,
       title: "普通朋友",
       artist: "陶喆",
-      url: "/music/369.MP3"
+      url: "/music/369.MP3",
+      genre: ["R&B"],
+      mood: ["矛盾", "深情", "无奈"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 370,
       title: "七里香",
       artist: "周杰伦",
-      url: "/music/370.MP3"
+      url: "/music/370.MP3",
+      genre: ["流行", "民谣"],
+      mood: ["甜蜜", "浪漫", "青春"],
+      energy: "中速",
+      weather: ["夏", "夜", "雨"],
+      theme: ["青春", "爱情"]
     },
-        {
+    {
+      id: 371,
       title: "其实都没有",
       artist: "杨宗纬",
-      url: "/music/371.MP3"
+      url: "/music/371.MP3",
+      genre: ["流行"],
+      mood: ["释然", "沧桑", "淡然"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["人生", "回忆"]
     },
     {
+      id: 372,
       title: "奇妙能力歌",
       artist: "陈粒",
-      url: "/music/372.MP3"
+      url: "/music/372.MP3",
+      genre: ["民谣"],
+      mood: ["孤独", "思念", "清冷"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "自由"]
     },
     {
+      id: 373,
       title: "千里之外",
       artist: "费玉清 周杰伦",
-      url: "/music/373.MP3"
+      url: "/music/373.MP3",
+      genre: ["中国风", "R&B"],
+      mood: ["凄美", "感伤", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 374,
       title: "千千阙歌",
       artist: "陈慧娴",
-      url: "/music/374.MP3"
+      url: "/music/374.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "深情", "不舍"],
+      energy: "中速",
+      weather: [],
+      theme: ["离别", "友情"]
     },
     {
+      id: 375,
       title: "牵丝戏",
       artist: "银临 Aki阿杰",
-      url: "/music/375.MP3"
+      url: "/music/375.MP3",
+      genre: ["古风"],
+      mood: ["凄美", "深情", "怀念"],
+      energy: "中速",
+      weather: [],
+      theme: ["陪伴", "传奇"]
     },
     {
+      id: 376,
       title: "前前前世",
       artist: "Radwimps",
-      url: "/music/376.MP3"
+      url: "/music/376.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["热血", "深情", "青春"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "爱情", "影视OST"]
     },
     {
+      id: 377,
       title: "青春大概",
       artist: "王上",
-      url: "/music/377.MP3"
+      url: "/music/377.MP3",
+      genre: ["民谣", "流行"],
+      mood: ["释然", "怀念", "青春"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "校园"]
     },
     {
+      id: 378,
       title: "青花瓷",
       artist: "周杰伦",
-      url: "/music/378.MP3"
+      url: "/music/378.MP3",
+      genre: ["中国风"],
+      mood: ["深情", "含蓄", "浪漫"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["爱情", "古典"]
     },
     {
+      id: 379,
       title: "青火",
       artist: "黄子弘凡",
-      url: "/music/379.MP3"
+      url: "/music/379.MP3",
+      genre: ["流行"],
+      mood: ["励志", "热血", "坚定"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "梦想"]
     },
     {
+      id: 380,
       title: "倾尽天下",
       artist: "河图",
-      url: "/music/380.MP3"
+      url: "/music/380.MP3",
+      genre: ["古风"],
+      mood: ["悲凉", "深情", "豪迈"],
+      energy: "中速",
+      weather: [],
+      theme: ["江湖", "爱情", "历史"]
     },
     {
+      id: 381,
       title: "情非得已",
       artist: "庾澄庆",
-      url: "/music/381.MP3"
+      url: "/music/381.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["甜蜜", "悸动", "青涩"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 382,
       title: "情歌",
       artist: "梁静茹",
-      url: "/music/382.MP3"
+      url: "/music/382.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "伤感", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 383,
       title: "情是何物",
       artist: "周深",
-      url: "/music/383.MP3"
+      url: "/music/383.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["深情", "凄美", "苍凉"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "古典"]
     },
     {
+      id: 384,
       title: "晴天",
       artist: "周杰伦",
-      url: "/music/384.MP3"
+      url: "/music/384.MP3",
+      genre: ["流行"],
+      mood: ["遗憾", "怀念", "青涩"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["青春", "爱情"]
     },
     {
+      id: 385,
       title: "去明天",
       artist: "周深",
-      url: "/music/385.MP3"
+      url: "/music/385.MP3",
+      genre: ["流行"],
+      mood: ["希望", "温暖", "治愈"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "毕业", "梦想"]
     },
     {
+      id: 386,
       title: "去有风的地方",
       artist: "郁可唯",
-      url: "/music/386.MP3"
+      url: "/music/386.MP3",
+      genre: ["流行"],
+      mood: ["治愈", "温暖", "宁静"],
+      energy: "舒缓",
+      weather: ["风", "晴"],
+      theme: ["远方", "治愈"]
     },
-        {
+    {
+      id: 387,
       title: "全世界最好的你",
       artist: "许嵩",
-      url: "/music/387.MP3"
+      url: "/music/387.MP3",
+      genre: ["流行"],
+      mood: ["甜蜜", "心动", "温柔"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 388,
       title: "如果声音不记得",
       artist: "吴青峰",
-      url: "/music/388.MP3"
+      url: "/music/388.MP3",
+      genre: ["流行"],
+      mood: ["忧郁", "悲伤", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "治愈", "影视OST"]
     },
     {
+      id: 389,
       title: "如果我们不曾相遇",
       artist: "五月天",
-      url: "/music/389.MP3"
+      url: "/music/389.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["感动", "温暖", "不舍"],
+      energy: "中速",
+      weather: [],
+      theme: ["友情", "青春"]
     },
     {
+      id: 390,
       title: "入海",
       artist: "毛不易",
-      url: "/music/390.MP3"
+      url: "/music/390.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "迷茫", "希望"],
+      energy: "中速",
+      weather: [],
+      theme: ["毕业", "成长", "梦想"]
     },
     {
+      id: 391,
       title: "三人游",
       artist: "方大同",
-      url: "/music/391.MP3"
+      url: "/music/391.MP3",
+      genre: ["R&B"],
+      mood: ["深情", "忧郁", "温柔"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 392,
       title: "三生三世",
       artist: "张杰",
-      url: "/music/392.MP3"
+      url: "/music/392.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["深情", "执着", "大气"],
+      energy: "激昂",
+      weather: [],
+      theme: ["爱情", "仙侠", "影视OST"]
     },
     {
+      id: 393,
       title: "三葉のテーマ",
       artist: "Radwimps",
-      url: "/music/393.MP3"
+      url: "/music/393.MP3",
+      genre: ["原声"],
+      mood: ["温柔", "思念", "青春"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["影视OST"]
     },
     {
+      id: 394,
       title: "珊瑚海",
       artist: "周杰伦 梁心颐",
-      url: "/music/394.MP3"
+      url: "/music/394.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "遗憾", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 395,
       title: "闪耀",
       artist: "汪苏泷",
-      url: "/music/395.MP3"
+      url: "/music/395.MP3",
+      genre: ["流行", "电子"],
+      mood: ["青春", "励志", "轻快"],
+      energy: "轻快",
+      weather: [],
+      theme: ["青春", "梦想", "影视OST"]
     },
     {
+      id: 396,
       title: "少年派",
       artist: "唐汉霄",
-      url: "/music/396.MP3"
+      url: "/music/396.MP3",
+      genre: ["电子", "流行"],
+      mood: ["孤独", "空灵", "坚定"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["成长", "探索"]
     },
     {
+      id: 397,
       title: "盛夏",
       artist: "毛不易",
-      url: "/music/397.MP3"
+      url: "/music/397.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "感动", "沧桑"],
+      energy: "舒缓",
+      weather: ["夏"],
+      theme: ["成长", "回忆"]
     },
     {
+      id: 398,
       title: "时间煮雨",
       artist: "郁可唯",
-      url: "/music/398.MP3"
+      url: "/music/398.MP3",
+      genre: ["流行"],
+      mood: ["悲伤", "怀念", "忧伤"],
+      energy: "舒缓",
+      weather: ["雨"],
+      theme: ["青春", "友情", "影视OST"]
     },
     {
+      id: 399,
       title: "是我，也是我们",
       artist: "黄子弘凡",
-      url: "/music/399.MP3"
+      url: "/music/399.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "励志", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["平凡", "奉献"]
     },
     {
+      id: 400,
       title: "手写的从前",
       artist: "周杰伦",
-      url: "/music/400.MP3"
+      url: "/music/400.MP3",
+      genre: ["流行", "R&B"],
+      mood: ["甜蜜", "怀念", "青涩"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "爱情"]
     },
     {
+      id: 401,
       title: "霜雪千年",
       artist: "封茗囧菌&双笙",
-      url: "/music/401.MP3"
+      url: "/music/401.MP3",
+      genre: ["古风"],
+      mood: ["忧伤", "怀念", "温柔"],
+      energy: "中速",
+      weather: ["雪"],
+      theme: ["爱情", "古典"]
     },
     {
+      id: 402,
       title: "水星记",
       artist: "郭顶",
-      url: "/music/402.MP3"
+      url: "/music/402.MP3",
+      genre: ["流行"],
+      mood: ["清冷", "深情", "压抑"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "宇宙"]
     },
     {
+      id: 403,
       title: "说好不哭",
       artist: "周杰伦 阿信",
-      url: "/music/403.MP3"
+      url: "/music/403.MP3",
+      genre: ["流行"],
+      mood: ["深情", "隐忍", "伤感"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别"]
     },
-        {
+    {
+      id: 404,
       title: "说好的幸福呢",
       artist: "周杰伦",
-      url: "/music/404.MP3"
+      url: "/music/404.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "惆怅", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "分手"]
     },
     {
+      id: 405,
       title: "私奔到月球",
       artist: "五月天 陈绮贞",
-      url: "/music/405.MP3"
+      url: "/music/405.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["甜蜜", "浪漫", "温馨"],
+      energy: "轻快",
+      weather: ["夜"],
+      theme: ["爱情"]
     },
     {
+      id: 406,
       title: "送别",
       artist: "朴树",
-      url: "/music/406.MP3"
+      url: "/music/406.MP3",
+      genre: ["民谣"],
+      mood: ["忧伤", "不舍", "怀念"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["离别", "友情"]
     },
     {
+      id: 407,
       title: "岁月",
       artist: "王菲 那英",
-      url: "/music/407.MP3"
+      url: "/music/407.MP3",
+      genre: ["流行"],
+      mood: ["感动", "温暖", "沧桑"],
+      energy: "中速",
+      weather: [],
+      theme: ["时光", "人生"]
     },
     {
+      id: 408,
       title: "他不懂",
       artist: "张杰",
-      url: "/music/408.MP3"
+      url: "/music/408.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "愧疚", "无奈"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "遗憾"]
     },
     {
+      id: 409,
       title: "他夏了夏天",
       artist: "苏打绿",
-      url: "/music/409.MP3"
+      url: "/music/409.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["励志", "轻快", "温暖"],
+      energy: "轻快",
+      weather: ["夏"],
+      theme: ["平凡", "梦想"]
     },
     {
+      id: 410,
       title: "桃花笑",
       artist: "汪睿",
-      url: "/music/410.MP3"
+      url: "/music/410.MP3",
+      genre: ["古风", "流行"],
+      mood: ["欢乐", "温馨", "活泼"],
+      energy: "轻快",
+      weather: ["春"],
+      theme: ["田园", "影视OST"]
     },
     {
+      id: 411,
       title: "特别的人",
       artist: "方大同",
-      url: "/music/411.MP3"
+      url: "/music/411.MP3",
+      genre: ["R&B", "流行"],
+      mood: ["深情", "温柔", "浪漫"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 412,
       title: "天后",
       artist: "陈势安",
-      url: "/music/412.MP3"
+      url: "/music/412.MP3",
+      genre: ["流行"],
+      mood: ["深情", "无奈", "坚定"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "自我"]
     },
-
     {
+      id: 413,
       title: "天外来物",
       artist: "薛之谦",
-      url: "/music/413.MP3"
+      url: "/music/413.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["深情", "坚定", "彷徨"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["爱情"]
     },
     {
+      id: 414,
       title: "听见下雨的声音",
       artist: "周杰伦",
-      url: "/music/414.MP3"
+      url: "/music/414.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["凄美", "怀念", "深情"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 415,
       title: "同桌的你",
       artist: "老狼",
-      url: "/music/415.MP3"
+      url: "/music/415.MP3",
+      genre: ["民谣"],
+      mood: ["怀念", "青涩", "伤感"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["青春", "校园"]
     },
     {
+      id: 416,
       title: "外面的世界",
       artist: "齐秦",
-      url: "/music/416.MP3"
+      url: "/music/416.MP3",
+      genre: ["流行", "民谣"],
+      mood: ["深情", "思念", "豁达"],
+      energy: "中速",
+      weather: [],
+      theme: ["远方", "爱情"]
     },
     {
+      id: 417,
       title: "顽疾(Live)",
       artist: "薛之谦",
-      url: "/music/417.MP3"
+      url: "/music/417.MP3",
+      genre: ["流行"],
+      mood: ["压抑", "深情", "孤独"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "思念"]
     },
     {
+      id: 418,
       title: "晚星",
       artist: "唐汉霄",
-      url: "/music/418.MP3"
+      url: "/music/418.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "深情", "治愈"],
+      energy: "舒缓",
+      weather: ["夜"],
+      theme: ["爱情", "陪伴", "影视OST"]
     },
     {
+      id: 419,
       title: "忘记时间",
       artist: "胡歌",
-      url: "/music/419.MP3"
+      url: "/music/419.MP3",
+      genre: ["流行"],
+      mood: ["深情", "怀念", "忧伤"],
+      energy: "中速",
+      weather: [],
+      theme: ["仙侠", "爱情", "影视OST"]
     },
     {
+      id: 420,
       title: "微尘",
       artist: "陶喆",
-      url: "/music/420.MP3"
+      url: "/music/420.MP3",
+      genre: ["流行"],
+      mood: ["深沉", "释然", "哲思"],
+      energy: "中速",
+      weather: [],
+      theme: ["人生", "时光"]
     },
     {
+      id: 421,
       title: "微微一笑很倾城",
       artist: "杨洋",
-      url: "/music/421.MP3"
+      url: "/music/421.MP3",
+      genre: ["流行"],
+      mood: ["甜蜜", "青春", "浪漫"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "青春", "影视OST"]
     },
-        {
+    {
+      id: 422,
       title: "违背的青春",
       artist: "薛之谦",
-      url: "/music/422.MP3"
+      url: "/music/422.MP3",
+      genre: ["流行"],
+      mood: ["励志", "温暖", "坚定"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "梦想"]
     },
     {
+      id: 423,
       title: "唯一",
       artist: "G.E.M.邓紫棋",
-      url: "/music/423.MP3"
+      url: "/music/423.MP3",
+      genre: ["流行"],
+      mood: ["深情", "执着", "释然"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 424,
       title: "问侠",
       artist: "冉然 韩孟伯 姚岚 唐艺豪",
-      url: "/music/424.MP3"
+      url: "/music/424.MP3",
+      genre: ["中国风"],
+      mood: ["豪迈", "热血", "侠义"],
+      energy: "激昂",
+      weather: [],
+      theme: ["江湖", "侠义"]
     },
     {
+      id: 425,
       title: "我的一八九八",
       artist: "安然",
-      url: "/music/425.MP3"
+      url: "/music/425.MP3",
+      genre: ["流行"],
+      mood: ["大气", "感动", "自豪"],
+      energy: "中速",
+      weather: [],
+      theme: ["家国", "历史", "校园"]
     },
     {
+      id: 426,
       title: "我好想你",
       artist: "苏打绿",
-      url: "/music/426.MP3"
+      url: "/music/426.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["思念", "深情", "孤独"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "思念"]
     },
     {
+      id: 427,
       title: "我怀念的",
       artist: "孙燕姿",
-      url: "/music/427.MP3"
+      url: "/music/427.MP3",
+      genre: ["流行"],
+      mood: ["怀念", "伤感", "不舍"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 428,
       title: "我落泪情绪零碎",
       artist: "周杰伦",
-      url: "/music/428.MP3"
+      url: "/music/428.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["忧伤", "悲凉", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "失去"]
     },
     {
+      id: 429,
       title: "我们的明天",
       artist: "鹿晗",
-      url: "/music/429.MP3"
+      url: "/music/429.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "坚定", "希望"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "希望", "影视OST"]
     },
     {
+      id: 430,
       title: "我是如此相信",
       artist: "周杰伦",
-      url: "/music/430.MP3"
+      url: "/music/430.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["坚定", "热血", "希望"],
+      energy: "激昂",
+      weather: [],
+      theme: ["信念", "希望", "影视OST"]
     },
-        {
+    {
+      id: 431,
       title: "我为自己代言",
       artist: "魏晨",
-      url: "/music/431.MP3"
+      url: "/music/431.MP3",
+      genre: ["流行"],
+      mood: ["励志", "坚定", "自信"],
+      energy: "中速",
+      weather: [],
+      theme: ["梦想", "自我"]
     },
     {
+      id: 432,
       title: "我要你(Live)",
       artist: "毛不易 单依纯",
-      url: "/music/432.MP3"
+      url: "/music/432.MP3",
+      genre: ["流行"],
+      mood: ["深情", "浪漫", "思念"],
+      energy: "舒缓",
+      weather: ["夜"],
+      theme: ["爱情", "影视OST"]
     },
     {
+      id: 433,
       title: "我以渺小爱你",
       artist: "周深",
-      url: "/music/433.MP3"
+      url: "/music/433.MP3",
+      genre: ["流行"],
+      mood: ["治愈", "温暖", "感动"],
+      energy: "中速",
+      weather: [],
+      theme: ["自然", "公益"]
     },
     {
+      id: 434,
       title: "下一个天亮",
       artist: "郭静",
-      url: "/music/434.MP3"
+      url: "/music/434.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "期待", "忧伤"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "希望"]
     },
     {
+      id: 435,
       title: "夏至未至",
       artist: "胡夏",
-      url: "/music/435.MP3"
+      url: "/music/435.MP3",
+      genre: ["流行"],
+      mood: ["青春", "怀念", "温暖"],
+      energy: "中速",
+      weather: ["夏"],
+      theme: ["青春", "校园", "影视OST"]
     },
     {
+      id: 436,
       title: "想你时风起",
       artist: "单依纯",
-      url: "/music/436.MP3"
+      url: "/music/436.MP3",
+      genre: ["流行"],
+      mood: ["思念", "伤感", "温柔"],
+      energy: "中速",
+      weather: ["风"],
+      theme: ["爱情", "思念"]
     },
     {
+      id: 437,
       title: "像风一样",
       artist: "薛之谦",
-      url: "/music/437.MP3"
+      url: "/music/437.MP3",
+      genre: ["流行"],
+      mood: ["释然", "伤感", "清冷"],
+      energy: "中速",
+      weather: ["风"],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 438,
       title: "像小时候一样",
       artist: "郁可唯",
-      url: "/music/438.MP3"
+      url: "/music/438.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "治愈", "感动"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "童年", "影视OST"]
     },
     {
+      id: 439,
       title: "逍遥叹",
       artist: "胡歌",
-      url: "/music/439.MP3"
+      url: "/music/439.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["深情", "豪迈", "温柔"],
+      energy: "中速",
+      weather: [],
+      theme: ["仙侠", "江湖", "影视OST"]
     },
-        {
+    {
+      id: 440,
       title: "小城夏天",
       artist: "LBI利比",
-      url: "/music/440.MP3"
+      url: "/music/440.MP3",
+      genre: ["流行"],
+      mood: ["甜蜜", "浪漫", "轻快"],
+      energy: "轻快",
+      weather: ["夏", "夜"],
+      theme: ["青春", "爱情"]
     },
     {
+      id: 441,
       title: "小城谣",
       artist: "胡碧乔",
-      url: "/music/441.MP3"
+      url: "/music/441.MP3",
+      genre: ["古风"],
+      mood: ["甜蜜", "欢快", "清新"],
+      energy: "轻快",
+      weather: ["春"],
+      theme: ["江南", "爱情"]
     },
     {
+      id: 442,
       title: "小丑",
       artist: "毛不易",
-      url: "/music/442.MP3"
+      url: "/music/442.MP3",
+      genre: ["流行"],
+      mood: ["治愈", "温暖", "脆弱"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["平凡", "自我", "影视OST"]
     },
     {
+      id: 443,
       title: "小欢喜",
       artist: "刘瑞琦",
-      url: "/music/443.MP3"
+      url: "/music/443.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "感动", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["亲情", "成长", "影视OST"]
     },
     {
+      id: 444,
       title: "小情歌",
       artist: "苏打绿",
-      url: "/music/444.MP3"
+      url: "/music/444.MP3",
+      genre: ["流行"],
+      mood: ["甜蜜", "温暖", "清新"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["爱情"]
     },
     {
+      id: 445,
       title: "小幸运",
       artist: "田馥甄",
-      url: "/music/445.MP3"
+      url: "/music/445.MP3",
+      genre: ["流行"],
+      mood: ["悸动", "遗憾", "温暖"],
+      energy: "中速",
+      weather: ["雨"],
+      theme: ["青春", "爱情", "影视OST"]
     },
     {
+      id: 446,
       title: "小镇姑娘",
       artist: "陶喆",
-      url: "/music/446.MP3"
+      url: "/music/446.MP3",
+      genre: ["R&B", "摇滚"],
+      mood: ["伤感", "无奈", "怀念"],
+      energy: "轻快",
+      weather: [],
+      theme: ["成长", "离别"]
     },
     {
+      id: 447,
       title: "新鸳鸯蝴蝶梦(Live)",
       artist: "许嵩",
-      url: "/music/447.MP3"
+      url: "/music/447.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["洒脱", "释然", "无奈"],
+      energy: "中速",
+      weather: [],
+      theme: ["人生", "爱情"]
     },
     {
+      id: 448,
       title: "星辰大海",
       artist: "黄霄雲",
-      url: "/music/448.MP3"
+      url: "/music/448.MP3",
+      genre: ["流行"],
+      mood: ["希望", "感动", "坚定"],
+      energy: "激昂",
+      weather: ["夜"],
+      theme: ["梦想", "爱情"]
     },
-        {
+    {
+      id: 449,
       title: "行走的鱼(Live)",
       artist: "汪苏泷",
-      url: "/music/449.MP3"
+      url: "/music/449.MP3",
+      genre: ["流行"],
+      mood: ["治愈", "深情", "温暖"],
+      energy: "中速",
+      weather: [],
+      theme: ["自我", "治愈"]
     },
     {
+      id: 450,
       title: "萱草花",
       artist: "张小斐",
-      url: "/music/450.MP3"
+      url: "/music/450.MP3",
+      genre: ["流行"],
+      mood: ["温暖", "感动", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "影视OST"]
     },
     {
+      id: 451,
       title: "雪落下的声音(Live)",
       artist: "林俊杰",
-      url: "/music/451.MP3"
+      url: "/music/451.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "深情", "无奈"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["爱情", "遗憾", "影视OST"]
     },
     {
+      id: 452,
       title: "雪落下的声音",
       artist: "陆虎",
-      url: "/music/452.MP3"
+      url: "/music/452.MP3",
+      genre: ["流行"],
+      mood: ["悲凉", "深情", "遗憾"],
+      energy: "舒缓",
+      weather: ["雪"],
+      theme: ["爱情", "遗憾", "影视OST"]
     },
     {
+      id: 453,
       title: "勋章",
       artist: "鹿晗",
-      url: "/music/453.MP3"
+      url: "/music/453.MP3",
+      genre: ["流行"],
+      mood: ["励志", "坚定", "热血"],
+      energy: "激昂",
+      weather: [],
+      theme: ["梦想", "英雄", "影视OST"]
     },
     {
+      id: 454,
       title: "烟花易冷",
       artist: "周杰伦",
-      url: "/music/454.MP3"
+      url: "/music/454.MP3",
+      genre: ["中国风"],
+      mood: ["凄美", "苍凉", "深情"],
+      energy: "舒缓",
+      weather: ["雨"],
+      theme: ["爱情", "历史"]
     },
     {
+      id: 455,
       title: "演员",
       artist: "薛之谦",
-      url: "/music/455.MP3"
+      url: "/music/455.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "压抑", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "欺骗"]
     },
     {
+      id: 456,
       title: "燕窝",
       artist: "吴青峰",
-      url: "/music/456.MP3"
+      url: "/music/456.MP3",
+      genre: ["流行", "摇滚"],
+      mood: ["坚定", "哲思", "深情"],
+      energy: "中速",
+      weather: [],
+      theme: ["创作", "梦想"]
     },
     {
+      id: 457,
       title: "陽菜と、走る帆高",
       artist: "Radwimps",
-      url: "/music/457.MP3"
+      url: "/music/457.MP3",
+      genre: ["原声", "流行"],
+      mood: ["热血", "浪漫", "青春"],
+      energy: "激昂",
+      weather: ["雨"],
+      theme: ["影视OST", "青春"]
     },
-        {
+    {
+      id: 458,
       title: "阳光宅男",
       artist: "周杰伦",
-      url: "/music/458.MP3"
+      url: "/music/458.MP3",
+      genre: ["流行"],
+      mood: ["轻快", "活泼", "自信"],
+      energy: "轻快",
+      weather: ["晴"],
+      theme: ["青春", "自我"]
     },
     {
+      id: 459,
       title: "洋葱",
       artist: "杨宗纬",
-      url: "/music/459.MP3"
+      url: "/music/459.MP3",
+      genre: ["流行"],
+      mood: ["深情", "伤感", "隐忍"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 460,
       title: "遥远的你",
       artist: "221小伙伴",
-      url: "/music/460.MP3"
+      url: "/music/460.MP3",
+      genre: ["民谣", "流行"],
+      mood: ["青涩", "暗恋", "怀念"],
+      energy: "中速",
+      weather: ["夏", "雨", "风"],
+      theme: ["青春", "爱情"]
     },
     {
+      id: 461,
       title: "爷爷泡的茶",
       artist: "周杰伦",
-      url: "/music/461.MP3"
+      url: "/music/461.MP3",
+      genre: ["嘻哈", "R&B", "中国风"],
+      mood: ["轻快", "温情", "怀旧"],
+      energy: "轻快",
+      weather: [],
+      theme: ["亲情", "传统"]
     },
     {
+      id: 462,
       title: "夜航星",
       artist: "不才",
-      url: "/music/462.MP3"
+      url: "/music/462.MP3",
+      genre: ["流行", "弦乐"],
+      mood: ["燃", "苍凉", "坚定"],
+      energy: "激昂",
+      weather: ["夜"],
+      theme: ["科幻", "宇宙", "信念"]
     },
     {
+      id: 463,
       title: "一次就好",
       artist: "杨宗纬",
-      url: "/music/463.MP3"
+      url: "/music/463.MP3",
+      genre: ["流行", "复古情歌"],
+      mood: ["温暖", "深情", "治愈"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 464,
       title: "一路生花",
       artist: "温奕心",
-      url: "/music/464.MP3"
+      url: "/music/464.MP3",
+      genre: ["流行"],
+      mood: ["励志", "希望", "温暖"],
+      energy: "轻快",
+      weather: [],
+      theme: ["梦想", "青春"]
     },
     {
+      id: 465,
       title: "一路向北",
       artist: "周杰伦",
-      url: "/music/465.MP3"
+      url: "/music/465.MP3",
+      genre: ["流行摇滚", "英式摇滚"],
+      mood: ["伤感", "压抑", "失恋"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 466,
       title: "一念之间",
       artist: "陶喆",
-      url: "/music/466.MP3"
+      url: "/music/466.MP3",
+      genre: ["流行", "R&B"],
+      mood: ["深情", "释然", "感慨"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "选择"]
     },
-        {
+    {
+      id: 467,
       title: "一笑倾城",
       artist: "汪苏泷",
-      url: "/music/467.MP3"
+      url: "/music/467.MP3",
+      genre: ["流行", "清新"],
+      mood: ["甜蜜", "浪漫", "青春"],
+      energy: "轻快",
+      weather: [],
+      theme: ["爱情", "青春"]
     },
     {
+      id: 468,
       title: "忆黄山",
       artist: "许嵩",
-      url: "/music/468.MP3"
+      url: "/music/468.MP3",
+      genre: ["中国风"],
+      mood: ["悠远", "乡情", "旷达"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["山水", "乡愁"]
     },
     {
+      id: 469,
       title: "隐形的翅膀",
       artist: "张韶涵",
-      url: "/music/469.MP3"
+      url: "/music/469.MP3",
+      genre: ["民谣流行"],
+      mood: ["温暖", "希望", "励志"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["梦想", "成长"]
     },
     {
+      id: 470,
       title: "有我",
       artist: "周深",
-      url: "/music/470.MP3"
+      url: "/music/470.MP3",
+      genre: ["流行", "主旋律"],
+      mood: ["热血", "信念", "大气"],
+      energy: "激昂",
+      weather: [],
+      theme: ["青春", "家国"]
     },
     {
+      id: 471,
       title: "雨天",
       artist: "孙燕姿",
-      url: "/music/471.MP3"
+      url: "/music/471.MP3",
+      genre: ["流行"],
+      mood: ["感伤", "释然", "深情"],
+      energy: "舒缓",
+      weather: ["雨"],
+      theme: ["爱情"]
     },
     {
+      id: 472,
       title: "遇见",
       artist: "孙燕姿",
-      url: "/music/472.MP3"
+      url: "/music/472.MP3",
+      genre: ["流行", "清新"],
+      mood: ["温暖", "期待", "淡淡哀愁"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "缘分"]
     },
     {
+      id: 473,
       title: "月亮代表谁的心",
       artist: "陶喆",
-      url: "/music/473.MP3"
+      url: "/music/473.MP3",
+      genre: ["R&B"],
+      mood: ["浪漫", "温馨", "感慨"],
+      energy: "舒缓",
+      weather: ["夜"],
+      theme: ["爱情"]
     },
     {
+      id: 474,
       title: "再见深海",
       artist: "唐汉霄",
-      url: "/music/474.MP3"
+      url: "/music/474.MP3",
+      genre: ["流行"],
+      mood: ["治愈", "温暖", "感动"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["告别", "成长", "和解"]
     },
     {
+      id: 475,
       title: "在故事的最终",
       artist: "张碧晨",
-      url: "/music/475.MP3"
+      url: "/music/475.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "释然", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["亲情", "告别", "成长"]
     },
-        {
+    {
+      id: 476,
       title: "找自己",
       artist: "陶喆",
-      url: "/music/476.MP3"
+      url: "/music/476.MP3",
+      genre: ["摇滚", "另类摇滚"],
+      mood: ["释放", "畅快", "坚定"],
+      energy: "激昂",
+      weather: ["雨"],
+      theme: ["自我", "成长"]
     },
     {
+      id: 477,
       title: "照片",
       artist: "单依纯",
-      url: "/music/477.MP3"
+      url: "/music/477.MP3",
+      genre: ["流行", "抒情"],
+      mood: ["伤感", "怀念", "克制"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "回忆"]
     },
     {
+      id: 478,
       title: "这世界那么多人",
       artist: "莫文蔚",
-      url: "/music/478.MP3"
+      url: "/music/478.MP3",
+      genre: ["流行"],
+      mood: ["温柔", "怀念", "遗憾"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "人生"]
     },
     {
+      id: 479,
       title: "正解",
       artist: "Radwimps",
-      url: "/music/479.MP3"
+      url: "/music/479.MP3",
+      genre: ["摇滚", "流行"],
+      mood: ["温柔", "坚定", "感动", "青春"],
+      energy: "中速",
+      weather: [],
+      theme: ["青春", "毕业", "成长"]
     },
     {
+      id: 480,
       title: "知否知否",
       artist: "胡夏 郁可唯",
-      url: "/music/480.MP3"
+      url: "/music/480.MP3",
+      genre: ["中国风", "流行"],
+      mood: ["婉约", "伤情", "深情"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情", "古风"]
     },
     {
+      id: 481,
       title: "转眼",
       artist: "五月天",
-      url: "/music/481.MP3"
+      url: "/music/481.MP3",
+      genre: ["流行摇滚"],
+      mood: ["感慨", "怀念", "温情"],
+      energy: "中速",
+      weather: [],
+      theme: ["时间", "生命", "回忆"]
     },
     {
+      id: 482,
       title: "追光者",
       artist: "岑宁儿",
-      url: "/music/482.MP3"
+      url: "/music/482.MP3",
+      genre: ["流行"],
+      mood: ["暗恋", "凄美", "温暖"],
+      energy: "舒缓",
+      weather: [],
+      theme: ["爱情"]
     },
     {
+      id: 483,
       title: "租购",
       artist: "薛之谦",
-      url: "/music/483.MP3"
+      url: "/music/483.MP3",
+      genre: ["流行"],
+      mood: ["悲伤", "深情", "怀念"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "现实"]
     },
     {
+      id: 484,
       title: "最后一页",
       artist: "江语晨",
-      url: "/music/484.MP3"
-    },
-        {
-      title: "最长的电影",
-      artist: "周杰伦",
-      url: "/music/485.MP3"
+      url: "/music/484.MP3",
+      genre: ["流行"],
+      mood: ["伤感", "怀念", "不舍"],
+      energy: "舒缓",
+      weather: ["雨"],
+      theme: ["爱情", "离别"]
     },
     {
+      id: 485,
+      title: "最长的电影",
+      artist: "周杰伦",
+      url: "/music/485.MP3",
+      genre: ["流行", "抒情"],
+      mood: ["悲伤", "深情", "压抑"],
+      energy: "中速",
+      weather: [],
+      theme: ["爱情", "回忆"]
+    },
+    {
+      id: 486,
       title: "昨夜书",
       artist: "许嵩",
-      url: "/music/486.MP3"
-    }
+      url: "/music/486.MP3",
+      genre: ["中国风"],
+      mood: ["慷慨", "悲怆", "深情"],
+      energy: "中速",
+      weather: ["夜"],
+      theme: ["历史", "英雄"]
+    },
   ];
-let playQueue = JSON.parse(localStorage.getItem("playQueue")) || [];
-let currentIndex = parseInt(localStorage.getItem("currentIndex")) || 0;
-let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
+// ==================== 每日推歌 · 智能推荐 ====================
+// 综合「位置 + 天气 + 时间」为每天选一首最合适的歌，并附上推荐理由。
+// 位置：浏览器定位 → IP 定位兜底；天气：Open-Meteo（免费、无需 Key）。
 
+const PERIODS = [
+  { key: "清晨", start: 5, end: 8, energy: "轻快", moods: ["希望", "励志", "清新", "活力"] },
+  { key: "上午", start: 8, end: 12, energy: "中速", moods: ["励志", "坚定", "希望", "轻快"] },
+  { key: "午后", start: 12, end: 14, energy: "舒缓", moods: ["治愈", "温暖", "宁静", "释然"] },
+  { key: "下午", start: 14, end: 18, energy: "中速", moods: ["轻快", "温暖", "青春", "浪漫"] },
+  { key: "傍晚", start: 18, end: 22, energy: "舒缓", moods: ["治愈", "浪漫", "温暖", "深情"] },
+  { key: "深夜", start: 22, end: 26, energy: "舒缓", moods: ["孤独", "安静", "释然", "温柔", "思念"] }
+];
+
+let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
-function shuffle(array) {
-  let arr = array.slice();
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function initQueue() {
-  playQueue = shuffle(songs);
-  currentIndex = 0;
-  localStorage.setItem("playQueue", JSON.stringify(playQueue));
-  localStorage.setItem("currentIndex", 0);
-}
-
-if (playQueue.length === 0) {
-  initQueue();
-}
-
 const player = document.getElementById("song-player");
 
-function loadSong() {
-  const s = playQueue[currentIndex];
+function getPeriod(hour) {
+  const h = hour < 5 ? hour + 24 : hour;
+  for (const p of PERIODS) {
+    if (h >= p.start && h < p.end) return p;
+  }
+  return PERIODS[5];
+}
+
+function getSeason(month) {
+  if (month >= 3 && month <= 5) return "春";
+  if (month >= 6 && month <= 8) return "夏";
+  if (month >= 9 && month <= 11) return "秋";
+  return "冬";
+}
+
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+}
+
+function getLocation() {
+  return new Promise(function (resolve) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude, src: "gps" });
+        },
+        function () { ipFallback(resolve); },
+        { timeout: 4000, maximumAge: 10 * 60 * 1000 }
+      );
+    } else {
+      ipFallback(resolve);
+    }
+  });
+}
+
+function ipFallback(resolve) {
+  fetch("https://ipapi.co/json/")
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d && typeof d.latitude === "number") {
+        resolve({ lat: d.latitude, lon: d.longitude, src: "ip", city: d.city });
+      } else {
+        resolve(null);
+      }
+    })
+    .catch(function () { resolve(null); });
+}
+
+// WMO 天气代码 → 我们的标签
+function weatherFromCode(code) {
+  if (code === 0 || code === 1 || code === 2) return "晴";
+  if (code === 3 || code === 45 || code === 48) return null;
+  const rain = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99];
+  if (rain.indexOf(code) >= 0) return "雨";
+  const snow = [71, 73, 75, 77, 85, 86];
+  if (snow.indexOf(code) >= 0) return "雪";
+  return null;
+}
+
+async function fetchWeather(lat, lon) {
+  try {
+    const url = "https://api.open-meteo.com/v1/forecast?latitude=" + lat +
+      "&longitude=" + lon + "&current_weather=true&timezone=auto";
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data.current_weather) return null;
+    const cw = data.current_weather;
+    return {
+      weather: weatherFromCode(cw.weathercode),
+      temp: Math.round(cw.temperature),
+      wind: cw.windspeed
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+async function buildContext() {
+  const now = new Date();
+  const ctx = {
+    period: getPeriod(now.getHours()),
+    season: getSeason(now.getMonth() + 1),
+    hour: now.getHours(),
+    weekday: now.getDay(),
+    weekend: (now.getDay() === 0 || now.getDay() === 6),
+    night: (now.getHours() >= 19 || now.getHours() < 5),
+    weather: null,
+    temp: null,
+    wind: null,
+    city: null
+  };
+  const loc = await getLocation();
+  if (loc) {
+    ctx.city = loc.city || null;
+    const w = await fetchWeather(loc.lat, loc.lon);
+    if (w) {
+      ctx.weather = w.weather;
+      ctx.temp = w.temp;
+      ctx.wind = w.wind;
+    }
+  }
+  return ctx;
+}
+
+const WEATHER_REASON = {
+  "雨": "今天有雨，歌里也藏着雨天的故事",
+  "雪": "今天下雪了，让这首歌陪你看看雪",
+  "晴": "天气晴朗，来一首明快的歌应景",
+  "夜": "夜色已深，让这首歌陪你安静下来",
+  "风": "今天风不小，这首歌正好带着风的气息",
+  "夏": "夏天来了，歌里的夏日气息正应景",
+  "春": "春意正浓，这首歌和春天很配"
+};
+
+function scoreSong(song, ctx, jitter) {
+  let score = 0;
+  const reasons = [];
+  const push = function (r) { if (reasons.length < 3) reasons.push(r); };
+
+  if (ctx.weather && song.weather.indexOf(ctx.weather) >= 0) {
+    score += 30;
+    push(WEATHER_REASON[ctx.weather] || ("今天" + ctx.weather + "天，和这首歌很配"));
+  }
+  if (ctx.night && song.weather.indexOf("夜") >= 0) {
+    score += 15;
+    push("夜色正好，这首歌很适合此刻");
+  }
+  if (ctx.season === "夏" && song.weather.indexOf("夏") >= 0) {
+    score += 10;
+    push("夏天来了，歌里的夏日气息正应景");
+  }
+  if (ctx.season === "春" && song.weather.indexOf("春") >= 0) {
+    score += 10;
+    push("春意正浓，这首歌和春天很配");
+  }
+  if (ctx.wind !== null && ctx.wind > 20 && song.weather.indexOf("风") >= 0) {
+    score += 10;
+    push("今天风不小，这首歌正好带着风的气息");
+  }
+  if (song.energy === ctx.period.energy) {
+    score += 12;
+  }
+  const moodHits = song.mood.filter(function (m) { return ctx.period.moods.indexOf(m) >= 0; }).length;
+  score += moodHits * 8;
+  if (moodHits >= 2) {
+    push(ctx.period.key + "时分，" + song.mood[0] + "的旋律和现在很搭");
+  }
+  if (ctx.weekend) {
+    if (song.theme.indexOf("自由") >= 0 || song.theme.indexOf("远方") >= 0 || song.theme.indexOf("友情") >= 0) {
+      score += 8;
+      push("周末到了，听点关于自由与远方的歌吧");
+    }
+  } else {
+    if (song.theme.indexOf("励志") >= 0 || song.theme.indexOf("梦想") >= 0) {
+      score += 6;
+      push("工作日加油，这首歌给你一点力量");
+    }
+  }
+  score += jitter;
+  return { score: score, reasons: reasons };
+}
+
+function rankSongs(songs, ctx) {
+  const ranked = songs.map(function (s) {
+    const r = scoreSong(s, ctx, Math.random() * 10);
+    return { id: s.id, score: r.score, reasons: r.reasons };
+  });
+  ranked.sort(function (a, b) { return b.score - a.score; });
+  return ranked;
+}
+
+let smartQueue = [];
+let smartIdx = 0;
+let smartCtx = null;
+
+function buildReason(song, reasons) {
+  const parts = reasons.slice(0, 3);
+  if (parts.length === 0) {
+    return "今天没有太强的天气或时间线索，随机为你挑了一首《" + song.title + "》";
+  }
+  return parts.join("；") + "。";
+}
+
+function contextPrefix(ctx) {
+  const parts = [];
+  if (ctx && ctx.city) parts.push(ctx.city);
+  if (ctx && ctx.temp !== null && ctx.temp !== undefined) parts.push(ctx.temp + "°C");
+  if (ctx && ctx.weather) parts.push(ctx.weather + "天");
+  return parts.length > 0 ? "📍 " + parts.join(" · ") + "\n" : "";
+}
+
+function loadSmart() {
+  const item = smartQueue[smartIdx];
+  const s = songs.find(function (x) { return x.id === item.id; }) || songs[0];
   document.getElementById("song-title").innerText = s.title;
   document.getElementById("song-artist").innerText = s.artist;
+  document.getElementById("song-reason").innerText =
+    contextPrefix(smartCtx) + "💡 " + buildReason(s, item.reasons);
   player.src = s.url;
   player.currentTime = songTime;
-  const isPlaying = localStorage.getItem("isPlaying") === "true";
-
-if (isPlaying) {
-  player.play();
+  if (localStorage.getItem("isPlaying") === "true") {
+    player.play();
+  }
 }
+
+async function initSmart() {
+  const today = todayStr();
+  const cached = localStorage.getItem("smartState");
+  if (cached) {
+    try {
+      const c = JSON.parse(cached);
+      if (c && c.date === today && Array.isArray(c.order) && c.order.length > 0) {
+        smartQueue = c.order;
+        smartCtx = c.ctx || null;
+        smartIdx = parseInt(localStorage.getItem("smartIdx"), 10) || 0;
+        if (smartIdx >= smartQueue.length) smartIdx = 0;
+        loadSmart();
+        return;
+      }
+    } catch (e) { /* 忽略损坏的缓存 */ }
+  }
+  const ctx = await buildContext();
+  smartCtx = ctx;
+  smartQueue = rankSongs(songs, ctx);
+  smartIdx = 0;
+  localStorage.setItem("smartState", JSON.stringify({ date: today, ctx: ctx, order: smartQueue }));
+  localStorage.setItem("smartIdx", "0");
+  loadSmart();
 }
 
 function nextSong() {
-  currentIndex++;
-
-  if (currentIndex >= playQueue.length) {
-    initQueue(); // 全部播完 → 重新洗牌
-    currentIndex = 0;
+  smartIdx++;
+  if (smartIdx >= smartQueue.length) {
+    const now = new Date();
+    const ctx = smartCtx || {
+      period: getPeriod(now.getHours()),
+      season: getSeason(now.getMonth() + 1),
+      hour: now.getHours(),
+      weekday: now.getDay(),
+      weekend: (now.getDay() === 0 || now.getDay() === 6),
+      night: (now.getHours() >= 19 || now.getHours() < 5),
+      weather: null,
+      temp: null,
+      wind: null,
+      city: null
+    };
+    smartQueue = rankSongs(songs, ctx);
+    smartIdx = 0;
   }
-
-  songTime = 0;
-  localStorage.setItem("songTime", 0);
-  localStorage.setItem("currentIndex", currentIndex);
-  loadSong();
+  localStorage.setItem("smartIdx", String(smartIdx));
+  loadSmart();
 }
 
 // 记住播放进度
-player.addEventListener("timeupdate", () => {
+player.addEventListener("timeupdate", function () {
   localStorage.setItem("songTime", player.currentTime);
 });
 
-player.addEventListener("ended", () => {
+player.addEventListener("ended", function () {
   localStorage.setItem("isPlaying", "true");
   nextSong();
 });
 
-player.addEventListener("play", () => {
+player.addEventListener("play", function () {
   localStorage.setItem("isPlaying", "true");
 });
 
-player.addEventListener("pause", () => {
+player.addEventListener("pause", function () {
   localStorage.setItem("isPlaying", "false");
 });
 
-loadSong();
-  // 📜 今日诗词 API
-  function loadPoem() {
-    fetch("https://v1.jinrishici.com/all.json")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("poem-content").innerText = data.content;
-        document.getElementById("poem-info").innerText =
-          `—— ${data.author}《${data.origin}》`;
-      })
-      .catch(() => {
-        document.getElementById("poem-content").innerText = "获取失败";
-      });
-  }
+initSmart();
 
-  loadPoem();
+// ==================== 今日诗词 ====================
+function loadPoem() {
+  fetch("https://v1.jinrishici.com/all.json")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      document.getElementById("poem-content").innerText = data.content;
+      document.getElementById("poem-info").innerText =
+        "—— " + data.author + "《" + data.origin + "》";
+    })
+    .catch(function () {
+      document.getElementById("poem-content").innerText = "获取失败";
+    });
+}
+
+loadPoem();
 </script>
 
 <style>
@@ -3318,7 +6452,19 @@ loadSong();
     font-size: 0.8rem;
     opacity: 0.7;
   }
+
+  .song-reason {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 0.5rem;
+    line-height: 1.7;
+    background: rgba(255, 143, 171, 0.12);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-color);
+  }
 </style>
+
 
 <!-- ====== 运行时间 + 文章数统计 ====== -->
 <script>

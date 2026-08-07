@@ -361,7 +361,7 @@
           </time>
           <h2 class="archive-card-title">Hello World</h2>
           
-            <p class="archive-card-excerpt">A simple test.  千里之行，始于足下</p>
+            <p class="archive-card-excerpt">A simple test. 千里之行，始于足下</p>
           
           <div class="archive-card-meta">
             <span><i class="iconfont icon-clock-fill"></i>3 min read</span>
@@ -5814,6 +5814,7 @@ const PERIODS = [
 ];
 
 let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
+let songId = localStorage.getItem("songId") || "";
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
@@ -6017,7 +6018,7 @@ function contextPrefix(ctx) {
   return parts.length > 0 ? "📍 " + parts.join(" · ") + "\n" : "";
 }
 
-function loadSmart() {
+function loadSmart(resume) {
   const item = smartQueue[smartIdx];
   const s = songs.find(function (x) { return x.id === item.id; }) || songs[0];
   document.getElementById("song-title").innerText = s.title;
@@ -6025,7 +6026,17 @@ function loadSmart() {
   document.getElementById("song-reason").innerText =
     contextPrefix(smartCtx) + "💡 " + buildReason(s, item.reasons);
   player.src = s.url;
-  player.currentTime = songTime;
+  const sameSong = (songId === String(s.id));
+  songId = String(s.id);
+  localStorage.setItem("songId", songId);
+  if (resume && sameSong && songTime > 0) {
+    // 刷新页面：同一首歌才续播
+    player.currentTime = songTime;
+  } else {
+    // 换歌/新的一天：从头开始
+    player.currentTime = 0;
+    localStorage.setItem("songTime", "0");
+  }
   if (localStorage.getItem("isPlaying") === "true") {
     player.play();
   }
@@ -6042,7 +6053,7 @@ async function initSmart() {
         smartCtx = c.ctx || null;
         smartIdx = parseInt(localStorage.getItem("smartIdx"), 10) || 0;
         if (smartIdx >= smartQueue.length) smartIdx = 0;
-        loadSmart();
+        loadSmart(true);
         return;
       }
     } catch (e) { /* 忽略损坏的缓存 */ }
@@ -6053,7 +6064,7 @@ async function initSmart() {
   smartIdx = 0;
   localStorage.setItem("smartState", JSON.stringify({ date: today, ctx: ctx, order: smartQueue }));
   localStorage.setItem("smartIdx", "0");
-  loadSmart();
+  loadSmart(true);
 }
 
 function nextSong() {
@@ -6076,7 +6087,7 @@ function nextSong() {
     smartIdx = 0;
   }
   localStorage.setItem("smartIdx", String(smartIdx));
-  loadSmart();
+  loadSmart(false);
 }
 
 // 记住播放进度

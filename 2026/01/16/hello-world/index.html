@@ -21,12 +21,12 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A simple test.  千里之行，始于足下">
+    <meta name="description" content="A simple test. 千里之行，始于足下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello World">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/01/16/hello-world/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="A simple test.  千里之行，始于足下">
+<meta property="og:description" content="A simple test. 千里之行，始于足下">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-16T07:26:36.505Z">
 <meta property="article:modified_time" content="2026-08-07T10:08:31.851Z">
@@ -436,21 +436,22 @@
             
               <div class="markdown-body">
                 
-                <p>A simple test. </p>
+                <p>A simple test.</p>
 <p>千里之行，始于足下</p>
 <span id="more"></span>
 <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
                 
@@ -6099,6 +6100,7 @@ const PERIODS = [
 ];
 
 let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
+let songId = localStorage.getItem("songId") || "";
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
@@ -6302,7 +6304,7 @@ function contextPrefix(ctx) {
   return parts.length > 0 ? "📍 " + parts.join(" · ") + "\n" : "";
 }
 
-function loadSmart() {
+function loadSmart(resume) {
   const item = smartQueue[smartIdx];
   const s = songs.find(function (x) { return x.id === item.id; }) || songs[0];
   document.getElementById("song-title").innerText = s.title;
@@ -6310,7 +6312,17 @@ function loadSmart() {
   document.getElementById("song-reason").innerText =
     contextPrefix(smartCtx) + "💡 " + buildReason(s, item.reasons);
   player.src = s.url;
-  player.currentTime = songTime;
+  const sameSong = (songId === String(s.id));
+  songId = String(s.id);
+  localStorage.setItem("songId", songId);
+  if (resume && sameSong && songTime > 0) {
+    // 刷新页面：同一首歌才续播
+    player.currentTime = songTime;
+  } else {
+    // 换歌/新的一天：从头开始
+    player.currentTime = 0;
+    localStorage.setItem("songTime", "0");
+  }
   if (localStorage.getItem("isPlaying") === "true") {
     player.play();
   }
@@ -6327,7 +6339,7 @@ async function initSmart() {
         smartCtx = c.ctx || null;
         smartIdx = parseInt(localStorage.getItem("smartIdx"), 10) || 0;
         if (smartIdx >= smartQueue.length) smartIdx = 0;
-        loadSmart();
+        loadSmart(true);
         return;
       }
     } catch (e) { /* 忽略损坏的缓存 */ }
@@ -6338,7 +6350,7 @@ async function initSmart() {
   smartIdx = 0;
   localStorage.setItem("smartState", JSON.stringify({ date: today, ctx: ctx, order: smartQueue }));
   localStorage.setItem("smartIdx", "0");
-  loadSmart();
+  loadSmart(true);
 }
 
 function nextSong() {
@@ -6361,7 +6373,7 @@ function nextSong() {
     smartIdx = 0;
   }
   localStorage.setItem("smartIdx", String(smartIdx));
-  loadSmart();
+  loadSmart(false);
 }
 
 // 记住播放进度

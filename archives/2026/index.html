@@ -408,7 +408,7 @@
             <p class="archive-card-excerpt">北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第五讲：Flow</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>21 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>20 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -427,10 +427,10 @@
           </time>
           <h2 class="archive-card-title">随机算法</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十一章：随机算法</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>39 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>38 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -449,10 +449,10 @@
           </time>
           <h2 class="archive-card-title">网络流</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第七章：网络流</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第七章：网络流</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>57 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>54 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -471,10 +471,10 @@
           </time>
           <h2 class="archive-card-title">近似算法</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十章：近似算法</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十章：近似算法</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>35 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>34 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -493,10 +493,10 @@
           </time>
           <h2 class="archive-card-title">NP完全</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第九章：NP完全</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第九章：NP完全</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>48 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>46 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -515,10 +515,10 @@
           </time>
           <h2 class="archive-card-title">问题复杂度</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第八章：问题复杂度</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第八章：问题复杂度</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>43 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>42 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -5974,6 +5974,7 @@ const PERIODS = [
 ];
 
 let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
+let songId = localStorage.getItem("songId") || "";
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
@@ -6177,7 +6178,7 @@ function contextPrefix(ctx) {
   return parts.length > 0 ? "📍 " + parts.join(" · ") + "\n" : "";
 }
 
-function loadSmart() {
+function loadSmart(resume) {
   const item = smartQueue[smartIdx];
   const s = songs.find(function (x) { return x.id === item.id; }) || songs[0];
   document.getElementById("song-title").innerText = s.title;
@@ -6185,7 +6186,17 @@ function loadSmart() {
   document.getElementById("song-reason").innerText =
     contextPrefix(smartCtx) + "💡 " + buildReason(s, item.reasons);
   player.src = s.url;
-  player.currentTime = songTime;
+  const sameSong = (songId === String(s.id));
+  songId = String(s.id);
+  localStorage.setItem("songId", songId);
+  if (resume && sameSong && songTime > 0) {
+    // 刷新页面：同一首歌才续播
+    player.currentTime = songTime;
+  } else {
+    // 换歌/新的一天：从头开始
+    player.currentTime = 0;
+    localStorage.setItem("songTime", "0");
+  }
   if (localStorage.getItem("isPlaying") === "true") {
     player.play();
   }
@@ -6202,7 +6213,7 @@ async function initSmart() {
         smartCtx = c.ctx || null;
         smartIdx = parseInt(localStorage.getItem("smartIdx"), 10) || 0;
         if (smartIdx >= smartQueue.length) smartIdx = 0;
-        loadSmart();
+        loadSmart(true);
         return;
       }
     } catch (e) { /* 忽略损坏的缓存 */ }
@@ -6213,7 +6224,7 @@ async function initSmart() {
   smartIdx = 0;
   localStorage.setItem("smartState", JSON.stringify({ date: today, ctx: ctx, order: smartQueue }));
   localStorage.setItem("smartIdx", "0");
-  loadSmart();
+  loadSmart(true);
 }
 
 function nextSong() {
@@ -6236,7 +6247,7 @@ function nextSong() {
     smartIdx = 0;
   }
   localStorage.setItem("smartIdx", String(smartIdx));
-  loadSmart();
+  loadSmart(false);
 }
 
 // 记住播放进度

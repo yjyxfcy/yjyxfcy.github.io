@@ -333,7 +333,7 @@
         
         
         
-          19 分钟
+          18 分钟
         
       </span>
     
@@ -534,47 +534,120 @@
                 <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第四讲：Language Modelling</p>
 <span id="more"></span>
-<h3 id="一些补充"><a href="#一些补充" class="headerlink" title="一些补充"></a>一些补充</h3><p>生成模型与判别模型：<br><img src="4.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>这里的内容主要是对ai引论中划分训练集、验证集与测试集的回顾，只不过这里将validation set称作development set，本质是同一个东西<br>还有经典的K折交叉检验<br><img src="4.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h3 id="什么是语言模型"><a href="#什么是语言模型" class="headerlink" title="什么是语言模型"></a>什么是语言模型</h3><p>我们先看几句话：<br>the dog barks<br>the dog laughs<br>dog the dog bark a laugh smile<br>前两句话看起来还比较有章法，但第三句就有点“胡言乱语”了<br>从概率论角度，那么出现第三句话的概率远低于前两句！<br>语言模型就是要给所有可能的词序列(句子)分配一个概率，使得合理的句子概率高，不合理的句子概率低</p>
-<p>用严谨的概率论来说，假如有一个有限的词表$V$,所有由这些词构成的句子(包括不同长度)组成集合$S$<br>我们想要一个概率分布$p$满足：<br>$\sum_{s \in S}p(s)&#x3D;1,p(s)\ge 0$<br>其中p(the dog barks)很大，p(the dog laughs)较大，p(dog the dog bark a laugh smile)极小</p>
-<h3 id="为什么需要语言模型"><a href="#为什么需要语言模型" class="headerlink" title="为什么需要语言模型"></a>为什么需要语言模型</h3><p>语言模型可以解决许多任务：<br>语音识别，例如recognize speech 与 wreck a nice beach 发音相似，但语言模型会选择更合理的那个<br>还有机器翻译、文本生成、句子补全等，不再一一介绍<br><img src="4.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>上述所有情况都满足此公式<br>其中比较有意思的是surprisal理论，一个词在上下文中出现的概率越低，其信息量&#x2F;惊奇度越高，读者理解起来就越困难<br>$Surprisal(\omega)&#x3D;-log_2 p(\omega|history_{\omega})$</p>
-<h3 id="N-gram-语言模型"><a href="#N-gram-语言模型" class="headerlink" title="N-gram 语言模型"></a>N-gram 语言模型</h3><p>句子作为词语序列：$\omega_1,\omega_2,…,\omega_n$<br>句子作为随机变量序列$X_1,X_2,…,X_n$<br>由概率的链式法则，我们有：<br><img src="4.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>但是当$n$很大的时候，似乎不好处理？<br>所以我们要做(马尔可夫)假设！假设当前词的概率分布只与先前的几个词相关，于是就有了N-gram模型<br>完全不考虑历史的模型称作unigram,考虑一个的是bigram，两个的是trigram，三个以上就有4-gram,5-gram等……<br><img src="4.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="一些补充">一些补充</h3>
+<p>生成模型与判别模型：<br>
+<img src="4.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>这里的内容主要是对ai引论中划分训练集、验证集与测试集的回顾，只不过这里将validation set称作development set，本质是同一个东西<br>
+还有经典的K折交叉检验<br>
+<img src="4.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="什么是语言模型">什么是语言模型</h3>
+<p>我们先看几句话：<br>
+the dog barks<br>
+the dog laughs<br>
+dog the dog bark a laugh smile<br>
+前两句话看起来还比较有章法，但第三句就有点“胡言乱语”了<br>
+从概率论角度，那么出现第三句话的概率远低于前两句！<br>
+语言模型就是要给所有可能的词序列(句子)分配一个概率，使得合理的句子概率高，不合理的句子概率低</p>
+<p>用严谨的概率论来说，假如有一个有限的词表$V$,所有由这些词构成的句子(包括不同长度)组成集合$S$<br>
+我们想要一个概率分布$p$满足：<br>
+$\sum_{s \in S}p(s)=1,p(s)\ge 0$<br>
+其中p(the dog barks)很大，p(the dog laughs)较大，p(dog the dog bark a laugh smile)极小</p>
+<h3 id="为什么需要语言模型">为什么需要语言模型</h3>
+<p>语言模型可以解决许多任务：<br>
+语音识别，例如recognize speech 与 wreck a nice beach 发音相似，但语言模型会选择更合理的那个<br>
+还有机器翻译、文本生成、句子补全等，不再一一介绍<br>
+<img src="4.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>上述所有情况都满足此公式<br>
+其中比较有意思的是surprisal理论，一个词在上下文中出现的概率越低，其信息量/惊奇度越高，读者理解起来就越困难<br>
+$Surprisal(\omega)=-log_2 p(\omega|history_{\omega})$</p>
+<h3 id="N-gram-语言模型">N-gram 语言模型</h3>
+<p>句子作为词语序列：$\omega_1,\omega_2,…,\omega_n$<br>
+句子作为随机变量序列$X_1,X_2,…,X_n$<br>
+由概率的链式法则，我们有：<br>
+<img src="4.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>但是当$n$很大的时候，似乎不好处理？<br>
+所以我们要做(马尔可夫)假设！假设当前词的概率分布只与先前的几个词相关，于是就有了N-gram模型<br>
+完全不考虑历史的模型称作unigram,考虑一个的是bigram，两个的是trigram，三个以上就有4-gram,5-gram等……<br>
+<img src="4.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <img src="4.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>上面就是trigram的定义及例子，注意此处标点符号和终止符STOP也被算作了一个词</p>
-<p>给定一个语料库，我们可以统计各种N-gram的出现次数<br><img src="4.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>所以训练数据越多模型一定越好吗？并不一定<br>这是由于数据的稀疏性，某些N-gram从未出现，导致概率为0<br>一般trigram就足够用了</p>
-<h3 id="如何评估模型"><a href="#如何评估模型" class="headerlink" title="如何评估模型"></a>如何评估模型</h3><p>一个优秀的语言模型应该为更可能出现在该语言中的句子分配较高概率<br>最优语言模型应该能对未见过的测试集进行最佳预测</p>
-<p>对于某个数据集$D$,我们可以用语言模型：<br>计算每个句子出现的概率，$p(s)&#x3D;p(\omega_1,\omega_2,…,\omega_n)$<br>对于整个数据集进行似然估计，计算$\Pi_{s \in D}p(s)$<br>然后对于$D$中共$M$个词(包括STOP)进行归一化，得到$(\Pi_{s \in D}p(s))^{\dfrac{1}{M}}$<br>对其取对数，得到$\dfrac{1}{M} \Sigma_{s \in D}log p(s)$<br>极大似然估计等价于最小化交叉熵损失$-\dfrac{1}{M} \Sigma_{s \in D}log p(s)$</p>
-<p>现在我们定义困惑度$perplexity(D)&#x3D;2^{-\dfrac{1}{M} \Sigma_{s \in D}log p(s)}$<br>极大似然估计越大，困惑度越低，代表模型预测的越好</p>
-<p>困惑度可以理解为分支因子的平均值：模型在每个位置上平均有多少个等概率的词可以选择<br>如果困惑度为1，代表下一个出现的词只有一种可能，于是模型就非常精确<br>如果模型满足均匀分布，所有$p&#x3D;\dfrac{1}{|V|}$，那么困惑度即为$|V|$，也即每次都得在$|V|$个词中随机选择<br>一般情况下困惑度$\ge 1$，好的语言模型能把困惑度控制在$1.4 \sim 1.5$</p>
-<p>注意事项：<br>比较困惑度时，词汇表必须相同。<br>困惑度并不完全等同于下游任务性能，但它是常用的内部评价指标。</p>
-<p>N-gram：N到底为多少更优？<br>N太小无法学习语言特征，N太大会有成本问题，概率为0问题……</p>
-<h3 id="处理未见事件"><a href="#处理未见事件" class="headerlink" title="处理未见事件"></a>处理未见事件</h3><img src="4.8.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<p>上面是一个例子，测试集中”you like”和”hate”在训练集中都没有，我们只能将其概率设为0，但是这些句子其实是说得通的<br>所以我们应该对这种未见事件赋予一定的概率！<br>方法：<br>回退gram(back-off，三元退二元，二元退一元)<br>直接生产出一个就叫做”unknown”的词<br>进行平滑操作</p>
+<p>给定一个语料库，我们可以统计各种N-gram的出现次数<br>
+<img src="4.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>所以训练数据越多模型一定越好吗？并不一定<br>
+这是由于数据的稀疏性，某些N-gram从未出现，导致概率为0<br>
+一般trigram就足够用了</p>
+<h3 id="如何评估模型">如何评估模型</h3>
+<p>一个优秀的语言模型应该为更可能出现在该语言中的句子分配较高概率<br>
+最优语言模型应该能对未见过的测试集进行最佳预测</p>
+<p>对于某个数据集$D$,我们可以用语言模型：<br>
+计算每个句子出现的概率，$p(s)=p(\omega_1,\omega_2,…,\omega_n)$<br>
+对于整个数据集进行似然估计，计算$\Pi_{s \in D}p(s)$<br>
+然后对于$D$中共$M$个词(包括STOP)进行归一化，得到$(\Pi_{s \in D}p(s))^{\dfrac{1}{M}}$<br>
+对其取对数，得到$\dfrac{1}{M} \Sigma_{s \in D}log p(s)$<br>
+极大似然估计等价于最小化交叉熵损失$-\dfrac{1}{M} \Sigma_{s \in D}log p(s)$</p>
+<p>现在我们定义困惑度$perplexity(D)=2^{-\dfrac{1}{M} \Sigma_{s \in D}log p(s)}$<br>
+极大似然估计越大，困惑度越低，代表模型预测的越好</p>
+<p>困惑度可以理解为分支因子的平均值：模型在每个位置上平均有多少个等概率的词可以选择<br>
+如果困惑度为1，代表下一个出现的词只有一种可能，于是模型就非常精确<br>
+如果模型满足均匀分布，所有$p=\dfrac{1}{|V|}$，那么困惑度即为$|V|$，也即每次都得在$|V|$个词中随机选择<br>
+一般情况下困惑度$\ge 1$，好的语言模型能把困惑度控制在$1.4 \sim 1.5$</p>
+<p>注意事项：<br>
+比较困惑度时，词汇表必须相同。<br>
+困惑度并不完全等同于下游任务性能，但它是常用的内部评价指标。</p>
+<p>N-gram：N到底为多少更优？<br>
+N太小无法学习语言特征，N太大会有成本问题，概率为0问题……</p>
+<h3 id="处理未见事件">处理未见事件</h3>
+<img src="4.8.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<p>上面是一个例子，测试集中&quot;you like&quot;和&quot;hate&quot;在训练集中都没有，我们只能将其概率设为0，但是这些句子其实是说得通的<br>
+所以我们应该对这种未见事件赋予一定的概率！<br>
+方法：<br>
+回退gram(back-off，三元退二元，二元退一元)<br>
+直接生产出一个就叫做&quot;unknown&quot;的词<br>
+进行平滑操作</p>
 <img src="4.9.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<p>也可以采用插值法，将3、2、1gram的概率加权平均，所得结果依旧是一个概率分布<br>问题在于$\lambda$如何设置？<br>一种方法是继续MLE，但是很困难<br>可以在验证集调？</p>
-<h4 id="stupid-back-off"><a href="#stupid-back-off" class="headerlink" title="stupid back-off"></a>stupid back-off</h4><img src="4.10.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<p>当高阶不存在时，回退低阶估计<br>0.4是一个精心设计的数字()效果很好<br>修改之后的$s$已经不是概率模型了</p>
-<h4 id="smoothing"><a href="#smoothing" class="headerlink" title="smoothing"></a>smoothing</h4><p>对于每个可能的n-gram都加上默认计数1<br>听起来很简单！这就是著名的laplace smoothing<br><img src="4.11.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>也可以采用插值法，将3、2、1gram的概率加权平均，所得结果依旧是一个概率分布<br>
+问题在于$\lambda$如何设置？<br>
+一种方法是继续MLE，但是很困难<br>
+可以在验证集调？</p>
+<h4 id="stupid-back-off">stupid back-off</h4>
+<img src="4.10.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<p>当高阶不存在时，回退低阶估计<br>
+0.4是一个精心设计的数字()效果很好<br>
+修改之后的$s$已经不是概率模型了</p>
+<h4 id="smoothing">smoothing</h4>
+<p>对于每个可能的n-gram都加上默认计数1<br>
+听起来很简单！这就是著名的laplace smoothing<br>
+<img src="4.11.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>存在问题：可能对于未见事件赋予了过高的权重</p>
-<h5 id="Good-Turing-Discounting"><a href="#Good-Turing-Discounting" class="headerlink" title="Good-Turing Discounting"></a>Good-Turing Discounting</h5><p>一个直觉思路：利用已出现一次的n-gram来辅助未见事件的计数<br>$N_r$表示频率为$r$的单词数量，将真实计数$r$调整为$r^{\ast}$</p>
-<p>$r^{\ast}&#x3D;(r+1)\dfrac{N_{r+1}}{N_r}$</p>
-<p>这样一来，所有未出现事件分配的概率是$\dfrac{N_1}{N_{all}}$<br>$r$较大时，$N_{r-1}$通常为$0$，可以采取曲线拟合或线性回归等多种方法</p>
-<p>在测试阶段，我们如何确定某个单词在训练集中出现$r$次的可能性？<br>假设我们可以随机删除训练集中的某个单词来构建新的伪训练集：每次删除一个单词$w$时，若已知该单词在原始集中出现$r+1$次，则在新训练集中应出现$r$次。<br>原始集中$r+1$个单词的总出现次数为$N_{r+1}(r+1)$。<br>经过多次删除操作后，新集合中这些单词的数量可视为$N_r$，而这些单词的可能平均出现次数应为$(r+1)\dfrac{N_{r+1}}{N_r}$</p>
+<h5 id="Good-Turing-Discounting">Good-Turing Discounting</h5>
+<p>一个直觉思路：利用已出现一次的n-gram来辅助未见事件的计数<br>
+$N_r$表示频率为$r$的单词数量，将真实计数$r$调整为$r^{\ast}$</p>
+<p>$r^{\ast}=(r+1)\dfrac{N_{r+1}}{N_r}$</p>
+<p>这样一来，所有未出现事件分配的概率是$\dfrac{N_1}{N_{all}}$<br>
+$r$较大时，$N_{r-1}$通常为$0$，可以采取曲线拟合或线性回归等多种方法</p>
+<p>在测试阶段，我们如何确定某个单词在训练集中出现$r$次的可能性？<br>
+假设我们可以随机删除训练集中的某个单词来构建新的伪训练集：每次删除一个单词$w$时，若已知该单词在原始集中出现$r+1$次，则在新训练集中应出现$r$次。<br>
+原始集中$r+1$个单词的总出现次数为$N_{r+1}(r+1)$。<br>
+经过多次删除操作后，新集合中这些单词的数量可视为$N_r$，而这些单词的可能平均出现次数应为$(r+1)\dfrac{N_{r+1}}{N_r}$</p>
 <img src="4.12.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<p>上面是重新分配之后的结果<br>
+注意到大多数情况下$r^{\ast}=r-0.75$<br>
+所以我们或许可以对每次计数减去一个固定数值$d$？<br>
+<img src="4.13.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h5 id="Kneser-Ney-Smoothing">Kneser-Ney Smoothing</h5>
+<p>对于上述方法的一种综合，结合了线性插值和回退概率，广受欢迎，限于篇幅这里不再赘述</p>
+<h3 id="总结：N-gram模型的优缺点">总结：N-gram模型的优缺点</h3>
+<p>优点：<br>
+构建简单，可处理大规模语料<br>
+概率评分自然适用于许多任务<br>
+平滑技术能有效处理稀疏性</p>
+<p>缺点：<br>
+无法捕捉长距离依赖(受限于 n 的大小)<br>
+无法处理同义词、语义相似性(词被视为原子符号)<br>
+参数数量随 n 指数增长，存储和计算成本高<br>
+数据稀疏问题依然存在，尤其高阶模型</p>
+<h6 id="笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解">笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解</h6>
 
-<p>上面是重新分配之后的结果<br>注意到大多数情况下$r^{\ast}&#x3D;r-0.75$<br>所以我们或许可以对每次计数减去一个固定数值$d$？<br><img src="4.13.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h5 id="Kneser-Ney-Smoothing"><a href="#Kneser-Ney-Smoothing" class="headerlink" title="Kneser-Ney Smoothing"></a>Kneser-Ney Smoothing</h5><p>对于上述方法的一种综合，结合了线性插值和回退概率，广受欢迎，限于篇幅这里不再赘述</p>
-<h3 id="总结：N-gram模型的优缺点"><a href="#总结：N-gram模型的优缺点" class="headerlink" title="总结：N-gram模型的优缺点"></a>总结：N-gram模型的优缺点</h3><p>优点：<br>构建简单，可处理大规模语料<br>概率评分自然适用于许多任务<br>平滑技术能有效处理稀疏性</p>
-<p>缺点：<br>无法捕捉长距离依赖(受限于 n 的大小)<br>无法处理同义词、语义相似性(词被视为原子符号)<br>参数数量随 n 指数增长，存储和计算成本高<br>数据稀疏问题依然存在，尤其高阶模型</p>
-<h6 id="笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解"><a href="#笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解" class="headerlink" title="笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解"></a>笔者按：到目前为止我们似乎一直在数数？完全没有高大上的方法，如何训练更大的模型？且听下回分解</h6>
                 
               </div>
             
@@ -848,11 +921,18 @@
   </div>
 
   <!-- 今日诗词 -->
-  <div class="daily-card">
-    <h3>📜 每日诗词</h3>
-    <div id="poem-content" class="poem-content">加载中...</div>
-    <div id="poem-info" class="poem-info"></div>
-    <button class="daily-btn" onclick="loadPoem()">换一首</button>
+  <div class="daily-card poem-card">
+    <h3 class="poem-title">📜 每日诗词 <span class="poem-seal">今日诗</span></h3>
+    <div id="poem-reason" class="poem-reason"></div>
+    <div class="poem-scroll">
+      <div id="poem-content" class="poem-content">正在铺纸研墨…</div>
+      <div id="poem-info" class="poem-info"></div>
+    </div>
+    <div class="poem-actions">
+      <button id="poem-read-btn" class="poem-btn" onclick="toggleRead()">🔊 朗读</button>
+      <button id="poem-copy-btn" class="poem-btn" onclick="copyPoem()">📋 复制</button>
+      <button class="daily-btn" onclick="nextPoem()">换一首</button>
+    </div>
   </div>
 </div>
 
@@ -6303,6 +6383,12 @@ async function fetchWeather(lat, lon) {
   }
 }
 
+let contextPromise = null;
+function getContextOnce() {
+  if (!contextPromise) contextPromise = buildContext();
+  return contextPromise;
+}
+
 async function buildContext() {
   const now = new Date();
   const ctx = {
@@ -6447,7 +6533,7 @@ async function initSmart() {
       }
     } catch (e) { /* 忽略损坏的缓存 */ }
   }
-  const ctx = await buildContext();
+  const ctx = await getContextOnce();
   smartCtx = ctx;
   smartQueue = rankSongs(songs, ctx);
   smartIdx = 0;
@@ -6500,20 +6586,273 @@ player.addEventListener("pause", function () {
 initSmart();
 
 // ==================== 今日诗词 ====================
-function loadPoem() {
-  fetch("https://v1.jinrishici.com/all.json")
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      document.getElementById("poem-content").innerText = data.content;
-      document.getElementById("poem-info").innerText =
-        "—— " + data.author + "《" + data.origin + "》";
-    })
-    .catch(function () {
-      document.getElementById("poem-content").innerText = "获取失败";
-    });
+// 内置经典诗词库（全部公有领域），每首打好天气/季节/时段标签，
+// 和每日推歌一样结合「位置 + 天气 + 时间」智能挑一首应景的。
+const POEMS = [
+  { c: "床前明月光，疑是地上霜。\n举头望明月，低头思故乡。", a: "李白", o: "静夜思", t: ["夜", "月", "思乡", "孤独"] },
+  { c: "春眠不觉晓，处处闻啼鸟。\n夜来风雨声，花落知多少。", a: "孟浩然", o: "春晓", t: ["春", "清晨", "雨"] },
+  { c: "千山鸟飞绝，万径人踪灭。\n孤舟蓑笠翁，独钓寒江雪。", a: "柳宗元", o: "江雪", t: ["冬", "雪", "孤独"] },
+  { c: "月落乌啼霜满天，江枫渔火对愁眠。\n姑苏城外寒山寺，夜半钟声到客船。", a: "张继", o: "枫桥夜泊", t: ["秋", "夜", "月", "思乡", "孤独"] },
+  { c: "空山新雨后，天气晚来秋。\n明月松间照，清泉石上流。\n竹喧归浣女，莲动下渔舟。\n随意春芳歇，王孙自可留。", a: "王维", o: "山居秋暝", t: ["秋", "雨", "夜", "山水", "宁静"] },
+  { c: "日照香炉生紫烟，遥看瀑布挂前川。\n飞流直下三千尺，疑是银河落九天。", a: "李白", o: "望庐山瀑布", t: ["夏", "晴", "山水", "豪迈"] },
+  { c: "朝辞白帝彩云间，千里江陵一日还。\n两岸猿声啼不住，轻舟已过万重山。", a: "李白", o: "早发白帝城", t: ["清晨", "夏", "晴", "轻快", "山水"] },
+  { c: "好雨知时节，当春乃发生。\n随风潜入夜，润物细无声。\n野径云俱黑，江船火独明。\n晓看红湿处，花重锦官城。", a: "杜甫", o: "春夜喜雨", t: ["春", "雨", "夜"] },
+  { c: "横看成岭侧成峰，远近高低各不同。\n不识庐山真面目，只缘身在此山中。", a: "苏轼", o: "题西林壁", t: ["晴", "山水", "哲理"] },
+  { c: "白日依山尽，黄河入海流。\n欲穷千里目，更上一层楼。", a: "王之涣", o: "登鹳雀楼", t: ["傍晚", "晴", "励志", "豪迈"] },
+  { c: "故人西辞黄鹤楼，烟花三月下扬州。\n孤帆远影碧空尽，唯见长江天际流。", a: "李白", o: "黄鹤楼送孟浩然之广陵", t: ["春", "晴", "送别", "友情", "山水"] },
+  { c: "天门中断楚江开，碧水东流至此回。\n两岸青山相对出，孤帆一片日边来。", a: "李白", o: "望天门山", t: ["夏", "晴", "山水"] },
+  { c: "人闲桂花落，夜静春山空。\n月出惊山鸟，时鸣春涧中。", a: "王维", o: "鸟鸣涧", t: ["春", "夜", "月", "宁静"] },
+  { c: "独坐幽篁里，弹琴复长啸。\n深林人不知，明月来相照。", a: "王维", o: "竹里馆", t: ["夜", "月", "孤独", "宁静"] },
+  { c: "空山不见人，但闻人语响。\n返景入深林，复照青苔上。", a: "王维", o: "鹿柴", t: ["傍晚", "山水", "宁静"] },
+  { c: "红豆生南国，春来发几枝。\n愿君多采撷，此物最相思。", a: "王维", o: "相思", t: ["春", "爱情", "思念"] },
+  { c: "独在异乡为异客，每逢佳节倍思亲。\n遥知兄弟登高处，遍插茱萸少一人。", a: "王维", o: "九月九日忆山东兄弟", t: ["秋", "思乡", "孤独", "重阳"] },
+  { c: "秦时明月汉时关，万里长征人未还。\n但使龙城飞将在，不教胡马度阴山。", a: "王昌龄", o: "出塞", t: ["夜", "月", "边塞", "豪迈"] },
+  { c: "葡萄美酒夜光杯，欲饮琵琶马上催。\n醉卧沙场君莫笑，古来征战几人回。", a: "王翰", o: "凉州词", t: ["夜", "边塞", "豪迈", "酒"] },
+  { c: "渭城朝雨浥轻尘，客舍青青柳色新。\n劝君更尽一杯酒，西出阳关无故人。", a: "王维", o: "送元二使安西", t: ["雨", "清晨", "送别", "友情", "酒"] },
+  { c: "千里黄云白日曛，北风吹雁雪纷纷。\n莫愁前路无知己，天下谁人不识君。", a: "高适", o: "别董大", t: ["冬", "雪", "送别", "励志"] },
+  { c: "北风卷地白草折，胡天八月即飞雪。\n忽如一夜春风来，千树万树梨花开。", a: "岑参", o: "白雪歌送武判官归京（节选）", t: ["冬", "雪"] },
+  { c: "千里莺啼绿映红，水村山郭酒旗风。\n南朝四百八十寺，多少楼台烟雨中。", a: "杜牧", o: "江南春", t: ["春", "雨", "晴"] },
+  { c: "远上寒山石径斜，白云生处有人家。\n停车坐爱枫林晚，霜叶红于二月花。", a: "杜牧", o: "山行", t: ["秋", "傍晚"] },
+  { c: "烟笼寒水月笼沙，夜泊秦淮近酒家。\n商女不知亡国恨，隔江犹唱后庭花。", a: "杜牧", o: "泊秦淮", t: ["夜", "月", "秋", "怀古"] },
+  { c: "清明时节雨纷纷，路上行人欲断魂。\n借问酒家何处有，牧童遥指杏花村。", a: "杜牧", o: "清明", t: ["春", "雨", "清明"] },
+  { c: "锦瑟无端五十弦，一弦一柱思华年。\n庄生晓梦迷蝴蝶，望帝春心托杜鹃。\n沧海月明珠有泪，蓝田日暖玉生烟。\n此情可待成追忆，只是当时已惘然。", a: "李商隐", o: "锦瑟", t: ["夜", "爱情", "回忆", "怅惘"] },
+  { c: "君问归期未有期，巴山夜雨涨秋池。\n何当共剪西窗烛，却话巴山夜雨时。", a: "李商隐", o: "夜雨寄北", t: ["秋", "雨", "夜", "思念"] },
+  { c: "相见时难别亦难，东风无力百花残。\n春蚕到死丝方尽，蜡炬成灰泪始干。\n晓镜但愁云鬓改，夜吟应觉月光寒。\n蓬山此去无多路，青鸟殷勤为探看。", a: "李商隐", o: "无题（节选）", t: ["爱情", "离别", "思念"] },
+  { c: "明月几时有？把酒问青天。\n不知天上宫阙，今夕是何年。", a: "苏轼", o: "水调歌头（节选）", t: ["夜", "月", "中秋", "思念", "豁达"] },
+  { c: "大江东去，浪淘尽，千古风流人物。", a: "苏轼", o: "念奴娇·赤壁怀古（节选）", t: ["夏", "山水", "豪迈", "怀古"] },
+  { c: "莫听穿林打叶声，何妨吟啸且徐行。\n竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。", a: "苏轼", o: "定风波（节选）", t: ["雨", "豁达", "励志"] },
+  { c: "常记溪亭日暮，沉醉不知归路。\n兴尽晚回舟，误入藕花深处。\n争渡，争渡，惊起一滩鸥鹭。", a: "李清照", o: "如梦令", t: ["夏", "傍晚", "轻快", "青春"] },
+  { c: "昨夜雨疏风骤，浓睡不消残酒。\n试问卷帘人，却道海棠依旧。\n知否，知否？应是绿肥红瘦。", a: "李清照", o: "如梦令", t: ["春", "雨", "清晨"] },
+  { c: "花自飘零水自流。一种相思，两处闲愁。\n此情无计可消除，才下眉头，却上心头。", a: "李清照", o: "一剪梅（节选）", t: ["秋", "爱情", "思念", "孤独"] },
+  { c: "寻寻觅觅，冷冷清清，凄凄惨惨戚戚。\n乍暖还寒时候，最难将息。\n三杯两盏淡酒，怎敌他、晚来风急！", a: "李清照", o: "声声慢（节选）", t: ["秋", "风", "孤独", "哀愁"] },
+  { c: "东风夜放花千树，更吹落、星如雨。\n众里寻他千百度，蓦然回首，\n那人却在，灯火阑珊处。", a: "辛弃疾", o: "青玉案·元夕（节选）", t: ["夜", "元宵", "爱情", "思念"] },
+  { c: "醉里挑灯看剑，梦回吹角连营。\n八百里分麾下炙，五十弦翻塞外声，沙场秋点兵。", a: "辛弃疾", o: "破阵子·为陈同甫赋壮词以寄之（节选）", t: ["夜", "秋", "边塞", "豪迈"] },
+  { c: "明月别枝惊鹊，清风半夜鸣蝉。\n稻花香里说丰年，听取蛙声一片。\n七八个星天外，两三点雨山前。\n旧时茅店社林边，路转溪桥忽见。", a: "辛弃疾", o: "西江月·夜行黄沙道中", t: ["夏", "夜", "雨", "月", "宁静"] },
+  { c: "枯藤老树昏鸦，小桥流水人家，古道西风瘦马。\n夕阳西下，断肠人在天涯。", a: "马致远", o: "天净沙·秋思", t: ["秋", "傍晚", "孤独", "思乡"] },
+  { c: "千锤万凿出深山，烈火焚烧若等闲。\n粉骨碎身浑不怕，要留清白在人间。", a: "于谦", o: "石灰吟", t: ["励志", "哲理"] },
+  { c: "咬定青山不放松，立根原在破岩中。\n千磨万击还坚劲，任尔东西南北风。", a: "郑燮", o: "竹石", t: ["励志", "风", "哲理"] },
+  { c: "浩荡离愁白日斜，吟鞭东指即天涯。\n落红不是无情物，化作春泥更护花。", a: "龚自珍", o: "己亥杂诗（其五）", t: ["春", "傍晚", "离别", "励志"] },
+  { c: "离离原上草，一岁一枯荣。\n野火烧不尽，春风吹又生。\n远芳侵古道，晴翠接荒城。\n又送王孙去，萋萋满别情。", a: "白居易", o: "赋得古原草送别", t: ["春", "送别", "励志", "晴"] },
+  { c: "孤山寺北贾亭西，水面初平云脚低。\n几处早莺争暖树，谁家新燕啄春泥。\n乱花渐欲迷人眼，浅草才能没马蹄。\n最爱湖东行不足，绿杨阴里白沙堤。", a: "白居易", o: "钱塘湖春行", t: ["春", "清晨", "晴", "轻快"] },
+  { c: "单车欲问边，属国过居延。\n征蓬出汉塞，归雁入胡天。\n大漠孤烟直，长河落日圆。\n萧关逢候骑，都护在燕然。", a: "王维", o: "使至塞上", t: ["傍晚", "晴", "边塞", "山水"] },
+  { c: "东临碣石，以观沧海。\n水何澹澹，山岛竦峙。\n树木丛生，百草丰茂。\n秋风萧瑟，洪波涌起。\n日月之行，若出其中；\n星汉灿烂，若出其里。\n幸甚至哉，歌以咏志。", a: "曹操", o: "观沧海", t: ["秋", "傍晚", "海", "豪迈"] },
+  { c: "春江潮水连海平，海上明月共潮生。\n滟滟随波千万里，何处春江无月明！", a: "张若虚", o: "春江花月夜（节选）", t: ["春", "夜", "月", "江"] },
+  { c: "君不见黄河之水天上来，奔流到海不复回。\n君不见高堂明镜悲白发，朝如青丝暮成雪。\n人生得意须尽欢，莫使金樽空对月。", a: "李白", o: "将进酒（节选）", t: ["夜", "月", "豪迈", "酒", "哲理"] },
+  { c: "李白乘舟将欲行，忽闻岸上踏歌声。\n桃花潭水深千尺，不及汪伦送我情。", a: "李白", o: "赠汪伦", t: ["夏", "晴", "送别", "友情", "轻快"] }
+];
+
+let poemQueue = [];
+let poemIdx = 0;
+let poemCtx = null;
+let poemTyping = null;
+let poemSpeaking = false;
+
+function poemScore(poem, ctx, jitter) {
+  let score = 0;
+  const reasons = [];
+  const push = function (r) { if (reasons.length < 3) reasons.push(r); };
+  const tags = poem.t;
+
+  if (ctx.weather === "雨" && tags.indexOf("雨") >= 0) {
+    score += 30;
+    push("今天有雨，雨声里读诗正相宜");
+  }
+  if (ctx.weather === "雪" && tags.indexOf("雪") >= 0) {
+    score += 30;
+    push("今日落雪，来一首写雪的诗");
+  }
+  if (ctx.weather === "晴" && tags.indexOf("晴") >= 0) {
+    score += 8;
+    push("天气晴朗，适合一首明快的诗");
+  }
+  if (ctx.night && tags.indexOf("夜") >= 0) {
+    score += 15;
+    push("夜深了，月色与诗更配");
+  }
+  if (ctx.night && tags.indexOf("月") >= 0) {
+    score += 8;
+  }
+  if (tags.indexOf(ctx.season) >= 0) {
+    score += 12;
+    push("现在正是" + ctx.season + "天，这首诗应景");
+  }
+  if (ctx.period.key === "清晨" && tags.indexOf("清晨") >= 0) {
+    score += 10;
+    push("清晨宜读诗，给今天一个温柔的开头");
+  }
+  if (ctx.period.key === "傍晚" && tags.indexOf("傍晚") >= 0) {
+    score += 10;
+    push("傍晚适合慢下来，读一首诗");
+  }
+  if (ctx.weekend && (tags.indexOf("轻快") >= 0 || tags.indexOf("青春") >= 0)) {
+    score += 6;
+    push("周末了，来点轻快的诗意");
+  }
+  score += jitter;
+  return { score: score, reasons: reasons };
 }
 
-loadPoem();
+function rankPoems(ctx) {
+  const ranked = POEMS.map(function (p, i) {
+    const r = poemScore(p, ctx, Math.random() * 10);
+    return { i: i, score: r.score, reasons: r.reasons };
+  });
+  ranked.sort(function (a, b) { return b.score - a.score; });
+  return ranked;
+}
+
+function fallbackPoemCtx() {
+  const now = new Date();
+  return {
+    period: getPeriod(now.getHours()),
+    season: getSeason(now.getMonth() + 1),
+    hour: now.getHours(),
+    weekday: now.getDay(),
+    weekend: (now.getDay() === 0 || now.getDay() === 6),
+    night: (now.getHours() >= 19 || now.getHours() < 5),
+    weather: null,
+    temp: null,
+    wind: null,
+    city: null
+  };
+}
+
+function typePoem(poem, reasons) {
+  if (poemTyping) { clearInterval(poemTyping); poemTyping = null; }
+  const el = document.getElementById("poem-content");
+  const infoEl = document.getElementById("poem-info");
+  const reasonEl = document.getElementById("poem-reason");
+  reasonEl.innerText = "💡 " + (reasons.length > 0
+    ? reasons.slice(0, 2).join("；") + "。"
+    : "今日随缘抽一首，读到就是缘分。");
+  infoEl.innerText = "";
+  el.classList.add("typing");
+  el.innerText = "";
+  const full = poem.c;
+  let idx = 0;
+  const speed = Math.max(12, Math.min(45, Math.round(4200 / full.length)));
+  poemTyping = setInterval(function () {
+    idx++;
+    el.innerText = full.slice(0, idx);
+    if (idx >= full.length) {
+      clearInterval(poemTyping);
+      poemTyping = null;
+      el.classList.remove("typing");
+      infoEl.innerText = "—— " + poem.a + "《" + poem.o + "》";
+    }
+  }, speed);
+}
+
+function renderPoem() {
+  if (!poemQueue.length) return;
+  const item = poemQueue[poemIdx];
+  typePoem(POEMS[item.i], item.reasons);
+}
+
+function nextPoem() {
+  if (!poemQueue.length) {
+    poemQueue = rankPoems(poemCtx || fallbackPoemCtx());
+    poemIdx = 0;
+  } else {
+    poemIdx++;
+    if (poemIdx >= poemQueue.length) {
+      poemQueue = rankPoems(poemCtx || fallbackPoemCtx());
+      poemIdx = 0;
+    }
+  }
+  localStorage.setItem("poemIdx", String(poemIdx));
+  renderPoem();
+}
+
+async function initPoem() {
+  const today = todayStr();
+  const cached = localStorage.getItem("poemState");
+  if (cached) {
+    try {
+      const c = JSON.parse(cached);
+      if (c && c.date === today && Array.isArray(c.order) && c.order.length > 0) {
+        poemQueue = c.order;
+        poemCtx = c.ctx || null;
+        poemIdx = parseInt(localStorage.getItem("poemIdx"), 10) || 0;
+        if (poemIdx >= poemQueue.length) poemIdx = 0;
+        renderPoem();
+        return;
+      }
+    } catch (e) { /* 忽略损坏的缓存 */ }
+  }
+  const ctx = await getContextOnce();
+  poemCtx = ctx;
+  poemQueue = rankPoems(ctx);
+  poemIdx = 0;
+  localStorage.setItem("poemState", JSON.stringify({ date: today, ctx: ctx, order: poemQueue }));
+  localStorage.setItem("poemIdx", "0");
+  renderPoem();
+}
+
+function currentPoem() {
+  if (!poemQueue.length || !poemQueue[poemIdx]) return null;
+  return POEMS[poemQueue[poemIdx].i];
+}
+
+function toggleRead() {
+  const btn = document.getElementById("poem-read-btn");
+  if (typeof speechSynthesis === "undefined") {
+    btn.innerText = "浏览器不支持";
+    return;
+  }
+  if (poemSpeaking) {
+    speechSynthesis.cancel();
+    poemSpeaking = false;
+    btn.innerText = "🔊 朗读";
+    return;
+  }
+  const poem = currentPoem();
+  if (!poem) return;
+  const u = new SpeechSynthesisUtterance(
+    poem.c.replace(/\n/g, "，") + "。" + poem.o + "，" + poem.a
+  );
+  u.lang = "zh-CN";
+  u.rate = 0.9;
+  u.onend = function () { poemSpeaking = false; btn.innerText = "🔊 朗读"; };
+  u.onerror = function () { poemSpeaking = false; btn.innerText = "🔊 朗读"; };
+  speechSynthesis.cancel();
+  poemSpeaking = true;
+  btn.innerText = "⏹ 停止";
+  speechSynthesis.speak(u);
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); } catch (e) { /* ignore */ }
+  document.body.removeChild(ta);
+}
+
+function copyPoem() {
+  const poem = currentPoem();
+  if (!poem) return;
+  const text = poem.c + "\n—— " + poem.a + "《" + poem.o + "》";
+  const btn = document.getElementById("poem-copy-btn");
+  const ok = function () {
+    btn.innerText = "✓ 已复制";
+    setTimeout(function () { btn.innerText = "📋 复制"; }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(ok, function () {
+      fallbackCopy(text);
+      ok();
+    });
+  } else {
+    fallbackCopy(text);
+    ok();
+  }
+}
+
+initPoem();
 </script>
 
 <style>
@@ -6589,6 +6928,109 @@ loadPoem();
     border-radius: 10px;
     padding: 0.4rem 0.6rem;
     color: var(--text-color);
+  }
+
+  /* ---- 每日诗词 · 水墨卷轴风 ---- */
+  .poem-card {
+    position: relative;
+  }
+
+  .poem-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .poem-seal {
+    display: inline-block;
+    padding: 0.08rem 0.38rem;
+    background: #d33a3a;
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    transform: rotate(-6deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  .poem-reason {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 0.4rem;
+    line-height: 1.7;
+    background: rgba(90, 120, 160, 0.1);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-color);
+  }
+
+  .poem-scroll {
+    margin: 0.8rem 0;
+    padding: 1.1rem 1rem;
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 143, 171, 0.1), transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(128, 90, 213, 0.08), transparent 50%),
+      linear-gradient(180deg, rgba(120, 120, 120, 0.07), rgba(120, 120, 120, 0));
+    border: 1px solid rgba(128, 128, 128, 0.16);
+    min-height: 8.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem-content {
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", "Songti SC", serif;
+    font-size: 1.05rem;
+    line-height: 2.1;
+    white-space: pre-wrap;
+    color: var(--text-color);
+  }
+
+  .poem-content.typing::after {
+    content: "▎";
+    margin-left: 2px;
+    color: #d33a3a;
+    animation: poem-blink 1s steps(1) infinite;
+  }
+
+  @keyframes poem-blink {
+    50% { opacity: 0; }
+  }
+
+  .poem-info {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    margin-top: 0.6rem;
+    text-align: right;
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", serif;
+  }
+
+  .poem-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .poem-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.9rem;
+  }
+
+  .poem-btn:hover {
+    border-color: #ff8fab;
+    color: #ff8fab;
+    background: rgba(255, 143, 171, 0.08);
   }
 </style>
 

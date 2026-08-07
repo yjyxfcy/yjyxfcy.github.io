@@ -317,10 +317,10 @@
           </time>
           <h2 class="archive-card-title">随机算法</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十一章：随机算法</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>39 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>38 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -391,11 +391,18 @@
   </div>
 
   <!-- 今日诗词 -->
-  <div class="daily-card">
-    <h3>📜 每日诗词</h3>
-    <div id="poem-content" class="poem-content">加载中...</div>
-    <div id="poem-info" class="poem-info"></div>
-    <button class="daily-btn" onclick="loadPoem()">换一首</button>
+  <div class="daily-card poem-card">
+    <h3 class="poem-title">📜 每日诗词 <span class="poem-seal">今日诗</span></h3>
+    <div id="poem-reason" class="poem-reason"></div>
+    <div class="poem-scroll">
+      <div id="poem-content" class="poem-content">正在铺纸研墨…</div>
+      <div id="poem-info" class="poem-info"></div>
+    </div>
+    <div class="poem-actions">
+      <button id="poem-read-btn" class="poem-btn" onclick="toggleRead()">🔊 朗读</button>
+      <button id="poem-copy-btn" class="poem-btn" onclick="copyPoem()">📋 复制</button>
+      <button class="daily-btn" onclick="nextPoem()">换一首</button>
+    </div>
   </div>
 </div>
 
@@ -5846,6 +5853,12 @@ async function fetchWeather(lat, lon) {
   }
 }
 
+let contextPromise = null;
+function getContextOnce() {
+  if (!contextPromise) contextPromise = buildContext();
+  return contextPromise;
+}
+
 async function buildContext() {
   const now = new Date();
   const ctx = {
@@ -5990,7 +6003,7 @@ async function initSmart() {
       }
     } catch (e) { /* 忽略损坏的缓存 */ }
   }
-  const ctx = await buildContext();
+  const ctx = await getContextOnce();
   smartCtx = ctx;
   smartQueue = rankSongs(songs, ctx);
   smartIdx = 0;
@@ -6043,20 +6056,273 @@ player.addEventListener("pause", function () {
 initSmart();
 
 // ==================== 今日诗词 ====================
-function loadPoem() {
-  fetch("https://v1.jinrishici.com/all.json")
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      document.getElementById("poem-content").innerText = data.content;
-      document.getElementById("poem-info").innerText =
-        "—— " + data.author + "《" + data.origin + "》";
-    })
-    .catch(function () {
-      document.getElementById("poem-content").innerText = "获取失败";
-    });
+// 内置经典诗词库（全部公有领域），每首打好天气/季节/时段标签，
+// 和每日推歌一样结合「位置 + 天气 + 时间」智能挑一首应景的。
+const POEMS = [
+  { c: "床前明月光，疑是地上霜。\n举头望明月，低头思故乡。", a: "李白", o: "静夜思", t: ["夜", "月", "思乡", "孤独"] },
+  { c: "春眠不觉晓，处处闻啼鸟。\n夜来风雨声，花落知多少。", a: "孟浩然", o: "春晓", t: ["春", "清晨", "雨"] },
+  { c: "千山鸟飞绝，万径人踪灭。\n孤舟蓑笠翁，独钓寒江雪。", a: "柳宗元", o: "江雪", t: ["冬", "雪", "孤独"] },
+  { c: "月落乌啼霜满天，江枫渔火对愁眠。\n姑苏城外寒山寺，夜半钟声到客船。", a: "张继", o: "枫桥夜泊", t: ["秋", "夜", "月", "思乡", "孤独"] },
+  { c: "空山新雨后，天气晚来秋。\n明月松间照，清泉石上流。\n竹喧归浣女，莲动下渔舟。\n随意春芳歇，王孙自可留。", a: "王维", o: "山居秋暝", t: ["秋", "雨", "夜", "山水", "宁静"] },
+  { c: "日照香炉生紫烟，遥看瀑布挂前川。\n飞流直下三千尺，疑是银河落九天。", a: "李白", o: "望庐山瀑布", t: ["夏", "晴", "山水", "豪迈"] },
+  { c: "朝辞白帝彩云间，千里江陵一日还。\n两岸猿声啼不住，轻舟已过万重山。", a: "李白", o: "早发白帝城", t: ["清晨", "夏", "晴", "轻快", "山水"] },
+  { c: "好雨知时节，当春乃发生。\n随风潜入夜，润物细无声。\n野径云俱黑，江船火独明。\n晓看红湿处，花重锦官城。", a: "杜甫", o: "春夜喜雨", t: ["春", "雨", "夜"] },
+  { c: "横看成岭侧成峰，远近高低各不同。\n不识庐山真面目，只缘身在此山中。", a: "苏轼", o: "题西林壁", t: ["晴", "山水", "哲理"] },
+  { c: "白日依山尽，黄河入海流。\n欲穷千里目，更上一层楼。", a: "王之涣", o: "登鹳雀楼", t: ["傍晚", "晴", "励志", "豪迈"] },
+  { c: "故人西辞黄鹤楼，烟花三月下扬州。\n孤帆远影碧空尽，唯见长江天际流。", a: "李白", o: "黄鹤楼送孟浩然之广陵", t: ["春", "晴", "送别", "友情", "山水"] },
+  { c: "天门中断楚江开，碧水东流至此回。\n两岸青山相对出，孤帆一片日边来。", a: "李白", o: "望天门山", t: ["夏", "晴", "山水"] },
+  { c: "人闲桂花落，夜静春山空。\n月出惊山鸟，时鸣春涧中。", a: "王维", o: "鸟鸣涧", t: ["春", "夜", "月", "宁静"] },
+  { c: "独坐幽篁里，弹琴复长啸。\n深林人不知，明月来相照。", a: "王维", o: "竹里馆", t: ["夜", "月", "孤独", "宁静"] },
+  { c: "空山不见人，但闻人语响。\n返景入深林，复照青苔上。", a: "王维", o: "鹿柴", t: ["傍晚", "山水", "宁静"] },
+  { c: "红豆生南国，春来发几枝。\n愿君多采撷，此物最相思。", a: "王维", o: "相思", t: ["春", "爱情", "思念"] },
+  { c: "独在异乡为异客，每逢佳节倍思亲。\n遥知兄弟登高处，遍插茱萸少一人。", a: "王维", o: "九月九日忆山东兄弟", t: ["秋", "思乡", "孤独", "重阳"] },
+  { c: "秦时明月汉时关，万里长征人未还。\n但使龙城飞将在，不教胡马度阴山。", a: "王昌龄", o: "出塞", t: ["夜", "月", "边塞", "豪迈"] },
+  { c: "葡萄美酒夜光杯，欲饮琵琶马上催。\n醉卧沙场君莫笑，古来征战几人回。", a: "王翰", o: "凉州词", t: ["夜", "边塞", "豪迈", "酒"] },
+  { c: "渭城朝雨浥轻尘，客舍青青柳色新。\n劝君更尽一杯酒，西出阳关无故人。", a: "王维", o: "送元二使安西", t: ["雨", "清晨", "送别", "友情", "酒"] },
+  { c: "千里黄云白日曛，北风吹雁雪纷纷。\n莫愁前路无知己，天下谁人不识君。", a: "高适", o: "别董大", t: ["冬", "雪", "送别", "励志"] },
+  { c: "北风卷地白草折，胡天八月即飞雪。\n忽如一夜春风来，千树万树梨花开。", a: "岑参", o: "白雪歌送武判官归京（节选）", t: ["冬", "雪"] },
+  { c: "千里莺啼绿映红，水村山郭酒旗风。\n南朝四百八十寺，多少楼台烟雨中。", a: "杜牧", o: "江南春", t: ["春", "雨", "晴"] },
+  { c: "远上寒山石径斜，白云生处有人家。\n停车坐爱枫林晚，霜叶红于二月花。", a: "杜牧", o: "山行", t: ["秋", "傍晚"] },
+  { c: "烟笼寒水月笼沙，夜泊秦淮近酒家。\n商女不知亡国恨，隔江犹唱后庭花。", a: "杜牧", o: "泊秦淮", t: ["夜", "月", "秋", "怀古"] },
+  { c: "清明时节雨纷纷，路上行人欲断魂。\n借问酒家何处有，牧童遥指杏花村。", a: "杜牧", o: "清明", t: ["春", "雨", "清明"] },
+  { c: "锦瑟无端五十弦，一弦一柱思华年。\n庄生晓梦迷蝴蝶，望帝春心托杜鹃。\n沧海月明珠有泪，蓝田日暖玉生烟。\n此情可待成追忆，只是当时已惘然。", a: "李商隐", o: "锦瑟", t: ["夜", "爱情", "回忆", "怅惘"] },
+  { c: "君问归期未有期，巴山夜雨涨秋池。\n何当共剪西窗烛，却话巴山夜雨时。", a: "李商隐", o: "夜雨寄北", t: ["秋", "雨", "夜", "思念"] },
+  { c: "相见时难别亦难，东风无力百花残。\n春蚕到死丝方尽，蜡炬成灰泪始干。\n晓镜但愁云鬓改，夜吟应觉月光寒。\n蓬山此去无多路，青鸟殷勤为探看。", a: "李商隐", o: "无题（节选）", t: ["爱情", "离别", "思念"] },
+  { c: "明月几时有？把酒问青天。\n不知天上宫阙，今夕是何年。", a: "苏轼", o: "水调歌头（节选）", t: ["夜", "月", "中秋", "思念", "豁达"] },
+  { c: "大江东去，浪淘尽，千古风流人物。", a: "苏轼", o: "念奴娇·赤壁怀古（节选）", t: ["夏", "山水", "豪迈", "怀古"] },
+  { c: "莫听穿林打叶声，何妨吟啸且徐行。\n竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。", a: "苏轼", o: "定风波（节选）", t: ["雨", "豁达", "励志"] },
+  { c: "常记溪亭日暮，沉醉不知归路。\n兴尽晚回舟，误入藕花深处。\n争渡，争渡，惊起一滩鸥鹭。", a: "李清照", o: "如梦令", t: ["夏", "傍晚", "轻快", "青春"] },
+  { c: "昨夜雨疏风骤，浓睡不消残酒。\n试问卷帘人，却道海棠依旧。\n知否，知否？应是绿肥红瘦。", a: "李清照", o: "如梦令", t: ["春", "雨", "清晨"] },
+  { c: "花自飘零水自流。一种相思，两处闲愁。\n此情无计可消除，才下眉头，却上心头。", a: "李清照", o: "一剪梅（节选）", t: ["秋", "爱情", "思念", "孤独"] },
+  { c: "寻寻觅觅，冷冷清清，凄凄惨惨戚戚。\n乍暖还寒时候，最难将息。\n三杯两盏淡酒，怎敌他、晚来风急！", a: "李清照", o: "声声慢（节选）", t: ["秋", "风", "孤独", "哀愁"] },
+  { c: "东风夜放花千树，更吹落、星如雨。\n众里寻他千百度，蓦然回首，\n那人却在，灯火阑珊处。", a: "辛弃疾", o: "青玉案·元夕（节选）", t: ["夜", "元宵", "爱情", "思念"] },
+  { c: "醉里挑灯看剑，梦回吹角连营。\n八百里分麾下炙，五十弦翻塞外声，沙场秋点兵。", a: "辛弃疾", o: "破阵子·为陈同甫赋壮词以寄之（节选）", t: ["夜", "秋", "边塞", "豪迈"] },
+  { c: "明月别枝惊鹊，清风半夜鸣蝉。\n稻花香里说丰年，听取蛙声一片。\n七八个星天外，两三点雨山前。\n旧时茅店社林边，路转溪桥忽见。", a: "辛弃疾", o: "西江月·夜行黄沙道中", t: ["夏", "夜", "雨", "月", "宁静"] },
+  { c: "枯藤老树昏鸦，小桥流水人家，古道西风瘦马。\n夕阳西下，断肠人在天涯。", a: "马致远", o: "天净沙·秋思", t: ["秋", "傍晚", "孤独", "思乡"] },
+  { c: "千锤万凿出深山，烈火焚烧若等闲。\n粉骨碎身浑不怕，要留清白在人间。", a: "于谦", o: "石灰吟", t: ["励志", "哲理"] },
+  { c: "咬定青山不放松，立根原在破岩中。\n千磨万击还坚劲，任尔东西南北风。", a: "郑燮", o: "竹石", t: ["励志", "风", "哲理"] },
+  { c: "浩荡离愁白日斜，吟鞭东指即天涯。\n落红不是无情物，化作春泥更护花。", a: "龚自珍", o: "己亥杂诗（其五）", t: ["春", "傍晚", "离别", "励志"] },
+  { c: "离离原上草，一岁一枯荣。\n野火烧不尽，春风吹又生。\n远芳侵古道，晴翠接荒城。\n又送王孙去，萋萋满别情。", a: "白居易", o: "赋得古原草送别", t: ["春", "送别", "励志", "晴"] },
+  { c: "孤山寺北贾亭西，水面初平云脚低。\n几处早莺争暖树，谁家新燕啄春泥。\n乱花渐欲迷人眼，浅草才能没马蹄。\n最爱湖东行不足，绿杨阴里白沙堤。", a: "白居易", o: "钱塘湖春行", t: ["春", "清晨", "晴", "轻快"] },
+  { c: "单车欲问边，属国过居延。\n征蓬出汉塞，归雁入胡天。\n大漠孤烟直，长河落日圆。\n萧关逢候骑，都护在燕然。", a: "王维", o: "使至塞上", t: ["傍晚", "晴", "边塞", "山水"] },
+  { c: "东临碣石，以观沧海。\n水何澹澹，山岛竦峙。\n树木丛生，百草丰茂。\n秋风萧瑟，洪波涌起。\n日月之行，若出其中；\n星汉灿烂，若出其里。\n幸甚至哉，歌以咏志。", a: "曹操", o: "观沧海", t: ["秋", "傍晚", "海", "豪迈"] },
+  { c: "春江潮水连海平，海上明月共潮生。\n滟滟随波千万里，何处春江无月明！", a: "张若虚", o: "春江花月夜（节选）", t: ["春", "夜", "月", "江"] },
+  { c: "君不见黄河之水天上来，奔流到海不复回。\n君不见高堂明镜悲白发，朝如青丝暮成雪。\n人生得意须尽欢，莫使金樽空对月。", a: "李白", o: "将进酒（节选）", t: ["夜", "月", "豪迈", "酒", "哲理"] },
+  { c: "李白乘舟将欲行，忽闻岸上踏歌声。\n桃花潭水深千尺，不及汪伦送我情。", a: "李白", o: "赠汪伦", t: ["夏", "晴", "送别", "友情", "轻快"] }
+];
+
+let poemQueue = [];
+let poemIdx = 0;
+let poemCtx = null;
+let poemTyping = null;
+let poemSpeaking = false;
+
+function poemScore(poem, ctx, jitter) {
+  let score = 0;
+  const reasons = [];
+  const push = function (r) { if (reasons.length < 3) reasons.push(r); };
+  const tags = poem.t;
+
+  if (ctx.weather === "雨" && tags.indexOf("雨") >= 0) {
+    score += 30;
+    push("今天有雨，雨声里读诗正相宜");
+  }
+  if (ctx.weather === "雪" && tags.indexOf("雪") >= 0) {
+    score += 30;
+    push("今日落雪，来一首写雪的诗");
+  }
+  if (ctx.weather === "晴" && tags.indexOf("晴") >= 0) {
+    score += 8;
+    push("天气晴朗，适合一首明快的诗");
+  }
+  if (ctx.night && tags.indexOf("夜") >= 0) {
+    score += 15;
+    push("夜深了，月色与诗更配");
+  }
+  if (ctx.night && tags.indexOf("月") >= 0) {
+    score += 8;
+  }
+  if (tags.indexOf(ctx.season) >= 0) {
+    score += 12;
+    push("现在正是" + ctx.season + "天，这首诗应景");
+  }
+  if (ctx.period.key === "清晨" && tags.indexOf("清晨") >= 0) {
+    score += 10;
+    push("清晨宜读诗，给今天一个温柔的开头");
+  }
+  if (ctx.period.key === "傍晚" && tags.indexOf("傍晚") >= 0) {
+    score += 10;
+    push("傍晚适合慢下来，读一首诗");
+  }
+  if (ctx.weekend && (tags.indexOf("轻快") >= 0 || tags.indexOf("青春") >= 0)) {
+    score += 6;
+    push("周末了，来点轻快的诗意");
+  }
+  score += jitter;
+  return { score: score, reasons: reasons };
 }
 
-loadPoem();
+function rankPoems(ctx) {
+  const ranked = POEMS.map(function (p, i) {
+    const r = poemScore(p, ctx, Math.random() * 10);
+    return { i: i, score: r.score, reasons: r.reasons };
+  });
+  ranked.sort(function (a, b) { return b.score - a.score; });
+  return ranked;
+}
+
+function fallbackPoemCtx() {
+  const now = new Date();
+  return {
+    period: getPeriod(now.getHours()),
+    season: getSeason(now.getMonth() + 1),
+    hour: now.getHours(),
+    weekday: now.getDay(),
+    weekend: (now.getDay() === 0 || now.getDay() === 6),
+    night: (now.getHours() >= 19 || now.getHours() < 5),
+    weather: null,
+    temp: null,
+    wind: null,
+    city: null
+  };
+}
+
+function typePoem(poem, reasons) {
+  if (poemTyping) { clearInterval(poemTyping); poemTyping = null; }
+  const el = document.getElementById("poem-content");
+  const infoEl = document.getElementById("poem-info");
+  const reasonEl = document.getElementById("poem-reason");
+  reasonEl.innerText = "💡 " + (reasons.length > 0
+    ? reasons.slice(0, 2).join("；") + "。"
+    : "今日随缘抽一首，读到就是缘分。");
+  infoEl.innerText = "";
+  el.classList.add("typing");
+  el.innerText = "";
+  const full = poem.c;
+  let idx = 0;
+  const speed = Math.max(12, Math.min(45, Math.round(4200 / full.length)));
+  poemTyping = setInterval(function () {
+    idx++;
+    el.innerText = full.slice(0, idx);
+    if (idx >= full.length) {
+      clearInterval(poemTyping);
+      poemTyping = null;
+      el.classList.remove("typing");
+      infoEl.innerText = "—— " + poem.a + "《" + poem.o + "》";
+    }
+  }, speed);
+}
+
+function renderPoem() {
+  if (!poemQueue.length) return;
+  const item = poemQueue[poemIdx];
+  typePoem(POEMS[item.i], item.reasons);
+}
+
+function nextPoem() {
+  if (!poemQueue.length) {
+    poemQueue = rankPoems(poemCtx || fallbackPoemCtx());
+    poemIdx = 0;
+  } else {
+    poemIdx++;
+    if (poemIdx >= poemQueue.length) {
+      poemQueue = rankPoems(poemCtx || fallbackPoemCtx());
+      poemIdx = 0;
+    }
+  }
+  localStorage.setItem("poemIdx", String(poemIdx));
+  renderPoem();
+}
+
+async function initPoem() {
+  const today = todayStr();
+  const cached = localStorage.getItem("poemState");
+  if (cached) {
+    try {
+      const c = JSON.parse(cached);
+      if (c && c.date === today && Array.isArray(c.order) && c.order.length > 0) {
+        poemQueue = c.order;
+        poemCtx = c.ctx || null;
+        poemIdx = parseInt(localStorage.getItem("poemIdx"), 10) || 0;
+        if (poemIdx >= poemQueue.length) poemIdx = 0;
+        renderPoem();
+        return;
+      }
+    } catch (e) { /* 忽略损坏的缓存 */ }
+  }
+  const ctx = await getContextOnce();
+  poemCtx = ctx;
+  poemQueue = rankPoems(ctx);
+  poemIdx = 0;
+  localStorage.setItem("poemState", JSON.stringify({ date: today, ctx: ctx, order: poemQueue }));
+  localStorage.setItem("poemIdx", "0");
+  renderPoem();
+}
+
+function currentPoem() {
+  if (!poemQueue.length || !poemQueue[poemIdx]) return null;
+  return POEMS[poemQueue[poemIdx].i];
+}
+
+function toggleRead() {
+  const btn = document.getElementById("poem-read-btn");
+  if (typeof speechSynthesis === "undefined") {
+    btn.innerText = "浏览器不支持";
+    return;
+  }
+  if (poemSpeaking) {
+    speechSynthesis.cancel();
+    poemSpeaking = false;
+    btn.innerText = "🔊 朗读";
+    return;
+  }
+  const poem = currentPoem();
+  if (!poem) return;
+  const u = new SpeechSynthesisUtterance(
+    poem.c.replace(/\n/g, "，") + "。" + poem.o + "，" + poem.a
+  );
+  u.lang = "zh-CN";
+  u.rate = 0.9;
+  u.onend = function () { poemSpeaking = false; btn.innerText = "🔊 朗读"; };
+  u.onerror = function () { poemSpeaking = false; btn.innerText = "🔊 朗读"; };
+  speechSynthesis.cancel();
+  poemSpeaking = true;
+  btn.innerText = "⏹ 停止";
+  speechSynthesis.speak(u);
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); } catch (e) { /* ignore */ }
+  document.body.removeChild(ta);
+}
+
+function copyPoem() {
+  const poem = currentPoem();
+  if (!poem) return;
+  const text = poem.c + "\n—— " + poem.a + "《" + poem.o + "》";
+  const btn = document.getElementById("poem-copy-btn");
+  const ok = function () {
+    btn.innerText = "✓ 已复制";
+    setTimeout(function () { btn.innerText = "📋 复制"; }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(ok, function () {
+      fallbackCopy(text);
+      ok();
+    });
+  } else {
+    fallbackCopy(text);
+    ok();
+  }
+}
+
+initPoem();
 </script>
 
 <style>
@@ -6132,6 +6398,109 @@ loadPoem();
     border-radius: 10px;
     padding: 0.4rem 0.6rem;
     color: var(--text-color);
+  }
+
+  /* ---- 每日诗词 · 水墨卷轴风 ---- */
+  .poem-card {
+    position: relative;
+  }
+
+  .poem-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .poem-seal {
+    display: inline-block;
+    padding: 0.08rem 0.38rem;
+    background: #d33a3a;
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    transform: rotate(-6deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  .poem-reason {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 0.4rem;
+    line-height: 1.7;
+    background: rgba(90, 120, 160, 0.1);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-color);
+  }
+
+  .poem-scroll {
+    margin: 0.8rem 0;
+    padding: 1.1rem 1rem;
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 143, 171, 0.1), transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(128, 90, 213, 0.08), transparent 50%),
+      linear-gradient(180deg, rgba(120, 120, 120, 0.07), rgba(120, 120, 120, 0));
+    border: 1px solid rgba(128, 128, 128, 0.16);
+    min-height: 8.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem-content {
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", "Songti SC", serif;
+    font-size: 1.05rem;
+    line-height: 2.1;
+    white-space: pre-wrap;
+    color: var(--text-color);
+  }
+
+  .poem-content.typing::after {
+    content: "▎";
+    margin-left: 2px;
+    color: #d33a3a;
+    animation: poem-blink 1s steps(1) infinite;
+  }
+
+  @keyframes poem-blink {
+    50% { opacity: 0; }
+  }
+
+  .poem-info {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    margin-top: 0.6rem;
+    text-align: right;
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", serif;
+  }
+
+  .poem-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .poem-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.9rem;
+  }
+
+  .poem-btn:hover {
+    border-color: #ff8fab;
+    color: #ff8fab;
+    background: rgba(255, 143, 171, 0.08);
   }
 </style>
 

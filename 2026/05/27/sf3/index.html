@@ -21,12 +21,12 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十章：近似算法">
+    <meta name="description" content="北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十章：近似算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="近似算法">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/05/27/sf3/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十章：近似算法">
+<meta property="og:description" content="北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十章：近似算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/05/27/sf3/3.1.png">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/05/27/sf3/3.2.png">
@@ -314,7 +314,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k 字
+          5.5k 字
         
       </span>
     
@@ -325,7 +325,7 @@
         
         
         
-          34 分钟
+          35 分钟
         
       </span>
     
@@ -478,100 +478,40 @@
             
               <div class="markdown-body">
                 
-                <p>北京大学信息科学技术学院<br>
-算法设计与分析(2026春)的课程笔记</p>
+                <p>北京大学信息科学技术学院<br>算法设计与分析(2026春)的课程笔记</p>
 <p>第十章：近似算法</p>
 <span id="more"></span>
-<p>经过第九章的学习，我们知道许多组合优化问题对应的判定问题是NPC，在P=NP没被证明出的前提下，根本无法找到多项式时间内的最优算法<br>
-但我们显然又不能置之不理，摆烂到底，这些问题还是有许多现实意义的，所以我们退而求其次，找一个足够好的可行解，因此寻找近似算法就顺理成章</p>
-<h3 id="近似算法及其近似比">近似算法及其近似比</h3>
-<p>假设组合优化问题为$\Pi$，$A$是一个多项式时间算法，如果对于$\Pi$的每一个实例$I$，算法$A$都能输出$I$的一个可行解$\sigma$，那么我们就称$A$为$\Pi$的<strong>近似算法</strong><br>
-记作$A(I)=c(\sigma)$，其中$c(\sigma)$为$\sigma$的值<br>
-如果$A(I)=OPT(I)$恒成立，即$A$总是输出$I$最优解，则称$A$是$\Pi$的<strong>最优化算法</strong></p>
-<p>当$\Pi$为最小化问题时，记$r_A(I)=\frac{A(I)}{OPT(I)}$<br>
-当$\Pi$为最大化问题时，记$r_A(I)=\frac{OPT(I)}{A(I)}$<br>
-如果对$\Pi$的每个实例$I$，都有$r_A(I) \le r$，则称近似算法近似比为$r$，$A$为<strong>r-近似算法</strong><br>
-如果$r$为常数，称$A$<strong>具有常数比</strong></p>
-<p>显然$r\ge 1$，并且越接近1越好<br>
-对于NP难的组合优化问题，可以按照可近似性分为以下3类：</p>
+<p>经过第九章的学习，我们知道许多组合优化问题对应的判定问题是NPC，在P&#x3D;NP没被证明出的前提下，根本无法找到多项式时间内的最优算法<br>但我们显然又不能置之不理，摆烂到底，这些问题还是有许多现实意义的，所以我们退而求其次，找一个足够好的可行解，因此寻找近似算法就顺理成章</p>
+<h3 id="近似算法及其近似比"><a href="#近似算法及其近似比" class="headerlink" title="近似算法及其近似比"></a>近似算法及其近似比</h3><p>假设组合优化问题为$\Pi$，$A$是一个多项式时间算法，如果对于$\Pi$的每一个实例$I$，算法$A$都能输出$I$的一个可行解$\sigma$，那么我们就称$A$为$\Pi$的<strong>近似算法</strong><br>记作$A(I)&#x3D;c(\sigma)$，其中$c(\sigma)$为$\sigma$的值<br>如果$A(I)&#x3D;OPT(I)$恒成立，即$A$总是输出$I$最优解，则称$A$是$\Pi$的<strong>最优化算法</strong></p>
+<p>当$\Pi$为最小化问题时，记$r_A(I)&#x3D;\frac{A(I)}{OPT(I)}$<br>当$\Pi$为最大化问题时，记$r_A(I)&#x3D;\frac{OPT(I)}{A(I)}$<br>如果对$\Pi$的每个实例$I$，都有$r_A(I) \le r$，则称近似算法近似比为$r$，$A$为<strong>r-近似算法</strong><br>如果$r$为常数，称$A$<strong>具有常数比</strong></p>
+<p>显然$r\ge 1$，并且越接近1越好<br>对于NP难的组合优化问题，可以按照可近似性分为以下3类：</p>
 <ul>
 <li>对于任意小的$\epsilon &gt;0$，存在$(1+\epsilon)$-近似算法，该问题为<strong>完全可近似的</strong></li>
 <li>存在具有常数比的近似算法，该问题为<strong>可近似的</strong></li>
-<li>只要P=NP不成立，就不存在具有常数比的近似算法，该问题为<strong>不可近似的</strong></li>
+<li>只要P&#x3D;NP不成立，就不存在具有常数比的近似算法，该问题为<strong>不可近似的</strong></li>
 </ul>
-<p>当然分类大前提是$P \neq NP$<br>
-并且不可近似的算法并非没有近似算法，而是没有常数比近似算法，可能有近似比为$n,log n $的算法</p>
-<p>下面我们看一个简单例子：最小顶点覆盖问题<br>
-任给$G=&lt;V,E&gt;$，求$G$顶点数最少的顶点覆盖<br>
-我们采用MVC近似算法：开始令$V’$为空集，任取一条边$(u,v)$，将$u,v$加入$V’$并删去$u,v$及其关联的边，重复上述过程直至所有的边都被删去为止，则$V’$即为所求<br>
-时间复杂度$O(|E|)$</p>
-<p>近似比：<br>
-设$|V’|=2k$，$V’$由$k$条互不关联的边的端点组成，为了覆盖这$k$条边需要$k$个顶点从而$OPT(I) \ge k$，因此<br>
-$\frac{MVC(I)}{OPT(I)} \le \frac{2k}{k} =2$<br>
-当$G$刚好由$k$条互不关联的边构成时，取到等号<br>
-这表明MVC近似比不可能小于2，故MVC为2-近似算法</p>
-<h3 id="多机调度问题">多机调度问题</h3>
-<p>任给有穷作业集$A$，$m$台相同机器，作业$a$的处理时间为正整数$t(a)$，每一项作业都可以在任意机器上处理<br>
-问如何把作业合理分配给机器，使得完成所有作业时间最短<br>
-即如何把$A$划分为$m$个不相交子集$A_i$，使得<br>
-$max[\Sigma_{a \in A_i}t(a)|i=1,2,…,m]$最小</p>
-<h4 id="贪心法">贪心法</h4>
-<p>定义负载为：分配给一台机器的作业 处理时间之和<br>
-我们采用G-MPS贪心：<br>
-按照输入顺序分配作业，把每一项作业都分配给当前负载最小的机器，如果当前负载最小的机器不止一台，则随机分配(或者就分给序号最小的也可)<br>
-<img src="3.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>当然分类大前提是$P \neq NP$<br>并且不可近似的算法并非没有近似算法，而是没有常数比近似算法，可能有近似比为$n,log n $的算法</p>
+<p>下面我们看一个简单例子：最小顶点覆盖问题<br>任给$G&#x3D;&lt;V,E&gt;$，求$G$顶点数最少的顶点覆盖<br>我们采用MVC近似算法：开始令$V’$为空集，任取一条边$(u,v)$，将$u,v$加入$V’$并删去$u,v$及其关联的边，重复上述过程直至所有的边都被删去为止，则$V’$即为所求<br>时间复杂度$O(|E|)$</p>
+<p>近似比：<br>设$|V’|&#x3D;2k$，$V’$由$k$条互不关联的边的端点组成，为了覆盖这$k$条边需要$k$个顶点从而$OPT(I) \ge k$，因此<br>$\frac{MVC(I)}{OPT(I)} \le \frac{2k}{k} &#x3D;2$<br>当$G$刚好由$k$条互不关联的边构成时，取到等号<br>这表明MVC近似比不可能小于2，故MVC为2-近似算法</p>
+<h3 id="多机调度问题"><a href="#多机调度问题" class="headerlink" title="多机调度问题"></a>多机调度问题</h3><p>任给有穷作业集$A$，$m$台相同机器，作业$a$的处理时间为正整数$t(a)$，每一项作业都可以在任意机器上处理<br>问如何把作业合理分配给机器，使得完成所有作业时间最短<br>即如何把$A$划分为$m$个不相交子集$A_i$，使得<br>$max[\Sigma_{a \in A_i}t(a)|i&#x3D;1,2,…,m]$最小</p>
+<h4 id="贪心法"><a href="#贪心法" class="headerlink" title="贪心法"></a>贪心法</h4><p>定义负载为：分配给一台机器的作业 处理时间之和<br>我们采用G-MPS贪心：<br>按照输入顺序分配作业，把每一项作业都分配给当前负载最小的机器，如果当前负载最小的机器不止一台，则随机分配(或者就分给序号最小的也可)<br><img src="3.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>上面是一个实例，可以看到这种贪心不一定最优</p>
-<p>对于每一个有$m$台机器的实例$I$<br>
-我们可以证明：$G-MPS(I) \le (2-\frac{1}{m})OPT(I)$</p>
-<p>显然有$OPT(I) \ge \frac{1}{m} \Sigma_{a \in A}t(a)$<br>
-最大负载不小于平均负载<br>
-$OPT(I) \ge  \max_{a \in A}t(a)$<br>
-最大负载不小于单个任务负载</p>
-<p>假设机器$M$负载最大，为$t(M)$，$b$为最后被分配给$M$的作业，根据算法，在分配$b$时$M$负载最小，最小负载不大于平均负载，我们有<br>
-$t(M)-t(b) \le \frac{1}{m}(\Sigma_{a \in A}t(a)-t(b))$<br>
-LHS为该机器在$b$之前的负载，RHS为除去$b$剩下作业时间的平均值，也即在分配$b$之前所有机器平均负载<br>
-于是$G-MPS(I)=t(M)$<br>
-$\le \frac{1}{m}(\Sigma_{a \in A}t(a)-t(b))+t(b)$<br>
-$=\frac{1}{m}\Sigma_{a \in A}t(a)+(1-\frac{1}{m})t(b)$<br>
-$\le OPT(I)+(1-\frac{1}{m})OPT(I)$<br>
-$=(2-\frac{1}{m})OPT(I)$<br>
-得证</p>
+<p>对于每一个有$m$台机器的实例$I$<br>我们可以证明：$G-MPS(I) \le (2-\frac{1}{m})OPT(I)$</p>
+<p>显然有$OPT(I) \ge \frac{1}{m} \Sigma_{a \in A}t(a)$<br>最大负载不小于平均负载<br>$OPT(I) \ge  \max_{a \in A}t(a)$<br>最大负载不小于单个任务负载</p>
+<p>假设机器$M$负载最大，为$t(M)$，$b$为最后被分配给$M$的作业，根据算法，在分配$b$时$M$负载最小，最小负载不大于平均负载，我们有<br>$t(M)-t(b) \le \frac{1}{m}(\Sigma_{a \in A}t(a)-t(b))$<br>LHS为该机器在$b$之前的负载，RHS为除去$b$剩下作业时间的平均值，也即在分配$b$之前所有机器平均负载<br>于是$G-MPS(I)&#x3D;t(M)$<br>$\le \frac{1}{m}(\Sigma_{a \in A}t(a)-t(b))+t(b)$<br>$&#x3D;\frac{1}{m}\Sigma_{a \in A}t(a)+(1-\frac{1}{m})t(b)$<br>$\le OPT(I)+(1-\frac{1}{m})OPT(I)$<br>$&#x3D;(2-\frac{1}{m})OPT(I)$<br>得证</p>
 <img src="3.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>上面是一个取等的实例，故G-MPS也是2-近似算法</p>
-<h4 id="贪心法的改进">贪心法的改进</h4>
-<p>递降贪心法DG-MPS：先对数据按照处理时间由大到小进行排序，再运用G-MPS<br>
-增加了排序时间$O(nlogn)$，依旧是多项式算法</p>
-<p>对于每一个有$m$台机器的实例$I$<br>
-我们可以证明：$DG-MPS(I) \le (\frac{3}{2}-\frac{1}{2m})OPT(I)$</p>
-<p>假设作业处理时间由大到小进行排序之后为$a_1,a_2,…,a_n$，仍然假设负载最大的机器为$M$，最后分配给$M$的机器为$a_i$<br>
-假如$M$只有一个作业，$i=1$，必为最优解<br>
-否则$M$有大于等于两个作业，则$i \ge m+1$，从而$OPT(I) \ge 2t(a_{m+1})$<br>
-类似上面的证法，我们有：<br>
-$DG-MPS(I)=t(M) \le \frac{1}{m}(\Sigma_{k=1}^{n}t(a_k)-t(a_i))+t(a_i)$<br>
-$=\frac{1}{m}\Sigma_{k=1}^{n}t(a_k)+(1-\frac{1}{m})t(a_i)$<br>
-$\le OPT(I)+(1-\frac{1}{m})\cdot \frac{1}{2} OPT(I)$<br>
-$=(\frac{3}{2}-\frac{1}{2m})OPT(I)$</p>
+<h4 id="贪心法的改进"><a href="#贪心法的改进" class="headerlink" title="贪心法的改进"></a>贪心法的改进</h4><p>递降贪心法DG-MPS：先对数据按照处理时间由大到小进行排序，再运用G-MPS<br>增加了排序时间$O(nlogn)$，依旧是多项式算法</p>
+<p>对于每一个有$m$台机器的实例$I$<br>我们可以证明：$DG-MPS(I) \le (\frac{3}{2}-\frac{1}{2m})OPT(I)$</p>
+<p>假设作业处理时间由大到小进行排序之后为$a_1,a_2,…,a_n$，仍然假设负载最大的机器为$M$，最后分配给$M$的机器为$a_i$<br>假如$M$只有一个作业，$i&#x3D;1$，必为最优解<br>否则$M$有大于等于两个作业，则$i \ge m+1$，从而$OPT(I) \ge 2t(a_{m+1})$<br>类似上面的证法，我们有：<br>$DG-MPS(I)&#x3D;t(M) \le \frac{1}{m}(\Sigma_{k&#x3D;1}^{n}t(a_k)-t(a_i))+t(a_i)$<br>$&#x3D;\frac{1}{m}\Sigma_{k&#x3D;1}^{n}t(a_k)+(1-\frac{1}{m})t(a_i)$<br>$\le OPT(I)+(1-\frac{1}{m})\cdot \frac{1}{2} OPT(I)$<br>$&#x3D;(\frac{3}{2}-\frac{1}{2m})OPT(I)$</p>
 <p>从而DG-MPS为$\frac{3}{2}$-近似算法</p>
-<h3 id="货郎问题">货郎问题</h3>
-<p>本章中考虑的货郎问题默认满足三角不等式<br>
-即对于任意三个城市$i,j,k$，他们之间距离满足$d(i,j)+d(j,k) \ge d(i,k)$</p>
-<h4 id="最邻近法-NN">最邻近法(NN)</h4>
-<p>从任意城市开始，每一步取 离当前城市最近的 尚未到过的城市 作为下一个城市，如果这样的城市不止一个，就任取一个，直至走遍所有城市回到出发点<br>
-我们可以证明$NN(I) \le \frac{1}{2}(\lceil logn \rceil+1)OPT(I)$<br>
-并且对于任意充分大的$n$，存在满足三角不等式的$n$个城市的实例$I$，使得<br>
-$NN(I) &gt; \frac{1}{3}(log(n+1)+\frac{4}{3})OPT(I)$<br>
-定理证明从略，该定理表明了NN法的近似比可以取到正无穷<br>
-因此无法实际应用</p>
-<h4 id="最小生成树法-MST">最小生成树法(MST)</h4>
-<p>首先求图的一棵最小生成树T，然后，沿着 T 走两遍得到图的一条欧拉回路，最后，顺着这条欧拉回路，跳过已走过的顶点，抄近路得到一条哈密顿回路<br>
-求最小生成树和欧拉回路都可以在多项式时间内完成，故算法是多项式时间的，下面是一个例子<br>
-<img src="3.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>对于所有满足三角不等式实例$I$，$MST(I) &lt; 2OPT(I)$<br>
-这是由于从HC中删去一条边就得到一棵生成树，故$T$的权小于$OPT(I)$，沿着$T$走两遍的长度自然小于$2OPT(I)$，并且由于满足三角不等式，所以抄近道不会增加长度</p>
-<p>故MST为2-近似算法，下面是一个取等实例<br>
-<img src="3.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h4 id="最小权匹配法-MM">最小权匹配法(MM)</h4>
-<ul>
+<h3 id="货郎问题"><a href="#货郎问题" class="headerlink" title="货郎问题"></a>货郎问题</h3><p>本章中考虑的货郎问题默认满足三角不等式<br>即对于任意三个城市$i,j,k$，他们之间距离满足$d(i,j)+d(j,k) \ge d(i,k)$</p>
+<h4 id="最邻近法-NN"><a href="#最邻近法-NN" class="headerlink" title="最邻近法(NN)"></a>最邻近法(NN)</h4><p>从任意城市开始，每一步取 离当前城市最近的 尚未到过的城市 作为下一个城市，如果这样的城市不止一个，就任取一个，直至走遍所有城市回到出发点<br>我们可以证明$NN(I) \le \frac{1}{2}(\lceil logn \rceil+1)OPT(I)$<br>并且对于任意充分大的$n$，存在满足三角不等式的$n$个城市的实例$I$，使得<br>$NN(I) &gt; \frac{1}{3}(log(n+1)+\frac{4}{3})OPT(I)$<br>定理证明从略，该定理表明了NN法的近似比可以取到正无穷<br>因此无法实际应用</p>
+<h4 id="最小生成树法-MST"><a href="#最小生成树法-MST" class="headerlink" title="最小生成树法(MST)"></a>最小生成树法(MST)</h4><p>首先求图的一棵最小生成树T，然后，沿着 T 走两遍得到图的一条欧拉回路，最后，顺着这条欧拉回路，跳过已走过的顶点，抄近路得到一条哈密顿回路<br>求最小生成树和欧拉回路都可以在多项式时间内完成，故算法是多项式时间的，下面是一个例子<br><img src="3.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>对于所有满足三角不等式实例$I$，$MST(I) &lt; 2OPT(I)$<br>这是由于从HC中删去一条边就得到一棵生成树，故$T$的权小于$OPT(I)$，沿着$T$走两遍的长度自然小于$2OPT(I)$，并且由于满足三角不等式，所以抄近道不会增加长度</p>
+<p>故MST为2-近似算法，下面是一个取等实例<br><img src="3.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="最小权匹配法-MM"><a href="#最小权匹配法-MM" class="headerlink" title="最小权匹配法(MM)"></a>最小权匹配法(MM)</h4><ul>
 <li>求图的一棵最小生成树T</li>
 <li>记T所有奇数度顶点在原图中导出子图H，H有偶数个顶点</li>
 <li>求 H 的最小匹配 M</li>
@@ -579,76 +519,44 @@ $NN(I) &gt; \frac{1}{3}(log(n+1)+\frac{4}{3})OPT(I)$<br>
 <li>沿着这条欧拉回路，跳过已走过的顶点，抄近路得到一条哈密顿回路</li>
 </ul>
 <p>求任意图最小权匹配的算法是多项式时间的，因此 MM 是多项式时间的</p>
-<p>对于所有满足三角不等式实例$I$，$MM(I) &lt; \frac{3}{2}OPT(I)$<br>
-这是由于满足三角不等式，记H中最短HC为C，C的长度不超过原图中最短HC的长度$OPT(I)$，沿着C隔一条边取一条边，得到H的一个匹配，总能使这个匹配的权不超过C长的一半，因此M的权不超过$\frac{OPT(I)}{2}$，又因为T的权小于$OPT(I)$，所以求得欧拉回路的长小于$\frac{3OPT(I)}{2}$，抄近路不会增加长度，得证</p>
+<p>对于所有满足三角不等式实例$I$，$MM(I) &lt; \frac{3}{2}OPT(I)$<br>这是由于满足三角不等式，记H中最短HC为C，C的长度不超过原图中最短HC的长度$OPT(I)$，沿着C隔一条边取一条边，得到H的一个匹配，总能使这个匹配的权不超过C长的一半，因此M的权不超过$\frac{OPT(I)}{2}$，又因为T的权小于$OPT(I)$，所以求得欧拉回路的长小于$\frac{3OPT(I)}{2}$，抄近路不会增加长度，得证</p>
 <p>故MM为$\frac{3}{2}$-近似算法，取等实例略去</p>
-<h4 id="货郎问题的难度">货郎问题的难度</h4>
-<p>只要$P \neq NP$，不满足三角不等式要求的货郎问题就是不可近似的<br>
-我们证明<strong>逆否命题</strong>：<br>
-若不然，假设近似算法为$A$，近似比$r \le K$,$K$为正整数<br>
-任给图$G=&lt;V,E&gt;$，如下构造实例$I_G$：<br>
-城市集$V$，$|V|=n$，每一对城市$u,v \in V$的距离为<br>
-$d(u,v)=1,if (u,v) \in E;Kn,else$</p>
-<p>如果$G$有HC，则$OPT(I_G)=n,A(I_G) \le rOPT(I_G) \le Kn$<br>
-否则$OPT(I_G) \ge Kn,A(I_G) \ge OPT(I_G) &gt;Kn$<br>
-故$G$有HC $\iff A(I_G) \le Kn$</p>
+<h4 id="货郎问题的难度"><a href="#货郎问题的难度" class="headerlink" title="货郎问题的难度"></a>货郎问题的难度</h4><p>只要$P \neq NP$，不满足三角不等式要求的货郎问题就是不可近似的<br>我们证明<strong>逆否命题</strong>：<br>若不然，假设近似算法为$A$，近似比$r \le K$,$K$为正整数<br>任给图$G&#x3D;&lt;V,E&gt;$，如下构造实例$I_G$：<br>城市集$V$，$|V|&#x3D;n$，每一对城市$u,v \in V$的距离为<br>$d(u,v)&#x3D;1,if (u,v) \in E;Kn,else$</p>
+<p>如果$G$有HC，则$OPT(I_G)&#x3D;n,A(I_G) \le rOPT(I_G) \le Kn$<br>否则$OPT(I_G) \ge Kn,A(I_G) \ge OPT(I_G) &gt;Kn$<br>故$G$有HC $\iff A(I_G) \le Kn$</p>
 <p>于是下面的算法可以判断$G$是否有HC：</p>
 <ul>
 <li>对$I$构造货郎问题实例$I_G$</li>
 <li>对$I_G$运用近似算法$A$</li>
 <li>如果$A(I_G) \le Kn$则输出Yes，否则输出No</li>
 </ul>
-<p>由于$K$为固定常数，构造$I_G$可在$O(N^2)$内完成，$|I_G|=O(n^2)$<br>
-$A$是多项式时间，且$A$对$I_G$可在$n$的多项式时间内完成计算<br>
-从而上述算法为HC的多项式时间算法，又因为HC是NP完全，所以P=NP，得证</p>
-<h3 id="背包问题">背包问题</h3>
-<p>任给$n$件物品和一个背包，物品$i$重量$w_i$，价值$v_i$，$i \le i \le n$，背包重量限制为$B$，$w_i,v_i,B$均为正整数，问把哪些物品装入背包才能在不超过重量限制的条件下使价值最大<br>
-即求子集$S^{\ast} \subseteq [1,2,…,n]$使得<br>
-$\Sigma_{i \in S^{\ast}}v_i = max[\Sigma_{i \in S }v_i | \Sigma_{i \in S }w_i \le B,S \subseteq [1,2,…,n]]$</p>
+<p>由于$K$为固定常数，构造$I_G$可在$O(N^2)$内完成，$|I_G|&#x3D;O(n^2)$<br>$A$是多项式时间，且$A$对$I_G$可在$n$的多项式时间内完成计算<br>从而上述算法为HC的多项式时间算法，又因为HC是NP完全，所以P&#x3D;NP，得证</p>
+<h3 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h3><p>任给$n$件物品和一个背包，物品$i$重量$w_i$，价值$v_i$，$i \le i \le n$，背包重量限制为$B$，$w_i,v_i,B$均为正整数，问把哪些物品装入背包才能在不超过重量限制的条件下使价值最大<br>即求子集$S^{\ast} \subseteq [1,2,…,n]$使得<br>$\Sigma_{i \in S^{\ast}}v_i &#x3D; max[\Sigma_{i \in S }v_i | \Sigma_{i \in S }w_i \le B,S \subseteq [1,2,…,n]]$</p>
 <p>下面不妨设所有物品重量$w_i \le B$，否则将该物品排除在外即可</p>
-<h4 id="一个简单的贪心算法-G-KK">一个简单的贪心算法(G-KK)</h4>
-<ul>
+<h4 id="一个简单的贪心算法-G-KK"><a href="#一个简单的贪心算法-G-KK" class="headerlink" title="一个简单的贪心算法(G-KK)"></a>一个简单的贪心算法(G-KK)</h4><ul>
 <li>按单位重量价值从大到小排列物品 $\frac{v_1}{w_1} \ge \frac{v_2}{w_2} \ge … \ge \frac{v_n}{w_n} $</li>
 <li>顺序检查每一件物品，只要能装得下就装，设装入背包总价值$V$</li>
-<li>求$v_k=max[v_i|i=1,2,…,n]$，若$v_k &gt;V$，则将背包里物品换成物品$k$</li>
+<li>求$v_k&#x3D;max[v_i|i&#x3D;1,2,…,n]$，若$v_k &gt;V$，则将背包里物品换成物品$k$</li>
 </ul>
-<p>设物品$l$为第一件未装入背包的物品，由于按照单位重量价值从大到小排列物品，故<br>
-$OPT(I) &lt;G-KK(I) +v_l$<br>
-$\le G-KK(I)+v_{max}$<br>
-$\le 2G-KK(I)$<br>
-故$OPT(I) &lt;2G-KK(I)$，G-KK为2-近似算法</p>
-<h4 id="多项式时间近似算法-PTAS">多项式时间近似算法(PTAS)</h4>
-<p>输入$\epsilon &gt;0$，实例$I$</p>
+<p>设物品$l$为第一件未装入背包的物品，由于按照单位重量价值从大到小排列物品，故<br>$OPT(I) &lt;G-KK(I) +v_l$<br>$\le G-KK(I)+v_{max}$<br>$\le 2G-KK(I)$<br>故$OPT(I) &lt;2G-KK(I)$，G-KK为2-近似算法</p>
+<h4 id="多项式时间近似算法-PTAS"><a href="#多项式时间近似算法-PTAS" class="headerlink" title="多项式时间近似算法(PTAS)"></a>多项式时间近似算法(PTAS)</h4><p>输入$\epsilon &gt;0$，实例$I$</p>
 <ul>
-<li>令$m=\lceil \frac{1}{\epsilon} \rceil$</li>
+<li>令$m&#x3D;\lceil \frac{1}{\epsilon} \rceil$</li>
 <li>按单位重量价值从大到小排列物品 $\frac{v_1}{w_1} \ge \frac{v_2}{w_2} \ge … \ge \frac{v_n}{w_n} $</li>
-<li>对每一个$t=1,2,…,m$和$t$件物品，检查这$t$件物品重量和，如果和不超过$B$，则接着用G-KK把剩余物品装进背包</li>
+<li>对每一个$t&#x3D;1,2,…,m$和$t$件物品，检查这$t$件物品重量和，如果和不超过$B$，则接着用G-KK把剩余物品装进背包</li>
 <li>比较得到的所有装法，取其中价值最大的作为近似解</li>
 </ul>
 <p><strong>核心思想</strong>：枚举前$m$个关键物品，对剩余部分再用贪心</p>
-<p>PTAS其实是一簇算法，对固定的$\epsilon&gt;0$，PTAS为一个算法，记作$PTAS_{\epsilon}$<br>
-定理：对每一个$\epsilon&gt;0$的0-1背包实例$I$<br>
-$OPT(I)&lt;(1+\epsilon)PTAS_{\epsilon}(I)$<br>
-且$PTAS_{\epsilon}$时间复杂度为$O(n^{\frac{1}{\epsilon}+2})$<br>
-证明从略，可知该算法是$(1+\epsilon)$-近似</p>
-<h4 id="伪多项式时间算法">伪多项式时间算法</h4>
-<p>其实就是我们最常用的dp<br>
-一开始我在想着为什么dp不是多项式时间算法，必须加上伪字<br>
-这里放一个deepseek的解释<br>
-<img src="3.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h4 id="完全多项式时间算法-FPTAS">完全多项式时间算法(FPTAS)</h4>
-<p>输入$\epsilon&gt;0$，实例$I$</p>
+<p>PTAS其实是一簇算法，对固定的$\epsilon&gt;0$，PTAS为一个算法，记作$PTAS_{\epsilon}$<br>定理：对每一个$\epsilon&gt;0$的0-1背包实例$I$<br>$OPT(I)&lt;(1+\epsilon)PTAS_{\epsilon}(I)$<br>且$PTAS_{\epsilon}$时间复杂度为$O(n^{\frac{1}{\epsilon}+2})$<br>证明从略，可知该算法是$(1+\epsilon)$-近似</p>
+<h4 id="伪多项式时间算法"><a href="#伪多项式时间算法" class="headerlink" title="伪多项式时间算法"></a>伪多项式时间算法</h4><p>其实就是我们最常用的dp<br>一开始我在想着为什么dp不是多项式时间算法，必须加上伪字<br>这里放一个deepseek的解释<br><img src="3.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="完全多项式时间算法-FPTAS"><a href="#完全多项式时间算法-FPTAS" class="headerlink" title="完全多项式时间算法(FPTAS)"></a>完全多项式时间算法(FPTAS)</h4><p>输入$\epsilon&gt;0$，实例$I$</p>
 <ul>
-<li>令$b=max[\lfloor \frac{v_{max}}{(1+\frac{1}{\epsilon})n}\rfloor,1]$</li>
-<li>令$v’_i=\lceil \frac{v_i}{b} \rceil,1\le i\le n$，把所有$v_i$换成$v’_i$，记新实例为$I’$</li>
+<li>令$b&#x3D;max[\lfloor \frac{v_{max}}{(1+\frac{1}{\epsilon})n}\rfloor,1]$</li>
+<li>令$v’_i&#x3D;\lceil \frac{v_i}{b} \rceil,1\le i\le n$，把所有$v_i$换成$v’_i$，记新实例为$I’$</li>
 <li>对$I’$应用算法$A$得到解$S$，把$S$取为实例$I$的解</li>
 </ul>
 <p><strong>核心思想</strong>：把价值缩小，从而dp的状态数减少</p>
-<p>则满足定理：<br>
-$OPT(I) &lt;(1+\epsilon)FPTAS(I)$<br>
-并且FPTAS时间复杂度为$O(n^3(1+\frac{1}{\epsilon}))$，证明从略</p>
-<h6 id="笔者按：这一章相比前两章来说还是简单了不少，没有太多抽象概念，主要就是数学推导和复杂度分析，不过笔者还是在分析背包问题时适当略去了一些证明过程……">笔者按：这一章相比前两章来说还是简单了不少，没有太多抽象概念，主要就是数学推导和复杂度分析，不过笔者还是在分析背包问题时适当略去了一些证明过程……</h6>
-
+<p>则满足定理：<br>$OPT(I) &lt;(1+\epsilon)FPTAS(I)$<br>并且FPTAS时间复杂度为$O(n^3(1+\frac{1}{\epsilon}))$，证明从略</p>
+<h6 id="笔者按：这一章相比前两章来说还是简单了不少，没有太多抽象概念，主要就是数学推导和复杂度分析，不过笔者还是在分析背包问题时适当略去了一些证明过程……"><a href="#笔者按：这一章相比前两章来说还是简单了不少，没有太多抽象概念，主要就是数学推导和复杂度分析，不过笔者还是在分析背包问题时适当略去了一些证明过程……" class="headerlink" title="笔者按：这一章相比前两章来说还是简单了不少，没有太多抽象概念，主要就是数学推导和复杂度分析，不过笔者还是在分析背包问题时适当略去了一些证明过程……"></a>笔者按：这一章相比前两章来说还是简单了不少，没有太多抽象概念，主要就是数学推导和复杂度分析，不过笔者还是在分析背包问题时适当略去了一些证明过程……</h6>
                 
               </div>
             

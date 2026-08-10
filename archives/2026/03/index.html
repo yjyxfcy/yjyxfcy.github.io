@@ -7008,7 +7008,9 @@ initPoem();
   .daily-wrapper {
     display: flex;
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
+    max-width: 960px;
+    padding: 0 1rem;
     flex-wrap: wrap;
   }
 
@@ -7017,14 +7019,24 @@ initPoem();
     min-width: 260px;
     padding: 1.2rem;
     border-radius: 18px;
-    background: var(--card-bg-color);
-    box-shadow: var(--box-shadow);
+    background: rgba(252, 253, 255, 0.72);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(148, 163, 220, 0.16);
+    box-shadow: 0 4px 24px rgba(96, 150, 220, 0.10);
     transition: all 0.3s ease;
     text-align: center;
 
     /* 👇 关键对齐代码 */
     display: flex;
     flex-direction: column;
+  }
+
+  [data-user-color-scheme="dark"] .daily-card,
+  .dark .daily-card {
+    background: rgba(30, 36, 58, 0.66);
+    border-color: rgba(148, 163, 220, 0.18);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
   }
 
   .daily-card:hover {

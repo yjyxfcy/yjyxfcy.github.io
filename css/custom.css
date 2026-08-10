@@ -27,14 +27,33 @@
 
 /* ===== 新海诚天空渐变背景 ===== */
 body {
-  background: linear-gradient(180deg, #dcebfc 0%, #e6e5f8 45%, #f6e9f2 100%);
+  background: #e8eefb;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg,
+    #dbe9fb 0%,
+    #e3e5f8 28%,
+    #eae2f6 52%,
+    #f3e7f2 76%,
+    #f7eef3 100%);
 }
 [data-user-color-scheme="dark"] body,
 .dark body {
+  background: #1a2138;
+}
+[data-user-color-scheme="dark"] body::before,
+.dark body::before {
   background: linear-gradient(180deg, #1a2138 0%, #1d1b33 50%, #181f36 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-user-color-scheme]) body {
+    background: #1a2138;
+  }
+  :root:not([data-user-color-scheme]) body::before {
     background: linear-gradient(180deg, #1a2138 0%, #1d1b33 50%, #181f36 100%);
   }
 }

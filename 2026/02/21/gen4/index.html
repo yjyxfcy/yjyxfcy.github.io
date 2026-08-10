@@ -316,7 +316,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          877 字
+          902 字
         
       </span>
     
@@ -502,45 +502,31 @@
 <p>第四讲：Debug</p>
 <span id="more"></span>
 <p>这一讲的内容较为轻松但是很有趣，主要介绍了在机器学习训练中如何更有效地debug</p>
-<p>一个机器学习研究者的日常belike：<br>
-找一份靠谱的代码(通常来自github/huggingface)<br>
-针对自己的问题做特定修改(修改模型结构/修改目标函数/接入新的下游任务/设计新的优化算法)<br>
-充分检查</p>
-<p>然而debug通常是一件很麻烦的事情，这是由于：<br>
-深度神经网络复杂、不可解释<br>
-超参数非常多(模型结构，网络层数、宽度、学习率，batch size，优化器，dropout……)<br>
-非线性模型，没有优化方法可以收敛到全局最优</p>
+<p>一个机器学习研究者的日常belike：<br>找一份靠谱的代码(通常来自github&#x2F;huggingface)<br>针对自己的问题做特定修改(修改模型结构&#x2F;修改目标函数&#x2F;接入新的下游任务&#x2F;设计新的优化算法)<br>充分检查</p>
+<p>然而debug通常是一件很麻烦的事情，这是由于：<br>深度神经网络复杂、不可解释<br>超参数非常多(模型结构，网络层数、宽度、学习率，batch size，优化器，dropout……)<br>非线性模型，没有优化方法可以收敛到全局最优</p>
 <p>因此在训练和测试中就会遇到各种各样稀奇古怪的问题，下面我们将逐个击破</p>
-<h3 id="训练中的问题">训练中的问题</h3>
-<h4 id="情况一">情况一</h4>
-<img src="4.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h3 id="训练中的问题"><a href="#训练中的问题" class="headerlink" title="训练中的问题"></a>训练中的问题</h3><h4 id="情况一"><a href="#情况一" class="headerlink" title="情况一"></a>情况一</h4><img src="4.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>如图所示，这里输入输出有明显关联，训练误差一开始也正常下降，然而一段时间过后误差却突然上升，判断很可能是某一次迭代出了问题，针对性进行解决</p>
-<h4 id="情况二">情况二</h4>
-<img src="4.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>这次的情况甚至还不如上一种，因为模型压根就不收敛，训练误差从未降低(悲)<br>
-所以得全方位排查错误，可能是代码就出现问题，也可能是优化问题，可以采用较为简单的模型/任务进行验证，逐一排查</p>
-<h4 id="情况三">情况三</h4>
-<img src="4.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>这次看起来倒是赏心悦目，误差初期降的很好，然而到后来误差开始上下抖动，甚至是规律的周期运动，令人疑惑()<br>
-猜测可能是学习率过大，或者数据未完全打乱</p>
-<h4 id="情况四">情况四</h4>
-<img src="4.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>这一次除了损失函数不下降……貌似都没问题<br>
-然而一般最麻烦的问题就是看不出明显问题<br>
-所以要从模型的各种参数之中考虑，逐一排查，很是麻烦</p>
-<h3 id="测试中的问题">测试中的问题</h3>
-<p>然而，经常是训练的时候风平浪静，一放到测试集上便风云突变，应该如何是好？</p>
-<h4 id="情况一-2">情况一</h4>
-<img src="4.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h4 id="情况二"><a href="#情况二" class="headerlink" title="情况二"></a>情况二</h4><img src="4.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>这次的情况甚至还不如上一种，因为模型压根就不收敛，训练误差从未降低(悲)<br>所以得全方位排查错误，可能是代码就出现问题，也可能是优化问题，可以采用较为简单的模型&#x2F;任务进行验证，逐一排查</p>
+<h4 id="情况三"><a href="#情况三" class="headerlink" title="情况三"></a>情况三</h4><img src="4.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>这次看起来倒是赏心悦目，误差初期降的很好，然而到后来误差开始上下抖动，甚至是规律的周期运动，令人疑惑()<br>猜测可能是学习率过大，或者数据未完全打乱</p>
+<h4 id="情况四"><a href="#情况四" class="headerlink" title="情况四"></a>情况四</h4><img src="4.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>这一次除了损失函数不下降……貌似都没问题<br>然而一般最麻烦的问题就是看不出明显问题<br>所以要从模型的各种参数之中考虑，逐一排查，很是麻烦</p>
+<h3 id="测试中的问题"><a href="#测试中的问题" class="headerlink" title="测试中的问题"></a>测试中的问题</h3><p>然而，经常是训练的时候风平浪静，一放到测试集上便风云突变，应该如何是好？</p>
+<h4 id="情况一-1"><a href="#情况一-1" class="headerlink" title="情况一"></a>情况一</h4><img src="4.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>这里模型在测试集中表现的并不差，然而与训练集相比水平明显有下降，说明模型泛化能力可能不够</p>
-<h4 id="情况二-2">情况二</h4>
-<img src="4.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>这种情况就比较惨了，测试集上损失函数要么很高，要么很低，但无论如何总是一马平川，和笔者的心电图一样(bushi)<br>
-推测是数据可能有问题，或者测试的代码不对</p>
-<h4 id="情况三-2">情况三</h4>
-<img src="4.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>还有最后一种情况，测试集损失虽然下降，却降的很不稳定，起起伏伏，这显然也是无法接受的<br>
-但在训练集上曲线降的很平滑，推测是测试集数据量太小，有一定偶然性</p>
+<h4 id="情况二-1"><a href="#情况二-1" class="headerlink" title="情况二"></a>情况二</h4><img src="4.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>这种情况就比较惨了，测试集上损失函数要么很高，要么很低，但无论如何总是一马平川，和笔者的心电图一样(bushi)<br>推测是数据可能有问题，或者测试的代码不对</p>
+<h4 id="情况三-1"><a href="#情况三-1" class="headerlink" title="情况三"></a>情况三</h4><img src="4.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>还有最后一种情况，测试集损失虽然下降，却降的很不稳定，起起伏伏，这显然也是无法接受的<br>但在训练集上曲线降的很平滑，推测是测试集数据量太小，有一定偶然性</p>
 
                 
               </div>
@@ -718,7 +704,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">训练中的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%80"><span class="toc-text">情况一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%BA%8C"><span class="toc-text">情况二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%89"><span class="toc-text">情况三</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E5%9B%9B"><span class="toc-text">情况四</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">测试中的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%80-2"><span class="toc-text">情况一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%BA%8C-2"><span class="toc-text">情况二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%89-2"><span class="toc-text">情况三</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">训练中的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%80"><span class="toc-text">情况一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%BA%8C"><span class="toc-text">情况二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%89"><span class="toc-text">情况三</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E5%9B%9B"><span class="toc-text">情况四</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">测试中的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%80-1"><span class="toc-text">情况一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%BA%8C-1"><span class="toc-text">情况二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E5%86%B5%E4%B8%89-1"><span class="toc-text">情况三</span></a></li></ol></li></ol>
   </div>
 </div>
 
@@ -6385,7 +6371,18 @@ let smartCtx = null;
 function buildReason(song, reasons) {
   const parts = reasons.slice(0, 3);
   if (parts.length === 0) {
-    return "今天没有太强的天气或时间线索，随机为你挑了一首《" + song.title + "》";
+    const g = (song.genre || []).slice(0, 2).join("、");
+    const m = (song.mood || []).slice(0, 2).join("与");
+    const t = (song.theme || []).slice(0, 2).join("、");
+    const bits = [];
+    if (g) bits.push("一首" + g + "风格的歌");
+    if (m) bits.push("带着" + m + "的味道");
+    if (t) bits.push("主题绕不开" + t);
+    if (song.energy) bits.push(song.energy + "的节奏");
+    if (bits.length > 0) {
+      return "《" + song.title + "》" + bits.join("，") + "，正适合此刻静下来听听。";
+    }
+    return "随机为你挑了一首《" + song.title + "》";
   }
   return parts.join("；") + "。";
 }
@@ -6950,9 +6947,7 @@ function typePoem(poem, reasons) {
   const el = document.getElementById("poem-content");
   const infoEl = document.getElementById("poem-info");
   const reasonEl = document.getElementById("poem-reason");
-  reasonEl.innerText = "💡 " + (reasons.length > 0
-    ? reasons.slice(0, 2).join("；") + "。"
-    : "今日随缘抽一首，读到就是缘分。");
+  reasonEl.innerText = "💡 " + poemReason(poem, reasons);
   infoEl.innerText = "";
   el.classList.add("typing");
   el.innerText = "";
@@ -6969,6 +6964,24 @@ function typePoem(poem, reasons) {
       infoEl.innerText = "—— " + poem.a + "《" + poem.o + "》";
     }
   }, speed);
+}
+
+function poemReason(poem, reasons) {
+  if (reasons.length > 0) {
+    return reasons.slice(0, 2).join("；") + "。";
+  }
+  const tagWords = {
+    "雨": "雨意", "雪": "雪韵", "月": "月色", "夜": "夜色", "春": "春意",
+    "夏": "夏韵", "秋": "秋意", "冬": "冬韵", "清晨": "晨光", "傍晚": "暮色",
+    "晴": "晴光", "轻快": "轻快", "青春": "青春"
+  };
+  const bits = [];
+  for (let i = 0; i < poem.t.length && bits.length < 2; i++) {
+    const w = tagWords[poem.t[i]] || poem.t[i];
+    if (bits.indexOf(w) < 0) bits.push(w);
+  }
+  const tail = bits.length > 0 ? "，字里行间带着" + bits.join("与") + "的气息" : "";
+  return poem.a + "的一首《" + poem.o + "》" + tail + "，好诗配好时光，读来便是缘分。";
 }
 
 function renderPoem() {

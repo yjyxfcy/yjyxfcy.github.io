@@ -315,7 +315,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.3k 字
         
       </span>
     
@@ -326,7 +326,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -500,113 +500,41 @@
                 <p>北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p>
 <p>第五讲：Flow</p>
 <span id="more"></span>
-<p>一期非常久违的更新(填坑)，今天让我们走进flow matching的世界<br>
-先回顾一样下我们之前学过的三种生成模型：</p>
+
+<p>一期非常久违的更新(填坑)，今天让我们走进flow matching的世界<br>先回顾一样下我们之前学过的三种生成模型：</p>
 <ul>
 <li>VAE：浅层、非序列、重建</li>
 <li>AR：深层、序列、MLE</li>
 <li>GAN：深层、非序列、近似距离</li>
 </ul>
 <p>而今天我们的主角Flow则是：深层、非序列、MLE</p>
-<h3 id="初步分析">初步分析</h3>
-<p>首先我们有图像$x$，噪音$z$，生成模型$g(z)$<br>
-我们从标准正态分布$N(0,I)$中sample出$z$，然后把$z$喂给$g(z;\theta)$，最终得到$x$，其中$\theta$为参数<br>
-那么，应该如何估计$p(x;\theta)$呢？</p>
-<p>一种简单的方式是，假设$g$反函数存在，则有：<br>
-<img src="5.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>接下来我们看一个更一般的情况：变量变换定理<br>
-$Z$为一个随机变量，概率密度函数为$p_{Z}(z)$<br>
-$X=g(Z)$，且$x$的概率密度函数为$p_{X}(x)$<br>
-假设$g$反函数存在，且为了方便设$g$单增<br>
-再假设$g,g^{-1}$都可微，于是有：<br>
-$P(X&lt;x)=P(g(Z)&lt;x)=P(z&lt;g^{-1}(x))=\int_{-\infty}^{g^{-1}(x)}p_{Z}(z) dz$<br>
-两边同时求导，便有：<br>
-$p_{X}(x)=(g^{-1}(x))'p_{Z}(z)$</p>
-<p>又$g(g^{-1}(x))=x$<br>
-两边求导有$g’(z)(g^{-1}(x))‘=1$<br>
-代入，亦可得出：<br>
-$p_{X}(x)g’(z)=p_{Z}(z)$</p>
-<h3 id="多维情况">多维情况</h3>
-<p>设$Z,X$均为$d$维随机向量，其余条件不变<br>
-$g:R^d \rightarrow R^d $反函数存在，且$g,g^{-1}$可微(这一条件我们称作<strong>微分同胚</strong>)<br>
-我们设Jacobi行列式$D_g(z)=\dfrac{\partial(g_1,…,g_d)}{\partial(z_1,…,z_d)}$<br>
-那么类似地，我们可以推出<br>
-$p_{X}(x)=|detD_{g^{-1}}(x)|p_{Z}(z)$<br>
-<img src="5.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="初步分析"><a href="#初步分析" class="headerlink" title="初步分析"></a>初步分析</h3><p>首先我们有图像$x$，噪音$z$，生成模型$g(z)$<br>我们从标准正态分布$N(0,I)$中sample出$z$，然后把$z$喂给$g(z;\theta)$，最终得到$x$，其中$\theta$为参数<br>那么，应该如何估计$p(x;\theta)$呢？</p>
+<p>一种简单的方式是，假设$g$反函数存在，则有：<br><img src="5.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>接下来我们看一个更一般的情况：变量变换定理<br>$Z$为一个随机变量，概率密度函数为$p_{Z}(z)$<br>$X&#x3D;g(Z)$，且$x$的概率密度函数为$p_{X}(x)$<br>假设$g$反函数存在，且为了方便设$g$单增<br>再假设$g,g^{-1}$都可微，于是有：<br>$P(X&lt;x)&#x3D;P(g(Z)&lt;x)&#x3D;P(z&lt;g^{-1}(x))&#x3D;\int_{-\infty}^{g^{-1}(x)}p_{Z}(z) dz$<br>两边同时求导，便有：<br>$p_{X}(x)&#x3D;(g^{-1}(x))’p_{Z}(z)$</p>
+<p>又$g(g^{-1}(x))&#x3D;x$<br>两边求导有$g’(z)(g^{-1}(x))’&#x3D;1$<br>代入，亦可得出：<br>$p_{X}(x)g’(z)&#x3D;p_{Z}(z)$</p>
+<h3 id="多维情况"><a href="#多维情况" class="headerlink" title="多维情况"></a>多维情况</h3><p>设$Z,X$均为$d$维随机向量，其余条件不变<br>$g:R^d \rightarrow R^d $反函数存在，且$g,g^{-1}$可微(这一条件我们称作<strong>微分同胚</strong>)<br>我们设Jacobi行列式$D_g(z)&#x3D;\dfrac{\partial(g_1,…,g_d)}{\partial(z_1,…,z_d)}$<br>那么类似地，我们可以推出<br>$p_{X}(x)&#x3D;|detD_{g^{-1}}(x)|p_{Z}(z)$<br><img src="5.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>如上图，反函数$g^{-1}$的作用恰好就是把复杂的分布$p_{X}(x)$ <strong>normalizing</strong> 为简单的分布$p_Z(z)$，从相反的方向 <strong>flow</strong> 过去，因此这种模型被称为<strong>normalizing flow</strong></p>
-<p>根据之前的推导，我们也可以类似得出<br>
-<img src="5.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>根据之前的推导，我们也可以类似得出<br><img src="5.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>总之就是从标准正态分布sample出$z$之后，$z$就可以和$x$互相flow来flow去</p>
-<h3 id="实际应用">实际应用</h3>
-<p>在实际应用中，我们可以通过参数化$f$或者$g$来解决问题，根据不同场景具体分析</p>
-<h4 id="density-estimation">density estimation</h4>
-<p>给定样本$x$，将其输入模型，输出$p(x)$的估计值<br>
-具体应用比如：假设有一组生成图像，需要选出质量最佳的那一张</p>
-<p>此时根据$P_X(x)=p_Z(f(x))|det D_f(x)|$，参数化$f$即可<br>
-因为我们不知道$Z$概率分布，如果参数化$g$还得求反函数，十分麻烦</p>
-<h4 id="sampling">sampling</h4>
-<p>给定噪声$z$，将其输入模型，输出复杂分布$p_X(x)$的样本<br>
-具体应用场景显然就是生成模型</p>
-<p>此时对$g$参数化就更方便，因为$x=g(z)$和$x=f^{-1}(z)$相比的话，显然前者更简单，不需要求反函数</p>
-<h3 id="挑战">挑战</h3>
-<p>讲了这么多flow的应用，但是在真实的神经网络中，存在许多非线性变换，卷积操作，这些行为都不一定保证能有反函数，更不用说要求出反函数了，如何是好？<br>
-科学家们想到的办法是：<br>
-寻找某个function class，这个class中的函数易于计算，反函数存在，并且能算出Jacobi行列式</p>
-<p>直接找到一个属于该class的函数，一步到位把$x$变成$z$显然是极为困难的<br>
-我们就分多步进行，只需保证每一步的函数都属于这个class即可<br>
-定义$x_n=g_1 ·g_2·…·g_n(z)$，代表经过$n$次函数的结果<br>
-于是$p_{X}(x)=|detD_{g^{-1}}(x)|p_{Z}(z)$<br>
-$=p_{Z}(z)|detD_{g_1^{-1}}(x_1)|…|detD_{g_n^{-1}}(x_n)|$</p>
-<h3 id="一些特殊flow">一些特殊flow</h3>
-<p>接下来我们会在normalizing flow的基础上，介绍几种特殊的flow，都是对一般情况的改进</p>
-<h4 id="element-flow">element flow</h4>
-<p>即在normalizing flow基础上加以限制，每一个维度都不和其他维度相关联，这样Jacobi矩阵为对角阵，行列式非常好算<br>
-$g(z)=(h(z_1),…,h(z_d))$<br>
-其中若每个$h$都可逆，则$g$也可逆<br>
-$h$可以是任意合理的激活函数，比如RELU</p>
-<h4 id="linear-flow">linear flow</h4>
-<p>顾名思义就是最简单的线性层：$g(z)=Az+b$，$A$为$d$维方阵<br>
-如果$A$可逆，那么$g$反函数存在，$g^{-1}(x)=A^{-1}(x-b)$<br>
-$D_g(z)=A,D_{g^{-1}}(x)=A^{-1}$<br>
-$|detD_g(z)|=|A|,|detD_{g^{-1}}(x)|=|A^{-1}|$<br>
-这种方法主要问题在于计算量太大，计算矩阵行列式要$O(d^3)$</p>
-<p>改进：<br>
-如果$A$为对角元非零的上(下)三角阵，那么它可逆，并且行列式易于计算<br>
-行列式$O(d)$，算逆矩阵$O(d^2)$</p>
-<p>如果$A$为正交矩阵，显然$A$可逆，且$A^{-1}=A^{T}$<br>
-于是$|detD_g(z)|=|detD_{g^{-1}}(x)|=1$，这样就十分方便<br>
-如何在训练中确保$A$正交呢？我们一般采用<strong>Householder transform</strong><br>
-(这个方法在数值分析课上会重点讲述，这里不加赘述，放一张图就好)<br>
-<img src="5.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>如果从结构角度看，<strong>MLP也可以看成是linear flow与element flow的叠加</strong><br>
-(读者可以思考一下为什么这么说)</p>
-<h4 id="residual-flow-1">residual flow 1</h4>
-<p>$g(z)=h+h(z)$<br>
-我们设$z$的前$d_1$维为$z_1$，后$d-d_1$维为$z_2$<br>
-$h1:R^{d-d_1} \rightarrow R^{d_1}$<br>
-$h2:R^{d_1} \rightarrow R^{d-d_1}$<br>
-$x_1=z_1+h_1(z_2)$<br>
-$x_2=z_2+h_2(x_1)$<br>
-$x=(x_1,x_2)=g(z)$</p>
-<p>反向求解则有：<br>
-$z_2=x_2-h_2(x_1)$<br>
-$z_1=x_1-h_1(x_2-h_2(x_1))$</p>
-<h4 id="residual-flow-2">residual flow 2</h4>
-<p>2相比1的升级版在于：<br>
-如果满足Lipschitz条件，即$Lip(h)&lt;1$，即可证明$g(z)$反函数存在<br>
-然而这种方法效率极低，虽然理论上$g(z)$反函数存在，但是实际解很难求出，只能逼近求近似解</p>
-<h4 id="continuous-flow">continuous flow</h4>
-<p>这里就牵扯到常微分方程数值解的知识了，笔者在学完数值分析回来之后，对此理解又加深了一层<br>
-定义常微分方程：$\dfrac{dx}{dt}=f(x,t)$<br>
-初值$x(t_0)=z$<br>
-需要找到目标函数$x^{\ast}(t)$满足上述条件</p>
-<p>大多数情况下难以获得解析解，因此需要采用数值方法，对于任意$t_1$估算$x(t_1)$<br>
-当然在此之前需要确保ODE的解唯一存在，回顾一下高数下的Picard 定理<br>
-<img src="5.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>传统的ODE会将式子改写为$\dfrac{dx}{dt}=f(x,t,\theta),x(0)=z$<br>
-将时间维度取消就得到了time independent ODE $\dfrac{dx}{dt}=f(x,\theta),x(0)=z$<br>
-我们已知噪音$z$和参数$\theta$后，解这个ODE，得出$x(1)$就是我们需要的图片输出，并且容易证明ODE也是可逆的(见下图)，所以ODE某种意义上也是normalizing flow<br>
-<img src="5.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>在实际应用中，我们可以通过参数化$f$或者$g$来解决问题，根据不同场景具体分析</p>
+<h4 id="density-estimation"><a href="#density-estimation" class="headerlink" title="density estimation"></a>density estimation</h4><p>给定样本$x$，将其输入模型，输出$p(x)$的估计值<br>具体应用比如：假设有一组生成图像，需要选出质量最佳的那一张</p>
+<p>此时根据$P_X(x)&#x3D;p_Z(f(x))|det D_f(x)|$，参数化$f$即可<br>因为我们不知道$Z$概率分布，如果参数化$g$还得求反函数，十分麻烦</p>
+<h4 id="sampling"><a href="#sampling" class="headerlink" title="sampling"></a>sampling</h4><p>给定噪声$z$，将其输入模型，输出复杂分布$p_X(x)$的样本<br>具体应用场景显然就是生成模型</p>
+<p>此时对$g$参数化就更方便，因为$x&#x3D;g(z)$和$x&#x3D;f^{-1}(z)$相比的话，显然前者更简单，不需要求反函数</p>
+<h3 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h3><p>讲了这么多flow的应用，但是在真实的神经网络中，存在许多非线性变换，卷积操作，这些行为都不一定保证能有反函数，更不用说要求出反函数了，如何是好？<br>科学家们想到的办法是：<br>寻找某个function class，这个class中的函数易于计算，反函数存在，并且能算出Jacobi行列式</p>
+<p>直接找到一个属于该class的函数，一步到位把$x$变成$z$显然是极为困难的<br>我们就分多步进行，只需保证每一步的函数都属于这个class即可<br>定义$x_n&#x3D;g_1 ·g_2·…·g_n(z)$，代表经过$n$次函数的结果<br>于是$p_{X}(x)&#x3D;|detD_{g^{-1}}(x)|p_{Z}(z)$<br>$&#x3D;p_{Z}(z)|detD_{g_1^{-1}}(x_1)|…|detD_{g_n^{-1}}(x_n)|$</p>
+<h3 id="一些特殊flow"><a href="#一些特殊flow" class="headerlink" title="一些特殊flow"></a>一些特殊flow</h3><p>接下来我们会在normalizing flow的基础上，介绍几种特殊的flow，都是对一般情况的改进</p>
+<h4 id="element-flow"><a href="#element-flow" class="headerlink" title="element flow"></a>element flow</h4><p>即在normalizing flow基础上加以限制，每一个维度都不和其他维度相关联，这样Jacobi矩阵为对角阵，行列式非常好算<br>$g(z)&#x3D;(h(z_1),…,h(z_d))$<br>其中若每个$h$都可逆，则$g$也可逆<br>$h$可以是任意合理的激活函数，比如RELU</p>
+<h4 id="linear-flow"><a href="#linear-flow" class="headerlink" title="linear flow"></a>linear flow</h4><p>顾名思义就是最简单的线性层：$g(z)&#x3D;Az+b$，$A$为$d$维方阵<br>如果$A$可逆，那么$g$反函数存在，$g^{-1}(x)&#x3D;A^{-1}(x-b)$<br>$D_g(z)&#x3D;A,D_{g^{-1}}(x)&#x3D;A^{-1}$<br>$|detD_g(z)|&#x3D;|A|,|detD_{g^{-1}}(x)|&#x3D;|A^{-1}|$<br>这种方法主要问题在于计算量太大，计算矩阵行列式要$O(d^3)$</p>
+<p>改进：<br>如果$A$为对角元非零的上(下)三角阵，那么它可逆，并且行列式易于计算<br>行列式$O(d)$，算逆矩阵$O(d^2)$</p>
+<p>如果$A$为正交矩阵，显然$A$可逆，且$A^{-1}&#x3D;A^{T}$<br>于是$|detD_g(z)|&#x3D;|detD_{g^{-1}}(x)|&#x3D;1$，这样就十分方便<br>如何在训练中确保$A$正交呢？我们一般采用<strong>Householder transform</strong><br>(这个方法在数值分析课上会重点讲述，这里不加赘述，放一张图就好)<br><img src="5.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>如果从结构角度看，<strong>MLP也可以看成是linear flow与element flow的叠加</strong><br>(读者可以思考一下为什么这么说)</p>
+<h4 id="residual-flow-1"><a href="#residual-flow-1" class="headerlink" title="residual flow 1"></a>residual flow 1</h4><p>$g(z)&#x3D;h+h(z)$<br>我们设$z$的前$d_1$维为$z_1$，后$d-d_1$维为$z_2$<br>$h1:R^{d-d_1} \rightarrow R^{d_1}$<br>$h2:R^{d_1} \rightarrow R^{d-d_1}$<br>$x_1&#x3D;z_1+h_1(z_2)$<br>$x_2&#x3D;z_2+h_2(x_1)$<br>$x&#x3D;(x_1,x_2)&#x3D;g(z)$</p>
+<p>反向求解则有：<br>$z_2&#x3D;x_2-h_2(x_1)$<br>$z_1&#x3D;x_1-h_1(x_2-h_2(x_1))$</p>
+<h4 id="residual-flow-2"><a href="#residual-flow-2" class="headerlink" title="residual flow 2"></a>residual flow 2</h4><p>2相比1的升级版在于：<br>如果满足Lipschitz条件，即$Lip(h)&lt;1$，即可证明$g(z)$反函数存在<br>然而这种方法效率极低，虽然理论上$g(z)$反函数存在，但是实际解很难求出，只能逼近求近似解</p>
+<h4 id="continuous-flow"><a href="#continuous-flow" class="headerlink" title="continuous flow"></a>continuous flow</h4><p>这里就牵扯到常微分方程数值解的知识了，笔者在学完数值分析回来之后，对此理解又加深了一层<br>定义常微分方程：$\dfrac{dx}{dt}&#x3D;f(x,t)$<br>初值$x(t_0)&#x3D;z$<br>需要找到目标函数$x^{\ast}(t)$满足上述条件</p>
+<p>大多数情况下难以获得解析解，因此需要采用数值方法，对于任意$t_1$估算$x(t_1)$<br>当然在此之前需要确保ODE的解唯一存在，回顾一下高数下的Picard 定理<br><img src="5.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>传统的ODE会将式子改写为$\dfrac{dx}{dt}&#x3D;f(x,t,\theta),x(0)&#x3D;z$<br>将时间维度取消就得到了time independent ODE $\dfrac{dx}{dt}&#x3D;f(x,\theta),x(0)&#x3D;z$<br>我们已知噪音$z$和参数$\theta$后，解这个ODE，得出$x(1)$就是我们需要的图片输出，并且容易证明ODE也是可逆的(见下图)，所以ODE某种意义上也是normalizing flow<br><img src="5.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 
                 
               </div>
@@ -6451,7 +6379,18 @@ let smartCtx = null;
 function buildReason(song, reasons) {
   const parts = reasons.slice(0, 3);
   if (parts.length === 0) {
-    return "今天没有太强的天气或时间线索，随机为你挑了一首《" + song.title + "》";
+    const g = (song.genre || []).slice(0, 2).join("、");
+    const m = (song.mood || []).slice(0, 2).join("与");
+    const t = (song.theme || []).slice(0, 2).join("、");
+    const bits = [];
+    if (g) bits.push("一首" + g + "风格的歌");
+    if (m) bits.push("带着" + m + "的味道");
+    if (t) bits.push("主题绕不开" + t);
+    if (song.energy) bits.push(song.energy + "的节奏");
+    if (bits.length > 0) {
+      return "《" + song.title + "》" + bits.join("，") + "，正适合此刻静下来听听。";
+    }
+    return "随机为你挑了一首《" + song.title + "》";
   }
   return parts.join("；") + "。";
 }
@@ -7016,9 +6955,7 @@ function typePoem(poem, reasons) {
   const el = document.getElementById("poem-content");
   const infoEl = document.getElementById("poem-info");
   const reasonEl = document.getElementById("poem-reason");
-  reasonEl.innerText = "💡 " + (reasons.length > 0
-    ? reasons.slice(0, 2).join("；") + "。"
-    : "今日随缘抽一首，读到就是缘分。");
+  reasonEl.innerText = "💡 " + poemReason(poem, reasons);
   infoEl.innerText = "";
   el.classList.add("typing");
   el.innerText = "";
@@ -7035,6 +6972,24 @@ function typePoem(poem, reasons) {
       infoEl.innerText = "—— " + poem.a + "《" + poem.o + "》";
     }
   }, speed);
+}
+
+function poemReason(poem, reasons) {
+  if (reasons.length > 0) {
+    return reasons.slice(0, 2).join("；") + "。";
+  }
+  const tagWords = {
+    "雨": "雨意", "雪": "雪韵", "月": "月色", "夜": "夜色", "春": "春意",
+    "夏": "夏韵", "秋": "秋意", "冬": "冬韵", "清晨": "晨光", "傍晚": "暮色",
+    "晴": "晴光", "轻快": "轻快", "青春": "青春"
+  };
+  const bits = [];
+  for (let i = 0; i < poem.t.length && bits.length < 2; i++) {
+    const w = tagWords[poem.t[i]] || poem.t[i];
+    if (bits.indexOf(w) < 0) bits.push(w);
+  }
+  const tail = bits.length > 0 ? "，字里行间带着" + bits.join("与") + "的气息" : "";
+  return poem.a + "的一首《" + poem.o + "》" + tail + "，好诗配好时光，读来便是缘分。";
 }
 
 function renderPoem() {

@@ -516,84 +516,54 @@
                 <p>北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p>
 <p>第二讲：Transformer&amp;AR</p>
 <span id="more"></span>
-<h2 id="Transformer">Transformer</h2>
-<p>nlp的挑战：<br>
-Long term dependency -&gt; Attention<br>
-Sophisticated meaning -&gt; Feed forward network<br>
-Word order matters a lot -&gt; Positional encoding</p>
-<h3 id="Attention-is-all-you-need">Attention is all you need</h3>
-<img src="2.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>老生常谈的话题了，ai引论我们曾经速通过，这里再次回顾一下<br>
-假设每个word被表示为$d$维词向量$x_{i}$，我们希望用注意力机制将每个$x_{i}$变为$z_{i}$，以更好获取上下文相关信息<br>
-Hash表是一种注意力机制，由(key,value)对组成，查询query到达时找出对应的key并返回value，若无法匹配则返回empty<br>
-Attention机制是一种软性的Hash表，给出query后每个key都要进行匹配计算，取其加权平均得出最终的value</p>
+<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><p>nlp的挑战：<br>Long term dependency -&gt; Attention<br>Sophisticated meaning -&gt; Feed forward network<br>Word order matters a lot -&gt; Positional encoding</p>
+<h3 id="Attention-is-all-you-need"><a href="#Attention-is-all-you-need" class="headerlink" title="Attention is all you need"></a>Attention is all you need</h3><img src="2.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>老生常谈的话题了，ai引论我们曾经速通过，这里再次回顾一下<br>假设每个word被表示为$d$维词向量$x_{i}$，我们希望用注意力机制将每个$x_{i}$变为$z_{i}$，以更好获取上下文相关信息<br>Hash表是一种注意力机制，由(key,value)对组成，查询query到达时找出对应的key并返回value，若无法匹配则返回empty<br>Attention机制是一种软性的Hash表，给出query后每个key都要进行匹配计算，取其加权平均得出最终的value</p>
 <img src="2.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>上图即为经典的注意力机制的逐词计算过程，下面给出矩阵版本</p>
 <img src="2.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>总结起来就得到了那个改变了nlp历史的经典公式：</p>
-<p>$Attn(Q,K,V)=softmax(\dfrac{QK^{T}}{\sqrt d_{k}})V$</p>
-<h5 id="典中典问题：这里-Q-与-K-T-相乘后为什么要除-sqrt-d-k-？">典中典问题：这里$Q$与$K^{T}$相乘后为什么要除$\sqrt d_{k}$？</h5>
-<p>这里摘取了知乎上的解答，本质还是保证方差的稳定性，防止在维度$d$较大时点乘的结果也会很大，$Softmax$的输入就会很大，梯度会很小<br>
-<img src="2.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: 
+<p>$Attn(Q,K,V)&#x3D;softmax(\dfrac{QK^{T}}{\sqrt d_{k}})V$</p>
+<h5 id="典中典问题：这里-Q-与-K-T-相乘后为什么要除-sqrt-d-k-？"><a href="#典中典问题：这里-Q-与-K-T-相乘后为什么要除-sqrt-d-k-？" class="headerlink" title="典中典问题：这里$Q$与$K^{T}$相乘后为什么要除$\sqrt d_{k}$？"></a>典中典问题：这里$Q$与$K^{T}$相乘后为什么要除$\sqrt d_{k}$？</h5><p>这里摘取了知乎上的解答，本质还是保证方差的稳定性，防止在维度$d$较大时点乘的结果也会很大，$Softmax$的输入就会很大，梯度会很小<br><img src="2.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: 
 auto;"></p>
-<h3 id="FFN-feed-forward-network">FFN (feed-forward network)</h3>
-<img src="2.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h3 id="FFN-feed-forward-network"><a href="#FFN-feed-forward-network" class="headerlink" title="FFN (feed-forward network)"></a>FFN (feed-forward network)</h3><img src="2.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>严格来说Attention是一种非线性转换，仅负责信息的收集和组织，不进行信息处理，所以Attention之后还需要经过一层FFN</p>
-<h3 id="Add-Norm">Add &amp; Norm</h3>
-<p>利用residual残差神经网络进行连接，防止梯度爆炸<br>
-<img src="2.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>Layer Normalization进行层归一化<br>
-<img src="2.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h3 id="Two-different-structures">Two different structures</h3>
-<p>Transformer有两种不同的范式，Post-LN和Pre-LN，区别在于LayerNorm的位置不同，前者确保了任何输入都需要经历一个非线性变换，后者则并非如此，早期人们努力训练Post-LN，但训练起来难度极大，对于模型学习率这样的参数极为敏感，需要大量微调，现在更常用的是训练起来较为稳定的Pre-LN<br>
-<img src="2.8.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h3 id="positional-encoding">positional encoding</h3>
-<p>无论在Attention还是FFN中，都没有考虑词汇的位置信息，这样会导致无法区分“屡败屡战”和“屡战屡败”，产生荒谬结果<br>
-所以我们需要添加位置编码，分为绝对、相对、旋转三种位置编码</p>
-<h4 id="绝对位置编码">绝对位置编码</h4>
-<p>直接将每个输入的词向量$x_{i}$替换为$x_{i}+p_{i}$，其中$p_{i}$为位置编码，一般采用关于$i$的正余弦函数来编。但是这个方法存在问题，不可学习的编码在长序列的泛化能力较差，可学习的编码无法应用到更长序列，也无法扩展到图像等多模态领域</p>
-<h4 id="相对位置编码">相对位置编码</h4>
-<p>编码任意两个位置的相对距离 $b_{ij}=f(i-j)$<br>
-<img src="2.9.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h4 id="旋转位置编码">旋转位置编码</h4>
-<img src="2.10.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<h2 id="Autoregressive-models">Autoregressive models</h2>
-<p>高维空间中的概率模型：<br>
-cv中判断两张图片相等是分别比较每个像素的RGB，nlp中判断两个句子相等则是分别比较每个单词<br>
-<img src="2.11.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>由条件概率公式，可以将每个元素分别相等的概率转化为以下的条件概率连乘形式，因此我们希望得到一个模型，可以在已知$x_{1},x_{2},…,x_{i-1}$的基础上预测$x_{i}$<br>
-此即为自回归模型，生成方式有左到右和右到左两种，我们在nlp中主要关注从左到右的生成，这种模型被称为language model！<br>
-(ps：这门课上不会涉及nlp的一些技术，如normalization,tokenization,segmentation等，想要进一步了解可以关注贺笛老师开设的nlp课程~)</p>
+<h3 id="Add-Norm"><a href="#Add-Norm" class="headerlink" title="Add &amp; Norm"></a>Add &amp; Norm</h3><p>利用residual残差神经网络进行连接，防止梯度爆炸<br><img src="2.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>Layer Normalization进行层归一化<br><img src="2.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="Two-different-structures"><a href="#Two-different-structures" class="headerlink" title="Two different structures"></a>Two different structures</h3><p>Transformer有两种不同的范式，Post-LN和Pre-LN，区别在于LayerNorm的位置不同，前者确保了任何输入都需要经历一个非线性变换，后者则并非如此，早期人们努力训练Post-LN，但训练起来难度极大，对于模型学习率这样的参数极为敏感，需要大量微调，现在更常用的是训练起来较为稳定的Pre-LN<br><img src="2.8.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="positional-encoding"><a href="#positional-encoding" class="headerlink" title="positional encoding"></a>positional encoding</h3><p>无论在Attention还是FFN中，都没有考虑词汇的位置信息，这样会导致无法区分“屡败屡战”和“屡战屡败”，产生荒谬结果<br>所以我们需要添加位置编码，分为绝对、相对、旋转三种位置编码</p>
+<h4 id="绝对位置编码"><a href="#绝对位置编码" class="headerlink" title="绝对位置编码"></a>绝对位置编码</h4><p>直接将每个输入的词向量$x_{i}$替换为$x_{i}+p_{i}$，其中$p_{i}$为位置编码，一般采用关于$i$的正余弦函数来编。但是这个方法存在问题，不可学习的编码在长序列的泛化能力较差，可学习的编码无法应用到更长序列，也无法扩展到图像等多模态领域</p>
+<h4 id="相对位置编码"><a href="#相对位置编码" class="headerlink" title="相对位置编码"></a>相对位置编码</h4><p>编码任意两个位置的相对距离 $b_{ij}&#x3D;f(i-j)$<br><img src="2.9.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="旋转位置编码"><a href="#旋转位置编码" class="headerlink" title="旋转位置编码"></a>旋转位置编码</h4><img src="2.10.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<h2 id="Autoregressive-models"><a href="#Autoregressive-models" class="headerlink" title="Autoregressive models"></a>Autoregressive models</h2><p>高维空间中的概率模型：<br>cv中判断两张图片相等是分别比较每个像素的RGB，nlp中判断两个句子相等则是分别比较每个单词<br><img src="2.11.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>由条件概率公式，可以将每个元素分别相等的概率转化为以下的条件概率连乘形式，因此我们希望得到一个模型，可以在已知$x_{1},x_{2},…,x_{i-1}$的基础上预测$x_{i}$<br>此即为自回归模型，生成方式有左到右和右到左两种，我们在nlp中主要关注从左到右的生成，这种模型被称为language model！<br>(ps：这门课上不会涉及nlp的一些技术，如normalization,tokenization,segmentation等，想要进一步了解可以关注贺笛老师开设的nlp课程~)</p>
 <p>语言模型的特点：给出一部分文本，预测next token</p>
-<h3 id="最古老的非参数模型：N-Gram-language-model">最古老的非参数模型：N-Gram language model</h3>
-<img src="2.12.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>根据Markov假设，$x_{i}$不会依赖于很远的token，只会依赖于最近的k个token，所以我们可以利用条件概率公式将$x_{i}$出现的概率简化，并从频率估计概率，下面是一个简单的例子<br>
-<img src="2.13.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="最古老的非参数模型：N-Gram-language-model"><a href="#最古老的非参数模型：N-Gram-language-model" class="headerlink" title="最古老的非参数模型：N-Gram language model"></a>最古老的非参数模型：N-Gram language model</h3><img src="2.12.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>根据Markov假设，$x_{i}$不会依赖于很远的token，只会依赖于最近的k个token，所以我们可以利用条件概率公式将$x_{i}$出现的概率简化，并从频率估计概率，下面是一个简单的例子<br><img src="2.13.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>存在的问题：当n变大时，需要更多上下文信息，空间消耗大，但是n减少又会导致准确度下降，形成了Sparsity, Memory和Accuracy的不可能三角！</p>
-<h3 id="fixed-window-language-model">fixed-window language model</h3>
-<img src="2.14.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h3 id="fixed-window-language-model"><a href="#fixed-window-language-model" class="headerlink" title="fixed-window language model"></a>fixed-window language model</h3><img src="2.14.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>使用神经网络来估计条件概率，优势在于没有内存和稀疏性问题，但由于window-size N被固定，使其语言理解能力不足</p>
-<h3 id="RNN">RNN</h3>
-<img src="2.15.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<p>RNN不局限于fixed-window，而是对所有前向的文字信息全部考虑，将前一个hidden state与现在的输入融合形成新的hidden state，不断递归下去，处理长句子的效果好了不少，其缺点在于递归使得训练速度极慢，句子越长训的越慢，无法像Transformer那样实现并行计算<br>
-<img src="2.16.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><img src="2.15.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<p>RNN不局限于fixed-window，而是对所有前向的文字信息全部考虑，将前一个hidden state与现在的输入融合形成新的hidden state，不断递归下去，处理长句子的效果好了不少，其缺点在于递归使得训练速度极慢，句子越长训的越慢，无法像Transformer那样实现并行计算<br><img src="2.16.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>RNN的本质(递归)体现在了上面这个经典公式之中</p>
-<h3 id="Transformer-为代表的大语言模型-补充">Transformer(为代表的大语言模型)补充</h3>
-<h4 id="训练">训练</h4>
-<p>正是由于RNN的结构问题，我们希望用Transformer来训练，但是依旧要满足自回归性质，即next token只与前面已知token有关，与后文token无关(不能让模型“未卜先知”提前看到后文)，所以需要引入attn_mask矩阵，下三角部分为0，上三角为-inf，-inf确保后文不想让模型看到的部分经过softmax后结果为0，就没有影响了，下三角部分结果仍然不变<br>
-<img src="2.17.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>Evaluation采用困惑度(perplexity)来评判<br>
-<img src="2.18.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="Transformer-为代表的大语言模型-补充"><a href="#Transformer-为代表的大语言模型-补充" class="headerlink" title="Transformer(为代表的大语言模型)补充"></a>Transformer(为代表的大语言模型)补充</h3><h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>正是由于RNN的结构问题，我们希望用Transformer来训练，但是依旧要满足自回归性质，即next token只与前面已知token有关，与后文token无关(不能让模型“未卜先知”提前看到后文)，所以需要引入attn_mask矩阵，下三角部分为0，上三角为-inf，-inf确保后文不想让模型看到的部分经过softmax后结果为0，就没有影响了，下三角部分结果仍然不变<br><img src="2.17.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>Evaluation采用困惑度(perplexity)来评判<br><img src="2.18.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>如果没有加mask会怎么样？这一点可能与我们惯性思维大不相同，loss会变得很低很低！这是由于模型只学会了copy，就是ctrlc ctrlv，简简单单把前一个位置的词往后复制，完全不会预测，更有趣的是这时的困惑度也会很低，只有当模型运用到现实场景中才能发现问题</p>
-<h4 id="推理">推理</h4>
-<p>大模型在训练之后，推理时的方式也略有不同<br>
-一种是stochastic sampling，通过概率分布随机sample出next token，这里GPT是用了top-k sample，从$P_{\theta}$中挑出k个概率最大的，再均匀分布采样出结果，当然也可以直接top-1 sample，那就没有随机性，直接选概率最大的，这被称作greedy search<br>
-beam search ppt上没有，这里简单补充一下，大致就是设置束宽B，挑出Top-B组合，使用对数概率累加评分，再从上一步的B个候选继续展开，与greedy search相比优点在于B可控，可以保留多条候选路径，生成的句子更为合理，缺点在于速度较慢，B越大推理路径越多，消耗的计算资源越多，缺乏随机性，容易生成中规中矩的保守回答<br>
-<img src="2.19.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h4><p>大模型在训练之后，推理时的方式也略有不同<br>一种是stochastic sampling，通过概率分布随机sample出next token，这里GPT是用了top-k sample，从$P_{\theta}$中挑出k个概率最大的，再均匀分布采样出结果，当然也可以直接top-1 sample，那就没有随机性，直接选概率最大的，这被称作greedy search<br>beam search ppt上没有，这里简单补充一下，大致就是设置束宽B，挑出Top-B组合，使用对数概率累加评分，再从上一步的B个候选继续展开，与greedy search相比优点在于B可控，可以保留多条候选路径，生成的句子更为合理，缺点在于速度较慢，B越大推理路径越多，消耗的计算资源越多，缺乏随机性，容易生成中规中矩的保守回答<br><img src="2.19.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <img src="2.21.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-<h4 id="Transformer与RNN的复杂度对比分析">Transformer与RNN的复杂度对比分析</h4>
-<img src="2.20.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
+<h4 id="Transformer与RNN的复杂度对比分析"><a href="#Transformer与RNN的复杂度对比分析" class="headerlink" title="Transformer与RNN的复杂度对比分析"></a>Transformer与RNN的复杂度对比分析</h4><img src="2.20.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <img src="2.22.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+
 <p>训练阶段Transformer时间复杂度为$O(n^{2})$，RNN则为$O(n)$，但Transformer胜在可以并行计算，可以通过GPU优化，而RNN则只能串行计算，效率较低</p>
 <p>推理时设序列长度d，Transformer复杂度与$d^{2}$成正比，RNN复杂度与$d$成正比，所以看起来确实RNN更为快捷，但无奈其训练太过缓慢</p>
 <p>srds现在科学家又发明了KVcache的优化技术，通过缓存已算好的KV，可以将Transformer推理时的复杂度降到与$d$成正比，这样一来RNN的优势几乎已荡然无存，但不可否认，其在nlp的历史上留下了浓墨重彩的一笔~</p>
@@ -869,13 +839,24 @@ beam search ppt上没有，这里简单补充一下，大致就是设置束宽B�
     <div class="song-player-wrap">
       <audio id="song-player" preload="metadata"></audio>
       <div class="song-controls">
-        <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
-        <div id="song-progress" class="song-progress" title="拖动进度">
-          <div class="song-progress-fill" id="song-progress-fill"></div>
-          <div class="song-progress-thumb" id="song-progress-thumb"></div>
+        <div class="song-ctl-row">
+          <button id="song-prev-btn" class="song-ctl song-nav" onclick="prevSong()" title="上一首">⏮</button>
+          <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
+          <button id="song-next-btn" class="song-ctl song-nav" onclick="nextSong()" title="下一首">⏭</button>
         </div>
-        <span id="song-time" class="song-time">0:00 / 0:00</span>
-        <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+        <div class="song-center">
+          <div id="song-progress" class="song-progress" title="拖动进度">
+            <div class="song-progress-fill" id="song-progress-fill"></div>
+            <div class="song-progress-thumb" id="song-progress-thumb"></div>
+          </div>
+          <span id="song-time" class="song-time">0:00 / 0:00</span>
+        </div>
+        <div class="song-side">
+          <span id="song-vol-icon" class="song-vol-icon">🔊</span>
+          <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
+                 oninput="setVolume(this.value)" title="音量">
+          <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+        </div>
       </div>
     </div>
     <button class="daily-btn" onclick="nextSong()">换一首</button>
@@ -6263,6 +6244,8 @@ const PERIODS = [
 let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
 let songId = localStorage.getItem("songId") || "";
 let playMode = localStorage.getItem("playMode") || "order"; // order 顺序 / shuffle 随机 / single 单曲循环
+let songVolume = parseInt(localStorage.getItem("songVolume"), 10);
+if (!(songVolume >= 0)) songVolume = 100;
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
@@ -6568,12 +6551,59 @@ function nextSong() {
   loadSmart(false);
 }
 
+function prevSong() {
+  if (smartQueue.length === 0) return;
+  // 播放超过 3 秒时，先回到本曲开头
+  if (player.currentTime > 3) {
+    player.currentTime = 0;
+    updateProgress();
+    return;
+  }
+  if (playMode === "shuffle") {
+    randomSong();
+  } else {
+    smartIdx--;
+    if (smartIdx < 0) smartIdx = smartQueue.length - 1;
+  }
+  localStorage.setItem("smartIdx", String(smartIdx));
+  loadSmart(false);
+}
+
 function togglePlay() {
   if (player.paused) {
     player.play();
   } else {
     player.pause();
   }
+}
+
+function setVolume(v) {
+  const vol = Math.min(100, Math.max(0, parseFloat(v) || 0));
+  songVolume = vol;
+  localStorage.setItem("songVolume", String(Math.round(vol)));
+  player.volume = vol / 100;
+  player.muted = vol === 0;
+  const icon = document.getElementById("song-vol-icon");
+  if (icon) icon.innerText = vol === 0 ? "🔇" : vol < 50 ? "🔉" : "🔊";
+  const slider = document.getElementById("song-volume");
+  if (slider && slider.style && slider.style.setProperty) {
+    slider.style.setProperty("--vol", vol + "%");
+  }
+}
+
+function initVolume() {
+  const vol = Math.min(100, Math.max(0, songVolume));
+  player.volume = vol / 100;
+  player.muted = vol === 0;
+  const slider = document.getElementById("song-volume");
+  if (slider) {
+    slider.value = String(vol);
+    if (slider.style && slider.style.setProperty) {
+      slider.style.setProperty("--vol", vol + "%");
+    }
+  }
+  const icon = document.getElementById("song-vol-icon");
+  if (icon) icon.innerText = vol === 0 ? "🔇" : vol < 50 ? "🔉" : "🔊";
 }
 
 function cycleMode() {
@@ -6661,15 +6691,22 @@ player.addEventListener("ended", function () {
 player.addEventListener("play", function () {
   localStorage.setItem("isPlaying", "true");
   const b = document.getElementById("song-play-btn");
-  if (b) b.innerText = "⏸";
+  if (b) {
+    b.innerText = "⏸";
+    b.classList.add("playing");
+  }
 });
 
 player.addEventListener("pause", function () {
   localStorage.setItem("isPlaying", "false");
   const b = document.getElementById("song-play-btn");
-  if (b) b.innerText = "▶";
+  if (b) {
+    b.innerText = "▶";
+    b.classList.remove("playing");
+  }
 });
 
+initVolume();
 renderMode();
 updateProgress();
 initSmart();
@@ -7450,11 +7487,33 @@ initPoem();
   .song-controls {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 0.45rem;
     gap: 0.55rem;
     padding: 0.5rem 0.7rem;
     border-radius: 14px;
     background: rgba(128, 128, 128, 0.08);
     border: 1px solid rgba(128, 128, 128, 0.15);
+  }
+
+  .song-ctl-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .song-center {
+    flex: 1;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .song-side {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
   }
 
   .song-ctl {
@@ -7467,12 +7526,12 @@ initPoem();
   }
 
   .song-play {
-    width: 2.1rem;
-    height: 2.1rem;
+    width: 2.3rem;
+    height: 2.3rem;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff8fab, #c86dd7);
     color: #fff;
-    font-size: 0.95rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7483,6 +7542,37 @@ initPoem();
   .song-play:hover {
     transform: scale(1.08);
     box-shadow: 0 4px 14px rgba(255, 143, 171, 0.5);
+  }
+
+  .song-play.playing {
+    animation: song-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes song-pulse {
+    0%, 100% {
+      box-shadow: 0 3px 10px rgba(255, 143, 171, 0.35);
+    }
+    50% {
+      box-shadow: 0 3px 18px rgba(255, 143, 171, 0.7);
+    }
+  }
+
+  .song-nav {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    background: rgba(128, 128, 128, 0.12);
+    transition: all 0.2s;
+  }
+
+  .song-nav:hover {
+    background: rgba(255, 143, 171, 0.2);
+    color: #ff8fab;
+    transform: scale(1.12);
   }
 
   .song-mode {
@@ -7542,8 +7632,49 @@ initPoem();
     font-size: 0.72rem;
     opacity: 0.75;
     font-variant-numeric: tabular-nums;
-    min-width: 5.4em;
     text-align: right;
+  }
+
+  .song-vol-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  .song-vol-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4.8rem;
+    height: 6px;
+    border-radius: 99px;
+    background: linear-gradient(90deg,
+      #ff8fab var(--vol, 100%),
+      rgba(128, 128, 128, 0.28) var(--vol, 100%));
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+
+  .song-vol-slider:hover {
+    box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.18);
+  }
+
+  .song-vol-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  }
+
+  .song-vol-slider::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
   }
 </style>
 

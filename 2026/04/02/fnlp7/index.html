@@ -321,7 +321,7 @@
         
         
         
-          14 分钟
+          13 分钟
         
       </span>
     
@@ -522,35 +522,72 @@
                 <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第七讲：Sequence Tagging - Hidden Markov Models</p>
 <span id="more"></span>
-<h3 id="序列标注"><a href="#序列标注" class="headerlink" title="序列标注"></a>序列标注</h3><p>定义：给定一个由若干项组成的序列，为序列中的每一项赋予一个预定义标签的任务。</p>
+<h3 id="序列标注">序列标注</h3>
+<p>定义：给定一个由若干项组成的序列，为序列中的每一项赋予一个预定义标签的任务。</p>
 <p>重要性：这是NLP中最基础的问题之一，它不再是孤立的单个决策，而是一连串相互影响的决策。</p>
-<p>应用：<br>词性标注：为文本中每个单词标注词性</p>
-<p>名词短语切分：切分出China Mobile这种名词短语<br>命名实体识别：识别出文本中的人名、地名、机构名等实体<br>(BIEO标记方案：Begin-Inside-Ending-Other)</p>
+<p>应用：<br>
+词性标注：为文本中每个单词标注词性</p>
+<p>名词短语切分：切分出China Mobile这种名词短语<br>
+命名实体识别：识别出文本中的人名、地名、机构名等实体<br>
+(BIEO标记方案：Begin-Inside-Ending-Other)</p>
 <p>词段划分：将字符序列分割为单词，适用于中文、日文等语言。</p>
-<p>挑战：<br>词性歧义，比如 can 这个词在不同语境下词性大不相同<br>语义歧义，比如“南京市长江大桥”“下雨天留客天留我不留”不好断句()</p>
-<h3 id="词性标注"><a href="#词性标注" class="headerlink" title="词性标注"></a>词性标注</h3><p>词可分为两类：开放词与封闭词<br>封闭词类：成员相对固定，通常是功能词，如介词、代词、冠词等<br>开放词类：成员会不断增长，主要是实义词，如名词、动词、形容词、副词等</p>
+<p>挑战：<br>
+词性歧义，比如 can 这个词在不同语境下词性大不相同<br>
+语义歧义，比如“南京市长江大桥”“下雨天留客天留我不留”不好断句()</p>
+<h3 id="词性标注">词性标注</h3>
+<p>词可分为两类：开放词与封闭词<br>
+封闭词类：成员相对固定，通常是功能词，如介词、代词、冠词等<br>
+开放词类：成员会不断增长，主要是实义词，如名词、动词、形容词、副词等</p>
 <p>标签集Tagset：用于细粒度词性标注的标准化代码</p>
-<p>词性标注任务：给定训练集，需建立将句子映射至对应词性标注序列的函数。<br>训练数据包含词语序列及其词性标注序列。<br>形式化定义：输入为词语序列$x_1,x_2,…,x_n$，输出为对应的词性标注序列$y_1,y_2,…,y_n$<br>目标：找到一个函数，能够最大化给定词序列时标签序列的概率</p>
+<p>词性标注任务：给定训练集，需建立将句子映射至对应词性标注序列的函数。<br>
+训练数据包含词语序列及其词性标注序列。<br>
+形式化定义：输入为词语序列$x_1,x_2,…,x_n$，输出为对应的词性标注序列$y_1,y_2,…,y_n$<br>
+目标：找到一个函数，能够最大化给定词序列时标签序列的概率</p>
 <p>$argmax_{y_1,y_2,…,y_n} P(y_1,y_2,…,y_n|x_1,x_2,…,x_n)$</p>
 <p>根据贝叶斯公式，等价于最大化</p>
 <p>$P(x_1,x_2,…,x_n|y_1,y_2,…,y_n)P(y_1,y_2,…,y_n)$</p>
-<p>其中$P(y_1,y_2,…,y_n)$像是语言模型，可以用trigram,bigram这种估计<br>再对$x_i$和$y_i$做出条件独立假设，$P(x_1,x_2,…,x_n|y_1,y_2,…,y_n) \approx \prod_{i&#x3D;1}^{n} P(x_i|y_i)$</p>
-<h3 id="隐马尔可夫模型-Hidden-Markov-Models"><a href="#隐马尔可夫模型-Hidden-Markov-Models" class="headerlink" title="隐马尔可夫模型(Hidden Markov Models)"></a>隐马尔可夫模型(Hidden Markov Models)</h3><p>状态：即我们想要预测的标签(如词性)，是不可直接观测的“隐”状态<br>输出：即我们可以观测到的词<br>初始状态：句子的开始(START)<br>参数：<br>转移概率 $p(yₙ|yₙ₋₁)$：从一个标签转移到下一个标签的概率<br>发射概率 $p(xₙ | yₙ)$：在给定标签下，生成某个词的概率<br><img src="7.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>从初始状态开始，选择第一个状态(标签)$y₁$<br>根据第一个状态，发射(生成)第一个词$ x₁$<br>根据当前状态 $y₁$，转移到下一个状态 $y₂$<br>根据 $y₂$，发射第二个词 $x₂$<br>重复上述过程，直到生成整个句子</p>
+<p>其中$P(y_1,y_2,…,y_n)$像是语言模型，可以用trigram,bigram这种估计<br>
+再对$x_i$和$y_i$做出条件独立假设，$P(x_1,x_2,…,x_n|y_1,y_2,…,y_n) \approx \prod_{i=1}^{n} P(x_i|y_i)$</p>
+<h3 id="隐马尔可夫模型-Hidden-Markov-Models">隐马尔可夫模型(Hidden Markov Models)</h3>
+<p>状态：即我们想要预测的标签(如词性)，是不可直接观测的“隐”状态<br>
+输出：即我们可以观测到的词<br>
+初始状态：句子的开始(START)<br>
+参数：<br>
+转移概率 $p(yₙ|yₙ₋₁)$：从一个标签转移到下一个标签的概率<br>
+发射概率 $p(xₙ | yₙ)$：在给定标签下，生成某个词的概率<br>
+<img src="7.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>从初始状态开始，选择第一个状态(标签)$y₁$<br>
+根据第一个状态，发射(生成)第一个词$ x₁$<br>
+根据当前状态 $y₁$，转移到下一个状态 $y₂$<br>
+根据 $y₂$，发射第二个词 $x₂$<br>
+重复上述过程，直到生成整个句子</p>
 <p>参数估计：与语言模型类似，极大似然估计＋平滑</p>
-<h3 id="解码问题"><a href="#解码问题" class="headerlink" title="解码问题"></a>解码问题</h3><p>有了一个训练好的HMM模型，给定一个新的句子，我们需要找出概率最高的标签序列<br>如果采用暴力搜索，对于一个长度为$ n $的句子，如果标签集大小为 $|S|$，那么可能的标签序列数量是 $|S|ⁿ$，这是指数级的，无法穷举<br>所以此处我们采用动态规划(维特比算法)</p>
+<h3 id="解码问题">解码问题</h3>
+<p>有了一个训练好的HMM模型，给定一个新的句子，我们需要找出概率最高的标签序列<br>
+如果采用暴力搜索，对于一个长度为$ n $的句子，如果标签集大小为 $|S|$，那么可能的标签序列数量是 $|S|ⁿ$，这是指数级的，无法穷举<br>
+所以此处我们采用动态规划(维特比算法)</p>
 <p>通过维护一个表格 $π(k, u, v)$ 来记录到第 $k $个词为止，以标签 $u $和 $v$ 结尾的所有可能标签序列中的最大概率</p>
-<p>$\pi(k,u,v)&#x3D;max_{y_{k-1}&#x3D;u,y_k&#x3D;v} \Pi_i^k p(y_i|y_{i-2},y_{i-1})\Pi_i^kp(x_i|y_i)$</p>
+<p>$\pi(k,u,v)=max_{y_{k-1}=u,y_k=v} \Pi_i^k p(y_i|y_{i-2},y_{i-1})\Pi_i^kp(x_i|y_i)$</p>
 <p>算法步骤：</p>
-<p>初始化：$π(0, START, START) &#x3D; 1$</p>
+<p>初始化：$π(0, START, START) = 1$</p>
 <p>递推：遍历句子中的每个位置 $i$，以及可能的标签对 ($u, v)$，利用递推公式计算 $π(i, u, v)$，并记录下是哪个$ w $使得这个概率最大</p>
 <p>终止：在句子的最后，选择能使 $π(n, u, v) * p(STOP|u, v)$ 最大的标签对 $(u, v) $作为最后两个词的标签</p>
 <p>回溯：根据记录的回溯指针 $path(i, u, v)$，从最后一个标签对开始，逐步向前推演出整个最优标签序列</p>
 <p>时间复杂度：$O(n * |S|^3)$，远优于指数级暴力搜索。如果使用一阶HMM(只依赖前一个标签)，复杂度可降至 $O(n * |S|²)$</p>
-<p>dp和贪心的折中：beam Search，比如$top16$，在<a href="https://yjyxfcy.github.io/2026/02/14/gen2/">生成模型基础</a>中略有提到<br>dp相当于宽度无限的beam search，贪心相当于宽度为1的beam search<br>可以加经验，采用重排序(re-ranking)的方式，先用beam search得到前$k$个候选标签序列，再用一个更复杂的模型(如神经网络)对这$k$个候选进行重新评分，选择得分最高的作为最终输出</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="HMM的优点"><a href="#HMM的优点" class="headerlink" title="HMM的优点"></a>HMM的优点</h4><p>模型简洁，有清晰的数学公式<br>参数估计简单直接(基于计数)<br>解码算法(维特比)优雅高效</p>
-<h4 id="HMM的局限性"><a href="#HMM的局限性" class="headerlink" title="HMM的局限性"></a>HMM的局限性</h4><p>需要大量的高质量标注数据<br>模型假设(马尔可夫假设)可能过于简化，不能灵活地引入复杂的特征(如词的拼写、大小写、前后缀等)<br>无法“学习”特征，所有知识都来源于共现计数</p>
-<h6 id="笔者按：序列标注技术与其他技能相结合后将更具强大功能，在NLP领域中发挥重要作用，暗示了后续课程将介绍更强大的模型，如条件随机场CRF、RNN、Transformer等，敬请期待"><a href="#笔者按：序列标注技术与其他技能相结合后将更具强大功能，在NLP领域中发挥重要作用，暗示了后续课程将介绍更强大的模型，如条件随机场CRF、RNN、Transformer等，敬请期待" class="headerlink" title="笔者按：序列标注技术与其他技能相结合后将更具强大功能，在NLP领域中发挥重要作用，暗示了后续课程将介绍更强大的模型，如条件随机场CRF、RNN、Transformer等，敬请期待"></a>笔者按：序列标注技术与其他技能相结合后将更具强大功能，在NLP领域中发挥重要作用，暗示了后续课程将介绍更强大的模型，如条件随机场CRF、RNN、Transformer等，敬请期待</h6>
+<p>dp和贪心的折中：beam Search，比如$top16$，在<a href="https://yjyxfcy.github.io/2026/02/14/gen2/">生成模型基础</a>中略有提到<br>
+dp相当于宽度无限的beam search，贪心相当于宽度为1的beam search<br>
+可以加经验，采用重排序(re-ranking)的方式，先用beam search得到前$k$个候选标签序列，再用一个更复杂的模型(如神经网络)对这$k$个候选进行重新评分，选择得分最高的作为最终输出</p>
+<h3 id="总结">总结</h3>
+<h4 id="HMM的优点">HMM的优点</h4>
+<p>模型简洁，有清晰的数学公式<br>
+参数估计简单直接(基于计数)<br>
+解码算法(维特比)优雅高效</p>
+<h4 id="HMM的局限性">HMM的局限性</h4>
+<p>需要大量的高质量标注数据<br>
+模型假设(马尔可夫假设)可能过于简化，不能灵活地引入复杂的特征(如词的拼写、大小写、前后缀等)<br>
+无法“学习”特征，所有知识都来源于共现计数</p>
+<h6 id="笔者按：序列标注技术与其他技能相结合后将更具强大功能，在NLP领域中发挥重要作用，暗示了后续课程将介绍更强大的模型，如条件随机场CRF、RNN、Transformer等，敬请期待">笔者按：序列标注技术与其他技能相结合后将更具强大功能，在NLP领域中发挥重要作用，暗示了后续课程将介绍更强大的模型，如条件随机场CRF、RNN、Transformer等，敬请期待</h6>
+
                 
               </div>
             
@@ -819,7 +856,18 @@
     <div id="song-title" class="song-title"></div>
     <div id="song-artist" class="song-artist"></div>
     <div id="song-reason" class="song-reason"></div>
-    <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
+    <div class="song-player-wrap">
+      <audio id="song-player" preload="metadata"></audio>
+      <div class="song-controls">
+        <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
+        <div id="song-progress" class="song-progress" title="拖动进度">
+          <div class="song-progress-fill" id="song-progress-fill"></div>
+          <div class="song-progress-thumb" id="song-progress-thumb"></div>
+        </div>
+        <span id="song-time" class="song-time">0:00 / 0:00</span>
+        <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+      </div>
+    </div>
     <button class="daily-btn" onclick="nextSong()">换一首</button>
   </div>
 
@@ -6204,6 +6252,7 @@ const PERIODS = [
 
 let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
 let songId = localStorage.getItem("songId") || "";
+let playMode = localStorage.getItem("playMode") || "order"; // order 顺序 / shuffle 随机 / single 单曲循环
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
@@ -6440,6 +6489,7 @@ function loadSmart(resume) {
   if (localStorage.getItem("isPlaying") === "true") {
     player.play();
   }
+  updateProgress();
 }
 
 async function initSmart() {
@@ -6467,7 +6517,7 @@ async function initSmart() {
   loadSmart(true);
 }
 
-function nextSong() {
+function advanceSong() {
   smartIdx++;
   if (smartIdx >= smartQueue.length) {
     const now = new Date();
@@ -6486,28 +6536,132 @@ function nextSong() {
     smartQueue = rankSongs(songs, ctx);
     smartIdx = 0;
   }
+}
+
+function randomSong() {
+  if (smartQueue.length > 1) {
+    let r;
+    do {
+      r = Math.floor(Math.random() * smartQueue.length);
+    } while (r === smartIdx);
+    smartIdx = r;
+  }
+}
+
+function nextSong() {
+  if (playMode === "shuffle") {
+    randomSong();
+  } else {
+    advanceSong();
+  }
   localStorage.setItem("smartIdx", String(smartIdx));
   loadSmart(false);
 }
 
+function togglePlay() {
+  if (player.paused) {
+    player.play();
+  } else {
+    player.pause();
+  }
+}
+
+function cycleMode() {
+  playMode = playMode === "order" ? "shuffle" : playMode === "shuffle" ? "single" : "order";
+  localStorage.setItem("playMode", playMode);
+  renderMode();
+}
+
+function renderMode() {
+  const btn = document.getElementById("song-mode-btn");
+  const map = { order: "🔁 顺序", shuffle: "🔀 随机", single: "🔂 单曲" };
+  const tip = { order: "顺序播放", shuffle: "随机播放", single: "单曲循环" };
+  if (btn) {
+    btn.innerText = map[playMode];
+    btn.title = tip[playMode] + "（点击切换）";
+  }
+}
+
+function fmtTime(sec) {
+  if (!isFinite(sec) || sec < 0) sec = 0;
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+function updateProgress() {
+  const dur = player.duration || 0;
+  const cur = player.currentTime || 0;
+  const pct = dur > 0 ? Math.min(100, Math.max(0, cur / dur * 100)) : 0;
+  const fill = document.getElementById("song-progress-fill");
+  const thumb = document.getElementById("song-progress-thumb");
+  const timeEl = document.getElementById("song-time");
+  if (fill) fill.style.width = pct + "%";
+  if (thumb) thumb.style.left = pct + "%";
+  if (timeEl) timeEl.innerText = fmtTime(cur) + " / " + fmtTime(dur);
+}
+
+let songSeeking = false;
+function seekFromEvent(ev) {
+  const bar = document.getElementById("song-progress");
+  const rect = bar.getBoundingClientRect();
+  const ratio = rect.width > 0 ? Math.min(1, Math.max(0, (ev.clientX - rect.left) / rect.width)) : 0;
+  if (player.duration > 0 && isFinite(player.duration)) {
+    player.currentTime = ratio * player.duration;
+  }
+  updateProgress();
+}
+
+// 播放器进度条交互（点击 / 拖动）
+document.getElementById("song-progress").addEventListener("pointerdown", function (ev) {
+  songSeeking = true;
+  seekFromEvent(ev);
+  if (this.setPointerCapture) this.setPointerCapture(ev.pointerId);
+});
+document.getElementById("song-progress").addEventListener("pointermove", function (ev) {
+  if (songSeeking) seekFromEvent(ev);
+});
+document.getElementById("song-progress").addEventListener("pointerup", function () {
+  songSeeking = false;
+});
+document.getElementById("song-progress").addEventListener("pointercancel", function () {
+  songSeeking = false;
+});
+
 // 记住播放进度
 player.addEventListener("timeupdate", function () {
   localStorage.setItem("songTime", player.currentTime);
+  updateProgress();
 });
 
+player.addEventListener("loadedmetadata", updateProgress);
+player.addEventListener("durationchange", updateProgress);
+
 player.addEventListener("ended", function () {
+  if (playMode === "single") {
+    player.currentTime = 0;
+    localStorage.setItem("isPlaying", "true");
+    player.play();
+    return;
+  }
   localStorage.setItem("isPlaying", "true");
   nextSong();
 });
 
 player.addEventListener("play", function () {
   localStorage.setItem("isPlaying", "true");
+  const b = document.getElementById("song-play-btn");
+  if (b) b.innerText = "⏸";
 });
 
 player.addEventListener("pause", function () {
   localStorage.setItem("isPlaying", "false");
+  const b = document.getElementById("song-play-btn");
+  if (b) b.innerText = "▶";
 });
 
+renderMode();
+updateProgress();
 initSmart();
 
 // ==================== 今日诗词 ====================
@@ -7276,6 +7430,110 @@ initPoem();
     border-color: #ff8fab;
     color: #ff8fab;
     background: rgba(255, 143, 171, 0.08);
+  }
+
+  /* ---- 推歌播放器 UI ---- */
+  .song-player-wrap {
+    margin-top: 0.6rem;
+  }
+
+  .song-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 14px;
+    background: rgba(128, 128, 128, 0.08);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+  }
+
+  .song-ctl {
+    flex: none;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .song-play {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff8fab, #c86dd7);
+    color: #fff;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(255, 143, 171, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .song-play:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(255, 143, 171, 0.5);
+  }
+
+  .song-mode {
+    font-size: 0.85rem;
+    padding: 0.32rem 0.42rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .song-mode:hover {
+    background: rgba(255, 143, 171, 0.15);
+  }
+
+  .song-progress {
+    position: relative;
+    flex: 1;
+    height: 8px;
+    border-radius: 99px;
+    background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));
+    cursor: pointer;
+  }
+
+  .song-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #ff8fab, #c86dd7);
+    box-shadow: 0 0 8px rgba(255, 143, 171, 0.55);
+    pointer-events: none;
+  }
+
+  .song-progress-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s;
+    pointer-events: none;
+  }
+
+  .song-progress:hover .song-progress-thumb {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  .song-time {
+    flex: none;
+    font-size: 0.72rem;
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+    min-width: 5.4em;
+    text-align: right;
   }
 </style>
 

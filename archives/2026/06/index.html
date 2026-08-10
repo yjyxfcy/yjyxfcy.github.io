@@ -317,10 +317,10 @@
           </time>
           <h2 class="archive-card-title">随机算法</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十一章：随机算法</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>39 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>38 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -386,7 +386,18 @@
     <div id="song-title" class="song-title"></div>
     <div id="song-artist" class="song-artist"></div>
     <div id="song-reason" class="song-reason"></div>
-    <audio id="song-player" controls style="width:100%; margin-top: 0.5rem;"></audio>
+    <div class="song-player-wrap">
+      <audio id="song-player" preload="metadata"></audio>
+      <div class="song-controls">
+        <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
+        <div id="song-progress" class="song-progress" title="拖动进度">
+          <div class="song-progress-fill" id="song-progress-fill"></div>
+          <div class="song-progress-thumb" id="song-progress-thumb"></div>
+        </div>
+        <span id="song-time" class="song-time">0:00 / 0:00</span>
+        <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+      </div>
+    </div>
     <button class="daily-btn" onclick="nextSong()">换一首</button>
   </div>
 
@@ -5771,6 +5782,7 @@ const PERIODS = [
 
 let songTime = parseFloat(localStorage.getItem("songTime")) || 0;
 let songId = localStorage.getItem("songId") || "";
+let playMode = localStorage.getItem("playMode") || "order"; // order 顺序 / shuffle 随机 / single 单曲循环
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
@@ -6007,6 +6019,7 @@ function loadSmart(resume) {
   if (localStorage.getItem("isPlaying") === "true") {
     player.play();
   }
+  updateProgress();
 }
 
 async function initSmart() {
@@ -6034,7 +6047,7 @@ async function initSmart() {
   loadSmart(true);
 }
 
-function nextSong() {
+function advanceSong() {
   smartIdx++;
   if (smartIdx >= smartQueue.length) {
     const now = new Date();
@@ -6053,28 +6066,132 @@ function nextSong() {
     smartQueue = rankSongs(songs, ctx);
     smartIdx = 0;
   }
+}
+
+function randomSong() {
+  if (smartQueue.length > 1) {
+    let r;
+    do {
+      r = Math.floor(Math.random() * smartQueue.length);
+    } while (r === smartIdx);
+    smartIdx = r;
+  }
+}
+
+function nextSong() {
+  if (playMode === "shuffle") {
+    randomSong();
+  } else {
+    advanceSong();
+  }
   localStorage.setItem("smartIdx", String(smartIdx));
   loadSmart(false);
 }
 
+function togglePlay() {
+  if (player.paused) {
+    player.play();
+  } else {
+    player.pause();
+  }
+}
+
+function cycleMode() {
+  playMode = playMode === "order" ? "shuffle" : playMode === "shuffle" ? "single" : "order";
+  localStorage.setItem("playMode", playMode);
+  renderMode();
+}
+
+function renderMode() {
+  const btn = document.getElementById("song-mode-btn");
+  const map = { order: "🔁 顺序", shuffle: "🔀 随机", single: "🔂 单曲" };
+  const tip = { order: "顺序播放", shuffle: "随机播放", single: "单曲循环" };
+  if (btn) {
+    btn.innerText = map[playMode];
+    btn.title = tip[playMode] + "（点击切换）";
+  }
+}
+
+function fmtTime(sec) {
+  if (!isFinite(sec) || sec < 0) sec = 0;
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+function updateProgress() {
+  const dur = player.duration || 0;
+  const cur = player.currentTime || 0;
+  const pct = dur > 0 ? Math.min(100, Math.max(0, cur / dur * 100)) : 0;
+  const fill = document.getElementById("song-progress-fill");
+  const thumb = document.getElementById("song-progress-thumb");
+  const timeEl = document.getElementById("song-time");
+  if (fill) fill.style.width = pct + "%";
+  if (thumb) thumb.style.left = pct + "%";
+  if (timeEl) timeEl.innerText = fmtTime(cur) + " / " + fmtTime(dur);
+}
+
+let songSeeking = false;
+function seekFromEvent(ev) {
+  const bar = document.getElementById("song-progress");
+  const rect = bar.getBoundingClientRect();
+  const ratio = rect.width > 0 ? Math.min(1, Math.max(0, (ev.clientX - rect.left) / rect.width)) : 0;
+  if (player.duration > 0 && isFinite(player.duration)) {
+    player.currentTime = ratio * player.duration;
+  }
+  updateProgress();
+}
+
+// 播放器进度条交互（点击 / 拖动）
+document.getElementById("song-progress").addEventListener("pointerdown", function (ev) {
+  songSeeking = true;
+  seekFromEvent(ev);
+  if (this.setPointerCapture) this.setPointerCapture(ev.pointerId);
+});
+document.getElementById("song-progress").addEventListener("pointermove", function (ev) {
+  if (songSeeking) seekFromEvent(ev);
+});
+document.getElementById("song-progress").addEventListener("pointerup", function () {
+  songSeeking = false;
+});
+document.getElementById("song-progress").addEventListener("pointercancel", function () {
+  songSeeking = false;
+});
+
 // 记住播放进度
 player.addEventListener("timeupdate", function () {
   localStorage.setItem("songTime", player.currentTime);
+  updateProgress();
 });
 
+player.addEventListener("loadedmetadata", updateProgress);
+player.addEventListener("durationchange", updateProgress);
+
 player.addEventListener("ended", function () {
+  if (playMode === "single") {
+    player.currentTime = 0;
+    localStorage.setItem("isPlaying", "true");
+    player.play();
+    return;
+  }
   localStorage.setItem("isPlaying", "true");
   nextSong();
 });
 
 player.addEventListener("play", function () {
   localStorage.setItem("isPlaying", "true");
+  const b = document.getElementById("song-play-btn");
+  if (b) b.innerText = "⏸";
 });
 
 player.addEventListener("pause", function () {
   localStorage.setItem("isPlaying", "false");
+  const b = document.getElementById("song-play-btn");
+  if (b) b.innerText = "▶";
 });
 
+renderMode();
+updateProgress();
 initSmart();
 
 // ==================== 今日诗词 ====================
@@ -6843,6 +6960,110 @@ initPoem();
     border-color: #ff8fab;
     color: #ff8fab;
     background: rgba(255, 143, 171, 0.08);
+  }
+
+  /* ---- 推歌播放器 UI ---- */
+  .song-player-wrap {
+    margin-top: 0.6rem;
+  }
+
+  .song-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 14px;
+    background: rgba(128, 128, 128, 0.08);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+  }
+
+  .song-ctl {
+    flex: none;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .song-play {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff8fab, #c86dd7);
+    color: #fff;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(255, 143, 171, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .song-play:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(255, 143, 171, 0.5);
+  }
+
+  .song-mode {
+    font-size: 0.85rem;
+    padding: 0.32rem 0.42rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .song-mode:hover {
+    background: rgba(255, 143, 171, 0.15);
+  }
+
+  .song-progress {
+    position: relative;
+    flex: 1;
+    height: 8px;
+    border-radius: 99px;
+    background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));
+    cursor: pointer;
+  }
+
+  .song-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #ff8fab, #c86dd7);
+    box-shadow: 0 0 8px rgba(255, 143, 171, 0.55);
+    pointer-events: none;
+  }
+
+  .song-progress-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s;
+    pointer-events: none;
+  }
+
+  .song-progress:hover .song-progress-thumb {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  .song-time {
+    flex: none;
+    font-size: 0.72rem;
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+    min-width: 5.4em;
+    text-align: right;
   }
 </style>
 

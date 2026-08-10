@@ -386,7 +386,7 @@
             <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第七讲：Sequence Tagging - Hidden Markov Models</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>14 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>13 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -408,7 +408,7 @@
             <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第六讲：Distributional Semantics</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>18 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>17 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -452,7 +452,7 @@
             <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第四讲：Language Modelling</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>19 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>18 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -515,7 +515,7 @@
           </time>
           <h2 class="archive-card-title">课程介绍</h2>
           
-            <p class="archive-card-excerpt">北京大学信息科学技术学院自然语言处理基础(2026春)的课程笔记 第一讲：Introduction</p>
+            <p class="archive-card-excerpt">北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第一讲：Introduction</p>
           
           <div class="archive-card-meta">
             <span><i class="iconfont icon-clock-fill"></i>6 min read</span>
@@ -593,27 +593,28 @@
     <div class="song-player-wrap">
       <audio id="song-player" preload="metadata"></audio>
       <div class="song-controls">
+        <div class="song-progress-block">
+          <div id="song-progress" class="song-progress" title="拖动进度">
+            <div class="song-progress-fill" id="song-progress-fill"></div>
+            <div class="song-progress-thumb" id="song-progress-thumb"></div>
+          </div>
+          <div class="song-meta-row">
+            <span id="song-time" class="song-time">0:00 / 0:00</span>
+            <div class="song-meta-side">
+              <span id="song-vol-icon" class="song-vol-icon">🔊</span>
+              <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
+                     oninput="setVolume(this.value)" title="音量">
+              <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+            </div>
+          </div>
+        </div>
         <div class="song-ctl-row">
           <button id="song-prev-btn" class="song-ctl song-nav" onclick="prevSong()" title="上一首">⏮</button>
           <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
           <button id="song-next-btn" class="song-ctl song-nav" onclick="nextSong()" title="下一首">⏭</button>
         </div>
-        <div class="song-center">
-          <div id="song-progress" class="song-progress" title="拖动进度">
-            <div class="song-progress-fill" id="song-progress-fill"></div>
-            <div class="song-progress-thumb" id="song-progress-thumb"></div>
-          </div>
-          <span id="song-time" class="song-time">0:00 / 0:00</span>
-        </div>
-        <div class="song-side">
-          <span id="song-vol-icon" class="song-vol-icon">🔊</span>
-          <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
-                 oninput="setVolume(this.value)" title="音量">
-          <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
-        </div>
       </div>
     </div>
-    <button class="daily-btn" onclick="nextSong()">换一首</button>
   </div>
 
   <!-- 今日诗词 -->
@@ -7234,34 +7235,41 @@ initPoem();
 
   .song-controls {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    row-gap: 0.45rem;
-    gap: 0.55rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
     padding: 0.5rem 0.7rem;
     border-radius: 14px;
     background: rgba(128, 128, 128, 0.08);
     border: 1px solid rgba(128, 128, 128, 0.15);
   }
 
-  .song-ctl-row {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  .song-center {
-    flex: 1;
-    min-width: 130px;
+  .song-progress-block {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
   }
 
-  .song-side {
+  .song-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .song-meta-side {
     display: flex;
     align-items: center;
     gap: 0.45rem;
+  }
+
+  .song-ctl-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
   }
 
   .song-ctl {
@@ -7274,8 +7282,8 @@ initPoem();
   }
 
   .song-play {
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff8fab, #c86dd7);
     color: #fff;
@@ -7306,13 +7314,13 @@ initPoem();
   }
 
   .song-nav {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2.1rem;
+    height: 2.1rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     background: rgba(128, 128, 128, 0.12);
     transition: all 0.2s;
   }
@@ -7337,6 +7345,7 @@ initPoem();
 
   .song-progress {
     position: relative;
+    width: 100%;
     height: 8px;
     border-radius: 99px;
     background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));
@@ -7379,7 +7388,7 @@ initPoem();
     font-size: 0.72rem;
     opacity: 0.75;
     font-variant-numeric: tabular-nums;
-    text-align: right;
+    text-align: left;
   }
 
   .song-vol-icon {

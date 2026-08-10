@@ -527,45 +527,62 @@
                 <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第十讲：Syntactic Analysis II</p>
 <span id="more"></span>
-<h3 id="依存结构"><a href="#依存结构" class="headerlink" title="依存结构"></a>依存结构</h3><h4 id="依存关系"><a href="#依存关系" class="headerlink" title="依存关系"></a>依存关系</h4><p>我认为语言最本质的特性，也是迄今为止发现的最令人费解的特性，就是所谓的“结构依赖性”。————诺姆·乔姆斯基<br><img src="10.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>上面是一个例子，展示了词与词之间的依存关系<br>依存关系本质上是一种二元关系，其中一个是核心词(head)，另一个是依存词(dependent)</p>
+<h3 id="依存结构">依存结构</h3>
+<h4 id="依存关系">依存关系</h4>
+<p>我认为语言最本质的特性，也是迄今为止发现的最令人费解的特性，就是所谓的“结构依赖性”。————诺姆·乔姆斯基<br>
+<img src="10.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>上面是一个例子，展示了词与词之间的依存关系<br>
+依存关系本质上是一种二元关系，其中一个是核心词(head)，另一个是依存词(dependent)</p>
 <img src="10.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>如上图，依存关系可以被表示为一条有向弧，从核心词指向依存词</p>
 <p>Universal Dependencies(UD)项目定义了37种常见关系(如 nsubj, obj, iobj, det, case, conj 等)</p>
-<h4 id="依存图-树"><a href="#依存图-树" class="headerlink" title="依存图(树)"></a>依存图(树)</h4><p>大部分情况下依存关系可以用树表示，但也有一些特殊情况，例如下面这个句子，所以为了满足一般性，我们还是用依存图来表示<br><img src="10.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="依存图-树">依存图(树)</h4>
+<p>大部分情况下依存关系可以用树表示，但也有一些特殊情况，例如下面这个句子，所以为了满足一般性，我们还是用依存图来表示<br>
+<img src="10.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>一个合法的依存图通常满足：</p>
-<p>连通性：所有节点通过弧相连<br>无环性：不能有循环依赖<br>单头约束：每个词只能有一个核心词<br>投射性(projectivity)：如果词 $i$ 是词 $j$ 的核心，则 $i$ 和 $j$ 之间的所有词都必须直接或间接从属于 $i$，即弧不能交叉</p>
+<p>连通性：所有节点通过弧相连<br>
+无环性：不能有循环依赖<br>
+单头约束：每个词只能有一个核心词<br>
+投射性(projectivity)：如果词 $i$ 是词 $j$ 的核心，则 $i$ 和 $j$ 之间的所有词都必须直接或间接从属于 $i$，即弧不能交叉</p>
 <p>不过，大多数理论框架并不假设投射性，需要非投射性结构来解释长距离依赖关系及自由词序现象</p>
-<h4 id="依存结构和短语结构的对比"><a href="#依存结构和短语结构的对比" class="headerlink" title="依存结构和短语结构的对比"></a>依存结构和短语结构的对比</h4><img src="10.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<h3 id="依存句法分析"><a href="#依存句法分析" class="headerlink" title="依存句法分析"></a>依存句法分析</h3><p>花园小径句：语法正确，但是句子开头容易让人产生错觉<br>The old man the boat. 此处man为动词……</p>
-<p>结构预测的两种方法<br>离散优化：定义评分函数并寻找得分最高的结构，如前面学过的viterbi，CKY算法等(dp)<br>增量搜索：搜索状态为当前构建的部分结构，每次操作逐步拓展结构，经常采用贪心，可以用beam search来提升性能</p>
-<h4 id="基于转移的依存解析框架"><a href="#基于转移的依存解析框架" class="headerlink" title="基于转移的依存解析框架"></a>基于转移的依存解析框架</h4><p>核心组件：</p>
+<h4 id="依存结构和短语结构的对比">依存结构和短语结构的对比</h4>
+<img src="10.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h3 id="依存句法分析">依存句法分析</h3>
+<p>花园小径句：语法正确，但是句子开头容易让人产生错觉<br>
+The old man the boat. 此处man为动词……</p>
+<p>结构预测的两种方法<br>
+离散优化：定义评分函数并寻找得分最高的结构，如前面学过的viterbi，CKY算法等(dp)<br>
+增量搜索：搜索状态为当前构建的部分结构，每次操作逐步拓展结构，经常采用贪心，可以用beam search来提升性能</p>
+<h4 id="基于转移的依存解析框架">基于转移的依存解析框架</h4>
+<p>核心组件：</p>
 <p>配置(configuration)：包含栈(stack)、缓冲区(buffer)、已构建的弧集(A)。</p>
-<p>初始：stack&#x3D;[ROOT]，buffer&#x3D;[w1, w2, …, wn]</p>
-<p>终止：stack&#x3D;[ROOT]，buffer为空</p>
+<p>初始：stack=[ROOT]，buffer=[w1, w2, …, wn]</p>
+<p>终止：stack=[ROOT]，buffer为空</p>
 <p>需要注意的是这里的缓冲区本质上也是栈结构，所以后续为了不产生歧义，我们统一用stack和buffer来描述两者</p>
 <p>转移(transition)：改变配置的动作</p>
 <p>解析器：每次根据当前状态选择下一个动作，直到终止。</p>
-<p>常用转移动作(Arc-standard 算法)：<br>Shift：将buffer的第一个词压入stack</p>
+<p>常用转移动作(Arc-standard 算法)：<br>
+Shift：将buffer的第一个词压入stack</p>
 <p>Left-Arc：buffer栈顶元素向stack栈顶元素连线，stack栈顶元素出栈，从此这个词消失</p>
 <p>Right-Arc：stack栈顶元素向buffer栈顶元素连线，buffer栈顶元素出栈，从此这个词消失，然后stack栈顶元素出stack，进入buffer</p>
 <p>下面是ppt中给出的一个实例，大家可以自行推导一遍，感觉这是本节课的重中之重，考试大概率会考()</p>
 <img src="10.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <img src="10.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
 <p>后续就是Right-Arc</p>
-<p>stack顶是checking(4)，buffer头部是machine(6)，确立“checking(4)→ machine(6)”(obj，宾语)，6消失4入buffer<br>stack：[0]；buffer：[4]；A：增加(4,6,obj)</p>
-<p>stack顶是ROOT(0)，buffer头部是checking(4)，确立“ROOT(0)→ checking(4)”(root)，4消失0入buffer<br>stack：ø；buffer：[0]；A：增加(0,4,root)</p>
+<p>stack顶是checking(4)，buffer头部是machine(6)，确立“checking(4)→ machine(6)”(obj，宾语)，6消失4入buffer<br>
+stack：[0]；buffer：[4]；A：增加(4,6,obj)</p>
+<p>stack顶是ROOT(0)，buffer头部是checking(4)，确立“ROOT(0)→ checking(4)”(root)，4消失0入buffer<br>
+stack：ø；buffer：[0]；A：增加(0,4,root)</p>
 <p>最后把buffer中的ROOT(0)移到stack中，结束算法</p>
-<h4 id="解析器学习"><a href="#解析器学习" class="headerlink" title="解析器学习"></a>解析器学习</h4><p>训练：使用树库(如UD Treebanks)，通过有监督学习训练一个分类器(感知机、对数线性模型、神经网络等)来预测每个状态下应该执行哪个动作</p>
+<h4 id="解析器学习">解析器学习</h4>
+<p>训练：使用树库(如UD Treebanks)，通过有监督学习训练一个分类器(感知机、对数线性模型、神经网络等)来预测每个状态下应该执行哪个动作</p>
 <p>解码：贪心搜索(每次取最高概率的动作)，也可用beam search提高准确率</p>
-<h4 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h4><p>无标签依附分数(UAS)：只判断每个词的核心词是否正确(忽略标签)</p>
+<h4 id="评估指标">评估指标</h4>
+<p>无标签依附分数(UAS)：只判断每个词的核心词是否正确(忽略标签)</p>
 <p>有标签依附分数(LAS)：同时判断核心词和关系标签是否正确</p>
 <p>通常以句子中正确依附的词的比例来报告</p>
-<h6 id="笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www"><a href="#笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www" class="headerlink" title="笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www"></a>笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www</h6>
+<h6 id="笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www">笔者按：不知不觉怎么这课也要期中了……讲的东西真是一团乱麻，学了下节忘了上节，逻辑混乱，ppt喂给ai也一言难尽，祝大家好运吧www</h6>
+
                 
               </div>
             
@@ -837,27 +854,28 @@
     <div class="song-player-wrap">
       <audio id="song-player" preload="metadata"></audio>
       <div class="song-controls">
+        <div class="song-progress-block">
+          <div id="song-progress" class="song-progress" title="拖动进度">
+            <div class="song-progress-fill" id="song-progress-fill"></div>
+            <div class="song-progress-thumb" id="song-progress-thumb"></div>
+          </div>
+          <div class="song-meta-row">
+            <span id="song-time" class="song-time">0:00 / 0:00</span>
+            <div class="song-meta-side">
+              <span id="song-vol-icon" class="song-vol-icon">🔊</span>
+              <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
+                     oninput="setVolume(this.value)" title="音量">
+              <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+            </div>
+          </div>
+        </div>
         <div class="song-ctl-row">
           <button id="song-prev-btn" class="song-ctl song-nav" onclick="prevSong()" title="上一首">⏮</button>
           <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
           <button id="song-next-btn" class="song-ctl song-nav" onclick="nextSong()" title="下一首">⏭</button>
         </div>
-        <div class="song-center">
-          <div id="song-progress" class="song-progress" title="拖动进度">
-            <div class="song-progress-fill" id="song-progress-fill"></div>
-            <div class="song-progress-thumb" id="song-progress-thumb"></div>
-          </div>
-          <span id="song-time" class="song-time">0:00 / 0:00</span>
-        </div>
-        <div class="song-side">
-          <span id="song-vol-icon" class="song-vol-icon">🔊</span>
-          <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
-                 oninput="setVolume(this.value)" title="音量">
-          <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
-        </div>
       </div>
     </div>
-    <button class="daily-btn" onclick="nextSong()">换一首</button>
   </div>
 
   <!-- 今日诗词 -->
@@ -7478,34 +7496,41 @@ initPoem();
 
   .song-controls {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    row-gap: 0.45rem;
-    gap: 0.55rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
     padding: 0.5rem 0.7rem;
     border-radius: 14px;
     background: rgba(128, 128, 128, 0.08);
     border: 1px solid rgba(128, 128, 128, 0.15);
   }
 
-  .song-ctl-row {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  .song-center {
-    flex: 1;
-    min-width: 130px;
+  .song-progress-block {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
   }
 
-  .song-side {
+  .song-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .song-meta-side {
     display: flex;
     align-items: center;
     gap: 0.45rem;
+  }
+
+  .song-ctl-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
   }
 
   .song-ctl {
@@ -7518,8 +7543,8 @@ initPoem();
   }
 
   .song-play {
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff8fab, #c86dd7);
     color: #fff;
@@ -7550,13 +7575,13 @@ initPoem();
   }
 
   .song-nav {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2.1rem;
+    height: 2.1rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     background: rgba(128, 128, 128, 0.12);
     transition: all 0.2s;
   }
@@ -7581,6 +7606,7 @@ initPoem();
 
   .song-progress {
     position: relative;
+    width: 100%;
     height: 8px;
     border-radius: 99px;
     background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));
@@ -7623,7 +7649,7 @@ initPoem();
     font-size: 0.72rem;
     opacity: 0.75;
     font-variant-numeric: tabular-nums;
-    text-align: right;
+    text-align: left;
   }
 
   .song-vol-icon {

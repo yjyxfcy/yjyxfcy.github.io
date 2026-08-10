@@ -525,31 +525,61 @@
                 <p>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第九讲：Syntactic Analysis</p>
 <span id="more"></span>
-<h3 id="句法结构"><a href="#句法结构" class="headerlink" title="句法结构"></a>句法结构</h3><h4 id="为什么需要句法分析？"><a href="#为什么需要句法分析？" class="headerlink" title="为什么需要句法分析？"></a>为什么需要句法分析？</h4><p>语言不仅仅是词的序列，还遵循隐性的语法规则<br>相同的词序列可能因结构不同而有不同含义：</p>
+<h3 id="句法结构">句法结构</h3>
+<h4 id="为什么需要句法分析？">为什么需要句法分析？</h4>
+<p>语言不仅仅是词的序列，还遵循隐性的语法规则<br>
+相同的词序列可能因结构不同而有不同含义：</p>
 <p>Jane ate spaghetti with fork(用叉子吃)</p>
 <p>Jane ate spaghetti with meatballs(吃肉丸意大利面)</p>
 <p>句法分析可以揭示这种结构差异。</p>
-<h4 id="组成成分-Constituent"><a href="#组成成分-Constituent" class="headerlink" title="组成成分(Constituent)"></a>组成成分(Constituent)</h4><p>一组词可以作为一个整体单元(如名词短语NP、动词短语VP)</p>
+<h4 id="组成成分-Constituent">组成成分(Constituent)</h4>
+<p>一组词可以作为一个整体单元(如名词短语NP、动词短语VP)</p>
 <p>判断是否为成分的方法：</p>
-<p>是否能出现在特定位置(如NP常出现在动词前)<br>是否能整体移动<br>是否能与其他成分并列</p>
+<p>是否能出现在特定位置(如NP常出现在动词前)<br>
+是否能整体移动<br>
+是否能与其他成分并列</p>
 <p>例子：Harry the Horse、a high-class spot 等都是NP</p>
-<h4 id="短语结构树-Phrase-Structure-Tree"><a href="#短语结构树-Phrase-Structure-Tree" class="headerlink" title="短语结构树(Phrase Structure Tree)"></a>短语结构树(Phrase Structure Tree)</h4><p>将句子组织为嵌套结构，形成树状图<br><img src="9.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h3 id="语法与解析"><a href="#语法与解析" class="headerlink" title="语法与解析"></a>语法与解析</h3><h4 id="上下文无关文法-CFG"><a href="#上下文无关文法-CFG" class="headerlink" title="上下文无关文法(CFG)"></a>上下文无关文法(CFG)</h4><p>形式化定义：</p>
-<p>终结符(单词)<br>非终结符(如NP、VP)<br>起始符号 S<br>产生式规则：A → β</p>
-<p>例子：<br>S → NP VP<br>NP → Det N<br>VP → V NP</p>
-<h4 id="乔姆斯基范式-CNF"><a href="#乔姆斯基范式-CNF" class="headerlink" title="乔姆斯基范式(CNF)"></a>乔姆斯基范式(CNF)</h4><p>每条规则必须是：</p>
+<h4 id="短语结构树-Phrase-Structure-Tree">短语结构树(Phrase Structure Tree)</h4>
+<p>将句子组织为嵌套结构，形成树状图<br>
+<img src="9.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="语法与解析">语法与解析</h3>
+<h4 id="上下文无关文法-CFG">上下文无关文法(CFG)</h4>
+<p>形式化定义：</p>
+<p>终结符(单词)<br>
+非终结符(如NP、VP)<br>
+起始符号 S<br>
+产生式规则：A → β</p>
+<p>例子：<br>
+S → NP VP<br>
+NP → Det N<br>
+VP → V NP</p>
+<h4 id="乔姆斯基范式-CNF">乔姆斯基范式(CNF)</h4>
+<p>每条规则必须是：</p>
 <p>A → B C(两个非终结符)</p>
 <p>A → w(一个终结符)</p>
 <p>任何CFG都可以转换为CNF，便于解析</p>
-<h4 id="概率上下文无关文法-PCFG"><a href="#概率上下文无关文法-PCFG" class="headerlink" title="概率上下文无关文法(PCFG)"></a>概率上下文无关文法(PCFG)</h4><p>为每条产生规则$A_i \rightarrow \beta_i$分配一个概率$$q(A_i \rightarrow \beta_i)$$<br>那么概率树$t$的概率为所有规则概率的乘积<br>$$P(t) &#x3D; \prod_{i} q(A_i \rightarrow \beta_i)$$<br>对于任意非终结符$A_i$，有$$\sum_{\beta} q(A_i \rightarrow \beta |A_i) &#x3D; 1$$<br>下面是一个实例，便于理解<br><img src="9.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>MLE：从训练数据中估计每个规则的概率<br>$$q_{ML}(A_i \rightarrow \beta) &#x3D; \dfrac{count(A_i \rightarrow \beta)}{count(A_i)}$$</p>
-<h4 id="CKY解析算法"><a href="#CKY解析算法" class="headerlink" title="CKY解析算法"></a>CKY解析算法</h4><p>给出一个PCFG和句子$s$，定义$T(s)$为以$s$为输出结果的树的集合，我们想要找到$$\hat{t} &#x3D; argmax_{t \in T(s)} P(t)$$</p>
-<p>采用CKY算法进行动态规划<br>定义$\pi[i,j,X]$为从词序$i$到$j$生成非终结符$X$的最大概率<br>然后根据规则填充如下表格：<br><img src="9.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="概率上下文无关文法-PCFG">概率上下文无关文法(PCFG)</h4>
+<p>为每条产生规则$A_i \rightarrow \beta_i$分配一个概率$$q(A_i \rightarrow \beta_i)$$<br>
+那么概率树$t$的概率为所有规则概率的乘积<br>
+$$P(t) = \prod_{i} q(A_i \rightarrow \beta_i)$$<br>
+对于任意非终结符$A_i$，有$$\sum_{\beta} q(A_i \rightarrow \beta |A_i) = 1$$<br>
+下面是一个实例，便于理解<br>
+<img src="9.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>MLE：从训练数据中估计每个规则的概率<br>
+$$q_{ML}(A_i \rightarrow \beta) = \dfrac{count(A_i \rightarrow \beta)}{count(A_i)}$$</p>
+<h4 id="CKY解析算法">CKY解析算法</h4>
+<p>给出一个PCFG和句子$s$，定义$T(s)$为以$s$为输出结果的树的集合，我们想要找到$$\hat{t} = argmax_{t \in T(s)} P(t)$$</p>
+<p>采用CKY算法进行动态规划<br>
+定义$\pi[i,j,X]$为从词序$i$到$j$生成非终结符$X$的最大概率<br>
+然后根据规则填充如下表格：<br>
+<img src="9.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <img src="9.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h3 id="评估">评估</h3>
+<p>使用标注精确率(Labeled Precision)、标注召回率(Labeled Recall)、F1值</p>
+<p>常见做法：<br>
+在Penn Treebank上训练(02-21节),测试在23节上,词性标签序列上的F1通常在70%左右</p>
+<h6 id="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣">笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣</h6>
 
-<h3 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h3><p>使用标注精确率(Labeled Precision)、标注召回率(Labeled Recall)、F1值</p>
-<p>常见做法：<br>在Penn Treebank上训练(02-21节),测试在23节上,词性标签序列上的F1通常在70%左右</p>
-<h6 id="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣"><a href="#笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣" class="headerlink" title="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣"></a>笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣</h6>
                 
               </div>
             
@@ -821,27 +851,28 @@
     <div class="song-player-wrap">
       <audio id="song-player" preload="metadata"></audio>
       <div class="song-controls">
+        <div class="song-progress-block">
+          <div id="song-progress" class="song-progress" title="拖动进度">
+            <div class="song-progress-fill" id="song-progress-fill"></div>
+            <div class="song-progress-thumb" id="song-progress-thumb"></div>
+          </div>
+          <div class="song-meta-row">
+            <span id="song-time" class="song-time">0:00 / 0:00</span>
+            <div class="song-meta-side">
+              <span id="song-vol-icon" class="song-vol-icon">🔊</span>
+              <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
+                     oninput="setVolume(this.value)" title="音量">
+              <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+            </div>
+          </div>
+        </div>
         <div class="song-ctl-row">
           <button id="song-prev-btn" class="song-ctl song-nav" onclick="prevSong()" title="上一首">⏮</button>
           <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
           <button id="song-next-btn" class="song-ctl song-nav" onclick="nextSong()" title="下一首">⏭</button>
         </div>
-        <div class="song-center">
-          <div id="song-progress" class="song-progress" title="拖动进度">
-            <div class="song-progress-fill" id="song-progress-fill"></div>
-            <div class="song-progress-thumb" id="song-progress-thumb"></div>
-          </div>
-          <span id="song-time" class="song-time">0:00 / 0:00</span>
-        </div>
-        <div class="song-side">
-          <span id="song-vol-icon" class="song-vol-icon">🔊</span>
-          <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
-                 oninput="setVolume(this.value)" title="音量">
-          <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
-        </div>
       </div>
     </div>
-    <button class="daily-btn" onclick="nextSong()">换一首</button>
   </div>
 
   <!-- 今日诗词 -->
@@ -7462,34 +7493,41 @@ initPoem();
 
   .song-controls {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    row-gap: 0.45rem;
-    gap: 0.55rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
     padding: 0.5rem 0.7rem;
     border-radius: 14px;
     background: rgba(128, 128, 128, 0.08);
     border: 1px solid rgba(128, 128, 128, 0.15);
   }
 
-  .song-ctl-row {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  .song-center {
-    flex: 1;
-    min-width: 130px;
+  .song-progress-block {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
   }
 
-  .song-side {
+  .song-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .song-meta-side {
     display: flex;
     align-items: center;
     gap: 0.45rem;
+  }
+
+  .song-ctl-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
   }
 
   .song-ctl {
@@ -7502,8 +7540,8 @@ initPoem();
   }
 
   .song-play {
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff8fab, #c86dd7);
     color: #fff;
@@ -7534,13 +7572,13 @@ initPoem();
   }
 
   .song-nav {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2.1rem;
+    height: 2.1rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     background: rgba(128, 128, 128, 0.12);
     transition: all 0.2s;
   }
@@ -7565,6 +7603,7 @@ initPoem();
 
   .song-progress {
     position: relative;
+    width: 100%;
     height: 8px;
     border-radius: 99px;
     background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));
@@ -7607,7 +7646,7 @@ initPoem();
     font-size: 0.72rem;
     opacity: 0.75;
     font-variant-numeric: tabular-nums;
-    text-align: right;
+    text-align: left;
   }
 
   .song-vol-icon {

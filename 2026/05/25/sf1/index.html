@@ -6387,10 +6387,23 @@ let songId = localStorage.getItem("songId") || "";
 let playMode = localStorage.getItem("playMode") || "order"; // order 顺序 / shuffle 随机 / single 单曲循环
 let songVolume = parseInt(localStorage.getItem("songVolume"), 10);
 if (!(songVolume >= 0)) songVolume = 100;
+let audioFallbackTried = false;
+const SONG_CDN_VER = "20260810"; // 歌曲 CDN 缓存版本号，改歌后递增可强制浏览器重新拉取
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
 const player = document.getElementById("song-player");
+
+function songUrl(song) {
+  return song.url + "?v=" + SONG_CDN_VER;
+}
+
+function fallbackSongUrl(song) {
+  return song.url.replace(
+    "https://cdn.jsdelivr.net/gh/yjyxfcy/yjyxfcy.github.io@music-assets/",
+    "https://raw.githubusercontent.com/yjyxfcy/yjyxfcy.github.io/music-assets/"
+  ) + "?v=" + SONG_CDN_VER;
+}
 
 function getPeriod(hour) {
   const h = hour < 5 ? hour + 24 : hour;
@@ -6608,7 +6621,8 @@ function loadSmart(resume) {
   document.getElementById("song-artist").innerText = s.artist;
   document.getElementById("song-reason").innerText =
     contextPrefix(smartCtx) + "💡 " + buildReason(s, item.reasons);
-  player.src = s.url;
+  player.src = songUrl(s);
+  audioFallbackTried = false;
   const sameSong = (songId === String(s.id));
   songId = String(s.id);
   localStorage.setItem("songId", songId);
@@ -6801,6 +6815,21 @@ document.getElementById("song-progress").addEventListener("pointerup", function 
 });
 document.getElementById("song-progress").addEventListener("pointercancel", function () {
   songSeeking = false;
+});
+
+// jsDelivr 拉取失败时，自动降级到 GitHub 原始直链
+player.addEventListener("error", function () {
+  const item = smartQueue[smartIdx];
+  const s = item && songs.find(function (x) { return x.id === item.id; });
+  if (s && !audioFallbackTried) {
+    audioFallbackTried = true;
+    player.src = fallbackSongUrl(s);
+    if (localStorage.getItem("isPlaying") === "true") {
+      player.play();
+    }
+    return;
+  }
+  audioFallbackTried = false;
 });
 
 // 记住播放进度

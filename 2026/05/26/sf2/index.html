@@ -7842,10 +7842,17 @@ initPoem();
 
     var progressText = document.getElementById('toc-reading-progress-text');
     var progressBar = document.getElementById('toc-reading-progress-bar');
-    var article = document.querySelector('.markdown-body');
+
+    function getReadingArticle() {
+      return document.querySelector('.markdown-body') ||
+        document.getElementById('hexo-blog-encrypt') ||
+        document.querySelector('article.post-content');
+    }
 
     function updateReadingProgress() {
-      if (!progressText || !progressBar || !article) { return; }
+      if (!progressText || !progressBar) { return; }
+      var article = getReadingArticle();
+      if (!article) { return; }
       var rect = article.getBoundingClientRect();
       var articleTop = window.pageYOffset + rect.top;
       var articleHeight = article.scrollHeight;
@@ -7861,11 +7868,14 @@ initPoem();
     updateReadingProgress();
     window.addEventListener('scroll', updateReadingProgress, { passive: true });
     window.addEventListener('resize', updateReadingProgress);
+    window.addEventListener('hexo-blog-decrypt', function() {
+      if ('tocbot' in window) { tocbot.refresh(); }
+      updateReadingProgress();
+    });
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
         tocbot.refresh();
-        article = document.querySelector('.markdown-body');
         updateReadingProgress();
       }
     });

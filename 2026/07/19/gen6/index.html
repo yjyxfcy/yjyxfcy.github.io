@@ -6532,12 +6532,6 @@ function nextSong() {
 
 function prevSong() {
   if (smartQueue.length === 0) return;
-  // 播放超过 3 秒时，先回到本曲开头
-  if (player.currentTime > 3) {
-    player.currentTime = 0;
-    updateProgress();
-    return;
-  }
   if (playMode === "shuffle") {
     randomSong();
   } else {
@@ -7568,7 +7562,6 @@ initPoem();
 
   .song-progress {
     position: relative;
-    flex: 1;
     height: 8px;
     border-radius: 99px;
     background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));

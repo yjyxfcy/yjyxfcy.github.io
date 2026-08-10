@@ -132,17 +132,6 @@ body::before {
   background: linear-gradient(90deg, #8fc3f5, #b9a8ee, #f2a8c8);
   z-index: 1;
 }
-.daily-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #8fc3f5, #b9a8ee, #f2a8c8);
-  border-radius: 18px 18px 0 0;
-  z-index: 1;
-}
 .dark .post-card {
   background: rgba(36,43,66,0.85);
   box-shadow: 0 2px 16px rgba(0,0,0,0.25);

@@ -11,21 +11,77 @@
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c4c6c9;
+  background: #b9cbe6;
   border-radius: 4px;
   transition: background 0.2s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #a6a6a6;
+  background: #9fb4dd;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #687582;
+  background: #4c5a80;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #9da8b3;
+  background: #6b7ba6;
+}
+
+/* ===== 新海诚天空渐变背景 ===== */
+body {
+  background: linear-gradient(180deg, #dcebfc 0%, #e6e5f8 45%, #f6e9f2 100%);
+}
+[data-user-color-scheme="dark"] body,
+.dark body {
+  background: linear-gradient(180deg, #1a2138 0%, #1d1b33 50%, #181f36 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-user-color-scheme]) body {
+    background: linear-gradient(180deg, #1a2138 0%, #1d1b33 50%, #181f36 100%);
+  }
 }
 
 /* ===== 首页文章卡片 ===== */
+.index-simple-item {
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  margin: 0 -0.8rem;
+}
+.index-simple-item:hover,
+.index-simple-item:focus {
+  background: rgba(143, 195, 245, 0.16);
+}
+.index-simple-item:hover .index-simple-title,
+.index-simple-item:focus .index-simple-title {
+  color: #c2508e;
+}
+.index-simple-item time {
+  color: #7d93b8;
+}
+[data-user-color-scheme="dark"] .index-simple-item:hover,
+[data-user-color-scheme="dark"] .index-simple-item:focus,
+.dark .index-simple-item:hover,
+.dark .index-simple-item:focus {
+  background: rgba(120, 140, 220, 0.14);
+}
+[data-user-color-scheme="dark"] .index-simple-item:hover .index-simple-title,
+[data-user-color-scheme="dark"] .index-simple-item:focus .index-simple-title,
+.dark .index-simple-item:hover .index-simple-title,
+.dark .index-simple-item:focus .index-simple-title {
+  color: #f09abf;
+}
+
+/* 主面板顶部渐变细线 */
+#board::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8fc3f5, #b9a8ee, #f2a8c8);
+  border-radius: 0.5rem 0.5rem 0 0;
+  z-index: 4;
+}
+
 .post-card-container {
   max-width: 800px;
   margin: 0 auto;
@@ -35,23 +91,45 @@
   display: flex;
   margin-bottom: 1.5rem;
   border-radius: 14px;
-  background: rgba(255,255,255,0.82);
+  position: relative;
+  background: rgba(252,253,255,0.86);
   backdrop-filter: blur(12px);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(96,150,220,0.12);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   flex-direction: column;
 }
 .post-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 32px rgba(120,140,220,0.20);
+}
+.post-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8fc3f5, #b9a8ee, #f2a8c8);
+  z-index: 1;
+}
+.daily-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8fc3f5, #b9a8ee, #f2a8c8);
+  border-radius: 18px 18px 0 0;
+  z-index: 1;
 }
 .dark .post-card {
-  background: rgba(37,45,56,0.85);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  background: rgba(36,43,66,0.85);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
 }
 .dark .post-card:hover {
-  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.4);
 }
 
 /* 封面图 */
@@ -88,13 +166,13 @@
   transition: color 0.2s;
 }
 .post-card-title a:hover {
-  color: #0366d6;
+  color: #c2508e;
 }
 .dark .post-card-title a {
   color: #c4c6c9;
 }
 .dark .post-card-title a:hover {
-  color: #1589e9;
+  color: #f09abf;
 }
 .post-card-title i {
   color: #e36209;
@@ -190,7 +268,7 @@
   border: none;
   border-radius: 999px;
   padding: .45rem 1.2rem;
-  background: linear-gradient(135deg, #5b6cff, #8b5cf6);
+  background: linear-gradient(135deg, #c2508e, #8b7cd8);
   color: white;
   cursor: pointer;
 }
@@ -260,7 +338,7 @@
   font-weight: 700;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-style: normal;
-  background: #5b6cff;
+  background: #8b7cd8;
   color: #fff;
   border-radius: 50%;
   width: 16px;

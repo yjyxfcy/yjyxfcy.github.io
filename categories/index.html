@@ -6314,7 +6314,7 @@ let playMode = localStorage.getItem("playMode") || "order"; // order 顺序 / sh
 let songVolume = parseInt(localStorage.getItem("songVolume"), 10);
 if (!(songVolume >= 0)) songVolume = 100;
 let audioFallbackTried = false;
-const SONG_CDN_VER = "20260810"; // 歌曲 CDN 缓存版本号，改歌后递增可强制浏览器重新拉取
+const SONG_CDN_VER = "20260817"; // 歌曲 CDN 缓存版本号，改歌后递增可强制浏览器重新拉取
 if (localStorage.getItem("isPlaying") === null) {
   localStorage.setItem("isPlaying", "false");
 }
@@ -6572,7 +6572,7 @@ async function initSmart() {
   if (cached) {
     try {
       const c = JSON.parse(cached);
-      if (c && c.date === today && Array.isArray(c.order) && c.order.length > 0) {
+      if (c && c.date === today && c.ver === SONG_CDN_VER && Array.isArray(c.order) && c.order.length > 0) {
         smartQueue = c.order;
         smartCtx = c.ctx || null;
         smartIdx = parseInt(localStorage.getItem("smartIdx"), 10) || 0;
@@ -6586,7 +6586,7 @@ async function initSmart() {
   smartCtx = ctx;
   smartQueue = rankSongs(songs, ctx);
   smartIdx = 0;
-  localStorage.setItem("smartState", JSON.stringify({ date: today, ctx: ctx, order: smartQueue }));
+  localStorage.setItem("smartState", JSON.stringify({ date: today, ver: SONG_CDN_VER, ctx: ctx, order: smartQueue }));
   localStorage.setItem("smartIdx", "0");
   loadSmart(true);
 }

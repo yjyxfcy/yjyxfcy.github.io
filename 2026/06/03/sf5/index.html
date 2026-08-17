@@ -21,12 +21,12 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法">
+    <meta name="description" content="北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十一章：随机算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="随机算法">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/06/03/sf5/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学信息科学技术学院算法设计与分析(2026春)的课程笔记 第十一章：随机算法">
+<meta property="og:description" content="北京大学信息科学技术学院 算法设计与分析(2026春)的课程笔记 第十一章：随机算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.1.png">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/06/03/sf5/5.2.png">
@@ -316,7 +316,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.2k 字
+          6k 字
         
       </span>
     
@@ -327,7 +327,7 @@
         
         
         
-          39 分钟
+          38 分钟
         
       </span>
     
@@ -480,65 +480,200 @@
             
               <div class="markdown-body">
                 
-                <p>北京大学信息科学技术学院<br>算法设计与分析(2026春)的课程笔记</p>
+                <p>北京大学信息科学技术学院<br>
+算法设计与分析(2026春)的课程笔记</p>
 <p>第十一章：随机算法</p>
 <span id="more"></span>
 <p>在经历了复杂度下限分析、NP完全、近似算法等一系列抽象内容的洗礼后，我们终于苦尽甘来，熬到了比较简单的一章：随机算法</p>
-<h3 id="Las-Vegas型随机算法"><a href="#Las-Vegas型随机算法" class="headerlink" title="Las Vegas型随机算法"></a>Las Vegas型随机算法</h3><h4 id="随机快排"><a href="#随机快排" class="headerlink" title="随机快排"></a>随机快排</h4><p>顾名思义，就是在选择pivot时随机选择一个元素，而不是每次固定选择某一个元素，然后递归的方式和普通快排相同</p>
-<p>随机选取pivot，其位于排序后第$i$个位置($i&#x3D;0,1,…,n-1$)的概率为$\dfrac{1}{n}$，故<br>$T(n)&#x3D;n-1+\dfrac{1}{n}(\Sigma_{i&#x3D;0}^{n-1} \ T(i)+T(n-i-1))&#x3D;n-1+\dfrac{2}{n}\Sigma_{i&#x3D;1}^{n-1}T(i)$<br>我们归纳证明$T(n) \le 2n ln n$<br>$n&#x3D;1$时显然，假设对于$1,2,…n-1$时都成立，则$n$时<br>$T(n)\le n-1+\dfrac{2}{n}\Sigma_{i&#x3D;1}^{n-1}2ilni\le n-1+\dfrac{2}{n} \int_1^{n} 2xlnx \ dx$<br>$\le n-1+2n lnn-n+\dfrac{1}{n} \le 2nlnn$<br>所以上界可以从$\Theta(n logn)$精确到$2nlnn$</p>
-<h4 id="随机选择"><a href="#随机选择" class="headerlink" title="随机选择"></a>随机选择</h4><p>从数组$A$的$p$到$r$下标选第$k$小的数<br>if $p&#x3D;r$ return;<br>否则在$p,r$之中随机选出下标$i$，假设有$j$个数小于等于$A[i]$<br>若$k\le j$，就从$p$到$p+j-1$下标选第$k$小的数<br>否则就从$p+j$到$r$下标选第$k-j$小的数<br>递归调用即可</p>
-<p>假设$1,2,…n$中每个数被选到概率相同，且第$k$个数总是出现在被划分后两个数组中较大者，则<br>$T(n)\le \dfrac{2}{n}\Sigma_{i&#x3D;\dfrac{n}{2}}^{n-1}T(i)+O(n)$<br>类似地我们可归纳证明$T(n) \le cn$</p>
-<h4 id="n皇后随机放置"><a href="#n皇后随机放置" class="headerlink" title="n皇后随机放置"></a>n皇后随机放置</h4><p>对于每一行，先筛选出所有合法位置，再随机选一个位置放置皇后<br>改进：与回溯相结合<br>$stopVegas$个用随机放，剩下$n-stopVegas$仍用经典的回溯</p>
-<p>对于不同的$ stopVegas $值，设<br>$p $为算法成功概率<br>$s $为一次成功搜索访问的结点数的平均值<br>$e $为一次不成功搜索访问的结点数的平均值<br>$t $为算法找到一个解的平均时间<br>则$t&#x3D;ps+(1-p)(e+t) \rightarrow t&#x3D;s+e\dfrac{1-p}{p}$<br><img src="5.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h3 id="Monte-Calo型随机随机算法"><a href="#Monte-Calo型随机随机算法" class="headerlink" title="Monte Calo型随机随机算法"></a>Monte Calo型随机随机算法</h3><h4 id="主元素测试"><a href="#主元素测试" class="headerlink" title="主元素测试"></a>主元素测试</h4><p>我们将出现次数超过一半以上的元素称为主元素<br>输入$n$个元素的数组$T$，判断其是否存在主元素<br>我们定义算法$M(T,n)$</p>
+<h3 id="Las-Vegas型随机算法">Las Vegas型随机算法</h3>
+<h4 id="随机快排">随机快排</h4>
+<p>顾名思义，就是在选择pivot时随机选择一个元素，而不是每次固定选择某一个元素，然后递归的方式和普通快排相同</p>
+<p>随机选取pivot，其位于排序后第$i$个位置($i=0,1,…,n-1$)的概率为$\dfrac{1}{n}$，故<br>
+$T(n)=n-1+\dfrac{1}{n}(\Sigma_{i=0}^{n-1} \ T(i)+T(n-i-1))=n-1+\dfrac{2}{n}\Sigma_{i=1}^{n-1}T(i)$<br>
+我们归纳证明$T(n) \le 2n ln n$<br>
+$n=1$时显然，假设对于$1,2,…n-1$时都成立，则$n$时<br>
+$T(n)\le n-1+\dfrac{2}{n}\Sigma_{i=1}^{n-1}2ilni\le n-1+\dfrac{2}{n} \int_1^{n} 2xlnx \ dx$<br>
+$\le n-1+2n lnn-n+\dfrac{1}{n} \le 2nlnn$<br>
+所以上界可以从$\Theta(n logn)$精确到$2nlnn$</p>
+<h4 id="随机选择">随机选择</h4>
+<p>从数组$A$的$p$到$r$下标选第$k$小的数<br>
+if $p=r$ return;<br>
+否则在$p,r$之中随机选出下标$i$，假设有$j$个数小于等于$A[i]$<br>
+若$k\le j$，就从$p$到$p+j-1$下标选第$k$小的数<br>
+否则就从$p+j$到$r$下标选第$k-j$小的数<br>
+递归调用即可</p>
+<p>假设$1,2,…n$中每个数被选到概率相同，且第$k$个数总是出现在被划分后两个数组中较大者，则<br>
+$T(n)\le \dfrac{2}{n}\Sigma_{i=\dfrac{n}{2}}^{n-1}T(i)+O(n)$<br>
+类似地我们可归纳证明$T(n) \le cn$</p>
+<h4 id="n皇后随机放置">n皇后随机放置</h4>
+<p>对于每一行，先筛选出所有合法位置，再随机选一个位置放置皇后<br>
+改进：与回溯相结合<br>
+$stopVegas$个用随机放，剩下$n-stopVegas$仍用经典的回溯</p>
+<p>对于不同的$ stopVegas $值，设<br>
+$p $为算法成功概率<br>
+$s $为一次成功搜索访问的结点数的平均值<br>
+$e $为一次不成功搜索访问的结点数的平均值<br>
+$t $为算法找到一个解的平均时间<br>
+则$t=ps+(1-p)(e+t) \rightarrow t=s+e\dfrac{1-p}{p}$<br>
+<img src="5.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="Monte-Calo型随机随机算法">Monte Calo型随机随机算法</h3>
+<h4 id="主元素测试">主元素测试</h4>
+<p>我们将出现次数超过一半以上的元素称为主元素<br>
+输入$n$个元素的数组$T$，判断其是否存在主元素<br>
+我们定义算法$M(T,n)$</p>
 <ul>
-<li>在$1,2,…n$中随机选取下标$i$，$x&#x3D;T[i]$</li>
+<li>在$1,2,…n$中随机选取下标$i$，$x=T[i]$</li>
 <li>统计$x$在$T$中出现次数，若$&gt; \dfrac{n}{2}$ return true，否则return false</li>
 </ul>
-<p>显然这个算法是不准确的，如果回答true那倒好，说明确实有主元素，但如果回答false，难以断言就一定没有主元素<br>我们调用时，如果回答true就结束，回答false就再调用<br>那么调用$k$次正确的概率为<br>$p+(1-p)p+…+(1-p)^{k-1}p&#x3D;1-(1-p)^{k}$<br>由于当回答true时，数组里至少$\dfrac{n}{2}$个元素都是$x$，所以选中$x$的概率$p&gt; \dfrac{1}{2}$<br>因此$1-(1-p)^{k} &gt; 1-2^{-k}$<br><img src="5.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>改进：对于任意给定$\epsilon&gt;0$，要使出错概率不超过$\epsilon$<br>则$2^{-k} \le \epsilon$<br>两边取以2为底的对数，有<br>$-k \le log \epsilon$<br>$k \ge -log \epsilon$<br>故$k \ge \lceil log\dfrac{1}{\epsilon} \rceil$<br>我们取$k&#x3D;\lceil log\dfrac{1}{\epsilon} \rceil$，调用$k$次算法，即可保证出错概率不超过$\epsilon$</p>
-<h4 id="串相等测试"><a href="#串相等测试" class="headerlink" title="串相等测试"></a>串相等测试</h4><p>$A$有一个长串$x$，$B$也有一个长串$y$，$A,B$两人希望知道$x,y$是否相等<br>那你说，这不简单吗，直接让$A$把$x$发给$B$，$B$进行一个比较就好，然而由于串过长，发送时占用资源过多，$A,B$希望你找到更好的办法<br>于是你打算让$A$对$x$采用$f$操作，导出一个$f(x)$发给$B$，$B$也用相同操作导出$f(y)$，若$f(x) \neq f(y)$即可断言$x \neq y$，但是当$f(x)&#x3D;f(y)$时依然无法断言$x&#x3D;y$</p>
-<p>我们假设$x,y$二进制表示分别为$I(x),I(y)$<br>令$I_p(x)&#x3D; I(x ) \ mod \ p$<br>$A$将素数$p$和$I_p(x)$传给$B$，当$p$不太大时，传的就是短串<br>问题还是如上面所说，而且这里还有新问题，what if $p | (I(x)-I(y))$？<br>我们选择随机选择素数$p$进行测试<br>出错的必要条件：$x,y$位数相同，$p | (I(x)-I(y))$</p>
-<p>下面我们介绍关于素数的一些性质<br>函数$\pi(t)$定义为小于$t$的不同素数个数<br>例如$\pi(20)&#x3D;8 \ (2,3,5,7,11,13,17,19)$<br>于是我们有素数定理：$\pi(t)\approx \dfrac{t}{lnt}$<br>如果$k&lt;2^n$，$n$不太小，则整除$k$的不同素数个数小于$\pi(n)$<br><img src="5.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>由此，我们可以估计出错概率<br><img src="5.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>我们重复执行$j$次，每次都随机选择小于$M$的素数<br>令$j&#x3D;\lceil loglogn \rceil$，则出错概率<br>$(\dfrac{1}{n})^j \le \dfrac{1}{n^{\lceil loglogn \rceil}}$</p>
-<h4 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h4><p>输入：二进制串$x,y$，长度分别为$n,m$，$n \ge m$<br>输入：若$y$在$x$中，输入$y$出现的第一个位置，否则输出0<br>这个东西很眼熟对不对？本质上就是数算中学的字符串匹配(简化版)<br>不必多说，朴素匹配复杂度$O(mn)$，KMP算法复杂度$O(m+n)$</p>
-<p>但是今天！我们要尝试用随机算法<br>设$x(j)&#x3D;x_jx_{j+1}…x_{j+m-1}$<br>我们将$x(j)$和$y$逐字符比较改为$I_p(x(j))$和$I_p(y)$的比较<br>由二进制性质，$x(j+1)&#x3D;2x(j)-2^mx_j+x_{j+m}$<br>令$W_p&#x3D;2^m(mod \ p)$<br>则$I_p(x(j+1))&#x3D;(2I_p(x(j))-W_px_j+x_{j+m})(mod \ p)$<br>由此公式，从$I_p(x(j))$计算$I_p(x(j+1))$只需要常数时间</p>
-<p>于是我们有如下算法：<br>从随机选取小于$M$的素数$p$<br>然后取$j$从$1$开始，一直循环到$n-m+1$<br>采取上面的迭代方式，如果出现了$I_p(x(j))&#x3D;I_p(y)$就return j<br>否则如果循环完了还没结果就return 0</p>
-<p>时间复杂度$O(m+n)$<br>出错条件和出错概率如下：<br><img src="5.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h4 id="素数测试"><a href="#素数测试" class="headerlink" title="素数测试"></a>素数测试</h4><p>首先我们来学习一下，如何“优雅”地求$x$的$m$次幂<br>其中$x$为实数，$m&#x3D;d_kd_{k-1}…d_1$为二进制自然数</p>
+<p>显然这个算法是不准确的，如果回答true那倒好，说明确实有主元素，但如果回答false，难以断言就一定没有主元素<br>
+我们调用时，如果回答true就结束，回答false就再调用<br>
+那么调用$k$次正确的概率为<br>
+$p+(1-p)p+…+(1-p)^{k-1}p=1-(1-p)^{k}$<br>
+由于当回答true时，数组里至少$\dfrac{n}{2}$个元素都是$x$，所以选中$x$的概率$p&gt; \dfrac{1}{2}$<br>
+因此$1-(1-p)^{k} &gt; 1-2^{-k}$<br>
+<img src="5.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>改进：对于任意给定$\epsilon&gt;0$，要使出错概率不超过$\epsilon$<br>
+则$2^{-k} \le \epsilon$<br>
+两边取以2为底的对数，有<br>
+$-k \le log \epsilon$<br>
+$k \ge -log \epsilon$<br>
+故$k \ge \lceil log\dfrac{1}{\epsilon} \rceil$<br>
+我们取$k=\lceil log\dfrac{1}{\epsilon} \rceil$，调用$k$次算法，即可保证出错概率不超过$\epsilon$</p>
+<h4 id="串相等测试">串相等测试</h4>
+<p>$A$有一个长串$x$，$B$也有一个长串$y$，$A,B$两人希望知道$x,y$是否相等<br>
+那你说，这不简单吗，直接让$A$把$x$发给$B$，$B$进行一个比较就好，然而由于串过长，发送时占用资源过多，$A,B$希望你找到更好的办法<br>
+于是你打算让$A$对$x$采用$f$操作，导出一个$f(x)$发给$B$，$B$也用相同操作导出$f(y)$，若$f(x) \neq f(y)$即可断言$x \neq y$，但是当$f(x)=f(y)$时依然无法断言$x=y$</p>
+<p>我们假设$x,y$二进制表示分别为$I(x),I(y)$<br>
+令$I_p(x)= I(x ) \ mod \ p$<br>
+$A$将素数$p$和$I_p(x)$传给$B$，当$p$不太大时，传的就是短串<br>
+问题还是如上面所说，而且这里还有新问题，what if $p | (I(x)-I(y))$？<br>
+我们选择随机选择素数$p$进行测试<br>
+出错的必要条件：$x,y$位数相同，$p | (I(x)-I(y))$</p>
+<p>下面我们介绍关于素数的一些性质<br>
+函数$\pi(t)$定义为小于$t$的不同素数个数<br>
+例如$\pi(20)=8 \ (2,3,5,7,11,13,17,19)$<br>
+于是我们有素数定理：$\pi(t)\approx \dfrac{t}{lnt}$<br>
+如果$k&lt;2^n$，$n$不太小，则整除$k$的不同素数个数小于$\pi(n)$<br>
+<img src="5.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>由此，我们可以估计出错概率<br>
+<img src="5.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>我们重复执行$j$次，每次都随机选择小于$M$的素数<br>
+令$j=\lceil loglogn \rceil$，则出错概率<br>
+$(\dfrac{1}{n})^j \le \dfrac{1}{n^{\lceil loglogn \rceil}}$</p>
+<h4 id="模式匹配">模式匹配</h4>
+<p>输入：二进制串$x,y$，长度分别为$n,m$，$n \ge m$<br>
+输入：若$y$在$x$中，输入$y$出现的第一个位置，否则输出0<br>
+这个东西很眼熟对不对？本质上就是数算中学的字符串匹配(简化版)<br>
+不必多说，朴素匹配复杂度$O(mn)$，KMP算法复杂度$O(m+n)$</p>
+<p>但是今天！我们要尝试用随机算法<br>
+设$x(j)=x_jx_{j+1}…x_{j+m-1}$<br>
+我们将$x(j)$和$y$逐字符比较改为$I_p(x(j))$和$I_p(y)$的比较<br>
+由二进制性质，$x(j+1)=2x(j)-2^mx_j+x_{j+m}$<br>
+令$W_p=2^m(mod \ p)$<br>
+则$I_p(x(j+1))=(2I_p(x(j))-W_px_j+x_{j+m})(mod \ p)$<br>
+由此公式，从$I_p(x(j))$计算$I_p(x(j+1))$只需要常数时间</p>
+<p>于是我们有如下算法：<br>
+从随机选取小于$M$的素数$p$<br>
+然后取$j$从$1$开始，一直循环到$n-m+1$<br>
+采取上面的迭代方式，如果出现了$I_p(x(j))=I_p(y)$就return j<br>
+否则如果循环完了还没结果就return 0</p>
+<p>时间复杂度$O(m+n)$<br>
+出错条件和出错概率如下：<br>
+<img src="5.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="素数测试">素数测试</h4>
+<p>首先我们来学习一下，如何“优雅”地求$x$的$m$次幂<br>
+其中$x$为实数，$m=d_kd_{k-1}…d_1$为二进制自然数</p>
 <p>算法如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">y=1<br><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(k,0):<br>    y=y*y<br>    <span class="hljs-keyword">if</span> d_j==1:<br>        y=x*y<br><span class="hljs-built_in">return</span> y<br></code></pre></td></tr></table></figure>
-<p>接下来我们更进一步，计算$a \ mod \ n$的$m$次幂，这就是所谓的快速幂<br>输入$a,m,n$均为正整数，$m \le n$，$m&#x3D;d_kd_{k-1}…d_1$为二进制自然数<br>算法如下：</p>
+<p>接下来我们更进一步，计算$a \ mod \ n$的$m$次幂，这就是所谓的快速幂<br>
+输入$a,m,n$均为正整数，$m \le n$，$m=d_kd_{k-1}…d_1$为二进制自然数<br>
+算法如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">y=1<br><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(k,0):<br>    y=y*y%n<br>    <span class="hljs-keyword">if</span> b_j==1:<br>        y=a*y%n<br><span class="hljs-built_in">return</span> y<br></code></pre></td></tr></table></figure>
-<p>可以看出其实就加了mod n 这一步<br>以位乘为基本运算，$T(n)&#x3D;O(k log^{2} n)&#x3D;O(log^{3} n)$</p>
-<p>接下来我们终于可以开始素数测试了<br>首先回顾一下高中学过的费马小定理：<br>若$n$为素数，则对于所有正整数$a \ mod \ n \neq 0$，有：<br>$a^{n-1} \equiv 1 (\ mod \ n)$</p>
-<p>于是我们有了一个粗糙算法：<br>计算$2^{n-1} \equiv 1 (\ mod \ n)$，如果满足则$n$为素数，否则为合数<br>问题在于这里只对于$a&#x3D;2$进行了测试，容易出反例，比如$n&#x3D;341$就是一个，满足上述条件且为合数，此时称$n$为基2的“伪素数”</p>
-<p>于是我们进行改进，随机选取for a in range(2,n)，例如取$a&#x3D;3$就可以否定341<br>然而我们必须指出，费马小定理只是必要条件而非充分条件<br>这意味着即使所有与$n$互质的正整数$a$都满足定理，$n$也不一定就是素数<br>这种$n$很特殊，我们称其为<strong>Carmichael数</strong>，如 561，1105，1729，2465 等<br>Carmichael数非常少，小于 $10^8$ 的只有 255 个<br>由初等数论可以证明：如果n为合数，但不是Carmichael数，那么上面的算法测试n为合数的概率至少为1&#x2F;2</p>
-<p>在费马小定理之外，我们给出另一个必要条件：<br>如果$n$为素数，则$x^{2} \equiv 1 (\ mod \ n)$的根只有两个<br>即$x&#x3D;1$和$x&#x3D;-1$(mod n 意义下)<br>我们称不是1或-1的根为<strong>非平凡的</strong>，如果方程有非平凡的根，则$n$为合数<br>于是我们给出测试方法：<br>设$n$为奇素数，则$n-1$为偶数，设$n-1&#x3D;2^qm(q \ge 1)$<br><strong>在mod n 意义下</strong>，我们构造序列$a^m,a^{2m},a^{4m},…,a^{2^qm}$<br>其中最后一项即为$a^{n-1}$，并且每一项是前面一项的平方<br>测试方法：</p>
+<p>可以看出其实就加了mod n 这一步<br>
+以位乘为基本运算，$T(n)=O(k log^{2} n)=O(log^{3} n)$</p>
+<p>接下来我们终于可以开始素数测试了<br>
+首先回顾一下高中学过的费马小定理：<br>
+若$n$为素数，则对于所有正整数$a \ mod \ n \neq 0$，有：<br>
+$a^{n-1} \equiv 1 (\ mod \ n)$</p>
+<p>于是我们有了一个粗糙算法：<br>
+计算$2^{n-1} \equiv 1 (\ mod \ n)$，如果满足则$n$为素数，否则为合数<br>
+问题在于这里只对于$a=2$进行了测试，容易出反例，比如$n=341$就是一个，满足上述条件且为合数，此时称$n$为基2的“伪素数”</p>
+<p>于是我们进行改进，随机选取for a in range(2,n)，例如取$a=3$就可以否定341<br>
+然而我们必须指出，费马小定理只是必要条件而非充分条件<br>
+这意味着即使所有与$n$互质的正整数$a$都满足定理，$n$也不一定就是素数<br>
+这种$n$很特殊，我们称其为<strong>Carmichael数</strong>，如 561，1105，1729，2465 等<br>
+Carmichael数非常少，小于 $10^8$ 的只有 255 个<br>
+由初等数论可以证明：如果n为合数，但不是Carmichael数，那么上面的算法测试n为合数的概率至少为1/2</p>
+<p>在费马小定理之外，我们给出另一个必要条件：<br>
+如果$n$为素数，则$x^{2} \equiv 1 (\ mod \ n)$的根只有两个<br>
+即$x=1$和$x=-1$(mod n 意义下)<br>
+我们称不是1或-1的根为<strong>非平凡的</strong>，如果方程有非平凡的根，则$n$为合数<br>
+于是我们给出测试方法：<br>
+设$n$为奇素数，则$n-1$为偶数，设$n-1=2^qm(q \ge 1)$<br>
+<strong>在mod n 意义下</strong>，我们构造序列$a^m,a^{2m},a^{4m},…,a^{2^qm}$<br>
+其中最后一项即为$a^{n-1}$，并且每一项是前面一项的平方<br>
+测试方法：</p>
 <ul>
 <li>随机选取$a \in [2,3,…,n-1]$进行测试</li>
-<li>对于任意$i&#x3D;0,1,…q-1$ 判断$a^{2^im} \ mod \ n$是否为1和n-1，且它后一项是否为1</li>
+<li>对于任意$i=0,1,…q-1$ 判断$a^{2^im} \ mod \ n$是否为1和n-1，且它后一项是否为1</li>
 <li>如果其后项为1，但它本身不为1和n-1，则它就是非平凡根，从而知道$n$不是素数</li>
 </ul>
 <img src="5.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<p>上面为一个实例，该算法被称为<strong>Miller-Rabin算法</strong><br>首先找$q,m$使得$n-1&#x3D;2^qm$，复杂度$O(log n)$<br>然后检测序列是否存在非平凡根，复杂度$O(log^3 n)$<br>可证明每次测试出错概率最多1&#x2F;2，重复测试$k$次出错概率最多$2^{-k}$<br>令$k&#x3D; \lceil logn \rceil$，则$2^{-k} \le \dfrac{1}{n}$，正确率为$1-\dfrac{1}{n}$<br>换言之，若$n$为素数，算法输出“素数”，若$n$为合数，算分以$1-\dfrac{1}{n}$概率输出“合数”<br>由于测试需要$k$次，按位乘统计，<strong>总时间复杂度$O(log^4 n)$</strong></p>
-<h3 id="两种算法的对比与总结"><a href="#两种算法的对比与总结" class="headerlink" title="两种算法的对比与总结"></a>两种算法的对比与总结</h3><h4 id="Las-Vegas型"><a href="#Las-Vegas型" class="headerlink" title="Las Vegas型"></a>Las Vegas型</h4><p>Las Vegas型随机算法主要是修改确定性算法得到，一般把某一步确定性选择变为随机选择，可以与确定性算法相结合使用，有可能改进确定性算法的平均时间复杂度<br>这种算法的特点是要么得不到解，如果有解，解一定是正确的，但运行时间时短时长，本身是一个随机变量，因此我们更关心它的平均运行时间<br>我们把期望运行时间是输入规模的多项式 且总是给出正确答案的 随机算法称为<strong>有效的 Las Vegas型随机算法</strong></p>
-<h4 id="Monte-Calo型"><a href="#Monte-Calo型" class="headerlink" title="Monte Calo型"></a>Monte Calo型</h4><p>Monte Calo型随机算法不但运行时间是随机变量，而且计算结果也是随机事件<br>我们把总是在多项式时间内运行 且出错概率不超过$\dfrac{1}{3}$的随机算法称为<strong>有效的Monte Calo型随机算法</strong><br>当然其实只要算法执行足够多次，出错概率可以变得任意小，也不需要这个$\dfrac{1}{3}$</p>
-<h4 id="单侧错误和双侧错误"><a href="#单侧错误和双侧错误" class="headerlink" title="单侧错误和双侧错误"></a>单侧错误和双侧错误</h4><ul>
+<p>上面为一个实例，该算法被称为<strong>Miller-Rabin算法</strong><br>
+首先找$q,m$使得$n-1=2^qm$，复杂度$O(log n)$<br>
+然后检测序列是否存在非平凡根，复杂度$O(log^3 n)$<br>
+可证明每次测试出错概率最多1/2，重复测试$k$次出错概率最多$2^{-k}$<br>
+令$k= \lceil logn \rceil$，则$2^{-k} \le \dfrac{1}{n}$，正确率为$1-\dfrac{1}{n}$<br>
+换言之，若$n$为素数，算法输出“素数”，若$n$为合数，算分以$1-\dfrac{1}{n}$概率输出“合数”<br>
+由于测试需要$k$次，按位乘统计，<strong>总时间复杂度$O(log^4 n)$</strong></p>
+<h3 id="两种算法的对比与总结">两种算法的对比与总结</h3>
+<h4 id="Las-Vegas型">Las Vegas型</h4>
+<p>Las Vegas型随机算法主要是修改确定性算法得到，一般把某一步确定性选择变为随机选择，可以与确定性算法相结合使用，有可能改进确定性算法的平均时间复杂度<br>
+这种算法的特点是要么得不到解，如果有解，解一定是正确的，但运行时间时短时长，本身是一个随机变量，因此我们更关心它的平均运行时间<br>
+我们把期望运行时间是输入规模的多项式 且总是给出正确答案的 随机算法称为<strong>有效的 Las Vegas型随机算法</strong></p>
+<h4 id="Monte-Calo型">Monte Calo型</h4>
+<p>Monte Calo型随机算法不但运行时间是随机变量，而且计算结果也是随机事件<br>
+我们把总是在多项式时间内运行 且出错概率不超过$\dfrac{1}{3}$的随机算法称为<strong>有效的Monte Calo型随机算法</strong><br>
+当然其实只要算法执行足够多次，出错概率可以变得任意小，也不需要这个$\dfrac{1}{3}$</p>
+<h4 id="单侧错误和双侧错误">单侧错误和双侧错误</h4>
+<ul>
 <li><strong>弃真型</strong>单侧错误：当算法宣布接受时结果一定对，宣布拒绝时不一定对，例如主元素测试</li>
 <li><strong>取伪型</strong>单侧错误：算法宣布拒绝时结果一定对，宣布接受时不一定对，例如素数测试</li>
 <li><strong>双侧</strong>错误：在所有输入上同时出现上述两种不同的错误</li>
 </ul>
-<h4 id="随机算法的分类与局限性"><a href="#随机算法的分类与局限性" class="headerlink" title="随机算法的分类与局限性"></a>随机算法的分类与局限性</h4><p>Las Vegas型中，我们有零错误概率多项式时间算法(有效的)，称为<strong>ZPP</strong><br>Monte Calo型中，错误概率有界的有效算法(多项式时间)称为<strong>BPP</strong><br>在此基础上，如果是弃真型单侧错误概率有界，称为<strong>RP</strong>，取伪型称为<strong>coRP</strong><br>局限性在于：错误概率有界的多项式时间随机算法不太可能解决NP完全问题</p>
-<h3 id="处理难解问题的策略"><a href="#处理难解问题的策略" class="headerlink" title="处理难解问题的策略"></a>处理难解问题的策略</h3><p>严格来说这是第十二章的内容了，不过老师也没细讲，在此就并入十一章中，简单带过</p>
-<h4 id="对问题施加限制"><a href="#对问题施加限制" class="headerlink" title="对问题施加限制"></a>对问题施加限制</h4><p>例如SAT问题，限制成<strong>2SAT</strong>，它就是P类问题了<br>或者限制成<strong>HornSAT</strong>(输入限制为霍恩公式，析取式中正文字，即不带否定号的变量，至多出现一次)，那么也变成了P类问题<br>再比如说各类图的问题，也可以限制参数如下：<br><img src="5.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h4 id="固定参数算法"><a href="#固定参数算法" class="headerlink" title="固定参数算法"></a>固定参数算法</h4><p>通常把优化问题转化为判定问题时，都会在输入中引入一个参数<br>例如顶点覆盖问题：给定图$G$，正整数$K$(小于等于$G$的顶点数)，问是否存在不超过$K$的顶点覆盖？<br>我们固定常数$k$，输入为$(G,k)$，从而穷举所有$k$元顶点子集，看是否存在顶点覆盖，复杂度约为$O(kn^{k+1})&#x3D;O(2^k kn)$<br>所以在$O(2^k kn)$时间内能够正确解决大小不超过$k$的顶点覆盖问题</p>
-<h4 id="改进的指数时间算法"><a href="#改进的指数时间算法" class="headerlink" title="改进的指数时间算法"></a>改进的指数时间算法</h4><p>我们用$O^{\ast}$表述忽略多项式因子，例如$O^{\ast}(2^n)&#x3D;O(n^{O(1)}2^n)$<br>当一个问题，暴力算法时间$O^{\ast}(2^n)$时，则$\forall 1&lt;c&lt;2$，时间复杂度为$O^{\ast}(c^n)$的指数时间算法称为 <strong>非平凡(改进)的指数时间算法</strong><br>例如我们可证明，SAT可以在$O^{\ast}(1.8393^n)$时间内正确求解</p>
-<p><strong>指数时间假设</strong>：对于任意正整数$k$，都存在$c_k&gt;0$，使得求解kSAT的精确算法复杂度大于等于$2^{c_kn}$，当然这仅限于一个猜想，认为指数时间算法改进的底数不能任意的小<br>实际上，改进NPC问题的指数时间精确算法，在近期取得了许多突破：<br>任意色数图的顶点着色问题都有$O^{\ast}(3^n)$的算法<br>背包问题有比$O^{\ast}(2^{\dfrac{n}{2}})$更好的算法<br>货郎问题有比$O^{\ast}(2^n)$更好的算法</p>
-<h4 id="其他处理难解问题的策略"><a href="#其他处理难解问题的策略" class="headerlink" title="其他处理难解问题的策略"></a>其他处理难解问题的策略</h4><p><strong>启发式方法</strong>：无法从理论上给出任何性能保证，但在实践中偏偏效果良好，就统称为启发式方法，常用的有回溯与分支限界法、局部搜索法(随机化策略、重启策略、模拟退火)、遗传算法等<br><strong>平均复杂度</strong>：有些NPC问题在考虑平均复杂度时是易解的，例如哈密顿回路的平均情况对图$G(n,\dfrac{1}{2})$有$O(n^3)$的算法<br>此处的$\dfrac{1}{2}$为概率，实际算法设为$G(n,p)$，即让图顶点数为$n$，然后在任何两个不同顶点之间独立地以概率$p$连一条边<br><strong>难解算例生成</strong>：确定紧实例</p>
-<h6 id="笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……最后还小小补充了第十二章，终于是将算分后半学期的笔记更新完毕了，准备好迎接无情的期末吧"><a href="#笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……最后还小小补充了第十二章，终于是将算分后半学期的笔记更新完毕了，准备好迎接无情的期末吧" class="headerlink" title="笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……最后还小小补充了第十二章，终于是将算分后半学期的笔记更新完毕了，准备好迎接无情的期末吧"></a>笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……最后还小小补充了第十二章，终于是将算分后半学期的笔记更新完毕了，准备好迎接无情的期末吧</h6>
+<h4 id="随机算法的分类与局限性">随机算法的分类与局限性</h4>
+<p>Las Vegas型中，我们有零错误概率多项式时间算法(有效的)，称为<strong>ZPP</strong><br>
+Monte Calo型中，错误概率有界的有效算法(多项式时间)称为<strong>BPP</strong><br>
+在此基础上，如果是弃真型单侧错误概率有界，称为<strong>RP</strong>，取伪型称为<strong>coRP</strong><br>
+局限性在于：错误概率有界的多项式时间随机算法不太可能解决NP完全问题</p>
+<h3 id="处理难解问题的策略">处理难解问题的策略</h3>
+<p>严格来说这是第十二章的内容了，不过老师也没细讲，在此就并入十一章中，简单带过</p>
+<h4 id="对问题施加限制">对问题施加限制</h4>
+<p>例如SAT问题，限制成<strong>2SAT</strong>，它就是P类问题了<br>
+或者限制成<strong>HornSAT</strong>(输入限制为霍恩公式，析取式中正文字，即不带否定号的变量，至多出现一次)，那么也变成了P类问题<br>
+再比如说各类图的问题，也可以限制参数如下：<br>
+<img src="5.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="固定参数算法">固定参数算法</h4>
+<p>通常把优化问题转化为判定问题时，都会在输入中引入一个参数<br>
+例如顶点覆盖问题：给定图$G$，正整数$K$(小于等于$G$的顶点数)，问是否存在不超过$K$的顶点覆盖？<br>
+我们固定常数$k$，输入为$(G,k)$，从而穷举所有$k$元顶点子集，看是否存在顶点覆盖，复杂度约为$O(kn^{k+1})=O(2^k kn)$<br>
+所以在$O(2^k kn)$时间内能够正确解决大小不超过$k$的顶点覆盖问题</p>
+<h4 id="改进的指数时间算法">改进的指数时间算法</h4>
+<p>我们用$O^{\ast}$表述忽略多项式因子，例如$O^{\ast}(2^n)=O(n^{O(1)}2^n)$<br>
+当一个问题，暴力算法时间$O^{\ast}(2^n)$时，则$\forall 1&lt;c&lt;2$，时间复杂度为$O^{\ast}(c^n)$的指数时间算法称为 <strong>非平凡(改进)的指数时间算法</strong><br>
+例如我们可证明，SAT可以在$O^{\ast}(1.8393^n)$时间内正确求解</p>
+<p><strong>指数时间假设</strong>：对于任意正整数$k$，都存在$c_k&gt;0$，使得求解kSAT的精确算法复杂度大于等于$2^{c_kn}$，当然这仅限于一个猜想，认为指数时间算法改进的底数不能任意的小<br>
+实际上，改进NPC问题的指数时间精确算法，在近期取得了许多突破：<br>
+任意色数图的顶点着色问题都有$O^{\ast}(3^n)$的算法<br>
+背包问题有比$O^{\ast}(2^{\dfrac{n}{2}})$更好的算法<br>
+货郎问题有比$O^{\ast}(2^n)$更好的算法</p>
+<h4 id="其他处理难解问题的策略">其他处理难解问题的策略</h4>
+<p><strong>启发式方法</strong>：无法从理论上给出任何性能保证，但在实践中偏偏效果良好，就统称为启发式方法，常用的有回溯与分支限界法、局部搜索法(随机化策略、重启策略、模拟退火)、遗传算法等<br>
+<strong>平均复杂度</strong>：有些NPC问题在考虑平均复杂度时是易解的，例如哈密顿回路的平均情况对图$G(n,\dfrac{1}{2})$有$O(n^3)$的算法<br>
+此处的$\dfrac{1}{2}$为概率，实际算法设为$G(n,p)$，即让图顶点数为$n$，然后在任何两个不同顶点之间独立地以概率$p$连一条边<br>
+<strong>难解算例生成</strong>：确定紧实例</p>
+<h6 id="笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……最后还小小补充了第十二章，终于是将算分后半学期的笔记更新完毕了，准备好迎接无情的期末吧">笔者按：这一讲ppt内容和课本大有不同，不过本质上都不难理解，属于是在前面四章超高强度之后一个非常好的放松……最后还小小补充了第十二章，终于是将算分后半学期的笔记更新完毕了，准备好迎接无情的期末吧</h6>
+
                 
               </div>
             
@@ -6198,7 +6333,7 @@
       energy: "中速",
       weather: ["夜"],
       theme: ["历史", "英雄"]
-    },,
+    },
     { id: 487, title: "me me she", artist: "RADWIMPS", url: "https://cdn.jsdelivr.net/gh/yjyxfcy/yjyxfcy.github.io@music-assets/music/me me she RADWIMPS.mp4", genre: ["摇滚", "日系流行"], mood: ["温柔", "感伤", "释然"], energy: "中速", weather: [], theme: ["爱情", "离别"] },
     { id: 488, title: "一念之间－在水中", artist: "齐豫＆吴青峰", url: "https://cdn.jsdelivr.net/gh/yjyxfcy/yjyxfcy.github.io@music-assets/music/一念之间－在水中 齐豫＆吴青峰.mp4", genre: ["流行"], mood: ["空灵", "温柔", "诗意"], energy: "舒缓", weather: [], theme: ["生命", "诗意"] },
     { id: 489, title: "一念之间－在空中", artist: "齐豫＆吴青峰", url: "https://cdn.jsdelivr.net/gh/yjyxfcy/yjyxfcy.github.io@music-assets/music/一念之间－在空中 齐豫＆吴青峰.mp4", genre: ["流行"], mood: ["空灵", "悠远", "诗意"], energy: "舒缓", weather: [], theme: ["生命", "诗意"] },

@@ -6693,6 +6693,10 @@ function rankSongs(songs, ctx) {
 let smartQueue = [];
 let smartIdx = 0;
 let smartCtx = null;
+// 随机模式的"洗牌播放"状态：shuffleDeck 是一副打乱的下标序列，
+// 按顺序消费，播完一整轮才重新洗牌，保证同一轮内不重复。
+let shuffleDeck = [];
+let shuffleIdx = 0;
 
 function buildReason(song, reasons) {
   const parts = reasons.slice(0, 3);
@@ -6758,6 +6762,7 @@ async function initSmart() {
         smartCtx = c.ctx || null;
         smartIdx = parseInt(localStorage.getItem("smartIdx"), 10) || 0;
         if (smartIdx >= smartQueue.length) smartIdx = 0;
+        if (playMode === "shuffle") loadShuffleDeck();
         loadSmart(true);
         return;
       }
@@ -6769,6 +6774,7 @@ async function initSmart() {
   smartIdx = 0;
   localStorage.setItem("smartState", JSON.stringify({ date: today, ver: SONG_CDN_VER, ctx: ctx, order: smartQueue }));
   localStorage.setItem("smartIdx", "0");
+  if (playMode === "shuffle") loadShuffleDeck();
   loadSmart(true);
 }
 
@@ -6793,35 +6799,93 @@ function advanceSong() {
   }
 }
 
-function randomSong() {
-  if (smartQueue.length > 1) {
-    let r;
-    do {
-      r = Math.floor(Math.random() * smartQueue.length);
-    } while (r === smartIdx);
-    smartIdx = r;
+function buildShuffleDeck() {
+  const n = smartQueue.length;
+  const deck = [];
+  for (let i = 0; i < n; i++) deck.push(i);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = deck[i];
+    deck[i] = deck[j];
+    deck[j] = t;
   }
+  // 避免新一轮第一首恰好又是刚播完的那首，把它挪到后面
+  if (n > 1) {
+    const cur = smartIdx % n;
+    if (deck[0] === cur) {
+      const swapPos = 1 + Math.floor(Math.random() * (n - 1));
+      deck[0] = deck[swapPos];
+      deck[swapPos] = cur;
+    }
+  }
+  return deck;
+}
+
+function persistShuffle() {
+  localStorage.setItem("shuffleDeck", JSON.stringify({
+    date: todayStr(),
+    ver: SONG_CDN_VER,
+    deck: shuffleDeck
+  }));
+  localStorage.setItem("shuffleIdx", String(shuffleIdx));
+}
+
+function loadShuffleDeck() {
+  const today = todayStr();
+  try {
+    const raw = localStorage.getItem("shuffleDeck");
+    const meta = raw ? JSON.parse(raw) : null;
+    if (meta && meta.date === today && meta.ver === SONG_CDN_VER &&
+        Array.isArray(meta.deck) && meta.deck.length === smartQueue.length) {
+      shuffleDeck = meta.deck;
+      shuffleIdx = parseInt(localStorage.getItem("shuffleIdx"), 10) || 0;
+      if (shuffleIdx >= shuffleDeck.length) shuffleIdx = 0;
+      return;
+    }
+  } catch (e) { /* 缓存损坏则重建 */ }
+  // 重建：当前正在听/正推的歌作为新一轮起点，其余随机排在后面
+  const n = smartQueue.length;
+  const rest = [];
+  for (let i = 0; i < n; i++) if (i !== smartIdx) rest.push(i);
+  for (let i = rest.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = rest[i];
+    rest[i] = rest[j];
+    rest[j] = t;
+  }
+  shuffleDeck = [smartIdx % n].concat(rest);
+  shuffleIdx = 0;
+  persistShuffle();
 }
 
 function nextSong() {
   if (playMode === "shuffle") {
-    randomSong();
+    shuffleIdx++;
+    if (shuffleIdx >= shuffleDeck.length) {
+      shuffleDeck = buildShuffleDeck();
+      shuffleIdx = 0;
+    }
+    smartIdx = shuffleDeck[shuffleIdx];
   } else {
     advanceSong();
   }
   localStorage.setItem("smartIdx", String(smartIdx));
+  if (playMode === "shuffle") persistShuffle();
   loadSmart(false);
 }
 
 function prevSong() {
   if (smartQueue.length === 0) return;
   if (playMode === "shuffle") {
-    randomSong();
+    shuffleIdx--;
+    if (shuffleIdx < 0) shuffleIdx = shuffleDeck.length - 1;
+    smartIdx = shuffleDeck[shuffleIdx];
   } else {
     smartIdx--;
     if (smartIdx < 0) smartIdx = smartQueue.length - 1;
   }
   localStorage.setItem("smartIdx", String(smartIdx));
+  if (playMode === "shuffle") persistShuffle();
   loadSmart(false);
 }
 
@@ -6865,6 +6929,9 @@ function initVolume() {
 function cycleMode() {
   playMode = playMode === "order" ? "shuffle" : playMode === "shuffle" ? "single" : "order";
   localStorage.setItem("playMode", playMode);
+  if (playMode === "shuffle" && smartQueue.length > 0 && shuffleDeck.length === 0) {
+    loadShuffleDeck();
+  }
   renderMode();
 }
 

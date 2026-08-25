@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第九讲：Evaluation">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-25T08:08:09.785Z">
-<meta property="article:modified_time" content="2026-08-25T08:36:21.068Z">
+<meta property="article:modified_time" content="2026-08-25T08:41:58.700Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -538,7 +538,7 @@
 <li>清晰度：<br>好的图片应当让分类器对其类别非常确定，因此分类器预测分布的信息熵应该很小，也即$\Sigma_y c(y|x)log c(y|x)$应该较大</li>
 <li>多样性：<br>生成的图片应覆盖所有类别且分布均衡，因此需要计算生成样本边缘分布$c(y)$的熵，越均匀熵越高，也即$-\Sigma_y c(y)log c(y)$应该较大</li>
 </ul>
-<p>由此，我们令$IS&#x3D;D×S$<br>其中$S&#x3D;exp(E_{x \sim p_\theta}[\Sigma_y c(y|x)log c(y|x)])$<br>$D&#x3D;exp(-[\Sigma_y c(y)log c(y)])$</p>
+<p>由此，我们令$IS&#x3D;D×S$<br>其中$S&#x3D;exp(E_{x \sim p_\theta}[\Sigma_y c(y|x)log c(y|x)])$<br>$D&#x3D;exp(-E_{x \sim p_\theta}[\Sigma_y c(y|x)log c(y)])&#x3D;exp(-[\Sigma_y c(y)log c(y)])$</p>
 <p>更好记的公式：$IS&#x3D;exp(E_{x \sim p_\theta} [KL(c(y|x))||c(y)])$</p>
 <h4 id="指标二：Frechet-Inception-Distance-FID"><a href="#指标二：Frechet-Inception-Distance-FID" class="headerlink" title="指标二：Frechet Inception Distance (FID)"></a>指标二：Frechet Inception Distance (FID)</h4><p>主要计算真实数据和生成数据在特征空间中分布的差异，<strong>分数越低越好</strong></p>
 <p>计算时使用预训练分类器的中间层特征提取测试集T和生成样本G的特征向量，分别用多元高斯分布进行拟合，得到$(\mu_T,\mu_G),(\Sigma_T,\Sigma_G)$<br>由此计算FID距离：<br>$FID&#x3D;||\mu_T-\mu_G||^2+Trace(\Sigma_T+\Sigma_G-2(\Sigma_T \Sigma_G)^{0.5})$</p>

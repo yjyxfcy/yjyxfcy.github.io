@@ -21,13 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hi, I am Yjy. Welcome to my personal homepage.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yjy">
-<meta property="og:url" content="https://yjyxfcy.github.io/page/3/index.html">
+    <meta name="description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第九讲：Evaluation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="评估">
+<meta property="og:url" content="https://yjyxfcy.github.io/2026/08/25/gen9/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="Hi, I am Yjy. Welcome to my personal homepage.">
+<meta property="og:description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第九讲：Evaluation">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-25T08:08:09.785Z">
+<meta property="article:modified_time" content="2026-08-25T08:36:21.068Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -47,11 +49,17 @@
 </script>
 
   
-  <title>Yjy</title>
+  <title>评估 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -117,7 +125,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 100vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -276,33 +284,73 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/avatar.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p12.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-i18n-key="home.slogan" data-i18n-html="true" data-typed-text="你好呀！我是 Yjy，PKU 信科智能专业大二学生。&lt;br&gt;
-正在 AI 方向继续学习和探索。&lt;br&gt;
-我喜欢文学、历史、音乐和旅行。&lt;br&gt;
-欢迎来到我的博客！&lt;br&gt;
-&lt;a href=&#34;/about/&#34; target=&#34;_blank&#34;&gt;更多关于我&lt;/a&gt;
-">你好呀！我是 Yjy，PKU 信科智能专业大二学生。<br>
-正在 AI 方向继续学习和探索。<br>
-我喜欢文学、历史、音乐和旅行。<br>
-欢迎来到我的博客！<br>
-<a href="/about/" target="_blank">更多关于我</a>
-</span>
+            <span id="subtitle" data-typed-text="评估"></span>
           
         </div>
 
         
-      </div>
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-25 16:08" pubdate>
+          2026年8月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
 
       
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
+    
+  </div>
+
+
+        
+      </div>
+
       
     </div>
   </div>
@@ -314,134 +362,406 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          style="margin-top: 0">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar">
+    
+
+<div id="category-bar-card">
+  <p class="category-bar-header">
+    <i class="iconfont icon-category"></i>
+    <span>分类文章</span>
+  </p>
+  
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="生成模型基础"
+        id="heading-320c54b9a1e78533008165d336e2f160" role="tab" data-toggle="collapse" href="#collapse-320c54b9a1e78533008165d336e2f160"
+        aria-expanded="true"
+      >
+        生成模型基础
+        <span class="list-group-count">(9)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-320c54b9a1e78533008165d336e2f160"
+           role="tabpanel" aria-labelledby="heading-320c54b9a1e78533008165d336e2f160">
+        
+        
           
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2026/07/18/gen5/" title="Normalizing Flow"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Normalizing Flow</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/02/13/gen1/" title="变分自编码器(VAE)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">变分自编码器(VAE)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/07/19/gen6/" title="扩散模型(Diffusion)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">扩散模型(Diffusion)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/07/30/gen7/" title="模型加速"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">模型加速</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/02/15/gen3/" title="生成对抗模型(GAN)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">生成对抗模型(GAN)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/08/25/gen8/" title="能量模型"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">能量模型</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/02/14/gen2/" title="自回归模型(Transformer&amp;AR)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">自回归模型(Transformer&amp;AR)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/08/25/gen9/" title="评估"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">评估</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/02/21/gen4/" title="调试"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">调试</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+</div>
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">评估</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
                 
+                  
+                    本文最后更新于 2026年8月25日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p>
+<p>第九讲：Evaluation</p>
+<span id="more"></span>
+<p>趁热打铁再写一章，这一章也算是较为轻松友好的</p>
+<p>对于判别模型来说，评估是非常简单的，只需看正确率即可<br>但对于生成模型来说，评估就得从多个方面来考虑了，没有一个单一的指标能衡量所有方面<br>下面我们会介绍三个主要的评估维度</p>
+<h3 id="密度估计"><a href="#密度估计" class="headerlink" title="密度估计"></a>密度估计</h3><p>顾名思义，就是评估模型在测试集上赋予数据的概率(对数似然)大小<br>具体操作大家应该也很熟悉了，无非就是划分训练集验证集测试集，在训练集上学习$p_\theta(x)$，在验证集上调参，最后在测试集上计算期望对数似然$E_{x \sim test}[log p_\theta(x)]$</p>
+<p>对于AR和Flow来说，这种方式易于计算，VAE和Diffusion也可估计，GAN则通常不这样做</p>
+<p>这里有一个需要注意力的地方：<strong>极大似然估计等价于数据压缩</strong><br>采用香农编码，给每个数据点$x$分配长度为$\lceil log \dfrac{1}{p_\theta(x)}\rceil$的编码<br>那么平均编码长度约等于负对数似然，模型找出的数据规律越多，压缩率越高</p>
+<h3 id="样本质量"><a href="#样本质量" class="headerlink" title="样本质量"></a>样本质量</h3><p>这个非常好理解，主要是有人工评估和自动评估之分</p>
+<p>人工评估当然比较符合我们真实的主观感受，但是费时费力，且存在偏见，结果不可解释，也难以复现，无法评估泛化性</p>
+<p>至于自动评估，首先要满足两个核心假设：</p>
+<ul>
+<li>模型是在有标签数据集上(like ImageNet)训练的</li>
+<li>拥有一个良好的预训练概率分类器$c(y|x)$用于预测标签$y$</li>
+</ul>
+<h4 id="指标一：Inception-Score-IS"><a href="#指标一：Inception-Score-IS" class="headerlink" title="指标一：Inception Score (IS)"></a>指标一：Inception Score (IS)</h4><p>IS结合了两个标准，<strong>分数越高越好</strong></p>
+<ul>
+<li>清晰度：<br>好的图片应当让分类器对其类别非常确定，因此分类器预测分布的信息熵应该很小，也即$\Sigma_y c(y|x)log c(y|x)$应该较大</li>
+<li>多样性：<br>生成的图片应覆盖所有类别且分布均衡，因此需要计算生成样本边缘分布$c(y)$的熵，越均匀熵越高，也即$-\Sigma_y c(y)log c(y)$应该较大</li>
+</ul>
+<p>由此，我们令$IS&#x3D;D×S$<br>其中$S&#x3D;exp(E_{x \sim p_\theta}[\Sigma_y c(y|x)log c(y|x)])$<br>$D&#x3D;exp(-[\Sigma_y c(y)log c(y)])$</p>
+<p>更好记的公式：$IS&#x3D;exp(E_{x \sim p_\theta} [KL(c(y|x))||c(y)])$</p>
+<h4 id="指标二：Frechet-Inception-Distance-FID"><a href="#指标二：Frechet-Inception-Distance-FID" class="headerlink" title="指标二：Frechet Inception Distance (FID)"></a>指标二：Frechet Inception Distance (FID)</h4><p>主要计算真实数据和生成数据在特征空间中分布的差异，<strong>分数越低越好</strong></p>
+<p>计算时使用预训练分类器的中间层特征提取测试集T和生成样本G的特征向量，分别用多元高斯分布进行拟合，得到$(\mu_T,\mu_G),(\Sigma_T,\Sigma_G)$<br>由此计算FID距离：<br>$FID&#x3D;||\mu_T-\mu_G||^2+Trace(\Sigma_T+\Sigma_G-2(\Sigma_T \Sigma_G)^{0.5})$</p>
+<h3 id="下游任务解决能力"><a href="#下游任务解决能力" class="headerlink" title="下游任务解决能力"></a>下游任务解决能力</h3><p>对于llm来说，生成文本后通常通过解决具体任务来评估质量<br>这个应该无需多言，只需设计特定的prompt，然后让模型在few-shot或者zero-shot条件下完成下游任务即可<br>ppt中的表格评估的甚至还是GPT 4，claude 2，Grok 1，恍如隔世……</p>
 
-<h1 style="display: none">Yjy</h1>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
-<div class="index-simple-list">
+<span class="category-chains">
+  
   
     
-    <a class="index-simple-item" href="/2026/03/11/fnlp2/" target="_self">
-      <time datetime="2026-03-11 21:40">
-        2026-03-11
-      </time>
-      <span class="index-simple-title">
+      <span class="category-chain">
         
-        词义消歧
-      </span>
-    </a>
+  <a href="/categories/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">生成模型基础</a>
   
-    
-    <a class="index-simple-item" href="/2026/03/11/fnlp1/" target="_self">
-      <time datetime="2026-03-11 21:10">
-        2026-03-11
-      </time>
-      <span class="index-simple-title">
-        
-        课程介绍
-      </span>
-    </a>
   
-    
-    <a class="index-simple-item" href="/2026/02/21/gen4/" target="_self">
-      <time datetime="2026-02-21 14:24">
-        2026-02-21
-      </time>
-      <span class="index-simple-title">
-        
-        调试
+
       </span>
-    </a>
+    
   
-    
-    <a class="index-simple-item" href="/2026/02/15/gen3/" target="_self">
-      <time datetime="2026-02-15 15:02">
-        2026-02-15
-      </time>
-      <span class="index-simple-title">
-        
-        生成对抗模型(GAN)
-      </span>
-    </a>
+</span>
+
+    </div>
   
-    
-    <a class="index-simple-item" href="/2026/02/14/gen2/" target="_self">
-      <time datetime="2026-02-14 14:52">
-        2026-02-14
-      </time>
-      <span class="index-simple-title">
-        
-        自回归模型(Transformer&amp;AR)
-      </span>
-    </a>
-  
-    
-    <a class="index-simple-item" href="/2026/02/13/gen1/" target="_self">
-      <time datetime="2026-02-13 14:37">
-        2026-02-13
-      </time>
-      <span class="index-simple-title">
-        
-        变分自编码器(VAE)
-      </span>
-    </a>
-  
-    
-    <a class="index-simple-item" href="/2026/01/20/CV%20Final%20Project/" target="_self">
-      <time datetime="2026-01-20 10:58">
-        2026-01-20
-      </time>
-      <span class="index-simple-title">
-        
-        CV Final Project
-      </span>
-    </a>
-  
-    
-    <a class="index-simple-item" href="/2026/01/20/VCL%20Final%20Project/" target="_self">
-      <time datetime="2026-01-20 10:54">
-        2026-01-20
-      </time>
-      <span class="index-simple-title">
-        
-        VCL Final Project
-      </span>
-    </a>
-  
-    
-    <a class="index-simple-item" href="/2026/01/16/hello-world/" target="_self">
-      <time datetime="2026-01-16 15:26">
-        2026-01-16
-      </time>
-      <span class="index-simple-title">
-        
-        Hello World
-      </span>
-    </a>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span>
-    </span>
-  </nav>
+              
+  
 
-
-
-              </div>
-            </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>评估</div>
+      <div>https://yjyxfcy.github.io/2026/08/25/gen9/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年8月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年8月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/25/gen8/" title="能量模型">
+                        <span class="hidden-mobile">能量模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-reading-progress" aria-label="Reading progress">
+    <div class="toc-reading-progress-row">
+      <span>阅读进度</span>
+      <span id="toc-reading-progress-text">0%</span>
+    </div>
+    <div class="toc-reading-progress-track">
+      <div id="toc-reading-progress-bar"></div>
+    </div>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1"><span class="toc-text">密度估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E6%9C%AC%E8%B4%A8%E9%87%8F"><span class="toc-text">样本质量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E6%A0%87%E4%B8%80%EF%BC%9AInception-Score-IS"><span class="toc-text">指标一：Inception Score (IS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E6%A0%87%E4%BA%8C%EF%BC%9AFrechet-Inception-Distance-FID"><span class="toc-text">指标二：Frechet Inception Distance (FID)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%B8%B8%E4%BB%BB%E5%8A%A1%E8%A7%A3%E5%86%B3%E8%83%BD%E5%8A%9B"><span class="toc-text">下游任务解决能力</span></a></li></ol>
+  </div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -7671,6 +7991,166 @@ initPoem();
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+
+    var progressText = document.getElementById('toc-reading-progress-text');
+    var progressBar = document.getElementById('toc-reading-progress-bar');
+
+    function getReadingArticle() {
+      return document.querySelector('.markdown-body') ||
+        document.getElementById('hexo-blog-encrypt') ||
+        document.querySelector('article.post-content');
+    }
+
+    function updateReadingProgress() {
+      if (!progressText || !progressBar) { return; }
+      var article = getReadingArticle();
+      if (!article) { return; }
+      var rect = article.getBoundingClientRect();
+      var articleTop = window.pageYOffset + rect.top;
+      var articleHeight = article.scrollHeight;
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      var readableHeight = Math.max(articleHeight - viewportHeight * 0.55, 1);
+      var read = window.pageYOffset - articleTop + viewportHeight * 0.25;
+      var percent = Math.min(100, Math.max(0, Math.round(read / readableHeight * 100)));
+
+      progressText.textContent = percent + '%';
+      progressBar.style.width = percent + '%';
+    }
+
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    window.addEventListener('hexo-blog-decrypt', function() {
+      if ('tocbot' in window) { tocbot.refresh(); }
+      updateReadingProgress();
+    });
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        updateReadingProgress();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

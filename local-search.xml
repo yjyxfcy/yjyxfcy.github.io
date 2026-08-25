@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>评估</title>
+    <link href="/2026/08/25/gen9/"/>
+    <url>/2026/08/25/gen9/</url>
+    
+    <content type="html"><![CDATA[<p>北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p><p>第九讲：Evaluation</p><span id="more"></span><p>趁热打铁再写一章，这一章也算是较为轻松友好的</p><p>对于判别模型来说，评估是非常简单的，只需看正确率即可<br>但对于生成模型来说，评估就得从多个方面来考虑了，没有一个单一的指标能衡量所有方面<br>下面我们会介绍三个主要的评估维度</p><h3 id="密度估计"><a href="#密度估计" class="headerlink" title="密度估计"></a>密度估计</h3><p>顾名思义，就是评估模型在测试集上赋予数据的概率(对数似然)大小<br>具体操作大家应该也很熟悉了，无非就是划分训练集验证集测试集，在训练集上学习$p_\theta(x)$，在验证集上调参，最后在测试集上计算期望对数似然$E_{x \sim test}[log p_\theta(x)]$</p><p>对于AR和Flow来说，这种方式易于计算，VAE和Diffusion也可估计，GAN则通常不这样做</p><p>这里有一个需要注意力的地方：<strong>极大似然估计等价于数据压缩</strong><br>采用香农编码，给每个数据点$x$分配长度为$\lceil log \dfrac{1}{p_\theta(x)}\rceil$的编码<br>那么平均编码长度约等于负对数似然，模型找出的数据规律越多，压缩率越高</p><h3 id="样本质量"><a href="#样本质量" class="headerlink" title="样本质量"></a>样本质量</h3><p>这个非常好理解，主要是有人工评估和自动评估之分</p><p>人工评估当然比较符合我们真实的主观感受，但是费时费力，且存在偏见，结果不可解释，也难以复现，无法评估泛化性</p><p>至于自动评估，首先要满足两个核心假设：</p><ul><li>模型是在有标签数据集上(like ImageNet)训练的</li><li>拥有一个良好的预训练概率分类器$c(y|x)$用于预测标签$y$</li></ul><h4 id="指标一：Inception-Score-IS"><a href="#指标一：Inception-Score-IS" class="headerlink" title="指标一：Inception Score (IS)"></a>指标一：Inception Score (IS)</h4><p>IS结合了两个标准，<strong>分数越高越好</strong></p><ul><li>清晰度：<br>好的图片应当让分类器对其类别非常确定，因此分类器预测分布的信息熵应该很小，也即$\Sigma_y c(y|x)log c(y|x)$应该较大</li><li>多样性：<br>生成的图片应覆盖所有类别且分布均衡，因此需要计算生成样本边缘分布$c(y)$的熵，越均匀熵越高，也即$-\Sigma_y c(y)log c(y)$应该较大</li></ul><p>由此，我们令$IS&#x3D;D×S$<br>其中$S&#x3D;exp(E_{x \sim p_\theta}[\Sigma_y c(y|x)log c(y|x)])$<br>$D&#x3D;exp(-[\Sigma_y c(y)log c(y)])$</p><p>更好记的公式：$IS&#x3D;exp(E_{x \sim p_\theta} [KL(c(y|x))||c(y)])$</p><h4 id="指标二：Frechet-Inception-Distance-FID"><a href="#指标二：Frechet-Inception-Distance-FID" class="headerlink" title="指标二：Frechet Inception Distance (FID)"></a>指标二：Frechet Inception Distance (FID)</h4><p>主要计算真实数据和生成数据在特征空间中分布的差异，<strong>分数越低越好</strong></p><p>计算时使用预训练分类器的中间层特征提取测试集T和生成样本G的特征向量，分别用多元高斯分布进行拟合，得到$(\mu_T,\mu_G),(\Sigma_T,\Sigma_G)$<br>由此计算FID距离：<br>$FID&#x3D;||\mu_T-\mu_G||^2+Trace(\Sigma_T+\Sigma_G-2(\Sigma_T \Sigma_G)^{0.5})$</p><h3 id="下游任务解决能力"><a href="#下游任务解决能力" class="headerlink" title="下游任务解决能力"></a>下游任务解决能力</h3><p>对于llm来说，生成文本后通常通过解决具体任务来评估质量<br>这个应该无需多言，只需设计特定的prompt，然后让模型在few-shot或者zero-shot条件下完成下游任务即可<br>ppt中的表格评估的甚至还是GPT 4，claude 2，Grok 1，恍如隔世……</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>生成模型基础</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>能量模型</title>
     <link href="/2026/08/25/gen8/"/>
     <url>/2026/08/25/gen8/</url>

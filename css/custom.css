@@ -590,3 +590,5 @@ figure.highlight {
 .legacy-category-notice { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin:2rem 0 1rem; padding:1.1rem 1.2rem; background:rgba(139,160,204,.12); border-radius:12px; }
 .legacy-category-notice p { margin:.25rem 0 0; opacity:.75; font-size:.88rem; }.legacy-category-notice a,.legacy-course-link a { color:#7185af; font-weight:600; }.legacy-category-notice a { white-space:nowrap; }.legacy-course-link { margin-top:1.5rem !important; }
 @media (max-width: 767px) { .other-category-grid { grid-template-columns:1fr; gap:.7rem; } .other-category-card { min-height:0; padding:1rem 1.15rem; } .other-category-top { margin-bottom:.65rem; } .other-category-count { padding-top:.7rem; }.legacy-category-notice { align-items:flex-start; flex-direction:column; }.other-categories { margin-top:1.8rem; } }
+.translation-notice { margin:0 0 1.2rem; padding:.85rem 1rem; border-left:3px solid #92a8d1; border-radius:6px; background:rgba(139,160,204,.12); font-size:.9rem; }
+.translation-notice[hidden] { display:none; }.translated-post-title { display:block; margin-bottom:.2rem; }.translation-notice span { color:#7788a6; }

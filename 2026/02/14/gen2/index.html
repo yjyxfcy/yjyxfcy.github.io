@@ -164,6 +164,7 @@
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
+        <li class="nav-item"><a class="nav-link" href="/courses/">课程笔记</a></li>
         
           
           
@@ -313,7 +314,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="自回归模型(Transformer&amp;AR)"></span>
+            <span id="subtitle" data-typed-text="02 · 自回归模型(Transformer&amp;AR)"></span>
           
         </div>
 
@@ -528,7 +529,11 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">自回归模型(Transformer&amp;AR)</h1>
+            <h1 id="seo-header">02 · 自回归模型(Transformer&amp;AR)</h1>
+            
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/courses/">课程笔记</a><span>/</span><a href="/courses/generative-models/">生成模型基础</a><span>/</span><span>02</span></nav>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer"><span class="toc-text">Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Attention-is-all-you-need"><span class="toc-text">Attention is all you need</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FFN-feed-forward-network"><span class="toc-text">FFN (feed-forward network)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Add-Norm"><span class="toc-text">Add &amp; Norm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Two-different-structures"><span class="toc-text">Two different structures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#positional-encoding"><span class="toc-text">positional encoding</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Autoregressive-models"><span class="toc-text">Autoregressive models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%8F%A4%E8%80%81%E7%9A%84%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B%EF%BC%9AN-Gram-language-model"><span class="toc-text">最古老的非参数模型：N-Gram language model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fixed-window-language-model"><span class="toc-text">fixed-window language model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN"><span class="toc-text">RNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer-%E4%B8%BA%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B-%E8%A1%A5%E5%85%85"><span class="toc-text">Transformer(为代表的大语言模型)补充</span></a></li></ol></li></ol></div></details>
+            
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -679,28 +684,13 @@ auto;"></p>
 
 
               
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2026/02/15/gen3/" title="生成对抗模型(GAN)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">生成对抗模型(GAN)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2026/02/13/gen1/" title="变分自编码器(VAE)">
-                        <span class="hidden-mobile">变分自编码器(VAE)</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
+                <nav class="course-navigation" aria-label="课程章节导航">
+                  <a class="course-back" href="/courses/generative-models/">← 返回 生成模型基础 目录</a>
+                  <div class="course-neighbors">
+                    <a href="/2026/02/13/gen1/"><small>上一篇</small><strong>← 变分自编码器(VAE)</strong></a>
+                    <a href="/2026/02/15/gen3/"><small>下一篇</small><strong>生成对抗模型(GAN) →</strong></a>
+                  </div>
+                </nav>
               
             </div>
 

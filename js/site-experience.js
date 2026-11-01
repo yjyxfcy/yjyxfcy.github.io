@@ -38,7 +38,15 @@
     var content = document.getElementById('poem-content');
     if (content && !content.dataset.timeoutObserved) {
       content.dataset.timeoutObserved = 'true';
-      setTimeout(function() { if (content.textContent.trim() === '正在铺纸研墨…') content.textContent = '诗词暂时无法加载，请稍后重试。'; }, 15000);
+      function armPoemTimeout() {
+        setTimeout(function() { if (content.textContent.trim() === '正在铺纸研墨…') content.textContent = '诗词暂时无法加载，请稍后重试。'; }, 15000);
+      }
+      if ('IntersectionObserver' in window) {
+        var poemObserver = new IntersectionObserver(function(entries) {
+          if (entries.some(function(entry) { return entry.isIntersecting; })) { poemObserver.disconnect(); armPoemTimeout(); }
+        }, { rootMargin: '300px' });
+        poemObserver.observe(content);
+      } else { armPoemTimeout(); }
     }
   }
   document.addEventListener('DOMContentLoaded', init);

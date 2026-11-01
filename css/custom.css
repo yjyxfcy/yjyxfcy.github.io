@@ -568,3 +568,14 @@ figure.highlight {
 @media (max-width: 767px) { .course-section,.recent-section,.courses-page { padding-top:1.35rem; }.course-grid { grid-template-columns:1fr; gap:.7rem; }.course-card { min-height:0; padding:1rem 1.15rem; }.course-card h2,.course-card h3 { margin:.5rem 0 .35rem; }.course-card p { margin-bottom:.8rem; }.section-heading h2,.course-page-heading h1 { font-size:1.45rem; }.section-heading p { font-size:.84rem; }.journal-title { font-size:.98rem; }.journal-date { gap:.35rem; }.mobile-toc { display:block; margin:0 0 1.3rem; padding:.8rem 1rem; border:1px solid rgba(130,148,181,.25); border-radius:10px; }.mobile-toc summary { cursor:pointer; font-weight:600; }.mobile-toc div { max-height:45vh; overflow:auto; padding-top:.5rem; }.mobile-toc ul,.mobile-toc ol { padding-left:1.3rem; }.course-neighbors { gap:.5rem; }.course-neighbors a { padding:.7rem; }.chapter-heading span { font-size:.72rem; } }
 /* Keep navigation legible over both the cover and light content while scrolling. */
 #navbar.top-nav-collapse, #navbar.navbar-col-show { background:rgba(42,55,83,.96) !important; }
+
+/* Unified category overview and links from legacy category pages. */
+.category-course-grid,.other-category-grid { margin-top:1.1rem; }
+.other-categories { margin-top:2.5rem; }
+.other-category-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; }
+.other-category-card { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.15rem; border:1px solid rgba(125,149,192,.22); border-radius:12px; color:inherit; background:rgba(139,160,204,.06); font-weight:650; }
+.other-category-card span:last-child { white-space:nowrap; font-size:.8rem; color:#7888a6; font-weight:400; }
+.other-category-card:hover,.other-category-card:focus-visible { color:#a05d91; text-decoration:none; background:rgba(139,160,204,.13); }
+.legacy-category-notice { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin:2rem 0 1rem; padding:1.1rem 1.2rem; background:rgba(139,160,204,.12); border-radius:12px; }
+.legacy-category-notice p { margin:.25rem 0 0; opacity:.75; font-size:.88rem; }.legacy-category-notice a,.legacy-course-link a { color:#7185af; font-weight:600; }.legacy-category-notice a { white-space:nowrap; }.legacy-course-link { margin-top:1.5rem !important; }
+@media (max-width: 767px) { .other-category-grid { grid-template-columns:1fr; }.legacy-category-notice { align-items:flex-start; flex-direction:column; }.other-categories { margin-top:1.8rem; } }

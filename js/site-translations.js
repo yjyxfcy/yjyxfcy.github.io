@@ -108,9 +108,25 @@
 
   var locales = ['en', 'de', 'eo', 'es', 'ja', 'ru', 'zh-hk', 'zh-tw'];
   var dictionaries = {};
+  // Older entries omit Esperanto. Use English as a fallback for that entry,
+  // keeping Spanish and every subsequent language in its proper column.
+  rows = rows.map(function (row) {
+    if (row.length === 8) { row = row.slice(); row.splice(3, 0, row[1]); }
+    return row;
+  });
   locales.forEach(function (locale, index) {
     dictionaries[locale] = {};
     rows.forEach(function (row) { if (row[index + 1]) dictionaries[locale][row[0]] = row[index + 1]; });
+  });
+  Object.assign(dictionaries.eo, {
+    '课程笔记':'Kursaj notoj', '最新文章':'Lastaj artikoloj', '分类':'Kategorioj',
+    '其他分类':'Aliaj kategorioj', '首页':'Hejmo', '更多关于我':'Pli pri mi',
+    '课程目录':'Kursa enhavo', '上一篇':'Antaŭa', '下一篇':'Sekva',
+    '本文目录':'En ĉi tiu paĝo', '多模态学习':'Multmodala lernado',
+    '算法设计与分析':'Algoritma projektado kaj analizo',
+    '自然语言处理基础':'Bazoj de naturlingva prilaborado',
+    '生成模型基础':'Bazoj de generaj modeloj',
+    '按主题浏览':'Foliumi laŭ temo', '关于这份笔记':'Pri ĉi tiuj notoj'
   });
 
   var slogans = {
@@ -172,9 +188,9 @@
         var suffix = {en:count === '1' ? ' post' : ' posts',de:count === '1' ? ' Beitrag' : ' Beiträge',eo:' artikoloj',es:count === '1' ? ' artículo' : ' artículos',ja:'件の記事',ru:ruSuffix,'zh-hk':'篇文章','zh-tw':'篇文章'}[locale] || ' posts';
         return count + suffix;
       });
-    Object.keys(dictionary).sort(function (a, b) { return b.length - a.length; }).forEach(function (key) {
-      result = result.split(key).join(dictionary[key]);
-    });
+    var keys = Object.keys(dictionary).sort(function (a, b) { return b.length - a.length; });
+    var pattern = new RegExp(keys.map(function (key) { return key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|'), 'g');
+    result = result.replace(pattern, function (match) { return dictionary[match]; });
     result = result.replace(/← 返回 (.+?) 目录/g, function (_, course) {
       return ({en:'← Back to ' + course,de:'← Zur Übersicht von ' + course,eo:'← Reen al ' + course,es:'← Volver a ' + course,ja:'← ' + course + 'の目次に戻る',ru:'← К содержанию курса «' + course + '»','zh-hk':'← 返回' + course + '目錄','zh-tw':'← 返回' + course + '目錄'}[locale] || '← Back to ' + course);
     });
@@ -182,7 +198,7 @@
   }
   function apply() {
     var locale = getLocale();
-    var subtitle = document.getElementById('subtitle');
+    var subtitle = document.querySelector('#banner.hero-banner #subtitle');
     if (subtitle && slogans[locale]) subtitle.innerHTML = slogans[locale];
     document.querySelectorAll(selectors.join(',')).forEach(function (el) {
       if (!originals.has(el)) originals.set(el, el.textContent);
@@ -198,7 +214,9 @@
     Object.keys(controls).forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
-      var label = controls[id][locale === 'zh-cn' ? 0 : locales.indexOf(locale) + 1] || controls[id][1];
+      var labels = controls[id];
+      if (labels.length === 8) { labels = labels.slice(); labels.splice(3, 0, labels[1]); }
+      var label = labels[locale === 'zh-cn' ? 0 : locales.indexOf(locale) + 1] || labels[1];
       el.title = label;
       el.setAttribute('aria-label', label);
     });

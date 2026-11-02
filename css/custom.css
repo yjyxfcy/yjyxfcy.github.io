@@ -606,11 +606,17 @@ figure.highlight {
 /* Reading-first refinements */
 .hero-about-link { display:inline-flex; gap:.45rem; align-items:center; margin-top:.35rem; padding:.55rem 1.05rem; border:1px solid rgba(255,255,255,.8); border-radius:999px; background:rgba(25,44,77,.35); color:#fff; font-size:.86rem; font-weight:600; transition:background .2s,transform .2s; }
 .hero-about-link:hover,.hero-about-link:focus-visible { color:#fff; background:rgba(25,44,77,.68); text-decoration:none; transform:translateY(-1px); }
-/* Fluid adds a translucent panel to banner headings in dark mode. */
-[data-user-color-scheme="dark"] #banner.hero-banner .banner-text .h2,
-.dark #banner.hero-banner .banner-text .h2 { background:transparent !important; padding:0; border-radius:0; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; }
+/* Remove Fluid's dark-mode banner text panel and heavy shadow on every page. */
+[data-user-color-scheme="dark"] #banner .banner-text,
+[data-user-color-scheme="dark"] #banner .banner-text .h2,
+[data-user-color-scheme="dark"] #banner .banner-text #subtitle,
+.dark #banner .banner-text,
+.dark #banner .banner-text .h2,
+.dark #banner .banner-text #subtitle { background:transparent !important; padding-left:0; padding-right:0; border-radius:0; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; text-shadow:none !important; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-user-color-scheme]) #banner.hero-banner .banner-text .h2 { background:transparent !important; padding:0; border-radius:0; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; }
+  :root:not([data-user-color-scheme]) #banner .banner-text,
+  :root:not([data-user-color-scheme]) #banner .banner-text .h2,
+  :root:not([data-user-color-scheme]) #banner .banner-text #subtitle { background:transparent !important; padding-left:0; padding-right:0; border-radius:0; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; text-shadow:none !important; }
 }
 .reading-title { font-size:clamp(1.5rem,2.5vw,2.05rem); line-height:1.4; font-weight:750; letter-spacing:.015em; margin:0 0 1rem; overflow-wrap:anywhere; }
 .post-course-breadcrumb { margin-bottom:.8rem; }.reading-course-link { display:inline-block; color:#7185af; font-size:.88rem; margin:0 0 1.3rem; }

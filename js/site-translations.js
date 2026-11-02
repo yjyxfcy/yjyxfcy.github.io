@@ -3,6 +3,7 @@
   // These labels supplement Fluid's own translations. Article bodies remain untouched.
   var english = {
     '这份笔记整理了课程中网络流、计算复杂性与算法设计等内容，适合按目录顺序阅读或按主题查阅。':'These notes cover network flows, computational complexity, and algorithm design. Read them in order or explore by topic.', '这份笔记围绕自然语言处理的基础概念和建模方法展开，记录课程中涉及的主要知识点。':'These notes introduce core concepts and modeling methods in natural language processing.', '这份笔记整理了生成模型的核心方法与相关专题，包含模型原理、加速和评估等内容。':'These notes cover core generative models and related topics, including acceleration and evaluation.', '浏览课程 ↓':'Explore courses ↓', '关于这份笔记':'About these notes', '目录按课程笔记的顺序整理。':'The contents follow the course note order.', '← 返回课程目录':'← Back to course contents', '课程笔记':'Course Notes', '分类':'Categories', '首页':'Home', '最新文章':'Recent Posts', '其他分类':'Other Categories',
+    '这组笔记围绕多模态学习展开，涵盖视觉与语言基础、联合表示、对齐方法、注意力机制及视觉语言模型。':'These notes cover visual and language foundations, joint representations, cross-modal alignment, attention, and vision-language models.',
     '循着课程脉络，找到每一篇笔记。':'Explore notes in course order.', '查看全部分类 →':'All categories →',
     '学习笔记与生活记录，按时间排列。':'Study notes and personal writing, in chronological order.', '文章归档 →':'Archives →',
     '按课程学习，也可以浏览其他文章。':'Explore courses and other writing by topic.', '按课程顺序阅读':'Read in course order',
@@ -13,10 +14,11 @@
     '一些零散的记录':'A few miscellaneous notes', '浏览这个分类下的文章':'Explore posts in this category',
     '这门课的笔记已整理成完整目录。':'These notes are organized in a course index.', '查看课程目录 →':'View course contents →',
     '课程笔记已合并至分类':'Course notes have moved to Categories', '在分类页浏览所有课程和其他文章。':'Find all courses and other writing under Categories.', '前往分类 →':'Go to Categories →',
-    '算法设计与分析':'Algorithm Design and Analysis', '自然语言处理基础':'Fundamentals of Natural Language Processing', '生成模型基础':'Fundamentals of Generative Models',
+    '算法设计与分析':'Algorithm Design and Analysis', '自然语言处理基础':'Fundamentals of Natural Language Processing', '生成模型基础':'Fundamentals of Generative Models', '多模态学习':'Multimodal Learning',
     '从问题复杂度到近似算法、网络流与随机算法。':'From computational complexity to approximation, network flows, and randomized algorithms.',
     '从词义、语言模型到序列建模与句法分析。':'From word meaning and language models to sequence modeling and syntax.',
     '探索 VAE、自回归模型、GAN 与扩散模型等生成方法。':'Explore VAEs, autoregressive models, GANs, diffusion models, and more.',
+    '从视觉与语言基础，到多模态表示、跨模态对齐和基础模型。':'From visual and language foundations to multimodal representations, cross-modal alignment, and foundation models.',
     '问题复杂度':'Computational Complexity', 'NP完全':'NP-Completeness', '近似算法':'Approximation Algorithms', '网络流':'Network Flow', '随机算法':'Randomized Algorithms',
     '课程介绍':'Course Introduction', '词义消歧':'Word Sense Disambiguation', '分类 - 对数线性模型':'Classification: Log-linear Models', '语言模型':'Language Models',
     '自然语言模型':'Natural Language Models', '分布语义学':'Distributional Semantics', '序列标注 - 隐马尔可夫模型':'Sequence Labeling: Hidden Markov Models',
@@ -24,6 +26,7 @@
     '变分自编码器(VAE)':'Variational Autoencoders (VAE)', '自回归模型(Transformer&AR)':'Autoregressive Models (Transformer & AR)',
     '生成对抗模型(GAN)':'Generative Adversarial Networks (GAN)', '调试':'Debugging', 'Normalizing Flow':'Normalizing Flows',
     '扩散模型(Diffusion)':'Diffusion Models', '模型加速':'Model Acceleration', '能量模型':'Energy-based Models', '评估':'Evaluation',
+    '多模态学习概览':'Multimodal Learning Overview', '公式与计算':'Formulas and Calculations', '练习题与参考解答':'Practice Problems and Solutions',
     '数竞生涯回忆录（上）':'Memories of Mathematical Competitions (Part 1)', '数竞生涯回忆录（下）':'Memories of Mathematical Competitions (Part 2)',
     '🎵 每日推歌':'🎵 Daily Music', '📜 每日诗词':'📜 Daily Poetry', '阅读进度':'Reading progress',
     '🔊 朗读':'🔊 Read aloud', '📋 复制':'📋 Copy', '换一首':'Another poem'

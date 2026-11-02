@@ -1,0 +1,1538 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#35436b">
+  <meta name="author" content="Yjy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本篇汇总深度学习、视觉、序列建模、多模态表示和注意力中的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与多模态学习概览及练习题与参考解答配合阅读。 **口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MACs}$。不同课件&#x2F;框架在边界、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="公式与计算">
+<meta property="og:url" content="https://yjyxfcy.github.io/2026/11/02/mml2/index.html">
+<meta property="og:site_name" content="Yjy">
+<meta property="og:description" content="本篇汇总深度学习、视觉、序列建模、多模态表示和注意力中的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与多模态学习概览及练习题与参考解答配合阅读。 **口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MACs}$。不同课件&#x2F;框架在边界、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-11-02T01:01:00.000Z">
+<meta property="article:modified_time" content="2026-11-02T13:52:21.988Z">
+<meta property="article:author" content="Yjy">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>公式与计算 - Yjy</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css"></noscript>
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css"></noscript>
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yjyxfcy.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2026-01-16T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script id="fluid-language-data">
+    window.FluidLanguage = {"defaultLang":"zh-CN","packs":{"de":{"name":"Deutsch","home":{"menu":"Startseite","title":"Startseite","slogan":"Hallo! Ich bin Yjy, Student im dritten Jahr an der PKU im Fach Intelligence Science and Technology. <br>\nIch lerne und forsche im Bereich KI. <br>\nIch mag Literatur, Geschichte, Musik und Reisen. <br>\nWillkommen in meinem Blog! <br>\n<a href=\"/about/\" target=\"_blank\">Mehr über mich</a>\n"},"archive":{"menu":"Archiv","title":"Archiv","subtitle":"Archiv","post_total":"Insgesamt %d Artikel"},"category":{"menu":"Kategorien","title":"Kategorien","subtitle":"Kategorien","post_total":"Insgesamt %d Artikel","more":"More..."},"tag":{"menu":"Schlagwörter","title":"Schlagwörter","subtitle":"Schlagwörter","post_total":"Insgesamt %d Artikel"},"about":{"menu":"Über","title":"Über","subtitle":"Über"},"links":{"menu":"Weblinks","title":"Weblinks","subtitle":"Weblinks"},"page404":{"menu":"Die Seite wurde nicht gefunden","title":"Die Seite wurde nicht gefunden","subtitle":"Die Seite wurde nicht gefunden"},"post":{"toc":"Inhaltsverzeichnis","prev_post":"Vorheriger","next_post":"Nächster","updated":"Geändert am %s","meta":{"wordcount":"%s wörter","min2read":"%s minuten","views":"{} ansichten"},"copyright":{"author":"Beitragsautor","posted":"Veröffentlicht am","updated":"Geändert am","licensed":"Urheberrechtshinweis","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"Alle Aufrufe: {}","uv":"Alle Besucher: {}"},"search":{"title":"Suchen","keyword":"Stichwort"},"noscript_warning":"Blog funktioniert am besten mit aktiviertem JavaScript","home.menu":"Startseite","home.title":"Startseite","archive.menu":"Archiv","archive.title":"Archiv","archive.subtitle":"Archiv","archive.post_total":"Insgesamt %d Artikel","category.menu":"Kategorien","category.title":"Kategorien","category.subtitle":"Kategorien","category.post_total":"Insgesamt %d Artikel","category.more":"More...","tag.menu":"Schlagwörter","tag.title":"Schlagwörter","tag.subtitle":"Schlagwörter","tag.post_total":"Insgesamt %d Artikel","about.menu":"Über","about.title":"Über","about.subtitle":"Über","links.menu":"Weblinks","links.title":"Weblinks","links.subtitle":"Weblinks","page404.menu":"Die Seite wurde nicht gefunden","page404.title":"Die Seite wurde nicht gefunden","page404.subtitle":"Die Seite wurde nicht gefunden","post.toc":"Inhaltsverzeichnis","post.prev_post":"Vorheriger","post.next_post":"Nächster","post.updated":"Geändert am %s","post.meta.wordcount":"%s wörter","post.meta.min2read":"%s minuten","post.meta.views":"{} ansichten","post.copyright.author":"Beitragsautor","post.copyright.posted":"Veröffentlicht am","post.copyright.updated":"Geändert am","post.copyright.licensed":"Urheberrechtshinweis","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"Alle Aufrufe: {}","footer.uv":"Alle Besucher: {}","search.title":"Suchen","search.keyword":"Stichwort"},"en":{"name":"English","home":{"menu":"Home","title":"Home","slogan":"Hello! I'm Yjy, a junior student at PKU majoring in Intelligence Science and Technology. <br>\nI'm learning and exploring in the field of AI. <br>\nI love literature, history, music, and travel. <br>\nWelcome to my blog! <br>\n<a href=\"/about/\" target=\"_blank\">More about me</a>\n"},"archive":{"menu":"Archives","title":"Archives","subtitle":"Archives","post_total":"%d posts in total"},"category":{"menu":"Categories","title":"Categories","subtitle":"Categories","post_total":"%d posts in total","more":"More..."},"tag":{"menu":"Tags","title":"Tags","subtitle":"Tags","post_total":"%d posts in total"},"about":{"menu":"About","title":"About","subtitle":"About"},"links":{"menu":"Links","title":"Links","subtitle":"Links"},"page404":{"menu":"Page not found","title":"Page not found","subtitle":"Page not found"},"post":{"toc":"Table of Contents","prev_post":"Previous","next_post":"Next","updated":"Last updated on %s","meta":{"wordcount":"%s words","min2read":"%s mins","views":"{} views"},"copyright":{"author":"Author","posted":"Posted on","updated":"Updated on","licensed":"Licensed under","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"Views: {}","uv":"Visitors: {}"},"search":{"title":"Search","keyword":"Keyword"},"noscript_warning":"Blog works best with JavaScript enabled","home.menu":"Home","home.title":"Home","archive.menu":"Archives","archive.title":"Archives","archive.subtitle":"Archives","archive.post_total":"%d posts in total","category.menu":"Categories","category.title":"Categories","category.subtitle":"Categories","category.post_total":"%d posts in total","category.more":"More...","tag.menu":"Tags","tag.title":"Tags","tag.subtitle":"Tags","tag.post_total":"%d posts in total","about.menu":"About","about.title":"About","about.subtitle":"About","links.menu":"Links","links.title":"Links","links.subtitle":"Links","page404.menu":"Page not found","page404.title":"Page not found","page404.subtitle":"Page not found","post.toc":"Table of Contents","post.prev_post":"Previous","post.next_post":"Next","post.updated":"Last updated on %s","post.meta.wordcount":"%s words","post.meta.min2read":"%s mins","post.meta.views":"{} views","post.copyright.author":"Author","post.copyright.posted":"Posted on","post.copyright.updated":"Updated on","post.copyright.licensed":"Licensed under","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"Views: {}","footer.uv":"Visitors: {}","search.title":"Search","search.keyword":"Keyword"},"eo":{"name":"Esperanto","home":{"menu":"Hejmpaĝo","title":"Hejmpaĝo","slogan":"Saluton! Mi estas Yjy, triajara studento ĉe PKU pri Inteligenta Scienco kaj Teknologio. <br>\nMi lernas kaj esploras en la kampo de AI. <br>\nMi amas literaturon, historion, muzikon kaj vojaĝadon. <br>\nBonvenon al mia blogo! <br>\n<a href=\"/about/\" target=\"_blank\">Pli pri mi</a>\n"},"archive":{"menu":"Arkivoj","title":"Arkivoj","subtitle":"Arkivoj","post_total":"Entute %d afiŝoj"},"category":{"menu":"Kategorio","title":"Kategorio","subtitle":"Kategorio","post_total":"Entute %d afiŝoj","more":"More..."},"tag":{"menu":"Etikedoj","title":"Etikedoj","subtitle":"Etikedoj","post_total":"Entute %d afiŝoj"},"about":{"menu":"Pri","title":"Pri","subtitle":"Pri"},"links":{"menu":"Ligoj","title":"Ligoj","subtitle":"Ligoj"},"page404":{"menu":"Paĝo ne trovita","title":"Paĝo ne trovita","subtitle":"Paĝo ne trovita"},"post":{"toc":"Enhavtabelo","prev_post":"Antaŭa afiŝo","next_post":"Sekva afiŝo","updated":"Aktualizita: %s","meta":{"wordcount":"%s vortoj","min2read":"%s minutoj","views":"{} rigardoj"},"copyright":{"author":"Aŭtoro","posted":"Postigita","updated":"Aktualizita","licensed":"Lizenta","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"Vidoj: {}","uv":"Visitoj: {}"},"search":{"title":"Serĉi","keyword":"ŝlosivorto"},"noscript_warning":"Blogo funkcias plej bone kun JavaScript ebligita","home.menu":"Hejmpaĝo","home.title":"Hejmpaĝo","archive.menu":"Arkivoj","archive.title":"Arkivoj","archive.subtitle":"Arkivoj","archive.post_total":"Entute %d afiŝoj","category.menu":"Kategorio","category.title":"Kategorio","category.subtitle":"Kategorio","category.post_total":"Entute %d afiŝoj","category.more":"More...","tag.menu":"Etikedoj","tag.title":"Etikedoj","tag.subtitle":"Etikedoj","tag.post_total":"Entute %d afiŝoj","about.menu":"Pri","about.title":"Pri","about.subtitle":"Pri","links.menu":"Ligoj","links.title":"Ligoj","links.subtitle":"Ligoj","page404.menu":"Paĝo ne trovita","page404.title":"Paĝo ne trovita","page404.subtitle":"Paĝo ne trovita","post.toc":"Enhavtabelo","post.prev_post":"Antaŭa afiŝo","post.next_post":"Sekva afiŝo","post.updated":"Aktualizita: %s","post.meta.wordcount":"%s vortoj","post.meta.min2read":"%s minutoj","post.meta.views":"{} rigardoj","post.copyright.author":"Aŭtoro","post.copyright.posted":"Postigita","post.copyright.updated":"Aktualizita","post.copyright.licensed":"Lizenta","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"Vidoj: {}","footer.uv":"Visitoj: {}","search.title":"Serĉi","search.keyword":"ŝlosivorto"},"es":{"name":"Español","home":{"menu":"Inicio","title":"Inicio","slogan":"Hola! Soy Yjy, estudiante de tercer año en PKU, especializado en Ciencia y Tecnología de la Inteligencia. <br>\nEstoy aprendiendo y explorando el campo de la IA. <br>\nMe gustan la literatura, la historia, la música y viajar. <br>\nBienvenido a mi blog! <br>\n<a href=\"/about/\" target=\"_blank\">Más sobre mí</a>\n"},"archive":{"menu":"Archivo","title":"Archivo","subtitle":"Archivo","post_total":"%d artículos en total"},"category":{"menu":"Categorías","title":"Categorías","subtitle":"Categorías","post_total":"%d artículos en total","more":"Más..."},"tag":{"menu":"Etiquetas","title":"Etiquetas","subtitle":"Etiquetas","post_total":"%d artículos en total"},"about":{"menu":"Acerca","title":"Acerca","subtitle":"Acerca"},"links":{"menu":"Enlaces","title":"Enlaces","subtitle":"Enlaces"},"page404":{"menu":"Página no encontrada","title":"Página no encontrada","subtitle":"Página no encontrada"},"post":{"toc":"Tabla de Contenidos","prev_post":"Anterior","next_post":"Siguiente","updated":"Última actualización el %s","meta":{"wordcount":"%s palabras","min2read":"%s minutos","views":"{} vistas"},"copyright":{"author":"Autor","posted":"Publicado el","updated":"Actualizado el","licensed":"Licencia bajo","CC":"CC - Licencia Creative Commons","BY":"BY - Atribución","SA":"SA - Compartir igual","NC":"NC - No comercial","ND":"ND - Sin obras derivadas","ZERO":"CC0 - Sin derechos autorales"}},"footer":{"pv":"Vistas: {}","uv":"Visitantes: {}"},"search":{"title":"Buscar","keyword":"Palabra clave"},"noscript_warning":"El blog funciona mejor con JavaScript habilitado","home.menu":"Inicio","home.title":"Inicio","archive.menu":"Archivo","archive.title":"Archivo","archive.subtitle":"Archivo","archive.post_total":"%d artículos en total","category.menu":"Categorías","category.title":"Categorías","category.subtitle":"Categorías","category.post_total":"%d artículos en total","category.more":"Más...","tag.menu":"Etiquetas","tag.title":"Etiquetas","tag.subtitle":"Etiquetas","tag.post_total":"%d artículos en total","about.menu":"Acerca","about.title":"Acerca","about.subtitle":"Acerca","links.menu":"Enlaces","links.title":"Enlaces","links.subtitle":"Enlaces","page404.menu":"Página no encontrada","page404.title":"Página no encontrada","page404.subtitle":"Página no encontrada","post.toc":"Tabla de Contenidos","post.prev_post":"Anterior","post.next_post":"Siguiente","post.updated":"Última actualización el %s","post.meta.wordcount":"%s palabras","post.meta.min2read":"%s minutos","post.meta.views":"{} vistas","post.copyright.author":"Autor","post.copyright.posted":"Publicado el","post.copyright.updated":"Actualizado el","post.copyright.licensed":"Licencia bajo","post.copyright.CC":"CC - Licencia Creative Commons","post.copyright.BY":"BY - Atribución","post.copyright.SA":"SA - Compartir igual","post.copyright.NC":"NC - No comercial","post.copyright.ND":"ND - Sin obras derivadas","post.copyright.ZERO":"CC0 - Sin derechos autorales","footer.pv":"Vistas: {}","footer.uv":"Visitantes: {}","search.title":"Buscar","search.keyword":"Palabra clave"},"ja":{"name":"日本語","home":{"menu":"ホーム","title":"ホーム","slogan":"こんにちは！Yjy です。PKU で知能科学技術を学ぶ大学三年生です。<br>\nAI の分野で学び、探究を続けています。<br>\n文学、歴史、音楽、旅行が好きです。<br>\n私のブログへようこそ！<br>\n<a href=\"/about/\" target=\"_blank\">もっと詳しく</a>\n"},"archive":{"menu":"アーカイブ","title":"アーカイブ","subtitle":"アーカイブ","post_total":"全 %d 件のポスト"},"category":{"menu":"カテゴリ","title":"カテゴリ","subtitle":"カテゴリ","post_total":"全 %d 件のポスト","more":"More..."},"tag":{"menu":"タグ","title":"タグ","subtitle":"タグ","post_total":"全 %d 件のポスト"},"about":{"menu":"プロフィール","title":"プロフィール","subtitle":"プロフィール"},"links":{"menu":"リンク","title":"リンク","subtitle":"リンク"},"page404":{"menu":"ページが見つかりませんでした","title":"ページが見つかりませんでした","subtitle":"ページが見つかりませんでした"},"post":{"toc":"見出し","prev_post":"前の記事","next_post":"次の記事","updated":"最終更新日：%s","meta":{"wordcount":"%s 単語","min2read":"%s 分","views":"{} 閲覧"},"copyright":{"author":"著者","posted":"作成日","updated":"修正日","licensed":"著作権","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"閲覧合計数: {}","uv":"合計閲覧者数: {}"},"search":{"title":"検索","keyword":"キーワード"},"noscript_warning":"ブログは JavaScript を有効にすると最適に機能します","home.menu":"ホーム","home.title":"ホーム","archive.menu":"アーカイブ","archive.title":"アーカイブ","archive.subtitle":"アーカイブ","archive.post_total":"全 %d 件のポスト","category.menu":"カテゴリ","category.title":"カテゴリ","category.subtitle":"カテゴリ","category.post_total":"全 %d 件のポスト","category.more":"More...","tag.menu":"タグ","tag.title":"タグ","tag.subtitle":"タグ","tag.post_total":"全 %d 件のポスト","about.menu":"プロフィール","about.title":"プロフィール","about.subtitle":"プロフィール","links.menu":"リンク","links.title":"リンク","links.subtitle":"リンク","page404.menu":"ページが見つかりませんでした","page404.title":"ページが見つかりませんでした","page404.subtitle":"ページが見つかりませんでした","post.toc":"見出し","post.prev_post":"前の記事","post.next_post":"次の記事","post.updated":"最終更新日：%s","post.meta.wordcount":"%s 単語","post.meta.min2read":"%s 分","post.meta.views":"{} 閲覧","post.copyright.author":"著者","post.copyright.posted":"作成日","post.copyright.updated":"修正日","post.copyright.licensed":"著作権","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"閲覧合計数: {}","footer.uv":"合計閲覧者数: {}","search.title":"検索","search.keyword":"キーワード"},"ru":{"name":"Русский","home":{"menu":"Главная","title":"Главная","slogan":"Привет! Я Yjy, студент третьего курса PKU по направлению Intelligence Science and Technology. <br>\nЯ учусь и исследую область ИИ. <br>\nЯ люблю литературу, историю, музыку и путешествия. <br>\nДобро пожаловать в мой блог! <br>\n<a href=\"/about/\" target=\"_blank\">Больше обо мне</a>\n"},"archive":{"menu":"Архивы","title":"Архивы","subtitle":"Архивы","post_total":"%d сообщений всего"},"category":{"menu":"Категории","title":"Категории","subtitle":"Категории","post_total":"%d сообщений всего","more":"More..."},"tag":{"menu":"Теги","title":"Теги","subtitle":"Теги","post_total":"%d сообщений всего"},"about":{"menu":"О","title":"О","subtitle":"О"},"links":{"menu":"Ссылки","title":"Ссылки","subtitle":"Ссылки"},"page404":{"menu":"Страница не найдена","title":"Страница не найдена","subtitle":"Страница не найдена"},"post":{"toc":"Оглавление","prev_post":"Предыдущий","next_post":"Следующий","updated":"Последнее обновление %s","meta":{"wordcount":"%s слов","min2read":"%s минут","views":"{} просмотров"},"copyright":{"author":"Автор","posted":"Опубликовано на","updated":"Обновлено","license":"Лицензировано под","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"Просмотров: {}","uv":"Посетителей: {}"},"search":{"title":"Поиск","keyword":"Ключевое слово"},"noscript_warning":"Блог лучше всего работает с включенным JavaScript","home.menu":"Главная","home.title":"Главная","archive.menu":"Архивы","archive.title":"Архивы","archive.subtitle":"Архивы","archive.post_total":"%d сообщений всего","category.menu":"Категории","category.title":"Категории","category.subtitle":"Категории","category.post_total":"%d сообщений всего","category.more":"More...","tag.menu":"Теги","tag.title":"Теги","tag.subtitle":"Теги","tag.post_total":"%d сообщений всего","about.menu":"О","about.title":"О","about.subtitle":"О","links.menu":"Ссылки","links.title":"Ссылки","links.subtitle":"Ссылки","page404.menu":"Страница не найдена","page404.title":"Страница не найдена","page404.subtitle":"Страница не найдена","post.toc":"Оглавление","post.prev_post":"Предыдущий","post.next_post":"Следующий","post.updated":"Последнее обновление %s","post.meta.wordcount":"%s слов","post.meta.min2read":"%s минут","post.meta.views":"{} просмотров","post.copyright.author":"Автор","post.copyright.posted":"Опубликовано на","post.copyright.updated":"Обновлено","post.copyright.license":"Лицензировано под","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"Просмотров: {}","footer.uv":"Посетителей: {}","search.title":"Поиск","search.keyword":"Ключевое слово"},"zh-CN":{"name":"简体中文","home":{"menu":"首页","title":"首页","slogan":"你好呀！我是 Yjy，PKU 信科智能专业大三学生。<br>\n正在 AI 方向继续学习和探索。<br>\n我喜欢文学、历史、音乐和旅行。<br>\n欢迎来到我的博客！<br>\n<a href=\"/about/\" target=\"_blank\">更多关于我</a>\n"},"archive":{"menu":"文章","title":"文章","subtitle":"文章","post_total":"共计 %d 篇文章"},"category":{"menu":"分类","title":"分类","subtitle":"分类","post_total":"共计 %d 篇文章","more":"More..."},"tag":{"menu":"标签","title":"标签","subtitle":"标签","post_total":"共计 %d 篇文章"},"about":{"menu":"关于","title":"关于","subtitle":"关于"},"links":{"menu":"友链","title":"友链","subtitle":"友情链接"},"page404":{"menu":"页面不存在","title":"页面不存在","subtitle":"页面不存在"},"post":{"toc":"目录","prev_post":"上一篇","next_post":"下一篇","updated":"本文最后更新于 %s","meta":{"wordcount":"%s 字","min2read":"%s 分钟","views":"{} 次"},"copyright":{"author":"作者","posted":"发布于","updated":"更新于","licensed":"许可协议","CC":"CC - 知识共享许可协议","BY":"BY - 署名","SA":"SA - 相同方式共享","NC":"NC - 非商业性使用","ND":"ND - 禁止演绎","ZERO":"CC0 - 无版权"}},"footer":{"pv":"总访问量 {} 次","uv":"总访客数 {} 人"},"search":{"title":"搜索","keyword":"关键词"},"noscript_warning":"博客在允许 JavaScript 运行的环境下浏览效果更佳","home.menu":"首页","home.title":"首页","archive.menu":"文章","archive.title":"文章","archive.subtitle":"文章","archive.post_total":"共计 %d 篇文章","category.menu":"分类","category.title":"分类","category.subtitle":"分类","category.post_total":"共计 %d 篇文章","category.more":"More...","tag.menu":"标签","tag.title":"标签","tag.subtitle":"标签","tag.post_total":"共计 %d 篇文章","about.menu":"关于","about.title":"关于","about.subtitle":"关于","links.menu":"友链","links.title":"友链","links.subtitle":"友情链接","page404.menu":"页面不存在","page404.title":"页面不存在","page404.subtitle":"页面不存在","post.toc":"目录","post.prev_post":"上一篇","post.next_post":"下一篇","post.updated":"本文最后更新于 %s","post.meta.wordcount":"%s 字","post.meta.min2read":"%s 分钟","post.meta.views":"{} 次","post.copyright.author":"作者","post.copyright.posted":"发布于","post.copyright.updated":"更新于","post.copyright.licensed":"许可协议","post.copyright.CC":"CC - 知识共享许可协议","post.copyright.BY":"BY - 署名","post.copyright.SA":"SA - 相同方式共享","post.copyright.NC":"NC - 非商业性使用","post.copyright.ND":"ND - 禁止演绎","post.copyright.ZERO":"CC0 - 无版权","footer.pv":"总访问量 {} 次","footer.uv":"总访客数 {} 人","search.title":"搜索","search.keyword":"关键词","home.slogan":"你好呀！我是 Yjy，PKU 信科智能专业大三学生。<br>\n正在 AI 方向继续学习和探索。<br>\n我喜欢文学、历史、音乐和旅行。<br>\n欢迎来到我的博客！<br>\n<a href=\"/about/\" target=\"_blank\">更多关于我</a>\n"},"zh-HK":{"name":"繁體中文","home":{"menu":"首頁","title":"首頁","slogan":"你好呀！我是 Yjy，PKU 信科智能專業大三學生。<br>\n正在 AI 方向繼續學習和探索。<br>\n我喜歡文學、歷史、音樂和旅行。<br>\n歡迎來到我的博客！<br>\n<a href=\"/about/\" target=\"_blank\">更多關於我</a>\n"},"archive":{"menu":"歸檔","title":"歸檔","subtitle":"歸檔","post_total":"共有 %d 篇文章"},"category":{"menu":"分類","title":"分類","subtitle":"分類","post_total":"共有 %d 篇文章","more":"More..."},"tag":{"menu":"標籤","title":"標籤","subtitle":"標籤","post_total":"共有 %d 篇文章"},"about":{"menu":"關於","title":"關於","subtitle":"關於"},"links":{"menu":"連結","title":"交換連結","subtitle":"交換連結"},"page404":{"menu":"頁面不存在","title":"頁面不存在","subtitle":"頁面不存在"},"post":{"toc":"目錄","prev_post":"上一篇","next_post":"下一篇","updated":"本文最後更新於：%s","meta":{"wordcount":"%s 字","min2read":"%s 分鐘","views":"{} 次"},"copyright":{"author":"作者","posted":"發布於","updated":"更新於","licensed":"許可協議","CC":"CC - 知識共享許可協議","BY":"BY - 署名","SA":"SA - 相同方式共享","NC":"NC - 非商業性使用","ND":"ND - 禁止演繹","ZERO":"CC0 - 無著作權"}},"footer":{"pv":"總訪問量 {} 次","uv":"總訪客數 {} 人"},"search":{"title":"搜尋","keyword":"關鍵字"},"noscript_warning":"博客在允許 JavaScript 運行的環境下瀏覽效果更佳","home.menu":"首頁","home.title":"首頁","archive.menu":"歸檔","archive.title":"歸檔","archive.subtitle":"歸檔","archive.post_total":"共有 %d 篇文章","category.menu":"分類","category.title":"分類","category.subtitle":"分類","category.post_total":"共有 %d 篇文章","category.more":"More...","tag.menu":"標籤","tag.title":"標籤","tag.subtitle":"標籤","tag.post_total":"共有 %d 篇文章","about.menu":"關於","about.title":"關於","about.subtitle":"關於","links.menu":"連結","links.title":"交換連結","links.subtitle":"交換連結","page404.menu":"頁面不存在","page404.title":"頁面不存在","page404.subtitle":"頁面不存在","post.toc":"目錄","post.prev_post":"上一篇","post.next_post":"下一篇","post.updated":"本文最後更新於：%s","post.meta.wordcount":"%s 字","post.meta.min2read":"%s 分鐘","post.meta.views":"{} 次","post.copyright.author":"作者","post.copyright.posted":"發布於","post.copyright.updated":"更新於","post.copyright.licensed":"許可協議","post.copyright.CC":"CC - 知識共享許可協議","post.copyright.BY":"BY - 署名","post.copyright.SA":"SA - 相同方式共享","post.copyright.NC":"NC - 非商業性使用","post.copyright.ND":"ND - 禁止演繹","post.copyright.ZERO":"CC0 - 無著作權","footer.pv":"總訪問量 {} 次","footer.uv":"總訪客數 {} 人","search.title":"搜尋","search.keyword":"關鍵字"},"zh-TW":{"name":"正體中文","home":{"menu":"首頁","title":"首頁","slogan":"你好呀！我是 Yjy，PKU 信科智能專業大三學生。<br>\n正在 AI 方向繼續學習和探索。<br>\n我喜歡文學、歷史、音樂和旅行。<br>\n歡迎來到我的部落格！<br>\n<a href=\"/about/\" target=\"_blank\">更多關於我</a>\n"},"archive":{"menu":"歸檔","title":"歸檔","subtitle":"歸檔","post_total":"共有 %d 篇文章"},"category":{"menu":"分類","title":"分類","subtitle":"分類","post_total":"共有 %d 篇文章","more":"More..."},"tag":{"menu":"標籤","title":"標籤","subtitle":"標籤","post_total":"共有 %d 篇文章"},"about":{"menu":"關於","title":"關於","subtitle":"關於"},"links":{"menu":"連結","title":"交換連結","subtitle":"交換連結"},"page404":{"menu":"頁面不存在","title":"頁面不存在","subtitle":"頁面不存在"},"post":{"toc":"目錄","prev_post":"上一篇","next_post":"下一篇","updated":"本文最後更新於：%s","meta":{"wordcount":"%s 字","min2read":"%s 分鐘","views":"{} 次"},"copyright":{"author":"作者","posted":"發布於","updated":"更新於","licensed":"許可協議","CC":"CC - 創用 CC 授權","BY":"BY - 姓名標示","SA":"SA - 相同方式分享","NC":"NC - 非商業性","ND":"ND - 禁止改作","ZERO":"CC0 - 公眾領域貢獻宣告"}},"footer":{"pv":"總訪問量 {} 次","uv":"總訪客數 {} 人"},"search":{"title":"搜尋","keyword":"關鍵字"},"noscript_warning":"部落格在允許 JavaScript 執行的環境下瀏覽效果更佳","home.menu":"首頁","home.title":"首頁","archive.menu":"歸檔","archive.title":"歸檔","archive.subtitle":"歸檔","archive.post_total":"共有 %d 篇文章","category.menu":"分類","category.title":"分類","category.subtitle":"分類","category.post_total":"共有 %d 篇文章","category.more":"More...","tag.menu":"標籤","tag.title":"標籤","tag.subtitle":"標籤","tag.post_total":"共有 %d 篇文章","about.menu":"關於","about.title":"關於","about.subtitle":"關於","links.menu":"連結","links.title":"交換連結","links.subtitle":"交換連結","page404.menu":"頁面不存在","page404.title":"頁面不存在","page404.subtitle":"頁面不存在","post.toc":"目錄","post.prev_post":"上一篇","post.next_post":"下一篇","post.updated":"本文最後更新於：%s","post.meta.wordcount":"%s 字","post.meta.min2read":"%s 分鐘","post.meta.views":"{} 次","post.copyright.author":"作者","post.copyright.posted":"發布於","post.copyright.updated":"更新於","post.copyright.licensed":"許可協議","post.copyright.CC":"CC - 創用 CC 授權","post.copyright.BY":"BY - 姓名標示","post.copyright.SA":"SA - 相同方式分享","post.copyright.NC":"NC - 非商業性","post.copyright.ND":"ND - 禁止改作","post.copyright.ZERO":"CC0 - 公眾領域貢獻宣告","footer.pv":"總訪問量 {} 次","footer.uv":"總訪客數 {} 人","search.title":"搜尋","search.keyword":"關鍵字"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yjy's blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span data-i18n-key="home.menu">首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span data-i18n-key="about.menu">关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span data-i18n-key="archive.menu">文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span data-i18n-key="category.menu">分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span data-i18n-key="links.menu">友链</span>
+              </a>
+            </li>
+          
+        
+        
+          
+          
+          <li class="nav-item dropdown" id="language-switcher">
+            <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+              <i class="iconfont icon-globe"></i>
+              <span id="language-current">简体中文</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="language-current">
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="zh-CN">
+                  <span>简体中文</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="de">
+                  <span>Deutsch</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="en">
+                  <span>English</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="eo">
+                  <span>Esperanto</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="es">
+                  <span>Español</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="ja">
+                  <span>日本語</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="ru">
+                  <span>Русский</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="zh-HK">
+                  <span>繁體中文</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="zh-TW">
+                  <span>正體中文</span>
+                </a>
+              
+            </div>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/p5.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="02 · 公式与计算"></span>
+          
+        </div>
+
+        
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-11-02 09:01" pubdate>
+          2026年11月2日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          79 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar">
+    
+
+<div id="category-bar-card">
+  <p class="category-bar-header">
+    <i class="iconfont icon-category"></i>
+    <span>分类文章</span>
+  </p>
+  
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="多模态学习"
+        id="heading-1ad08b8f628b1e8f2dbc9ccc08e0bcbc" role="tab" data-toggle="collapse" href="#collapse-1ad08b8f628b1e8f2dbc9ccc08e0bcbc"
+        aria-expanded="true"
+      >
+        多模态学习
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-1ad08b8f628b1e8f2dbc9ccc08e0bcbc"
+           role="tabpanel" aria-labelledby="heading-1ad08b8f628b1e8f2dbc9ccc08e0bcbc">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2026/11/02/mml2/" title="公式与计算"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">公式与计算</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/02/mml1/" title="多模态学习概览"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">多模态学习概览</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/02/mml3/" title="练习题与参考解答"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">练习题与参考解答</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+</div>
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 class="reading-title">02 · 公式与计算</h1>
+            
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>02</span></nav>
+              <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F%E7%B4%A2%E5%BC%95"><span class="toc-text">常用公式索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%AF%BE%E4%BB%B6-2%EF%BC%89"><span class="toc-text">A. 深度学习（课件 2）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A1-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E3%80%81MSE%E3%80%81%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B"><span class="toc-text">A1. 线性回归、MSE、正规方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A2-softmax%E3%80%81%E4%BA%A4%E5%8F%89%E7%86%B5%E5%92%8C%E6%A2%AF%E5%BA%A6"><span class="toc-text">A2. softmax、交叉熵和梯度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A3-%E6%BF%80%E6%B4%BB%E3%80%81%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">A3. 激活、梯度下降、正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A4-BN%E3%80%81LN%E3%80%81IN%E3%80%81GN%E3%80%81RMSNorm"><span class="toc-text">A4. BN、LN、IN、GN、RMSNorm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-CNN%E3%80%81%E6%A3%80%E6%B5%8B%E5%92%8C%E5%88%86%E5%89%B2%EF%BC%88%E8%AF%BE%E4%BB%B6-3%E2%80%934%EF%BC%89"><span class="toc-text">B. CNN、检测和分割（课件 3–4）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B1-%E5%8D%B7%E7%A7%AF%E3%80%81%E6%B1%A0%E5%8C%96%E5%B0%BA%E5%AF%B8%E4%B8%8E%E5%8F%82%E6%95%B0"><span class="toc-text">B1. 卷积、池化尺寸与参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B2-%E6%84%9F%E5%8F%97%E9%87%8E%E3%80%81VGG-%E4%B8%8E-FC"><span class="toc-text">B2. 感受野、VGG 与 FC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B3-IoU%E3%80%81NMS%E3%80%81Focal-Loss"><span class="toc-text">B3. IoU、NMS、Focal Loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B4-GIoU%E3%80%81DIoU%E3%80%81CIoU"><span class="toc-text">B4. GIoU、DIoU、CIoU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B5-%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF%E4%B8%8E-YOLOv1-%E8%BE%93%E5%87%BA%E7%BB%B4%E5%BA%A6"><span class="toc-text">B5. 转置卷积与 YOLOv1 输出维度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-NLP-%E4%B8%8E%E5%BA%8F%E5%88%97%EF%BC%88%E8%AF%BE%E4%BB%B6-5%EF%BC%89"><span class="toc-text">C. NLP 与序列（课件 5）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C1-CBOW%E3%80%81Skip-gram%E3%80%81%E8%B4%9F%E9%87%87%E6%A0%B7"><span class="toc-text">C1. CBOW、Skip-gram、负采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2-n-gram%E3%80%81%E5%8F%A5%E5%AD%90%E6%A6%82%E7%8E%87%E3%80%81%E5%9B%B0%E6%83%91%E5%BA%A6"><span class="toc-text">C2. $n$-gram、句子概率、困惑度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C3-RNN-%E4%B8%8E-LSTM-%E4%B8%80%E6%AD%A5%E8%AE%A1%E7%AE%97"><span class="toc-text">C3. RNN 与 LSTM 一步计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%AE%BA%EF%BC%88%E8%AF%BE%E4%BB%B6-6%EF%BC%89"><span class="toc-text">D. 多模态表示与信息论（课件 6）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#D1-%E7%9B%B8%E4%BC%BC%E5%BA%A6%E3%80%81%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E3%80%81CCA"><span class="toc-text">D1. 相似度、相关系数、CCA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D2-%E5%BC%A0%E9%87%8F%E8%9E%8D%E5%90%88%E3%80%81%E4%BD%8E%E7%A7%A9%E4%B8%8E%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">D2. 张量融合、低秩与参数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D3-%E7%86%B5%E3%80%81%E6%9D%A1%E4%BB%B6%E7%86%B5%E3%80%81%E4%BA%92%E4%BF%A1%E6%81%AF"><span class="toc-text">D3. 熵、条件熵、互信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D4-CLIP-InfoNCE-%E6%89%8B%E7%AE%97"><span class="toc-text">D4. CLIP&#x2F;InfoNCE 手算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%B8%8E%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%EF%BC%88%E8%AF%BE%E4%BB%B6-7%E2%80%938%EF%BC%89"><span class="toc-text">E. 注意力与基础模型（课件 7–8）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#E1-Attention-%E7%9F%A9%E9%98%B5%E4%B8%8E-mask"><span class="toc-text">E1. Attention 矩阵与 mask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E2-%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E3%80%81%E5%A4%9A%E5%A4%B4%E3%80%81Transformer"><span class="toc-text">E2. 位置编码、多头、Transformer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E3-ViT-patch-%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%A7%84%E6%A8%A1"><span class="toc-text">E3. ViT patch 与注意力规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E4-LoRA-%E4%B8%8E-GQA"><span class="toc-text">E4. LoRA 与 GQA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4"><span class="toc-text">计算问题的一般步骤</span></a></li></ol></div></details>
+            
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="公式与计算"></strong><span>The original article content is not automatically translated.</span></p>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年11月2日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本篇汇总深度学习、视觉、序列建模、多模态表示和注意力中的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与<a href="https://yjyxfcy.github.io/2026/11/02/mml1/">多模态学习概览</a>及<a href="https://yjyxfcy.github.io/2026/11/02/mml3/">练习题与参考解答</a>配合阅读。</p>
+<p>**口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MACs}$。不同课件&#x2F;框架在边界、均值、FLOPs 口径可能不同，计算时先说明所用定义与口径。</p>
+<h2 id="常用公式索引"><a href="#常用公式索引" class="headerlink" title="常用公式索引"></a>常用公式索引</h2><ol>
+<li>线性层与 MSE：$\hat y&#x3D;Wx+b$，$L&#x3D;\frac1{2N}\sum|\hat y-y|^2$。</li>
+<li>Softmax 与 CE：$p_k&#x3D;e^{z_k}&#x2F;\sum_je^{z_j}$，$L&#x3D;-\log p_y$。</li>
+<li>BN&#x2F;LN：$(x-\mu)&#x2F;\sqrt{\sigma^2+\epsilon}$，再乘 $\gamma$ 加 $\beta$；分清统计轴。</li>
+<li>卷积尺寸：$H_o&#x3D;\lfloor(H+2P-K)&#x2F;S\rfloor+1$；参数 $C_o(C_iK^2+1)$；MACs $H_oW_oC_oC_iK^2$。</li>
+<li>IoU：交集面积&#x2F;并集面积；Focal：$-\alpha_t(1-p_t)^\gamma\log p_t$。</li>
+<li>转置卷积：$H_o&#x3D;(H_i-1)S-2P+K$（基本情形）；YOLOv1：$S^2(5B+C)$。</li>
+<li>语言模型：$P(w_{1:T})&#x3D;\prod_tP(w_t|w_{&lt;t})$；bigram 仅用前一词。</li>
+<li>LSTM：$c_t&#x3D;f_t\odot c_{t-1}+i_t\odot\tilde c_t$，$h_t&#x3D;o_t\odot\tanh(c_t)$。</li>
+<li>余弦与 CCA：$\cos(a,b)&#x3D;a^\top b&#x2F;(|a||b|)$；CCA 最大化投影后相关系数。</li>
+<li>CLIP：相似度除温度，按行与按列做正配对的交叉熵，再平均。</li>
+<li>Attention：$\operatorname{softmax}(QK^\top&#x2F;\sqrt{d_k}+M)V$；输出长度由 $Q$ 决定。</li>
+<li>ViT：$N&#x3D;HW&#x2F;P^2$；LoRA：$r(d_{\rm in}+d_{\rm out})$ 可训练因子参数。</li>
+</ol>
+<h2 id="A-深度学习（课件-2）"><a href="#A-深度学习（课件-2）" class="headerlink" title="A. 深度学习（课件 2）"></a>A. 深度学习（课件 2）</h2><h3 id="A1-线性回归、MSE、正规方程"><a href="#A1-线性回归、MSE、正规方程" class="headerlink" title="A1. 线性回归、MSE、正规方程"></a>A1. 线性回归、MSE、正规方程</h3><p>样本为行：$X\in\mathbb R^{N\times d}$、$Y\in\mathbb R^{N\times m}$。并入 bias 后 $\tilde X&#x3D;[X,\mathbf1]$、$\tilde W&#x3D;[W^\top,b^\top]^\top$，预测 $\hat Y&#x3D;\tilde X\tilde W$。若 $L&#x3D;\frac12|\tilde X\tilde W-Y|_F^2$，则</p>
+<p>$$\nabla_{\tilde W}L&#x3D;\tilde X^\top(\tilde X\tilde W-Y),\quad<br>\tilde W^*&#x3D;(\tilde X^\top\tilde X)^{-1}\tilde X^\top Y.$$</p>
+<p><strong>何时能写逆？</strong> $\tilde X$ 列满秩时；否则可用伪逆 $\tilde X^+Y$。例：点 $(0,1),(1,3)$ 拟合 $\hat y&#x3D;wx+b$，直接解得 $b&#x3D;1,w&#x3D;2$；写 $\tilde X&#x3D;\begin{bmatrix}0&amp;1\1&amp;1\end{bmatrix}$ 也得到同一结果。</p>
+<h3 id="A2-softmax、交叉熵和梯度"><a href="#A2-softmax、交叉熵和梯度" class="headerlink" title="A2. softmax、交叉熵和梯度"></a>A2. softmax、交叉熵和梯度</h3><p>$$p_k&#x3D;\frac{e^{z_k}}{\sum_j e^{z_j}},\quad L&#x3D;-\sum_k y_k\log p_k&#x3D;-\log p_{y},\quad<br>\frac{\partial L}{\partial z_k}&#x3D;p_k-y_k.$$</p>
+<p>例：logits $z&#x3D;(0,\ln2,\ln3)$，则 $p&#x3D;(1&#x2F;6,2&#x2F;6,3&#x2F;6)$；真类第 3 类，$L&#x3D;\ln2$，梯度 $(1&#x2F;6,1&#x2F;3,-1&#x2F;2)$。若 $C&#x3D;10$ 且各类均匀，$L&#x3D;\ln10\approx2.303$。数值计算时先减去 $\max z$ 再指数化可避免溢出。</p>
+<p><strong>二分类</strong>：$p&#x3D;\sigma(z)$，$L&#x3D;-y\ln p-(1-y)\ln(1-p)$，对 logit 的导数仍是 $\partial L&#x2F;\partial z&#x3D;p-y$。例 $z&#x3D;0,y&#x3D;1$，$p&#x3D;.5,L&#x3D;\ln2,\partial L&#x2F;\partial z&#x3D;-.5$；向梯度反方向调整会提高 $z$。多标签对每一类分别做此式；互斥多类才通常用一个 softmax。</p>
+<h3 id="A3-激活、梯度下降、正则化"><a href="#A3-激活、梯度下降、正则化" class="headerlink" title="A3. 激活、梯度下降、正则化"></a>A3. 激活、梯度下降、正则化</h3><p>$$\sigma’(x)&#x3D;\sigma(x)(1-\sigma(x)),\quad<br>\tanh’(x)&#x3D;1-\tanh^2(x),\quad<br>\mathrm{ReLU}’(x)&#x3D;\mathbf1_{x&gt;0}\quad(x&#x3D;0\text{ 处按实现取次梯度}).$$</p>
+<p>例：$w&#x3D;2$，$L&#x3D;(w-5)^2&#x2F;2$，$\eta&#x3D;0.1$；$\partial L&#x2F;\partial w&#x3D;w-5&#x3D;-3$，更新 $w’&#x3D;2-0.1(-3)&#x3D;2.3$。</p>
+<p>$L_{\rm total}&#x3D;L_{\rm data}+\lambda|W|_2^2$ 时，正则项梯度 $2\lambda W$；若写成 $\lambda|W|_2^2&#x2F;2$，则是 $\lambda W$。$L_1&#x3D;\lambda\sum|w_i|$ 在零点用次梯度。<strong>别背一个缺少系数的固定答案</strong>。</p>
+<p><strong>动量和 Adam 的识别式</strong>：动量 SGD 可写 $v_t&#x3D;\beta v_{t-1}+g_t,\ \theta_t&#x3D;\theta_{t-1}-\eta v_t$（其他教材有归一化系数约定）；Adam 用 $m_t&#x3D;\beta_1m_{t-1}+(1-\beta_1)g_t$、$v_t&#x3D;\beta_2v_{t-1}+(1-\beta_2)g_t^2$，再做偏差校正 $\hat m_t&#x3D;m_t&#x2F;(1-\beta_1^t)$、$\hat v_t&#x3D;v_t&#x2F;(1-\beta_2^t)$，更新 $\theta_t&#x3D;\theta_{t-1}-\eta\hat m_t&#x2F;(\sqrt{\hat v_t}+\epsilon)$。平方与除法按参数逐元素进行。课件更强调理解优化方向与曲线；若未指定超参数，不要硬算 Adam 数值。</p>
+<p><strong>残差梯度</strong>：$y&#x3D;F(x)+x$ 时 $\partial y&#x2F;\partial x&#x3D;J_F(x)+I$，反传有一条恒等路径；若 shortcut 用投影 $P(x)$，则变成 $J_F+J_P$。这说明更利于优化，不保证任意深网络无梯度问题。</p>
+<h3 id="A4-BN、LN、IN、GN、RMSNorm"><a href="#A4-BN、LN、IN、GN、RMSNorm" class="headerlink" title="A4. BN、LN、IN、GN、RMSNorm"></a>A4. BN、LN、IN、GN、RMSNorm</h3><p>统一式：$\mu_S&#x3D;|S|^{-1}\sum_{j\in S}x_j$，$\sigma_S^2&#x3D;|S|^{-1}\sum_{j\in S}(x_j-\mu_S)^2$，</p>
+<p>$$\hat x_i&#x3D;\frac{x_i-\mu_S}{\sqrt{\sigma_S^2+\epsilon}},\qquad y_i&#x3D;\gamma_i\hat x_i+\beta_i.$$</p>
+<table>
+<thead>
+<tr>
+<th>NCHW 上的层</th>
+<th>对固定的什么单元统计？</th>
+<th>被平均的轴</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BN</td>
+<td>通道 $c$</td>
+<td>$N,H,W$</td>
+</tr>
+<tr>
+<td>LN（CNN 整样本版）</td>
+<td>样本 $n$</td>
+<td>$C,H,W$</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>样本 $n$ 与通道 $c$</td>
+<td>$H,W$</td>
+</tr>
+<tr>
+<td>GN</td>
+<td>样本 $n$ 与通道组 $g$</td>
+<td>组内 $C,H,W$</td>
+</tr>
+<tr>
+<td>RMSNorm（Transformer）</td>
+<td>样本&#x2F;token</td>
+<td>特征维 $d$；不减均值</td>
+</tr>
+</tbody></table>
+<p><strong>例</strong>：一个通道的四个值 $(1,3,5,7)$，$\mu&#x3D;4$，总体方差 $(9+1+1+9)&#x2F;4&#x3D;5$。忽略 $\epsilon$、$\gamma&#x3D;1,\beta&#x3D;0$，标准化为 $(-3,-1,1,3)&#x2F;\sqrt5$。若 $\gamma&#x3D;2,\beta&#x3D;1$，输出是上述各项乘 2 再加 1。RMSNorm 对 $(3,4)$ 的均方根是 $\sqrt{(9+16)&#x2F;2}&#x3D;\sqrt{12.5}$，输出 $(3,4)&#x2F;\sqrt{12.5}$，与 LN 不同。</p>
+<p><strong>Dropout 例</strong>：丢弃率 $p&#x3D;0.25$、保留率 $q&#x3D;0.75$，输入 6 若保留，训练时倒置 dropout 输出 $6&#x2F;0.75&#x3D;8$；若被丢弃则 0。期望 $0.75\times8+0.25\times0&#x3D;6$。</p>
+<h2 id="B-CNN、检测和分割（课件-3–4）"><a href="#B-CNN、检测和分割（课件-3–4）" class="headerlink" title="B. CNN、检测和分割（课件 3–4）"></a>B. CNN、检测和分割（课件 3–4）</h2><h3 id="B1-卷积、池化尺寸与参数"><a href="#B1-卷积、池化尺寸与参数" class="headerlink" title="B1. 卷积、池化尺寸与参数"></a>B1. 卷积、池化尺寸与参数</h3><p>$$H_o&#x3D;\left\lfloor\frac{H_i+2P_h-K_h}{S_h}\right\rfloor+1,\quad<br>W_o&#x3D;\left\lfloor\frac{W_i+2P_w-K_w}{S_w}\right\rfloor+1.$$</p>
+<p>有 dilation $D$ 时把 $K$ 换成有效核 $D(K-1)+1$。输出形状 $(C_o,H_o,W_o)$。参数数（含 bias）$C_o(C_iK_hK_w+1)$。MACs $&#x3D;H_oW_oC_oC_iK_hK_w$。输出激活 FP32 单样本字节数 $4H_oW_oC_o$。池化参数 0、通常输出通道仍为 $C_i$。</p>
+<p><strong>例 1</strong>：输入 $3\times32\times32$，卷积核 $5\times5$、$C_o&#x3D;16$、$P&#x3D;2,S&#x3D;1$：输出 $16\times32\times32$；参数 $16(3\cdot25+1)&#x3D;1216$；MACs $32^2\cdot16\cdot3\cdot25&#x3D;1,228,800$；仅输出激活 $16\cdot32^2\cdot4&#x3D;65,536$ B $&#x3D;64$ KiB。再用 $2\times2,S&#x3D;2$ 最大池化，输出 $16\times16\times16$，参数 0。</p>
+<p><strong>例 2</strong>：$H&#x3D;8,K&#x3D;3,P&#x3D;0,S&#x3D;2$：$\lfloor(8-3)&#x2F;2\rfloor+1&#x3D;3$；不要把 $3.5$ 向上取整为 4，除非题目明确采用 ceil mode。若题目指定不允许不整除，应写“该配置有边界残余，需说明实现约定”。</p>
+<p><strong>分组卷积</strong>：分 $G$ 组时，每个输出通道连接 $C_i&#x2F;G$ 个输入通道，参数 $C_o(C_iK^2&#x2F;G+1)$（$C_i,C_o$ 可被 $G$ 整除）。Depthwise 是 $G&#x3D;C_i$ 且通常中间输出 $C_i$ 个通道；随后 pointwise $1\times1$ 做跨通道混合。忽略 bias，普通卷积 $K^2C_iC_o$，深度可分离 $K^2C_i+C_iC_o$。例 $C_i&#x3D;32,C_o&#x3D;64,K&#x3D;3$：普通 $18,432$；分离 $288+2,048&#x3D;2,336$，约为 $12.7%$。</p>
+<h3 id="B2-感受野、VGG-与-FC"><a href="#B2-感受野、VGG-与-FC" class="headerlink" title="B2. 感受野、VGG 与 FC"></a>B2. 感受野、VGG 与 FC</h3><p>层 $\ell$ 的“跳距” $j_\ell&#x3D;j_{\ell-1}s_\ell$，理论感受野 $r_\ell&#x3D;r_{\ell-1}+(k_\ell-1)j_{\ell-1}$，初始 $r_0&#x3D;j_0&#x3D;1$。两层 $3\times3$、stride 1：$r_1&#x3D;3,r_2&#x3D;5$。中间若 stride 2，第二层扩张会不同。</p>
+<p>全连接输入 $d_i$、输出 $d_o$：参数 $d_id_o+d_o$，MACs $d_id_o$。VGG 常用两层 $3\times3$ 代一层 $5\times5$，同宽度 $C$ 时核参数 $18C^2$ vs $25C^2$。GAP 把 $C\times H\times W$ 变 $C$ 维，无可学习参数；不要把它算成带参数的 $1\times1$ 卷积。</p>
+<h3 id="B3-IoU、NMS、Focal-Loss"><a href="#B3-IoU、NMS、Focal-Loss" class="headerlink" title="B3. IoU、NMS、Focal Loss"></a>B3. IoU、NMS、Focal Loss</h3><p>给轴对齐框 $A&#x3D;(x_1,y_1,x_2,y_2)$、$B&#x3D;(x’_1,y’_1,x’_2,y’_2)$：</p>
+<p>$$w_\cap&#x3D;\max(0,\min(x_2,x’_2)-\max(x_1,x’<em>1)),\quad<br>h</em>\cap&#x3D;\max(0,\min(y_2,y’<em>2)-\max(y_1,y’<em>1)),$$<br>$$I&#x3D;w</em>\cap h</em>\cap,\quad U&#x3D;|A|+|B|-I,\quad \mathrm{IoU}&#x3D;I&#x2F;U.$$</p>
+<p><strong>例</strong>：$A&#x3D;(0,0,4,4)$、$B&#x3D;(2,2,6,6)$，交集 $2\times2&#x3D;4$，各面积 16，并集 28，IoU $&#x3D;1&#x2F;7\approx0.143$。框不相交时 IoU 为 0；完全相同时为 1。若评测使用像素坐标含端点面积 $(x_2-x_1+1)(y_2-y_1+1)$，结果会不同，按题目约定。</p>
+<p><strong>NMS 例</strong>：框 A 分数 .9、B 分数 .8、C 分数 .7，若 $\mathrm{IoU}(A,B)&#x3D;.6,\mathrm{IoU}(A,C)&#x3D;.1$，阈值 .5，先保留 A、删 B、保留 C。NMS 比较的是<strong>预测框之间</strong>的 IoU，非预测框与真值的 IoU。</p>
+<p><strong>Precision&#x2F;Recall 例</strong>：若预测中 8 个是 TP、2 个是 FP，真实有 10 个对象（另 2 个 FN），则 Precision $&#x3D;8&#x2F;(8+2)&#x3D;.8$，Recall $&#x3D;8&#x2F;(8+2)&#x3D;.8$。AP 是随阈值变化的 P–R 曲线汇总，不等于单个阈值处的 precision，也不等于 IoU；mAP 的具体平均方式需看 VOC&#x2F;COCO 的评测约定。</p>
+<p>$p_t&#x3D;p$（正类标签）或 $1-p$（负类标签），$\mathrm{FL}&#x3D;-\alpha_t(1-p_t)^\gamma\ln p_t$。例 $\alpha_t&#x3D;1,\gamma&#x3D;2$：易样本 $p_t&#x3D;.9$ 权重 $.01$，难样本 $p_t&#x3D;.2$ 权重 $.64$；基准 CE 分别是 $-\ln .9$ 与 $-\ln .2$。Focal Loss 的作用是降低易样本相对贡献，不能只看调制因子忘掉 $\log$。</p>
+<h3 id="B4-GIoU、DIoU、CIoU"><a href="#B4-GIoU、DIoU、CIoU" class="headerlink" title="B4. GIoU、DIoU、CIoU"></a>B4. GIoU、DIoU、CIoU</h3><p>设 $C$ 为同时包含两个框的最小轴对齐外接框，中心距离平方 $\rho^2$，$c^2$ 为 $C$ 对角线平方：</p>
+<p>$$\mathrm{GIoU}&#x3D;\mathrm{IoU}-\frac{|C|-|A\cup B|}{|C|},\qquad<br>\mathrm{DIoU}&#x3D;\mathrm{IoU}-\frac{\rho^2}{c^2}.$$</p>
+<p>CIoU 在 DIoU 基础上再减去 $\alpha v$，其中 $v$ 衡量长宽比差异，$\alpha$ 依 IoU 与 $v$ 定义。常见 loss 写 $1-\mathrm{GIoU}$、$1-\mathrm{DIoU}$、$1-\mathrm{CIoU}$。无重叠时 GIoU 可为负并携带外接框信息；DIoU 直接反映中心距离。细节公式若课堂未要求，优先掌握改进动机。</p>
+<p>一种常见 CIoU 定义是 $v&#x3D;\frac4{\pi^2}\bigl[\arctan(w^<em>&#x2F;h^</em>)-\arctan(w&#x2F;h)\bigr]^2$，$\alpha&#x3D;v&#x2F;(1-\mathrm{IoU}+v)$，$\mathrm{CIoU}&#x3D;\mathrm{IoU}-\rho^2&#x2F;c^2-\alpha v$。其中带星号的是目标框宽高。实现细节可能对数值稳定项作处理；若题目给出定义，则按题目约定代入。</p>
+<h3 id="B5-转置卷积与-YOLOv1-输出维度"><a href="#B5-转置卷积与-YOLOv1-输出维度" class="headerlink" title="B5. 转置卷积与 YOLOv1 输出维度"></a>B5. 转置卷积与 YOLOv1 输出维度</h3><p>$$H_o&#x3D;(H_i-1)S-2P+D(K-1)+\mathrm{output_padding}+1.$$</p>
+<p>无 dilation、无 output padding：$(H_i-1)S-2P+K$。例 $H_i&#x3D;4,K&#x3D;3,S&#x3D;2,P&#x3D;1$，输出 $(4-1)2-2+3&#x3D;7$。转置卷积是可学习上采样，<strong>不是</strong>一般意义上的矩阵求逆。</p>
+<p>YOLOv1：$S\times S$ 格，每格 $B$ 个框各预测 $(x,y,w,h,\mathrm{confidence})$，另给 $C$ 个类概率，输出标量总数 $S^2(5B+C)$。例 $S&#x3D;7,B&#x3D;2,C&#x3D;20$，每格 $10+20&#x3D;30$，整图 $49\cdot30&#x3D;1470$。该公式不适用于所有 YOLO 版本。</p>
+<h2 id="C-NLP-与序列（课件-5）"><a href="#C-NLP-与序列（课件-5）" class="headerlink" title="C. NLP 与序列（课件 5）"></a>C. NLP 与序列（课件 5）</h2><h3 id="C1-CBOW、Skip-gram、负采样"><a href="#C1-CBOW、Skip-gram、负采样" class="headerlink" title="C1. CBOW、Skip-gram、负采样"></a>C1. CBOW、Skip-gram、负采样</h3><p>CBOW：$\bar v&#x3D;|C|^{-1}\sum_{c\in C}E[c]$，$P(w\mid C)&#x3D;\operatorname{softmax}(U^\top\bar v)<em>w$。Skip-gram：$P(C\mid w)\approx\prod</em>{c\in C}P(c\mid w)$。<strong>方向必分清</strong>。例上下文“北京／大学”预测中心“的”：是 CBOW；给“大学”预测“北京”“学生”等上下文：是 Skip-gram。负采样目标常写 $\log\sigma(u_c^\top v_w)+\sum_{n\in\mathrm{Neg}}\log\sigma(-u_n^\top v_w)$，真实共现词为正，噪声词为负。</p>
+<h3 id="C2-n-gram、句子概率、困惑度"><a href="#C2-n-gram、句子概率、困惑度" class="headerlink" title="C2. $n$-gram、句子概率、困惑度"></a>C2. $n$-gram、句子概率、困惑度</h3><p>$$P(w_{1:T})&#x3D;\prod_{t&#x3D;1}^{T}P(w_t\mid w_{&lt;t}),\quad<br>P_{\rm bigram}(w_t\mid w_{&lt;t})\approx P(w_t\mid w_{t-1}).$$</p>
+<p><strong>例</strong>：$P(\text{我})&#x3D;.2$、$P(\text{爱}\mid\text{我})&#x3D;.5$、$P(\text{你}\mid\text{爱})&#x3D;.4$，bigram 下“我 爱 你”的概率 $&#x3D;.2\cdot.5\cdot.4&#x3D;.04$。若三个真实词的模型概率均为 $.5$，平均负对数似然 $&#x3D;-\ln .5$，PPL $&#x3D;e^{-\ln .5}&#x3D;2$。要明确是否包含起止符以及词表&#x2F;分词方式。</p>
+<h3 id="C3-RNN-与-LSTM-一步计算"><a href="#C3-RNN-与-LSTM-一步计算" class="headerlink" title="C3. RNN 与 LSTM 一步计算"></a>C3. RNN 与 LSTM 一步计算</h3><p>RNN：$h_t&#x3D;\tanh(W_xx_t+W_hh_{t-1}+b)$。标量例 $x_t&#x3D;1,h_{t-1}&#x3D;0,W_x&#x3D;1,W_h&#x3D;2,b&#x3D;0$，$h_t&#x3D;\tanh(1)\approx.762$。</p>
+<p>LSTM：</p>
+<p>$$\begin{aligned}<br>f_t&amp;&#x3D;\sigma(\cdots),\quad i_t&#x3D;\sigma(\cdots),\quad<br>\tilde c_t&#x3D;\tanh(\cdots),\<br>c_t&amp;&#x3D;f_tc_{t-1}+i_t\tilde c_t,\quad<br>o_t&#x3D;\sigma(\cdots),\quad h_t&#x3D;o_t\tanh(c_t).<br>\end{aligned}$$</p>
+<p><strong>例</strong>：若门值已经算出 $f&#x3D;.8,i&#x3D;.25,o&#x3D;.5,\tilde c&#x3D;.4,c_{t-1}&#x3D;.5$，则 $c_t&#x3D;.8(.5)+.25(.4)&#x3D;.5$，$h_t&#x3D;.5\tanh(.5)\approx.231$。先算新 cell，再经 tanh 和输出门；不能拿 $\tilde c$ 直接算 $h$。若某步 $f_t&#x3D;1$、其他依赖忽略，旧记忆可直接传递；一般 $f_t&lt;1$ 时仍可能逐步衰减。</p>
+<h2 id="D-多模态表示与信息论（课件-6）"><a href="#D-多模态表示与信息论（课件-6）" class="headerlink" title="D. 多模态表示与信息论（课件 6）"></a>D. 多模态表示与信息论（课件 6）</h2><h3 id="D1-相似度、相关系数、CCA"><a href="#D1-相似度、相关系数、CCA" class="headerlink" title="D1. 相似度、相关系数、CCA"></a>D1. 相似度、相关系数、CCA</h3><p>$$\cos(a,b)&#x3D;\frac{a^\top b}{|a||b|},\quad<br>\rho(X,Y)&#x3D;\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}.$$</p>
+<p>例 $a&#x3D;(1,0),b&#x3D;(1,1)$，余弦 $1&#x2F;\sqrt2\approx.707$。把 $b$ 乘 10 后余弦不变，但欧氏距离改变。CCA 先中心化样本，然后找 $u,v$ 最大化 $u^\top\Sigma_{XY}v&#x2F;\sqrt{(u^\top\Sigma_{XX}u)(v^\top\Sigma_{YY}v)}$。若一维 $Y&#x3D;2X$ 且 $X$ 非常数，相关为 1，尽管数值尺度不同。CCA 目标不是“两个编码值逐项相等”。</p>
+<p><strong>Pearson、RBF、CCA 低维辨析</strong>：余弦以原点为基准，Pearson 等于中心化后的两个样本序列的余弦；$X&#x3D;(1,2,3),Y&#x3D;(3,5,7)$ 时 $Y&#x3D;2X+1$，Pearson 为 1。RBF $k(a,b)&#x3D;\exp[-|a-b|^2&#x2F;(2\sigma^2)]$；若 $a&#x3D;b$，值 1；距离越大趋向 0。CCA 的一维两模态情形归结为相关系数绝对值最大化；多维时通过投影找到最相关的线性组合。</p>
+<h3 id="D2-张量融合、低秩与参数量"><a href="#D2-张量融合、低秩与参数量" class="headerlink" title="D2. 张量融合、低秩与参数量"></a>D2. 张量融合、低秩与参数量</h3><p>若 $a\in\mathbb R^{d_a}$、$b\in\mathbb R^{d_b}$，外积 $ab^\top$ 大小 $d_a\times d_b$。增广外积 $[1;a][1;b]^\top$ 大小 $(d_a+1)(d_b+1)$，包含常数 1、单模态项 $a,b$ 与交互项 $a_ib_j$。例 $a&#x3D;(2,3),b&#x3D;(4)$，增广结果</p>
+<p>$$\begin{bmatrix}1\2\3\end{bmatrix}<br>\begin{bmatrix}1&amp;4\end{bmatrix}<br>&#x3D;\begin{bmatrix}1&amp;4\2&amp;8\3&amp;12\end{bmatrix}.$$</p>
+<p>双线性映射到 $d_h$ 维时完整权重约 $d_hd_ad_b$ 个参数；秩 $R$ 分解后约 $R,d_h(d_a+d_b)$（具体因分解结构而异）。例 $d_a&#x3D;d_b&#x3D;100,d_h&#x3D;64,R&#x3D;4$，完整约 640,000，低秩约 51,200。注意低秩近似的形式不同，参数量公式需按给定因子形状算。</p>
+<h3 id="D3-熵、条件熵、互信息"><a href="#D3-熵、条件熵、互信息" class="headerlink" title="D3. 熵、条件熵、互信息"></a>D3. 熵、条件熵、互信息</h3><p>$$H(X)&#x3D;-\sum_xp(x)\log_2p(x),\quad<br>H(Y|X)&#x3D;H(X,Y)-H(X),\quad<br>I(X;Y)&#x3D;H(X)+H(Y)-H(X,Y).$$</p>
+<p>用 $\log_2$ 时单位 bit。公平硬币 $H(X)&#x3D;1$ bit；若 $Y&#x3D;X$，$H(Y|X)&#x3D;0,I(X;Y)&#x3D;1$ bit；若 $X,Y$ 独立且各公平，$I(X;Y)&#x3D;0$。<strong>纠错</strong>：条件熵 $H(Y|X)$ 的对数对象是 $p(y|x)&#x3D;p(x,y)&#x2F;p(x)$，不是 $p(x|y)$；互信息 $I(X;Y)&#x3D;H(X)-H(X|Y)$ 或 $H(Y)-H(Y|X)$，两式应成对。</p>
+<h3 id="D4-CLIP-InfoNCE-手算"><a href="#D4-CLIP-InfoNCE-手算" class="headerlink" title="D4. CLIP&#x2F;InfoNCE 手算"></a>D4. CLIP&#x2F;InfoNCE 手算</h3><p>令批内两对图文的缩放后相似度矩阵 $S&#x3D;\begin{bmatrix}\ln3&amp;0\0&amp;\ln3\end{bmatrix}$，正确配对在对角线。图到文第 1 行正确概率 $3&#x2F;(3+1)&#x3D;.75$，第 2 行同理，所以 $L_{\rm i2t}&#x3D;-\ln .75&#x3D;\ln(4&#x2F;3)\approx.288$；文到图两列相同，最终 $L&#x3D;.288$。若某批正负相似度都相等，正确概率 $1&#x2F;N$，单向损失 $\ln N$。$\tau$ 出现在指数前的 logit $S_{ij}&#x3D;\mathrm{sim}(v_i,t_j)&#x2F;\tau$，不是在概率外简单除 $\tau$。</p>
+<h2 id="E-注意力与基础模型（课件-7–8）"><a href="#E-注意力与基础模型（课件-7–8）" class="headerlink" title="E. 注意力与基础模型（课件 7–8）"></a>E. 注意力与基础模型（课件 7–8）</h2><h3 id="E1-Attention-矩阵与-mask"><a href="#E1-Attention-矩阵与-mask" class="headerlink" title="E1. Attention 矩阵与 mask"></a>E1. Attention 矩阵与 mask</h3><p>$$Q!:\ T_q\times d_k,\quad K!:\ T_k\times d_k,\quad V!:\ T_k\times d_v,$$<br>$$S&#x3D;\frac{QK^\top}{\sqrt{d_k}}+M!:\ T_q\times T_k,\quad<br>A&#x3D;\operatorname{softmax}_{\rm row}(S),\quad Z&#x3D;AV!:\ T_q\times d_v.$$</p>
+<p><strong>手算例</strong>：一个 query 对两个 key 的缩放后分数为 $(0,\ln3)$，values 为 $v_1&#x3D;(2,0),v_2&#x3D;(0,4)$。权重 $(1&#x2F;4,3&#x2F;4)$，输出 $(.5,3)$。若第二位置被 mask，分数变 $(0,-\infty)$，权重 $(1,0)$，输出 $(2,0)$。<strong>先按行 softmax，再乘 V</strong>。</p>
+<p><strong>为什么除 $\sqrt{d_k}$</strong>：若各维 Q&#x2F;K 均值 0、方差 1 且近似独立，则点积 $q^\top k&#x3D;\sum_{j&#x3D;1}^{d_k}q_jk_j$ 的方差约为 $d_k$，除 $\sqrt{d_k}$ 后方差约为 1。这是尺度直觉，真实网络不必严格独立。</p>
+<p><strong>维度例</strong>：$T_q&#x3D;3,T_k&#x3D;5,d_k&#x3D;4,d_v&#x3D;6$，$QK^\top$ 为 $3\times5$，$Z$ 为 $3\times6$；交叉注意力输出序列长度是 3。若自注意力 $T&#x3D;1000$，单头 attention score 元素是 $10^6$，多头 $H$ 头则各有一个这样的矩阵。具体显存还受实现和精度影响。</p>
+<h3 id="E2-位置编码、多头、Transformer"><a href="#E2-位置编码、多头、Transformer" class="headerlink" title="E2. 位置编码、多头、Transformer"></a>E2. 位置编码、多头、Transformer</h3><p>$$PE_{pos,2i}&#x3D;\sin\left(pos&#x2F;10000^{2i&#x2F;d}\right),\quad<br>PE_{pos,2i+1}&#x3D;\cos\left(pos&#x2F;10000^{2i&#x2F;d}\right).$$</p>
+<p>例 $pos&#x3D;0$：所有偶数维为 0，奇数维为 1。通常 $d_{\rm model}&#x3D;H d_{\rm head}$；例 $d_{\rm model}&#x3D;512,H&#x3D;8$，每头常设 $d_k&#x3D;d_v&#x3D;64$。多头 concat 后回投影为 $d_{\rm model}$。位置编码给序列顺序线索；纯 self-attention 对 token 置换是等变的，不是固定输出不变。</p>
+<p><strong>正弦位置编码的相对位移</strong>：同频率一对 $\sin(pos&#x2F;\omega),\cos(pos&#x2F;\omega)$ 的两个位置点积为 $\cos((pos-pos’)&#x2F;\omega)$，只由相对位移决定。例 $pos&#x3D;0,pos’&#x3D;\pi\omega&#x2F;2$ 时点积为 0。RoPE 的思路是在 Q&#x2F;K 的二维子空间按位置角度旋转，二者点积自然依赖位置差；它与“给输入直接加绝对位置向量”不是同一操作。</p>
+<h3 id="E3-ViT-patch-与注意力规模"><a href="#E3-ViT-patch-与注意力规模" class="headerlink" title="E3. ViT patch 与注意力规模"></a>E3. ViT patch 与注意力规模</h3><p>若 $H,W$ 都被 $P$ 整除，$N&#x3D;(H&#x2F;P)(W&#x2F;P)$，每 patch 展平长度 $P^2C$，若加一个 CLS，序列长 $N+1$，单头分数矩阵 $(N+1)^2$。<strong>例</strong>：$224\times224\times3$、$P&#x3D;16$，$N&#x3D;14^2&#x3D;196$，patch 展平 768 维，含 CLS 共 197 token，分数矩阵 $197^2&#x3D;38,809$ 元素。若 $P&#x3D;8$，$N&#x3D;784$，矩阵 $785^2&#x3D;616,225$，约为前者 15.9 倍；这解释小 patch 带来的注意力成本。</p>
+<h3 id="E4-LoRA-与-GQA"><a href="#E4-LoRA-与-GQA" class="headerlink" title="E4. LoRA 与 GQA"></a>E4. LoRA 与 GQA</h3><p>$$W_{\rm eff}&#x3D;W+BA,\quad<br>W\in\mathbb R^{d_o\times d_i},\ B\in\mathbb R^{d_o\times r},\ A\in\mathbb R^{r\times d_i}.$$</p>
+<p>LoRA 可训练数 $r(d_o+d_i)$；全量矩阵 $d_od_i$。例 $d_i&#x3D;d_o&#x3D;4096,r&#x3D;8$：LoRA $8(4096+4096)&#x3D;65,536$，全量 $16,777,216$，比值 $0.390625%$。这是<strong>单矩阵</strong>的比较，整模型还要数应用到哪些层、是否训练其他参数。GQA 若有 $H_q&#x3D;32$ 个 query 头、$H_{kv}&#x3D;8$ 个 K&#x2F;V 头，则平均每 4 个 query 头共享 1 组 K&#x2F;V；相对 32 组 K&#x2F;V 的 MHA，<strong>仅 K&#x2F;V 头数&#x2F;缓存的这一部分</strong>约减到四分之一，不等于整模型显存减四分之三。</p>
+<h2 id="计算问题的一般步骤"><a href="#计算问题的一般步骤" class="headerlink" title="计算问题的一般步骤"></a>计算问题的一般步骤</h2><ol>
+<li><strong>写已知量和单位</strong>：样本数、张量布局、坐标格式、log 底数、是否含 bias、FLOPs 计法。</li>
+<li><strong>先写通式</strong>：尤其尺寸、损失、softmax、交并比，避免直接心算。</li>
+<li><strong>标中间形状</strong>：CNN 的 $(C,H,W)$；attention 的 $(T_q,T_k,d_v)$；LoRA 的矩阵维度。</li>
+<li><strong>代数后做合理性检查</strong>：IoU、softmax 概率在 $[0,1]$；输出尺寸为正整数；参数数为非负整数；loss 不应无端为负。</li>
+<li><strong>如果题目口径模糊，写明约定</strong>：例如乘加算 1 MAC 还是 2 FLOPs、池化是否 ceil mode、是否包含偏置。</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%AD%A6%E4%B9%A0/" class="category-chain-item">多模态学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>公式与计算</div>
+      <div>https://yjyxfcy.github.io/2026/11/02/mml2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年11月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年11月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <nav class="course-navigation" aria-label="课程章节导航">
+                  <a class="course-back" href="/courses/multimodal/">← 返回 多模态学习 目录</a>
+                  <div class="course-neighbors">
+                    <a href="/2026/11/02/mml1/"><small>上一篇</small><strong>← 多模态学习概览</strong></a>
+                    <a href="/2026/11/02/mml3/"><small>下一篇</small><strong>练习题与参考解答 →</strong></a>
+                  </div>
+                </nav>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-reading-progress" aria-label="Reading progress">
+    <div class="toc-reading-progress-row">
+      <span>阅读进度</span>
+      <span id="toc-reading-progress-text">0%</span>
+    </div>
+    <div class="toc-reading-progress-track">
+      <div id="toc-reading-progress-bar"></div>
+    </div>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F%E7%B4%A2%E5%BC%95"><span class="toc-text">常用公式索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%AF%BE%E4%BB%B6-2%EF%BC%89"><span class="toc-text">A. 深度学习（课件 2）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A1-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E3%80%81MSE%E3%80%81%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B"><span class="toc-text">A1. 线性回归、MSE、正规方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A2-softmax%E3%80%81%E4%BA%A4%E5%8F%89%E7%86%B5%E5%92%8C%E6%A2%AF%E5%BA%A6"><span class="toc-text">A2. softmax、交叉熵和梯度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A3-%E6%BF%80%E6%B4%BB%E3%80%81%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">A3. 激活、梯度下降、正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A4-BN%E3%80%81LN%E3%80%81IN%E3%80%81GN%E3%80%81RMSNorm"><span class="toc-text">A4. BN、LN、IN、GN、RMSNorm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-CNN%E3%80%81%E6%A3%80%E6%B5%8B%E5%92%8C%E5%88%86%E5%89%B2%EF%BC%88%E8%AF%BE%E4%BB%B6-3%E2%80%934%EF%BC%89"><span class="toc-text">B. CNN、检测和分割（课件 3–4）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B1-%E5%8D%B7%E7%A7%AF%E3%80%81%E6%B1%A0%E5%8C%96%E5%B0%BA%E5%AF%B8%E4%B8%8E%E5%8F%82%E6%95%B0"><span class="toc-text">B1. 卷积、池化尺寸与参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B2-%E6%84%9F%E5%8F%97%E9%87%8E%E3%80%81VGG-%E4%B8%8E-FC"><span class="toc-text">B2. 感受野、VGG 与 FC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B3-IoU%E3%80%81NMS%E3%80%81Focal-Loss"><span class="toc-text">B3. IoU、NMS、Focal Loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B4-GIoU%E3%80%81DIoU%E3%80%81CIoU"><span class="toc-text">B4. GIoU、DIoU、CIoU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B5-%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF%E4%B8%8E-YOLOv1-%E8%BE%93%E5%87%BA%E7%BB%B4%E5%BA%A6"><span class="toc-text">B5. 转置卷积与 YOLOv1 输出维度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-NLP-%E4%B8%8E%E5%BA%8F%E5%88%97%EF%BC%88%E8%AF%BE%E4%BB%B6-5%EF%BC%89"><span class="toc-text">C. NLP 与序列（课件 5）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C1-CBOW%E3%80%81Skip-gram%E3%80%81%E8%B4%9F%E9%87%87%E6%A0%B7"><span class="toc-text">C1. CBOW、Skip-gram、负采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2-n-gram%E3%80%81%E5%8F%A5%E5%AD%90%E6%A6%82%E7%8E%87%E3%80%81%E5%9B%B0%E6%83%91%E5%BA%A6"><span class="toc-text">C2. $n$-gram、句子概率、困惑度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C3-RNN-%E4%B8%8E-LSTM-%E4%B8%80%E6%AD%A5%E8%AE%A1%E7%AE%97"><span class="toc-text">C3. RNN 与 LSTM 一步计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%AE%BA%EF%BC%88%E8%AF%BE%E4%BB%B6-6%EF%BC%89"><span class="toc-text">D. 多模态表示与信息论（课件 6）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#D1-%E7%9B%B8%E4%BC%BC%E5%BA%A6%E3%80%81%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E3%80%81CCA"><span class="toc-text">D1. 相似度、相关系数、CCA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D2-%E5%BC%A0%E9%87%8F%E8%9E%8D%E5%90%88%E3%80%81%E4%BD%8E%E7%A7%A9%E4%B8%8E%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">D2. 张量融合、低秩与参数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D3-%E7%86%B5%E3%80%81%E6%9D%A1%E4%BB%B6%E7%86%B5%E3%80%81%E4%BA%92%E4%BF%A1%E6%81%AF"><span class="toc-text">D3. 熵、条件熵、互信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D4-CLIP-InfoNCE-%E6%89%8B%E7%AE%97"><span class="toc-text">D4. CLIP&#x2F;InfoNCE 手算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%B8%8E%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%EF%BC%88%E8%AF%BE%E4%BB%B6-7%E2%80%938%EF%BC%89"><span class="toc-text">E. 注意力与基础模型（课件 7–8）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#E1-Attention-%E7%9F%A9%E9%98%B5%E4%B8%8E-mask"><span class="toc-text">E1. Attention 矩阵与 mask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E2-%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E3%80%81%E5%A4%9A%E5%A4%B4%E3%80%81Transformer"><span class="toc-text">E2. 位置编码、多头、Transformer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E3-ViT-patch-%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%A7%84%E6%A8%A1"><span class="toc-text">E3. ViT patch 与注意力规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E4-LoRA-%E4%B8%8E-GQA"><span class="toc-text">E4. LoRA 与 GQA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4"><span class="toc-text">计算问题的一般步骤</span></a></li></ol>
+  </div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold" data-i18n-key="search.title">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input" data-i18n-key="search.keyword">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <!-- 你的 daily 卡片 -->
+<div class="daily-wrapper">
+  <!-- 今日推歌 -->
+  <div class="daily-card">
+    <h3>🎵 每日推歌</h3>
+    <div id="song-title" class="song-title"></div>
+    <div id="song-artist" class="song-artist"></div>
+    <div id="song-reason" class="song-reason"></div>
+    <div class="song-player-wrap">
+      <audio id="song-player" preload="none"></audio>
+      <div class="song-controls">
+        <div class="song-progress-block">
+          <div id="song-progress" class="song-progress" title="拖动进度">
+            <div class="song-progress-fill" id="song-progress-fill"></div>
+            <div class="song-progress-thumb" id="song-progress-thumb"></div>
+          </div>
+          <div class="song-meta-row">
+            <span id="song-time" class="song-time">0:00 / 0:00</span>
+            <div class="song-meta-side">
+              <span id="song-vol-icon" class="song-vol-icon">🔊</span>
+              <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
+                     oninput="setVolume(this.value)" title="音量">
+              <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+            </div>
+          </div>
+        </div>
+        <div class="song-ctl-row">
+          <button id="song-prev-btn" class="song-ctl song-nav" onclick="prevSong()" title="上一首">⏮</button>
+          <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
+          <button id="song-next-btn" class="song-ctl song-nav" onclick="nextSong()" title="下一首">⏭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 今日诗词 -->
+  <div class="daily-card poem-card">
+    <h3>📜 每日诗词</h3>
+    <div id="poem-reason" class="poem-reason"></div>
+    <div class="poem-scroll">
+      <div id="poem-content" class="poem-content">正在铺纸研墨…</div>
+      <div id="poem-info" class="poem-info"></div>
+    </div>
+    <div class="poem-actions">
+      <button id="poem-read-btn" class="poem-btn" onclick="toggleRead()">🔊 朗读</button>
+      <button id="poem-copy-btn" class="poem-btn" onclick="copyPoem()">📋 复制</button>
+      <button class="daily-btn" onclick="nextPoem()">换一首</button>
+    </div>
+  </div>
+</div>
+
+<script defer src="/js/site-daily.js"></script>
+
+<style>
+  .daily-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .daily-card {
+    flex: 1;
+    min-width: 260px;
+    padding: 1.2rem;
+    border-radius: 18px;
+    /* 无背景：与页面渐变融为一体 */
+    transition: all 0.3s ease;
+    text-align: center;
+
+    /* 👇 关键对齐代码 */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .daily-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .song-title {
+    font-weight: bold;
+    margin-top: 0.3rem;
+  }
+
+  .song-artist {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  .daily-btn {
+    margin-top: auto;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+
+  .daily-btn:hover {
+    background: #ff6f91;
+  }
+
+  .poem-content {
+    font-size: 1rem;
+    line-height: 2.2;
+    margin: 0.5rem 0;
+  }
+
+  .poem-info {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .song-reason {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 0.5rem;
+    line-height: 1.7;
+    background: rgba(255, 143, 171, 0.12);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-color);
+  }
+
+  /* ---- 每日诗词 · 水墨卷轴风 ---- */
+  .poem-card {
+    position: relative;
+  }
+
+  .poem-reason {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 0.4rem;
+    line-height: 1.7;
+    background: rgba(90, 120, 160, 0.1);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-color);
+  }
+
+  .poem-scroll {
+    margin: 0.8rem 0;
+    padding: 1.1rem 1rem;
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 143, 171, 0.1), transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(128, 90, 213, 0.08), transparent 50%),
+      linear-gradient(180deg, rgba(120, 120, 120, 0.07), rgba(120, 120, 120, 0));
+    border: 1px solid rgba(128, 128, 128, 0.16);
+    min-height: 8.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem-content {
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", "Songti SC", serif;
+    font-size: 1.05rem;
+    line-height: 2.1;
+    white-space: pre-wrap;
+    color: var(--text-color);
+  }
+
+  .poem-content.typing::after {
+    content: "▎";
+    margin-left: 2px;
+    color: #d33a3a;
+    animation: poem-blink 1s steps(1) infinite;
+  }
+
+  @keyframes poem-blink {
+    50% { opacity: 0; }
+  }
+
+  .poem-info {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    margin-top: 0.6rem;
+    text-align: right;
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", serif;
+  }
+
+  .poem-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .poem-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.9rem;
+  }
+
+  .poem-btn:hover {
+    border-color: #ff8fab;
+    color: #ff8fab;
+    background: rgba(255, 143, 171, 0.08);
+  }
+
+  /* ---- 推歌播放器 UI ---- */
+  .song-player-wrap {
+    margin-top: 0.6rem;
+  }
+
+  .song-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 14px;
+    background: rgba(128, 128, 128, 0.08);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+  }
+
+  .song-progress-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .song-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .song-meta-side {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .song-ctl-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .song-ctl {
+    flex: none;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .song-play {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff8fab, #c86dd7);
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(255, 143, 171, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .song-play:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(255, 143, 171, 0.5);
+  }
+
+  .song-play.playing {
+    animation: song-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes song-pulse {
+    0%, 100% {
+      box-shadow: 0 3px 10px rgba(255, 143, 171, 0.35);
+    }
+    50% {
+      box-shadow: 0 3px 18px rgba(255, 143, 171, 0.7);
+    }
+  }
+
+  .song-nav {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    background: rgba(128, 128, 128, 0.12);
+    transition: all 0.2s;
+  }
+
+  .song-nav:hover {
+    background: rgba(255, 143, 171, 0.2);
+    color: #ff8fab;
+    transform: scale(1.12);
+  }
+
+  .song-mode {
+    font-size: 0.85rem;
+    padding: 0.32rem 0.42rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .song-mode:hover {
+    background: rgba(255, 143, 171, 0.15);
+  }
+
+  .song-progress {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    border-radius: 99px;
+    background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));
+    cursor: pointer;
+  }
+
+  .song-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #ff8fab, #c86dd7);
+    box-shadow: 0 0 8px rgba(255, 143, 171, 0.55);
+    pointer-events: none;
+  }
+
+  .song-progress-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s;
+    pointer-events: none;
+  }
+
+  .song-progress:hover .song-progress-thumb {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  .song-time {
+    flex: none;
+    font-size: 0.72rem;
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+    text-align: left;
+  }
+
+  .song-vol-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  .song-vol-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4.8rem;
+    height: 6px;
+    border-radius: 99px;
+    background: linear-gradient(90deg,
+      #ff8fab var(--vol, 100%),
+      rgba(128, 128, 128, 0.28) var(--vol, 100%));
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+
+  .song-vol-slider:hover {
+    box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.18);
+  }
+
+  .song-vol-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  }
+
+  .song-vol-slider::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  }
+</style>
+
+
+<!-- ====== 运行时间 + 文章数统计 ====== -->
+<script>
+  const startTime = new Date("2026-01-16T15:26:00"); // ← 改成你建站时间
+
+  function updateRuntime() {
+    const now = new Date();
+    let diff = Math.floor((now - startTime) / 1000);
+
+    const days = Math.floor(diff / 86400);
+    diff %= 86400;
+    const hours = Math.floor(diff / 3600);
+    diff %= 3600;
+    const minutes = Math.floor(diff / 60);
+    const seconds = diff % 60;
+
+    const el = document.getElementById("site-runtime");
+    if (el) {
+      el.innerHTML = `已稳定运行 <b>${days}</b> 天 <b>${hours}</b> 小时 <b>${minutes}</b> 分钟 <b>${seconds}</b> 秒`;
+    }
+  }
+
+  setInterval(updateRuntime, 1000);
+  updateRuntime();
+</script>
+
+
+<div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>基于 Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid 开发</span></a><br>
+© 2026 <a href="https://yjyxfcy.github.io/" target="_blank"> Yjy&apos;s blog </a> <br>
+<span id="site-runtime"></span><br> 
+    </div>
+  
+
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+<script  src="/js/language-switcher.js" ></script>
+
+<script src="/js/site-translations.js"></script>
+
+
+<script src="/js/site-experience.js"></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text') || subtitle.innerHTML || subtitle.textContent;
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+
+    var progressText = document.getElementById('toc-reading-progress-text');
+    var progressBar = document.getElementById('toc-reading-progress-bar');
+
+    function getReadingArticle() {
+      return document.querySelector('.markdown-body') ||
+        document.getElementById('hexo-blog-encrypt') ||
+        document.querySelector('article.post-content');
+    }
+
+    function updateReadingProgress() {
+      if (!progressText || !progressBar) { return; }
+      var article = getReadingArticle();
+      if (!article) { return; }
+      var rect = article.getBoundingClientRect();
+      var articleTop = window.pageYOffset + rect.top;
+      var articleHeight = article.scrollHeight;
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      var readableHeight = Math.max(articleHeight - viewportHeight * 0.55, 1);
+      var read = window.pageYOffset - articleTop + viewportHeight * 0.25;
+      var percent = Math.min(100, Math.max(0, Math.round(read / readableHeight * 100)));
+
+      progressText.textContent = percent + '%';
+      progressBar.style.width = percent + '%';
+    }
+
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    window.addEventListener('hexo-blog-decrypt', function() {
+      if ('tocbot' in window) { tocbot.refresh(); }
+      updateReadingProgress();
+    });
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        updateReadingProgress();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('li > mjx-container').forEach(node => {
+                    node.parentNode.parentNode.classList.add('has-jax');
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning" data-i18n-key="noscript_warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -625,3 +625,25 @@ figure.highlight {
 @media(max-width:767px) { #banner.hero-banner .banner-text { width:100%; padding:3.8rem 1.2rem 1rem; } #banner.hero-banner .banner-text .h2 { font-size:1rem; line-height:1.55; } }
 @media(max-width:767px) { #banner.hero-banner #subtitle, #banner.hero-banner .typed-cursor { font-size:1rem; line-height:1.55; } }
 [data-user-color-scheme="dark"] :is(.course-card-foot,.other-category-count,.other-category-label,.chapter-number,.journal-date,.journal-meta), .dark :is(.course-card-foot,.other-category-count,.other-category-label,.chapter-number,.journal-date,.journal-meta) { color:#b2c1dc; }
+
+/* Encrypted article unlock form */
+#hexo-blog-encrypt.hbe-container { max-width: 35rem; margin: 1.5rem auto 2.5rem; }
+#hexo-blog-encrypt .hbe-content { padding: 2.3rem; border: 1px solid rgba(126,150,191,.25); border-radius: 18px; background: linear-gradient(150deg,rgba(237,243,255,.92),rgba(255,248,252,.96)); box-shadow: 0 12px 34px rgba(77,99,145,.09); text-align: center; }
+.locked-icon { display: grid; place-items: center; width: 52px; height: 52px; margin: 0 auto 1rem; border-radius: 16px; color: #7286b5; background: rgba(255,255,255,.8); }
+.locked-icon svg { width: 25px; height: 25px; }
+.locked-kicker { margin: 0 0 .45rem; color: #8191b1; font-size: .65rem; font-weight: 700; letter-spacing: .16em; }
+.locked-title { margin: 0; color: var(--text-color); font-size: 1.35rem; line-height: 1.4; }
+.locked-description { margin: .65rem 0 1.5rem; color: var(--text-color); opacity: .72; font-size: .9rem; line-height: 1.7; }
+.locked-form { max-width: 25rem; margin: 0 auto; text-align: left; }
+.locked-label { display: block; margin-bottom: .5rem; color: var(--text-color); font-size: .82rem; font-weight: 600; }
+.locked-controls { display: flex; gap: .65rem; }
+.locked-input { min-width: 0; flex: 1; padding: .75rem .9rem; border: 1px solid rgba(119,139,180,.4); border-radius: 10px; outline: none; background: rgba(255,255,255,.9); color: #35435d; font: inherit; font-size: .9rem; }
+.locked-input:focus-visible { border-color: #7189bf; box-shadow: 0 0 0 3px rgba(113,137,191,.2); }
+.locked-button { padding: .75rem 1rem; border: 0; border-radius: 10px; background: #7186b6; color: white; font: inherit; font-size: .86rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.locked-button:hover,.locked-button:focus-visible { background: #596fa4; }
+.locked-button:disabled { opacity: .65; cursor: wait; }
+.locked-error { min-height: 1.4em; margin-top: .5rem; color: #bd586d; font-size: .82rem; line-height: 1.4; }
+[data-user-color-scheme="dark"] #hexo-blog-encrypt .hbe-content, .dark #hexo-blog-encrypt .hbe-content { background: #303a55; border-color: rgba(167,182,217,.2); }
+[data-user-color-scheme="dark"] .locked-icon, .dark .locked-icon { color: #bfceef; background: rgba(255,255,255,.08); }
+[data-user-color-scheme="dark"] .locked-input, .dark .locked-input { background: #252e43; border-color: #647394; color: #eef2fb; }
+@media (max-width: 575px) { #hexo-blog-encrypt .hbe-content { padding: 1.5rem 1.15rem; } .locked-controls { flex-direction: column; } .locked-button { width: 100%; } }

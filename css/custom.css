@@ -596,8 +596,8 @@ figure.highlight {
 .translation-notice[hidden] { display:none; }.translated-post-title { display:block; margin-bottom:.2rem; }.translation-notice span { color:#7788a6; }
 
 /* Reading-first refinements */
-.hero-course-link { display:inline-flex; gap:.55rem; align-items:center; margin-top:1.3rem; padding:.6rem 1.15rem; border:1px solid rgba(255,255,255,.8); border-radius:999px; background:rgba(25,44,77,.35); color:#fff; font-size:.9rem; font-weight:600; }
-.hero-course-link:hover,.hero-course-link:focus-visible { color:#fff; background:rgba(25,44,77,.65); text-decoration:none; }
+.hero-about-link { display:inline-flex; gap:.45rem; align-items:center; margin-top:.35rem; padding:.55rem 1.05rem; border:1px solid rgba(255,255,255,.8); border-radius:999px; background:rgba(25,44,77,.35); color:#fff; font-size:.86rem; font-weight:600; transition:background .2s,transform .2s; }
+.hero-about-link:hover,.hero-about-link:focus-visible { color:#fff; background:rgba(25,44,77,.68); text-decoration:none; transform:translateY(-1px); }
 .reading-title { font-size:clamp(1.5rem,2.5vw,2.05rem); line-height:1.4; font-weight:750; letter-spacing:.015em; margin:0 0 1rem; overflow-wrap:anywhere; }
 .post-course-breadcrumb { margin-bottom:.8rem; }.reading-course-link { display:inline-block; color:#7185af; font-size:.88rem; margin:0 0 1.3rem; }
 .markdown-body :is(h1,h2,h3,h4,h5,h6),#courses-heading { scroll-margin-top:90px; }
@@ -605,9 +605,9 @@ figure.highlight {
 .about-english { border-radius:14px; padding:1.35rem 1.5rem; margin-bottom:2rem; background:rgba(139,160,204,.12); }.about-english h2 { font-size:1.25rem; }.about-english p:last-child { margin-bottom:0; }.about-english[hidden] { display:none; }
 .archive-card,.course-card,.other-category-card { border-radius:14px; }.archive-card-title { line-height:1.45; }
 .search-result-meta { display:block; color:#7888a6; font-weight:400; font-size:.8rem; margin-top:.3rem; }.search-empty,.search-error { padding:1rem; color:var(--text-color); opacity:.75; }.search-snippet { padding:.4rem 1rem .8rem; line-height:1.6; color:var(--text-color); opacity:.76; font-size:.88rem; }
-@media(max-width:767px) { .hero-course-link { margin-top:.8rem; }.reading-title { font-size:1.45rem; }.course-about { margin-bottom:1.5rem; }.about-english { padding:1rem; } }
+@media(max-width:767px) { .hero-about-link { margin-top:.25rem; padding:.45rem .9rem; font-size:.82rem; }.reading-title { font-size:1.45rem; }.course-about { margin-bottom:1.5rem; }.about-english { padding:1rem; } }
 .poem-expand { display:none; }.daily-status { margin:.5rem 0 0; color:#b75568; font-size:.82rem; }
 @media(max-width:767px) { .poem-scroll:not(.poem-expanded) { max-height:6.5rem; overflow:hidden; mask-image:linear-gradient(#000 65%, transparent); }.poem-expand { display:inline-block; padding:.4rem .2rem; border:0; background:transparent; color:#7185af; cursor:pointer; font-size:.85rem; } }
-@media(max-width:767px) { #banner.hero-banner .banner-text { width:100%; padding:3.8rem 1.2rem 1rem; } #banner.hero-banner .banner-text .h2 { font-size:1rem; line-height:1.55; } #banner.hero-banner .hero-course-link { margin-top:.7rem; padding:.4rem .9rem; font-size:.82rem; } }
+@media(max-width:767px) { #banner.hero-banner .banner-text { width:100%; padding:3.8rem 1.2rem 1rem; } #banner.hero-banner .banner-text .h2 { font-size:1rem; line-height:1.55; } }
 @media(max-width:767px) { #banner.hero-banner #subtitle, #banner.hero-banner .typed-cursor { font-size:1rem; line-height:1.55; } }
 [data-user-color-scheme="dark"] :is(.course-card-foot,.other-category-count,.other-category-label,.chapter-number,.journal-date,.journal-meta), .dark :is(.course-card-foot,.other-category-count,.other-category-label,.chapter-number,.journal-date,.journal-meta) { color:#b2c1dc; }

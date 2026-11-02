@@ -2,7 +2,7 @@
   'use strict';
   // These labels supplement Fluid's own translations. Article bodies remain untouched.
   var english = {
-    '这份笔记整理了课程中网络流、计算复杂性与算法设计等内容，适合按目录顺序阅读或按主题查阅。':'These notes cover network flows, computational complexity, and algorithm design. Read them in order or explore by topic.', '这份笔记围绕自然语言处理的基础概念和建模方法展开，记录课程中涉及的主要知识点。':'These notes introduce core concepts and modeling methods in natural language processing.', '这份笔记整理了生成模型的核心方法与相关专题，包含模型原理、加速和评估等内容。':'These notes cover core generative models and related topics, including acceleration and evaluation.', '浏览课程 ↓':'Explore courses ↓', '关于这份笔记':'About these notes', '目录按课程笔记的顺序整理。':'The contents follow the course note order.', '← 返回课程目录':'← Back to course contents', '课程笔记':'Course Notes', '分类':'Categories', '首页':'Home', '最新文章':'Recent Posts', '其他分类':'Other Categories',
+    '这份笔记整理了课程中网络流、计算复杂性与算法设计等内容，适合按目录顺序阅读或按主题查阅。':'These notes cover network flows, computational complexity, and algorithm design. Read them in order or explore by topic.', '这份笔记围绕自然语言处理的基础概念和建模方法展开，记录课程中涉及的主要知识点。':'These notes introduce core concepts and modeling methods in natural language processing.', '这份笔记整理了生成模型的核心方法与相关专题，包含模型原理、加速和评估等内容。':'These notes cover core generative models and related topics, including acceleration and evaluation.', '关于这份笔记':'About these notes', '目录按课程笔记的顺序整理。':'The contents follow the course note order.', '← 返回课程目录':'← Back to course contents', '课程笔记':'Course Notes', '分类':'Categories', '首页':'Home', '最新文章':'Recent Posts', '其他分类':'Other Categories',
     '这组笔记围绕多模态学习展开，涵盖视觉与语言基础、联合表示、对齐方法、注意力机制及视觉语言模型。':'These notes cover visual and language foundations, joint representations, cross-modal alignment, attention, and vision-language models.',
     '循着课程脉络，找到每一篇笔记。':'Explore notes in course order.', '查看全部分类 →':'All categories →',
     '学习笔记与生活记录，按时间排列。':'Study notes and personal writing, in chronological order.', '文章归档 →':'Archives →',
@@ -28,11 +28,11 @@
     '扩散模型(Diffusion)':'Diffusion Models', '模型加速':'Model Acceleration', '能量模型':'Energy-based Models', '评估':'Evaluation',
     '多模态学习概览':'Multimodal Learning Overview', '公式与计算':'Formulas and Calculations', '练习题与参考解答':'Practice Problems and Solutions',
     '数竞生涯回忆录（上）':'Memories of Mathematical Competitions (Part 1)', '数竞生涯回忆录（下）':'Memories of Mathematical Competitions (Part 2)',
-    '🎵 每日推歌':'🎵 Daily Music', '📜 每日诗词':'📜 Daily Poetry', '阅读进度':'Reading progress',
+    '更多关于我':'More about me', '🎵 每日推歌':'🎵 Daily Music', '📜 每日诗词':'📜 Daily Poetry', '阅读进度':'Reading progress',
     '🔊 朗读':'🔊 Read aloud', '📋 复制':'📋 Copy', '换一首':'Another poem'
   };
   var selectors = [
-    '.hero-course-link', '.reading-title', '.reading-course-link', '.course-about h2', '.course-about p', '.section-heading h2', '.section-heading p', '.section-link', '.course-card h3', '.course-card h2', '.course-card p', '.course-card-foot span:first-child',
+    '.hero-about-link', '.reading-title', '.reading-course-link', '.course-about h2', '.course-about p', '.section-heading h2', '.section-heading p', '.section-link', '.course-card h3', '.course-card h2', '.course-card p', '.course-card-foot span:first-child',
     '.journal-meta', '.journal-title', '.category-overview .course-page-heading h1', '.category-overview .course-page-heading p', '.chapter-heading h2', '.chapter-heading span',
     '.other-category-name', '.other-category-description', '.other-category-count', '.course-breadcrumb a', '.course-breadcrumb span:last-child',
     '.courses-page:not(.category-overview) .course-page-heading h1', '.courses-page:not(.category-overview) .course-page-heading p:not(.legacy-course-link)', '.legacy-course-link a', '.course-summary span',

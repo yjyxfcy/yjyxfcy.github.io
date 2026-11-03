@@ -5529,66 +5529,60 @@ function getSeason(month) {
   return "冬";
 }
 
+// Injected into the generated daily widget by site-layouts.js.
+// The location is the site's editorial choice, not the visitor's position.
+const DAILY_CONTEXT_VERSION = "beijing-weather-v1";
+const BEIJING_WEATHER_URL = "https://api.open-meteo.com/v1/forecast?latitude=39.9042&longitude=116.4074&current=temperature_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=1&timezone=Asia%2FShanghai";
+
+function beijingNow() {
+  const values = {};
+  new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Shanghai", year: "numeric", month: "numeric", day: "numeric",
+    hour: "numeric", hourCycle: "h23", weekday: "short"
+  }).formatToParts(new Date()).forEach(function (part) { values[part.type] = part.value; });
+  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return {
+    year: Number(values.year), month: Number(values.month), day: Number(values.day),
+    hour: Number(values.hour), weekday: weekdays.indexOf(values.weekday)
+  };
+}
+
 function todayStr() {
-  const d = new Date();
-  return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  const d = beijingNow();
+  return d.year + "-" + d.month + "-" + d.day;
 }
 
-function getLocation() {
-  return new Promise(function (resolve) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (pos) {
-          resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude, src: "gps" });
-        },
-        function () { ipFallback(resolve); },
-        { timeout: 4000, maximumAge: 10 * 60 * 1000 }
-      );
-    } else {
-      ipFallback(resolve);
-    }
-  });
-}
-
-function ipFallback(resolve) {
-  fetch("https://ipapi.co/json/")
-    .then(function (r) { return r.json(); })
-    .then(function (d) {
-      if (d && typeof d.latitude === "number") {
-        resolve({ lat: d.latitude, lon: d.longitude, src: "ip", city: d.city });
-      } else {
-        resolve(null);
-      }
-    })
-    .catch(function () { resolve(null); });
-}
-
-// WMO 天气代码 → 我们的标签
 function weatherFromCode(code) {
   if (code === 0 || code === 1 || code === 2) return "晴";
   if (code === 3 || code === 45 || code === 48) return null;
-  const rain = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99];
-  if (rain.indexOf(code) >= 0) return "雨";
-  const snow = [71, 73, 75, 77, 85, 86];
-  if (snow.indexOf(code) >= 0) return "雪";
+  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].indexOf(code) >= 0) return "雨";
+  if ([71, 73, 75, 77, 85, 86].indexOf(code) >= 0) return "雪";
   return null;
 }
 
-async function fetchWeather(lat, lon) {
+async function fetchBeijingWeather() {
+  const controller = new AbortController();
+  const timeout = setTimeout(function () { controller.abort(); }, 5500);
   try {
-    const url = "https://api.open-meteo.com/v1/forecast?latitude=" + lat +
-      "&longitude=" + lon + "&current_weather=true&timezone=auto";
-    const res = await fetch(url);
+    const res = await fetch(BEIJING_WEATHER_URL, { signal: controller.signal });
+    if (!res.ok) return null;
     const data = await res.json();
-    if (!data.current_weather) return null;
-    const cw = data.current_weather;
+    const current = data.current || {};
+    const daily = data.daily || {};
+    if (!Number.isFinite(current.temperature_2m) ||
+        !Array.isArray(daily.temperature_2m_min) || !Array.isArray(daily.temperature_2m_max) ||
+        !Number.isFinite(daily.temperature_2m_min[0]) || !Number.isFinite(daily.temperature_2m_max[0])) return null;
     return {
-      weather: weatherFromCode(cw.weathercode),
-      temp: Math.round(cw.temperature),
-      wind: cw.windspeed
+      weather: weatherFromCode(Array.isArray(daily.weather_code) ? daily.weather_code[0] : current.weather_code),
+      temp: Math.round(current.temperature_2m),
+      tempLow: Math.round(daily.temperature_2m_min[0]),
+      tempHigh: Math.round(daily.temperature_2m_max[0]),
+      wind: Number.isFinite(current.wind_speed_10m) ? current.wind_speed_10m : null
     };
   } catch (e) {
     return null;
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -5599,30 +5593,36 @@ function getContextOnce() {
 }
 
 async function buildContext() {
-  const now = new Date();
+  const now = beijingNow();
   const ctx = {
-    period: getPeriod(now.getHours()),
-    season: getSeason(now.getMonth() + 1),
-    hour: now.getHours(),
-    weekday: now.getDay(),
-    weekend: (now.getDay() === 0 || now.getDay() === 6),
-    night: (now.getHours() >= 19 || now.getHours() < 5),
-    weather: null,
-    temp: null,
-    wind: null,
-    city: null
+    period: getPeriod(now.hour), season: getSeason(now.month), hour: now.hour,
+    weekday: now.weekday, weekend: now.weekday === 0 || now.weekday === 6,
+    night: now.hour >= 19 || now.hour < 5,
+    weather: null, temp: null, tempLow: null, tempHigh: null, wind: null, city: "北京"
   };
-  const loc = await getLocation();
-  if (loc) {
-    ctx.city = loc.city || null;
-    const w = await fetchWeather(loc.lat, loc.lon);
-    if (w) {
-      ctx.weather = w.weather;
-      ctx.temp = w.temp;
-      ctx.wind = w.wind;
-    }
-  }
+  const weather = await fetchBeijingWeather();
+  if (weather) Object.assign(ctx, weather);
   return ctx;
+}
+
+function temperatureMatch(ctx, tags, kind) {
+  if (!Number.isFinite(ctx.temp)) return null;
+  let targets, description;
+  if (ctx.temp <= 5) {
+    targets = kind === "song" ? ["温暖", "治愈", "深情"] : ["冬", "雪"];
+    description = "天冷，挑一份暖意";
+  } else if (ctx.temp <= 15) {
+    targets = kind === "song" ? ["温柔", "安静", "治愈"] : ["秋", "风", "冬"];
+    description = "天气偏凉，适合慢下来";
+  } else if (ctx.temp < 27) {
+    targets = kind === "song" ? ["轻快", "清新", "自由"] : ["春", "晴", "轻快"];
+    description = "气温舒适，来点轻盈的心情";
+  } else {
+    targets = kind === "song" ? ["清新", "轻快", "自由"] : ["夏", "晴"];
+    description = "天气偏热，想要一点清爽";
+  }
+  return targets.some(function (tag) { return tags.indexOf(tag) >= 0; }) ?
+    { score: 14, reason: "北京当前约 " + ctx.temp + "°C，" + description } : null;
 }
 
 const WEATHER_REASON = {
@@ -5644,6 +5644,8 @@ function scoreSong(song, ctx, jitter) {
     score += 30;
     push(WEATHER_REASON[ctx.weather] || ("今天" + ctx.weather + "天，和这首歌很配"));
   }
+  const songTemperature = temperatureMatch(ctx, song.mood, "song");
+  if (songTemperature) { score += songTemperature.score; push(songTemperature.reason); }
   if (ctx.night && song.weather.indexOf("夜") >= 0) {
     score += 15;
     push("夜色正好，这首歌很适合此刻");
@@ -5720,11 +5722,12 @@ function buildReason(song, reasons) {
 }
 
 function contextPrefix(ctx) {
-  const parts = [];
-  if (ctx && ctx.city) parts.push(ctx.city);
-  if (ctx && ctx.temp !== null && ctx.temp !== undefined) parts.push(ctx.temp + "°C");
-  if (ctx && ctx.weather) parts.push(ctx.weather + "天");
-  return parts.length > 0 ? "📍 " + parts.join(" · ") + "\n" : "";
+  const parts = ["📍 北京"];
+  if (ctx && Number.isFinite(ctx.temp)) parts.push("当前 " + ctx.temp + "°C");
+  if (ctx && Number.isFinite(ctx.tempLow) && Number.isFinite(ctx.tempHigh))
+    parts.push("今日 " + ctx.tempLow + "～" + ctx.tempHigh + "°C");
+  if (ctx && ctx.weather) parts.push("今日" + ctx.weather);
+  return parts.join(" · ") + "\n";
 }
 
 function loadSmart(resume) {
@@ -5759,7 +5762,7 @@ async function initSmart() {
   if (cached) {
     try {
       const c = JSON.parse(cached);
-      if (c && c.date === today && c.ver === SONG_CDN_VER && Array.isArray(c.order) && c.order.length > 0) {
+      if (c && c.date === today && c.ver === DAILY_CONTEXT_VERSION && Array.isArray(c.order) && c.order.length > 0) {
         smartQueue = c.order;
         smartCtx = c.ctx || null;
         smartIdx = parseInt(localStorage.getItem("smartIdx"), 10) || 0;
@@ -5774,7 +5777,7 @@ async function initSmart() {
   smartCtx = ctx;
   smartQueue = rankSongs(songs, ctx);
   smartIdx = 0;
-  localStorage.setItem("smartState", JSON.stringify({ date: today, ver: SONG_CDN_VER, ctx: ctx, order: smartQueue }));
+  localStorage.setItem("smartState", JSON.stringify({ date: today, ver: DAILY_CONTEXT_VERSION, ctx: ctx, order: smartQueue }));
   localStorage.setItem("smartIdx", "0");
   if (playMode === "shuffle") loadShuffleDeck();
   loadSmart(true);
@@ -5794,7 +5797,7 @@ function advanceSong() {
       weather: null,
       temp: null,
       wind: null,
-      city: null
+      city: "北京"
     };
     smartQueue = rankSongs(songs, ctx);
     smartIdx = 0;
@@ -6446,6 +6449,8 @@ function poemScore(poem, ctx, jitter) {
     score += 8;
     push("天气晴朗，适合一首明快的诗");
   }
+  const poemTemperature = temperatureMatch(ctx, tags, "poem");
+  if (poemTemperature) { score += poemTemperature.score; push(poemTemperature.reason); }
   if (ctx.night && tags.indexOf("夜") >= 0) {
     score += 15;
     push("夜深了，月色与诗更配");
@@ -6480,7 +6485,8 @@ function rankPoems(ctx) {
   });
   ranked.sort(function (a, b) { return b.score - a.score; });
   // 每天轮换一下，避免连续多天都是同一首
-  const rot = dayOfYear(new Date()) % Math.min(25, ranked.length);
+  const bj = beijingNow();
+  const rot = dayOfYear(new Date(bj.year, bj.month - 1, bj.day)) % Math.min(25, ranked.length);
   if (rot > 0) ranked = ranked.slice(rot).concat(ranked.slice(0, rot));
   return ranked;
 }
@@ -6502,7 +6508,7 @@ function fallbackPoemCtx() {
     weather: null,
     temp: null,
     wind: null,
-    city: null
+    city: "北京"
   };
 }
 
@@ -6511,7 +6517,7 @@ function typePoem(poem, reasons) {
   const el = document.getElementById("poem-content");
   const infoEl = document.getElementById("poem-info");
   const reasonEl = document.getElementById("poem-reason");
-  reasonEl.innerText = "💡 " + poemReason(poem, reasons);
+  reasonEl.innerText = contextPrefix(poemCtx) + "💡 " + poemReason(poem, reasons);
   infoEl.innerText = "";
   el.classList.add("typing");
   el.innerText = "";
@@ -6575,7 +6581,7 @@ async function initPoem() {
   if (cached) {
     try {
       const c = JSON.parse(cached);
-      if (c && c.date === today && Array.isArray(c.order) && c.order.length > 0) {
+      if (c && c.date === today && c.ver === DAILY_CONTEXT_VERSION && Array.isArray(c.order) && c.order.length > 0) {
         poemQueue = c.order;
         poemCtx = c.ctx || null;
         poemIdx = parseInt(localStorage.getItem("poemIdx"), 10) || 0;
@@ -6589,7 +6595,7 @@ async function initPoem() {
   poemCtx = ctx;
   poemQueue = rankPoems(ctx);
   poemIdx = 0;
-  localStorage.setItem("poemState", JSON.stringify({ date: today, ctx: ctx, order: poemQueue }));
+  localStorage.setItem("poemState", JSON.stringify({ date: today, ver: DAILY_CONTEXT_VERSION, ctx: ctx, order: poemQueue }));
   localStorage.setItem("poemIdx", "0");
   renderPoem();
 }

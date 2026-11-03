@@ -15,16 +15,6 @@
       document.querySelectorAll('.language-option').forEach(function(option) { option.addEventListener('click', update); });
       poem.insertAdjacentElement('afterend', button); update();
     }
-    var reason = document.getElementById('song-reason');
-    if (reason && !reason.dataset.locationObserved) {
-      reason.dataset.locationObserved = 'true';
-      var labelLocation = function() {
-        var first = reason.firstChild;
-        if (first && first.nodeType === Node.TEXT_NODE && first.data.indexOf('📍 ') === 0 && first.data.indexOf('📍 位置估算 · ') !== 0) first.data = first.data.replace(/^📍 /, '📍 位置估算 · ');
-      };
-      new MutationObserver(labelLocation).observe(reason, { childList:true, characterData:true, subtree:true });
-      labelLocation();
-    }
     var audio = document.getElementById('song-player');
     if (audio && !audio.dataset.failureObserved) {
       audio.dataset.failureObserved = 'true';

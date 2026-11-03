@@ -629,6 +629,7 @@ figure.highlight {
 .search-result-meta { display:block; color:#7888a6; font-weight:400; font-size:.8rem; margin-top:.3rem; }.search-empty,.search-error { padding:1rem; color:var(--text-color); opacity:.75; }.search-snippet { padding:.4rem 1rem .8rem; line-height:1.6; color:var(--text-color); opacity:.76; font-size:.88rem; }
 @media(max-width:767px) { .hero-about-link { margin-top:.25rem; padding:.45rem .9rem; font-size:.82rem; }.reading-title { font-size:1.45rem; }.course-about { margin-bottom:1.5rem; }.about-localized { padding:1rem; } }
 .poem-expand { display:none; }.daily-status { margin:.5rem 0 0; color:#b75568; font-size:.82rem; }
+.song-reason,.poem-reason { white-space:pre-line; }
 @media(max-width:767px) { .poem-scroll:not(.poem-expanded) { max-height:6.5rem; overflow:hidden; mask-image:linear-gradient(#000 65%, transparent); }.poem-expand { display:inline-block; padding:.4rem .2rem; border:0; background:transparent; color:#7185af; cursor:pointer; font-size:.85rem; } }
 @media(max-width:767px) { #banner.hero-banner .banner-text { width:100%; padding:3.8rem 1.2rem 1rem; } #banner.hero-banner .banner-text .h2 { font-size:1rem; line-height:1.55; } }
 @media(max-width:767px) { #banner.hero-banner #subtitle, #banner.hero-banner .typed-cursor { font-size:1rem; line-height:1.55; } }

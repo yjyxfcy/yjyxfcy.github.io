@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《机器学习概论》（2026 秋）第 8 讲课程笔记。按主题梳理变长序列、循环状态、注意力和 Transformer。">
+    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第八讲：读到一句话的末尾时，模型该怎样记住前面的词？如果前文很长，能不能直接去找当前最相关的位置？ RNN 和注意力分别回答了这两个问题，Transformer 则把注意力作为主要计算模块。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第8讲｜序列神经网络模型">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml8/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）第 8 讲课程笔记。按主题梳理变长序列、循环状态、注意力和 Transformer。">
+<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第八讲：读到一句话的末尾时，模型该怎样记住前面的词？如果前文很长，能不能直接去找当前最相关的位置？ RNN 和注意力分别回答了这两个问题，Transformer 则把注意力作为主要计算模块。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.133Z">
-<meta property="article:modified_time" content="2026-11-03T10:23:38.949Z">
+<meta property="article:modified_time" content="2026-11-03T10:35:55.812Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          2.7k 字
         
       </span>
     
@@ -483,7 +483,7 @@
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>08</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">训练与生成要分开理解</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">训练与生成要分开理解</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第8讲｜序列神经网络模型"></strong><span>The original article content is not automatically translated.</span></p>
             
@@ -498,21 +498,42 @@
             
               <div class="markdown-body">
                 
-                <p>北京大学《机器学习概论》（2026 秋）第 8 讲课程笔记。按主题梳理变长序列、循环状态、注意力和 Transformer。</p>
+                <p>北京大学《机器学习概论》（2026 秋）的课程笔记。</p>
+<p>第八讲：读到一句话的末尾时，模型该怎样记住前面的词？如果前文很长，能不能直接去找当前最相关的位置？</p>
+<p>RNN 和注意力分别回答了这两个问题，Transformer 则把注意力作为主要计算模块。</p>
 <span id="more"></span>
 
-<h2 id="序列与固定维度输入有何不同"><a href="#序列与固定维度输入有何不同" class="headerlink" title="序列与固定维度输入有何不同"></a>序列与固定维度输入有何不同</h2><p>文本、音频、视频和用户行为都有先后关系，长度也可能变化。对齐任务可以每输入一步产生一步输出；非对齐 Seq2Seq 则可能把一个输入序列变为不同长度的输出序列。概率链式分解写为 $p(y_{1:T}\mid x)&#x3D;\prod_{t&#x3D;1}^Tp(y_t\mid y_{&lt;t},x)$。这里是<strong>乘积</strong>，取对数后才变成求和；课件该处的求和式应按链式法则理解为乘积。</p>
-<h2 id="RNN：用状态压缩过去"><a href="#RNN：用状态压缩过去" class="headerlink" title="RNN：用状态压缩过去"></a>RNN：用状态压缩过去</h2><p>简单循环网络递推 $h_t&#x3D;\phi(Wh_{t-1}+Ux_t+b)$，再由 $h_t$ 预测输出。每个时间步共享 $W,U$，因此能处理不同长度。训练时把网络沿时间展开并做反向传播（BPTT）；同一参数在各时刻使用，梯度须累加所有时间步的贡献。长序列中，梯度沿时间反复乘 $W$ 与激活函数导数，易消失或爆炸。LSTM 用遗忘、输入、输出等门控调节记忆单元，使重要信息更易跨越多步，但并非保证所有长期依赖都能学到。</p>
-<h2 id="编码器—解码器与注意力"><a href="#编码器—解码器与注意力" class="headerlink" title="编码器—解码器与注意力"></a>编码器—解码器与注意力</h2><p>只把整个输入压缩成一个固定向量会形成信息瓶颈。注意力让解码器在第 $t$ 步直接读取各输入位置：比较当前查询 $q_t$ 与每个键 $k_i$，把分数经 softmax 变成权重 $\alpha_{ti}$，再加权求和 $c_t&#x3D;\sum_i\alpha_{ti}v_i$。查询表示“现在需要什么”，键表示“哪里可能有关”，值是被读取的内容。课件的词指代示例说明不同层或不同头可能关注句法、语义等不同联系；注意力热图是线索，不宜直接当作因果解释。</p>
-<h2 id="Transformer：让位置之间直接交互"><a href="#Transformer：让位置之间直接交互" class="headerlink" title="Transformer：让位置之间直接交互"></a>Transformer：让位置之间直接交互</h2><p>自注意力的 $Q,K,V$ 都来自同一序列，缩放点积形式为 $\mathrm{softmax}(QK^T&#x2F;\sqrt{d_k})V$。除以 $\sqrt{d_k}$ 防止维度增大时分数过大、softmax 过于尖锐。多头注意力分别学习不同投影后再拼接，增强表示能力。每个位置随后经过前馈网络；残差连接和层归一化帮助深层训练。自注意力本身不含顺序，需要加入位置编码（固定正弦余弦或可学习向量）。</p>
-<p>编码器可双向读取输入；自回归解码器要使用因果掩码，防止预测当前位置时偷看未来目标；交叉注意力让解码器的查询读取编码器产生的键和值。最后经线性映射和 softmax 得到下一个词的概率。训练可并行处理已知目标序列中的多个位置，生成时仍须逐步产生输出。与 RNN 相比，Transformer 让远距离位置的交互路径更短，但标准自注意力的时间与内存开销随序列长度平方增长。</p>
-<h2 id="RNN-的时间反向传播为何不稳定"><a href="#RNN-的时间反向传播为何不稳定" class="headerlink" title="RNN 的时间反向传播为何不稳定"></a>RNN 的时间反向传播为何不稳定</h2><p>先看简化线性递推 $h_t&#x3D;Wh_{t-1}$，则 $\partial h_T&#x2F;\partial h_t&#x3D;W^{T-t}$（这里的上标表示矩阵幂，而非转置）。若 $W$ 的特征值模长期小于 1，早期状态对末端损失的影响趋近于 0；大于 1 则可能急剧放大。实际 RNN 还需乘上激活函数的导数，因此梯度消失通常更明显。LSTM 引入记忆状态 $c_t&#x3D;f_t\odot c_{t-1}+i_t\odot\tilde c_t$，遗忘门 $f_t$ 决定旧记忆保留多少；沿记忆通道的梯度有更直接的路径。梯度裁剪常用于限制爆炸，但不能修复已经消失的信号。</p>
-<h2 id="注意力从打分到上下文向量"><a href="#注意力从打分到上下文向量" class="headerlink" title="注意力从打分到上下文向量"></a>注意力从打分到上下文向量</h2><p>给定查询 $q_t$、键 $k_i$、值 $v_i$，先算分数 $e_{ti}&#x3D;\mathrm{score}(q_t,k_i)$，再归一化 $\alpha_{ti}&#x3D;\exp(e_{ti})&#x2F;\sum_j\exp(e_{tj})$，最后 $c_t&#x3D;\sum_i\alpha_{ti}v_i$。权重和为 1，使上下文成为值向量的加权平均。传统编码器—解码器中，查询来自解码器当前状态，键和值来自编码器各时间步；这样解码第 $t$ 个词时可以有选择地查看源序列，而不只依赖一个固定向量。</p>
-<h2 id="Transformer-的形状、掩码和复杂度"><a href="#Transformer-的形状、掩码和复杂度" class="headerlink" title="Transformer 的形状、掩码和复杂度"></a>Transformer 的形状、掩码和复杂度</h2><p>设序列长度 $T$、模型维度 $d$，输入矩阵 $X\in\mathbb R^{T\times d}$。线性投影得到 $Q&#x3D;XW_Q$、$K&#x3D;XW_K$、$V&#x3D;XW_V$；若键维度为 $d_k$，则 $QK^T&#x2F;\sqrt{d_k}$ 的形状为 $T\times T$，每一行对应一个查询对所有位置的分数。对每行做 softmax 后乘 $V$，得到每个位置综合其他位置的信息。多头注意力用多套投影并行计算，再拼接投影回模型维度。每头的注意力矩阵都含约 $T^2$ 个分数，这是长序列的主要成本之一。</p>
-<p>因果掩码把未来位置的分数设为负无穷，softmax 后权重为零；padding 掩码避免关注补齐位置。编码器自注意力通常只需 padding 掩码，解码器自注意力还需因果掩码，解码器到编码器的交叉注意力则按源序列有效位置设置掩码。位置编码解决“交换两个词但集合相同”时纯自注意力缺乏顺序感的问题。完整解码块通常按掩码自注意力、交叉注意力、前馈网络的次序组织，每个子层配残差和归一化。</p>
-<h2 id="位置编码的一个可计算例子"><a href="#位置编码的一个可计算例子" class="headerlink" title="位置编码的一个可计算例子"></a>位置编码的一个可计算例子</h2><p>固定正弦位置编码可设 $PE(pos,2i)&#x3D;\sin(pos&#x2F;10000^{2i&#x2F;d})$、$PE(pos,2i+1)&#x3D;\cos(pos&#x2F;10000^{2i&#x2F;d})$。不同维度使用不同波长，让位置 1、2、3 产生可区分的向量，并可把位置差异表现为连续变化。另一种方式是直接学习每个位置的向量，但通常只为训练时设定的最大长度准备参数。无论哪种方式，位置向量与词嵌入结合后，注意力才有机会区分相同词出现在不同位置的情况。</p>
-<h2 id="训练与生成要分开理解"><a href="#训练与生成要分开理解" class="headerlink" title="训练与生成要分开理解"></a>训练与生成要分开理解</h2><p>训练自回归解码器时，目标序列已知，可把向右平移一位的真实词作为输入，同时计算所有位置的损失；因果掩码保证第 $t$ 位只能看到更早的目标词，这称为 teacher forcing。生成时真实后续词未知，只能用已生成的词继续预测，因此逐步生成。训练并行不等于生成也能一次性算完。RNN 的计算链天然跨时间，Transformer 训练时的位置计算更易并行，但标准注意力的 $T^2$ 成本在长序列上突出。</p>
-<p><strong>本讲抓手：</strong> RNN 用递推状态传递信息；注意力按当前需要选择信息；Transformer 用自注意力建模序列内部关系，并用位置编码和掩码保证顺序与预测规则。</p>
+<h3 id="序列与固定维度输入有何不同"><a href="#序列与固定维度输入有何不同" class="headerlink" title="序列与固定维度输入有何不同"></a>序列与固定维度输入有何不同</h3><p>文本、音频、视频和用户行为都有先后关系，长度也可能变化。对齐任务可以每输入一步产生一步输出；非对齐 Seq2Seq 则可能把一个输入序列变为不同长度的输出序列。</p>
+<p>概率链式分解写为 $p(y_{1:T}\mid x)&#x3D;\prod_{t&#x3D;1}^Tp(y_t\mid y_{&lt;t},x)$。这里是<strong>乘积</strong>，取对数后才变成求和；课件该处的求和式应按链式法则理解为乘积。</p>
+<h3 id="RNN：用状态压缩过去"><a href="#RNN：用状态压缩过去" class="headerlink" title="RNN：用状态压缩过去"></a>RNN：用状态压缩过去</h3><p>简单循环网络递推 $h_t&#x3D;\phi(Wh_{t-1}+Ux_t+b)$，再由 $h_t$ 预测输出。每个时间步共享 $W,U$，因此能处理不同长度。</p>
+<p>训练时把网络沿时间展开并做反向传播（BPTT）；同一参数在各时刻使用，梯度须累加所有时间步的贡献。长序列中，梯度沿时间反复乘 $W$ 与激活函数导数，易消失或爆炸。</p>
+<p>LSTM 用遗忘、输入、输出等门控调节记忆单元，使重要信息更易跨越多步，但并非保证所有长期依赖都能学到。</p>
+<h3 id="编码器—解码器与注意力"><a href="#编码器—解码器与注意力" class="headerlink" title="编码器—解码器与注意力"></a>编码器—解码器与注意力</h3><p>只把整个输入压缩成一个固定向量会形成信息瓶颈。</p>
+<p>注意力让解码器在第 $t$ 步直接读取各输入位置：比较当前查询 $q_t$ 与每个键 $k_i$，把分数经 softmax 变成权重 $\alpha_{ti}$，再加权求和 $c_t&#x3D;\sum_i\alpha_{ti}v_i$。</p>
+<p>查询表示“现在需要什么”，键表示“哪里可能有关”，值是被读取的内容。课件的词指代示例说明不同层或不同头可能关注句法、语义等不同联系；注意力热图是线索，不宜直接当作因果解释。</p>
+<h3 id="Transformer：让位置之间直接交互"><a href="#Transformer：让位置之间直接交互" class="headerlink" title="Transformer：让位置之间直接交互"></a>Transformer：让位置之间直接交互</h3><p>自注意力的 $Q,K,V$ 都来自同一序列，缩放点积形式为 $\mathrm{softmax}(QK^T&#x2F;\sqrt{d_k})V$。除以 $\sqrt{d_k}$ 防止维度增大时分数过大、softmax 过于尖锐。</p>
+<p>多头注意力分别学习不同投影后再拼接，增强表示能力。每个位置随后经过前馈网络；残差连接和层归一化帮助深层训练。自注意力本身不含顺序，需要加入位置编码（固定正弦余弦或可学习向量）。</p>
+<p>编码器可双向读取输入；自回归解码器要使用因果掩码，防止预测当前位置时偷看未来目标；交叉注意力让解码器的查询读取编码器产生的键和值。最后经线性映射和 softmax 得到下一个词的概率。</p>
+<p>训练可并行处理已知目标序列中的多个位置，生成时仍须逐步产生输出。与 RNN 相比，Transformer 让远距离位置的交互路径更短，但标准自注意力的时间与内存开销随序列长度平方增长。</p>
+<h3 id="RNN-的时间反向传播为何不稳定"><a href="#RNN-的时间反向传播为何不稳定" class="headerlink" title="RNN 的时间反向传播为何不稳定"></a>RNN 的时间反向传播为何不稳定</h3><p>先看简化线性递推 $h_t&#x3D;Wh_{t-1}$，则 $\partial h_T&#x2F;\partial h_t&#x3D;W^{T-t}$（这里的上标表示矩阵幂，而非转置）。</p>
+<p>若 $W$ 的特征值模长期小于 1，早期状态对末端损失的影响趋近于 0；大于 1 则可能急剧放大。实际 RNN 还需乘上激活函数的导数，因此梯度消失通常更明显。</p>
+<p>LSTM 引入记忆状态 $c_t&#x3D;f_t\odot c_{t-1}+i_t\odot\tilde c_t$，遗忘门 $f_t$ 决定旧记忆保留多少；沿记忆通道的梯度有更直接的路径。</p>
+<p>梯度裁剪常用于限制爆炸，但不能修复已经消失的信号。</p>
+<h3 id="注意力从打分到上下文向量"><a href="#注意力从打分到上下文向量" class="headerlink" title="注意力从打分到上下文向量"></a>注意力从打分到上下文向量</h3><p>给定查询 $q_t$、键 $k_i$、值 $v_i$，先算分数 $e_{ti}&#x3D;\mathrm{score}(q_t,k_i)$，再归一化 $\alpha_{ti}&#x3D;\exp(e_{ti})&#x2F;\sum_j\exp(e_{tj})$，最后 $c_t&#x3D;\sum_i\alpha_{ti}v_i$。</p>
+<p>权重和为 1，使上下文成为值向量的加权平均。传统编码器—解码器中，查询来自解码器当前状态，键和值来自编码器各时间步；这样解码第 $t$ 个词时可以有选择地查看源序列，而不只依赖一个固定向量。</p>
+<h3 id="Transformer-的形状、掩码和复杂度"><a href="#Transformer-的形状、掩码和复杂度" class="headerlink" title="Transformer 的形状、掩码和复杂度"></a>Transformer 的形状、掩码和复杂度</h3><p>设序列长度 $T$、模型维度 $d$，输入矩阵 $X\in\mathbb R^{T\times d}$。</p>
+<p>线性投影得到 $Q&#x3D;XW_Q$、$K&#x3D;XW_K$、$V&#x3D;XW_V$；若键维度为 $d_k$，则 $QK^T&#x2F;\sqrt{d_k}$ 的形状为 $T\times T$，每一行对应一个查询对所有位置的分数。</p>
+<p>对每行做 softmax 后乘 $V$，得到每个位置综合其他位置的信息。多头注意力用多套投影并行计算，再拼接投影回模型维度。每头的注意力矩阵都含约 $T^2$ 个分数，这是长序列的主要成本之一。</p>
+<p>因果掩码把未来位置的分数设为负无穷，softmax 后权重为零；padding 掩码避免关注补齐位置。</p>
+<p>编码器自注意力通常只需 padding 掩码，解码器自注意力还需因果掩码，解码器到编码器的交叉注意力则按源序列有效位置设置掩码。位置编码解决“交换两个词但集合相同”时纯自注意力缺乏顺序感的问题。</p>
+<p>完整解码块通常按掩码自注意力、交叉注意力、前馈网络的次序组织，每个子层配残差和归一化。</p>
+<h3 id="位置编码的一个可计算例子"><a href="#位置编码的一个可计算例子" class="headerlink" title="位置编码的一个可计算例子"></a>位置编码的一个可计算例子</h3><p>固定正弦位置编码可设 $PE(pos,2i)&#x3D;\sin(pos&#x2F;10000^{2i&#x2F;d})$、$PE(pos,2i+1)&#x3D;\cos(pos&#x2F;10000^{2i&#x2F;d})$。</p>
+<p>不同维度使用不同波长，让位置 1、2、3 产生可区分的向量，并可把位置差异表现为连续变化。另一种方式是直接学习每个位置的向量，但通常只为训练时设定的最大长度准备参数。</p>
+<p>无论哪种方式，位置向量与词嵌入结合后，注意力才有机会区分相同词出现在不同位置的情况。</p>
+<h3 id="训练与生成要分开理解"><a href="#训练与生成要分开理解" class="headerlink" title="训练与生成要分开理解"></a>训练与生成要分开理解</h3><p>训练自回归解码器时，目标序列已知，可把向右平移一位的真实词作为输入，同时计算所有位置的损失；因果掩码保证第 $t$ 位只能看到更早的目标词，这称为 teacher forcing。</p>
+<p>生成时真实后续词未知，只能用已生成的词继续预测，因此逐步生成。训练并行不等于生成也能一次性算完。</p>
+<p>RNN 的计算链天然跨时间，Transformer 训练时的位置计算更易并行，但标准注意力的 $T^2$ 成本在长序列上突出。</p>
+<p>RNN 把过去压进不断更新的状态；注意力让模型按当前需要读取不同位置；Transformer 主要靠自注意力完成位置之间的信息交换，再用位置编码和掩码处理顺序与生成规则。</p>
 
                 
               </div>
@@ -675,7 +696,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">训练与生成要分开理解</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">训练与生成要分开理解</span></a></li></ol>
   </div>
 </div>
 

@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《机器学习概论》（2026 秋）课程笔记。机器学习究竟在“学”什么？这篇从数据、模型、泛化和优化四个角度建立全课程的地图。">
+    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第一讲：先想一个问题，机器在训练集上表现很好，就算“学会”了吗？ 后面反复会遇到训练误差、测试误差和模型容量，所以先把它们的关系理清。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第1讲｜课程简介与机器学习概述">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml1/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）课程笔记。机器学习究竟在“学”什么？这篇从数据、模型、泛化和优化四个角度建立全课程的地图。">
+<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第一讲：先想一个问题，机器在训练集上表现很好，就算“学会”了吗？ 后面反复会遇到训练误差、测试误差和模型容量，所以先把它们的关系理清。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:09:12.288Z">
-<meta property="article:modified_time" content="2026-11-03T10:19:28.598Z">
+<meta property="article:modified_time" content="2026-11-03T10:35:55.804Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -483,7 +483,7 @@
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>01</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%88%B0%E9%A2%84%E6%B5%8B"><span class="toc-text">从数据到预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9C%8B%E2%80%9C%E5%AD%A6%E4%B9%A0%E2%80%9D"><span class="toc-text">用线性回归看“学习”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E4%B8%8E%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-text">验证与交叉验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%AD%E8%A8%80"><span class="toc-text">需要的数学语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E5%88%B0%E6%B3%9B%E5%8C%96%E9%A3%8E%E9%99%A9"><span class="toc-text">从经验风险到泛化风险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E5%AE%8C%E6%95%B4%E8%81%94%E7%B3%BB"><span class="toc-text">正规方程与梯度下降的完整联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%BE%AE%E5%88%86%E5%A6%82%E4%BD%95%E8%87%AA%E6%A3%80"><span class="toc-text">矩阵微分如何自检</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%88%B0%E9%A2%84%E6%B5%8B"><span class="toc-text">从数据到预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9C%8B%E2%80%9C%E5%AD%A6%E4%B9%A0%E2%80%9D"><span class="toc-text">用线性回归看“学习”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E4%B8%8E%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-text">验证与交叉验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%AD%E8%A8%80"><span class="toc-text">需要的数学语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E5%88%B0%E6%B3%9B%E5%8C%96%E9%A3%8E%E9%99%A9"><span class="toc-text">从经验风险到泛化风险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E5%AE%8C%E6%95%B4%E8%81%94%E7%B3%BB"><span class="toc-text">正规方程与梯度下降的完整联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%BE%AE%E5%88%86%E5%A6%82%E4%BD%95%E8%87%AA%E6%A3%80"><span class="toc-text">矩阵微分如何自检</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第1讲｜课程简介与机器学习概述"></strong><span>The original article content is not automatically translated.</span></p>
             
@@ -498,21 +498,35 @@
             
               <div class="markdown-body">
                 
-                <p>北京大学《机器学习概论》（2026 秋）课程笔记。机器学习究竟在“学”什么？这篇从数据、模型、泛化和优化四个角度建立全课程的地图。</p>
+                <p>北京大学《机器学习概论》（2026 秋）的课程笔记。</p>
+<p>第一讲：先想一个问题，机器在训练集上表现很好，就算“学会”了吗？</p>
+<p>后面反复会遇到训练误差、测试误差和模型容量，所以先把它们的关系理清。</p>
 <span id="more"></span>
 
-<h2 id="从数据到预测"><a href="#从数据到预测" class="headerlink" title="从数据到预测"></a>从数据到预测</h2><p>传统程序由人写规则；机器学习先给定模型族，再用样本确定参数。监督学习的样本写作 $(x_n,y_n)$：输入 $x_n$ 是特征，$y_n$ 是目标；训练得到 $f_\theta(x)$，希望它对尚未见过的样本也有效。分类预测离散标签，回归预测连续值。无监督学习没有标签，任务可能是聚类、密度估计或表示学习。课件还从数据与反馈方式区分不同学习范式；关键是先弄清可观察到什么、要预测什么。</p>
+<h3 id="从数据到预测"><a href="#从数据到预测" class="headerlink" title="从数据到预测"></a>从数据到预测</h3><p>传统程序由人写规则；机器学习先给定模型族，再用样本确定参数。监督学习的样本写作 $(x_n,y_n)$：输入 $x_n$ 是特征，$y_n$ 是目标；训练得到 $f_\theta(x)$，希望它对尚未见过的样本也有效。</p>
+<p>分类预测离散标签，回归预测连续值。无监督学习没有标签，任务可能是聚类、密度估计或表示学习。课件还从数据与反馈方式区分不同学习范式；关键是先弄清可观察到什么、要预测什么。</p>
 <p>一个完整流程是：收集并清理数据 → 划分训练、验证、测试集 → 选模型与损失 → 优化参数 → 用验证集选超参数 → 最后用测试集估计泛化性能。测试集不能参与选模型，否则它已间接变成训练信息。</p>
-<h2 id="用线性回归看“学习”"><a href="#用线性回归看“学习”" class="headerlink" title="用线性回归看“学习”"></a>用线性回归看“学习”</h2><p>最简单的模型是 $\hat y&#x3D;w^Tx+b$。若用平方误差，目标是 $L(w,b)&#x3D;\frac1N\sum_n(w^Tx_n+b-y_n)^2$。这里的学习就是找使训练误差小的参数。写成矩阵形式 $L(w)&#x3D;|Xw-y|_2^2$，梯度为 $2X^T(Xw-y)$；若 $X^TX$ 可逆，驻点满足正规方程 $X^TXw&#x3D;X^Ty$。这说明“训练神经网络”和“解线性模型”在目标函数和参数优化层面有共同骨架。</p>
-<p>训练误差小不等于真正学会。足够复杂的函数甚至可以穿过每一个训练点，却在新点上偏离很远。<strong>泛化</strong>才是机器学习的目标。模型太简单会欠拟合，容量太大且约束不足可能过拟合。岭回归在误差之外加入 $\lambda|w|_2^2$，惩罚过大的权重；$\lambda$ 是训练前选择的超参数，通常通过验证集确定。</p>
-<h2 id="验证与交叉验证"><a href="#验证与交叉验证" class="headerlink" title="验证与交叉验证"></a>验证与交叉验证</h2><p>训练集用来拟合参数，验证集用来比较超参数或模型，测试集只在最终评估时使用。数据少时，可做 $K$ 折交叉验证：轮流拿一折验证、其余训练，平均验证结果后再选方案。交叉验证也不能消除数据分布变化；部署环境与训练样本不同仍可能失效。</p>
-<h2 id="需要的数学语言"><a href="#需要的数学语言" class="headerlink" title="需要的数学语言"></a>需要的数学语言</h2><p>标量函数 $f:\mathbb R^d\to\mathbb R$ 的梯度 $\nabla f$ 告诉我们各坐标增大时函数如何变化，负梯度给出局部下降方向。Hessian $H_{ij}&#x3D;\partial^2f&#x2F;(\partial x_i\partial x_j)$ 描述局部曲率；矩阵与向量求导时先核对维度。机器学习中的数值优化通常面对有限样本给出的经验目标，因此除了求出训练目标的低值，还要考虑新数据上的表现。</p>
-<h2 id="从经验风险到泛化风险"><a href="#从经验风险到泛化风险" class="headerlink" title="从经验风险到泛化风险"></a>从经验风险到泛化风险</h2><p>我们真正关心未知分布 $P(x,y)$ 下的期望风险 $R(\theta)&#x3D;\mathbb E_{(x,y)\sim P}[\ell(f_\theta(x),y)]$。分布不可直接访问，只能用训练集的经验风险 $\hat R_D(\theta)&#x3D;\frac1N\sum_{n&#x3D;1}^N\ell(f_\theta(x_n),y_n)$ 代替。训练降低的是后者；测试集用来估计前者。两者的差距解释了训练准确率为什么不足以证明模型有效。</p>
+<h3 id="用线性回归看“学习”"><a href="#用线性回归看“学习”" class="headerlink" title="用线性回归看“学习”"></a>用线性回归看“学习”</h3><p>最简单的模型是 $\hat y&#x3D;w^Tx+b$。若用平方误差，目标是 $L(w,b)&#x3D;\frac1N\sum_n(w^Tx_n+b-y_n)^2$。这里的学习就是找使训练误差小的参数。</p>
+<p>写成矩阵形式 $L(w)&#x3D;|Xw-y|_2^2$，梯度为 $2X^T(Xw-y)$；若 $X^TX$ 可逆，驻点满足正规方程 $X^TXw&#x3D;X^Ty$。</p>
+<p>这说明“训练神经网络”和“解线性模型”在目标函数和参数优化层面有共同骨架。</p>
+<p>训练误差小不等于真正学会。足够复杂的函数甚至可以穿过每一个训练点，却在新点上偏离很远。<strong>泛化</strong>才是机器学习的目标。模型太简单会欠拟合，容量太大且约束不足可能过拟合。</p>
+<p>岭回归在误差之外加入 $\lambda|w|_2^2$，惩罚过大的权重；$\lambda$ 是训练前选择的超参数，通常通过验证集确定。</p>
+<h3 id="验证与交叉验证"><a href="#验证与交叉验证" class="headerlink" title="验证与交叉验证"></a>验证与交叉验证</h3><p>训练集用来拟合参数，验证集用来比较超参数或模型，测试集只在最终评估时使用。数据少时，可做 $K$ 折交叉验证：轮流拿一折验证、其余训练，平均验证结果后再选方案。</p>
+<p>交叉验证也不能消除数据分布变化；部署环境与训练样本不同仍可能失效。</p>
+<h3 id="需要的数学语言"><a href="#需要的数学语言" class="headerlink" title="需要的数学语言"></a>需要的数学语言</h3><p>标量函数 $f:\mathbb R^d\to\mathbb R$ 的梯度 $\nabla f$ 告诉我们各坐标增大时函数如何变化，负梯度给出局部下降方向。</p>
+<p>Hessian $H_{ij}&#x3D;\partial^2f&#x2F;(\partial x_i\partial x_j)$ 描述局部曲率；矩阵与向量求导时先核对维度。</p>
+<p>机器学习中的数值优化通常面对有限样本给出的经验目标，因此除了求出训练目标的低值，还要考虑新数据上的表现。</p>
+<h3 id="从经验风险到泛化风险"><a href="#从经验风险到泛化风险" class="headerlink" title="从经验风险到泛化风险"></a>从经验风险到泛化风险</h3><p>我们真正关心未知分布 $P(x,y)$ 下的期望风险 $R(\theta)&#x3D;\mathbb E_{(x,y)\sim P}[\ell(f_\theta(x),y)]$。</p>
+<p>分布不可直接访问，只能用训练集的经验风险 $\hat R_D(\theta)&#x3D;\frac1N\sum_{n&#x3D;1}^N\ell(f_\theta(x_n),y_n)$ 代替。训练降低的是后者；测试集用来估计前者。</p>
+<p>两者的差距解释了训练准确率为什么不足以证明模型有效。</p>
 <p>低容量模型难以拟合训练规律，容易有较大偏差；容量过高时，模型可能对抽到哪些样本特别敏感，容易有较大方差。正则化通过限制参数、早停通过限制训练过程、交叉验证通过更充分利用小数据选择超参数，各自作用于不同环节。</p>
-<h2 id="正规方程与梯度下降的完整联系"><a href="#正规方程与梯度下降的完整联系" class="headerlink" title="正规方程与梯度下降的完整联系"></a>正规方程与梯度下降的完整联系</h2><p>以无截距平方损失为例，$L(w)&#x3D;(Xw-y)^T(Xw-y)&#x3D;w^TX^TXw-2y^TXw+y^Ty$。因此 $\nabla_wL&#x3D;2X^TXw-2X^Ty$；令梯度为零即 $X^TXw&#x3D;X^Ty$。加入岭惩罚 $\lambda|w|_2^2$ 后，梯度多出 $2\lambda w$，得到 $(X^TX+\lambda I)w&#x3D;X^Ty$。当矩阵不可逆时，不能直接套逆矩阵公式；可用伪逆或正则化。</p>
+<h3 id="正规方程与梯度下降的完整联系"><a href="#正规方程与梯度下降的完整联系" class="headerlink" title="正规方程与梯度下降的完整联系"></a>正规方程与梯度下降的完整联系</h3><p>以无截距平方损失为例，$L(w)&#x3D;(Xw-y)^T(Xw-y)&#x3D;w^TX^TXw-2y^TXw+y^Ty$。因此 $\nabla_wL&#x3D;2X^TXw-2X^Ty$；令梯度为零即 $X^TXw&#x3D;X^Ty$。</p>
+<p>加入岭惩罚 $\lambda|w|_2^2$ 后，梯度多出 $2\lambda w$，得到 $(X^TX+\lambda I)w&#x3D;X^Ty$。当矩阵不可逆时，不能直接套逆矩阵公式；可用伪逆或正则化。</p>
 <p>迭代法则从初值 $w_0$ 出发，重复 $w_{t+1}&#x3D;w_t-\eta\nabla L(w_t)$。学习率 $\eta$ 决定步长。闭式解和梯度下降是在求同一目标的两种途径，后续复杂模型大多依靠迭代法。</p>
-<h2 id="矩阵微分如何自检"><a href="#矩阵微分如何自检" class="headerlink" title="矩阵微分如何自检"></a>矩阵微分如何自检</h2><p>若 $w,x\in\mathbb R^d$，$w^Tx$ 是标量，$\nabla_w(w^Tx)&#x3D;x$ 必须是 $d$ 维向量。对 $f(w)&#x3D;w^TAw$，一般有 $\nabla f&#x3D;(A+A^T)w$，当 $A$ 对称时才简化为 $2Aw$。先核对维度和矩阵是否对称，能避开不少推导错误。平方损失的 Hessian 为 $2X^TX$，半正定，因此目标是凸的。</p>
-<p><strong>本讲抓手：</strong> 把“模型、损失、优化、泛化、超参数”分清。后续统计推断解释概率意义，神经网络则不断扩展模型族。</p>
+<h3 id="矩阵微分如何自检"><a href="#矩阵微分如何自检" class="headerlink" title="矩阵微分如何自检"></a>矩阵微分如何自检</h3><p>若 $w,x\in\mathbb R^d$，$w^Tx$ 是标量，$\nabla_w(w^Tx)&#x3D;x$ 必须是 $d$ 维向量。</p>
+<p>对 $f(w)&#x3D;w^TAw$，一般有 $\nabla f&#x3D;(A+A^T)w$，当 $A$ 对称时才简化为 $2Aw$。先核对维度和矩阵是否对称，能避开不少推导错误。</p>
+<p>平方损失的 Hessian 为 $2X^TX$，半正定，因此目标是凸的。</p>
+<p>回头看这一讲：模型决定能表达什么，损失决定怎样衡量错误，优化决定怎样找参数，验证与测试负责检查能否泛化。接下来的统计推断会给这些步骤补上概率解释。</p>
 
                 
               </div>
@@ -675,7 +689,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%88%B0%E9%A2%84%E6%B5%8B"><span class="toc-text">从数据到预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9C%8B%E2%80%9C%E5%AD%A6%E4%B9%A0%E2%80%9D"><span class="toc-text">用线性回归看“学习”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E4%B8%8E%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-text">验证与交叉验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%AD%E8%A8%80"><span class="toc-text">需要的数学语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E5%88%B0%E6%B3%9B%E5%8C%96%E9%A3%8E%E9%99%A9"><span class="toc-text">从经验风险到泛化风险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E5%AE%8C%E6%95%B4%E8%81%94%E7%B3%BB"><span class="toc-text">正规方程与梯度下降的完整联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%BE%AE%E5%88%86%E5%A6%82%E4%BD%95%E8%87%AA%E6%A3%80"><span class="toc-text">矩阵微分如何自检</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%88%B0%E9%A2%84%E6%B5%8B"><span class="toc-text">从数据到预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9C%8B%E2%80%9C%E5%AD%A6%E4%B9%A0%E2%80%9D"><span class="toc-text">用线性回归看“学习”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E4%B8%8E%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-text">验证与交叉验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%AD%E8%A8%80"><span class="toc-text">需要的数学语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E5%88%B0%E6%B3%9B%E5%8C%96%E9%A3%8E%E9%99%A9"><span class="toc-text">从经验风险到泛化风险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E5%AE%8C%E6%95%B4%E8%81%94%E7%B3%BB"><span class="toc-text">正规方程与梯度下降的完整联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%BE%AE%E5%88%86%E5%A6%82%E4%BD%95%E8%87%AA%E6%A3%80"><span class="toc-text">矩阵微分如何自检</span></a></li></ol>
   </div>
 </div>
 

@@ -29,7 +29,7 @@
 <meta property="og:description" content="从感知器走向概率分类：Logistic 回归直接学习 $p(y\mid x)$，并把交叉熵、梯度下降与多分类连起来。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:09:12.292Z">
-<meta property="article:modified_time" content="2026-11-03T10:09:12.292Z">
+<meta property="article:modified_time" content="2026-11-03T10:23:04.449Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.6k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          8 分钟
+          17 分钟
         
       </span>
     
@@ -390,15 +390,6 @@
     
       
       
-        <a href="/2026/11/03/itml8/" title="序列神经网络模型｜RNN、注意力与 Transformer"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">序列神经网络模型｜RNN、注意力与 Transformer</span>
-        </a>
-      
-    
-      
-      
         <a href="/2026/11/03/itml1/" title="第1讲｜课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
@@ -460,6 +451,15 @@
         </a>
       
     
+      
+      
+        <a href="/2026/11/03/itml8/" title="第8讲｜序列神经网络模型"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第8讲｜序列神经网络模型</span>
+        </a>
+      
+    
   </div>
 
         
@@ -483,9 +483,17 @@
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>04</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%99%A8%E8%B5%B0%E5%90%91%E6%A6%82%E7%8E%87"><span class="toc-text">为什么要从感知器走向概率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%80%E9%98%B6%E4%B8%8E%E4%BA%8C%E9%98%B6"><span class="toc-text">优化：一阶与二阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%EF%BC%9ASoftmax-%E5%9B%9E%E5%BD%92"><span class="toc-text">多分类：Softmax 回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E7%94%9F%E6%88%90%E5%BC%8F%E5%88%86%E7%B1%BB%E7%9A%84%E8%81%94%E7%B3%BB"><span class="toc-text">与生成式分类的联系</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%99%A8%E8%B5%B0%E5%90%91%E6%A6%82%E7%8E%87"><span class="toc-text">为什么要从感知器走向概率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%80%E9%98%B6%E4%B8%8E%E4%BA%8C%E9%98%B6"><span class="toc-text">优化：一阶与二阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%EF%BC%9ASoftmax-%E5%9B%9E%E5%BD%92"><span class="toc-text">多分类：Softmax 回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E7%94%9F%E6%88%90%E5%BC%8F%E5%88%86%E7%B1%BB%E7%9A%84%E8%81%94%E7%B3%BB"><span class="toc-text">与生成式分类的联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%8E%A8"><span class="toc-text">二元交叉熵的梯度一步步推</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax-%E6%A2%AF%E5%BA%A6%E4%B8%8E%E5%8F%AF%E8%BE%A8%E8%AF%86%E6%80%A7"><span class="toc-text">Softmax 梯度与可辨识性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%99%A8%E6%9B%B4%E6%96%B0%E5%88%B0%E6%A6%82%E7%8E%87%E4%BC%98%E5%8C%96"><span class="toc-text">从感知器更新到概率优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E3%80%81%E9%9A%8F%E6%9C%BA%E5%92%8C-mini-batch-%E6%9B%B4%E6%96%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">批量、随机和 mini-batch 更新的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%BF%E8%B4%9F%E6%A2%AF%E5%BA%A6%E8%B5%B0"><span class="toc-text">梯度下降为什么沿负梯度走</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第4讲｜Logistic 回归与判别模型"></strong><span>The original article content is not automatically translated.</span></p>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年11月3日 晚上
+                  
+                
+              </p>
             
             
               <div class="markdown-body">
@@ -499,6 +507,12 @@
 <p>牛顿法利用 Hessian：$w\leftarrow w-H^{-1}g$。Logistic 回归的 Hessian 可写成 $X^TRX$，其中 $R$ 的对角元为 $\hat p_n(1-\hat p_n)$，因此半正定。它考虑曲率，迭代次数可能少，但形成与求解 Hessian 在高维时成本高；课件还讨论了它与迭代加权最小二乘的联系。</p>
 <h2 id="多分类：Softmax-回归"><a href="#多分类：Softmax-回归" class="headerlink" title="多分类：Softmax 回归"></a>多分类：Softmax 回归</h2><p>类别 $c$ 的得分为 $a_c&#x3D;w_c^Tx$，概率为 $p(y&#x3D;c\mid x)&#x3D;e^{a_c}&#x2F;\sum_je^{a_j}$。one-hot 标签的交叉熵是 $-\sum_c y_c\log p_c$，其对每类得分的梯度为 $p_c-y_c$，与二分类的形式一致。所有得分同时加上同一常数，概率不变；实际实现先减去最大得分可防止指数溢出。</p>
 <h2 id="与生成式分类的联系"><a href="#与生成式分类的联系" class="headerlink" title="与生成式分类的联系"></a>与生成式分类的联系</h2><p>共享协方差的高斯判别分析也会导出对 $x$ 线性的对数后验几率，但它通过拟合 $p(x\mid y)$ 得到；Logistic 回归只优化条件概率 $p(y\mid x)$。前者的分布假设更强，后者通常更聚焦分类目标。</p>
+<h2 id="二元交叉熵的梯度一步步推"><a href="#二元交叉熵的梯度一步步推" class="headerlink" title="二元交叉熵的梯度一步步推"></a>二元交叉熵的梯度一步步推</h2><p>单样本损失 $\ell&#x3D;-y\log p-(1-y)\log(1-p)$，$p&#x3D;\sigma(a)$，$a&#x3D;w^Tx+b$。先求 $\partial\ell&#x2F;\partial p&#x3D;-y&#x2F;p+(1-y)&#x2F;(1-p)$，再用 $\partial p&#x2F;\partial a&#x3D;p(1-p)$，两项相乘化简为 $\partial\ell&#x2F;\partial a&#x3D;p-y$。最后按链式法则 $\nabla_w\ell&#x3D;(p-y)x$，$\partial\ell&#x2F;\partial b&#x3D;p-y$。因此全部样本的梯度是误差加权特征之和；这比记忆最终公式更容易迁移到神经网络。</p>
+<p>二阶导数 $\nabla_w^2\ell&#x3D;p(1-p)xx^T$ 半正定，求和后得到 $X^TRX$。牛顿更新解线性系统 $H\Delta&#x3D;g$，再令 $w\leftarrow w-\Delta$；实际不必显式求 $H^{-1}$。若添加 $\lambda|w|_2^2&#x2F;2$，梯度多 $\lambda w$、Hessian 多 $\lambda I$，也能缓解近奇异的问题。</p>
+<h2 id="Softmax-梯度与可辨识性"><a href="#Softmax-梯度与可辨识性" class="headerlink" title="Softmax 梯度与可辨识性"></a>Softmax 梯度与可辨识性</h2><p>设 $p_c&#x3D;e^{a_c}&#x2F;\sum_je^{a_j}$，$\ell&#x3D;-\sum_cy_c\log p_c$ 且 $\sum_cy_c&#x3D;1$。展开为 $\ell&#x3D;-\sum_cy_ca_c+\log\sum_je^{a_j}$。对 $a_c$ 求导立即得 $p_c-y_c$，对权重向量则为 $(p_c-y_c)x$。这与二分类形式统一。所有类别的权重同时加同一个向量，会使每个类别分数都增加同一个 $v^Tx$ 而概率不变，因此参数表示存在冗余；可固定一个类别为参考，或接受等价参数化。</p>
+<h2 id="从感知器更新到概率优化"><a href="#从感知器更新到概率优化" class="headerlink" title="从感知器更新到概率优化"></a>从感知器更新到概率优化</h2><p>感知器在错分样本上按类别修正权重，主要关心决策边界的符号；Logistic 回归对所有样本用概率误差 $p-y$ 更新。前者在线性可分数据上有经典收敛结论，后者的似然目标可与正则化、概率校准和风险决策衔接。多类问题用 softmax 时，最大概率是默认的 0–1 损失决策；类别代价不同则应另设阈值或最小化期望损失。</p>
+<h2 id="批量、随机和-mini-batch-更新的区别"><a href="#批量、随机和-mini-batch-更新的区别" class="headerlink" title="批量、随机和 mini-batch 更新的区别"></a>批量、随机和 mini-batch 更新的区别</h2><p>若总损失是样本平均 $L&#x3D;\frac1N\sum_n\ell_n$，批量梯度每步计算全部 $N$ 个样本；随机梯度用一个随机样本的 $\nabla\ell_n$，在均匀抽样下它是全梯度的无偏估计；mini-batch 用 $B$ 个样本的平均，通常能并行利用硬件并降低梯度方差。每一步便宜不代表到达同一精度所需总计算更少；学习率、批大小和数据打乱共同影响训练。</p>
+<h2 id="梯度下降为什么沿负梯度走"><a href="#梯度下降为什么沿负梯度走" class="headerlink" title="梯度下降为什么沿负梯度走"></a>梯度下降为什么沿负梯度走</h2><p>在当前点 $w$ 附近做一阶近似：$L(w+\Delta)\approx L(w)+\nabla L(w)^T\Delta$。如果限定 $|\Delta|_2\le\epsilon$，让内积最小的方向是 $\Delta&#x3D;-\epsilon\nabla L&#x2F;|\nabla L|_2$。这只说明局部最陡方向；步长过大可能越过低谷。牛顿法进一步利用二阶近似 $L(w+\Delta)\approx L(w)+g^T\Delta+\frac12\Delta^TH\Delta$，令其导数为零得到 $H\Delta&#x3D;-g$。当 Hessian 不是正定或数值不稳时需要阻尼、线搜索等措施。</p>
 <p><strong>本讲抓手：</strong> 线性得分决定边界，sigmoid&#x2F;softmax 把它变成概率，交叉熵把概率模型变成可优化的目标。</p>
 
                 
@@ -554,6 +568,11 @@
           <div>2026年11月3日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年11月3日</div>
+        </div>
       
       
         <div class="license-meta-item">
@@ -657,7 +676,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%99%A8%E8%B5%B0%E5%90%91%E6%A6%82%E7%8E%87"><span class="toc-text">为什么要从感知器走向概率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%80%E9%98%B6%E4%B8%8E%E4%BA%8C%E9%98%B6"><span class="toc-text">优化：一阶与二阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%EF%BC%9ASoftmax-%E5%9B%9E%E5%BD%92"><span class="toc-text">多分类：Softmax 回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E7%94%9F%E6%88%90%E5%BC%8F%E5%88%86%E7%B1%BB%E7%9A%84%E8%81%94%E7%B3%BB"><span class="toc-text">与生成式分类的联系</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%99%A8%E8%B5%B0%E5%90%91%E6%A6%82%E7%8E%87"><span class="toc-text">为什么要从感知器走向概率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%80%E9%98%B6%E4%B8%8E%E4%BA%8C%E9%98%B6"><span class="toc-text">优化：一阶与二阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%EF%BC%9ASoftmax-%E5%9B%9E%E5%BD%92"><span class="toc-text">多分类：Softmax 回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E7%94%9F%E6%88%90%E5%BC%8F%E5%88%86%E7%B1%BB%E7%9A%84%E8%81%94%E7%B3%BB"><span class="toc-text">与生成式分类的联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%8E%A8"><span class="toc-text">二元交叉熵的梯度一步步推</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Softmax-%E6%A2%AF%E5%BA%A6%E4%B8%8E%E5%8F%AF%E8%BE%A8%E8%AF%86%E6%80%A7"><span class="toc-text">Softmax 梯度与可辨识性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%84%9F%E7%9F%A5%E5%99%A8%E6%9B%B4%E6%96%B0%E5%88%B0%E6%A6%82%E7%8E%87%E4%BC%98%E5%8C%96"><span class="toc-text">从感知器更新到概率优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E3%80%81%E9%9A%8F%E6%9C%BA%E5%92%8C-mini-batch-%E6%9B%B4%E6%96%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">批量、随机和 mini-batch 更新的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%BF%E8%B4%9F%E6%A2%AF%E5%BA%A6%E8%B5%B0"><span class="toc-text">梯度下降为什么沿负梯度走</span></a></li></ol>
   </div>
 </div>
 

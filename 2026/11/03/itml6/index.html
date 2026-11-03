@@ -29,7 +29,7 @@
 <meta property="og:description" content="当线性模型无法表达复杂关系，多层感知机通过可学习的特征变换扩展模型；真正的难点随之转向反向传播与稳定训练。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.128Z">
-<meta property="article:modified_time" content="2026-11-03T10:10:26.128Z">
+<meta property="article:modified_time" content="2026-11-03T10:23:38.947Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.5k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          7 分钟
+          16 分钟
         
       </span>
     
@@ -390,15 +390,6 @@
     
       
       
-        <a href="/2026/11/03/itml8/" title="序列神经网络模型｜RNN、注意力与 Transformer"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">序列神经网络模型｜RNN、注意力与 Transformer</span>
-        </a>
-      
-    
-      
-      
         <a href="/2026/11/03/itml1/" title="第1讲｜课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
@@ -460,6 +451,15 @@
         </a>
       
     
+      
+      
+        <a href="/2026/11/03/itml8/" title="第8讲｜序列神经网络模型"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第8讲｜序列神经网络模型</span>
+        </a>
+      
+    
   </div>
 
         
@@ -483,9 +483,17 @@
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>06</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">优化与防过拟合</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">优化与防过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E8%B5%B0%E4%B8%80%E9%81%8D%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">用两层网络走一遍反向传播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%AE%8B%E5%B7%AE%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89"><span class="toc-text">梯度消失、初始化和残差的数学直觉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BB%86%E8%8A%82"><span class="toc-text">归一化和正则化的操作细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">激活函数的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A9%E5%81%9C%E4%B8%8E%E6%9D%83%E9%87%8D%E6%83%A9%E7%BD%9A%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-text">早停与权重惩罚的联系与区别</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第6讲｜多层感知机与神经网络训练"></strong><span>The original article content is not automatically translated.</span></p>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年11月3日 晚上
+                  
+                
+              </p>
             
             
               <div class="markdown-body">
@@ -497,6 +505,12 @@
 <h2 id="反向传播究竟算什么"><a href="#反向传播究竟算什么" class="headerlink" title="反向传播究竟算什么"></a>反向传播究竟算什么</h2><p>给定损失 $L$，链式法则逐层把输出端的梯度传回输入端。令 $a^{(l)}&#x3D;W^{(l)}h^{(l-1)}+b^{(l)}$，误差信号 $\delta^{(l)}&#x3D;\partial L&#x2F;\partial a^{(l)}$；则 $\partial L&#x2F;\partial W^{(l)}&#x3D;\delta^{(l)}(h^{(l-1)})^T$，前一层误差由 $(W^{(l)})^T\delta^{(l)}$ 乘上激活函数导数得到。反向传播不是另一种优化器，它是高效求梯度的算法；得到梯度后才由 SGD 等优化器更新参数。课件还用 Jacobian–vector 与 vector–Jacobian product 解释自动微分为何无需显式构造巨大 Jacobian。</p>
 <h2 id="为什么深层网络难训练"><a href="#为什么深层网络难训练" class="headerlink" title="为什么深层网络难训练"></a>为什么深层网络难训练</h2><p>梯度跨很多层时反复乘矩阵和激活函数导数，可能指数式缩小或放大，分别造成梯度消失和爆炸。sigmoid 在饱和区导数小；ReLU 在正半轴导数稳定但负半轴可能“死亡”，Leaky ReLU&#x2F;ELU 是相关改进。合适的随机初始化希望信号在层间保持合理尺度，批归一化利用 mini-batch 统计量规范化中间表示，训练和推理时使用的统计量不同。残差连接 $h^{(l+1)}&#x3D;F(h^{(l)})+h^{(l)}$ 提供更直接的梯度通路。</p>
 <h2 id="优化与防过拟合"><a href="#优化与防过拟合" class="headerlink" title="优化与防过拟合"></a>优化与防过拟合</h2><p>mini-batch SGD 在计算效率与梯度噪声之间折中；动量、按参数调整步长的方法以及学习率日程改善训练。批大小、初始学习率和衰减策略要一起考虑。早停依据验证集表现停止训练，$L_2$ 惩罚限制过大的权重，Dropout 在训练时随机屏蔽部分单元以减轻共适应，推理时使用完整网络并相应调整。它们控制容量的方式不同，不能代替合理的数据划分。</p>
+<h2 id="用两层网络走一遍反向传播"><a href="#用两层网络走一遍反向传播" class="headerlink" title="用两层网络走一遍反向传播"></a>用两层网络走一遍反向传播</h2><p>设 $a_1&#x3D;W_1x+b_1$、$h&#x3D;\phi(a_1)$、$a_2&#x3D;W_2h+b_2$、$p&#x3D;\mathrm{softmax}(a_2)$，目标是 one-hot 类别 $y$ 的交叉熵 $L&#x3D;-\sum_cy_c\log p_c$。输出层误差为 $\delta_2&#x3D;\partial L&#x2F;\partial a_2&#x3D;p-y$，故 $\nabla_{W_2}L&#x3D;\delta_2h^T$、$\nabla_{b_2}L&#x3D;\delta_2$。传回隐藏层：$\delta_1&#x3D;(W_2^T\delta_2)\odot\phi’(a_1)$，再得 $\nabla_{W_1}L&#x3D;\delta_1x^T$、$\nabla_{b_1}L&#x3D;\delta_1$。这里 $\odot$ 是逐元素乘法。矩阵维度必须与对应权重一致，这也是检查实现是否正确的最快方法。</p>
+<p>对 mini-batch，把每个样本的梯度求和或平均，然后才更新一次权重。共享参数或分支计算图中，同一参数收到多条路径的梯度要相加；反向传播沿计算图反序遍历即可。</p>
+<h2 id="梯度消失、初始化和残差的数学直觉"><a href="#梯度消失、初始化和残差的数学直觉" class="headerlink" title="梯度消失、初始化和残差的数学直觉"></a>梯度消失、初始化和残差的数学直觉</h2><p>跨 $L$ 层的梯度包含 $\prod_{l}W_l^T\operatorname{diag}(\phi’(a_l))$。若这些因子的典型尺度长期小于 1，梯度缩小；大于 1 则放大。Xavier&#x2F;He 类初始化按输入输出宽度调整权重方差，试图让前向激活和反向梯度在层间保持合理尺度。残差块 $h_{l+1}&#x3D;h_l+F(h_l)$ 的 Jacobian 是 $I+J_F$，即使 $F$ 的通路较难训练，仍有恒等通路帮助信息传播。它不能单独保证梯度绝不爆炸或消失。</p>
+<h2 id="归一化和正则化的操作细节"><a href="#归一化和正则化的操作细节" class="headerlink" title="归一化和正则化的操作细节"></a>归一化和正则化的操作细节</h2><p>Batch Normalization 对一批激活求均值 $\mu_B$ 与方差 $s_B^2$，计算 $\hat a&#x3D;(a-\mu_B)&#x2F;\sqrt{s_B^2+\epsilon}$，再学习缩放和平移 $\gamma\hat a+\beta$。推理时若继续依赖当前单样本的 batch 统计，结果会和训练时不一致，因此通常使用训练中累计的统计量。Dropout 训练时随机置零并按保留概率缩放，推理时关闭随机屏蔽。早停要监控验证集而非训练集，否则无法识别过拟合。</p>
+<h2 id="激活函数的选择"><a href="#激活函数的选择" class="headerlink" title="激活函数的选择"></a>激活函数的选择</h2><p>Sigmoid 将值压到 $(0,1)$，适合作为二分类输出概率，但在两端饱和区导数接近零；tanh 输出以零为中心，仍会饱和。ReLU $\max(0,z)$ 在正半轴梯度为 1，计算简单，但负半轴梯度为零，部分神经元可能长期不激活。Leaky ReLU 在负半轴保留小斜率，ELU 使用平滑的负侧曲线。Softmax 是将一组得分变为总和为 1 的多类概率，通常用于输出层；它不是逐元素独立激活。</p>
+<h2 id="早停与权重惩罚的联系与区别"><a href="#早停与权重惩罚的联系与区别" class="headerlink" title="早停与权重惩罚的联系与区别"></a>早停与权重惩罚的联系与区别</h2><p>从较小随机权重开始训练时，早期迭代往往先学到较明显的规律；继续优化可能逐渐追随训练噪声。早停选择验证损失最低附近的参数，它通过限制优化轨迹间接控制复杂度。$L_2$ 在目标函数中显式惩罚权重，Dropout 在训练中随机改变网络结构，三者都可能改善泛化，但不能相互视作完全等价。若类别不平衡，单看准确率还可能掩盖小类错误，验证指标要与任务目标一致。</p>
 <p><strong>本讲抓手：</strong> MLP 学的是逐层变换；反向传播负责算导数，优化器负责走一步，初始化、归一化、残差与正则化负责让训练可行且可泛化。</p>
 
                 
@@ -552,6 +566,11 @@
           <div>2026年11月3日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年11月3日</div>
+        </div>
       
       
         <div class="license-meta-item">
@@ -655,7 +674,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">优化与防过拟合</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">优化与防过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E8%B5%B0%E4%B8%80%E9%81%8D%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">用两层网络走一遍反向传播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%AE%8B%E5%B7%AE%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89"><span class="toc-text">梯度消失、初始化和残差的数学直觉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BB%86%E8%8A%82"><span class="toc-text">归一化和正则化的操作细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">激活函数的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A9%E5%81%9C%E4%B8%8E%E6%9D%83%E9%87%8D%E6%83%A9%E7%BD%9A%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-text">早停与权重惩罚的联系与区别</span></a></li></ol>
   </div>
 </div>
 

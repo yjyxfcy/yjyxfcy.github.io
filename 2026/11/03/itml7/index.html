@@ -29,7 +29,7 @@
 <meta property="og:description" content="为什么图像不宜直接展开后交给全连接层？卷积网络利用局部连接、参数共享和逐层聚合保留空间结构。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.131Z">
-<meta property="article:modified_time" content="2026-11-03T10:10:26.131Z">
+<meta property="article:modified_time" content="2026-11-03T10:23:38.949Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          936 字
+          2.2k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          6 分钟
+          14 分钟
         
       </span>
     
@@ -390,15 +390,6 @@
     
       
       
-        <a href="/2026/11/03/itml8/" title="序列神经网络模型｜RNN、注意力与 Transformer"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">序列神经网络模型｜RNN、注意力与 Transformer</span>
-        </a>
-      
-    
-      
-      
         <a href="/2026/11/03/itml1/" title="第1讲｜课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
@@ -460,6 +451,15 @@
         </a>
       
     
+      
+      
+        <a href="/2026/11/03/itml8/" title="第8讲｜序列神经网络模型"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第8讲｜序列神经网络模型</span>
+        </a>
+      
+    
   </div>
 
         
@@ -483,9 +483,17 @@
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>07</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">经典架构与变体</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">经典架构与变体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%E5%8D%B7%E7%A7%AF%E5%B0%BA%E5%AF%B8%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">手算一次卷积尺寸和参数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E7%B4%AF%E5%8A%A0%E2%80%9D"><span class="toc-text">反向传播为什么需要“累加”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8F%96%E8%88%8D"><span class="toc-text">几种结构的计算取舍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9C%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">从经典网络看设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84%E8%83%BD%E6%8F%90%E4%BE%9B%E5%A4%9A%E5%B0%91%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D"><span class="toc-text">图像空间结构能提供多少“不变性”</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第7讲｜卷积神经网络"></strong><span>The original article content is not automatically translated.</span></p>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年11月3日 晚上
+                  
+                
+              </p>
             
             
               <div class="markdown-body">
@@ -498,6 +506,12 @@
 <h2 id="输出尺寸、填充与感受野"><a href="#输出尺寸、填充与感受野" class="headerlink" title="输出尺寸、填充与感受野"></a>输出尺寸、填充与感受野</h2><p>单维输出尺寸为 $\lfloor(H+2P-K)&#x2F;S\rfloor+1$，其中 $P$ 是两侧填充，$S$ 是步长。步长控制采样密度，零填充影响边界信息和空间尺寸。课件用多层 $3\times3$ 卷积比较有填充与无填充：以 $9\times9$ 输入连续做四层步长 1 卷积，有填充可维持 $9\times9$，无填充会逐层变为 $7,5,3,1$，边缘信息快速丢失。堆叠小核既扩大有效感受野，也插入更多非线性。</p>
 <h2 id="基本网络与训练"><a href="#基本网络与训练" class="headerlink" title="基本网络与训练"></a>基本网络与训练</h2><p>常见结构是若干卷积、激活、归一化与池化层后接任务输出层。最大池化保留窗口内最大的响应，平均池化做局部汇总；池化没有可学习权重，反向传播时最大池化只把梯度送给前向最大值的位置。卷积核在多个位置被重复使用，因此求某个核权重的梯度要把所有使用该权重的位置贡献相加。实现通常交给自动微分，但理解这种梯度累积很有助于排错。</p>
 <h2 id="经典架构与变体"><a href="#经典架构与变体" class="headerlink" title="经典架构与变体"></a>经典架构与变体</h2><p>课件介绍更深的卷积网络、Inception 的多尺度分支、ResNet 的残差块以及 SENet 的通道重标定。共同目标是让网络在增加表达能力时仍可训练、计算可控。转置卷积可扩大空间分辨率，但它是对应线性卷积算子的转置操作，不是原卷积的逆。深度可分离卷积先按通道做空间卷积，再用 $1\times1$ 卷积混合通道，从而减少计算；代价是结构约束更强。</p>
+<h2 id="手算一次卷积尺寸和参数量"><a href="#手算一次卷积尺寸和参数量" class="headerlink" title="手算一次卷积尺寸和参数量"></a>手算一次卷积尺寸和参数量</h2><p>假设输入 $32\times32\times3$，使用 16 个 $3\times3$ 卷积核、步长 1、两侧填充 1，则输出宽高均为 $\lfloor(32+2-3)&#x2F;1\rfloor+1&#x3D;32$，输出形状 $32\times32\times16$。参数数目为 $3\cdot3\cdot3\cdot16+16&#x3D;448$（最后 16 个是偏置）。若下一层仍用 $3\times3$、输出 32 通道，其参数数目是 $3\cdot3\cdot16\cdot32+32&#x3D;4640$。空间尺寸不进入权重数量，却进入计算量；分辨率翻倍通常会明显增加运算与中间激活内存。</p>
+<p>叠加两层步长 1 的 $3\times3$ 卷积，单个输出的理论感受野为 $5\times5$；再叠一层则为 $7\times7$。这与直接使用大核相比，多了非线性变换，也常能节省参数。感受野公式要同时考虑步长和膨胀率；前面层有下采样时，后面一个位置对应输入中更大的区域。</p>
+<h2 id="反向传播为什么需要“累加”"><a href="#反向传播为什么需要“累加”" class="headerlink" title="反向传播为什么需要“累加”"></a>反向传播为什么需要“累加”</h2><p>一维示意：$z_i&#x3D;\sum_kw_kx_{i+k}$。同一个 $w_k$ 被所有位置复用，所以 $\partial L&#x2F;\partial w_k&#x3D;\sum_i(\partial L&#x2F;\partial z_i)x_{i+k}$。输入 $x_j$ 也可能进入多个输出，$\partial L&#x2F;\partial x_j$ 需把所有相关路径求和。二维多通道只是将位置与通道索引扩展。最大池化的反向传播则把输出梯度送回前向窗口的最大元素位置；若并列最大值，具体分配由实现的规则决定。</p>
+<h2 id="几种结构的计算取舍"><a href="#几种结构的计算取舍" class="headerlink" title="几种结构的计算取舍"></a>几种结构的计算取舍</h2><p>普通卷积从 $C_{in}$ 到 $C_{out}$ 的核参数约 $K^2C_{in}C_{out}$。深度可分离卷积先对每个输入通道各用一个 $K\times K$ 核，再用 $1\times1$ 核混合通道，参数约 $K^2C_{in}+C_{in}C_{out}$；当通道数大时可显著减少参数。转置卷积常用于上采样，其输出尺寸受步长、填充和 output padding 共同影响；它只是卷积线性算子的转置，不能恢复被下采样丢弃的原始信息。</p>
+<h2 id="从经典网络看设计思路"><a href="#从经典网络看设计思路" class="headerlink" title="从经典网络看设计思路"></a>从经典网络看设计思路</h2><p>较早的卷积网络通常交替使用卷积与池化，再用全连接层分类。层数加深后，可用多个小卷积核代替单个大核；Inception 在同一层设置不同尺度的分支，让网络同时看局部与较大范围。ResNet 的残差块学习对输入的修正 $F(x)$，输出 $x+F(x)$，使很深的网络更易优化；当通道数很多时，瓶颈块借助 $1\times1$ 卷积先降维、再做空间卷积、最后升维。SENet 先汇聚每个通道的全局信息，再学习通道权重，相当于让网络按输入内容决定更重视哪些特征通道。</p>
+<h2 id="图像空间结构能提供多少“不变性”"><a href="#图像空间结构能提供多少“不变性”" class="headerlink" title="图像空间结构能提供多少“不变性”"></a>图像空间结构能提供多少“不变性”</h2><p>共享卷积核使特征检测具有平移等变性，但边界填充、步长和池化会改变严格的等变关系。图像旋转不变性也不会从普通卷积自动得到，通常需要数据增强、特殊结构或训练数据覆盖旋转情况。把这些归纳偏置当作“帮助学习的假设”比当作绝对保证更准确。</p>
 <p><strong>本讲抓手：</strong> 局部连接决定“看哪里”，参数共享决定“同一种特征可在哪里出现”，层叠与池化决定逐步汇总的范围。</p>
 
                 
@@ -554,6 +568,11 @@
         </div>
       
       
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年11月3日</div>
+        </div>
+      
       
         <div class="license-meta-item">
           <div>许可协议</div>
@@ -582,7 +601,7 @@
                   <a class="course-back" href="/courses/machine-learning/">← 返回 机器学习概论 目录</a>
                   <div class="course-neighbors">
                     <a href="/2026/11/03/itml6/"><small>上一篇</small><strong>← 第6讲｜多层感知机与神经网络训练</strong></a>
-                    <a href="/2026/11/03/itml8/"><small>下一篇</small><strong>序列神经网络模型｜RNN、注意力与 Transformer →</strong></a>
+                    <a href="/2026/11/03/itml8/"><small>下一篇</small><strong>第8讲｜序列神经网络模型 →</strong></a>
                   </div>
                 </nav>
               
@@ -656,7 +675,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">经典架构与变体</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">经典架构与变体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%E5%8D%B7%E7%A7%AF%E5%B0%BA%E5%AF%B8%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">手算一次卷积尺寸和参数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E7%B4%AF%E5%8A%A0%E2%80%9D"><span class="toc-text">反向传播为什么需要“累加”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8F%96%E8%88%8D"><span class="toc-text">几种结构的计算取舍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9C%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">从经典网络看设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84%E8%83%BD%E6%8F%90%E4%BE%9B%E5%A4%9A%E5%B0%91%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D"><span class="toc-text">图像空间结构能提供多少“不变性”</span></a></li></ol>
   </div>
 </div>
 

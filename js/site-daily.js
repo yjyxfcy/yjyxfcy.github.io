@@ -5737,22 +5737,26 @@ function loadSmart(resume) {
   document.getElementById("song-artist").innerText = s.artist;
   document.getElementById("song-reason").innerText =
     contextPrefix(smartCtx) + "💡 " + buildReason(s, item.reasons);
-  player.src = songUrl(s);
-  audioFallbackTried = false;
-  const sameSong = (songId === String(s.id));
+  const sameSong = songId === String(s.id);
   songId = String(s.id);
   localStorage.setItem("songId", songId);
-  if (resume && sameSong && songTime > 0) {
-    // 刷新页面：同一首歌才续播
-    player.currentTime = songTime;
-  } else {
-    // 换歌/新的一天：从头开始
-    player.currentTime = 0;
+  const targetTime = resume && sameSong ? songTime : 0;
+  if (!resume || !sameSong) {
+    songTime = 0;
     localStorage.setItem("songTime", "0");
   }
-  if (localStorage.getItem("isPlaying") === "true") {
-    player.play();
-  }
+  player.pause();
+  player.src = songUrl(s);
+  audioFallbackTried = false;
+  player.addEventListener("loadedmetadata", function restoreSongPosition() {
+    player.removeEventListener("loadedmetadata", restoreSongPosition);
+    if (targetTime > 0 && Number.isFinite(player.duration)) {
+      player.currentTime = Math.min(targetTime, Math.max(0, player.duration - 0.25));
+    }
+    if (localStorage.getItem("isPlaying") === "true") player.play().catch(function () {});
+    updateProgress();
+  });
+  if (player.readyState >= 1) player.dispatchEvent(new Event("loadedmetadata"));
   updateProgress();
 }
 

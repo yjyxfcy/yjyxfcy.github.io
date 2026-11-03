@@ -1,0 +1,1528 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#35436b">
+  <meta name="author" content="Yjy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。 多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第 2 讲：深度学习基础">
+<meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml2/index.html">
+<meta property="og:site_name" content="Yjy">
+<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。 多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-11-04T04:02:00.000Z">
+<meta property="article:modified_time" content="2026-11-03T17:49:00.801Z">
+<meta property="article:author" content="Yjy">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>第 2 讲：深度学习基础 - Yjy</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css"></noscript>
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css"></noscript>
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css?v=06ee523a2613.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yjyxfcy.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2026-01-16T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script id="fluid-language-data">
+    window.FluidLanguage = {"defaultLang":"zh-CN","packs":{"de":{"name":"Deutsch","home":{"menu":"Startseite","title":"Startseite","slogan":"Hallo! Ich bin Yjy, Student im dritten Jahr an der PKU im Fach Intelligence Science and Technology. <br>\nIch lerne und forsche im Bereich KI. <br>\nIch mag Literatur, Geschichte, Musik und Reisen. <br>\nWillkommen in meinem Blog! <br>\n<a href=\"/about/\" target=\"_blank\">Mehr über mich</a>\n"},"archive":{"menu":"Archiv","title":"Archiv","subtitle":"Archiv","post_total":"Insgesamt %d Artikel"},"category":{"menu":"Kategorien","title":"Kategorien","subtitle":"Kategorien","post_total":"Insgesamt %d Artikel","more":"More..."},"tag":{"menu":"Schlagwörter","title":"Schlagwörter","subtitle":"Schlagwörter","post_total":"Insgesamt %d Artikel"},"about":{"menu":"Über","title":"Über","subtitle":"Über"},"links":{"menu":"Weblinks","title":"Weblinks","subtitle":"Weblinks"},"page404":{"menu":"Die Seite wurde nicht gefunden","title":"Die Seite wurde nicht gefunden","subtitle":"Die Seite wurde nicht gefunden"},"post":{"toc":"Inhaltsverzeichnis","prev_post":"Vorheriger","next_post":"Nächster","updated":"Geändert am %s","meta":{"wordcount":"%s wörter","min2read":"%s minuten","views":"{} ansichten"},"copyright":{"author":"Beitragsautor","posted":"Veröffentlicht am","updated":"Geändert am","licensed":"Urheberrechtshinweis","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"Alle Aufrufe: {}","uv":"Alle Besucher: {}"},"search":{"title":"Suchen","keyword":"Stichwort"},"noscript_warning":"Blog funktioniert am besten mit aktiviertem JavaScript","home.menu":"Startseite","home.title":"Startseite","archive.menu":"Archiv","archive.title":"Archiv","archive.subtitle":"Archiv","archive.post_total":"Insgesamt %d Artikel","category.menu":"Kategorien","category.title":"Kategorien","category.subtitle":"Kategorien","category.post_total":"Insgesamt %d Artikel","category.more":"More...","tag.menu":"Schlagwörter","tag.title":"Schlagwörter","tag.subtitle":"Schlagwörter","tag.post_total":"Insgesamt %d Artikel","about.menu":"Über","about.title":"Über","about.subtitle":"Über","links.menu":"Weblinks","links.title":"Weblinks","links.subtitle":"Weblinks","page404.menu":"Die Seite wurde nicht gefunden","page404.title":"Die Seite wurde nicht gefunden","page404.subtitle":"Die Seite wurde nicht gefunden","post.toc":"Inhaltsverzeichnis","post.prev_post":"Vorheriger","post.next_post":"Nächster","post.updated":"Geändert am %s","post.meta.wordcount":"%s wörter","post.meta.min2read":"%s minuten","post.meta.views":"{} ansichten","post.copyright.author":"Beitragsautor","post.copyright.posted":"Veröffentlicht am","post.copyright.updated":"Geändert am","post.copyright.licensed":"Urheberrechtshinweis","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"Alle Aufrufe: {}","footer.uv":"Alle Besucher: {}","search.title":"Suchen","search.keyword":"Stichwort"},"en":{"name":"English","home":{"menu":"Home","title":"Home","slogan":"Hello! I'm Yjy, a junior student at PKU majoring in Intelligence Science and Technology. <br>\nI'm learning and exploring in the field of AI. <br>\nI love literature, history, music, and travel. <br>\nWelcome to my blog! <br>\n<a href=\"/about/\" target=\"_blank\">More about me</a>\n"},"archive":{"menu":"Archives","title":"Archives","subtitle":"Archives","post_total":"%d posts in total"},"category":{"menu":"Categories","title":"Categories","subtitle":"Categories","post_total":"%d posts in total","more":"More..."},"tag":{"menu":"Tags","title":"Tags","subtitle":"Tags","post_total":"%d posts in total"},"about":{"menu":"About","title":"About","subtitle":"About"},"links":{"menu":"Links","title":"Links","subtitle":"Links"},"page404":{"menu":"Page not found","title":"Page not found","subtitle":"Page not found"},"post":{"toc":"Table of Contents","prev_post":"Previous","next_post":"Next","updated":"Last updated on %s","meta":{"wordcount":"%s words","min2read":"%s mins","views":"{} views"},"copyright":{"author":"Author","posted":"Posted on","updated":"Updated on","licensed":"Licensed under","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"Views: {}","uv":"Visitors: {}"},"search":{"title":"Search","keyword":"Keyword"},"noscript_warning":"Blog works best with JavaScript enabled","home.menu":"Home","home.title":"Home","archive.menu":"Archives","archive.title":"Archives","archive.subtitle":"Archives","archive.post_total":"%d posts in total","category.menu":"Categories","category.title":"Categories","category.subtitle":"Categories","category.post_total":"%d posts in total","category.more":"More...","tag.menu":"Tags","tag.title":"Tags","tag.subtitle":"Tags","tag.post_total":"%d posts in total","about.menu":"About","about.title":"About","about.subtitle":"About","links.menu":"Links","links.title":"Links","links.subtitle":"Links","page404.menu":"Page not found","page404.title":"Page not found","page404.subtitle":"Page not found","post.toc":"Table of Contents","post.prev_post":"Previous","post.next_post":"Next","post.updated":"Last updated on %s","post.meta.wordcount":"%s words","post.meta.min2read":"%s mins","post.meta.views":"{} views","post.copyright.author":"Author","post.copyright.posted":"Posted on","post.copyright.updated":"Updated on","post.copyright.licensed":"Licensed under","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"Views: {}","footer.uv":"Visitors: {}","search.title":"Search","search.keyword":"Keyword"},"es":{"name":"Español","home":{"menu":"Inicio","title":"Inicio","slogan":"Hola! Soy Yjy, estudiante de tercer año en PKU, especializado en Ciencia y Tecnología de la Inteligencia. <br>\nEstoy aprendiendo y explorando el campo de la IA. <br>\nMe gustan la literatura, la historia, la música y viajar. <br>\nBienvenido a mi blog! <br>\n<a href=\"/about/\" target=\"_blank\">Más sobre mí</a>\n"},"archive":{"menu":"Archivo","title":"Archivo","subtitle":"Archivo","post_total":"%d artículos en total"},"category":{"menu":"Categorías","title":"Categorías","subtitle":"Categorías","post_total":"%d artículos en total","more":"Más..."},"tag":{"menu":"Etiquetas","title":"Etiquetas","subtitle":"Etiquetas","post_total":"%d artículos en total"},"about":{"menu":"Acerca","title":"Acerca","subtitle":"Acerca"},"links":{"menu":"Enlaces","title":"Enlaces","subtitle":"Enlaces"},"page404":{"menu":"Página no encontrada","title":"Página no encontrada","subtitle":"Página no encontrada"},"post":{"toc":"Tabla de Contenidos","prev_post":"Anterior","next_post":"Siguiente","updated":"Última actualización el %s","meta":{"wordcount":"%s palabras","min2read":"%s minutos","views":"{} vistas"},"copyright":{"author":"Autor","posted":"Publicado el","updated":"Actualizado el","licensed":"Licencia bajo","CC":"CC - Licencia Creative Commons","BY":"BY - Atribución","SA":"SA - Compartir igual","NC":"NC - No comercial","ND":"ND - Sin obras derivadas","ZERO":"CC0 - Sin derechos autorales"}},"footer":{"pv":"Vistas: {}","uv":"Visitantes: {}"},"search":{"title":"Buscar","keyword":"Palabra clave"},"noscript_warning":"El blog funciona mejor con JavaScript habilitado","home.menu":"Inicio","home.title":"Inicio","archive.menu":"Archivo","archive.title":"Archivo","archive.subtitle":"Archivo","archive.post_total":"%d artículos en total","category.menu":"Categorías","category.title":"Categorías","category.subtitle":"Categorías","category.post_total":"%d artículos en total","category.more":"Más...","tag.menu":"Etiquetas","tag.title":"Etiquetas","tag.subtitle":"Etiquetas","tag.post_total":"%d artículos en total","about.menu":"Acerca","about.title":"Acerca","about.subtitle":"Acerca","links.menu":"Enlaces","links.title":"Enlaces","links.subtitle":"Enlaces","page404.menu":"Página no encontrada","page404.title":"Página no encontrada","page404.subtitle":"Página no encontrada","post.toc":"Tabla de Contenidos","post.prev_post":"Anterior","post.next_post":"Siguiente","post.updated":"Última actualización el %s","post.meta.wordcount":"%s palabras","post.meta.min2read":"%s minutos","post.meta.views":"{} vistas","post.copyright.author":"Autor","post.copyright.posted":"Publicado el","post.copyright.updated":"Actualizado el","post.copyright.licensed":"Licencia bajo","post.copyright.CC":"CC - Licencia Creative Commons","post.copyright.BY":"BY - Atribución","post.copyright.SA":"SA - Compartir igual","post.copyright.NC":"NC - No comercial","post.copyright.ND":"ND - Sin obras derivadas","post.copyright.ZERO":"CC0 - Sin derechos autorales","footer.pv":"Vistas: {}","footer.uv":"Visitantes: {}","search.title":"Buscar","search.keyword":"Palabra clave"},"ja":{"name":"日本語","home":{"menu":"ホーム","title":"ホーム","slogan":"こんにちは！Yjy です。PKU で知能科学技術を学ぶ大学三年生です。<br>\nAI の分野で学び、探究を続けています。<br>\n文学、歴史、音楽、旅行が好きです。<br>\n私のブログへようこそ！<br>\n<a href=\"/about/\" target=\"_blank\">もっと詳しく</a>\n"},"archive":{"menu":"アーカイブ","title":"アーカイブ","subtitle":"アーカイブ","post_total":"全 %d 件のポスト"},"category":{"menu":"カテゴリ","title":"カテゴリ","subtitle":"カテゴリ","post_total":"全 %d 件のポスト","more":"More..."},"tag":{"menu":"タグ","title":"タグ","subtitle":"タグ","post_total":"全 %d 件のポスト"},"about":{"menu":"プロフィール","title":"プロフィール","subtitle":"プロフィール"},"links":{"menu":"リンク","title":"リンク","subtitle":"リンク"},"page404":{"menu":"ページが見つかりませんでした","title":"ページが見つかりませんでした","subtitle":"ページが見つかりませんでした"},"post":{"toc":"見出し","prev_post":"前の記事","next_post":"次の記事","updated":"最終更新日：%s","meta":{"wordcount":"%s 単語","min2read":"%s 分","views":"{} 閲覧"},"copyright":{"author":"著者","posted":"作成日","updated":"修正日","licensed":"著作権","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"閲覧合計数: {}","uv":"合計閲覧者数: {}"},"search":{"title":"検索","keyword":"キーワード"},"noscript_warning":"ブログは JavaScript を有効にすると最適に機能します","home.menu":"ホーム","home.title":"ホーム","archive.menu":"アーカイブ","archive.title":"アーカイブ","archive.subtitle":"アーカイブ","archive.post_total":"全 %d 件のポスト","category.menu":"カテゴリ","category.title":"カテゴリ","category.subtitle":"カテゴリ","category.post_total":"全 %d 件のポスト","category.more":"More...","tag.menu":"タグ","tag.title":"タグ","tag.subtitle":"タグ","tag.post_total":"全 %d 件のポスト","about.menu":"プロフィール","about.title":"プロフィール","about.subtitle":"プロフィール","links.menu":"リンク","links.title":"リンク","links.subtitle":"リンク","page404.menu":"ページが見つかりませんでした","page404.title":"ページが見つかりませんでした","page404.subtitle":"ページが見つかりませんでした","post.toc":"見出し","post.prev_post":"前の記事","post.next_post":"次の記事","post.updated":"最終更新日：%s","post.meta.wordcount":"%s 単語","post.meta.min2read":"%s 分","post.meta.views":"{} 閲覧","post.copyright.author":"著者","post.copyright.posted":"作成日","post.copyright.updated":"修正日","post.copyright.licensed":"著作権","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"閲覧合計数: {}","footer.uv":"合計閲覧者数: {}","search.title":"検索","search.keyword":"キーワード"},"ru":{"name":"Русский","home":{"menu":"Главная","title":"Главная","slogan":"Привет! Я Yjy, студент третьего курса PKU по направлению Intelligence Science and Technology. <br>\nЯ учусь и исследую область ИИ. <br>\nЯ люблю литературу, историю, музыку и путешествия. <br>\nДобро пожаловать в мой блог! <br>\n<a href=\"/about/\" target=\"_blank\">Больше обо мне</a>\n"},"archive":{"menu":"Архивы","title":"Архивы","subtitle":"Архивы","post_total":"%d сообщений всего"},"category":{"menu":"Категории","title":"Категории","subtitle":"Категории","post_total":"%d сообщений всего","more":"More..."},"tag":{"menu":"Теги","title":"Теги","subtitle":"Теги","post_total":"%d сообщений всего"},"about":{"menu":"О","title":"О","subtitle":"О"},"links":{"menu":"Ссылки","title":"Ссылки","subtitle":"Ссылки"},"page404":{"menu":"Страница не найдена","title":"Страница не найдена","subtitle":"Страница не найдена"},"post":{"toc":"Оглавление","prev_post":"Предыдущий","next_post":"Следующий","updated":"Последнее обновление %s","meta":{"wordcount":"%s слов","min2read":"%s минут","views":"{} просмотров"},"copyright":{"author":"Автор","posted":"Опубликовано на","updated":"Обновлено","license":"Лицензировано под","CC":"CC - Creative Commons license","BY":"BY - Attribution","SA":"SA - Share-alike","NC":"NC - Non-commercial","ND":"ND - No derivative works","ZERO":"CC0 - No Copyright"}},"footer":{"pv":"Просмотров: {}","uv":"Посетителей: {}"},"search":{"title":"Поиск","keyword":"Ключевое слово"},"noscript_warning":"Блог лучше всего работает с включенным JavaScript","home.menu":"Главная","home.title":"Главная","archive.menu":"Архивы","archive.title":"Архивы","archive.subtitle":"Архивы","archive.post_total":"%d сообщений всего","category.menu":"Категории","category.title":"Категории","category.subtitle":"Категории","category.post_total":"%d сообщений всего","category.more":"More...","tag.menu":"Теги","tag.title":"Теги","tag.subtitle":"Теги","tag.post_total":"%d сообщений всего","about.menu":"О","about.title":"О","about.subtitle":"О","links.menu":"Ссылки","links.title":"Ссылки","links.subtitle":"Ссылки","page404.menu":"Страница не найдена","page404.title":"Страница не найдена","page404.subtitle":"Страница не найдена","post.toc":"Оглавление","post.prev_post":"Предыдущий","post.next_post":"Следующий","post.updated":"Последнее обновление %s","post.meta.wordcount":"%s слов","post.meta.min2read":"%s минут","post.meta.views":"{} просмотров","post.copyright.author":"Автор","post.copyright.posted":"Опубликовано на","post.copyright.updated":"Обновлено","post.copyright.license":"Лицензировано под","post.copyright.CC":"CC - Creative Commons license","post.copyright.BY":"BY - Attribution","post.copyright.SA":"SA - Share-alike","post.copyright.NC":"NC - Non-commercial","post.copyright.ND":"ND - No derivative works","post.copyright.ZERO":"CC0 - No Copyright","footer.pv":"Просмотров: {}","footer.uv":"Посетителей: {}","search.title":"Поиск","search.keyword":"Ключевое слово"},"zh-CN":{"name":"简体中文","home":{"menu":"首页","title":"首页","slogan":"你好呀！我是 Yjy，PKU 信科智能专业大三学生。<br>\n正在 AI 方向继续学习和探索。<br>\n我喜欢文学、历史、音乐和旅行。<br>\n欢迎来到我的博客！<br>\n<a class=\"hero-about-link\" href=\"/about/\">更多关于我 <span aria-hidden=\"true\">↗</span></a>\n"},"archive":{"menu":"文章","title":"文章","subtitle":"文章","post_total":"共计 %d 篇文章"},"category":{"menu":"分类","title":"分类","subtitle":"分类","post_total":"共计 %d 篇文章","more":"More..."},"tag":{"menu":"标签","title":"标签","subtitle":"标签","post_total":"共计 %d 篇文章"},"about":{"menu":"关于","title":"关于","subtitle":"关于"},"links":{"menu":"友链","title":"友链","subtitle":"友情链接"},"page404":{"menu":"页面不存在","title":"页面不存在","subtitle":"页面不存在"},"post":{"toc":"目录","prev_post":"上一篇","next_post":"下一篇","updated":"本文最后更新于 %s","meta":{"wordcount":"%s 字","min2read":"%s 分钟","views":"{} 次"},"copyright":{"author":"作者","posted":"发布于","updated":"更新于","licensed":"许可协议","CC":"CC - 知识共享许可协议","BY":"BY - 署名","SA":"SA - 相同方式共享","NC":"NC - 非商业性使用","ND":"ND - 禁止演绎","ZERO":"CC0 - 无版权"}},"footer":{"pv":"总访问量 {} 次","uv":"总访客数 {} 人"},"search":{"title":"搜索","keyword":"关键词"},"noscript_warning":"博客在允许 JavaScript 运行的环境下浏览效果更佳","home.menu":"首页","home.title":"首页","archive.menu":"文章","archive.title":"文章","archive.subtitle":"文章","archive.post_total":"共计 %d 篇文章","category.menu":"分类","category.title":"分类","category.subtitle":"分类","category.post_total":"共计 %d 篇文章","category.more":"More...","tag.menu":"标签","tag.title":"标签","tag.subtitle":"标签","tag.post_total":"共计 %d 篇文章","about.menu":"关于","about.title":"关于","about.subtitle":"关于","links.menu":"友链","links.title":"友链","links.subtitle":"友情链接","page404.menu":"页面不存在","page404.title":"页面不存在","page404.subtitle":"页面不存在","post.toc":"目录","post.prev_post":"上一篇","post.next_post":"下一篇","post.updated":"本文最后更新于 %s","post.meta.wordcount":"%s 字","post.meta.min2read":"%s 分钟","post.meta.views":"{} 次","post.copyright.author":"作者","post.copyright.posted":"发布于","post.copyright.updated":"更新于","post.copyright.licensed":"许可协议","post.copyright.CC":"CC - 知识共享许可协议","post.copyright.BY":"BY - 署名","post.copyright.SA":"SA - 相同方式共享","post.copyright.NC":"NC - 非商业性使用","post.copyright.ND":"ND - 禁止演绎","post.copyright.ZERO":"CC0 - 无版权","footer.pv":"总访问量 {} 次","footer.uv":"总访客数 {} 人","search.title":"搜索","search.keyword":"关键词","home.slogan":"你好呀！我是 Yjy，PKU 信科智能专业大三学生。<br>\n正在 AI 方向继续学习和探索。<br>\n我喜欢文学、历史、音乐和旅行。<br>\n欢迎来到我的博客！<br>\n<a class=\"hero-about-link\" href=\"/about/\">更多关于我 <span aria-hidden=\"true\">↗</span></a>\n"},"zh-HK":{"name":"繁體中文","home":{"menu":"首頁","title":"首頁","slogan":"你好呀！我是 Yjy，PKU 信科智能專業大三學生。<br>\n正在 AI 方向繼續學習和探索。<br>\n我喜歡文學、歷史、音樂和旅行。<br>\n歡迎來到我的博客！<br>\n<a href=\"/about/\" target=\"_blank\">更多關於我</a>\n"},"archive":{"menu":"歸檔","title":"歸檔","subtitle":"歸檔","post_total":"共有 %d 篇文章"},"category":{"menu":"分類","title":"分類","subtitle":"分類","post_total":"共有 %d 篇文章","more":"More..."},"tag":{"menu":"標籤","title":"標籤","subtitle":"標籤","post_total":"共有 %d 篇文章"},"about":{"menu":"關於","title":"關於","subtitle":"關於"},"links":{"menu":"連結","title":"交換連結","subtitle":"交換連結"},"page404":{"menu":"頁面不存在","title":"頁面不存在","subtitle":"頁面不存在"},"post":{"toc":"目錄","prev_post":"上一篇","next_post":"下一篇","updated":"本文最後更新於：%s","meta":{"wordcount":"%s 字","min2read":"%s 分鐘","views":"{} 次"},"copyright":{"author":"作者","posted":"發布於","updated":"更新於","licensed":"許可協議","CC":"CC - 知識共享許可協議","BY":"BY - 署名","SA":"SA - 相同方式共享","NC":"NC - 非商業性使用","ND":"ND - 禁止演繹","ZERO":"CC0 - 無著作權"}},"footer":{"pv":"總訪問量 {} 次","uv":"總訪客數 {} 人"},"search":{"title":"搜尋","keyword":"關鍵字"},"noscript_warning":"博客在允許 JavaScript 運行的環境下瀏覽效果更佳","home.menu":"首頁","home.title":"首頁","archive.menu":"歸檔","archive.title":"歸檔","archive.subtitle":"歸檔","archive.post_total":"共有 %d 篇文章","category.menu":"分類","category.title":"分類","category.subtitle":"分類","category.post_total":"共有 %d 篇文章","category.more":"More...","tag.menu":"標籤","tag.title":"標籤","tag.subtitle":"標籤","tag.post_total":"共有 %d 篇文章","about.menu":"關於","about.title":"關於","about.subtitle":"關於","links.menu":"連結","links.title":"交換連結","links.subtitle":"交換連結","page404.menu":"頁面不存在","page404.title":"頁面不存在","page404.subtitle":"頁面不存在","post.toc":"目錄","post.prev_post":"上一篇","post.next_post":"下一篇","post.updated":"本文最後更新於：%s","post.meta.wordcount":"%s 字","post.meta.min2read":"%s 分鐘","post.meta.views":"{} 次","post.copyright.author":"作者","post.copyright.posted":"發布於","post.copyright.updated":"更新於","post.copyright.licensed":"許可協議","post.copyright.CC":"CC - 知識共享許可協議","post.copyright.BY":"BY - 署名","post.copyright.SA":"SA - 相同方式共享","post.copyright.NC":"NC - 非商業性使用","post.copyright.ND":"ND - 禁止演繹","post.copyright.ZERO":"CC0 - 無著作權","footer.pv":"總訪問量 {} 次","footer.uv":"總訪客數 {} 人","search.title":"搜尋","search.keyword":"關鍵字"},"zh-TW":{"name":"正體中文","home":{"menu":"首頁","title":"首頁","slogan":"你好呀！我是 Yjy，PKU 信科智能專業大三學生。<br>\n正在 AI 方向繼續學習和探索。<br>\n我喜歡文學、歷史、音樂和旅行。<br>\n歡迎來到我的部落格！<br>\n<a href=\"/about/\" target=\"_blank\">更多關於我</a>\n"},"archive":{"menu":"歸檔","title":"歸檔","subtitle":"歸檔","post_total":"共有 %d 篇文章"},"category":{"menu":"分類","title":"分類","subtitle":"分類","post_total":"共有 %d 篇文章","more":"More..."},"tag":{"menu":"標籤","title":"標籤","subtitle":"標籤","post_total":"共有 %d 篇文章"},"about":{"menu":"關於","title":"關於","subtitle":"關於"},"links":{"menu":"連結","title":"交換連結","subtitle":"交換連結"},"page404":{"menu":"頁面不存在","title":"頁面不存在","subtitle":"頁面不存在"},"post":{"toc":"目錄","prev_post":"上一篇","next_post":"下一篇","updated":"本文最後更新於：%s","meta":{"wordcount":"%s 字","min2read":"%s 分鐘","views":"{} 次"},"copyright":{"author":"作者","posted":"發布於","updated":"更新於","licensed":"許可協議","CC":"CC - 創用 CC 授權","BY":"BY - 姓名標示","SA":"SA - 相同方式分享","NC":"NC - 非商業性","ND":"ND - 禁止改作","ZERO":"CC0 - 公眾領域貢獻宣告"}},"footer":{"pv":"總訪問量 {} 次","uv":"總訪客數 {} 人"},"search":{"title":"搜尋","keyword":"關鍵字"},"noscript_warning":"部落格在允許 JavaScript 執行的環境下瀏覽效果更佳","home.menu":"首頁","home.title":"首頁","archive.menu":"歸檔","archive.title":"歸檔","archive.subtitle":"歸檔","archive.post_total":"共有 %d 篇文章","category.menu":"分類","category.title":"分類","category.subtitle":"分類","category.post_total":"共有 %d 篇文章","category.more":"More...","tag.menu":"標籤","tag.title":"標籤","tag.subtitle":"標籤","tag.post_total":"共有 %d 篇文章","about.menu":"關於","about.title":"關於","about.subtitle":"關於","links.menu":"連結","links.title":"交換連結","links.subtitle":"交換連結","page404.menu":"頁面不存在","page404.title":"頁面不存在","page404.subtitle":"頁面不存在","post.toc":"目錄","post.prev_post":"上一篇","post.next_post":"下一篇","post.updated":"本文最後更新於：%s","post.meta.wordcount":"%s 字","post.meta.min2read":"%s 分鐘","post.meta.views":"{} 次","post.copyright.author":"作者","post.copyright.posted":"發布於","post.copyright.updated":"更新於","post.copyright.licensed":"許可協議","post.copyright.CC":"CC - 創用 CC 授權","post.copyright.BY":"BY - 姓名標示","post.copyright.SA":"SA - 相同方式分享","post.copyright.NC":"NC - 非商業性","post.copyright.ND":"ND - 禁止改作","post.copyright.ZERO":"CC0 - 公眾領域貢獻宣告","footer.pv":"總訪問量 {} 次","footer.uv":"總訪客數 {} 人","search.title":"搜尋","search.keyword":"關鍵字"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yjy's blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span data-i18n-key="home.menu">首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span data-i18n-key="about.menu">关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span data-i18n-key="archive.menu">文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span data-i18n-key="category.menu">分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span data-i18n-key="links.menu">友链</span>
+              </a>
+            </li>
+          
+        
+        
+          
+          
+          <li class="nav-item dropdown" id="language-switcher">
+            <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+              <i class="iconfont icon-globe"></i>
+              <span id="language-current">简体中文</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="language-current">
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="zh-CN">
+                  <span>简体中文</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="de">
+                  <span>Deutsch</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="en">
+                  <span>English</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="es">
+                  <span>Español</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="ja">
+                  <span>日本語</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="ru">
+                  <span>Русский</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="zh-HK">
+                  <span>繁體中文</span>
+                </a>
+              
+                
+                <a class="dropdown-item language-option" href="javascript:;" data-lang="zh-TW">
+                  <span>正體中文</span>
+                </a>
+              
+            </div>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/p5.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="02 · 第 2 讲：深度学习基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yjy
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-11-04 12:02" pubdate>
+          2026年11月4日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar">
+    
+
+<div id="category-bar-card">
+  <p class="category-bar-header">
+    <i class="iconfont icon-category"></i>
+    <span>分类文章</span>
+  </p>
+  
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="多模态学习"
+        id="heading-1ad08b8f628b1e8f2dbc9ccc08e0bcbc" role="tab" data-toggle="collapse" href="#collapse-1ad08b8f628b1e8f2dbc9ccc08e0bcbc"
+        aria-expanded="true"
+      >
+        多模态学习
+        <span class="list-group-count">(8)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-1ad08b8f628b1e8f2dbc9ccc08e0bcbc"
+           role="tabpanel" aria-labelledby="heading-1ad08b8f628b1e8f2dbc9ccc08e0bcbc">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2026/11/04/mml1/" title="第 1 讲：多模态学习导论"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 1 讲：多模态学习导论</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml2/" title="第 2 讲：深度学习基础"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">第 2 讲：深度学习基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml3/" title="第 3 讲：计算机视觉基础与分类网络"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 3 讲：计算机视觉基础与分类网络</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml4/" title="第 4 讲：目标检测与图像分割"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 4 讲：目标检测与图像分割</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml5/" title="第 5 讲：自然语言处理与序列建模"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 5 讲：自然语言处理与序列建模</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml6/" title="第 6 讲：多模态表示与融合"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 6 讲：多模态表示与融合</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml7/" title="第 7 讲：跨模态对齐与注意力"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 7 讲：跨模态对齐与注意力</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml8/" title="第 8 讲：视觉语言基础模型"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 8 讲：视觉语言基础模型</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+</div>
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 class="reading-title">02 · 第 2 讲：深度学习基础</h1>
+            
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>02</span></nav>
+              <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80"><span class="toc-text">深度学习基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%88%B0%E5%A4%9A%E5%B1%82%E7%BD%91%E7%BB%9C"><span class="toc-text">从线性回归到多层网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9A%E5%9B%BE%E5%83%8F%E3%80%81%E5%AF%BC%E6%95%B0%E5%92%8C%E6%98%93%E6%B7%B7%E7%82%B9"><span class="toc-text">激活函数：图像、导数和易混点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E3%80%81%E5%8F%8D%E4%BC%A0%E3%80%81%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF"><span class="toc-text">损失、反传、优化与训练曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A%E7%BB%9F%E8%AE%A1%E8%BD%B4%E4%B8%8E%E5%9D%87%E5%80%BC"><span class="toc-text">正则化与归一化：统计轴与均值</span></a></li></ol></li></ol></div></details>
+            
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 2 讲：深度学习基础"></strong><span>The original article content is not automatically translated.</span></p>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年11月4日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。</p>
+<p>多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。</p>
+<span id="more"></span>
+
+<h2 id="深度学习基础"><a href="#深度学习基础" class="headerlink" title="深度学习基础"></a>深度学习基础</h2><h3 id="从线性回归到多层网络"><a href="#从线性回归到多层网络" class="headerlink" title="从线性回归到多层网络"></a>从线性回归到多层网络</h3><p>单样本线性层：$\hat{\mathbf y}&#x3D;W^\top\mathbf x+\mathbf b$；若输入 $d_{\rm in}$、输出 $d_{\rm out}$，则 $W\in\mathbb R^{d_{\rm in}\times d_{\rm out}}$。矩阵习惯也可写作 $XW+\mathbf 1b^\top$，使用公式时先说明数据按行还是按列。</p>
+<p>均方误差可写 $\mathcal L(W,b)&#x3D;\frac1{2N}\sum_{n&#x3D;1}^N|\hat y_n-y_n|_2^2$。把偏置并入设计矩阵 $\tilde X&#x3D;[X,\mathbf1]$，若 $\tilde X^\top\tilde X$ 可逆，正规方程给出 $\tilde W^*&#x3D;(\tilde X^\top\tilde X)^{-1}\tilde X^\top Y$；不可逆时用伪逆或正则化，不能直接求逆。多层纯线性映射仍等于一个线性映射，所以需要激活函数：$h^{(\ell)}&#x3D;\phi(W^{(\ell)}h^{(\ell-1)}+b^{(\ell)})$。</p>
+<p>“通用近似”说明某些足够宽&#x2F;深的网络能够逼近一类连续函数，<strong>不保证</strong>给定网络可训练、数据足够、泛化好，也不等于任意函数都能在有限资源下精确表示。</p>
+<p><strong>7–20 页的 Light Theory 动画</strong>：隐藏 Sigmoid 单元 $\sigma(wx+b)$ 当 $|w|$ 很大时形状接近阶跃，阶跃位置约在 $s&#x3D;-b&#x2F;w$；两个方向相反的阶跃相减可近似一个局部“矩形窗”，多个矩形窗按不同高度加权求和，像黎曼和一样逐段逼近目标曲线。图里先改变 bias 移动阶跃，再改变输出权重控制台阶高度，所以“多神经元叠加能拼复杂函数”有直观来源。课件列出三个理论版本：足够宽的<strong>单隐藏层</strong>网络可在适当条件下逼近连续函数；另一类结果用与输入维度相关的有限宽度（图中写 $d+1$）配足够深度；残差网络还有更窄、足够深的近似结果。这些是不同架构&#x2F;激活&#x2F;函数类前提下的存在性结果，不应把“单神经元 ResNet”随意套成任何有限网络都万能。</p>
+<h3 id="激活函数：图像、导数和易混点"><a href="#激活函数：图像、导数和易混点" class="headerlink" title="激活函数：图像、导数和易混点"></a>激活函数：图像、导数和易混点</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>公式与导数</th>
+<th>记忆点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sigmoid</td>
+<td>$\sigma(x)&#x3D;1&#x2F;(1+e^{-x})$；$\sigma’(x)&#x3D;\sigma(x)(1-\sigma(x))$</td>
+<td>输出 $(0,1)$；两端饱和、非零中心</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td>$\tanh(x)&#x3D;2\sigma(2x)-1$；$\tanh’(x)&#x3D;1-\tanh^2(x)$</td>
+<td>输出 $(-1,1)$、零中心，但两端仍饱和</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td>$\max(0,x)$；正半轴导数 1、负半轴 0</td>
+<td>便宜、正区间不饱和；负区间可能“死亡”</td>
+</tr>
+<tr>
+<td>Leaky&#x2F;PReLU</td>
+<td>$\max(\alpha x,x)$</td>
+<td>$\alpha$ 固定是 Leaky，学习得到是 PReLU</td>
+</tr>
+<tr>
+<td>GELU</td>
+<td>$x\Phi(x)$（$\Phi$ 为标准正态 CDF）；常用 $\tfrac12x[1+\tanh(\sqrt{2&#x2F;\pi}(x+0.044715x^3))]$ 近似</td>
+<td>平滑门控；与 ReLU 的硬截断不同</td>
+</tr>
+<tr>
+<td>Swish</td>
+<td>$x\sigma(x)$</td>
+<td>平滑且可在负值区给小输出</td>
+</tr>
+<tr>
+<td>SwiGLU</td>
+<td>$(xW_v)\odot\operatorname{Swish}(xW_g)$</td>
+<td>两支投影相乘，门控中用了 Swish</td>
+</tr>
+</tbody></table>
+<p><strong>为什么非零中心会影响优化？</strong> 对一层 $z&#x3D;\sum_i w_ix_i+b$，有 $\partial L&#x2F;\partial w_i&#x3D;(\partial L&#x2F;\partial z)x_i$。若上层输出 $x_i$ 全为正，则同一神经元的各个 $w_i$ 梯度同号；优化轨迹可能“之”字形。注意梯度符号<strong>也取决于损失的反传项</strong>，不能说“仅由 $x_i$ 决定”。课件激活曲线可用“饱和区斜率接近零”解释梯度消失。</p>
+<h3 id="损失、反传、优化与训练曲线"><a href="#损失、反传、优化与训练曲线" class="headerlink" title="损失、反传、优化与训练曲线"></a>损失、反传、优化与训练曲线</h3><p>分类常用 softmax $p_k&#x3D;e^{z_k}&#x2F;\sum_j e^{z_j}$ 和交叉熵 $L&#x3D;-\log p_y$。若 $C$ 类初始化近似均匀，初始损失约 $\log C$。链式法则把末端损失对参数的导数逐层传回；梯度下降 $\theta\leftarrow\theta-\eta\nabla_\theta L$，小批量 SGD 用一批样本的平均梯度，<strong>全批量 GD、单样本 SGD、小批量 SGD 不要混叫</strong>。批量平均与求和方向相同，但数值相差批量大小，固定学习率时更新幅度不一样。</p>
+<p><strong>把任务和损失对上号</strong>：回归输出连续值，常用 MSE；二分类可先算 logit $z$，再经 sigmoid 得 $p&#x3D;\sigma(z)$，二元交叉熵 $L&#x3D;-y\log p-(1-y)\log(1-p)$；多类互斥分类用 $C$ 个 logit、softmax 与多类交叉熵。Logit 是尚未归一化的分数，二分类中 $z&#x3D;\log[p&#x2F;(1-p)]$ 是对数几率。多标签任务可对每类独立 sigmoid，而不是把“多类”与“多标签”混同。参数是由训练更新的权重&#x2F;偏置，超参数如学习率、批量大小、dropout 率需另选。课件的计算图用局部导数连乘解释反传，遇到分叉节点要把各条路径贡献相加。</p>
+<p><strong>优化器关系</strong>：普通 SGD 按当前梯度更新；带动量的 SGD 累积历史方向，减少狭长谷地中来回摆动；Adam 按一阶&#x2F;二阶矩估计调节每个参数的步长。不同优化器不会消除数据与学习率选择的重要性。学习率调度可在训练后期下降；warmup 从较小学习率升起以缓和初期不稳定。课件曲线重在能诊断“发散、震荡、下降慢、过拟合”，不是背某条曲线的精确数值。</p>
+<p><strong>看曲线判问题</strong>：训练损失一开始不降，查数据&#x2F;标签、初始化、学习率、梯度；损失变 NaN，先查学习率过大、数值溢出；训练好验证差，查过拟合，考虑增强、正则化、早停；训练和验证都差，查欠拟合&#x2F;优化不足。训练一个极小数据集至近乎零损失是实现检查。学习率过大可震荡，过小下降慢；仅凭曲线不能唯一定位原因。</p>
+<h3 id="正则化与归一化：统计轴与均值"><a href="#正则化与归一化：统计轴与均值" class="headerlink" title="正则化与归一化：统计轴与均值"></a>正则化与归一化：统计轴与均值</h3><p>$L_2$ 正则为 $\lambda|W|_2^2$，倾向缩小所有权重；$L_1$ 为 $\lambda|W|_1$，更易产生稀疏权重。Dropout 训练时随机置零部分激活；倒置 Dropout 保留概率 $q&#x3D;1-p$ 时把保留项除以 $q$，推理时直接使用全部单元。数据增强通过裁剪、翻转、颜色变化等改变训练样本；测试阶段按固定流程预处理。梯度裁剪限制过大梯度，不能从根本上“证明解决”梯度问题。</p>
+<p><strong>训练曲线与增强细节</strong>：随机裁剪在训练中改变视野，测试时通常固定缩放&#x2F;中心裁剪；Mixup 把两张图和标签按同一系数线性混合，$\tilde x&#x3D;\lambda x_i+(1-\lambda)x_j,\ \tilde y&#x3D;\lambda y_i+(1-\lambda)y_j$；CutMix 用一张图的矩形区域替换另一张图的对应区域，并按保留面积调整软标签。二者都不是把混合图硬标成一个类别。DropPath&#x2F;随机深度随机跳过残差分支，适用于深网络；与逐元素 Dropout 不同。对视觉&#x2F;语言&#x2F;生成模型的归一化选择，主要看统计轴、批量大小和条件控制需求。</p>
+<p>设 CNN 激活 $x\in\mathbb R^{N\times C\times H\times W}$：</p>
+<ul>
+<li><strong>BatchNorm (BN)</strong>：每个通道 $c$，在 $N,H,W$ 上统计；训练时用当前批统计量，推理时常用移动统计量。$\hat x&#x3D;(x-\mu_c)&#x2F;\sqrt{\sigma_c^2+\epsilon}$，$y&#x3D;\gamma_c\hat x+\beta_c$。</li>
+<li><strong>LayerNorm (LN)</strong>：每个样本独立，在选定特征维度上统计；Transformer 中通常是每个 token 的 $d_{\rm model}$ 维。与批大小基本无关。</li>
+<li><strong>InstanceNorm (IN)</strong>：每个样本、每个通道，在 $H,W$ 上统计。</li>
+<li><strong>GroupNorm (GN)</strong>：每个样本，将通道分组，在组内通道及 $H,W$ 上统计。</li>
+<li><strong>RMSNorm</strong>：不减均值，$y_i&#x3D;\gamma_i x_i&#x2F;\sqrt{d^{-1}\sum_jx_j^2+\epsilon}$。课件也提 AdaLN，核心是条件信号调节归一化后的仿射参数。</li>
+</ul>
+<p><strong>易错</strong>：归一化后 $\hat x$ 才近似零均值&#x2F;单位方差；可学习 $\gamma,\beta$ 后的 $y$ 未必如此。BN 的统计轴不是“只对 batch 维”，CNN 中还包括空间轴。LN 在不同任务中具体统计轴需看张量布局。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%AD%A6%E4%B9%A0/" class="category-chain-item">多模态学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第 2 讲：深度学习基础</div>
+      <div>https://yjyxfcy.github.io/2026/11/04/mml2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yjy</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年11月4日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年11月4日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <nav class="course-navigation" aria-label="课程章节导航">
+                  <a class="course-back" href="/courses/multimodal/">← 返回 多模态学习 目录</a>
+                  <div class="course-neighbors">
+                    <a href="/2026/11/04/mml1/"><small>上一篇</small><strong>← 第 1 讲：多模态学习导论</strong></a>
+                    <a href="/2026/11/04/mml3/"><small>下一篇</small><strong>第 3 讲：计算机视觉基础与分类网络 →</strong></a>
+                  </div>
+                </nav>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"yjyxfcy/yjyxfcy.github.io","repo-id":"R_kgDOQ65acQ","category":"General","category-id":"DIC_kwDOQ65acc4C1E5P","mapping":"pathname","strict":false,"reactions-enabled":true,"emit-metadata":true,"input-position":"bottom","theme":"preferred_color_scheme","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-reading-progress" aria-label="Reading progress">
+    <div class="toc-reading-progress-row">
+      <span>阅读进度</span>
+      <span id="toc-reading-progress-text">0%</span>
+    </div>
+    <div class="toc-reading-progress-track">
+      <div id="toc-reading-progress-bar"></div>
+    </div>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80"><span class="toc-text">深度学习基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%88%B0%E5%A4%9A%E5%B1%82%E7%BD%91%E7%BB%9C"><span class="toc-text">从线性回归到多层网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9A%E5%9B%BE%E5%83%8F%E3%80%81%E5%AF%BC%E6%95%B0%E5%92%8C%E6%98%93%E6%B7%B7%E7%82%B9"><span class="toc-text">激活函数：图像、导数和易混点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E3%80%81%E5%8F%8D%E4%BC%A0%E3%80%81%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF"><span class="toc-text">损失、反传、优化与训练曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A%E7%BB%9F%E8%AE%A1%E8%BD%B4%E4%B8%8E%E5%9D%87%E5%80%BC"><span class="toc-text">正则化与归一化：统计轴与均值</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold" data-i18n-key="search.title">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input" data-i18n-key="search.keyword">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <!-- 你的 daily 卡片 -->
+<div class="daily-wrapper">
+  <!-- 今日推歌 -->
+  <div class="daily-card">
+    <h3>🎵 每日推歌</h3>
+    <div id="song-title" class="song-title"></div>
+    <div id="song-artist" class="song-artist"></div>
+    <div id="song-reason" class="song-reason"></div>
+    <div class="song-player-wrap">
+      <audio id="song-player" preload="none"></audio>
+      <div class="song-controls">
+        <div class="song-progress-block">
+          <div id="song-progress" class="song-progress" title="拖动进度">
+            <div class="song-progress-fill" id="song-progress-fill"></div>
+            <div class="song-progress-thumb" id="song-progress-thumb"></div>
+          </div>
+          <div class="song-meta-row">
+            <span id="song-time" class="song-time">0:00 / 0:00</span>
+            <div class="song-meta-side">
+              <span id="song-vol-icon" class="song-vol-icon">🔊</span>
+              <input id="song-volume" class="song-vol-slider" type="range" min="0" max="100" value="100"
+                     oninput="setVolume(this.value)" title="音量">
+              <button id="song-mode-btn" class="song-ctl song-mode" onclick="cycleMode()" title="播放模式">🔁 顺序</button>
+            </div>
+          </div>
+        </div>
+        <div class="song-ctl-row">
+          <button id="song-prev-btn" class="song-ctl song-nav" onclick="prevSong()" title="上一首">⏮</button>
+          <button id="song-play-btn" class="song-ctl song-play" onclick="togglePlay()" title="播放 / 暂停">▶</button>
+          <button id="song-next-btn" class="song-ctl song-nav" onclick="nextSong()" title="下一首">⏭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 今日诗词 -->
+  <div class="daily-card poem-card">
+    <h3>📜 每日诗词</h3>
+    <div id="poem-reason" class="poem-reason"></div>
+    <div class="poem-scroll">
+      <div id="poem-content" class="poem-content">正在铺纸研墨…</div>
+      <div id="poem-info" class="poem-info"></div>
+    </div>
+    <div class="poem-actions">
+      <button id="poem-read-btn" class="poem-btn" onclick="toggleRead()">🔊 朗读</button>
+      <button id="poem-copy-btn" class="poem-btn" onclick="copyPoem()">📋 复制</button>
+      <button class="daily-btn" onclick="nextPoem()">换一首</button>
+    </div>
+  </div>
+</div>
+
+<script defer src="/js/site-daily.js?v=d68108e3277e"></script>
+
+<style>
+  .daily-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .daily-card {
+    flex: 1;
+    min-width: 260px;
+    padding: 1.2rem;
+    border-radius: 18px;
+    /* 无背景：与页面渐变融为一体 */
+    transition: all 0.3s ease;
+    text-align: center;
+
+    /* 👇 关键对齐代码 */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .daily-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .song-title {
+    font-weight: bold;
+    margin-top: 0.3rem;
+  }
+
+  .song-artist {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  .daily-btn {
+    margin-top: auto;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+
+  .daily-btn:hover {
+    background: #ff6f91;
+  }
+
+  .poem-content {
+    font-size: 1rem;
+    line-height: 2.2;
+    margin: 0.5rem 0;
+  }
+
+  .poem-info {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .song-reason {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 0.5rem;
+    line-height: 1.7;
+    background: rgba(255, 143, 171, 0.12);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-color);
+  }
+
+  /* ---- 每日诗词 · 水墨卷轴风 ---- */
+  .poem-card {
+    position: relative;
+  }
+
+  .poem-reason {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 0.4rem;
+    line-height: 1.7;
+    background: rgba(90, 120, 160, 0.1);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-color);
+  }
+
+  .poem-scroll {
+    margin: 0.8rem 0;
+    padding: 1.1rem 1rem;
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 143, 171, 0.1), transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(128, 90, 213, 0.08), transparent 50%),
+      linear-gradient(180deg, rgba(120, 120, 120, 0.07), rgba(120, 120, 120, 0));
+    border: 1px solid rgba(128, 128, 128, 0.16);
+    min-height: 8.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem-content {
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", "Songti SC", serif;
+    font-size: 1.05rem;
+    line-height: 2.1;
+    white-space: pre-wrap;
+    color: var(--text-color);
+  }
+
+  .poem-content.typing::after {
+    content: "▎";
+    margin-left: 2px;
+    color: #d33a3a;
+    animation: poem-blink 1s steps(1) infinite;
+  }
+
+  @keyframes poem-blink {
+    50% { opacity: 0; }
+  }
+
+  .poem-info {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    margin-top: 0.6rem;
+    text-align: right;
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体", serif;
+  }
+
+  .poem-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .poem-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.9rem;
+  }
+
+  .poem-btn:hover {
+    border-color: #ff8fab;
+    color: #ff8fab;
+    background: rgba(255, 143, 171, 0.08);
+  }
+
+  /* ---- 推歌播放器 UI ---- */
+  .song-player-wrap {
+    margin-top: 0.6rem;
+  }
+
+  .song-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 14px;
+    background: rgba(128, 128, 128, 0.08);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+  }
+
+  .song-progress-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .song-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .song-meta-side {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .song-ctl-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .song-ctl {
+    flex: none;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .song-play {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff8fab, #c86dd7);
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(255, 143, 171, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .song-play:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(255, 143, 171, 0.5);
+  }
+
+  .song-play.playing {
+    animation: song-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes song-pulse {
+    0%, 100% {
+      box-shadow: 0 3px 10px rgba(255, 143, 171, 0.35);
+    }
+    50% {
+      box-shadow: 0 3px 18px rgba(255, 143, 171, 0.7);
+    }
+  }
+
+  .song-nav {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    background: rgba(128, 128, 128, 0.12);
+    transition: all 0.2s;
+  }
+
+  .song-nav:hover {
+    background: rgba(255, 143, 171, 0.2);
+    color: #ff8fab;
+    transform: scale(1.12);
+  }
+
+  .song-mode {
+    font-size: 0.85rem;
+    padding: 0.32rem 0.42rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .song-mode:hover {
+    background: rgba(255, 143, 171, 0.15);
+  }
+
+  .song-progress {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    border-radius: 99px;
+    background: linear-gradient(180deg, rgba(128, 128, 128, 0.28), rgba(128, 128, 128, 0.18));
+    cursor: pointer;
+  }
+
+  .song-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #ff8fab, #c86dd7);
+    box-shadow: 0 0 8px rgba(255, 143, 171, 0.55);
+    pointer-events: none;
+  }
+
+  .song-progress-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s;
+    pointer-events: none;
+  }
+
+  .song-progress:hover .song-progress-thumb {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  .song-time {
+    flex: none;
+    font-size: 0.72rem;
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+    text-align: left;
+  }
+
+  .song-vol-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  .song-vol-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4.8rem;
+    height: 6px;
+    border-radius: 99px;
+    background: linear-gradient(90deg,
+      #ff8fab var(--vol, 100%),
+      rgba(128, 128, 128, 0.28) var(--vol, 100%));
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+
+  .song-vol-slider:hover {
+    box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.18);
+  }
+
+  .song-vol-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  }
+
+  .song-vol-slider::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ff8fab;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  }
+</style>
+
+
+<!-- ====== 运行时间 + 文章数统计 ====== -->
+<script>
+  const startTime = new Date("2026-01-16T15:26:00"); // ← 改成你建站时间
+
+  function updateRuntime() {
+    const now = new Date();
+    let diff = Math.floor((now - startTime) / 1000);
+
+    const days = Math.floor(diff / 86400);
+    diff %= 86400;
+    const hours = Math.floor(diff / 3600);
+    diff %= 3600;
+    const minutes = Math.floor(diff / 60);
+    const seconds = diff % 60;
+
+    const el = document.getElementById("site-runtime");
+    if (el) {
+      el.innerHTML = `已稳定运行 <b>${days}</b> 天 <b>${hours}</b> 小时 <b>${minutes}</b> 分钟 <b>${seconds}</b> 秒`;
+    }
+  }
+
+  setInterval(updateRuntime, 1000);
+  updateRuntime();
+</script>
+
+
+<div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>基于 Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid 开发</span></a><br>
+© 2026 <a href="https://yjyxfcy.github.io/" target="_blank"> Yjy&apos;s blog </a> <br>
+<span id="site-runtime"></span><br> 
+    </div>
+  
+
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+<script  src="/js/language-switcher.js" ></script>
+
+<script src="/js/site-translations.js?v=6dbe1f46e449.js"></script>
+
+
+<script src="/js/site-experience.js?v=b07845e51e8f.js"></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text') || subtitle.innerHTML || subtitle.textContent;
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+
+    var progressText = document.getElementById('toc-reading-progress-text');
+    var progressBar = document.getElementById('toc-reading-progress-bar');
+
+    function getReadingArticle() {
+      return document.querySelector('.markdown-body') ||
+        document.getElementById('hexo-blog-encrypt') ||
+        document.querySelector('article.post-content');
+    }
+
+    function updateReadingProgress() {
+      if (!progressText || !progressBar) { return; }
+      var article = getReadingArticle();
+      if (!article) { return; }
+      var rect = article.getBoundingClientRect();
+      var articleTop = window.pageYOffset + rect.top;
+      var articleHeight = article.scrollHeight;
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      var readableHeight = Math.max(articleHeight - viewportHeight * 0.55, 1);
+      var read = window.pageYOffset - articleTop + viewportHeight * 0.25;
+      var percent = Math.min(100, Math.max(0, Math.round(read / readableHeight * 100)));
+
+      progressText.textContent = percent + '%';
+      progressBar.style.width = percent + '%';
+    }
+
+    updateReadingProgress();
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    window.addEventListener('hexo-blog-decrypt', function() {
+      if ('tocbot' in window) { tocbot.refresh(); }
+      updateReadingProgress();
+    });
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        updateReadingProgress();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('li > mjx-container').forEach(node => {
+                    node.parentNode.parentNode.classList.add('has-jax');
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning" data-i18n-key="noscript_warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

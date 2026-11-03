@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本篇是北京大学《多模态学习》（2026 秋）期中考试速通笔记的配套练习，汇集课程知识点相关的选择、判断、计算和简答题，并附参考解答。每道题下紧跟参考答案与解析，可以先遮住答案独立作答，再核对推理、公式和边界条件。适合与多模态学习概览和公式与计算配合阅读。 一、选择题（单选）1. 下面哪项最准确地描述多模态“对齐”？A. 将多个模型输出取平均　B. 找到图中区域和句中词的对应　C. 从文字生成图像">
+    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 8 讲笔记，依据对应课程课件整理。 前面的方法如何扩展到视觉与语言基础模型？本讲把 ViT、BERT、GPT、参数高效微调及多模态 Transformer 放到一条线上。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="练习题与参考解答">
-<meta property="og:url" content="https://yjyxfcy.github.io/2026/11/02/mml3/index.html">
+<meta property="og:title" content="第 8 讲：视觉语言基础模型">
+<meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml8/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="本篇是北京大学《多模态学习》（2026 秋）期中考试速通笔记的配套练习，汇集课程知识点相关的选择、判断、计算和简答题，并附参考解答。每道题下紧跟参考答案与解析，可以先遮住答案独立作答，再核对推理、公式和边界条件。适合与多模态学习概览和公式与计算配合阅读。 一、选择题（单选）1. 下面哪项最准确地描述多模态“对齐”？A. 将多个模型输出取平均　B. 找到图中区域和句中词的对应　C. 从文字生成图像">
+<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 8 讲笔记，依据对应课程课件整理。 前面的方法如何扩展到视觉与语言基础模型？本讲把 ViT、BERT、GPT、参数高效微调及多模态 Transformer 放到一条线上。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-11-02T01:02:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T12:41:12.523Z">
+<meta property="article:published_time" content="2026-11-04T04:08:00.000Z">
+<meta property="article:modified_time" content="2026-11-03T17:49:50.978Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>练习题与参考解答 - Yjy</title>
+  <title>第 8 讲：视觉语言基础模型 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -267,13 +267,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p6.avif') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p11.webp') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="03 · 练习题与参考解答"></span>
+            <span id="subtitle" data-typed-text="08 · 第 8 讲：视觉语言基础模型"></span>
           
         </div>
 
@@ -289,8 +289,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-11-02 09:02" pubdate>
-          2026年11月2日 上午
+        <time datetime="2026-11-04 12:08" pubdate>
+          2026年11月4日 中午
         </time>
       </span>
     
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.6k 字
+          2.1k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          55 分钟
+          13 分钟
         
       </span>
     
@@ -376,7 +376,7 @@
         aria-expanded="true"
       >
         多模态学习
-        <span class="list-group-count">(3)</span>
+        <span class="list-group-count">(8)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -390,28 +390,73 @@
     
       
       
-        <a href="/2026/11/02/mml1/" title="多模态学习概览"
+        <a href="/2026/11/04/mml1/" title="第 1 讲：多模态学习导论"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">多模态学习概览</span>
+          <span class="category-post">第 1 讲：多模态学习导论</span>
         </a>
       
     
       
       
-        <a href="/2026/11/02/mml2/" title="公式与计算"
+        <a href="/2026/11/04/mml2/" title="第 2 讲：深度学习基础"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">公式与计算</span>
+          <span class="category-post">第 2 讲：深度学习基础</span>
         </a>
       
     
       
       
-        <a href="/2026/11/02/mml3/" title="练习题与参考解答"
+        <a href="/2026/11/04/mml3/" title="第 3 讲：计算机视觉基础与分类网络"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 3 讲：计算机视觉基础与分类网络</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml4/" title="第 4 讲：目标检测与图像分割"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 4 讲：目标检测与图像分割</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml5/" title="第 5 讲：自然语言处理与序列建模"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 5 讲：自然语言处理与序列建模</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml6/" title="第 6 讲：多模态表示与融合"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 6 讲：多模态表示与融合</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml7/" title="第 7 讲：跨模态对齐与注意力"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 7 讲：跨模态对齐与注意力</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/mml8/" title="第 8 讲：视觉语言基础模型"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">练习题与参考解答</span>
+          <span class="category-post">第 8 讲：视觉语言基础模型</span>
         </a>
       
     
@@ -434,19 +479,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">03 · 练习题与参考解答</h1>
+            <h1 class="reading-title">08 · 第 8 讲：视觉语言基础模型</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>03</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>08</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98%EF%BC%88%E5%8D%95%E9%80%89%EF%BC%89"><span class="toc-text">一、选择题（单选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%88%A4%E6%96%AD%E9%A2%98%EF%BC%88%E5%86%99%E2%80%9C%E5%AF%B9-%E9%94%99%E2%80%9D%E5%B9%B6%E6%8C%87%E5%87%BA%E5%85%B3%E9%94%AE%E6%9D%A1%E4%BB%B6%EF%BC%89"><span class="toc-text">二、判断题（写“对&#x2F;错”并指出关键条件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%AE%A1%E7%AE%97%E9%A2%98%EF%BC%88%E9%99%84%E5%AE%8C%E6%95%B4%E8%BF%87%E7%A8%8B%EF%BC%89"><span class="toc-text">三、计算题（附完整过程）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98%EF%BC%88%E5%BB%BA%E8%AE%AE%E5%85%88%E6%8C%89%E2%80%9C%E5%8A%A8%E6%9C%BA%E2%80%94%E6%96%B9%E6%B3%95%E2%80%94%E6%95%88%E6%9E%9C%E2%80%94%E5%B1%80%E9%99%90%E2%80%9D%E5%88%97%E6%8F%90%E7%BA%B2%EF%BC%89"><span class="toc-text">四、简答题（建议先按“动机—方法—效果—局限”列提纲）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="toc-text">练习记录</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ViT%E3%80%81BERT%E3%80%81GPT%E3%80%81GQA%E3%80%81LoRA"><span class="toc-text">ViT、BERT、GPT、GQA、LoRA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ViT-%E4%B8%8E%E5%A2%9E%E5%BC%BA-%E8%92%B8%E9%A6%8F"><span class="toc-text">ViT 与增强&#x2F;蒸馏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BERT-%E4%B8%8E-GPT"><span class="toc-text">BERT 与 GPT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LLaMA%E3%80%81GQA%E3%80%81LoRA-%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81-LLM"><span class="toc-text">LLaMA、GQA、LoRA 与多模态 LLM</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="练习题与参考解答"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 8 讲：视觉语言基础模型"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月3日 晚上
+                    本文最后更新于 2026年11月4日 凌晨
                   
                 
               </p>
@@ -454,122 +499,46 @@
             
               <div class="markdown-body">
                 
-                <p>本篇是北京大学《多模态学习》（2026 秋）期中考试速通笔记的配套练习，汇集课程知识点相关的选择、判断、计算和简答题，并附参考解答。每道题下紧跟参考答案与解析，可以先遮住答案独立作答，再核对推理、公式和边界条件。适合与<a href="https://yjyxfcy.github.io/2026/11/02/mml1/">多模态学习概览</a>和<a href="https://yjyxfcy.github.io/2026/11/02/mml2/">公式与计算</a>配合阅读。</p>
-<h2 id="一、选择题（单选）"><a href="#一、选择题（单选）" class="headerlink" title="一、选择题（单选）"></a>一、选择题（单选）</h2><p><strong>1.</strong> 下面哪项最准确地描述多模态“对齐”？<br><br>A. 将多个模型输出取平均　B. 找到图中区域和句中词的对应　C. 从文字生成图像　D. 随机丢弃一个模态</p>
-<p><strong>答案：B。</strong> 对齐找局部对应，A 是晚期融合、C 是转换。</p>
-<p><strong>2.</strong> 纯线性层连用三层、层间无非线性，整体相当于：<br><br>A. 一个线性&#x2F;仿射映射　B. 一个任意非线性函数　C. 一个 softmax　D. 一个卷积核</p>
-<p><strong>答案：A。</strong> 矩阵复合仍是线性&#x2F;仿射。</p>
-<p><strong>3.</strong> 对 NCHW 图像激活做标准 BatchNorm，固定通道 $c$ 时均值主要沿哪些轴求？<br><br>A. 仅 C　B. N、H、W　C. 仅 H、W　D. C、H、W</p>
-<p><strong>答案：B。</strong> 固定通道，在批与空间轴统计。</p>
-<p><strong>4.</strong> 关于 ReLU 和 Leaky ReLU，正确的是：<br><br>A. ReLU 在所有位置有非零梯度　B. Leaky ReLU 负半轴有小斜率　C. Leaky 的斜率一定可学习　D. 两者输出都限制在 $(0,1)$</p>
-<p><strong>答案：B。</strong> Leaky 的负斜率固定；PReLU 才学习斜率。</p>
-<p><strong>5.</strong> 深度可分离卷积的两步通常是：<br><br>A. 先 $1\times1$，再池化　B. 先逐通道空间卷积，再 $1\times1$ 跨通道卷积　C. 两次 FC　D. 先图像描述，再文本分类</p>
-<p><strong>答案：B。</strong> Depthwise 空间处理 + pointwise 通道混合。</p>
-<p><strong>6.</strong> Faster R-CNN 相对 Fast R-CNN 的关键改动是：<br><br>A. 取消所有分类　B. 用 RPN 学习候选区域　C. 每框单独跑 CNN　D. 改成语义分割</p>
-<p><strong>答案：B。</strong> RPN 替代外部候选方法。</p>
-<p><strong>7.</strong> RoI Align 对比 RoI Pooling 主要缓解：<br><br>A. 坐标量化造成的位置错位　B. 类别数过多　C. 语言模型暴露偏差　D. 梯度裁剪问题</p>
-<p><strong>答案：A。</strong> 浮点坐标与插值减轻量化错位。</p>
-<p><strong>8.</strong> 以下哪个是 <strong>YOLOv1</strong> 在 $S\times S$ 网格、每格 $B$ 框、$C$ 类时的输出标量数？<br><br>A. $S(5B+C)$　B. $S^2(5B+C)$　C. $B^2(S+C)$　D. $S^2BC$</p>
-<p><strong>答案：B。</strong> 每格 $5B+C$，共 $S^2$ 格。</p>
-<p><strong>9.</strong> CBOW 的训练方向是：<br><br>A. 给中心词预测上下文　B. 给上下文预测中心词　C. 给图像预测框　D. 给两个矩阵求 CCA</p>
-<p><strong>答案：B。</strong> CBOW：上下文到中心。</p>
-<p><strong>10.</strong> Bigram 假设下预测 $w_t$ 使用：<br><br>A. 仅 $w_{t-1}$　B. $w_{t-2},w_{t-1}$　C. 全部历史　D. 后一个词 $w_{t+1}$</p>
-<p><strong>答案：A。</strong> Bigram 只看前一个词。</p>
-<p><strong>11.</strong> LSTM 中直接将旧记忆和新候选相加形成新记忆的式子是：<br><br>A. $c_t&#x3D;f_t\odot c_{t-1}+i_t\odot\tilde c_t$　B. $h_t&#x3D;f_t+h_{t-1}$　C. $c_t&#x3D;\mathrm{softmax}(QK^\top)V$　D. $o_t&#x3D;c_{t-1}-x_t$</p>
-<p><strong>答案：A。</strong> 旧 cell 与新候选相加，受门控制。</p>
-<p><strong>12.</strong> CCA 的目标最贴近：<br><br>A. 找线性投影使两视图相关性最大　B. 让两视图像素逐项相等　C. 只训练图像编码器　D. 最大化模态私有噪声</p>
-<p><strong>答案：A。</strong> CCA 优化线性投影后的相关性。</p>
-<p><strong>13.</strong> CLIP 批内对比目标中，正确配对的图文通常落在相似度矩阵的：<br><br>A. 最后一行　B. 对角线　C. 所有非对角线　D. 不构造矩阵</p>
-<p><strong>答案：B。</strong> 按索引配对时正例在对角线。</p>
-<p><strong>14.</strong> 若 $Q$ 有 4 个 token，$K,V$ 有 7 个 token，cross-attention 输出有几个 token？<br><br>A. 4　B. 7　C. 11　D. 28</p>
-<p><strong>答案：A。</strong> 输出位置数由 Q 的长度决定。</p>
-<p><strong>15.</strong> 因果 mask 把未来位置的 attention score 加上：<br><br>A. $+\infty$　B. 1　C. $-\infty$　D. 0</p>
-<p><strong>答案：C。</strong> softmax 后权重趋于 0。</p>
-<p><strong>16.</strong> 不加位置编码，self-attention 对 token 重排的基本性质是：<br><br>A. 输出严格不变　B. 输出随输入对应重排（置换等变）　C. 自动知道词序　D. 无法反向传播</p>
-<p><strong>答案：B。</strong> 重排输入，输出相应重排。</p>
-<p><strong>17.</strong> 原始 BERT 的主要预训练目标之一是：<br><br>A. 自回归只预测下一个词　B. Masked Language Modeling　C. 仅边框回归　D. 逐像素实例分割</p>
-<p><strong>答案：B。</strong> 原始 BERT 的 MLM。</p>
-<p><strong>18.</strong> LoRA 对 $d_o\times d_i$ 的矩阵使用秩 $r$ 增量，忽略 bias 时新增可训练参数为：<br><br>A. $d_od_i$　B. $r(d_o+d_i)$　C. $r^2d_od_i$　D. $d_o+d_i$</p>
-<p><strong>答案：B。</strong> 两个因子分别 $d_o r$、$r d_i$。</p>
-<h2 id="二、判断题（写“对-错”并指出关键条件）"><a href="#二、判断题（写“对-错”并指出关键条件）" class="headerlink" title="二、判断题（写“对&#x2F;错”并指出关键条件）"></a>二、判断题（写“对&#x2F;错”并指出关键条件）</h2><p><strong>J1.</strong> “通用近似定理保证一个有限网络在有限数据上训练得到最优且泛化良好。”</p>
-<p><strong>答案：错。</strong> 近似能力不保证可训练性或泛化。</p>
-<p><strong>J2.</strong> “在 CNN 的 BN 中，推理一般沿用训练阶段累计的统计量。”</p>
-<p><strong>答案：对。</strong> 训练统计量累计，推理常用 moving statistics。</p>
-<p><strong>J3.</strong> “$L_1$ 正则通常比 $L_2$ 更易使部分权重精确为零。”</p>
-<p><strong>答案：对。</strong> $L_1$ 更易稀疏。</p>
-<p><strong>J4.</strong> “卷积层每个空间位置都学习一套完全不同的核参数。”</p>
-<p><strong>答案：错。</strong> 卷积核空间共享参数。</p>
-<p><strong>J5.</strong> “池化层通常没有可学习参数，但会改变特征图空间尺寸。”</p>
-<p><strong>答案：对。</strong> 普通 max&#x2F;avg pool 无训练参数，通常下采样。</p>
-<p><strong>J6.</strong> “U-Net 同尺度跳连通常把编码器特征拼接到解码器；ResNet 经典残差支路通常逐元素相加。”</p>
-<p><strong>答案：对。</strong> U-Net 常拼接，ResNet 经典形式相加；具体变体可不同。</p>
-<p><strong>J7.</strong> “无重叠的两个框其 IoU 为 0，因此 IoU loss 在此位置不提供有效的分离方向定位信号。”</p>
-<p><strong>答案：对。</strong> 分离框 IoU 局部不提供有用距离信号。</p>
-<p><strong>J8.</strong> “YOLO 推理时必须先知道预测框和真值框的 IoU，才能给出类别分数。”</p>
-<p><strong>答案：错。</strong> 推理没有真值框。</p>
-<p><strong>J9.</strong> “CBOW 的 softmax 输出天然是一个只有一个 1 的 one-hot 向量。”</p>
-<p><strong>答案：错。</strong> softmax 是概率分布。</p>
-<p><strong>J10.</strong> “训练时 teacher forcing 使用真实上一步词，推理时通常没有真实上一步词。”</p>
-<p><strong>答案：对。</strong> 此差异带来 exposure bias。</p>
-<p><strong>J11.</strong> “截断 BPTT 越短，越能完整学习任意长度的长期依赖。”</p>
-<p><strong>答案：错。</strong> 反传窗口过短会截断长程梯度。</p>
-<p><strong>J12.</strong> “CLIP 的批内负例中，可能有语义相同却未标注配对的假负例。”</p>
-<p><strong>答案：对。</strong> 批内非配对不必然语义无关。</p>
-<p><strong>J13.</strong> “$I(X;Y)&#x3D;H(X)-H(X|Y)$；若独立则互信息为零。”</p>
-<p><strong>答案：对。</strong> 互信息的等价式与独立性质。</p>
-<p><strong>J14.</strong> “Cross-attention 的 Q、K、V 必须来自同一序列。”</p>
-<p><strong>答案：错。</strong> Cross-attention 中 Q 与 K&#x2F;V 来源不同。</p>
-<p><strong>J15.</strong> “ViT 缩小 patch 会增加 token 数，并可能显著增加全局注意力成本。”</p>
-<p><strong>答案：对。</strong> token 增多，分数矩阵元素约按长度平方增。</p>
-<p><strong>J16.</strong> “GQA 把多个 query 头分组共享 K&#x2F;V，可降低 KV cache 的该部分开销。”</p>
-<p><strong>答案：对。</strong> 共享 K&#x2F;V 减少缓存该部分。</p>
-<h2 id="三、计算题（附完整过程）"><a href="#三、计算题（附完整过程）" class="headerlink" title="三、计算题（附完整过程）"></a>三、计算题（附完整过程）</h2><p><strong>C1. 卷积与池化</strong>　输入单张 $3\times32\times32$ 图像，卷积 $5\times5$、输出 16 通道、padding 2、stride 1，带 bias；随后 $2\times2$、stride 2 最大池化。求两层输出形状、卷积参数量、MACs、卷积输出的 FP32 激活大小（KiB）。</p>
-<p><strong>解答：</strong> 卷积高宽 $\lfloor(32+2\cdot2-5)&#x2F;1\rfloor+1&#x3D;32$，形状 $16\times32\times32$。参数 $16(3\cdot5^2+1)&#x3D;1216$。MACs $32^2\cdot16\cdot3\cdot25&#x3D;1,228,800$。输出激活 $16\cdot32^2\cdot4&#x2F;1024&#x3D;64$ KiB。池化后 $16\times16\times16$。</p>
-<p><strong>C2. BN 与 Dropout</strong>　固定一个通道，批及空间维合起来有四值 $(1,3,5,7)$。取 $\epsilon&#x3D;0$、$\gamma&#x3D;2,\beta&#x3D;1$，求第一个值标准化及仿射后的结果。另有输入 6，倒置 dropout 丢弃率 .25，若被保留，输出为多少？</p>
-<p><strong>解答：</strong> 均值 4，方差 $[(1-4)^2+(3-4)^2+(5-4)^2+(7-4)^2]&#x2F;4&#x3D;5$。第一个值 $\hat x&#x3D;-3&#x2F;\sqrt5$，输出 $y&#x3D;1-6&#x2F;\sqrt5\approx-1.683$。保留的 dropout 输出 $6&#x2F;.75&#x3D;8$。</p>
-<p><strong>C3. IoU + NMS</strong>　$A&#x3D;(0,0,4,4)$、$B&#x3D;(2,2,6,6)$，连续坐标面积定义，求 IoU。若 A 分数 .9，B 分数 .8，另一个 C 分数 .7 且 $\mathrm{IoU}(A,C)&#x3D;.1,\mathrm{IoU}(B,C)&#x3D;.1$，NMS 阈值 .1（按“严格大于阈值才删除”），保留哪些？</p>
-<p><strong>解答：</strong> 交集 $[2,4]\times[2,4]$ 面积 4；并集 $16+16-4&#x3D;28$，IoU $1&#x2F;7\approx.143$。NMS 先保留 A，B 的 IoU $.143&gt;.1$，删 B；C 与 A 是 $.1$，题设“严格大于”才删，所以保留 C。答案 A、C。若题目使用“$\ge$ 阈值删除”，边界结果不同，先看规则。</p>
-<p><strong>C4. YOLOv1 与转置卷积</strong>　$S&#x3D;7,B&#x3D;2,C&#x3D;20$ 的输出标量数？一个转置卷积 $H_i&#x3D;4,K&#x3D;3,S&#x3D;2,P&#x3D;1$，无 dilation&#x2F;output padding，输出高多少？</p>
-<p><strong>解答：</strong> $49(10+20)&#x3D;1470$；转置卷积输出 $(4-1)2-2+3&#x3D;7$。</p>
-<p><strong>C5. 语言模型</strong>　Bigram 模型给 $P(\text{我})&#x3D;.2$、$P(\text{爱}\mid\text{我})&#x3D;.5$、$P(\text{你}\mid\text{爱})&#x3D;.4$。求“我 爱 你”的概率。若三个位置正确词概率均为 $.5$，困惑度是多少？</p>
-<p><strong>解答：</strong> 句子概率 $.2\cdot.5\cdot.4&#x3D;.04$。PPL $&#x3D;\exp[-\frac13(3\ln.5)]&#x3D;2$。</p>
-<p><strong>C6. LSTM</strong>　已算出 $f&#x3D;.8,i&#x3D;.25,o&#x3D;.5,\tilde c&#x3D;.4,c_{t-1}&#x3D;.5$，求 $c_t$ 和 $h_t$（$\tanh(.5)\approx.4621$）。</p>
-<p><strong>解答：</strong> $c_t&#x3D;.8(.5)+.25(.4)&#x3D;.5$；$h_t&#x3D;.5\tanh(.5)\approx.23105$。</p>
-<p><strong>C7. 融合与互信息</strong>　$a&#x3D;(2,3),b&#x3D;(4)$，写出增广外积 $[1;a][1;b]^\top$。公平二元随机变量 $X$ 与 $Y&#x3D;X$，以 bit 为单位求 $H(X),H(Y|X),I(X;Y)$。</p>
-<p><strong>解答：</strong> $[1;2;3][1,4]&#x3D;\begin{bmatrix}1&amp;4\2&amp;8\3&amp;12\end{bmatrix}$。$H(X)&#x3D;1$ bit，给定 $X$ 完全知道 $Y$，$H(Y|X)&#x3D;0$，$I(X;Y)&#x3D;1$ bit。</p>
-<p><strong>C8. CLIP</strong>　两对图文的相似度 logits 为 $S&#x3D;\begin{bmatrix}\ln3&amp;0\0&amp;\ln3\end{bmatrix}$，第 $i$ 张图与第 $i$ 段文配对，求双向平均交叉熵。</p>
-<p><strong>解答：</strong> 每行&#x2F;列对角正确概率 $e^{\ln3}&#x2F;(e^{\ln3}+e^0)&#x3D;3&#x2F;4$；两方向各为 $-\ln(3&#x2F;4)&#x3D;\ln(4&#x2F;3)$，平均仍 $\ln(4&#x2F;3)\approx.288$。</p>
-<p><strong>C9. 注意力</strong>　一个 query 对两个 key 的已缩放 logits 是 $(0,\ln3)$，对应 values $(2,0),(0,4)$。求权重及输出。若第二个 key 被 mask，输出改为多少？</p>
-<p><strong>解答：</strong> softmax $(0,\ln3)$ 得 $(1&#x2F;4,3&#x2F;4)$；加权 $(1&#x2F;4)(2,0)+(3&#x2F;4)(0,4)&#x3D;(.5,3)$。mask 第二个后权重 $(1,0)$，输出 $(2,0)$。</p>
-<p><strong>C10. ViT、LoRA、GQA</strong>　$224\times224\times3$ 图像以 $16\times16$ patch 切分并加一个 CLS token：patch 数、每 patch 展平长度、序列长度和单头 attention score 元素数？$4096\times4096$ 权重用秩 8 LoRA：可训练因子参数数和占原矩阵比例？若 32 个 query 头、8 组 K&#x2F;V 头，每组 K&#x2F;V 供几个 query 头共享？</p>
-<p><strong>解答：</strong> $N&#x3D;(224&#x2F;16)^2&#x3D;196$；每 patch $16^2\cdot3&#x3D;768$；序列 197；score 矩阵 $197^2&#x3D;38,809$。LoRA $8(4096+4096)&#x3D;65,536$，全量 $4096^2&#x3D;16,777,216$，比例 $0.390625%$。每 $32&#x2F;8&#x3D;4$ 个 query 头共享一组 K&#x2F;V。</p>
-<p><strong>C11. 二分类损失</strong>　一个样本二分类 logit $z&#x3D;0$、真标签 $y&#x3D;1$。求 sigmoid 概率、BCE 损失和对 logit 的梯度。若 $z$ 增大一点，损失倾向上升还是下降？</p>
-<p><strong>解答：</strong> $p&#x3D;\sigma(0)&#x3D;.5$；$L&#x3D;-\ln .5&#x3D;\ln2\approx.693$；$\partial L&#x2F;\partial z&#x3D;p-y&#x3D;-.5$。增大 $z$ 会提高正类概率，局部使损失下降。</p>
-<p><strong>C12. 多头注意力维度与参数</strong>　序列长 $T&#x3D;5$、$d_{\rm model}&#x3D;64$、头数 $H&#x3D;4$，每头 $d_k&#x3D;d_v&#x3D;16$。求每头分数矩阵形状、四头拼接后的每 token 维度；若 Q&#x2F;K&#x2F;V 与输出投影均为 $64\times64$，忽略 bias，总参数数是多少？</p>
-<p><strong>解答：</strong> 每头分数矩阵 $5\times5$；四头输出拼接后每 token $4\cdot16&#x3D;64$ 维。四个完整投影共 $4\cdot64^2&#x3D;16,384$ 个参数。这里头数为 4 不意味着每个头都另有 $64\times64$ 的完整 Q&#x2F;K&#x2F;V 矩阵；通常将完整投影按头切分。</p>
-<p><strong>C13. Precision&#x2F;Recall</strong>　某一置信度阈值下有 $TP&#x3D;8,FP&#x3D;2,FN&#x3D;2$。求 Precision、Recall；解释为什么不能把其中一个数直接当作 AP。</p>
-<p><strong>解答：</strong> Precision $&#x3D;8&#x2F;(8+2)&#x3D;.8$，Recall $&#x3D;8&#x2F;(8+2)&#x3D;.8$。AP 汇总多个阈值下的 P–R 曲线，单一点不能确定整条曲线。</p>
-<h2 id="四、简答题（建议先按“动机—方法—效果—局限”列提纲）"><a href="#四、简答题（建议先按“动机—方法—效果—局限”列提纲）" class="headerlink" title="四、简答题（建议先按“动机—方法—效果—局限”列提纲）"></a>四、简答题（建议先按“动机—方法—效果—局限”列提纲）</h2><p><strong>S1.</strong> 比较 R-CNN、Fast R-CNN、Faster R-CNN 在候选区域来源、共享特征、训练和速度方面的差别。</p>
-<p><strong>参考要点：</strong> R-CNN 用 Selective Search 提候选且每框独立 CNN，重复计算重；分类与回归训练较分散。Fast R-CNN 整图只算一次特征，在 feature map 上 ROI Pooling，联合分类&#x2F;回归，但候选仍外部产生。Faster R-CNN 用共享特征上的 RPN 学候选，后接 ROI head，四类损失可联合训练。速度提升来自共享计算和可学习候选；两阶段检测仍要进行候选处理。</p>
-<p><strong>S2.</strong> 为什么 CNN 要用非线性、池化&#x2F;下采样和残差连接？三者分别解决什么问题？</p>
-<p><strong>参考要点：</strong> 非线性使堆叠层可表达非线性函数，否则多层等价一层。池化&#x2F;下采样缩小空间尺寸，节省后续计算、扩大感受野，但丢位置细节。残差 $F(x)+x$ 给深网络提供更直接的信息与梯度通路，缓解深层优化困难；形状不符可投影。三者作用不同，不能互相替代。</p>
-<p><strong>S3.</strong> 比较 BN、LN 与 RMSNorm 的统计方式和典型使用场景。</p>
-<p><strong>参考要点：</strong> BN 对每个通道在批与空间轴计算均值方差，CNN 常用，训练和推理统计量处理不同，小批量时估计可能不稳定。LN 对每个样本&#x2F;token 的特征维统计，不依赖同批其他样本，Transformer 常用。RMSNorm 只除以均方根、不减均值，常见于大语言模型；是否加可学习缩放看实现。</p>
-<p><strong>S4.</strong> 比较 CBOW、Skip-gram、RNN 语言模型的输入、输出和信息范围。</p>
-<p><strong>参考要点：</strong> CBOW 输入周围词、预测中心词，简化模型通常平均上下文向量，局部顺序弱。Skip-gram 输入中心词、分别预测周围词，两者都从局部共现学词向量。RNN 语言模型逐时刻读前文并预测下一词，隐藏状态可汇总变长前缀；相比固定窗口可利用更长历史，但训练有串行和长依赖困难。</p>
-<p><strong>S5.</strong> RNN 为何有长依赖困难？LSTM 的门和 cell state 怎样缓解？其局限是什么？</p>
-<p><strong>参考要点：</strong> RNN 的 BPTT 沿时间反复乘雅可比矩阵，梯度可逐渐缩小或增大。LSTM 用遗忘门保留旧 cell、输入门写候选、输出门决定暴露哪些状态；$c_t&#x3D;f_tc_{t-1}+i_t\tilde c_t$ 的加法路径有利于较长距离传递。门依赖和 $f_t&lt;1$ 仍可使梯度衰减，不能保证任意长依赖；序列计算仍较难并行。</p>
-<p><strong>S6.</strong> 用“融合—协调—分解”解释多模态表示学习，分别举一个做法，并比较 CCA 与 CLIP。</p>
-<p><strong>参考要点：</strong> 融合把模态合成一个表示，如拼接、门控或张量融合；协调分别编码，通过相关&#x2F;对比损失使配对相近，如 CCA&#x2F;CLIP；分解把共享和私有因素分开，并用重建&#x2F;判别&#x2F;解耦目标约束。CCA 在线性投影上最大化相关，CLIP 用图文双塔、批内双向对比交叉熵学习可检索的向量空间。融合、协调和分解可组合使用。</p>
-<p><strong>S7.</strong> 解释图像描述中的视觉注意力，并区分 self-attention、cross-attention、因果 mask。</p>
-<p><strong>参考要点：</strong> 图像描述将图像区域编码为 $v_i$；解码每一步据当前状态对各区域算权重 $\alpha_{ti}$，得到视觉上下文 $\sum_i\alpha_{ti}v_i$，帮助生成当前词。Self-attention 的 Q&#x2F;K&#x2F;V 来自同一序列；cross-attention 的 Q 来自解码器或一个模态，K&#x2F;V 来自编码器或另一模态。自回归的 causal mask 阻止看未来，padding mask 阻止看填充位置。注意力热图能提供线索但不等同于可靠解释。</p>
-<p><strong>S8.</strong> 比较 ViT、BERT、GPT 的输入、架构、训练目标；再解释 LoRA 和 GQA 各节省什么成本。</p>
-<p><strong>参考要点：</strong> ViT 把图像切 patch 加位置编码，送 Transformer Encoder，常用分类 token；主要学习视觉表示，较依赖预训练与增强。BERT 用双向 Encoder 与 MLM 学文本表示；GPT 用因果 Decoder 和下一 token 预测生成文本。LoRA 冻结底座，只训练低秩权重增量，节省微调参数和优化器状态；GQA 让多个 query 头共享 K&#x2F;V，节省推理 KV cache 的相关部分。二者节省的是不同阶段&#x2F;资源，不能混同。</p>
-<p><strong>S9.</strong> 用一张“对照表”的口吻区分 SimCLR、DINO、MAE 的自监督信号，并解释何为代理任务。</p>
-<p><strong>参考要点：</strong> SimCLR 对同一图像做两次随机增强作为正例，批中不同图像作为负例，用对比损失学习增强不变的表示。DINO 让学生对一个视图的输出匹配教师对另一视图的分布，通常不靠显式负样本表。MAE 随机遮住图像 patch，让模型重建被遮区域，课件用 masked patch 上的像素 MSE。代理任务是从未标注数据本身自动构造标签的任务，如旋转预测、图像补全、上色。</p>
-<p><strong>S10.</strong> 图像描述出现“物体识别正确但关系说错”，应该优先改进什么？比较 BLEU、CIDEr、SPICE 看什么。</p>
-<p><strong>参考要点：</strong> 如果物体已识别正确，优先改进区域间的空间&#x2F;语义关系建模，而非只换更强检测器；可用区域图及消息传递表示“谁对谁做什么”。BLEU 主要看 n-gram 精确率，CIDEr 用 TF-IDF 强调有区分度的词组，SPICE 比较场景图中对象&#x2F;属性&#x2F;关系元组的 F1。自动分数受参考描述与解析方式影响，不能替代图像事实检查。</p>
-<h2 id="练习记录"><a href="#练习记录" class="headerlink" title="练习记录"></a>练习记录</h2><p>做完后可记录每道错题的原因：概念混淆、公式记错、维度或单位错误，或漏看条件。回到<a href="https://yjyxfcy.github.io/2026/11/02/mml1/">讲义章节</a>和<a href="https://yjyxfcy.github.io/2026/11/02/mml2/">计算示例</a>核对思路，再尝试重新作答。</p>
+                <p>北京大学《多模态学习》（2026 秋）第 8 讲笔记，依据对应课程课件整理。</p>
+<p>前面的方法如何扩展到视觉与语言基础模型？本讲把 ViT、BERT、GPT、参数高效微调及多模态 Transformer 放到一条线上。</p>
+<span id="more"></span>
+
+<h2 id="ViT、BERT、GPT、GQA、LoRA"><a href="#ViT、BERT、GPT、GQA、LoRA" class="headerlink" title="ViT、BERT、GPT、GQA、LoRA"></a>ViT、BERT、GPT、GQA、LoRA</h2><h3 id="ViT-与增强-蒸馏"><a href="#ViT-与增强-蒸馏" class="headerlink" title="ViT 与增强&#x2F;蒸馏"></a>ViT 与增强&#x2F;蒸馏</h3><p>把 $H\times W\times C$ 图像切为 $P\times P$ patch，若整除，patch 数 $N&#x3D;HW&#x2F;P^2$；每个 patch 展平后长度 $P^2C$，线性投影到 $d$ 维，加位置编码，可加 CLS token，然后送 Transformer Encoder。注意 patchify 本身不保证视觉局部先验；与 CNN 相比 ViT 对数据规模、增强和训练策略更敏感。课件比较曲线表明<strong>给定实验设置下</strong>大规模预训练与增强显著改善 ViT，不能推出任意预算下都优于 CNN。Token 数增大使全局注意力矩阵约为 $(N+1)^2$。ViT&#x2F;DeiT 的蒸馏图：teacher 的软目标指导 student，distillation token 提供一条输出支路；推理与训练用法看具体模型，不把“蒸馏&#x3D;标签平滑”混为一谈。</p>
+<p><strong>蒸馏曲线逐项读</strong>：先用真标签训练 teacher，再让 student 通过 KL 散度匹配 teacher 的软预测，也可混合对真标签的交叉熵。温度 $T$ 越大，softmax(logits&#x2F;$T$) 越平滑；若用经典蒸馏目标，KL 项常乘 $T^2$ 以平衡梯度尺度。课件柱图依次加入蒸馏、延长训练、提高输入分辨率，因此最后一柱相对第一柱的提升不能全归因于蒸馏。第 34 页的 distillation token 与 classification token 是两条不同输出支路，均参与 Transformer 处理。</p>
+<h3 id="BERT-与-GPT"><a href="#BERT-与-GPT" class="headerlink" title="BERT 与 GPT"></a>BERT 与 GPT</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>BERT</th>
+<th>GPT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主体</td>
+<td>Transformer Encoder</td>
+<td>因果 Decoder-only</td>
+</tr>
+<tr>
+<td>预训练</td>
+<td>Masked Language Modeling 预测被遮 token；原始 BERT 还用 NSP</td>
+<td>自回归预测下一个 token</td>
+</tr>
+<tr>
+<td>可见上下文</td>
+<td>被预测词可用左右<strong>未遮蔽</strong>上下文</td>
+<td>只用左侧已生成 token</td>
+</tr>
+<tr>
+<td>典型用途</td>
+<td>分类、抽取、标注、问答表示</td>
+<td>生成、续写、提示式任务</td>
+</tr>
+</tbody></table>
+<p>原始 BERT 的 MLM 选 15% token 为预测目标，其中 80% 换 [MASK]、10% 换随机词、10% 保留原词；这是<strong>原始 BERT 配方</strong>，非所有掩码模型通则。输入 token&#x2F;segment&#x2F;position embedding 相加；[CLS] 常作整句任务表示，[SEP] 分隔片段。GPT 的因果 mask 与自回归目标一致。Zero-shot&#x2F;Few-shot 指不提供&#x2F;提供少量任务示例的提示条件，不等于模型未经过任何预训练。</p>
+<h3 id="LLaMA、GQA、LoRA-与多模态-LLM"><a href="#LLaMA、GQA、LoRA-与多模态-LLM" class="headerlink" title="LLaMA、GQA、LoRA 与多模态 LLM"></a>LLaMA、GQA、LoRA 与多模态 LLM</h3><p>LLaMA 相关课件强调数据、模型规模及推理效率。多头注意力 (MHA) 每个 query 头通常有独立 K&#x2F;V 头；Multi-Query Attention (MQA) 让所有 Q 头共享一组 K&#x2F;V；Grouped-Query Attention (GQA) 把 Q 头分组，每组共享一组 K&#x2F;V，降低 KV cache。它们是推理缓存与表达能力之间的设计取舍。</p>
+<p><strong>课件 8的模型发展线</strong>：GPT-1 展示生成式预训练加下游适配；GPT-2 强调用自然语言任务描述进行条件生成；GPT-3 展示大模型的 in-context few-shot 提示。它们的核心仍是因果下一 token 预测，具体训练规模和任务适配方式逐代变化。LLaMA 课件图列出 Decoder、RMSNorm、SiLU&#x2F;Swish 和 RoPE（旋转位置编码）；RoPE 给 Q&#x2F;K 注入位置关系，不能简单等同于“输入 token 加一条绝对位置向量”。LLaMA 2&#x2F;3 图强调更长训练、GQA 和指令微调等演进；年份与数值对比只在课件所列实验条件下理解。</p>
+<p>课件第 54 页把 GPT-4 作为后续大模型进展的例子；阅读相关比较时，应区分课件明确展示的内容与未提供的训练细节。</p>
+<p><strong>LoRA</strong> 冻结原权重 $W\in\mathbb R^{d_{\rm out}\times d_{\rm in}}$，只学习低秩增量 $\Delta W&#x3D;BA$，其中 $B\in\mathbb R^{d_{\rm out}\times r}$、$A\in\mathbb R^{r\times d_{\rm in}}$。可训练参数 $r(d_{\rm out}+d_{\rm in})$（忽略缩放&#x2F;bias），相对全量 $d_{\rm out}d_{\rm in}$ 显著变小；常让一因子初始化为零，使开始时 $\Delta W&#x3D;0$。公式位置和转置取决于 $W$ 约定，维度相乘正确最重要。多模态 LLM 常见链路：视觉编码器 → 投影&#x2F;连接器使视觉 token 匹配语言模型维度 → 与文本 token 共同输入语言模型 → 指令微调生成回答。课件最后 68–71 页只给入门，别把某一具体连接方式当成所有视觉语言模型的唯一结构。</p>
 
                 
               </div>
@@ -608,8 +577,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>练习题与参考解答</div>
-      <div>https://yjyxfcy.github.io/2026/11/02/mml3/</div>
+      <div>第 8 讲：视觉语言基础模型</div>
+      <div>https://yjyxfcy.github.io/2026/11/04/mml8/</div>
     </div>
     <div class="license-meta">
       
@@ -621,13 +590,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年11月2日</div>
+          <div>2026年11月4日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月3日</div>
+          <div>2026年11月4日</div>
         </div>
       
       
@@ -657,7 +626,7 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/multimodal/">← 返回 多模态学习 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/02/mml2/"><small>上一篇</small><strong>← 公式与计算</strong></a>
+                    <a href="/2026/11/04/mml7/"><small>上一篇</small><strong>← 第 7 讲：跨模态对齐与注意力</strong></a>
                     
                   </div>
                 </nav>
@@ -732,7 +701,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98%EF%BC%88%E5%8D%95%E9%80%89%EF%BC%89"><span class="toc-text">一、选择题（单选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%88%A4%E6%96%AD%E9%A2%98%EF%BC%88%E5%86%99%E2%80%9C%E5%AF%B9-%E9%94%99%E2%80%9D%E5%B9%B6%E6%8C%87%E5%87%BA%E5%85%B3%E9%94%AE%E6%9D%A1%E4%BB%B6%EF%BC%89"><span class="toc-text">二、判断题（写“对&#x2F;错”并指出关键条件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%AE%A1%E7%AE%97%E9%A2%98%EF%BC%88%E9%99%84%E5%AE%8C%E6%95%B4%E8%BF%87%E7%A8%8B%EF%BC%89"><span class="toc-text">三、计算题（附完整过程）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98%EF%BC%88%E5%BB%BA%E8%AE%AE%E5%85%88%E6%8C%89%E2%80%9C%E5%8A%A8%E6%9C%BA%E2%80%94%E6%96%B9%E6%B3%95%E2%80%94%E6%95%88%E6%9E%9C%E2%80%94%E5%B1%80%E9%99%90%E2%80%9D%E5%88%97%E6%8F%90%E7%BA%B2%EF%BC%89"><span class="toc-text">四、简答题（建议先按“动机—方法—效果—局限”列提纲）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="toc-text">练习记录</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ViT%E3%80%81BERT%E3%80%81GPT%E3%80%81GQA%E3%80%81LoRA"><span class="toc-text">ViT、BERT、GPT、GQA、LoRA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ViT-%E4%B8%8E%E5%A2%9E%E5%BC%BA-%E8%92%B8%E9%A6%8F"><span class="toc-text">ViT 与增强&#x2F;蒸馏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BERT-%E4%B8%8E-GPT"><span class="toc-text">BERT 与 GPT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LLaMA%E3%80%81GQA%E3%80%81LoRA-%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81-LLM"><span class="toc-text">LLaMA、GQA、LoRA 与多模态 LLM</span></a></li></ol></li></ol>
   </div>
 </div>
 

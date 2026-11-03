@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第一讲：先想一个问题，机器在训练集上表现很好，就算“学会”了吗？ 后面反复会遇到训练误差、测试误差和模型容量，所以先把它们的关系理清。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:09:12.288Z">
-<meta property="article:modified_time" content="2026-11-03T10:35:55.804Z">
+<meta property="article:modified_time" content="2026-11-03T11:25:50.233Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.1k 字
         
       </span>
     
@@ -481,8 +481,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">01 · 第1讲｜课程简介与机器学习概述</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>01</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>01</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%88%B0%E9%A2%84%E6%B5%8B"><span class="toc-text">从数据到预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9C%8B%E2%80%9C%E5%AD%A6%E4%B9%A0%E2%80%9D"><span class="toc-text">用线性回归看“学习”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E4%B8%8E%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-text">验证与交叉验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%AD%E8%A8%80"><span class="toc-text">需要的数学语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E5%88%B0%E6%B3%9B%E5%8C%96%E9%A3%8E%E9%99%A9"><span class="toc-text">从经验风险到泛化风险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E5%AE%8C%E6%95%B4%E8%81%94%E7%B3%BB"><span class="toc-text">正规方程与梯度下降的完整联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%BE%AE%E5%88%86%E5%A6%82%E4%BD%95%E8%87%AA%E6%A3%80"><span class="toc-text">矩阵微分如何自检</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第1讲｜课程简介与机器学习概述"></strong><span>The original article content is not automatically translated.</span></p>
@@ -507,7 +508,7 @@
 <p>分类预测离散标签，回归预测连续值。无监督学习没有标签，任务可能是聚类、密度估计或表示学习。课件还从数据与反馈方式区分不同学习范式；关键是先弄清可观察到什么、要预测什么。</p>
 <p>一个完整流程是：收集并清理数据 → 划分训练、验证、测试集 → 选模型与损失 → 优化参数 → 用验证集选超参数 → 最后用测试集估计泛化性能。测试集不能参与选模型，否则它已间接变成训练信息。</p>
 <h3 id="用线性回归看“学习”"><a href="#用线性回归看“学习”" class="headerlink" title="用线性回归看“学习”"></a>用线性回归看“学习”</h3><p>最简单的模型是 $\hat y&#x3D;w^Tx+b$。若用平方误差，目标是 $L(w,b)&#x3D;\frac1N\sum_n(w^Tx_n+b-y_n)^2$。这里的学习就是找使训练误差小的参数。</p>
-<p>写成矩阵形式 $L(w)&#x3D;|Xw-y|_2^2$，梯度为 $2X^T(Xw-y)$；若 $X^TX$ 可逆，驻点满足正规方程 $X^TXw&#x3D;X^Ty$。</p>
+<p>把偏置并入 $X$ 与 $w$ 后，矩阵形式是 $L(w)&#x3D;\frac1N|Xw-y|_2^2$，梯度为 $\frac2N X^T(Xw-y)$；若 $X^TX$ 可逆，驻点满足正规方程 $X^TXw&#x3D;X^Ty$。省略共同的 $1&#x2F;N$ 不影响最优解，但会改变梯度的数值大小。</p>
 <p>这说明“训练神经网络”和“解线性模型”在目标函数和参数优化层面有共同骨架。</p>
 <p>训练误差小不等于真正学会。足够复杂的函数甚至可以穿过每一个训练点，却在新点上偏离很远。<strong>泛化</strong>才是机器学习的目标。模型太简单会欠拟合，容量太大且约束不足可能过拟合。</p>
 <p>岭回归在误差之外加入 $\lambda|w|_2^2$，惩罚过大的权重；$\lambda$ 是训练前选择的超参数，通常通过验证集确定。</p>

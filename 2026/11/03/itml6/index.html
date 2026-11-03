@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -481,8 +481,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">06 · 第6讲｜多层感知机与神经网络训练</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>06</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>06</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">从固定特征到学习特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">反向传播究竟算什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">为什么深层网络难训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">优化与防过拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E8%B5%B0%E4%B8%80%E9%81%8D%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">用两层网络走一遍反向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%AE%8B%E5%B7%AE%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89"><span class="toc-text">梯度消失、初始化和残差的数学直觉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BB%86%E8%8A%82"><span class="toc-text">归一化和正则化的操作细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">激活函数的选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A9%E5%81%9C%E4%B8%8E%E6%9D%83%E9%87%8D%E6%83%A9%E7%BD%9A%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-text">早停与权重惩罚的联系与区别</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第6讲｜多层感知机与神经网络训练"></strong><span>The original article content is not automatically translated.</span></p>

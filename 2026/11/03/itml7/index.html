@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第七讲：一张图片里，同一条边缘出现在左上角或右下角，识别它真的需要两套完全不同的参数吗？ 卷积网络的想法是让同一个小滤波器在整张图上移动。这样既减少参数，也保留了像素之间的空间关系。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.131Z">
-<meta property="article:modified_time" content="2026-11-03T10:36:41.607Z">
+<meta property="article:modified_time" content="2026-11-03T11:25:50.236Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.4k 字
         
       </span>
     
@@ -481,8 +481,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">07 · 第7讲｜卷积神经网络</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>07</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>07</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">基本网络与训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">经典架构与变体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%E5%8D%B7%E7%A7%AF%E5%B0%BA%E5%AF%B8%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">手算一次卷积尺寸和参数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E7%B4%AF%E5%8A%A0%E2%80%9D"><span class="toc-text">反向传播为什么需要“累加”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8F%96%E8%88%8D"><span class="toc-text">几种结构的计算取舍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9C%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">从经典网络看设计思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84%E8%83%BD%E6%8F%90%E4%BE%9B%E5%A4%9A%E5%B0%91%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D"><span class="toc-text">图像空间结构能提供多少“不变性”</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第7讲｜卷积神经网络"></strong><span>The original article content is not automatically translated.</span></p>
@@ -509,7 +510,7 @@
 <p>一个输出通道由跨全部输入通道的一组核组成，不能把“一个二维核”误当成完整多通道卷积。</p>
 <h3 id="输出尺寸、填充与感受野"><a href="#输出尺寸、填充与感受野" class="headerlink" title="输出尺寸、填充与感受野"></a>输出尺寸、填充与感受野</h3><p>单维输出尺寸为 $\lfloor(H+2P-K)&#x2F;S\rfloor+1$，其中 $P$ 是两侧填充，$S$ 是步长。步长控制采样密度，零填充影响边界信息和空间尺寸。</p>
 <p>课件用多层 $3\times3$ 卷积比较有填充与无填充：以 $9\times9$ 输入连续做四层步长 1 卷积，有填充可维持 $9\times9$，无填充会逐层变为 $7,5,3,1$，边缘信息快速丢失。</p>
-<p>堆叠小核既扩大有效感受野，也插入更多非线性。</p>
+<p>堆叠小核既扩大理论感受野，也插入更多非线性；实际有效感受野的贡献通常集中在理论范围的一部分。</p>
 <h3 id="基本网络与训练"><a href="#基本网络与训练" class="headerlink" title="基本网络与训练"></a>基本网络与训练</h3><p>常见结构是若干卷积、激活、归一化与池化层后接任务输出层。最大池化保留窗口内最大的响应，平均池化做局部汇总；池化没有可学习权重，反向传播时最大池化只把梯度送给前向最大值的位置。</p>
 <p>卷积核在多个位置被重复使用，因此求某个核权重的梯度要把所有使用该权重的位置贡献相加。实现通常交给自动微分，但理解这种梯度累积很有助于排错。</p>
 <h3 id="经典架构与变体"><a href="#经典架构与变体" class="headerlink" title="经典架构与变体"></a>经典架构与变体</h3><p>课件介绍更深的卷积网络、Inception 的多尺度分支、ResNet 的残差块以及 SENet 的通道重标定。共同目标是让网络在增加表达能力时仍可训练、计算可控。</p>

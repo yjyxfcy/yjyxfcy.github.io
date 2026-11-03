@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本篇汇总深度学习、视觉、序列建模、多模态表示和注意力中的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与多模态学习概览及练习题与参考解答配合阅读。 **口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MACs}$。不同课件&#x2F;框架在边界、">
+    <meta name="description" content="本篇汇总北京大学《多模态学习》（2026 秋）课程中深度学习、视觉、序列建模、多模态表示和注意力的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与多模态学习概览及练习题与参考解答配合阅读。 **口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="公式与计算">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/02/mml2/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="本篇汇总深度学习、视觉、序列建模、多模态表示和注意力中的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与多模态学习概览及练习题与参考解答配合阅读。 **口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MACs}$。不同课件&#x2F;框架在边界、">
+<meta property="og:description" content="本篇汇总北京大学《多模态学习》（2026 秋）课程中深度学习、视觉、序列建模、多模态表示和注意力的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与多模态学习概览及练习题与参考解答配合阅读。 **口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MA">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-02T01:01:00.000Z">
-<meta property="article:modified_time" content="2026-11-02T13:53:00.773Z">
+<meta property="article:modified_time" content="2026-11-03T11:25:50.231Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k 字
+          13k 字
         
       </span>
     
@@ -436,8 +436,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">02 · 公式与计算</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>02</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>02</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F%E7%B4%A2%E5%BC%95"><span class="toc-text">常用公式索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%AF%BE%E4%BB%B6-2%EF%BC%89"><span class="toc-text">A. 深度学习（课件 2）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A1-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E3%80%81MSE%E3%80%81%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B"><span class="toc-text">A1. 线性回归、MSE、正规方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A2-softmax%E3%80%81%E4%BA%A4%E5%8F%89%E7%86%B5%E5%92%8C%E6%A2%AF%E5%BA%A6"><span class="toc-text">A2. softmax、交叉熵和梯度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A3-%E6%BF%80%E6%B4%BB%E3%80%81%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">A3. 激活、梯度下降、正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A4-BN%E3%80%81LN%E3%80%81IN%E3%80%81GN%E3%80%81RMSNorm"><span class="toc-text">A4. BN、LN、IN、GN、RMSNorm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-CNN%E3%80%81%E6%A3%80%E6%B5%8B%E5%92%8C%E5%88%86%E5%89%B2%EF%BC%88%E8%AF%BE%E4%BB%B6-3%E2%80%934%EF%BC%89"><span class="toc-text">B. CNN、检测和分割（课件 3–4）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B1-%E5%8D%B7%E7%A7%AF%E3%80%81%E6%B1%A0%E5%8C%96%E5%B0%BA%E5%AF%B8%E4%B8%8E%E5%8F%82%E6%95%B0"><span class="toc-text">B1. 卷积、池化尺寸与参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B2-%E6%84%9F%E5%8F%97%E9%87%8E%E3%80%81VGG-%E4%B8%8E-FC"><span class="toc-text">B2. 感受野、VGG 与 FC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B3-IoU%E3%80%81NMS%E3%80%81Focal-Loss"><span class="toc-text">B3. IoU、NMS、Focal Loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B4-GIoU%E3%80%81DIoU%E3%80%81CIoU"><span class="toc-text">B4. GIoU、DIoU、CIoU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B5-%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF%E4%B8%8E-YOLOv1-%E8%BE%93%E5%87%BA%E7%BB%B4%E5%BA%A6"><span class="toc-text">B5. 转置卷积与 YOLOv1 输出维度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-NLP-%E4%B8%8E%E5%BA%8F%E5%88%97%EF%BC%88%E8%AF%BE%E4%BB%B6-5%EF%BC%89"><span class="toc-text">C. NLP 与序列（课件 5）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C1-CBOW%E3%80%81Skip-gram%E3%80%81%E8%B4%9F%E9%87%87%E6%A0%B7"><span class="toc-text">C1. CBOW、Skip-gram、负采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C2-n-gram%E3%80%81%E5%8F%A5%E5%AD%90%E6%A6%82%E7%8E%87%E3%80%81%E5%9B%B0%E6%83%91%E5%BA%A6"><span class="toc-text">C2. $n$-gram、句子概率、困惑度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C3-RNN-%E4%B8%8E-LSTM-%E4%B8%80%E6%AD%A5%E8%AE%A1%E7%AE%97"><span class="toc-text">C3. RNN 与 LSTM 一步计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%AE%BA%EF%BC%88%E8%AF%BE%E4%BB%B6-6%EF%BC%89"><span class="toc-text">D. 多模态表示与信息论（课件 6）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#D1-%E7%9B%B8%E4%BC%BC%E5%BA%A6%E3%80%81%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E3%80%81CCA"><span class="toc-text">D1. 相似度、相关系数、CCA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D2-%E5%BC%A0%E9%87%8F%E8%9E%8D%E5%90%88%E3%80%81%E4%BD%8E%E7%A7%A9%E4%B8%8E%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">D2. 张量融合、低秩与参数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D3-%E7%86%B5%E3%80%81%E6%9D%A1%E4%BB%B6%E7%86%B5%E3%80%81%E4%BA%92%E4%BF%A1%E6%81%AF"><span class="toc-text">D3. 熵、条件熵、互信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D4-CLIP-InfoNCE-%E6%89%8B%E7%AE%97"><span class="toc-text">D4. CLIP&#x2F;InfoNCE 手算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%B8%8E%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%EF%BC%88%E8%AF%BE%E4%BB%B6-7%E2%80%938%EF%BC%89"><span class="toc-text">E. 注意力与基础模型（课件 7–8）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#E1-Attention-%E7%9F%A9%E9%98%B5%E4%B8%8E-mask"><span class="toc-text">E1. Attention 矩阵与 mask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E2-%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E3%80%81%E5%A4%9A%E5%A4%B4%E3%80%81Transformer"><span class="toc-text">E2. 位置编码、多头、Transformer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E3-ViT-patch-%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%A7%84%E6%A8%A1"><span class="toc-text">E3. ViT patch 与注意力规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E4-LoRA-%E4%B8%8E-GQA"><span class="toc-text">E4. LoRA 与 GQA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4"><span class="toc-text">计算问题的一般步骤</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="公式与计算"></strong><span>The original article content is not automatically translated.</span></p>
@@ -445,7 +446,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月2日 晚上
+                    本文最后更新于 2026年11月3日 晚上
                   
                 
               </p>
@@ -453,7 +454,7 @@
             
               <div class="markdown-body">
                 
-                <p>本篇汇总深度学习、视觉、序列建模、多模态表示和注意力中的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与<a href="https://yjyxfcy.github.io/2026/11/02/mml1/">多模态学习概览</a>及<a href="https://yjyxfcy.github.io/2026/11/02/mml3/">练习题与参考解答</a>配合阅读。</p>
+                <p>本篇汇总北京大学《多模态学习》（2026 秋）课程中深度学习、视觉、序列建模、多模态表示和注意力的常用公式，并通过尺寸、参数量和损失函数的例子说明计算过程。推荐与<a href="https://yjyxfcy.github.io/2026/11/02/mml1/">多模态学习概览</a>及<a href="https://yjyxfcy.github.io/2026/11/02/mml3/">练习题与参考解答</a>配合阅读。</p>
 <p>**口径约定：**自然对数 $\ln$；除特别说明，卷积无 dilation、每输出通道有一个 bias；“MAC”指一次乘加，若题目将乘和加分别算 FLOP，则约为 $2,\mathrm{MACs}$。不同课件&#x2F;框架在边界、均值、FLOPs 口径可能不同，计算时先说明所用定义与口径。</p>
 <h2 id="常用公式索引"><a href="#常用公式索引" class="headerlink" title="常用公式索引"></a>常用公式索引</h2><ol>
 <li>线性层与 MSE：$\hat y&#x3D;Wx+b$，$L&#x3D;\frac1{2N}\sum|\hat y-y|^2$。</li>
@@ -550,7 +551,7 @@
 <p><strong>Pearson、RBF、CCA 低维辨析</strong>：余弦以原点为基准，Pearson 等于中心化后的两个样本序列的余弦；$X&#x3D;(1,2,3),Y&#x3D;(3,5,7)$ 时 $Y&#x3D;2X+1$，Pearson 为 1。RBF $k(a,b)&#x3D;\exp[-|a-b|^2&#x2F;(2\sigma^2)]$；若 $a&#x3D;b$，值 1；距离越大趋向 0。CCA 的一维两模态情形归结为相关系数绝对值最大化；多维时通过投影找到最相关的线性组合。</p>
 <h3 id="D2-张量融合、低秩与参数量"><a href="#D2-张量融合、低秩与参数量" class="headerlink" title="D2. 张量融合、低秩与参数量"></a>D2. 张量融合、低秩与参数量</h3><p>若 $a\in\mathbb R^{d_a}$、$b\in\mathbb R^{d_b}$，外积 $ab^\top$ 大小 $d_a\times d_b$。增广外积 $[1;a][1;b]^\top$ 大小 $(d_a+1)(d_b+1)$，包含常数 1、单模态项 $a,b$ 与交互项 $a_ib_j$。例 $a&#x3D;(2,3),b&#x3D;(4)$，增广结果</p>
 <p>$$\begin{bmatrix}1\2\3\end{bmatrix}<br>\begin{bmatrix}1&amp;4\end{bmatrix}<br>&#x3D;\begin{bmatrix}1&amp;4\2&amp;8\3&amp;12\end{bmatrix}.$$</p>
-<p>双线性映射到 $d_h$ 维时完整权重约 $d_hd_ad_b$ 个参数；秩 $R$ 分解后约 $R,d_h(d_a+d_b)$（具体因分解结构而异）。例 $d_a&#x3D;d_b&#x3D;100,d_h&#x3D;64,R&#x3D;4$，完整约 640,000，低秩约 51,200。注意低秩近似的形式不同，参数量公式需按给定因子形状算。</p>
+<p>双线性映射到 $d_h$ 维时，完整权重张量有 $d_hd_ad_b$ 个参数。若对每个输出维度的 $d_a\times d_b$ 权重矩阵分别做秩 $R$ 分解，因子参数数为 $R,d_h(d_a+d_b)$；例 $d_a&#x3D;d_b&#x3D;100,d_h&#x3D;64,R&#x3D;4$，完整权重有 640,000 个参数，这种分解有 51,200 个。若改用整个三阶张量的 CP 分解，参数数则是 $R(d_h+d_a+d_b)$，不能混用两种公式。这里都未计 bias 等额外参数。</p>
 <h3 id="D3-熵、条件熵、互信息"><a href="#D3-熵、条件熵、互信息" class="headerlink" title="D3. 熵、条件熵、互信息"></a>D3. 熵、条件熵、互信息</h3><p>$$H(X)&#x3D;-\sum_xp(x)\log_2p(x),\quad<br>H(Y|X)&#x3D;H(X,Y)-H(X),\quad<br>I(X;Y)&#x3D;H(X)+H(Y)-H(X,Y).$$</p>
 <p>用 $\log_2$ 时单位 bit。公平硬币 $H(X)&#x3D;1$ bit；若 $Y&#x3D;X$，$H(Y|X)&#x3D;0,I(X;Y)&#x3D;1$ bit；若 $X,Y$ 独立且各公平，$I(X;Y)&#x3D;0$。<strong>纠错</strong>：条件熵 $H(Y|X)$ 的对数对象是 $p(y|x)&#x3D;p(x,y)&#x2F;p(x)$，不是 $p(x|y)$；互信息 $I(X;Y)&#x3D;H(X)-H(X|Y)$ 或 $H(Y)-H(Y|X)$，两式应成对。</p>
 <h3 id="D4-CLIP-InfoNCE-手算"><a href="#D4-CLIP-InfoNCE-手算" class="headerlink" title="D4. CLIP&#x2F;InfoNCE 手算"></a>D4. CLIP&#x2F;InfoNCE 手算</h3><p>令批内两对图文的缩放后相似度矩阵 $S&#x3D;\begin{bmatrix}\ln3&amp;0\0&amp;\ln3\end{bmatrix}$，正确配对在对角线。图到文第 1 行正确概率 $3&#x2F;(3+1)&#x3D;.75$，第 2 行同理，所以 $L_{\rm i2t}&#x3D;-\ln .75&#x3D;\ln(4&#x2F;3)\approx.288$；文到图两列相同，最终 $L&#x3D;.288$。若某批正负相似度都相等，正确概率 $1&#x2F;N$，单向损失 $\ln N$。$\tau$ 出现在指数前的 logit $S_{ij}&#x3D;\mathrm{sim}(v_i,t_j)&#x2F;\tau$，不是在概率外简单除 $\tau$。</p>
@@ -628,7 +629,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月2日</div>
+          <div>2026年11月3日</div>
         </div>
       
       

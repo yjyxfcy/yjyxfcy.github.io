@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -481,8 +481,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">03 · 第3讲｜生成模型与生成式分类</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>03</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>03</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%BB%BA%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%EF%BC%8C%E5%86%8D%E5%88%86%E7%B1%BB"><span class="toc-text">先建联合分布，再分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E7%94%A8%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE%E6%8D%A2%E5%8F%96%E5%8F%AF%E4%BC%B0%E8%AE%A1%E6%80%A7"><span class="toc-text">朴素贝叶斯：用独立假设换取可估计性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90"><span class="toc-text">高斯判别分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E7%B1%BB%E5%88%AB"><span class="toc-text">如何选类别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E4%BB%8E%E8%AE%A1%E6%95%B0%E5%BE%97%E5%88%B0"><span class="toc-text">朴素贝叶斯参数怎么从计数得到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E4%BA%AB%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%BA%A7%E7%94%9F%E7%BA%BF%E6%80%A7%E8%BE%B9%E7%95%8C"><span class="toc-text">为什么共享协方差产生线性边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fisher-%E6%8A%95%E5%BD%B1%E4%B8%8E%E6%A6%82%E7%8E%87%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Fisher 投影与概率分类的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E4%B8%A4%E7%B1%BB%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">一个完整的两类计算例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%81%87%E8%AE%BE%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%A5%BD%E5%A4%84%E4%B8%8E%E4%BB%A3%E4%BB%B7"><span class="toc-text">分布假设带来的好处与代价</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第3讲｜生成模型与生成式分类"></strong><span>The original article content is not automatically translated.</span></p>

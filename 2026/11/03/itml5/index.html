@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第五讲：回归任务要预测连续的数。拟合数据时，我们为什么常用平方误差？如果特征太多，又怎样让模型不被训练样本带偏？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.124Z">
-<meta property="article:modified_time" content="2026-11-03T10:35:55.805Z">
+<meta property="article:modified_time" content="2026-11-03T11:27:24.673Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.4k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          20 分钟
+          22 分钟
         
       </span>
     
@@ -481,8 +481,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">05 · 第5讲｜线性回归、正则化与贝叶斯回归</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>05</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>05</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%A6%82%E7%8E%87%E5%81%87%E8%AE%BE%E5%BE%97%E5%88%B0%E5%B9%B3%E6%96%B9%E8%AF%AF%E5%B7%AE"><span class="toc-text">从概率假设得到平方误差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E5%88%AB%E5%BC%8F%E4%B8%8E%E7%94%9F%E6%88%90%E5%BC%8F%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%A7%86%E8%A7%92"><span class="toc-text">判别式与生成式的两种视角</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B2%AD%E5%9B%9E%E5%BD%92%EF%BC%9A%E6%8A%8A%E4%B8%8D%E7%A8%B3%E5%AE%9A%E8%A7%A3%E6%8B%89%E5%9B%9E%E6%9D%A5"><span class="toc-text">岭回归：把不稳定解拉回来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lasso%EF%BC%9A%E8%AE%A9%E9%83%A8%E5%88%86%E5%8F%82%E6%95%B0%E6%81%B0%E5%A5%BD%E5%8F%98%E6%88%90%E9%9B%B6"><span class="toc-text">Lasso：让部分参数恰好变成零</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-text">贝叶斯线性回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BB%8E%E5%9B%9E%E5%BD%92%E8%BF%9E%E6%8E%A5%E5%88%86%E7%B1%BB"><span class="toc-text">广义线性模型：从回归连接分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E5%88%B0%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-text">从高斯似然到最小二乘的具体步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B2%AD%E5%9B%9E%E5%BD%92%E7%9A%84-MAP-%E7%B3%BB%E6%95%B0%E4%BB%8E%E5%93%AA%E9%87%8C%E6%9D%A5"><span class="toc-text">岭回归的 MAP 系数从哪里来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E9%98%88%E5%80%BC%E4%B8%BA%E4%BD%95%E4%BA%A7%E7%94%9F%E7%A8%80%E7%96%8F%E6%80%A7"><span class="toc-text">软阈值为何产生稀疏性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%9E%E5%BD%92%E7%9A%84%E5%90%8E%E9%AA%8C%E5%92%8C%E9%A2%84%E6%B5%8B%E6%96%B9%E5%B7%AE"><span class="toc-text">贝叶斯回归的后验和预测方差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B1%E5%90%8C%E5%85%AC%E5%BC%8F"><span class="toc-text">广义线性模型的共同公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E8%BF%98%E5%8F%AF%E4%BB%A5%E9%99%90%E5%88%B6%E4%B8%80%E7%BB%84%E5%8F%82%E6%95%B0"><span class="toc-text">正则化还可以限制一组参数</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第5讲｜线性回归、正则化与贝叶斯回归"></strong><span>The original article content is not automatically translated.</span></p>
@@ -512,7 +513,7 @@
 <h3 id="Lasso：让部分参数恰好变成零"><a href="#Lasso：让部分参数恰好变成零" class="headerlink" title="Lasso：让部分参数恰好变成零"></a>Lasso：让部分参数恰好变成零</h3><p>将惩罚换成 $\lambda|w|_1$ 得到 Lasso；其先验视角对应拉普拉斯分布。$L_1$ 在零点不可导，但这个“尖角”正是产生稀疏解的重要原因。</p>
 <p>课件讨论坐标下降：固定其他坐标，逐个更新当前权重；在简化的正交设计情形，解可通过软阈值算子 $S(z,\lambda)&#x3D;\mathrm{sign}(z)\max(|z|-\lambda,0)$ 理解。</p>
 <p>Lasso 可做特征选择，但高度相关的特征可能使被选中的具体变量不稳定。分组稀疏则按预先指定的特征组一起选择。</p>
-<p>课件还介绍变量拆分与投影梯度的求解思路：写 $w&#x3D;w^+-w^-$ 且 $w^+,w^-\ge0$，则 $|w|_1$ 可以表示为非负变量之和，再在约束域内更新。</p>
+<p>课件还介绍变量拆分与投影梯度的求解思路：写 $w&#x3D;w^+-w^-$ 且 $w^+,w^-\ge0$。对任意拆分有 $|w|_1\le\sum_j(w_j^++w_j^-)$；只有每个坐标不同时取正值时才相等。若目标函数含正的 $L_1$ 惩罚系数，最优解总能选取这种拆分，再在非负约束域内求解。</p>
 <p>坐标下降和投影法都是处理 $L_1$ 非光滑性的办法，选择取决于问题规模与结构。</p>
 <h3 id="贝叶斯线性回归"><a href="#贝叶斯线性回归" class="headerlink" title="贝叶斯线性回归"></a>贝叶斯线性回归</h3><p>岭回归的 MAP 只留下一个最佳权重。贝叶斯回归保留 $p(w\mid D)$：高斯先验配合高斯噪声得到高斯后验。</p>
 <p>新输入的预测分布是 $p(y_*\mid x_*,D)&#x3D;\int p(y_*\mid x_*,w)p(w\mid D)dw$。其方差同时包含观测噪声与参数不确定性；训练数据稀少或新点远离已见区域时，后者更重要。</p>
@@ -532,10 +533,10 @@
 <h3 id="贝叶斯回归的后验和预测方差"><a href="#贝叶斯回归的后验和预测方差" class="headerlink" title="贝叶斯回归的后验和预测方差"></a>贝叶斯回归的后验和预测方差</h3><p>令噪声精度 $\beta&#x3D;1&#x2F;\sigma^2$，先验 $w\sim\mathcal N(m_0,S_0)$。</p>
 <p>配平方项可得 $S_N^{-1}&#x3D;S_0^{-1}+\beta X^TX$，$m_N&#x3D;S_N(S_0^{-1}m_0+\beta X^Ty)$。</p>
 <p>新点的预测均值是 $x_*^Tm_N$，方差为 $\sigma^2+x_*^TS_Nx_*$。第二项是“权重还不确定”带来的额外方差；训练数据增多通常让后验更集中。MAP 只报告 $m_N$，完整预测还报告这个不确定性。</p>
-<h3 id="广义线性模型的共同公式"><a href="#广义线性模型的共同公式" class="headerlink" title="广义线性模型的共同公式"></a>广义线性模型的共同公式</h3><p>指数族常写作 $p(y\mid\eta)&#x3D;h(y)\exp[y\eta-A(\eta)]$（有些分布还带尺度参数）。</p>
-<p>令自然参数 $\eta&#x3D;w^Tx$，负对数似然去掉与 $w$ 无关的项为 $\sum_n[A(\eta_n)-y_n\eta_n]$。</p>
-<p>由于 $A’(\eta)&#x3D;\mathbb E[y\mid\eta]$，梯度是 $\sum_n(A’(\eta_n)-y_n)x_n$，即“预测均值减真实值”乘输入特征。</p>
-<p>伯努利模型的 $A(\eta)&#x3D;\log(1+e^\eta)$，导出 Logistic 回归；高斯固定方差导出平方误差；Poisson 模型的均值为 $e^\eta$，适合计数数据。</p>
+<h3 id="广义线性模型的共同公式"><a href="#广义线性模型的共同公式" class="headerlink" title="广义线性模型的共同公式"></a>广义线性模型的共同公式</h3><p>单参数指数族可写作 $p(y\mid\eta)&#x3D;h(y)\exp[y\eta-A(\eta)]$；带已知离散度或方差尺度 $a(\phi)$ 时，更一般地写作 $p(y\mid\eta,\phi)&#x3D;h(y,\phi)\exp{[y\eta-A(\eta)]&#x2F;a(\phi)}$。</p>
+<p>采用规范连接并令自然参数 $\eta&#x3D;w^Tx$ 时，不带尺度的负对数似然去掉与 $w$ 无关的项为 $\sum_n[A(\eta_n)-y_n\eta_n]$。</p>
+<p>由于 $A’(\eta)&#x3D;\mathbb E[y\mid\eta]$，梯度是 $\sum_n(A’(\eta_n)-y_n)x_n$，即“预测均值减真实值”乘输入特征；有固定尺度 $a(\phi)$ 时还需除以该尺度。</p>
+<p>伯努利模型的 $A(\eta)&#x3D;\log(1+e^\eta)$，导出 Logistic 回归；高斯已知方差 $\sigma^2$ 可取 $\eta&#x3D;\mu&#x3D;w^Tx$、$a(\phi)&#x3D;\sigma^2$，负对数似然便含 $(y-\mu)^2&#x2F;(2\sigma^2)$；若硬套不带尺度的形式，其自然参数则是 $\mu&#x2F;\sigma^2$。Poisson 模型的均值为 $e^\eta$，适合计数数据。</p>
 <p>不同输出类型对应不同的均值函数与噪声假设。</p>
 <h3 id="正则化还可以限制一组参数"><a href="#正则化还可以限制一组参数" class="headerlink" title="正则化还可以限制一组参数"></a>正则化还可以限制一组参数</h3><p>若特征按来源分组，只对每个权重单独施加 $L_1$ 惩罚，可能在同一组内留下零散变量。分组稀疏常使用 $\lambda\sum_g|w_g|_2$：组内用 $L_2$ 衡量强度，组间再求和，某一组可能整体缩为零。</p>
 <p>它要求分组在训练前有合理定义。正则化不是“参数越小越好”的绝对原则；过大惩罚会使模型欠拟合，应在验证集上选强度。</p>

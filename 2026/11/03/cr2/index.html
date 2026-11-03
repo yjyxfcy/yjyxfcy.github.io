@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -472,8 +472,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">02 · 第2讲｜工程回顾：从模型到训练系统</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/cognitive-reasoning/">认知推理</a><span>/</span><span>02</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/cognitive-reasoning/">认知推理</a><span>/</span><span>2026 秋</span><span>/</span><span>02</span></nav>
               <a class="reading-course-link" href="/courses/cognitive-reasoning/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%BC%84%E6%B8%85%E6%88%91%E4%BB%AC%E7%A9%B6%E7%AB%9F%E5%9C%A8%E4%BC%98%E5%8C%96%E4%BB%80%E4%B9%88"><span class="toc-text">先弄清我们究竟在优化什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%B1%82%E5%BC%80%E5%A7%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">从线性层开始：为什么需要正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLP%E3%80%81CNN%E3%80%81RNN%E3%80%81Transformer-%E5%88%86%E5%88%AB%E6%94%B9%E5%8F%98%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">MLP、CNN、RNN、Transformer 分别改变了什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81AdamW-%E5%92%8C%E8%AE%AD%E7%BB%83%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-text">梯度下降、AdamW 和训练稳定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E3%80%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%A2%9D%E5%A4%96%E9%97%AE%E9%A2%98"><span class="toc-text">数据、计算与大模型的额外问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%E5%86%8D%E7%BB%86%E7%9C%8B%E4%B8%80%E6%AD%A5"><span class="toc-text">反向传播与归一化再细看一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E8%AF%8D%E7%BB%99%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A%E4%BA%86%E2%80%9C%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D%E2%80%9D"><span class="toc-text">分词给模型设定了“基本单位”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%8A%9B%E9%A2%84%E7%AE%97%E4%B8%8B%E6%80%8E%E6%A0%B7%E5%8F%96%E8%88%8D"><span class="toc-text">算力预算下怎样取舍</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第2讲｜工程回顾：从模型到训练系统"></strong><span>The original article content is not automatically translated.</span></p>

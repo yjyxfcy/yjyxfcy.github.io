@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="课程笔记根据多模态学习课程的课件整理，串联深度学习、计算机视觉、自然语言处理与多模态建模方法。内容从基础网络和视觉任务出发，逐步延伸到联合表示、跨模态对齐、注意力机制及视觉语言模型。 概念与推导集中在本篇；常用公式和演算示例见公式与计算，配套练习及解答见练习题与参考解答。">
+    <meta name="description" content="这篇北京大学《多模态学习》（2026 秋）课程笔记根据课件整理，串联深度学习、计算机视觉、自然语言处理与多模态建模方法。内容从基础网络和视觉任务出发，逐步延伸到联合表示、跨模态对齐、注意力机制及视觉语言模型。 概念与推导集中在本篇；常用公式和演算示例见公式与计算，配套练习及解答见练习题与参考解答。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多模态学习概览">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/02/mml1/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="课程笔记根据多模态学习课程的课件整理，串联深度学习、计算机视觉、自然语言处理与多模态建模方法。内容从基础网络和视觉任务出发，逐步延伸到联合表示、跨模态对齐、注意力机制及视觉语言模型。 概念与推导集中在本篇；常用公式和演算示例见公式与计算，配套练习及解答见练习题与参考解答。">
+<meta property="og:description" content="这篇北京大学《多模态学习》（2026 秋）课程笔记根据课件整理，串联深度学习、计算机视觉、自然语言处理与多模态建模方法。内容从基础网络和视觉任务出发，逐步延伸到联合表示、跨模态对齐、注意力机制及视觉语言模型。 概念与推导集中在本篇；常用公式和演算示例见公式与计算，配套练习及解答见练习题与参考解答。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-02T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-02T13:53:00.751Z">
+<meta property="article:modified_time" content="2026-11-03T11:25:50.229Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -70,7 +70,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=5f3f137848fc.css">
+<link rel="stylesheet" href="/css/custom.css?v=187f36c54d10.css">
 
 
 
@@ -436,8 +436,9 @@
           <article class="post-content mx-auto">
             <h1 class="reading-title">01 · 多模态学习概览</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>01</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>01</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
+              <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E4%BB%BB%E5%8A%A1%E4%B8%8E%E9%97%AE%E9%A2%98"><span class="toc-text">多模态任务与问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A4%9A%E6%A8%A1%E6%80%81%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%9C%B0%E5%9B%BE%EF%BC%88%E8%AF%BE%E4%BB%B6-1%EF%BC%8C%E7%BA%A6-5%E2%80%9310%E3%80%8120%E2%80%9373-%E9%A1%B5%EF%BC%89"><span class="toc-text">1. 多模态学习的地图（课件 1，约 5–10、20–73 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%88%E8%AF%BE%E4%BB%B6-2%EF%BC%8C%E7%BA%A6-3%E2%80%9352%E3%80%8154%E2%80%9374%E3%80%8176%E2%80%93128-%E9%A1%B5%EF%BC%89"><span class="toc-text">2. 深度学习基础（课件 2，约 3–52、54–74、76–128 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-CNN-%E4%B8%8E%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%EF%BC%88%E8%AF%BE%E4%BB%B6-3%EF%BC%8C%E7%BA%A6-3%E2%80%9361%E3%80%8162%E2%80%93101%E3%80%81103%E2%80%93167-%E9%A1%B5%EF%BC%89"><span class="toc-text">3. CNN 与分类网络（课件 3，约 3–61、62–101、103–167 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%86%E5%89%B2%EF%BC%88%E8%AF%BE%E4%BB%B6-4%EF%BC%8C%E7%BA%A6-3%E2%80%9359%E3%80%8162%E2%80%93103-%E9%A1%B5%EF%BC%89"><span class="toc-text">4. 检测与分割（课件 4，约 3–59、62–103 页）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA"><span class="toc-text">自然语言处理与多模态表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-NLP-%E5%9F%BA%E7%A1%80%EF%BC%88%E8%AF%BE%E4%BB%B6-5%EF%BC%8C%E7%BA%A6-2%E2%80%9352-%E9%A1%B5%EF%BC%89"><span class="toc-text">5. NLP 基础（课件 5，约 2–52 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-RNN%E3%80%81LSTM-%E4%B8%8E%E5%BA%8F%E5%88%97%E8%AE%AD%E7%BB%83%EF%BC%88%E8%AF%BE%E4%BB%B6-5%EF%BC%8C%E7%BA%A6-53%E2%80%93128-%E9%A1%B5%EF%BC%89"><span class="toc-text">6. RNN、LSTM 与序列训练（课件 5，约 53–128 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%EF%BC%9A%E8%9E%8D%E5%90%88%E3%80%81%E5%8D%8F%E8%B0%83%E3%80%81%E5%88%86%E8%A7%A3%EF%BC%88%E8%AF%BE%E4%BB%B6-6%EF%BC%8C%E7%BA%A6-2%E2%80%9374-%E9%A1%B5%EF%BC%89"><span class="toc-text">7. 多模态表示：融合、协调、分解（课件 6，约 2–74 页）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E6%A8%A1%E6%80%81%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">跨模态对齐与基础模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0%EF%BC%88%E8%AF%BE%E4%BB%B6-7%EF%BC%8C%E7%BA%A6-2%E2%80%9330%E3%80%8177%E2%80%9397-%E9%A1%B5%EF%BC%89"><span class="toc-text">8. 对齐与图像描述（课件 7，约 2–30、77–97 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Self-attention-%E4%B8%8E-Transformer%EF%BC%88%E8%AF%BE%E4%BB%B6-7%EF%BC%8C%E7%BA%A6-31%E2%80%9376-%E9%A1%B5%EF%BC%89"><span class="toc-text">9. Self-attention 与 Transformer（课件 7，约 31–76 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-ViT%E3%80%81BERT%E3%80%81GPT%E3%80%81GQA%E3%80%81LoRA%EF%BC%88%E8%AF%BE%E4%BB%B6-8%EF%BC%8C%E7%BA%A6-3%E2%80%9371-%E9%A1%B5%EF%BC%89"><span class="toc-text">10. ViT、BERT、GPT、GQA、LoRA（课件 8，约 3–71 页）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E8%AE%B2%E5%86%85%E5%AE%B9%E7%B4%A2%E5%BC%95"><span class="toc-text">八讲内容索引</span></a></li></ol></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="多模态学习概览"></strong><span>The original article content is not automatically translated.</span></p>
@@ -445,7 +446,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月2日 晚上
+                    本文最后更新于 2026年11月3日 晚上
                   
                 
               </p>
@@ -453,7 +454,7 @@
             
               <div class="markdown-body">
                 
-                <p>课程笔记根据多模态学习课程的课件整理，串联深度学习、计算机视觉、自然语言处理与多模态建模方法。内容从基础网络和视觉任务出发，逐步延伸到联合表示、跨模态对齐、注意力机制及视觉语言模型。</p>
+                <p>这篇北京大学《多模态学习》（2026 秋）课程笔记根据课件整理，串联深度学习、计算机视觉、自然语言处理与多模态建模方法。内容从基础网络和视觉任务出发，逐步延伸到联合表示、跨模态对齐、注意力机制及视觉语言模型。</p>
 <p>概念与推导集中在本篇；常用公式和演算示例见<a href="https://yjyxfcy.github.io/2026/11/02/mml2/">公式与计算</a>，配套练习及解答见<a href="https://yjyxfcy.github.io/2026/11/02/mml3/">练习题与参考解答</a>。</p>
 <span id="more"></span>
 
@@ -936,7 +937,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月2日</div>
+          <div>2026年11月3日</div>
         </div>
       
       

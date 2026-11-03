@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 tasks-evaluation-benchmark.pdf 整理。模型能否称为“更好”，首先取决于我们让它做什么、怎样计分，以及测试题是否真的代表目标场景。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:16:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T16:42:32.817Z">
+<meta property="article:modified_time" content="2026-11-03T16:51:23.139Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -312,7 +312,7 @@
         
         
         
-          15 分钟
+          16 分钟
         
       </span>
     
@@ -582,7 +582,7 @@
 <p>序列标注与结构预测还需要决定<strong>比对单位</strong>：按 token 逐个算对，还是要求整个实体跨度及类型都对？“北京大学”只识别成“大学”，按 token 或宽松匹配可能有部分分数，严格实体级评测则算错。比较结果前必须先确认评测脚本定义。</p>
 <h3 id="机器翻译：BLEU-在数什么"><a href="#机器翻译：BLEU-在数什么" class="headerlink" title="机器翻译：BLEU 在数什么"></a>机器翻译：BLEU 在数什么</h3><p>BLEU 对候选译文的 $n$-gram 做<strong>截断精确率</strong>，避免把一个正确词反复输出刷高得分；再加入简短惩罚（brevity penalty），防止只输出几个高概率词。常见语料级形式为</p>
 <p>$$\operatorname{BLEU}&#x3D;BP\cdot\exp\left(\sum_{n&#x3D;1}^{N}w_n\log p_n\right),\qquad<br>BP&#x3D;\min(1,e^{1-r&#x2F;c}),$$</p>
-<p>其中 $p_n$ 是截断后的 $n$-gram 精确率，$c$ 与 $r$ 是候选和参考长度。标准 BLEU 常取 $N&#x3D;4$ 和相等权重。计算单句 BLEU 时零计数的平滑方法会影响结果，不能与语料级分数直接混用。</p>
+<p>其中 $p_n$ 是截断后的 $n$-gram 精确率，$c$ 与 $r$ 是候选和参考长度。多参考译文时，参考长度通常按与候选长度最接近的规则选取；语料级 BLEU 先汇总整个语料的计数再计算比例，不能把各句 BLEU 简单取平均。标准 BLEU 常取 $N&#x3D;4$ 和相等权重。计算单句 BLEU 时零计数的平滑方法会影响结果，不能与语料级分数直接混用。</p>
 <p>BLEU 主要测与参考译文的词组重合，不直接判断事实、文风或语用是否正确。两种同样好的译法可能因为措辞不同得到差异较大的分数。课件也提到 TER、ChrF 等其他指标；多指标与人工检查通常更稳妥。</p>
 <h3 id="问答、对话和任务成功"><a href="#问答、对话和任务成功" class="headerlink" title="问答、对话和任务成功"></a>问答、对话和任务成功</h3><p>抽取式问答常用 Exact Match 和 token F1。若正确答案是“北京大学”，模型输出“北大”，严格字面匹配可能判错，尽管人能理解二者同指。自由生成问答因此还需核对语义等价、证据支持和是否答非所问。</p>
 <p>对话更难：单轮回复礼貌自然，不代表几轮后用户真的完成购票或找到资料。可测任务成功率、错误恢复、用户满意度，也可以用模拟用户扩大测试规模。模拟器的行为模式与真实用户有差异，不能完全替代真实交互评估。</p>

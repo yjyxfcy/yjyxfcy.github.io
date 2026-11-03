@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第九讲：Evaluation">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-25T08:08:09.785Z">
-<meta property="article:modified_time" content="2026-10-06T12:52:59.711Z">
+<meta property="article:modified_time" content="2026-11-03T16:51:16.758Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.5k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -376,7 +376,7 @@
         aria-expanded="true"
       >
         生成模型基础
-        <span class="list-group-count">(9)</span>
+        <span class="list-group-count">(11)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -399,10 +399,28 @@
     
       
       
+        <a href="/2026/11/04/gen10/" title="RLHF：从人类偏好到推理模型"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">RLHF：从人类偏好到推理模型</span>
+        </a>
+      
+    
+      
+      
         <a href="/2026/02/13/gen1/" title="变分自编码器(VAE)"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">变分自编码器(VAE)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/11/04/gen11/" title="多模态生成：让文字与图像对上号"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">多模态生成：让文字与图像对上号</span>
         </a>
       
     
@@ -500,7 +518,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年10月6日 晚上
+                    本文最后更新于 2026年11月4日 凌晨
                   
                 
               </p>
@@ -515,23 +533,21 @@
 <p>对于判别模型来说，评估是非常简单的，只需看正确率即可<br>但对于生成模型来说，评估就得从多个方面来考虑了，没有一个单一的指标能衡量所有方面<br>下面我们会介绍三个主要的评估维度</p>
 <h3 id="密度估计"><a href="#密度估计" class="headerlink" title="密度估计"></a>密度估计</h3><p>顾名思义，就是评估模型在测试集上赋予数据的概率(对数似然)大小<br>具体操作大家应该也很熟悉了，无非就是划分训练集验证集测试集，在训练集上学习$p_\theta(x)$，在验证集上调参，最后在测试集上计算期望对数似然$E_{x \sim test}[log p_\theta(x)]$</p>
 <p>对于AR和Flow来说，这种方式易于计算，VAE和Diffusion也可估计，GAN则通常不这样做</p>
-<p>这里有一个需要注意力的地方：<strong>极大似然估计等价于数据压缩</strong><br>采用香农编码，给每个数据点$x$分配长度为$\lceil log \dfrac{1}{p_\theta(x)}\rceil$的编码<br>那么平均编码长度约等于负对数似然，模型找出的数据规律越多，压缩率越高</p>
+<p>这里有一个需要注意力的地方：<strong>极大似然估计等价于数据压缩</strong><br>对离散数据使用接近最优的熵编码，给概率为$p_\theta(x)$的数据点分配约$-\log_2 p_\theta(x)$比特；连续密度需先约定量化方式，不能直接把密度当作离散概率<br>那么平均编码长度约等于负对数似然，模型找出的数据规律越多，压缩率越高</p>
 <h3 id="样本质量"><a href="#样本质量" class="headerlink" title="样本质量"></a>样本质量</h3><p>这个非常好理解，主要是有人工评估和自动评估之分</p>
 <p>人工评估当然比较符合我们真实的主观感受，但是费时费力，且存在偏见，结果不可解释，也难以复现，无法评估泛化性</p>
-<p>至于自动评估，首先要满足两个核心假设：</p>
-<ul>
-<li>模型是在有标签数据集上(like ImageNet)训练的</li>
-<li>拥有一个良好的预训练概率分类器$c(y|x)$用于预测标签$y$</li>
-</ul>
+<p>下面的 IS 指标依赖一个预训练分类器$c(y|x)$，常用在 ImageNet 等有标签数据上训练的分类器。<strong>被评估的生成模型不必在有标签数据上训练</strong>，但分类器的类别和特征若不适合生成内容，指标就可能失真。</p>
 <h4 id="指标一：Inception-Score-IS"><a href="#指标一：Inception-Score-IS" class="headerlink" title="指标一：Inception Score (IS)"></a>指标一：Inception Score (IS)</h4><p>IS结合了两个标准，<strong>分数越高越好</strong></p>
 <ul>
 <li>清晰度：<br>好的图片应当让分类器对其类别非常确定，因此分类器预测分布的信息熵应该很小，也即$\Sigma_y c(y|x)log c(y|x)$应该较大</li>
 <li>多样性：<br>生成的图片应覆盖所有类别且分布均衡，因此需要计算生成样本边缘分布$c(y)$的熵，越均匀熵越高，也即$-\Sigma_y c(y)log c(y)$应该较大</li>
 </ul>
-<p>由此，我们令$IS&#x3D;D×S$<br>其中$S&#x3D;exp(E_{x \sim p_\theta}[\Sigma_y c(y|x)log c(y|x)])$<br>$D&#x3D;exp(-[\Sigma_y c(y)log c(y)])$</p>
-<p>更好记的公式：$IS&#x3D;exp(E_{x \sim p_\theta} [KL(c(y|x))||c(y)])$</p>
+<p>令$c(y)&#x3D;E_{x\sim p_\theta}[c(y|x)]$，则</p>
+<p>$$IS&#x3D;\exp\left(E_{x\sim p_\theta}D_{\rm KL}(c(y|x)|c(y))\right).$$</p>
+<p>也可以把它看成两项的乘积：一项奖励类别边缘分布$c(y)$的高熵（多样性），一项奖励每张图片的预测分布$c(y|x)$的低熵（清晰度）。IS 不使用真实图片作比较，所以高分不保证生成分布接近真实分布。</p>
 <h4 id="指标二：Frechet-Inception-Distance-FID"><a href="#指标二：Frechet-Inception-Distance-FID" class="headerlink" title="指标二：Frechet Inception Distance (FID)"></a>指标二：Frechet Inception Distance (FID)</h4><p>主要计算真实数据和生成数据在特征空间中分布的差异，<strong>分数越低越好</strong></p>
-<p>计算时使用预训练分类器的中间层特征提取测试集T和生成样本G的特征向量，分别用多元高斯分布进行拟合，得到$(\mu_T,\mu_G),(\Sigma_T,\Sigma_G)$<br>由此计算FID距离：<br>$FID&#x3D;||\mu_T-\mu_G||^2+Trace(\Sigma_T+\Sigma_G-2(\Sigma_T \Sigma_G)^{0.5})$</p>
+<p>计算时使用预训练分类器的中间层特征提取测试集T和生成样本G的特征向量，分别用多元高斯分布进行拟合，得到$(\mu_T,\mu_G),(\Sigma_T,\Sigma_G)$<br>由此计算FID距离：<br>$FID&#x3D;|\mu_T-\mu_G|^2+\operatorname{Tr}(\Sigma_T+\Sigma_G-2(\Sigma_T^{1&#x2F;2}\Sigma_G\Sigma_T^{1&#x2F;2})^{1&#x2F;2})$</p>
+<p>式中的矩阵平方根需要正确计算；直接把两个协方差矩阵当作普通数相乘开方，通常是不严谨的。FID 对特征提取器、样本量和图像预处理也敏感。</p>
 <h3 id="下游任务解决能力"><a href="#下游任务解决能力" class="headerlink" title="下游任务解决能力"></a>下游任务解决能力</h3><p>对于llm来说，生成文本后通常通过解决具体任务来评估质量<br>这个应该无需多言，只需设计特定的prompt，然后让模型在few-shot或者zero-shot条件下完成下游任务即可<br>ppt中的表格评估的甚至还是GPT 4，claude 2，Grok 1，恍如隔世……</p>
 
                 
@@ -590,7 +606,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年10月6日</div>
+          <div>2026年11月4日</div>
         </div>
       
       
@@ -621,7 +637,7 @@
                   <a class="course-back" href="/courses/generative-models/">← 返回 生成模型基础 目录</a>
                   <div class="course-neighbors">
                     <a href="/2026/08/25/gen8/"><small>上一篇</small><strong>← 能量模型</strong></a>
-                    
+                    <a href="/2026/11/04/gen10/"><small>下一篇</small><strong>RLHF：从人类偏好到推理模型 →</strong></a>
                   </div>
                 </nav>
               

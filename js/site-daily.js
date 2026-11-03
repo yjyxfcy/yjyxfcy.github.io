@@ -5740,23 +5740,38 @@ function loadSmart(resume) {
   const sameSong = songId === String(s.id);
   songId = String(s.id);
   localStorage.setItem("songId", songId);
-  const targetTime = resume && sameSong ? songTime : 0;
+  const savedTime = Number(localStorage.getItem("songTime"));
+  const targetTime = resume && sameSong && Number.isFinite(savedTime) ? savedTime : 0;
   if (!resume || !sameSong) {
     songTime = 0;
     localStorage.setItem("songTime", "0");
   }
+  restoringSong = true;
+  const shouldResume = localStorage.getItem("isPlaying") === "true";
   player.pause();
+  localStorage.setItem("isPlaying", String(shouldResume));
   player.src = songUrl(s);
   audioFallbackTried = false;
-  player.addEventListener("loadedmetadata", function restoreSongPosition() {
-    player.removeEventListener("loadedmetadata", restoreSongPosition);
-    if (targetTime > 0 && Number.isFinite(player.duration)) {
-      player.currentTime = Math.min(targetTime, Math.max(0, player.duration - 0.25));
+  function restoreSongPosition() {
+    if (targetTime > 0) {
+      try {
+        const lastMoment = Number.isFinite(player.duration) ? Math.max(0, player.duration - 0.25) : targetTime;
+        player.currentTime = Math.min(targetTime, lastMoment);
+      } catch (e) { /* Some mobile browsers only allow seeking after canplay. */ }
     }
-    if (localStorage.getItem("isPlaying") === "true") player.play().catch(function () {});
-    updateProgress();
-  });
-  if (player.readyState >= 1) player.dispatchEvent(new Event("loadedmetadata"));
+    if (targetTime === 0 || player.currentTime >= targetTime - 1 || player.ended) {
+      player.removeEventListener("loadedmetadata", restoreSongPosition);
+      player.removeEventListener("canplay", restoreSongPosition);
+      songTime = player.currentTime || targetTime;
+      localStorage.setItem("songTime", String(songTime));
+      restoringSong = false;
+      if (shouldResume) player.play().catch(function () {});
+      updateProgress();
+    }
+  }
+  player.addEventListener("loadedmetadata", restoreSongPosition);
+  player.addEventListener("canplay", restoreSongPosition);
+  if (player.readyState >= 1) restoreSongPosition();
   updateProgress();
 }
 
@@ -6015,9 +6030,19 @@ player.addEventListener("error", function () {
   audioFallbackTried = false;
 });
 
+window.addEventListener("pagehide", function () {
+  if (!restoringSong && Number.isFinite(player.currentTime) && player.currentTime > 0) {
+    songTime = player.currentTime;
+    localStorage.setItem("songTime", String(songTime));
+  }
+});
+
 // 记住播放进度
 player.addEventListener("timeupdate", function () {
-  localStorage.setItem("songTime", player.currentTime);
+  if (!restoringSong && Number.isFinite(player.currentTime)) {
+    songTime = player.currentTime;
+    localStorage.setItem("songTime", String(songTime));
+  }
   updateProgress();
 });
 

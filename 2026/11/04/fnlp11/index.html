@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记。本篇由 AI 依据 lec9_sp.pdf 整理，接在前两篇句法分析之后。 句法分析回答“哪些词组合在一起”；语义分析还要回答“组合后说了什么”。两句话用词不同却表达同一事实时，系统能否得到相近的意义表示？ 学习路线：下面按 8 个主题展开：为什么词向量还不够、真值条件：从句子走向世界、一阶逻辑的几件工具、蕴含：表示为什么能帮助推理、组合性：">
+    <meta name="description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记。本篇由 AI 依据 lec9_sp.pdf 整理，接在前两篇句法分析之后。 句法分析回答“哪些词组合在一起”；语义分析还要回答“组合后说了什么”。两句话用词不同却表达同一事实时，系统能否得到相近的意义表示？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 11 讲：语义表示与组合语义">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/fnlp11/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记。本篇由 AI 依据 lec9_sp.pdf 整理，接在前两篇句法分析之后。 句法分析回答“哪些词组合在一起”；语义分析还要回答“组合后说了什么”。两句话用词不同却表达同一事实时，系统能否得到相近的意义表示？ 学习路线：下面按 8 个主题展开：为什么词向量还不够、真值条件：从句子走向世界、一阶逻辑的几件工具、蕴含：表示为什么能帮助推理、组合性：">
+<meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记。本篇由 AI 依据 lec9_sp.pdf 整理，接在前两篇句法分析之后。 句法分析回答“哪些词组合在一起”；语义分析还要回答“组合后说了什么”。两句话用词不同却表达同一事实时，系统能否得到相近的意义表示？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:11:00.000Z">
-<meta property="article:modified_time" content="2026-11-05T13:18:53.843Z">
+<meta property="article:modified_time" content="2026-11-05T15:28:39.528Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          3.3k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          22 分钟
+          21 分钟
         
       </span>
     
@@ -558,7 +558,7 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/nlp/">自然语言处理基础</a><span>/</span><span>2026 春</span><span>/</span><span>11</span></nav>
               <a class="reading-course-link" href="/courses/nlp/">← 返回课程目录</a>
               
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%8D%E5%90%91%E9%87%8F%E8%BF%98%E4%B8%8D%E5%A4%9F"><span class="toc-text">第 1 章：为什么词向量还不够</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%9C%9F%E5%80%BC%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%BB%8E%E5%8F%A5%E5%AD%90%E8%B5%B0%E5%90%91%E4%B8%96%E7%95%8C"><span class="toc-text">第 2 章：真值条件：从句子走向世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E7%9A%84%E5%87%A0%E4%BB%B6%E5%B7%A5%E5%85%B7"><span class="toc-text">第 3 章：一阶逻辑的几件工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E8%95%B4%E5%90%AB%EF%BC%9A%E8%A1%A8%E7%A4%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%B8%AE%E5%8A%A9%E6%8E%A8%E7%90%86"><span class="toc-text">第 4 章：蕴含：表示为什么能帮助推理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%BB%84%E5%90%88%E6%80%A7%EF%BC%9A%E8%AE%A9%E5%B0%8F%E7%89%87%E6%AE%B5%E6%8B%BC%E6%88%90%E6%95%B4%E5%8F%A5"><span class="toc-text">第 5 章：组合性：让小片段拼成整句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%A5%E6%B3%95%E8%A7%84%E5%88%99%E6%80%8E%E6%A0%B7%E5%B8%A6%E4%B8%8A%E8%AF%AD%E4%B9%89"><span class="toc-text">第 6 章：句法规则怎样带上语义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%84%8F%E4%B9%89%E8%A1%A8%E7%A4%BA%E8%AF%AD%E8%A8%80%E8%BF%98%E5%BA%94%E6%BB%A1%E8%B6%B3%E4%BB%80%E4%B9%88"><span class="toc-text">第 7 章：意义表示语言还应满足什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 8 章：本讲小结</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%8D%E5%90%91%E9%87%8F%E8%BF%98%E4%B8%8D%E5%A4%9F"><span class="toc-text">第 1 章：为什么词向量还不够</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%9C%9F%E5%80%BC%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%BB%8E%E5%8F%A5%E5%AD%90%E8%B5%B0%E5%90%91%E4%B8%96%E7%95%8C"><span class="toc-text">第 2 章：真值条件：从句子走向世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E7%9A%84%E5%87%A0%E4%BB%B6%E5%B7%A5%E5%85%B7"><span class="toc-text">第 3 章：一阶逻辑的几件工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E8%95%B4%E5%90%AB%EF%BC%9A%E8%A1%A8%E7%A4%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%B8%AE%E5%8A%A9%E6%8E%A8%E7%90%86"><span class="toc-text">第 4 章：蕴含：表示为什么能帮助推理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%BB%84%E5%90%88%E6%80%A7%EF%BC%9A%E8%AE%A9%E5%B0%8F%E7%89%87%E6%AE%B5%E6%8B%BC%E6%88%90%E6%95%B4%E5%8F%A5"><span class="toc-text">第 5 章：组合性：让小片段拼成整句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%A5%E6%B3%95%E8%A7%84%E5%88%99%E6%80%8E%E6%A0%B7%E5%B8%A6%E4%B8%8A%E8%AF%AD%E4%B9%89"><span class="toc-text">第 6 章：句法规则怎样带上语义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%84%8F%E4%B9%89%E8%A1%A8%E7%A4%BA%E8%AF%AD%E8%A8%80%E8%BF%98%E5%BA%94%E6%BB%A1%E8%B6%B3%E4%BB%80%E4%B9%88"><span class="toc-text">第 7 章：意义表示语言还应满足什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E5%B0%8F%E7%BB%93"><span class="toc-text">第 8 章：小结</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 11 讲：语义表示与组合语义"></strong><span>The original article content is not automatically translated.</span></p>
             
@@ -575,7 +575,6 @@
                 
                 <p>北京大学《自然语言处理基础》（2026 春）的课程笔记。本篇由 AI 依据 <code>lec9_sp.pdf</code> 整理，接在前两篇句法分析之后。</p>
 <p>句法分析回答“哪些词组合在一起”；语义分析还要回答“组合后说了什么”。两句话用词不同却表达同一事实时，系统能否得到相近的意义表示？</p>
-<p>学习路线：下面按 8 个主题展开：为什么词向量还不够、真值条件：从句子走向世界、一阶逻辑的几件工具、蕴含：表示为什么能帮助推理、组合性：让小片段拼成整句、句法规则怎样带上语义等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 <h2 id="第-1-章：为什么词向量还不够">第 1 章：为什么词向量还不够</h2>
 <p>分布语义把词映射为向量。相似的词往往出现在相似语境，所以向量距离能提供有用的词义线索。然而，“张三爱李四”和“李四爱张三”词几乎相同，真值条件却可能完全不同。只有词的集合或平均向量，无法表达谁做了什么。</p>
@@ -617,7 +616,7 @@
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∃</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mopen">[</span><span class="mop"><span class="mord mathrm">Book</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∧</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∀</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mop"><span class="mord mathrm">Person</span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">Read</span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">))]</span></span></span></span></span></p>
 <p>要求存在同一本书，所有人都读过。两个公式只换了量词顺序，意思却不同。</p>
 <p>课件最后还展示了图结构表示、SQL/SPARQL 和神经语义解析。它们不是一阶逻辑的简单替代品：数据库查询强调可执行，图表示方便表达关系，神经模型擅长从语句学习映射。无论用哪一种，都要检查输出是否忠于原句，并能否在目标任务中验证。</p>
-<h2 id="第-8-章：本讲小结">第 8 章：本讲小结</h2>
+<h2 id="第-8-章：小结">第 8 章：小结</h2>
 <p>词向量擅长表达相似性；逻辑或图表示擅长明确实体、关系与可检验的推理。组合语义把句法树变成计算意义的路线图。复习时可以拿“玛丽有一只猫”“每个孩子都哭了”两句，亲手写出量词、谓词与 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> 应用，检查每个变量由哪个量词绑定。</p>
 
                 
@@ -781,7 +780,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%8D%E5%90%91%E9%87%8F%E8%BF%98%E4%B8%8D%E5%A4%9F"><span class="toc-text">第 1 章：为什么词向量还不够</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%9C%9F%E5%80%BC%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%BB%8E%E5%8F%A5%E5%AD%90%E8%B5%B0%E5%90%91%E4%B8%96%E7%95%8C"><span class="toc-text">第 2 章：真值条件：从句子走向世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E7%9A%84%E5%87%A0%E4%BB%B6%E5%B7%A5%E5%85%B7"><span class="toc-text">第 3 章：一阶逻辑的几件工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E8%95%B4%E5%90%AB%EF%BC%9A%E8%A1%A8%E7%A4%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%B8%AE%E5%8A%A9%E6%8E%A8%E7%90%86"><span class="toc-text">第 4 章：蕴含：表示为什么能帮助推理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%BB%84%E5%90%88%E6%80%A7%EF%BC%9A%E8%AE%A9%E5%B0%8F%E7%89%87%E6%AE%B5%E6%8B%BC%E6%88%90%E6%95%B4%E5%8F%A5"><span class="toc-text">第 5 章：组合性：让小片段拼成整句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%A5%E6%B3%95%E8%A7%84%E5%88%99%E6%80%8E%E6%A0%B7%E5%B8%A6%E4%B8%8A%E8%AF%AD%E4%B9%89"><span class="toc-text">第 6 章：句法规则怎样带上语义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%84%8F%E4%B9%89%E8%A1%A8%E7%A4%BA%E8%AF%AD%E8%A8%80%E8%BF%98%E5%BA%94%E6%BB%A1%E8%B6%B3%E4%BB%80%E4%B9%88"><span class="toc-text">第 7 章：意义表示语言还应满足什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 8 章：本讲小结</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%8D%E5%90%91%E9%87%8F%E8%BF%98%E4%B8%8D%E5%A4%9F"><span class="toc-text">第 1 章：为什么词向量还不够</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%9C%9F%E5%80%BC%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%BB%8E%E5%8F%A5%E5%AD%90%E8%B5%B0%E5%90%91%E4%B8%96%E7%95%8C"><span class="toc-text">第 2 章：真值条件：从句子走向世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E7%9A%84%E5%87%A0%E4%BB%B6%E5%B7%A5%E5%85%B7"><span class="toc-text">第 3 章：一阶逻辑的几件工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E8%95%B4%E5%90%AB%EF%BC%9A%E8%A1%A8%E7%A4%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%B8%AE%E5%8A%A9%E6%8E%A8%E7%90%86"><span class="toc-text">第 4 章：蕴含：表示为什么能帮助推理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%BB%84%E5%90%88%E6%80%A7%EF%BC%9A%E8%AE%A9%E5%B0%8F%E7%89%87%E6%AE%B5%E6%8B%BC%E6%88%90%E6%95%B4%E5%8F%A5"><span class="toc-text">第 5 章：组合性：让小片段拼成整句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%A5%E6%B3%95%E8%A7%84%E5%88%99%E6%80%8E%E6%A0%B7%E5%B8%A6%E4%B8%8A%E8%AF%AD%E4%B9%89"><span class="toc-text">第 6 章：句法规则怎样带上语义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%84%8F%E4%B9%89%E8%A1%A8%E7%A4%BA%E8%AF%AD%E8%A8%80%E8%BF%98%E5%BA%94%E6%BB%A1%E8%B6%B3%E4%BB%80%E4%B9%88"><span class="toc-text">第 7 章：意义表示语言还应满足什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E5%B0%8F%E7%BB%93"><span class="toc-text">第 8 章：小结</span></a></li></ol>
   </div>
 </div>
 

@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《认知推理》（2026 秋）的课程笔记。 画面中有人、有椅子，还不足以说明人正在坐椅子。第四讲的重点是把人、物体与动作一起看，进一步从二维图像推断三维交互与场景。 学习路线：下面按 9 个主题展开：人—物交互到底识别什么、为什么不能把三件事各自独立预测、从二维跳到三维，首先要选表示、人体不只是关节点：SMPL 在做什么、交互能帮助三维重建，也能用于生成、从 HOI 到 HSI：让场景围绕人">
+    <meta name="description" content="北京大学《认知推理》（2026 秋）的课程笔记。 画面中有人、有椅子，还不足以说明人正在坐椅子。第四讲的重点是把人、物体与动作一起看，进一步从二维图像推断三维交互与场景。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 4 讲：人—物交互：从检测到三维场景">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/cr4/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《认知推理》（2026 秋）的课程笔记。 画面中有人、有椅子，还不足以说明人正在坐椅子。第四讲的重点是把人、物体与动作一起看，进一步从二维图像推断三维交互与场景。 学习路线：下面按 9 个主题展开：人—物交互到底识别什么、为什么不能把三件事各自独立预测、从二维跳到三维，首先要选表示、人体不只是关节点：SMPL 在做什么、交互能帮助三维重建，也能用于生成、从 HOI 到 HSI：让场景围绕人">
+<meta property="og:description" content="北京大学《认知推理》（2026 秋）的课程笔记。 画面中有人、有椅子，还不足以说明人正在坐椅子。第四讲的重点是把人、物体与动作一起看，进一步从二维图像推断三维交互与场景。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:51:43.988Z">
-<meta property="article:modified_time" content="2026-11-05T13:18:53.773Z">
+<meta property="article:modified_time" content="2026-11-05T15:26:42.013Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          2.9k 字
         
       </span>
     
@@ -494,12 +494,11 @@
                 
                 <p>北京大学《认知推理》（2026 秋）的课程笔记。</p>
 <p>画面中有人、有椅子，还不足以说明人正在坐椅子。第四讲的重点是把人、物体与动作一起看，进一步从二维图像推断三维交互与场景。</p>
-<p>学习路线：下面按 9 个主题展开：人—物交互到底识别什么、为什么不能把三件事各自独立预测、从二维跳到三维，首先要选表示、人体不只是关节点：SMPL 在做什么、交互能帮助三维重建，也能用于生成、从 HOI 到 HSI：让场景围绕人来设计等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 <h2 id="第-1-章：人—物交互到底识别什么">第 1 章：人—物交互到底识别什么</h2>
 <p>人—物交互（Human–Object Interaction, HOI）通常用一个三元组表示：〈人，动作，物体〉。例如“人—拿—杯子”“人—坐—椅子”。检测框只告诉我们人和椅子在哪里；HOI 还要判断两者之间发生了什么。</p>
-<p>课件用室内图像说明：如果把图片去掉，只留显示器、桌子和椅子的二维框，三维布局很难确定。加入物体名称会有帮助；再加入人体姿态，就能利用“脚可能踩在地面”“手可能接触桌面”“臀部贴近椅面”等关系缩小解释空间。</p>
-<p>这说明交互是双向线索。我们先看到人和物，再预测动作；推断出的动作又反过来帮助修正人和物的位置。例如若判断为“坐”，椅面的位置、人的姿态和两者的相对朝向就要互相一致。</p>
+<p>以室内图像为例：如果去掉画面，只留下显示器、桌子和椅子的二维框，三维布局很难确定。加入物体名称会有帮助；再加入人体姿态，就能利用“脚可能踩在地面”“手可能接触桌面”“臀部贴近椅面”等关系缩小解释空间。</p>
+<p>人和物的交互提供的是双向线索：我们先看到人和物，再预测动作；推断出的动作又会反过来约束人和物的位置。比如判断为“坐”时，椅面的位置、人的姿态和两者的相对朝向应当彼此一致。</p>
 <h2 id="第-2-章：为什么不能把三件事各自独立预测">第 2 章：为什么不能把三件事各自独立预测</h2>
 <p>设图像为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span></span></span></span>，人位置为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span></span></span></span>，物体位置为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi></mrow><annotation encoding="application/x-tex">O</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span></span></span></span>，动作为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span></span></span></span>。理想目标是联合推断 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>H</mi><mo separator="true">,</mo><mi>O</mi><mo separator="true">,</mo><mi>A</mi><mo>∣</mo><mi>I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(H,O,A\mid I)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mclose">)</span></span></span></span>。一种分解是先找人和物，再推断动作：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>H</mi><mo separator="true">,</mo><mi>O</mi><mo>∣</mo><mi>I</mi><mo stretchy="false">)</mo><mi>P</mi><mo stretchy="false">(</mo><mi>A</mi><mo>∣</mo><mi>H</mi><mo separator="true">,</mo><mi>O</mi><mo separator="true">,</mo><mi>I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(H,O\mid I)P(A\mid H,O,I)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mclose">)</span></span></span></span>。也可以先利用动作线索，再修正人和物。</p>
 <p>这只是概率链式分解，单靠形式并不决定算法优劣。关键是人、物和动作强相关：同样的手臂姿态，面前是杯子或门把手时，合理动作不同；同一个杯子的位置，若手刚好接触杯柄，“拿”的证据比“看”更强。</p>

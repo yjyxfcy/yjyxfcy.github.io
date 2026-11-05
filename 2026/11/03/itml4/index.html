@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第四讲：上一讲先估计每类数据的分布，这次直接估计“给定这个样本，它属于某类的概率”。 为什么一个线性模型可以输出概率？它的损失又为什么恰好是交叉熵？ **学习路线：**下面按 9 个主题展开：为什么要从感知器走向概率 → 优化：一阶与二阶 → 多分类：Softmax 回归 → 与生成式分类的联系 → 二元交叉熵的梯度一步步推 → Softmax">
+    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第四讲：上一讲先估计每类数据的分布，这次直接估计“给定这个样本，它属于某类的概率”。 为什么一个线性模型可以输出概率？它的损失又为什么恰好是交叉熵？ 学习路线：下面按 9 个主题展开：为什么要从感知器走向概率、优化：一阶与二阶、多分类：Softmax 回归、与生成式分类的联系、二元交叉熵的梯度一步步推、Softmax 梯度与可辨识性等。阅读时先">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 4 讲：Logistic 回归与判别模型">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml4/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第四讲：上一讲先估计每类数据的分布，这次直接估计“给定这个样本，它属于某类的概率”。 为什么一个线性模型可以输出概率？它的损失又为什么恰好是交叉熵？ **学习路线：**下面按 9 个主题展开：为什么要从感知器走向概率 → 优化：一阶与二阶 → 多分类：Softmax 回归 → 与生成式分类的联系 → 二元交叉熵的梯度一步步推 → Softmax">
+<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第四讲：上一讲先估计每类数据的分布，这次直接估计“给定这个样本，它属于某类的概率”。 为什么一个线性模型可以输出概率？它的损失又为什么恰好是交叉熵？ 学习路线：下面按 9 个主题展开：为什么要从感知器走向概率、优化：一阶与二阶、多分类：Softmax 回归、与生成式分类的联系、二元交叉熵的梯度一步步推、Softmax 梯度与可辨识性等。阅读时先">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:09:12.292Z">
-<meta property="article:modified_time" content="2026-11-05T12:25:26.889Z">
+<meta property="article:modified_time" content="2026-11-05T13:09:50.176Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -504,7 +504,7 @@
                 <p>北京大学《机器学习概论》（2026 秋）的课程笔记。</p>
 <p>第四讲：上一讲先估计每类数据的分布，这次直接估计“给定这个样本，它属于某类的概率”。</p>
 <p>为什么一个线性模型可以输出概率？它的损失又为什么恰好是交叉熵？</p>
-<p>**学习路线：**下面按 9 个主题展开：为什么要从感知器走向概率 → 优化：一阶与二阶 → 多分类：Softmax 回归 → 与生成式分类的联系 → 二元交叉熵的梯度一步步推 → Softmax 梯度与可辨识性等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
+<p>学习路线：下面按 9 个主题展开：为什么要从感知器走向概率、优化：一阶与二阶、多分类：Softmax 回归、与生成式分类的联系、二元交叉熵的梯度一步步推、Softmax 梯度与可辨识性等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 <h2 id="第-1-章：为什么要从感知器走向概率">第 1 章：为什么要从感知器走向概率</h2>
 <p>感知器依据 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>w</mi><mi>T</mi></msup><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">w^Tx+b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9247em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span></span></span></span></span></span></span></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span> 的符号给出类别，但没有直接提供可信的类别概率。</p>

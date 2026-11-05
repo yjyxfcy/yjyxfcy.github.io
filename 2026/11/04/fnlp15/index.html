@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。 **学习路线：**下面按 11 个主题展开：Prompting 在做什么 → 好提示的基本条件 → 零样本与少样本上下文学习 → 思维链与程序化输出 → 从手写提示到自动搜索 → 为什么要检索增强生成（R">
+    <meta name="description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。 学习路线：下面按 11 个主题展开：Prompting 在做什么、好提示的基本条件、零样本与少样本上下文学习、思维链与程序化输出、从手写提示到自动搜索、为什么要检索增强生成（RAG）等。阅读时先抓住每一章">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 15 讲：提示学习与检索增强生成">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/fnlp15/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。 **学习路线：**下面按 11 个主题展开：Prompting 在做什么 → 好提示的基本条件 → 零样本与少样本上下文学习 → 思维链与程序化输出 → 从手写提示到自动搜索 → 为什么要检索增强生成（R">
+<meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。 学习路线：下面按 11 个主题展开：Prompting 在做什么、好提示的基本条件、零样本与少样本上下文学习、思维链与程序化输出、从手写提示到自动搜索、为什么要检索增强生成（RAG）等。阅读时先抓住每一章">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:15:00.000Z">
-<meta property="article:modified_time" content="2026-11-05T12:28:09.954Z">
+<meta property="article:modified_time" content="2026-11-05T13:09:50.193Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          2.4k 字
         
       </span>
     
@@ -574,17 +574,17 @@
               <div class="markdown-body">
                 
                 <p>北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 <code>lec12_ppt.pdf</code> 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。</p>
-<p>**学习路线：**下面按 11 个主题展开：Prompting 在做什么 → 好提示的基本条件 → 零样本与少样本上下文学习 → 思维链与程序化输出 → 从手写提示到自动搜索 → 为什么要检索增强生成（RAG）等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
+<p>学习路线：下面按 11 个主题展开：Prompting 在做什么、好提示的基本条件、零样本与少样本上下文学习、思维链与程序化输出、从手写提示到自动搜索、为什么要检索增强生成（RAG）等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 <h2 id="第-1-章：Prompting-在做什么">第 1 章：Prompting 在做什么</h2>
 <p>提示（prompt）把任务说明、输入、示例或约束写进模型上下文，让模型在当前输入条件下完成目标。它通常不需要重新更新模型参数。比如情感分类，直接输入“电影很好看”可能得到续写；换成“判断下面评论是正面还是负面，只输出标签：电影很好看”，输出形式就更明确。</p>
-<p>一个完整提示流程可以拆成：<strong>设计模板 → 填入输入 → 生成候选输出 → 提取或选择答案</strong>。最后一步常被忽略。模型若输出“这是一段正面评论，因此标签是正面”，评分器却期待单个词“正面”，就需要稳定的解析规则。</p>
+<p>一个完整提示流程可以拆成：设计模板 → 填入输入 → 生成候选输出 → 提取或选择答案。最后一步常被忽略。模型若输出“这是一段正面评论，因此标签是正面”，评分器却期待单个词“正面”，就需要稳定的解析规则。</p>
 <h2 id="第-2-章：好提示的基本条件">第 2 章：好提示的基本条件</h2>
 <p>任务目标要清楚，输入与指令要分隔，输出格式要可检查。需要领域背景时应提供相关信息；不需要时，冗长背景可能干扰判断。若任务涉及外部资料，还应说明模型要依据哪些资料、缺少证据时如何回答。</p>
 <p>提示措辞会影响结果，但不存在适用于所有模型和任务的万能模板。比较模板时应固定评测集、模型版本与解码参数，避免只凭几条挑选过的例子下结论。</p>
 <h2 id="第-3-章：零样本与少样本上下文学习">第 3 章：零样本与少样本上下文学习</h2>
 <p>零样本提示只给任务描述；少样本提示再给几组“输入 → 输出”示例。例如让模型抽取地点，可在新句子前放两三个已标注句子。示例既示范了标签空间，也示范了格式。</p>
-<p>选择示例时有几个取舍：<strong>相关性</strong>高的例子能提供接近目标输入的线索；<strong>多样性</strong>能覆盖更多边界情况；<strong>标签平衡</strong>能减轻模型一味模仿某一类的倾向；示例顺序也可能影响答案。课件引用的研究发现，某些设置下即便扰乱示例标签，表现仍未显著下降。这提醒我们模型可能在利用任务格式、输入分布等线索，不能据此推断正确标签永远不重要。</p>
+<p>选择示例时有几个取舍：相关性高的例子能提供接近目标输入的线索；多样性能覆盖更多边界情况；标签平衡能减轻模型一味模仿某一类的倾向；示例顺序也可能影响答案。课件引用的研究发现，某些设置下即便扰乱示例标签，表现仍未显著下降。这提醒我们模型可能在利用任务格式、输入分布等线索，不能据此推断正确标签永远不重要。</p>
 <h2 id="第-4-章：思维链与程序化输出">第 4 章：思维链与程序化输出</h2>
 <p>思维链（Chain of Thought，CoT）提示让模型在给答案前展示中间推理步骤。它在部分多步推理任务上有帮助，因为生成过程获得了更多计算步骤。但写出流畅的推理不代表过程真实或结论正确；要核对可验证的中间量和最终答案。</p>
 <p>另一类方法让模型输出程序或结构化表达，再交给外部执行器计算。比如先把数学文字题写成代码，再运行得到数值。程序化方法可减少算术错误，前提是生成的程序正确、执行环境受控，且外部工具的结果被正确解释。</p>
@@ -594,14 +594,14 @@
 <p>模型参数中的知识可能过时，且模型可能在缺少依据时编造细节。RAG 把外部检索纳入生成流程：</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>q</mi><mtext>  </mtext><mo>⟶</mo><mtext>  </mtext><mi mathvariant="normal">Retrieve</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>q</mi><mo separator="true">,</mo><mi>D</mi><mo stretchy="false">)</mo><mtext>  </mtext><mo>⟶</mo><mtext>  </mtext><mi>C</mi><mtext>  </mtext><mo>⟶</mo><mtext>  </mtext><mi>P</mi><mo stretchy="false">(</mo><mi>y</mi><mo>∣</mo><mi>q</mi><mo separator="true">,</mo><mi>C</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">q\;\longrightarrow\;\operatorname{Retrieve}(q,D)\;\longrightarrow\;C
 \;\longrightarrow\;P(y\mid q,C).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7054em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⟶</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">Retrieve</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⟶</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6943em;vertical-align:-0.011em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⟶</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span> 是文档库，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span></span></span></span> 是检索到的上下文。生成模型在回答时可以引用资料，但<strong>检索到了证据</strong>不等于<strong>一定用对了证据</strong>。错误文档、截断、过长上下文和模型误读，都可能产生带引用的错误回答。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span> 是文档库，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span></span></span></span> 是检索到的上下文。生成模型在回答时可以引用资料，但检索到了证据不等于一定用对了证据。错误文档、截断、过长上下文和模型误读，都可能产生带引用的错误回答。</p>
 <h2 id="第-7-章：RAG-的两端都能改">第 7 章：RAG 的两端都能改</h2>
-<p><strong>检索端</strong>可以改善切块、索引和查询：长文档按主题切分，保留标题和出处；用关键词与向量混合召回；对候选再重排。切块太小会丢前后文，太大会增加无关信息和上下文成本。查询改写要保留用户原意，不能擅自替换关键条件。</p>
-<p><strong>生成端</strong>可以先压缩检索内容、过滤重复片段、要求答案绑定来源，或在初步回答后发现缺口再检索一次。课件还讨论迭代检索：模型根据尚未解决的问题决定是否继续查资料。它能处理多跳问题，但每轮都增加延迟，并可能把上轮错误扩散到下一轮。</p>
+<p>检索端可以改善切块、索引和查询：长文档按主题切分，保留标题和出处；用关键词与向量混合召回；对候选再重排。切块太小会丢前后文，太大会增加无关信息和上下文成本。查询改写要保留用户原意，不能擅自替换关键条件。</p>
+<p>生成端可以先压缩检索内容、过滤重复片段、要求答案绑定来源，或在初步回答后发现缺口再检索一次。课件还讨论迭代检索：模型根据尚未解决的问题决定是否继续查资料。它能处理多跳问题，但每轮都增加延迟，并可能把上轮错误扩散到下一轮。</p>
 <h2 id="第-8-章：一个可检查的例子">第 8 章：一个可检查的例子</h2>
 <p>问“某论文提出了什么方法、在哪个数据集上验证？”时，可先检索论文正文和实验表，再让模型分别抽取方法名称、数据集与对应证据位置。若只能找到摘要而找不到实验细节，答案就应标明证据不足。这比让模型直接凭记忆给出看似完整的结论更可核验。</p>
 <h2 id="第-9-章：示例选择可以怎样做">第 9 章：示例选择可以怎样做</h2>
-<p>课件列出几类策略。<strong>近邻选择</strong>从示例库中找与当前输入最相似的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span></span></span></span> 条，适合存在局部表达规律的任务；<strong>多样性选择</strong>覆盖不同类别与场景，避免近邻全是同一种题；<strong>模型自生成示例</strong>省去人工寻找，但要审查生成标签是否正确。顺序也会影响模型，最相近例子放在末尾是一种可测试的启发式，而非普遍定律。</p>
+<p>课件列出几类策略。近邻选择从示例库中找与当前输入最相似的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span></span></span></span> 条，适合存在局部表达规律的任务；多样性选择覆盖不同类别与场景，避免近邻全是同一种题；模型自生成示例省去人工寻找，但要审查生成标签是否正确。顺序也会影响模型，最相近例子放在末尾是一种可测试的启发式，而非普遍定律。</p>
 <p>例如做“机构名抽取”，新句子提到“北京大学”，只找“清华大学”“复旦大学”示例虽相关，却没覆盖“教育部”和企业名。若测试集含不同机构类型，示例组合就应同时考虑相似性与覆盖率。</p>
 <h2 id="第-10-章：RAG-应怎样评测">第 10 章：RAG 应怎样评测</h2>
 <p>可以把检索与回答分开：先看相关资料是否进入前 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span></span></span></span> 条，再看模型引用了哪些片段、回答是否由这些片段支持。若检索没有找到证据，生成模型再流畅也无法凭空补上；若检索找到了而回答仍错，则要检查上下文组织和答案生成。</p>

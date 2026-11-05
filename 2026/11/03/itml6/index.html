@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第六讲：线性模型学不出弯曲的边界，可以先手工设计复杂特征。但如果特征也交给模型学习，会发生什么？ 多层感知机给出了答案，同时带来了新的问题：参数那么多，梯度怎样算，深层网络怎样训？ **学习路线：**下面按 9 个主题展开：从固定特征到学习特征 → 反向传播究竟算什么 → 为什么深层网络难训练 → 优化与防过拟合 → 用两层网络走一遍反向传播">
+    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第六讲：线性模型学不出弯曲的边界，可以先手工设计复杂特征。但如果特征也交给模型学习，会发生什么？ 多层感知机给出了答案，同时带来了新的问题：参数那么多，梯度怎样算，深层网络怎样训？ 学习路线：下面按 9 个主题展开：从固定特征到学习特征、反向传播究竟算什么、为什么深层网络难训练、优化与防过拟合、用两层网络走一遍反向传播、梯度消失、初始化和残差的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 6 讲：多层感知机与神经网络训练">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml6/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第六讲：线性模型学不出弯曲的边界，可以先手工设计复杂特征。但如果特征也交给模型学习，会发生什么？ 多层感知机给出了答案，同时带来了新的问题：参数那么多，梯度怎样算，深层网络怎样训？ **学习路线：**下面按 9 个主题展开：从固定特征到学习特征 → 反向传播究竟算什么 → 为什么深层网络难训练 → 优化与防过拟合 → 用两层网络走一遍反向传播">
+<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第六讲：线性模型学不出弯曲的边界，可以先手工设计复杂特征。但如果特征也交给模型学习，会发生什么？ 多层感知机给出了答案，同时带来了新的问题：参数那么多，梯度怎样算，深层网络怎样训？ 学习路线：下面按 9 个主题展开：从固定特征到学习特征、反向传播究竟算什么、为什么深层网络难训练、优化与防过拟合、用两层网络走一遍反向传播、梯度消失、初始化和残差的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.128Z">
-<meta property="article:modified_time" content="2026-11-05T12:53:23.598Z">
+<meta property="article:modified_time" content="2026-11-05T13:09:50.176Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          3.3k 字
         
       </span>
     
@@ -504,7 +504,7 @@
                 <p>北京大学《机器学习概论》（2026 秋）的课程笔记。</p>
 <p>第六讲：线性模型学不出弯曲的边界，可以先手工设计复杂特征。但如果特征也交给模型学习，会发生什么？</p>
 <p>多层感知机给出了答案，同时带来了新的问题：参数那么多，梯度怎样算，深层网络怎样训？</p>
-<p>**学习路线：**下面按 9 个主题展开：从固定特征到学习特征 → 反向传播究竟算什么 → 为什么深层网络难训练 → 优化与防过拟合 → 用两层网络走一遍反向传播 → 梯度消失、初始化和残差的数学直觉等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
+<p>学习路线：下面按 9 个主题展开：从固定特征到学习特征、反向传播究竟算什么、为什么深层网络难训练、优化与防过拟合、用两层网络走一遍反向传播、梯度消失、初始化和残差的数学直觉等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 <h2 id="第-1-章：从固定特征到学习特征">第 1 章：从固定特征到学习特征</h2>
 <p>线性模型 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>w</mi><mi>T</mi></msup><mi>x</mi></mrow><annotation encoding="application/x-tex">w^Tx</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span></span></span></span></span></span></span></span><span class="mord mathnormal">x</span></span></span></span> 的能力取决于输入特征。人为设计基函数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">ϕ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 后可以用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>w</mi><mi>T</mi></msup><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">w^T\phi(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0913em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span></span></span></span></span></span></span></span><span class="mord mathnormal">ϕ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 表达非线性，但基函数是否合适仍靠人工。</p>

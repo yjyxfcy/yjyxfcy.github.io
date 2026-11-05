@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 6 讲笔记，依据对应课程课件整理。 面对两种甚至更多模态，模型怎样合并信息、保留各自特征，又让表示彼此可比较？">
+    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 6 讲笔记，依据对应课程课件整理。 面对两种甚至更多模态，模型怎样合并信息、保留各自特征，又让表示彼此可比较？ **学习路线：**下面按 3 个主题展开：融合表示 → 协调表示 → 共享与私有信息的分解。三条路线回答的是不同问题，阅读时先看模型希望哪些信息靠近、哪些信息保留、哪些信息分开。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 6 讲：多模态表示与融合">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml6/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 6 讲笔记，依据对应课程课件整理。 面对两种甚至更多模态，模型怎样合并信息、保留各自特征，又让表示彼此可比较？">
+<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 6 讲笔记，依据对应课程课件整理。 面对两种甚至更多模态，模型怎样合并信息、保留各自特征，又让表示彼此可比较？ **学习路线：**下面按 3 个主题展开：融合表示 → 协调表示 → 共享与私有信息的分解。三条路线回答的是不同问题，阅读时先看模型希望哪些信息靠近、哪些信息保留、哪些信息分开。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T04:06:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T17:49:50.978Z">
+<meta property="article:modified_time" content="2026-11-05T12:25:26.884Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.1k 字
+          4.2k 字
         
       </span>
     
@@ -484,14 +484,14 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>06</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%EF%BC%9A%E8%9E%8D%E5%90%88%E3%80%81%E5%8D%8F%E8%B0%83%E3%80%81%E5%88%86%E8%A7%A3"><span class="toc-text">多模态表示：融合、协调、分解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Representation-%E7%9A%84%E4%B8%89%E6%9D%A1%E8%B7%AF%E7%BA%BF"><span class="toc-text">Representation 的三条路线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%B0%83%E3%80%81CCA-%E4%B8%8E-CLIP"><span class="toc-text">协调、CCA 与 CLIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fission%E3%80%81%E4%BF%A1%E6%81%AF%E8%AE%BA%E4%B8%8E%E8%87%AA%E7%9B%91%E7%9D%A3"><span class="toc-text">Fission、信息论与自监督</span></a></li></ol></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%E7%9A%84%E4%B8%89%E6%9D%A1%E8%B7%AF%E7%BA%BF"><span class="toc-text">第 1 章：多模态表示的三条路线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%9E%8D%E5%90%88%E8%A1%A8%E7%A4%BA%E6%80%8E%E6%A0%B7%E7%BB%84%E5%90%88%E4%B8%8D%E5%90%8C%E6%A8%A1%E6%80%81"><span class="toc-text">1.1 融合表示怎样组合不同模态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%8D%8F%E8%B0%83%E8%A1%A8%E7%A4%BA%E3%80%81CCA-%E4%B8%8E-CLIP"><span class="toc-text">第 2 章：协调表示、CCA 与 CLIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E8%A1%A8%E7%A4%BA%E5%88%86%E8%A7%A3%E3%80%81%E4%BF%A1%E6%81%AF%E8%AE%BA%E4%B8%8E%E8%87%AA%E7%9B%91%E7%9D%A3"><span class="toc-text">第 3 章：表示分解、信息论与自监督</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 6 讲：多模态表示与融合"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月4日 凌晨
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -501,9 +501,10 @@
                 
                 <p>北京大学《多模态学习》（2026 秋）第 6 讲笔记，依据对应课程课件整理。</p>
 <p>面对两种甚至更多模态，模型怎样合并信息、保留各自特征，又让表示彼此可比较？</p>
+<p>**学习路线：**下面按 3 个主题展开：融合表示 → 协调表示 → 共享与私有信息的分解。三条路线回答的是不同问题，阅读时先看模型希望哪些信息靠近、哪些信息保留、哪些信息分开。</p>
 <span id="more"></span>
 
-<h2 id="多模态表示：融合、协调、分解"><a href="#多模态表示：融合、协调、分解" class="headerlink" title="多模态表示：融合、协调、分解"></a>多模态表示：融合、协调、分解</h2><p><strong>跨模态交互的六种行为图</strong>：这是描述输入组合如何改变响应的分类，不等同于后面的六种神经网络结构。</p>
+<h2 id="第-1-章：多模态表示的三条路线"><a href="#第-1-章：多模态表示的三条路线" class="headerlink" title="第 1 章：多模态表示的三条路线"></a>第 1 章：多模态表示的三条路线</h2><p><strong>跨模态交互的六种行为图</strong>：这是描述输入组合如何改变响应的分类，不等同于后面的六种神经网络结构。</p>
 <table>
 <thead>
 <tr>
@@ -544,7 +545,7 @@
 </tr>
 </tbody></table>
 <p>课件的“电影生病&#x2F;不错”加笑容、皱眉、音量例子说明，有些歧义要两通道才解除，三通道还可能形成新的判断；不能只把三通道得分相加。答案可以用新的例子，但应指出哪一通道独自提供什么、合用后响应如何变化。</p>
-<h3 id="Representation-的三条路线"><a href="#Representation-的三条路线" class="headerlink" title="Representation 的三条路线"></a>Representation 的三条路线</h3><p>设图像特征 $a&#x3D;f_A(x_A)$、文本特征 $b&#x3D;f_B(x_B)$。<strong>Fusion</strong> 把多个模态合成一个联合表示 $z$，方便联合预测；<strong>Coordination</strong> 保留各自表示 $z_A,z_B$，通过相似&#x2F;相关损失让配对样本可比较；<strong>Fission</strong> 将表示分成共享、模态私有等因素，使模型兼顾共性与个性。它们不是互斥类别，一个模型可同时融合与协调。</p>
+<h3 id="1-1-融合表示怎样组合不同模态"><a href="#1-1-融合表示怎样组合不同模态" class="headerlink" title="1.1 融合表示怎样组合不同模态"></a>1.1 融合表示怎样组合不同模态</h3><p>设图像特征 $a&#x3D;f_A(x_A)$、文本特征 $b&#x3D;f_B(x_B)$。<strong>Fusion</strong> 把多个模态合成一个联合表示 $z$，方便联合预测；<strong>Coordination</strong> 保留各自表示 $z_A,z_B$，通过相似&#x2F;相关损失让配对样本可比较；<strong>Fission</strong> 将表示分成共享、模态私有等因素，使模型兼顾共性与个性。它们不是互斥类别，一个模型可同时融合与协调。</p>
 <table>
 <thead>
 <tr>
@@ -589,22 +590,26 @@
 <td>按样本学习哪个模态更有用</td>
 </tr>
 </tbody></table>
-<p>张量融合常先增广 $\tilde a&#x3D;[1;a]$、$\tilde b&#x3D;[1;b]$，再取外积：包含常数、单模态项及双模态交互。三模态可用三阶外积；维度乘积迅速变大。低秩分解 $W_k\approx\sum_{r&#x3D;1}^R u_{k,r}v_{k,r}^\top$ 后，$h_k\approx\sum_r(u_{k,r}^\top a)(v_{k,r}^\top b)$，避免显式构造巨大外积；低秩是表达能力与成本的折中。注意 $a^\top b$ 是内积得到标量，$ab^\top$ 是外积得到矩阵。</p>
-<h3 id="协调、CCA-与-CLIP"><a href="#协调、CCA-与-CLIP" class="headerlink" title="协调、CCA 与 CLIP"></a>协调、CCA 与 CLIP</h3><p>协调损失可用欧氏距离、余弦、Pearson 相关、核相似度等；关键是“<strong>配对样本靠近，非配对样本可区分</strong>”，同时各模态保留可独立编码能力。</p>
+<p>张量融合常先增广 $\tilde a&#x3D;[1;a]$、$\tilde b&#x3D;[1;b]$，再取外积：包含常数、单模态项及双模态交互。三模态可用三阶外积；维度乘积迅速变大。</p>
+<p>低秩分解 $W_k\approx\sum_{r&#x3D;1}^R u_{k,r}v_{k,r}^\top$ 后，$h_k\approx\sum_r(u_{k,r}^\top a)(v_{k,r}^\top b)$，避免显式构造巨大外积；低秩是表达能力与成本的折中。注意 $a^\top b$ 是内积得到标量，$ab^\top$ 是外积得到矩阵。</p>
+<h2 id="第-2-章：协调表示、CCA-与-CLIP"><a href="#第-2-章：协调表示、CCA-与-CLIP" class="headerlink" title="第 2 章：协调表示、CCA 与 CLIP"></a>第 2 章：协调表示、CCA 与 CLIP</h2><p>协调损失可用欧氏距离、余弦、Pearson 相关、核相似度等；关键是“<strong>配对样本靠近，非配对样本可区分</strong>”，同时各模态保留可独立编码能力。</p>
 <p>典型相关分析 CCA：对中心化随机向量 $X,Y$ 找投影 $u,v$，最大化</p>
 <p>$$\rho(u,v)&#x3D;\frac{u^\top\Sigma_{XY}v}<br>{\sqrt{(u^\top\Sigma_{XX}u)(v^\top\Sigma_{YY}v)}}.$$</p>
 <p>约束 $u^\top\Sigma_{XX}u&#x3D;v^\top\Sigma_{YY}v&#x3D;1$ 可消除任意缩放。它最大化<strong>相关性</strong>而非直接最小化欧氏距离；普通 CCA 是线性投影，深度 CCA 用神经编码器扩展。相关系数介于 $[-1,1]$，协方差的大小则受尺度影响。</p>
 <p><strong>课件 6的变体图</strong>：DCCAE 把“让两个视图投影相关”的目标与“各自重建输入”的目标并用；前者鼓励共同信息，后者避免为了相关性而丢弃过多原始内容。多视图潜空间图表达先学习潜在共享空间再恢复&#x2F;预测各视图。Gated coordination 则用门值调节两模态的相互作用。分析图示时，可先定位各编码器、共享与私有表示及解码器，再说明每项损失作用于哪条支路。</p>
-<p><strong>Pearson 与核函数</strong>：Pearson $\rho&#x3D;\mathrm{Cov}(X,Y)&#x2F;(\sigma_X\sigma_Y)$ 比协方差更能排除量纲差异；若 $Y&#x3D;2X+3$ 且 $X$ 有方差，则 $\rho&#x3D;1$。余弦比较两个向量相对原点的夹角，Pearson 比较中心化后的线性相关，二者不总相等。核相似度可写 $k(x,y)&#x3D;\langle\phi(x),\phi(y)\rangle$；RBF 核 $k(x,y)&#x3D;\exp[-|x-y|^2&#x2F;(2\sigma^2)]$ 距离越近值越大。CCA 用协方差矩阵而非简单逐样本余弦优化，通常要中心化并约束投影方差；多对典型变量还要限制新方向与已有方向的相关，避免重复得到同一方向。</p>
+<p><strong>Pearson 与核函数</strong>：Pearson $\rho&#x3D;\mathrm{Cov}(X,Y)&#x2F;(\sigma_X\sigma_Y)$ 比协方差更能排除量纲差异；若 $Y&#x3D;2X+3$ 且 $X$ 有方差，则 $\rho&#x3D;1$。余弦比较两个向量相对原点的夹角，Pearson 比较中心化后的线性相关，二者不总相等。</p>
+<p>核相似度可写 $k(x,y)&#x3D;\langle\phi(x),\phi(y)\rangle$；RBF 核 $k(x,y)&#x3D;\exp[-|x-y|^2&#x2F;(2\sigma^2)]$ 距离越近值越大。CCA 用协方差矩阵而非简单逐样本余弦优化，通常要中心化并约束投影方差；多对典型变量还要限制新方向与已有方向的相关，避免重复得到同一方向。</p>
 <p><strong>CLIP</strong>：图像编码器和文本编码器输出单位向量；批内 $N$ 对图文构造 $N\times N$ 相似度矩阵 $S_{ij}&#x3D;v_i^\top t_j&#x2F;\tau$，对角线是正确配对，其他位置通常作负例。图到文和文到图两个方向的交叉熵取平均：</p>
 <p>$$L_{\rm i2t}&#x3D;-\frac1N\sum_i\log\frac{e^{S_{ii}}}{\sum_j e^{S_{ij}}},\quad<br>L_{\rm t2i}&#x3D;-\frac1N\sum_i\log\frac{e^{S_{ii}}}{\sum_j e^{S_{ji}}},\quad L&#x3D;\tfrac12(L_{\rm i2t}+L_{\rm t2i}).$$</p>
 <p>温度 $\tau$ 小，分布更尖锐。零样本分类把类别写成自然语言提示，将图像与各提示编码，按相似度选类，不需该任务专用分类头。<strong>公式易错</strong>：InfoNCE 必须有指数、归一化和负对数；批内“非配对”也可能语义相同，是潜在假负例。课件中的热力图：训练后对角线相似度应更突出，但不要把某一批图像的经验图当作数学保证。</p>
-<p><strong>CLIP 图的后半段</strong>：零样本分类并非直接拿“猫”“狗”两个孤立词当传统分类头，而是可写成“A photo of a cat”之类自然语言模板，分别编码类别文本，再与图像向量比较。不同模板可平均文本表示&#x2F;分类分数，缓解提示措辞敏感。课件的跨数据集柱图和 few-shot 曲线展示迁移性能随数据集&#x2F;示例数不同而变化；它们说明这种预训练表示具有迁移性，不能据此说“所有数据集零样本都优于专门监督模型”。CLIP 只在全图—文本级别对比训练时，也不自动给出词—区域的精细对齐。</p>
-<h3 id="Fission、信息论与自监督"><a href="#Fission、信息论与自监督" class="headerlink" title="Fission、信息论与自监督"></a>Fission、信息论与自监督</h3><p>信息量 $-\log p(x)$，熵 $H(X)&#x3D;-\mathbb E\log p(X)$，条件熵 $H(Y|X)&#x3D;-\mathbb E\log p(Y|X)$；互信息</p>
+<p><strong>CLIP 图的后半段</strong>：零样本分类并非直接拿“猫”“狗”两个孤立词当传统分类头，而是可写成“A photo of a cat”之类自然语言模板，分别编码类别文本，再与图像向量比较。不同模板可平均文本表示&#x2F;分类分数，缓解提示措辞敏感。</p>
+<p>课件的跨数据集柱图和 few-shot 曲线展示迁移性能随数据集&#x2F;示例数不同而变化；它们说明这种预训练表示具有迁移性，不能据此说“所有数据集零样本都优于专门监督模型”。CLIP 只在全图—文本级别对比训练时，也不自动给出词—区域的精细对齐。</p>
+<h2 id="第-3-章：表示分解、信息论与自监督"><a href="#第-3-章：表示分解、信息论与自监督" class="headerlink" title="第 3 章：表示分解、信息论与自监督"></a>第 3 章：表示分解、信息论与自监督</h2><p>信息量 $-\log p(x)$，熵 $H(X)&#x3D;-\mathbb E\log p(X)$，条件熵 $H(Y|X)&#x3D;-\mathbb E\log p(Y|X)$；互信息</p>
 <p>$$I(X;Y)&#x3D;H(X)-H(X|Y)&#x3D;H(Y)-H(Y|X)<br>&#x3D;\mathbb E_{p(x,y)}\log\frac{p(x,y)}{p(x)p(y)}.$$</p>
 <p>共享表示希望保留跨模态共同信息；私有表示保留模态独有内容；重建损失检查信息是否仍可从表示恢复，判别损失检查下游任务，去冗余&#x2F;解耦项限制重复信息。<strong>不是所有 fission 方法都机械地“让两个整模态表示越不相似越好”</strong>，否则可能丢掉最需要的共享语义。课件相关图示应按共享&#x2F;私有支路与各损失连接来解释。</p>
 <p><strong>Fission 三个损失按图记</strong>：两个模态分别编码出私有表示 $z_A,z_B$ 和共享表示 $z_Y$。$L_1$ 是下游标签预测的判别损失；$L_2$ 是把表示解码回原始模态的生成&#x2F;重建损失；$L_3$ 是对 $z_A,z_B,z_Y$ 施加分离先验或“no overlap”约束，帮助不同支路承担不同信息。具体论文实现的正则形式可以变化，阅读课件图时，需说明每个 $L_i$ 连接的支路及其作用；它们并不简单表示“A 和 B 完全无关”。</p>
-<p><strong>信息论图的三个极端</strong>：若 $X,Y$ 独立，$I(X;Y)&#x3D;0$；若 $Y$ 由 $X$ 完全决定，$H(Y|X)&#x3D;0$，$I(X;Y)&#x3D;H(Y)$；若有共同信息又各有私有信息，互信息只衡量共同部分的统计依赖，不等于两模态的全部信息。跨模态共享表示可用“提高 $I(Z;X)$ 和 $I(Z;Y)$”表达保留两侧信息的愿望，但实际计算互信息很难，常用对比目标、变分界或重建代理。课件推导的 InfoNCE 互信息下界与负例数量有关，是给定估计框架内的关系，不应推断无限增大 batch 必定提升测试成绩。</p>
+<p><strong>信息论图的三个极端</strong>：若 $X,Y$ 独立，$I(X;Y)&#x3D;0$；若 $Y$ 由 $X$ 完全决定，$H(Y|X)&#x3D;0$，$I(X;Y)&#x3D;H(Y)$；若有共同信息又各有私有信息，互信息只衡量共同部分的统计依赖，不等于两模态的全部信息。</p>
+<p>跨模态共享表示可用“提高 $I(Z;X)$ 和 $I(Z;Y)$”表达保留两侧信息的愿望，但实际计算互信息很难，常用对比目标、变分界或重建代理。课件推导的 InfoNCE 互信息下界与负例数量有关，是给定估计框架内的关系，不应推断无限增大 batch 必定提升测试成绩。</p>
 <p>自监督用数据自身构造训练目标：对比学习把同一对象的两种增强&#x2F;图文配对作正例，其他作负例；遮蔽重建预测被遮住内容；蒸馏式方法让学生匹配教师输出。InfoNCE 与互信息有关系，但“batch 越大一定越好”不成立，受假负例、计算、优化影响。图示重点：正例如何形成、负例如何取、编码器是否共享、损失在哪个空间算。</p>
 <p><strong>逐图区分自监督方法</strong>：</p>
 <table>
@@ -694,7 +699,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月4日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -799,7 +804,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%EF%BC%9A%E8%9E%8D%E5%90%88%E3%80%81%E5%8D%8F%E8%B0%83%E3%80%81%E5%88%86%E8%A7%A3"><span class="toc-text">多模态表示：融合、协调、分解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Representation-%E7%9A%84%E4%B8%89%E6%9D%A1%E8%B7%AF%E7%BA%BF"><span class="toc-text">Representation 的三条路线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%B0%83%E3%80%81CCA-%E4%B8%8E-CLIP"><span class="toc-text">协调、CCA 与 CLIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fission%E3%80%81%E4%BF%A1%E6%81%AF%E8%AE%BA%E4%B8%8E%E8%87%AA%E7%9B%91%E7%9D%A3"><span class="toc-text">Fission、信息论与自监督</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%E7%9A%84%E4%B8%89%E6%9D%A1%E8%B7%AF%E7%BA%BF"><span class="toc-text">第 1 章：多模态表示的三条路线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%9E%8D%E5%90%88%E8%A1%A8%E7%A4%BA%E6%80%8E%E6%A0%B7%E7%BB%84%E5%90%88%E4%B8%8D%E5%90%8C%E6%A8%A1%E6%80%81"><span class="toc-text">1.1 融合表示怎样组合不同模态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%8D%8F%E8%B0%83%E8%A1%A8%E7%A4%BA%E3%80%81CCA-%E4%B8%8E-CLIP"><span class="toc-text">第 2 章：协调表示、CCA 与 CLIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E8%A1%A8%E7%A4%BA%E5%88%86%E8%A7%A3%E3%80%81%E4%BF%A1%E6%81%AF%E8%AE%BA%E4%B8%8E%E8%87%AA%E7%9B%91%E7%9D%A3"><span class="toc-text">第 3 章：表示分解、信息论与自监督</span></a></li></ol>
   </div>
 </div>
 

@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第二讲：已知抛硬币的结果，怎样估计它正面朝上的概率？如果只抛了几次，估计值又该信多少？ 这两个问题会把我们带到最大似然、先验和后验分布。">
+    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第二讲：已知抛硬币的结果，怎样估计它正面朝上的概率？如果只抛了几次，估计值又该信多少？ 这两个问题会把我们带到最大似然、先验和后验分布。 **学习路线：**下面按 9 个主题展开：概率是模型的语言 → 信息量与分布差异 → 三种参数推断 → 共轭先验为什么方便 → 常见最大似然估计的推导 → Beta–Bernoulli 为什么共轭等。阅读时先">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第2讲｜统计推断方法">
+<meta property="og:title" content="第 2 讲：统计推断方法">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml2/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第二讲：已知抛硬币的结果，怎样估计它正面朝上的概率？如果只抛了几次，估计值又该信多少？ 这两个问题会把我们带到最大似然、先验和后验分布。">
+<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第二讲：已知抛硬币的结果，怎样估计它正面朝上的概率？如果只抛了几次，估计值又该信多少？ 这两个问题会把我们带到最大似然、先验和后验分布。 **学习路线：**下面按 9 个主题展开：概率是模型的语言 → 信息量与分布差异 → 三种参数推断 → 共轭先验为什么方便 → 常见最大似然估计的推导 → Beta–Bernoulli 为什么共轭等。阅读时先">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:09:12.289Z">
-<meta property="article:modified_time" content="2026-11-03T10:35:55.805Z">
+<meta property="article:modified_time" content="2026-11-05T12:25:26.887Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第2讲｜统计推断方法 - Yjy</title>
+  <title>第 2 讲：统计推断方法 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +273,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="02 · 第2讲｜统计推断方法"></span>
+            <span id="subtitle" data-typed-text="02 · 第 2 讲：统计推断方法"></span>
           
         </div>
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.3k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -390,73 +390,73 @@
     
       
       
-        <a href="/2026/11/03/itml1/" title="第1讲｜课程简介与机器学习概述"
+        <a href="/2026/11/03/itml1/" title="第 1 讲：课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第1讲｜课程简介与机器学习概述</span>
+          <span class="category-post">第 1 讲：课程简介与机器学习概述</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml2/" title="第2讲｜统计推断方法"
+        <a href="/2026/11/03/itml2/" title="第 2 讲：统计推断方法"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第2讲｜统计推断方法</span>
+          <span class="category-post">第 2 讲：统计推断方法</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml3/" title="第3讲｜生成模型与生成式分类"
+        <a href="/2026/11/03/itml3/" title="第 3 讲：生成模型与生成式分类"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第3讲｜生成模型与生成式分类</span>
+          <span class="category-post">第 3 讲：生成模型与生成式分类</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml4/" title="第4讲｜Logistic 回归与判别模型"
+        <a href="/2026/11/03/itml4/" title="第 4 讲：Logistic 回归与判别模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第4讲｜Logistic 回归与判别模型</span>
+          <span class="category-post">第 4 讲：Logistic 回归与判别模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml5/" title="第5讲｜线性回归、正则化与贝叶斯回归"
+        <a href="/2026/11/03/itml5/" title="第 5 讲：线性回归、正则化与贝叶斯回归"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第5讲｜线性回归、正则化与贝叶斯回归</span>
+          <span class="category-post">第 5 讲：线性回归、正则化与贝叶斯回归</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml6/" title="第6讲｜多层感知机与神经网络训练"
+        <a href="/2026/11/03/itml6/" title="第 6 讲：多层感知机与神经网络训练"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第6讲｜多层感知机与神经网络训练</span>
+          <span class="category-post">第 6 讲：多层感知机与神经网络训练</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml7/" title="第7讲｜卷积神经网络"
+        <a href="/2026/11/03/itml7/" title="第 7 讲：卷积神经网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第7讲｜卷积神经网络</span>
+          <span class="category-post">第 7 讲：卷积神经网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml8/" title="第8讲｜序列神经网络模型"
+        <a href="/2026/11/03/itml8/" title="第 8 讲：序列神经网络模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第8讲｜序列神经网络模型</span>
+          <span class="category-post">第 8 讲：序列神经网络模型</span>
         </a>
       
     
@@ -479,19 +479,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">02 · 第2讲｜统计推断方法</h1>
+            <h1 class="reading-title">02 · 第 2 讲：统计推断方法</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>02</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E6%98%AF%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-text">概率是模型的语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E9%87%8F%E4%B8%8E%E5%88%86%E5%B8%83%E5%B7%AE%E5%BC%82"><span class="toc-text">信息量与分布差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E5%8F%82%E6%95%B0%E6%8E%A8%E6%96%AD"><span class="toc-text">三种参数推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%E5%85%88%E9%AA%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%96%B9%E4%BE%BF"><span class="toc-text">共轭先验为什么方便</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-text">常见最大似然估计的推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Beta%E2%80%93Bernoulli-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E8%BD%AD"><span class="toc-text">Beta–Bernoulli 为什么共轭</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%AB%98%E6%96%AF%E4%B8%BA%E5%90%8E%E7%BB%AD%E8%AF%BE%E7%A8%8B%E5%81%9A%E4%BB%80%E4%B9%88%E5%87%86%E5%A4%87"><span class="toc-text">条件高斯为后续课程做什么准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%86%B5%E3%80%81%E4%BA%A4%E5%8F%89%E7%86%B5%E3%80%81KL-%E7%9A%84%E4%BB%A3%E6%95%B0%E8%81%94%E7%B3%BB"><span class="toc-text">熵、交叉熵、KL 的代数联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaussian%E2%80%93Gaussian-%E6%9B%B4%E6%96%B0%E7%9A%84%E6%9D%83%E9%87%8D"><span class="toc-text">Gaussian–Gaussian 更新的权重</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E6%A6%82%E7%8E%87%E6%98%AF%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-text">第 1 章：概率是模型的语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E4%BF%A1%E6%81%AF%E9%87%8F%E4%B8%8E%E5%88%86%E5%B8%83%E5%B7%AE%E5%BC%82"><span class="toc-text">第 2 章：信息量与分布差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%89%E7%A7%8D%E5%8F%82%E6%95%B0%E6%8E%A8%E6%96%AD"><span class="toc-text">第 3 章：三种参数推断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%85%B1%E8%BD%AD%E5%85%88%E9%AA%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%96%B9%E4%BE%BF"><span class="toc-text">第 4 章：共轭先验为什么方便</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E5%B8%B8%E8%A7%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-text">第 5 章：常见最大似然估计的推导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9ABeta%E2%80%93Bernoulli-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E8%BD%AD"><span class="toc-text">第 6 章：Beta–Bernoulli 为什么共轭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%9D%A1%E4%BB%B6%E9%AB%98%E6%96%AF%E4%B8%BA%E5%90%8E%E7%BB%AD%E8%AF%BE%E7%A8%8B%E5%81%9A%E4%BB%80%E4%B9%88%E5%87%86%E5%A4%87"><span class="toc-text">第 7 章：条件高斯为后续课程做什么准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E7%86%B5%E3%80%81%E4%BA%A4%E5%8F%89%E7%86%B5%E3%80%81KL-%E7%9A%84%E4%BB%A3%E6%95%B0%E8%81%94%E7%B3%BB"><span class="toc-text">第 8 章：熵、交叉熵、KL 的代数联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9AGaussian%E2%80%93Gaussian-%E6%9B%B4%E6%96%B0%E7%9A%84%E6%9D%83%E9%87%8D"><span class="toc-text">第 9 章：Gaussian–Gaussian 更新的权重</span></a></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第2讲｜统计推断方法"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 2 讲：统计推断方法"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月3日 晚上
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -502,16 +502,17 @@
                 <p>北京大学《机器学习概论》（2026 秋）的课程笔记。</p>
 <p>第二讲：已知抛硬币的结果，怎样估计它正面朝上的概率？如果只抛了几次，估计值又该信多少？</p>
 <p>这两个问题会把我们带到最大似然、先验和后验分布。</p>
+<p>**学习路线：**下面按 9 个主题展开：概率是模型的语言 → 信息量与分布差异 → 三种参数推断 → 共轭先验为什么方便 → 常见最大似然估计的推导 → Beta–Bernoulli 为什么共轭等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h3 id="概率是模型的语言"><a href="#概率是模型的语言" class="headerlink" title="概率是模型的语言"></a>概率是模型的语言</h3><p>条件概率 $p(A\mid B)&#x3D;p(A,B)&#x2F;p(B)$；独立意味着 $p(A,B)&#x3D;p(A)p(B)$，不能仅凭两个变量不相关就断言独立，更不能把相关当作因果。</p>
+<h2 id="第-1-章：概率是模型的语言"><a href="#第-1-章：概率是模型的语言" class="headerlink" title="第 1 章：概率是模型的语言"></a>第 1 章：概率是模型的语言</h2><p>条件概率 $p(A\mid B)&#x3D;p(A,B)&#x2F;p(B)$；独立意味着 $p(A,B)&#x3D;p(A)p(B)$，不能仅凭两个变量不相关就断言独立，更不能把相关当作因果。</p>
 <p>贝叶斯公式 $p(\theta\mid D)&#x3D;p(D\mid\theta)p(\theta)&#x2F;p(D)$ 把观察前的先验和数据提供的似然合成后验。</p>
 <p>随机变量的期望是平均位置，方差描述波动，协方差描述线性共同变化。常见分布：伯努利用于二值结果，类别分布用于多类结果，高斯分布用于连续量。多元高斯由均值向量与协方差矩阵控制；协方差非对角项刻画维度间关联。</p>
 <p>课件的条件高斯和边缘高斯为后面的高斯判别与贝叶斯回归打基础。</p>
-<h3 id="信息量与分布差异"><a href="#信息量与分布差异" class="headerlink" title="信息量与分布差异"></a>信息量与分布差异</h3><p>熵 $H(p)&#x3D;-\sum_xp(x)\log p(x)$ 衡量不确定性；交叉熵 $H(p,q)&#x3D;-\sum_xp(x)\log q(x)$ 衡量用模型 $q$ 编码真实分布 $p$ 的代价。</p>
+<h2 id="第-2-章：信息量与分布差异"><a href="#第-2-章：信息量与分布差异" class="headerlink" title="第 2 章：信息量与分布差异"></a>第 2 章：信息量与分布差异</h2><p>熵 $H(p)&#x3D;-\sum_xp(x)\log p(x)$ 衡量不确定性；交叉熵 $H(p,q)&#x3D;-\sum_xp(x)\log q(x)$ 衡量用模型 $q$ 编码真实分布 $p$ 的代价。</p>
 <p>KL 散度 $D_{KL}(p|q)&#x3D;H(p,q)-H(p)\ge0$，且一般不对称。训练分类器最小化交叉熵时，真实标签分布固定，因此等价于缩小相应 KL 散度。</p>
 <p>正向与反向 KL 对低概率区域的态度不同，不能随意交换顺序。</p>
-<h3 id="三种参数推断"><a href="#三种参数推断" class="headerlink" title="三种参数推断"></a>三种参数推断</h3><p>假设数据独立同分布，似然为 $p(D\mid\theta)&#x3D;\prod_np(x_n\mid\theta)$。</p>
+<h2 id="第-3-章：三种参数推断"><a href="#第-3-章：三种参数推断" class="headerlink" title="第 3 章：三种参数推断"></a>第 3 章：三种参数推断</h2><p>假设数据独立同分布，似然为 $p(D\mid\theta)&#x3D;\prod_np(x_n\mid\theta)$。</p>
 <p>**最大似然估计（MLE）**选择 $\hat\theta&#x3D;\arg\max_\theta\sum_n\log p(x_n\mid\theta)$。</p>
 <p>例如硬币抛 $N$ 次有 $N_1$ 次正面，伯努利参数的 MLE 是 $N_1&#x2F;N$。若某类未出现，估计概率可能为零；这正是小样本下的风险。</p>
 <p>**最大后验估计（MAP）**在对数似然上加 $\log p(\theta)$。</p>
@@ -520,26 +521,26 @@
 <p><strong>贝叶斯方法</strong>保留整个后验，不急着压缩成单一参数。</p>
 <p>预测新一次正面概率为 $\int\theta p(\theta\mid D)d\theta&#x3D;(N_1+\alpha)&#x2F;(N+\alpha+\beta)$，它一般不同于 MAP。</p>
 <p>这个积分反映参数不确定性，在样本少时尤其有价值。</p>
-<h3 id="共轭先验为什么方便"><a href="#共轭先验为什么方便" class="headerlink" title="共轭先验为什么方便"></a>共轭先验为什么方便</h3><p>先验和后验属于同一家族时称共轭：Beta–Bernoulli、Dirichlet–类别分布、均值未知而方差已知的 Gaussian–Gaussian 都是课件实例。</p>
+<h2 id="第-4-章：共轭先验为什么方便"><a href="#第-4-章：共轭先验为什么方便" class="headerlink" title="第 4 章：共轭先验为什么方便"></a>第 4 章：共轭先验为什么方便</h2><p>先验和后验属于同一家族时称共轭：Beta–Bernoulli、Dirichlet–类别分布、均值未知而方差已知的 Gaussian–Gaussian 都是课件实例。</p>
 <p>Dirichlet 先验 $\alpha_k$ 遇到类别计数 $N_k$ 后变成 $\alpha_k+N_k$，预测概率为 $(N_k+\alpha_k)&#x2F;(N+\sum_j\alpha_j)$。</p>
 <p>把各 $\alpha_k$ 设为 1 对应常见的加一平滑。高斯均值的后验则是按“精度”（方差倒数）对先验均值和样本均值加权；数据越多，样本所占权重越大。</p>
-<h3 id="常见最大似然估计的推导"><a href="#常见最大似然估计的推导" class="headerlink" title="常见最大似然估计的推导"></a>常见最大似然估计的推导</h3><p>伯努利数据中有 $N_1$ 个 1、$N_0$ 个 0，则 $\ell(\theta)&#x3D;N_1\log\theta+N_0\log(1-\theta)$。</p>
+<h2 id="第-5-章：常见最大似然估计的推导"><a href="#第-5-章：常见最大似然估计的推导" class="headerlink" title="第 5 章：常见最大似然估计的推导"></a>第 5 章：常见最大似然估计的推导</h2><p>伯努利数据中有 $N_1$ 个 1、$N_0$ 个 0，则 $\ell(\theta)&#x3D;N_1\log\theta+N_0\log(1-\theta)$。</p>
 <p>求导 $\ell’(\theta)&#x3D;N_1&#x2F;\theta-N_0&#x2F;(1-\theta)$，设为零得到 $\hat\theta&#x3D;N_1&#x2F;(N_0+N_1)$。</p>
 <p>多类数据加入 $\sum_k\theta_k&#x3D;1$ 的约束，使用拉格朗日乘子同理得到 $\hat\theta_k&#x3D;N_k&#x2F;N$。</p>
 <p>若 $x_n\sim\mathcal N(\mu,\sigma^2)$，负对数似然去掉常数后是 $\frac N2\log\sigma^2+\frac1{2\sigma^2}\sum_n(x_n-\mu)^2$。</p>
 <p>对 $\mu$ 求导得到 $\hat\mu&#x3D;\bar x$；再对 $\sigma^2$ 求导得到 MLE 方差 $\hat\sigma^2&#x3D;\frac1N\sum_n(x_n-\bar x)^2$。</p>
 <p>此处分母为 $N$；无偏样本方差使用 $N-1$，目标不同。</p>
-<h3 id="Beta–Bernoulli-为什么共轭"><a href="#Beta–Bernoulli-为什么共轭" class="headerlink" title="Beta–Bernoulli 为什么共轭"></a>Beta–Bernoulli 为什么共轭</h3><p>Beta 先验密度正比于 $\theta^{\alpha-1}(1-\theta)^{\beta-1}$，乘上似然 $\theta^{N_1}(1-\theta)^{N_0}$，得到后验 $\mathrm{Beta}(N_1+\alpha,N_0+\beta)$。</p>
+<h2 id="第-6-章：Beta–Bernoulli-为什么共轭"><a href="#第-6-章：Beta–Bernoulli-为什么共轭" class="headerlink" title="第 6 章：Beta–Bernoulli 为什么共轭"></a>第 6 章：Beta–Bernoulli 为什么共轭</h2><p>Beta 先验密度正比于 $\theta^{\alpha-1}(1-\theta)^{\beta-1}$，乘上似然 $\theta^{N_1}(1-\theta)^{N_0}$，得到后验 $\mathrm{Beta}(N_1+\alpha,N_0+\beta)$。</p>
 <p>其均值就是下一次为 1 的预测概率。例：均匀先验 $\mathrm{Beta}(1,1)$、观察 3 正 1 反，后验为 $\mathrm{Beta}(4,2)$，预测正面概率 $4&#x2F;6$，而 MLE 是 $3&#x2F;4$。</p>
 <p>MAP 的后验众数仅当两个后验形状参数都大于 1 时可用常见内点公式。</p>
-<h3 id="条件高斯为后续课程做什么准备"><a href="#条件高斯为后续课程做什么准备" class="headerlink" title="条件高斯为后续课程做什么准备"></a>条件高斯为后续课程做什么准备</h3><p>设 $[x_1^T,x_2^T]^T$ 联合高斯，均值分块为 $\mu_1,\mu_2$，协方差分块为 $\Sigma_{ij}$。</p>
+<h2 id="第-7-章：条件高斯为后续课程做什么准备"><a href="#第-7-章：条件高斯为后续课程做什么准备" class="headerlink" title="第 7 章：条件高斯为后续课程做什么准备"></a>第 7 章：条件高斯为后续课程做什么准备</h2><p>设 $[x_1^T,x_2^T]^T$ 联合高斯，均值分块为 $\mu_1,\mu_2$，协方差分块为 $\Sigma_{ij}$。</p>
 <p>给定 $x_2$ 后，$x_1$ 的条件均值为 $\mu_1+\Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2)$，条件协方差为 $\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}$。</p>
 <p>观察相关变量会修正预测并缩小不确定性；高斯判别与贝叶斯回归都会再次用到。</p>
-<h3 id="熵、交叉熵、KL-的代数联系"><a href="#熵、交叉熵、KL-的代数联系" class="headerlink" title="熵、交叉熵、KL 的代数联系"></a>熵、交叉熵、KL 的代数联系</h3><p>对同一随机变量上的 $p,q$，有 $D_{KL}(p|q)&#x3D;\sum_xp(x)\log[p(x)&#x2F;q(x)]&#x3D;-H(p)+H(p,q)$。</p>
+<h2 id="第-8-章：熵、交叉熵、KL-的代数联系"><a href="#第-8-章：熵、交叉熵、KL-的代数联系" class="headerlink" title="第 8 章：熵、交叉熵、KL 的代数联系"></a>第 8 章：熵、交叉熵、KL 的代数联系</h2><p>对同一随机变量上的 $p,q$，有 $D_{KL}(p|q)&#x3D;\sum_xp(x)\log[p(x)&#x2F;q(x)]&#x3D;-H(p)+H(p,q)$。</p>
 <p>因为 $p$ 是固定目标，最小化交叉熵等价于最小化该方向的 KL，但交叉熵本身不是对称距离。</p>
 <p>联合熵满足 $H(X,Y)&#x3D;H(X)+H(Y\mid X)$；互信息 $I(X;Y)&#x3D;H(X)-H(X\mid Y)$ 衡量知道 $Y$ 后，$X$ 的不确定性减少多少。</p>
 <p>条件熵可以大于零，即使两个变量高度相关；相关系数只刻画线性关系，互信息能捕捉更一般的统计依赖。</p>
-<h3 id="Gaussian–Gaussian-更新的权重"><a href="#Gaussian–Gaussian-更新的权重" class="headerlink" title="Gaussian–Gaussian 更新的权重"></a>Gaussian–Gaussian 更新的权重</h3><p>设观测 $x_n\sim\mathcal N(\mu,\sigma^2)$，$\sigma^2$ 已知；先验 $\mu\sim\mathcal N(\mu_0,\tau_0^2)$。</p>
+<h2 id="第-9-章：Gaussian–Gaussian-更新的权重"><a href="#第-9-章：Gaussian–Gaussian-更新的权重" class="headerlink" title="第 9 章：Gaussian–Gaussian 更新的权重"></a>第 9 章：Gaussian–Gaussian 更新的权重</h2><p>设观测 $x_n\sim\mathcal N(\mu,\sigma^2)$，$\sigma^2$ 已知；先验 $\mu\sim\mathcal N(\mu_0,\tau_0^2)$。</p>
 <p>后验仍是高斯，其精度 $1&#x2F;\tau_N^2&#x3D;1&#x2F;\tau_0^2+N&#x2F;\sigma^2$，均值 $\mu_N&#x3D;\tau_N^2(\mu_0&#x2F;\tau_0^2+N\bar x&#x2F;\sigma^2)$。</p>
 <p>它是先验均值和样本均值按精度加权的平均。下一次观测的预测方差为 $\sigma^2+\tau_N^2$：第一项是数据噪声，第二项是不知道真实均值所付出的不确定性。</p>
 <p>把三种做法放在一起看：MLE 只找最能解释已有数据的参数；MAP 还考虑参数的先验倾向；贝叶斯预测则不押注单一参数，而是按整个后验分布求平均。</p>
@@ -581,7 +582,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第2讲｜统计推断方法</div>
+      <div>第 2 讲：统计推断方法</div>
       <div>https://yjyxfcy.github.io/2026/11/03/itml2/</div>
     </div>
     <div class="license-meta">
@@ -600,7 +601,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月3日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -630,8 +631,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/machine-learning/">← 返回 机器学习概论 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/03/itml1/"><small>上一篇</small><strong>← 第1讲｜课程简介与机器学习概述</strong></a>
-                    <a href="/2026/11/03/itml3/"><small>下一篇</small><strong>第3讲｜生成模型与生成式分类 →</strong></a>
+                    <a href="/2026/11/03/itml1/"><small>上一篇</small><strong>← 第 1 讲：课程简介与机器学习概述</strong></a>
+                    <a href="/2026/11/03/itml3/"><small>下一篇</small><strong>第 3 讲：生成模型与生成式分类 →</strong></a>
                   </div>
                 </nav>
               
@@ -705,7 +706,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E6%98%AF%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-text">概率是模型的语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E9%87%8F%E4%B8%8E%E5%88%86%E5%B8%83%E5%B7%AE%E5%BC%82"><span class="toc-text">信息量与分布差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E5%8F%82%E6%95%B0%E6%8E%A8%E6%96%AD"><span class="toc-text">三种参数推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%E5%85%88%E9%AA%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%96%B9%E4%BE%BF"><span class="toc-text">共轭先验为什么方便</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-text">常见最大似然估计的推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Beta%E2%80%93Bernoulli-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E8%BD%AD"><span class="toc-text">Beta–Bernoulli 为什么共轭</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%AB%98%E6%96%AF%E4%B8%BA%E5%90%8E%E7%BB%AD%E8%AF%BE%E7%A8%8B%E5%81%9A%E4%BB%80%E4%B9%88%E5%87%86%E5%A4%87"><span class="toc-text">条件高斯为后续课程做什么准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%86%B5%E3%80%81%E4%BA%A4%E5%8F%89%E7%86%B5%E3%80%81KL-%E7%9A%84%E4%BB%A3%E6%95%B0%E8%81%94%E7%B3%BB"><span class="toc-text">熵、交叉熵、KL 的代数联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaussian%E2%80%93Gaussian-%E6%9B%B4%E6%96%B0%E7%9A%84%E6%9D%83%E9%87%8D"><span class="toc-text">Gaussian–Gaussian 更新的权重</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E6%A6%82%E7%8E%87%E6%98%AF%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-text">第 1 章：概率是模型的语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E4%BF%A1%E6%81%AF%E9%87%8F%E4%B8%8E%E5%88%86%E5%B8%83%E5%B7%AE%E5%BC%82"><span class="toc-text">第 2 章：信息量与分布差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%89%E7%A7%8D%E5%8F%82%E6%95%B0%E6%8E%A8%E6%96%AD"><span class="toc-text">第 3 章：三种参数推断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%85%B1%E8%BD%AD%E5%85%88%E9%AA%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%96%B9%E4%BE%BF"><span class="toc-text">第 4 章：共轭先验为什么方便</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E5%B8%B8%E8%A7%81%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-text">第 5 章：常见最大似然估计的推导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9ABeta%E2%80%93Bernoulli-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E8%BD%AD"><span class="toc-text">第 6 章：Beta–Bernoulli 为什么共轭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%9D%A1%E4%BB%B6%E9%AB%98%E6%96%AF%E4%B8%BA%E5%90%8E%E7%BB%AD%E8%AF%BE%E7%A8%8B%E5%81%9A%E4%BB%80%E4%B9%88%E5%87%86%E5%A4%87"><span class="toc-text">第 7 章：条件高斯为后续课程做什么准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E7%86%B5%E3%80%81%E4%BA%A4%E5%8F%89%E7%86%B5%E3%80%81KL-%E7%9A%84%E4%BB%A3%E6%95%B0%E8%81%94%E7%B3%BB"><span class="toc-text">第 8 章：熵、交叉熵、KL 的代数联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9AGaussian%E2%80%93Gaussian-%E6%9B%B4%E6%96%B0%E7%9A%84%E6%9D%83%E9%87%8D"><span class="toc-text">第 9 章：Gaussian–Gaussian 更新的权重</span></a></li></ol>
   </div>
 </div>
 

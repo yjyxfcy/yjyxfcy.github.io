@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="math: true 北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。">
+    <meta name="description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。 **学习路线：**下面按 11 个主题展开：Prompting 在做什么 → 好提示的基本条件 → 零样本与少样本上下文学习 → 思维链与程序化输出 → 从手写提示到自动搜索 → 为什么要检索增强生成（R">
 <meta property="og:type" content="article">
-<meta property="og:title" content="提示学习与检索增强生成">
+<meta property="og:title" content="第 15 讲：提示学习与检索增强生成">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/fnlp15/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="math: true 北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。">
+<meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 lec12_ppt.pdf 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。 **学习路线：**下面按 11 个主题展开：Prompting 在做什么 → 好提示的基本条件 → 零样本与少样本上下文学习 → 思维链与程序化输出 → 从手写提示到自动搜索 → 为什么要检索增强生成（R">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:15:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T17:13:51.544Z">
+<meta property="article:modified_time" content="2026-11-05T12:28:09.954Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>提示学习与检索增强生成 - Yjy</title>
+  <title>第 15 讲：提示学习与检索增强生成 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +273,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="15 · 提示学习与检索增强生成"></span>
+            <span id="subtitle" data-typed-text="15 · 第 15 讲：提示学习与检索增强生成"></span>
           
         </div>
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.4k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -480,55 +480,55 @@
     
       
       
-        <a href="/2026/11/04/fnlp11/" title="语义表示与组合语义"
+        <a href="/2026/11/04/fnlp11/" title="第 11 讲：语义表示与组合语义"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">语义表示与组合语义</span>
+          <span class="category-post">第 11 讲：语义表示与组合语义</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp12/" title="信息检索与文本向量"
+        <a href="/2026/11/04/fnlp12/" title="第 12 讲：信息检索与文本向量"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">信息检索与文本向量</span>
+          <span class="category-post">第 12 讲：信息检索与文本向量</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp13/" title="预训练与微调"
+        <a href="/2026/11/04/fnlp13/" title="第 13 讲：预训练与微调"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">预训练与微调</span>
+          <span class="category-post">第 13 讲：预训练与微调</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp14/" title="后训练与指令对齐"
+        <a href="/2026/11/04/fnlp14/" title="第 14 讲：后训练与指令对齐"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">后训练与指令对齐</span>
+          <span class="category-post">第 14 讲：后训练与指令对齐</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp15/" title="提示学习与检索增强生成"
+        <a href="/2026/11/04/fnlp15/" title="第 15 讲：提示学习与检索增强生成"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">提示学习与检索增强生成</span>
+          <span class="category-post">第 15 讲：提示学习与检索增强生成</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp16/" title="NLP 任务、评测与基准"
+        <a href="/2026/11/04/fnlp16/" title="第 16 讲：NLP 任务、评测与基准"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">NLP 任务、评测与基准</span>
+          <span class="category-post">第 16 讲：NLP 任务、评测与基准</span>
         </a>
       
     
@@ -551,19 +551,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">15 · 提示学习与检索增强生成</h1>
+            <h1 class="reading-title">15 · 第 15 讲：提示学习与检索增强生成</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/nlp/">自然语言处理基础</a><span>/</span><span>2026 春</span><span>/</span><span>15</span></nav>
               <a class="reading-course-link" href="/courses/nlp/">← 返回课程目录</a>
               
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prompting-%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">Prompting 在做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E6%8F%90%E7%A4%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9D%A1%E4%BB%B6"><span class="toc-text">好提示的基本条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%B6%E6%A0%B7%E6%9C%AC%E4%B8%8E%E5%B0%91%E6%A0%B7%E6%9C%AC%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%A6%E4%B9%A0"><span class="toc-text">零样本与少样本上下文学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E9%93%BE%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">思维链与程序化输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%89%8B%E5%86%99%E6%8F%90%E7%A4%BA%E5%88%B0%E8%87%AA%E5%8A%A8%E6%90%9C%E7%B4%A2"><span class="toc-text">从手写提示到自动搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%EF%BC%88RAG%EF%BC%89"><span class="toc-text">为什么要检索增强生成（RAG）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAG-%E7%9A%84%E4%B8%A4%E7%AB%AF%E9%83%BD%E8%83%BD%E6%94%B9"><span class="toc-text">RAG 的两端都能改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%AF%E6%A3%80%E6%9F%A5%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">一个可检查的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%80%89%E6%8B%A9%E5%8F%AF%E4%BB%A5%E6%80%8E%E6%A0%B7%E5%81%9A"><span class="toc-text">示例选择可以怎样做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAG-%E5%BA%94%E6%80%8E%E6%A0%B7%E8%AF%84%E6%B5%8B"><span class="toc-text">RAG 应怎样评测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B"><span class="toc-text">回头看</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9APrompting-%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">第 1 章：Prompting 在做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%A5%BD%E6%8F%90%E7%A4%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9D%A1%E4%BB%B6"><span class="toc-text">第 2 章：好提示的基本条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E9%9B%B6%E6%A0%B7%E6%9C%AC%E4%B8%8E%E5%B0%91%E6%A0%B7%E6%9C%AC%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%A6%E4%B9%A0"><span class="toc-text">第 3 章：零样本与少样本上下文学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E6%80%9D%E7%BB%B4%E9%93%BE%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">第 4 章：思维链与程序化输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%86%99%E6%8F%90%E7%A4%BA%E5%88%B0%E8%87%AA%E5%8A%A8%E6%90%9C%E7%B4%A2"><span class="toc-text">第 5 章：从手写提示到自动搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%EF%BC%88RAG%EF%BC%89"><span class="toc-text">第 6 章：为什么要检索增强生成（RAG）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9ARAG-%E7%9A%84%E4%B8%A4%E7%AB%AF%E9%83%BD%E8%83%BD%E6%94%B9"><span class="toc-text">第 7 章：RAG 的两端都能改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%8F%AF%E6%A3%80%E6%9F%A5%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：一个可检查的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E7%A4%BA%E4%BE%8B%E9%80%89%E6%8B%A9%E5%8F%AF%E4%BB%A5%E6%80%8E%E6%A0%B7%E5%81%9A"><span class="toc-text">第 9 章：示例选择可以怎样做</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-10-%E7%AB%A0%EF%BC%9ARAG-%E5%BA%94%E6%80%8E%E6%A0%B7%E8%AF%84%E6%B5%8B"><span class="toc-text">第 10 章：RAG 应怎样评测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-11-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 11 章：本讲小结</span></a></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="提示学习与检索增强生成"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 15 讲：提示学习与检索增强生成"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月4日 凌晨
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -571,30 +571,30 @@
             
               <div class="markdown-body">
                 
-                <p>math: true</p>
-<p>北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 <code>lec12_ppt.pdf</code> 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。</p>
+                <p>北京大学《自然语言处理基础》（2026 春）的课程笔记，由 AI 依据 <code>lec12_ppt.pdf</code> 整理，承接前一篇预训练与后训练：参数训练完以后，输入怎样写、外部资料怎样给，也会改变模型表现。</p>
+<p>**学习路线：**下面按 11 个主题展开：Prompting 在做什么 → 好提示的基本条件 → 零样本与少样本上下文学习 → 思维链与程序化输出 → 从手写提示到自动搜索 → 为什么要检索增强生成（RAG）等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h3 id="Prompting-在做什么"><a href="#Prompting-在做什么" class="headerlink" title="Prompting 在做什么"></a>Prompting 在做什么</h3><p>提示（prompt）把任务说明、输入、示例或约束写进模型上下文，让模型在当前输入条件下完成目标。它通常不需要重新更新模型参数。比如情感分类，直接输入“电影很好看”可能得到续写；换成“判断下面评论是正面还是负面，只输出标签：电影很好看”，输出形式就更明确。</p>
+<h2 id="第-1-章：Prompting-在做什么"><a href="#第-1-章：Prompting-在做什么" class="headerlink" title="第 1 章：Prompting 在做什么"></a>第 1 章：Prompting 在做什么</h2><p>提示（prompt）把任务说明、输入、示例或约束写进模型上下文，让模型在当前输入条件下完成目标。它通常不需要重新更新模型参数。比如情感分类，直接输入“电影很好看”可能得到续写；换成“判断下面评论是正面还是负面，只输出标签：电影很好看”，输出形式就更明确。</p>
 <p>一个完整提示流程可以拆成：<strong>设计模板 → 填入输入 → 生成候选输出 → 提取或选择答案</strong>。最后一步常被忽略。模型若输出“这是一段正面评论，因此标签是正面”，评分器却期待单个词“正面”，就需要稳定的解析规则。</p>
-<h3 id="好提示的基本条件"><a href="#好提示的基本条件" class="headerlink" title="好提示的基本条件"></a>好提示的基本条件</h3><p>任务目标要清楚，输入与指令要分隔，输出格式要可检查。需要领域背景时应提供相关信息；不需要时，冗长背景可能干扰判断。若任务涉及外部资料，还应说明模型要依据哪些资料、缺少证据时如何回答。</p>
+<h2 id="第-2-章：好提示的基本条件"><a href="#第-2-章：好提示的基本条件" class="headerlink" title="第 2 章：好提示的基本条件"></a>第 2 章：好提示的基本条件</h2><p>任务目标要清楚，输入与指令要分隔，输出格式要可检查。需要领域背景时应提供相关信息；不需要时，冗长背景可能干扰判断。若任务涉及外部资料，还应说明模型要依据哪些资料、缺少证据时如何回答。</p>
 <p>提示措辞会影响结果，但不存在适用于所有模型和任务的万能模板。比较模板时应固定评测集、模型版本与解码参数，避免只凭几条挑选过的例子下结论。</p>
-<h3 id="零样本与少样本上下文学习"><a href="#零样本与少样本上下文学习" class="headerlink" title="零样本与少样本上下文学习"></a>零样本与少样本上下文学习</h3><p>零样本提示只给任务描述；少样本提示再给几组“输入 → 输出”示例。例如让模型抽取地点，可在新句子前放两三个已标注句子。示例既示范了标签空间，也示范了格式。</p>
+<h2 id="第-3-章：零样本与少样本上下文学习"><a href="#第-3-章：零样本与少样本上下文学习" class="headerlink" title="第 3 章：零样本与少样本上下文学习"></a>第 3 章：零样本与少样本上下文学习</h2><p>零样本提示只给任务描述；少样本提示再给几组“输入 → 输出”示例。例如让模型抽取地点，可在新句子前放两三个已标注句子。示例既示范了标签空间，也示范了格式。</p>
 <p>选择示例时有几个取舍：<strong>相关性</strong>高的例子能提供接近目标输入的线索；<strong>多样性</strong>能覆盖更多边界情况；<strong>标签平衡</strong>能减轻模型一味模仿某一类的倾向；示例顺序也可能影响答案。课件引用的研究发现，某些设置下即便扰乱示例标签，表现仍未显著下降。这提醒我们模型可能在利用任务格式、输入分布等线索，不能据此推断正确标签永远不重要。</p>
-<h3 id="思维链与程序化输出"><a href="#思维链与程序化输出" class="headerlink" title="思维链与程序化输出"></a>思维链与程序化输出</h3><p>思维链（Chain of Thought，CoT）提示让模型在给答案前展示中间推理步骤。它在部分多步推理任务上有帮助，因为生成过程获得了更多计算步骤。但写出流畅的推理不代表过程真实或结论正确；要核对可验证的中间量和最终答案。</p>
+<h2 id="第-4-章：思维链与程序化输出"><a href="#第-4-章：思维链与程序化输出" class="headerlink" title="第 4 章：思维链与程序化输出"></a>第 4 章：思维链与程序化输出</h2><p>思维链（Chain of Thought，CoT）提示让模型在给答案前展示中间推理步骤。它在部分多步推理任务上有帮助，因为生成过程获得了更多计算步骤。但写出流畅的推理不代表过程真实或结论正确；要核对可验证的中间量和最终答案。</p>
 <p>另一类方法让模型输出程序或结构化表达，再交给外部执行器计算。比如先把数学文字题写成代码，再运行得到数值。程序化方法可减少算术错误，前提是生成的程序正确、执行环境受控，且外部工具的结果被正确解释。</p>
-<h3 id="从手写提示到自动搜索"><a href="#从手写提示到自动搜索" class="headerlink" title="从手写提示到自动搜索"></a>从手写提示到自动搜索</h3><p>提示工程可以手工改写，也可以生成多个候选模板并在验证集上选择。自动方法包括同义改写、利用模型提出候选提示、搜索示例组合等。优化目标不能只看验证集准确率，还要留意提示长度、成本和跨数据集稳定性。反复试到某个测试集分数最好，会造成评测集泄漏。</p>
-<h3 id="为什么要检索增强生成（RAG）"><a href="#为什么要检索增强生成（RAG）" class="headerlink" title="为什么要检索增强生成（RAG）"></a>为什么要检索增强生成（RAG）</h3><p>模型参数中的知识可能过时，且模型可能在缺少依据时编造细节。RAG 把外部检索纳入生成流程：</p>
+<h2 id="第-5-章：从手写提示到自动搜索"><a href="#第-5-章：从手写提示到自动搜索" class="headerlink" title="第 5 章：从手写提示到自动搜索"></a>第 5 章：从手写提示到自动搜索</h2><p>提示工程可以手工改写，也可以生成多个候选模板并在验证集上选择。自动方法包括同义改写、利用模型提出候选提示、搜索示例组合等。优化目标不能只看验证集准确率，还要留意提示长度、成本和跨数据集稳定性。反复试到某个测试集分数最好，会造成评测集泄漏。</p>
+<h2 id="第-6-章：为什么要检索增强生成（RAG）"><a href="#第-6-章：为什么要检索增强生成（RAG）" class="headerlink" title="第 6 章：为什么要检索增强生成（RAG）"></a>第 6 章：为什么要检索增强生成（RAG）</h2><p>模型参数中的知识可能过时，且模型可能在缺少依据时编造细节。RAG 把外部检索纳入生成流程：</p>
 <p>$$q;\longrightarrow;\operatorname{Retrieve}(q,D);\longrightarrow;C<br>;\longrightarrow;P(y\mid q,C).$$</p>
 <p>$D$ 是文档库，$C$ 是检索到的上下文。生成模型在回答时可以引用资料，但<strong>检索到了证据</strong>不等于<strong>一定用对了证据</strong>。错误文档、截断、过长上下文和模型误读，都可能产生带引用的错误回答。</p>
-<h3 id="RAG-的两端都能改"><a href="#RAG-的两端都能改" class="headerlink" title="RAG 的两端都能改"></a>RAG 的两端都能改</h3><p><strong>检索端</strong>可以改善切块、索引和查询：长文档按主题切分，保留标题和出处；用关键词与向量混合召回；对候选再重排。切块太小会丢前后文，太大会增加无关信息和上下文成本。查询改写要保留用户原意，不能擅自替换关键条件。</p>
+<h2 id="第-7-章：RAG-的两端都能改"><a href="#第-7-章：RAG-的两端都能改" class="headerlink" title="第 7 章：RAG 的两端都能改"></a>第 7 章：RAG 的两端都能改</h2><p><strong>检索端</strong>可以改善切块、索引和查询：长文档按主题切分，保留标题和出处；用关键词与向量混合召回；对候选再重排。切块太小会丢前后文，太大会增加无关信息和上下文成本。查询改写要保留用户原意，不能擅自替换关键条件。</p>
 <p><strong>生成端</strong>可以先压缩检索内容、过滤重复片段、要求答案绑定来源，或在初步回答后发现缺口再检索一次。课件还讨论迭代检索：模型根据尚未解决的问题决定是否继续查资料。它能处理多跳问题，但每轮都增加延迟，并可能把上轮错误扩散到下一轮。</p>
-<h3 id="一个可检查的例子"><a href="#一个可检查的例子" class="headerlink" title="一个可检查的例子"></a>一个可检查的例子</h3><p>问“某论文提出了什么方法、在哪个数据集上验证？”时，可先检索论文正文和实验表，再让模型分别抽取方法名称、数据集与对应证据位置。若只能找到摘要而找不到实验细节，答案就应标明证据不足。这比让模型直接凭记忆给出看似完整的结论更可核验。</p>
-<h3 id="示例选择可以怎样做"><a href="#示例选择可以怎样做" class="headerlink" title="示例选择可以怎样做"></a>示例选择可以怎样做</h3><p>课件列出几类策略。<strong>近邻选择</strong>从示例库中找与当前输入最相似的 $k$ 条，适合存在局部表达规律的任务；<strong>多样性选择</strong>覆盖不同类别与场景，避免近邻全是同一种题；<strong>模型自生成示例</strong>省去人工寻找，但要审查生成标签是否正确。顺序也会影响模型，最相近例子放在末尾是一种可测试的启发式，而非普遍定律。</p>
+<h2 id="第-8-章：一个可检查的例子"><a href="#第-8-章：一个可检查的例子" class="headerlink" title="第 8 章：一个可检查的例子"></a>第 8 章：一个可检查的例子</h2><p>问“某论文提出了什么方法、在哪个数据集上验证？”时，可先检索论文正文和实验表，再让模型分别抽取方法名称、数据集与对应证据位置。若只能找到摘要而找不到实验细节，答案就应标明证据不足。这比让模型直接凭记忆给出看似完整的结论更可核验。</p>
+<h2 id="第-9-章：示例选择可以怎样做"><a href="#第-9-章：示例选择可以怎样做" class="headerlink" title="第 9 章：示例选择可以怎样做"></a>第 9 章：示例选择可以怎样做</h2><p>课件列出几类策略。<strong>近邻选择</strong>从示例库中找与当前输入最相似的 $k$ 条，适合存在局部表达规律的任务；<strong>多样性选择</strong>覆盖不同类别与场景，避免近邻全是同一种题；<strong>模型自生成示例</strong>省去人工寻找，但要审查生成标签是否正确。顺序也会影响模型，最相近例子放在末尾是一种可测试的启发式，而非普遍定律。</p>
 <p>例如做“机构名抽取”，新句子提到“北京大学”，只找“清华大学”“复旦大学”示例虽相关，却没覆盖“教育部”和企业名。若测试集含不同机构类型，示例组合就应同时考虑相似性与覆盖率。</p>
-<h3 id="RAG-应怎样评测"><a href="#RAG-应怎样评测" class="headerlink" title="RAG 应怎样评测"></a>RAG 应怎样评测</h3><p>可以把检索与回答分开：先看相关资料是否进入前 $k$ 条，再看模型引用了哪些片段、回答是否由这些片段支持。若检索没有找到证据，生成模型再流畅也无法凭空补上；若检索找到了而回答仍错，则要检查上下文组织和答案生成。</p>
+<h2 id="第-10-章：RAG-应怎样评测"><a href="#第-10-章：RAG-应怎样评测" class="headerlink" title="第 10 章：RAG 应怎样评测"></a>第 10 章：RAG 应怎样评测</h2><p>可以把检索与回答分开：先看相关资料是否进入前 $k$ 条，再看模型引用了哪些片段、回答是否由这些片段支持。若检索没有找到证据，生成模型再流畅也无法凭空补上；若检索找到了而回答仍错，则要检查上下文组织和答案生成。</p>
 <p>RAG 还有时效性问题。资料更新后，文档库与向量索引是否同步？答案引用的是旧版本还是新版本？这些都是“模型会不会幻觉”之外的实际问题。是否使用 RAG，要由任务对时效、可追溯性、延迟和维护成本的要求决定。</p>
-<h3 id="回头看"><a href="#回头看" class="headerlink" title="回头看"></a>回头看</h3><p>Prompting 改变模型当下接收的任务信息，少样本示例提供格式和局部规律，CoT 或程序化输出提供多步处理路径，RAG 把可更新的外部资料接进流程。复习时可以画出输入、检索、生成、答案提取四个节点，并问每个节点会怎样出错、该用什么证据检查。</p>
+<h2 id="第-11-章：本讲小结"><a href="#第-11-章：本讲小结" class="headerlink" title="第 11 章：本讲小结"></a>第 11 章：本讲小结</h2><p>Prompting 改变模型当下接收的任务信息，少样本示例提供格式和局部规律，CoT 或程序化输出提供多步处理路径，RAG 把可更新的外部资料接进流程。复习时可以画出输入、检索、生成、答案提取四个节点，并问每个节点会怎样出错、该用什么证据检查。</p>
 
                 
               </div>
@@ -633,7 +633,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>提示学习与检索增强生成</div>
+      <div>第 15 讲：提示学习与检索增强生成</div>
       <div>https://yjyxfcy.github.io/2026/11/04/fnlp15/</div>
     </div>
     <div class="license-meta">
@@ -652,7 +652,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月4日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -682,8 +682,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/nlp/">← 返回 自然语言处理基础 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/fnlp14/"><small>上一篇</small><strong>← 后训练与指令对齐</strong></a>
-                    <a href="/2026/11/04/fnlp16/"><small>下一篇</small><strong>NLP 任务、评测与基准 →</strong></a>
+                    <a href="/2026/11/04/fnlp14/"><small>上一篇</small><strong>← 第 14 讲：后训练与指令对齐</strong></a>
+                    <a href="/2026/11/04/fnlp16/"><small>下一篇</small><strong>第 16 讲：NLP 任务、评测与基准 →</strong></a>
                   </div>
                 </nav>
               
@@ -757,7 +757,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prompting-%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">Prompting 在做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E6%8F%90%E7%A4%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9D%A1%E4%BB%B6"><span class="toc-text">好提示的基本条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%B6%E6%A0%B7%E6%9C%AC%E4%B8%8E%E5%B0%91%E6%A0%B7%E6%9C%AC%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%A6%E4%B9%A0"><span class="toc-text">零样本与少样本上下文学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E9%93%BE%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">思维链与程序化输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%89%8B%E5%86%99%E6%8F%90%E7%A4%BA%E5%88%B0%E8%87%AA%E5%8A%A8%E6%90%9C%E7%B4%A2"><span class="toc-text">从手写提示到自动搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%EF%BC%88RAG%EF%BC%89"><span class="toc-text">为什么要检索增强生成（RAG）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAG-%E7%9A%84%E4%B8%A4%E7%AB%AF%E9%83%BD%E8%83%BD%E6%94%B9"><span class="toc-text">RAG 的两端都能改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%AF%E6%A3%80%E6%9F%A5%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">一个可检查的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%80%89%E6%8B%A9%E5%8F%AF%E4%BB%A5%E6%80%8E%E6%A0%B7%E5%81%9A"><span class="toc-text">示例选择可以怎样做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAG-%E5%BA%94%E6%80%8E%E6%A0%B7%E8%AF%84%E6%B5%8B"><span class="toc-text">RAG 应怎样评测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B"><span class="toc-text">回头看</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9APrompting-%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">第 1 章：Prompting 在做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%A5%BD%E6%8F%90%E7%A4%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9D%A1%E4%BB%B6"><span class="toc-text">第 2 章：好提示的基本条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E9%9B%B6%E6%A0%B7%E6%9C%AC%E4%B8%8E%E5%B0%91%E6%A0%B7%E6%9C%AC%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%A6%E4%B9%A0"><span class="toc-text">第 3 章：零样本与少样本上下文学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E6%80%9D%E7%BB%B4%E9%93%BE%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">第 4 章：思维链与程序化输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%86%99%E6%8F%90%E7%A4%BA%E5%88%B0%E8%87%AA%E5%8A%A8%E6%90%9C%E7%B4%A2"><span class="toc-text">第 5 章：从手写提示到自动搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%EF%BC%88RAG%EF%BC%89"><span class="toc-text">第 6 章：为什么要检索增强生成（RAG）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9ARAG-%E7%9A%84%E4%B8%A4%E7%AB%AF%E9%83%BD%E8%83%BD%E6%94%B9"><span class="toc-text">第 7 章：RAG 的两端都能改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%8F%AF%E6%A3%80%E6%9F%A5%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：一个可检查的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E7%A4%BA%E4%BE%8B%E9%80%89%E6%8B%A9%E5%8F%AF%E4%BB%A5%E6%80%8E%E6%A0%B7%E5%81%9A"><span class="toc-text">第 9 章：示例选择可以怎样做</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-10-%E7%AB%A0%EF%BC%9ARAG-%E5%BA%94%E6%80%8E%E6%A0%B7%E8%AF%84%E6%B5%8B"><span class="toc-text">第 10 章：RAG 应怎样评测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-11-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 11 章：本讲小结</span></a></li></ol>
   </div>
 </div>
 

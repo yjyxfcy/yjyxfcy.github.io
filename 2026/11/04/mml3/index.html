@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 3 讲笔记，依据对应课程课件整理。 一张图如何从像素走向类别？本讲从卷积计算出发，沿经典分类网络的发展理解视觉表示。">
+    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 3 讲笔记，依据对应课程课件整理。 一张图如何从像素走向类别？本讲从卷积计算出发，沿经典分类网络的发展理解视觉表示。 **学习路线：**下面按 3 个主题展开：卷积与池化计算 → 经典分类网络 → 轻量、大核与动态卷积。阅读时先理解卷积利用了图像的什么结构，再比较不同网络怎样控制参数和计算量。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 3 讲：计算机视觉基础与分类网络">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml3/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 3 讲笔记，依据对应课程课件整理。 一张图如何从像素走向类别？本讲从卷积计算出发，沿经典分类网络的发展理解视觉表示。">
+<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 3 讲笔记，依据对应课程课件整理。 一张图如何从像素走向类别？本讲从卷积计算出发，沿经典分类网络的发展理解视觉表示。 **学习路线：**下面按 3 个主题展开：卷积与池化计算 → 经典分类网络 → 轻量、大核与动态卷积。阅读时先理解卷积利用了图像的什么结构，再比较不同网络怎样控制参数和计算量。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T04:03:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T17:49:00.801Z">
+<meta property="article:modified_time" content="2026-11-05T12:25:26.881Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.5k 字
         
       </span>
     
@@ -484,14 +484,14 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>03</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CNN-%E4%B8%8E%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C"><span class="toc-text">CNN 与分类网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E4%B8%8E%E6%B1%A0%E5%8C%96%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-text">卷积与池化的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%B0%B1%E7%B3%BB%EF%BC%9A%E6%AF%8F%E4%B8%AA%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-text">网络谱系：每个模型回答什么问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BE%E4%BB%B6%E4%B8%AD%E5%85%B6%E4%BD%99-CNN-%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AE%9E%E9%AA%8C%E6%9B%B2%E7%BA%BF"><span class="toc-text">课件中其余 CNN 结构与实验曲线</span></a></li></ol></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%8D%B7%E7%A7%AF%E4%B8%8E%E6%B1%A0%E5%8C%96%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-text">第 1 章：卷积与池化的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%BD%91%E7%BB%9C%E8%B0%B1%E7%B3%BB%EF%BC%9A%E6%AF%8F%E4%B8%AA%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-text">第 2 章：网络谱系：每个模型回答什么问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E8%BD%BB%E9%87%8F%E3%80%81%E5%A4%A7%E6%A0%B8%E4%B8%8E%E5%8A%A8%E6%80%81%E5%8D%B7%E7%A7%AF"><span class="toc-text">第 3 章：轻量、大核与动态卷积</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 3 讲：计算机视觉基础与分类网络"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月4日 凌晨
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -501,14 +501,17 @@
                 
                 <p>北京大学《多模态学习》（2026 秋）第 3 讲笔记，依据对应课程课件整理。</p>
 <p>一张图如何从像素走向类别？本讲从卷积计算出发，沿经典分类网络的发展理解视觉表示。</p>
+<p>**学习路线：**下面按 3 个主题展开：卷积与池化计算 → 经典分类网络 → 轻量、大核与动态卷积。阅读时先理解卷积利用了图像的什么结构，再比较不同网络怎样控制参数和计算量。</p>
 <span id="more"></span>
 
-<h2 id="CNN-与分类网络"><a href="#CNN-与分类网络" class="headerlink" title="CNN 与分类网络"></a>CNN 与分类网络</h2><h3 id="卷积与池化的计算"><a href="#卷积与池化的计算" class="headerlink" title="卷积与池化的计算"></a>卷积与池化的计算</h3><p>图像张量 $C_{\rm in}\times H\times W$，$C_{\rm out}$ 个大小 $K_h\times K_w$ 的滤波器；每个滤波器跨越<strong>全部输入通道</strong>，不同空间位置共享同一组参数。输出高宽：</p>
-<p><strong>6–12 页的连续动画</strong>按“全连接 → 局部连接 → 卷积”读：全连接让一个输出看到整张图，输入图一大就会有海量参数；局部连接让输出只看附近 $K\times K$，利用图像结构，但不同位置仍有不同参数；卷积进一步让同一滤波器在各位置共享参数。比如单通道输入、单个 $10\times10$ 局部核，若有约 4 万个输出位置，不共享时约需 $4{,}000{,}000$ 个核权重，共享时只需 100 个核权重（这里不计 bias）。权重共享隐含“某种局部图案在不同位置可由相同检测器识别”的假设，带来平移等变性；池化&#x2F;全局汇聚再提高一定平移不变性。等变指输入平移时特征也相应平移，不变指最终输出近似不变，两者不要混同。</p>
+<h2 id="第-1-章：卷积与池化的计算"><a href="#第-1-章：卷积与池化的计算" class="headerlink" title="第 1 章：卷积与池化的计算"></a>第 1 章：卷积与池化的计算</h2><p>图像张量 $C_{\rm in}\times H\times W$，$C_{\rm out}$ 个大小 $K_h\times K_w$ 的滤波器；每个滤波器跨越<strong>全部输入通道</strong>，不同空间位置共享同一组参数。输出高宽：</p>
+<p><strong>6–12 页的连续动画</strong>按“全连接 → 局部连接 → 卷积”读：全连接让一个输出看到整张图，输入图一大就会有海量参数；局部连接让输出只看附近 $K\times K$，利用图像结构，但不同位置仍有不同参数；卷积进一步让同一滤波器在各位置共享参数。</p>
+<p>比如单通道输入、单个 $10\times10$ 局部核，若有约 4 万个输出位置，不共享时约需 $4{,}000{,}000$ 个核权重，共享时只需 100 个核权重（这里不计 bias）。权重共享隐含“某种局部图案在不同位置可由相同检测器识别”的假设，带来平移等变性；池化&#x2F;全局汇聚再提高一定平移不变性。等变指输入平移时特征也相应平移，不变指最终输出近似不变，两者不要混同。</p>
 <p>$$H_o&#x3D;\left\lfloor\frac{H+2P_h-D_h(K_h-1)-1}{S_h}+1\right\rfloor,\quad W_o&#x3D;\left\lfloor\frac{W+2P_w-D_w(K_w-1)-1}{S_w}+1\right\rfloor.$$</p>
-<p>一般非空洞卷积 $D&#x3D;1$，即 $\lfloor(H+2P-K)&#x2F;S\rfloor+1$。若课件&#x2F;题目指定必须整除，按其假设；通常库在无法整除时向下取整。每层可训练参数（含 bias）为 $C_{\rm out}(C_{\rm in}K_hK_w+1)$。乘加次数约 $H_oW_oC_{\rm out}C_{\rm in}K_hK_w$；若把乘和加各计一次 FLOP，数值约乘 2，<strong>先声明口径</strong>。激活显存仅输出、FP32、单样本时是 $4C_{\rm out}H_oW_o$ 字节，真实训练显存还包括输入、梯度、优化器状态等。</p>
+<p>一般非空洞卷积 $D&#x3D;1$，即 $\lfloor(H+2P-K)&#x2F;S\rfloor+1$。若课件&#x2F;题目指定必须整除，按其假设；通常库在无法整除时向下取整。每层可训练参数（含 bias）为 $C_{\rm out}(C_{\rm in}K_hK_w+1)$。</p>
+<p>乘加次数约 $H_oW_oC_{\rm out}C_{\rm in}K_hK_w$；若把乘和加各计一次 FLOP，数值约乘 2，<strong>先声明口径</strong>。激活显存仅输出、FP32、单样本时是 $4C_{\rm out}H_oW_o$ 字节，真实训练显存还包括输入、梯度、优化器状态等。</p>
 <p>池化每个通道独立，无可学习核，常见最大&#x2F;平均池化。池化降低空间分辨率、减少后续计算、增加后续单元感受野，但精细位置会丢失。最大池化反向传播只把梯度传向该窗口获胜位置；平均池化按平均分配。感受野：堆两个 stride 1 的 $3\times3$ 卷积可达 $5\times5$，同通道宽度参数约 $18C^2$，少于单个 $5\times5$ 的 $25C^2$，且多一次非线性。</p>
-<h3 id="网络谱系：每个模型回答什么问题"><a href="#网络谱系：每个模型回答什么问题" class="headerlink" title="网络谱系：每个模型回答什么问题"></a>网络谱系：每个模型回答什么问题</h3><table>
+<h2 id="第-2-章：网络谱系：每个模型回答什么问题"><a href="#第-2-章：网络谱系：每个模型回答什么问题" class="headerlink" title="第 2 章：网络谱系：每个模型回答什么问题"></a>第 2 章：网络谱系：每个模型回答什么问题</h2><table>
 <thead>
 <tr>
 <th>网络</th>
@@ -548,8 +551,10 @@
 </tr>
 </tbody></table>
 <p><strong>图示判读</strong>：卷积的局部连接与权重共享使参数不随输入位置数量线性增大；GAP 把每个通道的 $H\times W$ 值平均为一个数；ResNet 的旁路是恒等&#x2F;投影相加；Inception 各分支的输出在通道维拼接。大核实验受架构、训练设置影响，不单由核尺寸解释结果。</p>
-<h3 id="课件中其余-CNN-结构与实验曲线"><a href="#课件中其余-CNN-结构与实验曲线" class="headerlink" title="课件中其余 CNN 结构与实验曲线"></a>课件中其余 CNN 结构与实验曲线</h3><p><strong>$1\times1$ 卷积</strong>在同一像素位置混合通道，可升&#x2F;降通道数，但若不配合空间卷积，单独不能读取邻域空间。Padding 保持边界信息、控制输出尺寸；stride 负责步进与下采样；理论感受野是输出点可能依赖的输入范围，实际有效感受野的贡献通常不均匀。网络早期的高分辨率特征图会带来较多计算，末端大的 FC 层可能有很多参数：<strong>参数量、FLOPs、运行延迟、激活内存是不同指标</strong>。</p>
-<p><strong>Squeeze-and-Excitation（约 100 页）</strong>：先对每个通道做全局池化得到通道摘要，再经小网络产生通道权重并乘回特征图，学习“哪些通道更重要”；它主要是通道重标定，不是空间位置注意力。<strong>轻量网络</strong>：SqueezeNet 的 fire 模块先用 $1\times1$ squeeze 降通道，再并联 $1\times1$&#x2F;$3\times3$ expand；MobileNet 用深度可分离卷积；ShuffleNet 用分组卷积省计算、channel shuffle 让组间交换信息；EfficientNet 以系统性尺度扩展平衡分辨率、深度、宽度。模型小不必然在任意硬件上更快，需看访存与算子实现。</p>
+<h2 id="第-3-章：轻量、大核与动态卷积"><a href="#第-3-章：轻量、大核与动态卷积" class="headerlink" title="第 3 章：轻量、大核与动态卷积"></a>第 3 章：轻量、大核与动态卷积</h2><p><strong>$1\times1$ 卷积</strong>在同一像素位置混合通道，可升&#x2F;降通道数，但若不配合空间卷积，单独不能读取邻域空间。Padding 保持边界信息、控制输出尺寸；stride 负责步进与下采样；理论感受野是输出点可能依赖的输入范围，实际有效感受野的贡献通常不均匀。网络早期的高分辨率特征图会带来较多计算，末端大的 FC 层可能有很多参数：<strong>参数量、FLOPs、运行延迟、激活内存是不同指标</strong>。</p>
+<p><strong>Squeeze-and-Excitation（约 100 页）</strong>：先对每个通道做全局池化得到通道摘要，再经小网络产生通道权重并乘回特征图，学习“哪些通道更重要”；它主要是通道重标定，不是空间位置注意力。</p>
+<p><strong>轻量网络</strong>：SqueezeNet 的 fire 模块先用 $1\times1$ squeeze 降通道，再并联 $1\times1$&#x2F;$3\times3$ expand；MobileNet 用深度可分离卷积；ShuffleNet 用分组卷积省计算、channel shuffle 让组间交换信息；EfficientNet 以系统性尺度扩展平衡分辨率、深度、宽度。</p>
+<p>模型小不必然在任意硬件上更快，需看访存与算子实现。</p>
 <p><strong>RepLKNet&#x2F;动态核图</strong>：大核可扩大感受野，课件强调大 depthwise 核、shortcut、训练时的小核重参数化分支；推理时可把可合并的线性卷积分支折叠为一个核。动态卷积让输入内容参与决定特定位置&#x2F;样本的卷积权重；图中的性能提升不能脱离参数预算和训练设置解释。神经架构搜索（约 165 页）是自动搜索结构&#x2F;操作组合的思路，目标仍需在性能和成本间取舍。</p>
 
                 
@@ -608,7 +613,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月4日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -713,7 +718,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CNN-%E4%B8%8E%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C"><span class="toc-text">CNN 与分类网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E4%B8%8E%E6%B1%A0%E5%8C%96%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-text">卷积与池化的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%B0%B1%E7%B3%BB%EF%BC%9A%E6%AF%8F%E4%B8%AA%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-text">网络谱系：每个模型回答什么问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BE%E4%BB%B6%E4%B8%AD%E5%85%B6%E4%BD%99-CNN-%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AE%9E%E9%AA%8C%E6%9B%B2%E7%BA%BF"><span class="toc-text">课件中其余 CNN 结构与实验曲线</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%8D%B7%E7%A7%AF%E4%B8%8E%E6%B1%A0%E5%8C%96%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-text">第 1 章：卷积与池化的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%BD%91%E7%BB%9C%E8%B0%B1%E7%B3%BB%EF%BC%9A%E6%AF%8F%E4%B8%AA%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-text">第 2 章：网络谱系：每个模型回答什么问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E8%BD%BB%E9%87%8F%E3%80%81%E5%A4%A7%E6%A0%B8%E4%B8%8E%E5%8A%A8%E6%80%81%E5%8D%B7%E7%A7%AF"><span class="toc-text">第 3 章：轻量、大核与动态卷积</span></a></li></ol>
   </div>
 </div>
 

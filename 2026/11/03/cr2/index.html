@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《认知推理》（2026 秋）的课程笔记。 这一讲的课件叫 The Training Stack。它把从最小二乘到大语言模型的工程问题串起来：模型为什么这样设计？参数怎样更新？算力与数据预算又怎样分配？">
+    <meta name="description" content="北京大学《认知推理》（2026 秋）的课程笔记。 这一讲的课件叫 The Training Stack。它把从最小二乘到大语言模型的工程问题串起来：模型为什么这样设计？参数怎样更新？算力与数据预算又怎样分配？ **学习路线：**下面按 8 个主题展开：先弄清我们究竟在优化什么 → 从线性层开始：为什么需要正则化 → MLP、CNN、RNN、Transformer 分别改变了什么 → 梯度下降、Ad">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第2讲｜工程回顾：从模型到训练系统">
+<meta property="og:title" content="第 2 讲：工程回顾：从模型到训练系统">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/cr2/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《认知推理》（2026 秋）的课程笔记。 这一讲的课件叫 The Training Stack。它把从最小二乘到大语言模型的工程问题串起来：模型为什么这样设计？参数怎样更新？算力与数据预算又怎样分配？">
+<meta property="og:description" content="北京大学《认知推理》（2026 秋）的课程笔记。 这一讲的课件叫 The Training Stack。它把从最小二乘到大语言模型的工程问题串起来：模型为什么这样设计？参数怎样更新？算力与数据预算又怎样分配？ **学习路线：**下面按 8 个主题展开：先弄清我们究竟在优化什么 → 从线性层开始：为什么需要正则化 → MLP、CNN、RNN、Transformer 分别改变了什么 → 梯度下降、Ad">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:49:59.328Z">
-<meta property="article:modified_time" content="2026-11-03T10:56:25.084Z">
+<meta property="article:modified_time" content="2026-11-05T12:25:26.894Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第2讲｜工程回顾：从模型到训练系统 - Yjy</title>
+  <title>第 2 讲：工程回顾：从模型到训练系统 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +273,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="02 · 第2讲｜工程回顾：从模型到训练系统"></span>
+            <span id="subtitle" data-typed-text="02 · 第 2 讲：工程回顾：从模型到训练系统"></span>
           
         </div>
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k 字
+          3.8k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          23 分钟
+          24 分钟
         
       </span>
     
@@ -390,64 +390,64 @@
     
       
       
-        <a href="/2026/11/03/cr1/" title="第1讲｜导论：认知推理要解决什么问题"
+        <a href="/2026/11/03/cr1/" title="第 1 讲：导论：认知推理要解决什么问题"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第1讲｜导论：认知推理要解决什么问题</span>
+          <span class="category-post">第 1 讲：导论：认知推理要解决什么问题</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr2/" title="第2讲｜工程回顾：从模型到训练系统"
+        <a href="/2026/11/03/cr2/" title="第 2 讲：工程回顾：从模型到训练系统"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第2讲｜工程回顾：从模型到训练系统</span>
+          <span class="category-post">第 2 讲：工程回顾：从模型到训练系统</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr3/" title="第3讲｜可供性：看到物体后想到能做什么"
+        <a href="/2026/11/03/cr3/" title="第 3 讲：可供性：看到物体后想到能做什么"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第3讲｜可供性：看到物体后想到能做什么</span>
+          <span class="category-post">第 3 讲：可供性：看到物体后想到能做什么</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr4/" title="第4讲｜人—物交互：从检测到三维场景"
+        <a href="/2026/11/03/cr4/" title="第 4 讲：人—物交互：从检测到三维场景"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第4讲｜人—物交互：从检测到三维场景</span>
+          <span class="category-post">第 4 讲：人—物交互：从检测到三维场景</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr5/" title="第5讲｜人形机器人：从动作生成到真实控制"
+        <a href="/2026/11/03/cr5/" title="第 5 讲：人形机器人：从动作生成到真实控制"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第5讲｜人形机器人：从动作生成到真实控制</span>
+          <span class="category-post">第 5 讲：人形机器人：从动作生成到真实控制</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr6/" title="第6讲｜直觉物理：我们怎样预期世界的变化"
+        <a href="/2026/11/03/cr6/" title="第 6 讲：直觉物理：我们怎样预期世界的变化"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第6讲｜直觉物理：我们怎样预期世界的变化</span>
+          <span class="category-post">第 6 讲：直觉物理：我们怎样预期世界的变化</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr7/" title="第7讲｜因果推理：从相关到干预与反事实"
+        <a href="/2026/11/03/cr7/" title="第 7 讲：因果推理：从相关到干预与反事实"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第7讲｜因果推理：从相关到干预与反事实</span>
+          <span class="category-post">第 7 讲：因果推理：从相关到干预与反事实</span>
         </a>
       
     
@@ -470,19 +470,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">02 · 第2讲｜工程回顾：从模型到训练系统</h1>
+            <h1 class="reading-title">02 · 第 2 讲：工程回顾：从模型到训练系统</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/cognitive-reasoning/">认知推理</a><span>/</span><span>2026 秋</span><span>/</span><span>02</span></nav>
               <a class="reading-course-link" href="/courses/cognitive-reasoning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%BC%84%E6%B8%85%E6%88%91%E4%BB%AC%E7%A9%B6%E7%AB%9F%E5%9C%A8%E4%BC%98%E5%8C%96%E4%BB%80%E4%B9%88"><span class="toc-text">先弄清我们究竟在优化什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%B1%82%E5%BC%80%E5%A7%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">从线性层开始：为什么需要正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLP%E3%80%81CNN%E3%80%81RNN%E3%80%81Transformer-%E5%88%86%E5%88%AB%E6%94%B9%E5%8F%98%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">MLP、CNN、RNN、Transformer 分别改变了什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81AdamW-%E5%92%8C%E8%AE%AD%E7%BB%83%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-text">梯度下降、AdamW 和训练稳定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E3%80%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%A2%9D%E5%A4%96%E9%97%AE%E9%A2%98"><span class="toc-text">数据、计算与大模型的额外问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%E5%86%8D%E7%BB%86%E7%9C%8B%E4%B8%80%E6%AD%A5"><span class="toc-text">反向传播与归一化再细看一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E8%AF%8D%E7%BB%99%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A%E4%BA%86%E2%80%9C%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D%E2%80%9D"><span class="toc-text">分词给模型设定了“基本单位”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%8A%9B%E9%A2%84%E7%AE%97%E4%B8%8B%E6%80%8E%E6%A0%B7%E5%8F%96%E8%88%8D"><span class="toc-text">算力预算下怎样取舍</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%85%88%E5%BC%84%E6%B8%85%E6%88%91%E4%BB%AC%E7%A9%B6%E7%AB%9F%E5%9C%A8%E4%BC%98%E5%8C%96%E4%BB%80%E4%B9%88"><span class="toc-text">第 1 章：先弄清我们究竟在优化什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%B1%82%E5%BC%80%E5%A7%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">第 2 章：从线性层开始：为什么需要正则化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9AMLP%E3%80%81CNN%E3%80%81RNN%E3%80%81Transformer-%E5%88%86%E5%88%AB%E6%94%B9%E5%8F%98%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">第 3 章：MLP、CNN、RNN、Transformer 分别改变了什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81AdamW-%E5%92%8C%E8%AE%AD%E7%BB%83%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-text">第 4 章：梯度下降、AdamW 和训练稳定性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E3%80%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%A2%9D%E5%A4%96%E9%97%AE%E9%A2%98"><span class="toc-text">第 5 章：数据、计算与大模型的额外问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%E5%86%8D%E7%BB%86%E7%9C%8B%E4%B8%80%E6%AD%A5"><span class="toc-text">第 6 章：反向传播与归一化再细看一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%88%86%E8%AF%8D%E7%BB%99%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A%E4%BA%86%E2%80%9C%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D%E2%80%9D"><span class="toc-text">第 7 章：分词给模型设定了“基本单位”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E7%AE%97%E5%8A%9B%E9%A2%84%E7%AE%97%E4%B8%8B%E6%80%8E%E6%A0%B7%E5%8F%96%E8%88%8D"><span class="toc-text">第 8 章：算力预算下怎样取舍</span></a></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第2讲｜工程回顾：从模型到训练系统"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 2 讲：工程回顾：从模型到训练系统"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月3日 晚上
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -492,33 +492,34 @@
                 
                 <p>北京大学《认知推理》（2026 秋）的课程笔记。</p>
 <p>这一讲的课件叫 <em>The Training Stack</em>。它把从最小二乘到大语言模型的工程问题串起来：模型为什么这样设计？参数怎样更新？算力与数据预算又怎样分配？</p>
+<p>**学习路线：**下面按 8 个主题展开：先弄清我们究竟在优化什么 → 从线性层开始：为什么需要正则化 → MLP、CNN、RNN、Transformer 分别改变了什么 → 梯度下降、AdamW 和训练稳定性 → 数据、计算与大模型的额外问题 → 反向传播与归一化再细看一步等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h3 id="先弄清我们究竟在优化什么"><a href="#先弄清我们究竟在优化什么" class="headerlink" title="先弄清我们究竟在优化什么"></a>先弄清我们究竟在优化什么</h3><p>有训练样本 $(x_i,y_i)$，先选函数族 $f_\theta$ 和损失 $\ell$。真正关心的是未知分布上的风险 $R(\theta)&#x3D;\mathbb E[\ell(f_\theta(x),y)]$，但我们只有有限样本，于是优化经验风险 $\hat R(\theta)&#x3D;\frac1n\sum_i\ell(f_\theta(x_i),y_i)$。</p>
+<h2 id="第-1-章：先弄清我们究竟在优化什么"><a href="#第-1-章：先弄清我们究竟在优化什么" class="headerlink" title="第 1 章：先弄清我们究竟在优化什么"></a>第 1 章：先弄清我们究竟在优化什么</h2><p>有训练样本 $(x_i,y_i)$，先选函数族 $f_\theta$ 和损失 $\ell$。真正关心的是未知分布上的风险 $R(\theta)&#x3D;\mathbb E[\ell(f_\theta(x),y)]$，但我们只有有限样本，于是优化经验风险 $\hat R(\theta)&#x3D;\frac1n\sum_i\ell(f_\theta(x_i),y_i)$。</p>
 <p>模型选择、优化和泛化是三件事。换一个网络结构，是改变可表示的函数；换优化器，是改变找参数的路径；验证集表现好坏，才接近我们最关心的泛化问题。</p>
 <p>回归输出连续值，常用平方误差。分类输出离散标签，若要训练概率，可对 logits 使用 sigmoid 或 softmax，再最小化交叉熵。课件把它们画成“共享的特征主体 + 不同输出层”，这样同一种表示可以服务不同任务。</p>
-<h3 id="从线性层开始：为什么需要正则化"><a href="#从线性层开始：为什么需要正则化" class="headerlink" title="从线性层开始：为什么需要正则化"></a>从线性层开始：为什么需要正则化</h3><p>最小二乘目标 $J(w)&#x3D;\frac12|Xw-y|_2^2$ 的梯度是 $X^T(Xw-y)$。令它为零得到正规方程 $X^TXw&#x3D;X^Ty$。</p>
+<h2 id="第-2-章：从线性层开始：为什么需要正则化"><a href="#第-2-章：从线性层开始：为什么需要正则化" class="headerlink" title="第 2 章：从线性层开始：为什么需要正则化"></a>第 2 章：从线性层开始：为什么需要正则化</h2><p>最小二乘目标 $J(w)&#x3D;\frac12|Xw-y|_2^2$ 的梯度是 $X^T(Xw-y)$。令它为零得到正规方程 $X^TXw&#x3D;X^Ty$。</p>
 <p>如果特征太多，或几列几乎重复，$X^TX$ 可能不可逆或病态。稍微改变训练标签，就可能得到差别很大的权重。</p>
 <p>加上 $\frac\lambda2|w|_2^2$ 后，方程变为 $(X^TX+\lambda I)w&#x3D;X^Ty$。从特征值看，$\lambda I$ 抬高了接近零的特征值，使问题更稳定。实现时应解线性方程，不必真的形成逆矩阵。</p>
 <p>Logistic 回归没有相应的闭式解，但其负对数似然对线性参数是凸的，可以用梯度下降。Softmax 对所有 logits 同加一个常数不会改变概率，数值实现就先减去最大 logit，再求指数，避免溢出。</p>
-<h3 id="MLP、CNN、RNN、Transformer-分别改变了什么"><a href="#MLP、CNN、RNN、Transformer-分别改变了什么" class="headerlink" title="MLP、CNN、RNN、Transformer 分别改变了什么"></a>MLP、CNN、RNN、Transformer 分别改变了什么</h3><p><strong>MLP</strong> 在线性层之间插入非线性。如果没有激活函数，多层线性变换仍等价于一层。反向传播把损失对输出的导数逐层传回去，每层的权重梯度由“该层误差信号 × 输入激活”构成。</p>
+<h2 id="第-3-章：MLP、CNN、RNN、Transformer-分别改变了什么"><a href="#第-3-章：MLP、CNN、RNN、Transformer-分别改变了什么" class="headerlink" title="第 3 章：MLP、CNN、RNN、Transformer 分别改变了什么"></a>第 3 章：MLP、CNN、RNN、Transformer 分别改变了什么</h2><p><strong>MLP</strong> 在线性层之间插入非线性。如果没有激活函数，多层线性变换仍等价于一层。反向传播把损失对输出的导数逐层传回去，每层的权重梯度由“该层误差信号 × 输入激活”构成。</p>
 <p><strong>CNN</strong> 让局部卷积核在图像空间共享。直接把 $224\times224\times3$ 图像接到 1000 个隐单元，第一层约需 1.5 亿个权重；局部共享能大幅减少这个数。连续三个步长 1 的 $3\times3$ 卷积，理论感受野从 3 扩到 5 再到 7。参数共享是它适合图像的关键假设。</p>
 <p><strong>RNN</strong> 在不同时间步共享递推矩阵，能够处理变长序列。但反向传播需要穿过许多时间步，反复相乘的 Jacobian 会使梯度消失或爆炸。LSTM 用遗忘门、输入门和输出门控制记忆：$c_t&#x3D;f_t\odot c_{t-1}+i_t\odot\tilde c_t$，让重要信息有更直接的传递路径。</p>
 <p><strong>注意力</strong> 让当前查询直接读取各位置的信息。先计算 $e_j&#x3D;q^Tk_j&#x2F;\sqrt{d_k}$，用 softmax 得到权重 $\alpha_j$，再求 $\sum_j\alpha_jv_j$。多头注意力同时学习几种读取方式。Transformer 把注意力与逐位置前馈网络交替堆叠，用位置编码保留顺序，用残差和归一化帮助深层训练。</p>
-<h3 id="梯度下降、AdamW-和训练稳定性"><a href="#梯度下降、AdamW-和训练稳定性" class="headerlink" title="梯度下降、AdamW 和训练稳定性"></a>梯度下降、AdamW 和训练稳定性</h3><p>在当前参数附近，$L(\theta+\Delta)\approx L(\theta)+g^T\Delta$。如果限制步长的二范数，负梯度是局部下降最快的方向，于是得到 $\theta_{t+1}&#x3D;\theta_t-\eta g_t$。</p>
+<h2 id="第-4-章：梯度下降、AdamW-和训练稳定性"><a href="#第-4-章：梯度下降、AdamW-和训练稳定性" class="headerlink" title="第 4 章：梯度下降、AdamW 和训练稳定性"></a>第 4 章：梯度下降、AdamW 和训练稳定性</h2><p>在当前参数附近，$L(\theta+\Delta)\approx L(\theta)+g^T\Delta$。如果限制步长的二范数，负梯度是局部下降最快的方向，于是得到 $\theta_{t+1}&#x3D;\theta_t-\eta g_t$。</p>
 <p>批量梯度用全部样本；小批量梯度噪声较大，但每一步便宜且适合 GPU。AdaGrad 累加每个坐标的历史平方梯度，稀有特征可获得较大更新；因为累加量单调增长，步长会不断变小。RMSProp 与 Adam 改用指数滑动平均。Adam 同时跟踪梯度的一阶和二阶矩，并需要偏差修正，否则训练初期的统计量会系统性偏小。</p>
 <p>为什么常用 AdamW？若把 $L_2$ 惩罚直接加进 Adam 的梯度，惩罚也会被坐标自适应分母缩放；AdamW 将权重衰减单独执行，使收缩不依赖该坐标的历史梯度。学习率预热、后续衰减、全局梯度范数裁剪，是避免初期不稳定和偶发异常 batch 的常见配套措施。</p>
 <p>初始化也很重要。若每层输出方差都乘上同一个因子，堆叠几十层后就会指数式放大或缩小。ReLU 约屏蔽一半输入，He 初始化据此选权重方差约 $2&#x2F;n_{in}$。BatchNorm 训练时使用 batch 统计、推理时使用累计统计；LayerNorm&#x2F;RMSNorm 按每个 token 的特征维归一化，不依赖同一批次的其他样本。</p>
-<h3 id="数据、计算与大模型的额外问题"><a href="#数据、计算与大模型的额外问题" class="headerlink" title="数据、计算与大模型的额外问题"></a>数据、计算与大模型的额外问题</h3><p>文本进入模型前要先切成 token。BPE 从较小单位开始，反复合并语料中高频的相邻符号。常见词可能合成一个 token，罕见词由子词拼成。词表越大，序列可能越短，但嵌入与输出层越大；分词还会影响数字、字符计数和不同语言的使用成本。</p>
+<h2 id="第-5-章：数据、计算与大模型的额外问题"><a href="#第-5-章：数据、计算与大模型的额外问题" class="headerlink" title="第 5 章：数据、计算与大模型的额外问题"></a>第 5 章：数据、计算与大模型的额外问题</h2><p>文本进入模型前要先切成 token。BPE 从较小单位开始，反复合并语料中高频的相邻符号。常见词可能合成一个 token，罕见词由子词拼成。词表越大，序列可能越短，但嵌入与输出层越大；分词还会影响数字、字符计数和不同语言的使用成本。</p>
 <p>在固定算力 $C$ 下，模型参数量 $N$ 与训练 token 数 $D$ 不能都无限增加。课件用 $L(N,D)\approx E+AN^{-\alpha}+BD^{-\beta}$ 表示两种不足：模型太小会欠表达，数据太少会训练不足。实际会在几个小规模配置上做预算相同的实验，再推断较合适的规模，而不是只盯住单次训练的最小 loss。</p>
 <p>混合专家模型（MoE）让每个 token 只调用少数几个前馈网络。总参数数目可随专家数增长，而每个 token 的活跃计算量主要由选中的专家数决定。但路由器可能只偏爱少数专家，因此要考虑负载均衡、专家容量和跨设备通信。</p>
 <p>模型放不进单卡时，还可采用数据并行、张量并行、流水线并行，以及参数&#x2F;优化器状态切分。数据并行复制模型并汇总梯度；张量并行切开一层的矩阵；流水线并行把不同层放在不同设备。它们节省的资源不同，通信与空闲等待的代价也不同。激活检查点和混合精度常先用来降低内存压力。</p>
-<h3 id="反向传播与归一化再细看一步"><a href="#反向传播与归一化再细看一步" class="headerlink" title="反向传播与归一化再细看一步"></a>反向传播与归一化再细看一步</h3><p>设一层输出 $h&#x3D;\phi(Wx+b)$，上游传回 $\delta_h&#x3D;\partial L&#x2F;\partial h$。先经过激活函数得到 $\delta_z&#x3D;\delta_h\odot\phi’(Wx+b)$，于是 $\partial L&#x2F;\partial W&#x3D;\delta_zx^T$、$\partial L&#x2F;\partial b&#x3D;\delta_z$，再把 $W^T\delta_z$ 传给前一层。自动微分只是把这一链式法则沿计算图系统执行。</p>
+<h2 id="第-6-章：反向传播与归一化再细看一步"><a href="#第-6-章：反向传播与归一化再细看一步" class="headerlink" title="第 6 章：反向传播与归一化再细看一步"></a>第 6 章：反向传播与归一化再细看一步</h2><p>设一层输出 $h&#x3D;\phi(Wx+b)$，上游传回 $\delta_h&#x3D;\partial L&#x2F;\partial h$。先经过激活函数得到 $\delta_z&#x3D;\delta_h\odot\phi’(Wx+b)$，于是 $\partial L&#x2F;\partial W&#x3D;\delta_zx^T$、$\partial L&#x2F;\partial b&#x3D;\delta_z$，再把 $W^T\delta_z$ 传给前一层。自动微分只是把这一链式法则沿计算图系统执行。</p>
 <p>深层网络里要特别留意信号尺度。若每层都使激活方差乘以 $1.1$，几十层之后偏差会累积；ReLU 又会截去一半负输入，因此初始化方差需要相应补偿。归一化层可进一步稳定中间表示，但不能代替检查学习率和数据输入是否正确。</p>
 <p>对形状 $(B,T,d)$ 的序列张量，LayerNorm 通常分别对每个 batch、每个位置的 $d$ 个特征求均值和方差；RMSNorm 只按特征均方根缩放。它们不依赖同一 batch 中其他样本，因此在变长序列和单样本推理时使用方便。</p>
-<h3 id="分词给模型设定了“基本单位”"><a href="#分词给模型设定了“基本单位”" class="headerlink" title="分词给模型设定了“基本单位”"></a>分词给模型设定了“基本单位”</h3><p>拿一个罕见词做例子。按整个词建词表，没见过的词无法表示；按字符拆，序列会很长。BPE 从字符或字节出发，把语料中频繁一起出现的相邻符号逐步合并：常见词或词缀会变成较短的 token 序列，罕见词仍可由小单位拼出来。</p>
+<h2 id="第-7-章：分词给模型设定了“基本单位”"><a href="#第-7-章：分词给模型设定了“基本单位”" class="headerlink" title="第 7 章：分词给模型设定了“基本单位”"></a>第 7 章：分词给模型设定了“基本单位”</h2><p>拿一个罕见词做例子。按整个词建词表，没见过的词无法表示；按字符拆，序列会很长。BPE 从字符或字节出发，把语料中频繁一起出现的相邻符号逐步合并：常见词或词缀会变成较短的 token 序列，罕见词仍可由小单位拼出来。</p>
 <p>但 token 是人为选出的单位，不等于自然语言的“真正词”。数字 <code>1000</code> 与 <code>1,000</code> 可能被切成完全不同的序列；英语语料占主导的词表，也可能让其他语言付出更多 token 成本。这些偏差发生在模型训练之前，后续扩大参数未必能完全消除。</p>
-<h3 id="算力预算下怎样取舍"><a href="#算力预算下怎样取舍" class="headerlink" title="算力预算下怎样取舍"></a>算力预算下怎样取舍</h3><p>对密集 Transformer，粗略的训练计算量常写成 $C\approx6ND$，$N$ 是参数量，$D$ 是训练 token 数。给定预算 $C$，参数多一点意味着可处理的 token 通常要少一点。</p>
+<h2 id="第-8-章：算力预算下怎样取舍"><a href="#第-8-章：算力预算下怎样取舍" class="headerlink" title="第 8 章：算力预算下怎样取舍"></a>第 8 章：算力预算下怎样取舍</h2><p>对密集 Transformer，粗略的训练计算量常写成 $C\approx6ND$，$N$ 是参数量，$D$ 是训练 token 数。给定预算 $C$，参数多一点意味着可处理的 token 通常要少一点。</p>
 <p>如果模型太小，即使见过很多数据也难以表达复杂分布；如果模型很大却只看少量 token，又容易训练不足。课件用损失的经验标度关系比较这两种不足。实际做法是先在较小规模上训练多个配置，观察相同计算量下哪组最优，再谨慎外推；标度律是经验拟合，不能当物理定律。</p>
 <p>MoE 给出了另一种取舍：参数可以分散在许多专家里，单个 token 只激活其中少数。它节省活跃计算，但没有免费午餐。专家权重仍需存储，路由器可能负载不均，跨设备分发 token 需要通信；如果某个专家容量不够，还可能溢出或丢弃部分 token。</p>
 <p>这讲内容很多，可以把它当一张地图：架构决定怎么表示，损失与优化器决定怎么学，数据与系统设计决定在给定预算下能学到多少。后面的认知推理专题会在这张工程地图上，进一步问模型是否真正理解动作、物理与因果。</p>
@@ -560,7 +561,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第2讲｜工程回顾：从模型到训练系统</div>
+      <div>第 2 讲：工程回顾：从模型到训练系统</div>
       <div>https://yjyxfcy.github.io/2026/11/03/cr2/</div>
     </div>
     <div class="license-meta">
@@ -579,7 +580,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月3日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -609,8 +610,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/cognitive-reasoning/">← 返回 认知推理 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/03/cr1/"><small>上一篇</small><strong>← 第1讲｜导论：认知推理要解决什么问题</strong></a>
-                    <a href="/2026/11/03/cr3/"><small>下一篇</small><strong>第3讲｜可供性：看到物体后想到能做什么 →</strong></a>
+                    <a href="/2026/11/03/cr1/"><small>上一篇</small><strong>← 第 1 讲：导论：认知推理要解决什么问题</strong></a>
+                    <a href="/2026/11/03/cr3/"><small>下一篇</small><strong>第 3 讲：可供性：看到物体后想到能做什么 →</strong></a>
                   </div>
                 </nav>
               
@@ -684,7 +685,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%BC%84%E6%B8%85%E6%88%91%E4%BB%AC%E7%A9%B6%E7%AB%9F%E5%9C%A8%E4%BC%98%E5%8C%96%E4%BB%80%E4%B9%88"><span class="toc-text">先弄清我们究竟在优化什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%B1%82%E5%BC%80%E5%A7%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">从线性层开始：为什么需要正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLP%E3%80%81CNN%E3%80%81RNN%E3%80%81Transformer-%E5%88%86%E5%88%AB%E6%94%B9%E5%8F%98%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">MLP、CNN、RNN、Transformer 分别改变了什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81AdamW-%E5%92%8C%E8%AE%AD%E7%BB%83%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-text">梯度下降、AdamW 和训练稳定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E3%80%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%A2%9D%E5%A4%96%E9%97%AE%E9%A2%98"><span class="toc-text">数据、计算与大模型的额外问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%E5%86%8D%E7%BB%86%E7%9C%8B%E4%B8%80%E6%AD%A5"><span class="toc-text">反向传播与归一化再细看一步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E8%AF%8D%E7%BB%99%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A%E4%BA%86%E2%80%9C%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D%E2%80%9D"><span class="toc-text">分词给模型设定了“基本单位”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%8A%9B%E9%A2%84%E7%AE%97%E4%B8%8B%E6%80%8E%E6%A0%B7%E5%8F%96%E8%88%8D"><span class="toc-text">算力预算下怎样取舍</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%85%88%E5%BC%84%E6%B8%85%E6%88%91%E4%BB%AC%E7%A9%B6%E7%AB%9F%E5%9C%A8%E4%BC%98%E5%8C%96%E4%BB%80%E4%B9%88"><span class="toc-text">第 1 章：先弄清我们究竟在优化什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%B1%82%E5%BC%80%E5%A7%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">第 2 章：从线性层开始：为什么需要正则化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9AMLP%E3%80%81CNN%E3%80%81RNN%E3%80%81Transformer-%E5%88%86%E5%88%AB%E6%94%B9%E5%8F%98%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">第 3 章：MLP、CNN、RNN、Transformer 分别改变了什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E3%80%81AdamW-%E5%92%8C%E8%AE%AD%E7%BB%83%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-text">第 4 章：梯度下降、AdamW 和训练稳定性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E3%80%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%A2%9D%E5%A4%96%E9%97%AE%E9%A2%98"><span class="toc-text">第 5 章：数据、计算与大模型的额外问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%E5%86%8D%E7%BB%86%E7%9C%8B%E4%B8%80%E6%AD%A5"><span class="toc-text">第 6 章：反向传播与归一化再细看一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%88%86%E8%AF%8D%E7%BB%99%E6%A8%A1%E5%9E%8B%E8%AE%BE%E5%AE%9A%E4%BA%86%E2%80%9C%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D%E2%80%9D"><span class="toc-text">第 7 章：分词给模型设定了“基本单位”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E7%AE%97%E5%8A%9B%E9%A2%84%E7%AE%97%E4%B8%8B%E6%80%8E%E6%A0%B7%E5%8F%96%E8%88%8D"><span class="toc-text">第 8 章：算力预算下怎样取舍</span></a></li></ol>
   </div>
 </div>
 

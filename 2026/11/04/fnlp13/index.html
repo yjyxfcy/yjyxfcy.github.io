@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="math: true 北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 pretraining.pdf 整理。前面学过的词向量给一个词一个表示；这章讨论如何先从大量文本学通用表示，再迁移到具体任务。">
+    <meta name="description" content="北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 pretraining.pdf 整理。前面学过的词向量给一个词一个表示；这章讨论如何先从大量文本学通用表示，再迁移到具体任务。 **学习路线：**下面按 8 个主题展开：从静态词向量到上下文表示 → 预训练与微调各做什么 → BERT 的掩码语言模型 → 句对输入与 NSP → 三种 Transformer 路线 → GP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="预训练与微调">
+<meta property="og:title" content="第 13 讲：预训练与微调">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/fnlp13/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="math: true 北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 pretraining.pdf 整理。前面学过的词向量给一个词一个表示；这章讨论如何先从大量文本学通用表示，再迁移到具体任务。">
+<meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 pretraining.pdf 整理。前面学过的词向量给一个词一个表示；这章讨论如何先从大量文本学通用表示，再迁移到具体任务。 **学习路线：**下面按 8 个主题展开：从静态词向量到上下文表示 → 预训练与微调各做什么 → BERT 的掩码语言模型 → 句对输入与 NSP → 三种 Transformer 路线 → GP">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:13:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T17:13:51.541Z">
+<meta property="article:modified_time" content="2026-11-05T12:28:09.954Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>预训练与微调 - Yjy</title>
+  <title>第 13 讲：预训练与微调 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +273,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="13 · 预训练与微调"></span>
+            <span id="subtitle" data-typed-text="13 · 第 13 讲：预训练与微调"></span>
           
         </div>
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.3k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -480,55 +480,55 @@
     
       
       
-        <a href="/2026/11/04/fnlp11/" title="语义表示与组合语义"
+        <a href="/2026/11/04/fnlp11/" title="第 11 讲：语义表示与组合语义"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">语义表示与组合语义</span>
+          <span class="category-post">第 11 讲：语义表示与组合语义</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp12/" title="信息检索与文本向量"
+        <a href="/2026/11/04/fnlp12/" title="第 12 讲：信息检索与文本向量"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">信息检索与文本向量</span>
+          <span class="category-post">第 12 讲：信息检索与文本向量</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp13/" title="预训练与微调"
+        <a href="/2026/11/04/fnlp13/" title="第 13 讲：预训练与微调"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">预训练与微调</span>
+          <span class="category-post">第 13 讲：预训练与微调</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp14/" title="后训练与指令对齐"
+        <a href="/2026/11/04/fnlp14/" title="第 14 讲：后训练与指令对齐"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">后训练与指令对齐</span>
+          <span class="category-post">第 14 讲：后训练与指令对齐</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp15/" title="提示学习与检索增强生成"
+        <a href="/2026/11/04/fnlp15/" title="第 15 讲：提示学习与检索增强生成"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">提示学习与检索增强生成</span>
+          <span class="category-post">第 15 讲：提示学习与检索增强生成</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp16/" title="NLP 任务、评测与基准"
+        <a href="/2026/11/04/fnlp16/" title="第 16 讲：NLP 任务、评测与基准"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">NLP 任务、评测与基准</span>
+          <span class="category-post">第 16 讲：NLP 任务、评测与基准</span>
         </a>
       
     
@@ -551,19 +551,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">13 · 预训练与微调</h1>
+            <h1 class="reading-title">13 · 第 13 讲：预训练与微调</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/nlp/">自然语言处理基础</a><span>/</span><span>2026 春</span><span>/</span><span>13</span></nav>
               <a class="reading-course-link" href="/courses/nlp/">← 返回课程目录</a>
               
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E8%A1%A8%E7%A4%BA"><span class="toc-text">从静态词向量到上下文表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%BE%AE%E8%B0%83%E5%90%84%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">预训练与微调各做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BERT-%E7%9A%84%E6%8E%A9%E7%A0%81%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">BERT 的掩码语言模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A5%E5%AF%B9%E8%BE%93%E5%85%A5%E4%B8%8E-NSP"><span class="toc-text">句对输入与 NSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D-Transformer-%E8%B7%AF%E7%BA%BF"><span class="toc-text">三种 Transformer 路线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT-%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E8%A7%84%E6%A8%A1"><span class="toc-text">GPT 预训练与规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%BF%E5%88%86%E7%B1%BB%E4%B8%8E%E9%97%AE%E7%AD%94%E5%90%84%E8%B5%B0%E4%B8%80%E9%81%8D%E5%BE%AE%E8%B0%83"><span class="toc-text">拿分类与问答各走一遍微调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B"><span class="toc-text">回头看</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E8%A1%A8%E7%A4%BA"><span class="toc-text">第 1 章：从静态词向量到上下文表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%BE%AE%E8%B0%83%E5%90%84%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">第 2 章：预训练与微调各做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9ABERT-%E7%9A%84%E6%8E%A9%E7%A0%81%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">第 3 章：BERT 的掩码语言模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%8F%A5%E5%AF%B9%E8%BE%93%E5%85%A5%E4%B8%8E-NSP"><span class="toc-text">第 4 章：句对输入与 NSP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E4%B8%89%E7%A7%8D-Transformer-%E8%B7%AF%E7%BA%BF"><span class="toc-text">第 5 章：三种 Transformer 路线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9AGPT-%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E8%A7%84%E6%A8%A1"><span class="toc-text">第 6 章：GPT 预训练与规模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%8B%BF%E5%88%86%E7%B1%BB%E4%B8%8E%E9%97%AE%E7%AD%94%E5%90%84%E8%B5%B0%E4%B8%80%E9%81%8D%E5%BE%AE%E8%B0%83"><span class="toc-text">第 7 章：拿分类与问答各走一遍微调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 8 章：本讲小结</span></a></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="预训练与微调"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 13 讲：预训练与微调"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月4日 凌晨
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -571,30 +571,30 @@
             
               <div class="markdown-body">
                 
-                <p>math: true</p>
-<p>北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 <code>pretraining.pdf</code> 整理。前面学过的词向量给一个词一个表示；这章讨论如何先从大量文本学通用表示，再迁移到具体任务。</p>
+                <p>北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 <code>pretraining.pdf</code> 整理。前面学过的词向量给一个词一个表示；这章讨论如何先从大量文本学通用表示，再迁移到具体任务。</p>
+<p>**学习路线：**下面按 8 个主题展开：从静态词向量到上下文表示 → 预训练与微调各做什么 → BERT 的掩码语言模型 → 句对输入与 NSP → 三种 Transformer 路线 → GPT 预训练与规模等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h3 id="从静态词向量到上下文表示"><a href="#从静态词向量到上下文表示" class="headerlink" title="从静态词向量到上下文表示"></a>从静态词向量到上下文表示</h3><p>Word2Vec 之类的静态词向量为每个词保存一个向量。可是在“球员完成了一次漂亮的 <strong>play</strong>”和“剧院正在上演一出 <strong>play</strong>”里，<code>play</code> 的含义不同。单个固定向量只能混合这些用法。</p>
+<h2 id="第-1-章：从静态词向量到上下文表示"><a href="#第-1-章：从静态词向量到上下文表示" class="headerlink" title="第 1 章：从静态词向量到上下文表示"></a>第 1 章：从静态词向量到上下文表示</h2><p>Word2Vec 之类的静态词向量为每个词保存一个向量。可是在“球员完成了一次漂亮的 <strong>play</strong>”和“剧院正在上演一出 <strong>play</strong>”里，<code>play</code> 的含义不同。单个固定向量只能混合这些用法。</p>
 <p>上下文表示让向量依赖当前句子。ELMo 用双向语言模型产生与上下文有关的隐藏状态，课件借它引出“先在大语料训练，再用于新任务”的思路。上下文向量不等于模型已经完全消除了歧义，但它给下游任务提供了比静态词表更丰富的输入。</p>
-<h3 id="预训练与微调各做什么"><a href="#预训练与微调各做什么" class="headerlink" title="预训练与微调各做什么"></a>预训练与微调各做什么</h3><p><strong>预训练</strong>先用容易从原始文本自动构造的目标学习参数，例如预测被遮住的词或预测下一个词。<strong>微调</strong>再拿较小的标注数据调整参数，让模型完成分类、问答等任务。两阶段可以写为</p>
+<h2 id="第-2-章：预训练与微调各做什么"><a href="#第-2-章：预训练与微调各做什么" class="headerlink" title="第 2 章：预训练与微调各做什么"></a>第 2 章：预训练与微调各做什么</h2><p><strong>预训练</strong>先用容易从原始文本自动构造的目标学习参数，例如预测被遮住的词或预测下一个词。<strong>微调</strong>再拿较小的标注数据调整参数，让模型完成分类、问答等任务。两阶段可以写为</p>
 <p>$$\theta_{\rm pre}&#x3D;\arg\min_\theta L_{\rm pre}(\theta),\qquad<br>\theta_{\rm task}&#x3D;\arg\min_\theta L_{\rm task}(\theta;\theta_{\rm pre}).$$</p>
 <p>第二式表示以预训练参数为起点优化任务损失，并不保证每个任务都要更新全部参数；也可以冻结主干或使用参数高效微调。预训练数据的质量、分布和任务匹配程度会影响迁移效果。</p>
-<h3 id="BERT-的掩码语言模型"><a href="#BERT-的掩码语言模型" class="headerlink" title="BERT 的掩码语言模型"></a>BERT 的掩码语言模型</h3><p>BERT 使用 Transformer 编码器，让一个位置在编码时能看见左右两侧的上下文。原始 BERT 随机选择约 15% 的 token 作为预测目标；在这些被选中的位置中，约 80% 换成 <code>[MASK]</code>、10% 换成随机 token、10% 保持原样。损失只在选中的位置计算：</p>
+<h2 id="第-3-章：BERT-的掩码语言模型"><a href="#第-3-章：BERT-的掩码语言模型" class="headerlink" title="第 3 章：BERT 的掩码语言模型"></a>第 3 章：BERT 的掩码语言模型</h2><p>BERT 使用 Transformer 编码器，让一个位置在编码时能看见左右两侧的上下文。原始 BERT 随机选择约 15% 的 token 作为预测目标；在这些被选中的位置中，约 80% 换成 <code>[MASK]</code>、10% 换成随机 token、10% 保持原样。损失只在选中的位置计算：</p>
 <p>$$L_{\rm MLM}&#x3D;-\sum_{i\in M}\log P_\theta(x_i\mid \tilde x).$$</p>
 <p>$M$ 是被选中的位置集合，$\tilde x$ 是替换后的输入。这种 80&#x2F;10&#x2F;10 设计缓解了预训练大量出现 <code>[MASK]</code>、下游任务却没有它的差异。它并不意味着“只预测那 80% 被遮住的词”：随机替换和保持原样的选中位置也参与预测。</p>
-<h3 id="句对输入与-NSP"><a href="#句对输入与-NSP" class="headerlink" title="句对输入与 NSP"></a>句对输入与 NSP</h3><p>原始 BERT 还训练下一句预测（NSP），判断一对句子是否按原文相邻。典型输入形如 <code>[CLS] A [SEP] B [SEP]</code>，再加 token、位置与句段信息。<code>[CLS]</code> 的最终表示常用于句对或整段分类。</p>
+<h2 id="第-4-章：句对输入与-NSP"><a href="#第-4-章：句对输入与-NSP" class="headerlink" title="第 4 章：句对输入与 NSP"></a>第 4 章：句对输入与 NSP</h2><p>原始 BERT 还训练下一句预测（NSP），判断一对句子是否按原文相邻。典型输入形如 <code>[CLS] A [SEP] B [SEP]</code>，再加 token、位置与句段信息。<code>[CLS]</code> 的最终表示常用于句对或整段分类。</p>
 <p>NSP 是原始 BERT 的训练目标之一，并不代表所有后续模型都需要它。课件随后介绍 RoBERTa：它移除了 NSP，改进训练数据、训练时长和掩码等设置。因为多个因素同时变化，不能只凭 RoBERTa 更好就断言“移除 NSP 一项”解释了全部收益。</p>
-<h3 id="三种-Transformer-路线"><a href="#三种-Transformer-路线" class="headerlink" title="三种 Transformer 路线"></a>三种 Transformer 路线</h3><p><strong>编码器模型</strong>（如 BERT）重在双向上下文表示，适合分类和抽取等理解任务。<strong>自回归解码器模型</strong>（如 GPT）按从左到右的条件概率训练：</p>
+<h2 id="第-5-章：三种-Transformer-路线"><a href="#第-5-章：三种-Transformer-路线" class="headerlink" title="第 5 章：三种 Transformer 路线"></a>第 5 章：三种 Transformer 路线</h2><p><strong>编码器模型</strong>（如 BERT）重在双向上下文表示，适合分类和抽取等理解任务。<strong>自回归解码器模型</strong>（如 GPT）按从左到右的条件概率训练：</p>
 <p>$$P(x_{1:T})&#x3D;\prod_{t&#x3D;1}^{T}P(x_t\mid x_{&lt;t}).$$</p>
 <p>它自然能续写与生成。<strong>编码器—解码器模型</strong>先编码输入，再让解码器根据已生成内容和输入表示生成输出，适合翻译、摘要等输入输出都为文本的任务。T5 把许多任务统一写成“输入文本 → 输出文本”，并采用文本片段损坏与重建等预训练目标。</p>
 <p>这三类架构各有适合的计算方式，不宜简单判定某一类全面优于另外两类。选择模型时应先明确输入是否需要双向读取、输出是否需要逐步生成，以及推理成本。</p>
-<h3 id="GPT-预训练与规模"><a href="#GPT-预训练与规模" class="headerlink" title="GPT 预训练与规模"></a>GPT 预训练与规模</h3><p>课件从早期 GPT 的解码器语言模型讲到更大规模的预训练：参数量、数据量、上下文长度与计算量都会影响能力。规模增长并不能替代对数据质量的检查。训练集重复、污染评测集或领域覆盖不均，都会让看似漂亮的分数难以解释。</p>
+<h2 id="第-6-章：GPT-预训练与规模"><a href="#第-6-章：GPT-预训练与规模" class="headerlink" title="第 6 章：GPT 预训练与规模"></a>第 6 章：GPT 预训练与规模</h2><p>课件从早期 GPT 的解码器语言模型讲到更大规模的预训练：参数量、数据量、上下文长度与计算量都会影响能力。规模增长并不能替代对数据质量的检查。训练集重复、污染评测集或领域覆盖不均，都会让看似漂亮的分数难以解释。</p>
 <p>微调也有风险：新任务数据少时容易过拟合，任务与预训练分布差异过大时迁移可能不足。因此要用独立验证集选方案，并在真正关心的数据分布上评估。</p>
-<h3 id="拿分类与问答各走一遍微调"><a href="#拿分类与问答各走一遍微调" class="headerlink" title="拿分类与问答各走一遍微调"></a>拿分类与问答各走一遍微调</h3><p>做情感分类时，可把输入文本送进 BERT，取 <code>[CLS]</code> 的最终表示接分类层，再用标注标签计算交叉熵。模型主体与新分类层通常一起更新。这里 <code>[CLS]</code> 不是“天生含有情感标签”，而是在预训练和任务微调中逐步形成可用于整段判断的表示。</p>
+<h2 id="第-7-章：拿分类与问答各走一遍微调"><a href="#第-7-章：拿分类与问答各走一遍微调" class="headerlink" title="第 7 章：拿分类与问答各走一遍微调"></a>第 7 章：拿分类与问答各走一遍微调</h2><p>做情感分类时，可把输入文本送进 BERT，取 <code>[CLS]</code> 的最终表示接分类层，再用标注标签计算交叉熵。模型主体与新分类层通常一起更新。这里 <code>[CLS]</code> 不是“天生含有情感标签”，而是在预训练和任务微调中逐步形成可用于整段判断的表示。</p>
 <p>做抽取式问答时，输入可包含问题和段落，模型为段落中的每个位置预测答案起点和终点。训练目标通常由两个位置的对数似然组成，推理还要检查终点不早于起点、答案是否在允许的段落范围内。若答案不在段落中，任务设计还需给出“无答案”的处理方式。</p>
 <p>T5 的片段损坏与 BERT 的逐 token MLM 也值得区分：T5 把若干连续片段替换为特殊标记，让解码器按顺序重建缺失片段。它训练的是条件生成，因此下游可把分类标签、摘要或译文统一当作输出文本。代价是生成式推理常需逐 token 解码。</p>
-<h3 id="回头看"><a href="#回头看" class="headerlink" title="回头看"></a>回头看</h3><p>静态词向量为每个词存一个固定表示；ELMo、BERT 等让表示依赖上下文；GPT 用自回归预测学习生成；T5 用编码器—解码器统一多种文本任务。记住每个模型<strong>读什么输入、预测什么目标、怎样迁移到下游</strong>，比只背模型年份更有用。</p>
+<h2 id="第-8-章：本讲小结"><a href="#第-8-章：本讲小结" class="headerlink" title="第 8 章：本讲小结"></a>第 8 章：本讲小结</h2><p>静态词向量为每个词存一个固定表示；ELMo、BERT 等让表示依赖上下文；GPT 用自回归预测学习生成；T5 用编码器—解码器统一多种文本任务。记住每个模型<strong>读什么输入、预测什么目标、怎样迁移到下游</strong>，比只背模型年份更有用。</p>
 
                 
               </div>
@@ -633,7 +633,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>预训练与微调</div>
+      <div>第 13 讲：预训练与微调</div>
       <div>https://yjyxfcy.github.io/2026/11/04/fnlp13/</div>
     </div>
     <div class="license-meta">
@@ -652,7 +652,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月4日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -682,8 +682,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/nlp/">← 返回 自然语言处理基础 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/fnlp12/"><small>上一篇</small><strong>← 信息检索与文本向量</strong></a>
-                    <a href="/2026/11/04/fnlp14/"><small>下一篇</small><strong>后训练与指令对齐 →</strong></a>
+                    <a href="/2026/11/04/fnlp12/"><small>上一篇</small><strong>← 第 12 讲：信息检索与文本向量</strong></a>
+                    <a href="/2026/11/04/fnlp14/"><small>下一篇</small><strong>第 14 讲：后训练与指令对齐 →</strong></a>
                   </div>
                 </nav>
               
@@ -757,7 +757,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E8%A1%A8%E7%A4%BA"><span class="toc-text">从静态词向量到上下文表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%BE%AE%E8%B0%83%E5%90%84%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">预训练与微调各做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BERT-%E7%9A%84%E6%8E%A9%E7%A0%81%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">BERT 的掩码语言模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A5%E5%AF%B9%E8%BE%93%E5%85%A5%E4%B8%8E-NSP"><span class="toc-text">句对输入与 NSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D-Transformer-%E8%B7%AF%E7%BA%BF"><span class="toc-text">三种 Transformer 路线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT-%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E8%A7%84%E6%A8%A1"><span class="toc-text">GPT 预训练与规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%BF%E5%88%86%E7%B1%BB%E4%B8%8E%E9%97%AE%E7%AD%94%E5%90%84%E8%B5%B0%E4%B8%80%E9%81%8D%E5%BE%AE%E8%B0%83"><span class="toc-text">拿分类与问答各走一遍微调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B"><span class="toc-text">回头看</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E8%A1%A8%E7%A4%BA"><span class="toc-text">第 1 章：从静态词向量到上下文表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%BE%AE%E8%B0%83%E5%90%84%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">第 2 章：预训练与微调各做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9ABERT-%E7%9A%84%E6%8E%A9%E7%A0%81%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">第 3 章：BERT 的掩码语言模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%8F%A5%E5%AF%B9%E8%BE%93%E5%85%A5%E4%B8%8E-NSP"><span class="toc-text">第 4 章：句对输入与 NSP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E4%B8%89%E7%A7%8D-Transformer-%E8%B7%AF%E7%BA%BF"><span class="toc-text">第 5 章：三种 Transformer 路线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9AGPT-%E9%A2%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E8%A7%84%E6%A8%A1"><span class="toc-text">第 6 章：GPT 预训练与规模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E6%8B%BF%E5%88%86%E7%B1%BB%E4%B8%8E%E9%97%AE%E7%AD%94%E5%90%84%E8%B5%B0%E4%B8%80%E9%81%8D%E5%BE%AE%E8%B0%83"><span class="toc-text">第 7 章：拿分类与问答各走一遍微调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 8 章：本讲小结</span></a></li></ol>
   </div>
 </div>
 

@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第三讲：假设要根据一封邮件里出现的词判断它是不是垃圾邮件。可以先问“垃圾邮件通常会出现什么词”，再反过来判断新邮件属于哪一类。 这一讲的生成式分类，就是把这个想法写成概率模型。">
+    <meta name="description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第三讲：假设要根据一封邮件里出现的词判断它是不是垃圾邮件。可以先问“垃圾邮件通常会出现什么词”，再反过来判断新邮件属于哪一类。 这一讲的生成式分类，就是把这个想法写成概率模型。 **学习路线：**下面按 9 个主题展开：先建联合分布，再分类 → 朴素贝叶斯：用独立假设换取可估计性 → 高斯判别分析 → 如何选类别 → 朴素贝叶斯参数怎么从计数得">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第3讲｜生成模型与生成式分类">
+<meta property="og:title" content="第 3 讲：生成模型与生成式分类">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml3/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第三讲：假设要根据一封邮件里出现的词判断它是不是垃圾邮件。可以先问“垃圾邮件通常会出现什么词”，再反过来判断新邮件属于哪一类。 这一讲的生成式分类，就是把这个想法写成概率模型。">
+<meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第三讲：假设要根据一封邮件里出现的词判断它是不是垃圾邮件。可以先问“垃圾邮件通常会出现什么词”，再反过来判断新邮件属于哪一类。 这一讲的生成式分类，就是把这个想法写成概率模型。 **学习路线：**下面按 9 个主题展开：先建联合分布，再分类 → 朴素贝叶斯：用独立假设换取可估计性 → 高斯判别分析 → 如何选类别 → 朴素贝叶斯参数怎么从计数得">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:09:12.290Z">
-<meta property="article:modified_time" content="2026-11-03T10:35:55.805Z">
+<meta property="article:modified_time" content="2026-11-05T12:25:26.888Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第3讲｜生成模型与生成式分类 - Yjy</title>
+  <title>第 3 讲：生成模型与生成式分类 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +273,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="03 · 第3讲｜生成模型与生成式分类"></span>
+            <span id="subtitle" data-typed-text="03 · 第 3 讲：生成模型与生成式分类"></span>
           
         </div>
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.9k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          18 分钟
+          19 分钟
         
       </span>
     
@@ -390,73 +390,73 @@
     
       
       
-        <a href="/2026/11/03/itml1/" title="第1讲｜课程简介与机器学习概述"
+        <a href="/2026/11/03/itml1/" title="第 1 讲：课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第1讲｜课程简介与机器学习概述</span>
+          <span class="category-post">第 1 讲：课程简介与机器学习概述</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml2/" title="第2讲｜统计推断方法"
+        <a href="/2026/11/03/itml2/" title="第 2 讲：统计推断方法"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第2讲｜统计推断方法</span>
+          <span class="category-post">第 2 讲：统计推断方法</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml3/" title="第3讲｜生成模型与生成式分类"
+        <a href="/2026/11/03/itml3/" title="第 3 讲：生成模型与生成式分类"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第3讲｜生成模型与生成式分类</span>
+          <span class="category-post">第 3 讲：生成模型与生成式分类</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml4/" title="第4讲｜Logistic 回归与判别模型"
+        <a href="/2026/11/03/itml4/" title="第 4 讲：Logistic 回归与判别模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第4讲｜Logistic 回归与判别模型</span>
+          <span class="category-post">第 4 讲：Logistic 回归与判别模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml5/" title="第5讲｜线性回归、正则化与贝叶斯回归"
+        <a href="/2026/11/03/itml5/" title="第 5 讲：线性回归、正则化与贝叶斯回归"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第5讲｜线性回归、正则化与贝叶斯回归</span>
+          <span class="category-post">第 5 讲：线性回归、正则化与贝叶斯回归</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml6/" title="第6讲｜多层感知机与神经网络训练"
+        <a href="/2026/11/03/itml6/" title="第 6 讲：多层感知机与神经网络训练"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第6讲｜多层感知机与神经网络训练</span>
+          <span class="category-post">第 6 讲：多层感知机与神经网络训练</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml7/" title="第7讲｜卷积神经网络"
+        <a href="/2026/11/03/itml7/" title="第 7 讲：卷积神经网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第7讲｜卷积神经网络</span>
+          <span class="category-post">第 7 讲：卷积神经网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml8/" title="第8讲｜序列神经网络模型"
+        <a href="/2026/11/03/itml8/" title="第 8 讲：序列神经网络模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第8讲｜序列神经网络模型</span>
+          <span class="category-post">第 8 讲：序列神经网络模型</span>
         </a>
       
     
@@ -479,19 +479,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">03 · 第3讲｜生成模型与生成式分类</h1>
+            <h1 class="reading-title">03 · 第 3 讲：生成模型与生成式分类</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>03</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%BB%BA%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%EF%BC%8C%E5%86%8D%E5%88%86%E7%B1%BB"><span class="toc-text">先建联合分布，再分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E7%94%A8%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE%E6%8D%A2%E5%8F%96%E5%8F%AF%E4%BC%B0%E8%AE%A1%E6%80%A7"><span class="toc-text">朴素贝叶斯：用独立假设换取可估计性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90"><span class="toc-text">高斯判别分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E7%B1%BB%E5%88%AB"><span class="toc-text">如何选类别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E4%BB%8E%E8%AE%A1%E6%95%B0%E5%BE%97%E5%88%B0"><span class="toc-text">朴素贝叶斯参数怎么从计数得到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E4%BA%AB%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%BA%A7%E7%94%9F%E7%BA%BF%E6%80%A7%E8%BE%B9%E7%95%8C"><span class="toc-text">为什么共享协方差产生线性边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fisher-%E6%8A%95%E5%BD%B1%E4%B8%8E%E6%A6%82%E7%8E%87%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Fisher 投影与概率分类的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E4%B8%A4%E7%B1%BB%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">一个完整的两类计算例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%81%87%E8%AE%BE%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%A5%BD%E5%A4%84%E4%B8%8E%E4%BB%A3%E4%BB%B7"><span class="toc-text">分布假设带来的好处与代价</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%85%88%E5%BB%BA%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%EF%BC%8C%E5%86%8D%E5%88%86%E7%B1%BB"><span class="toc-text">第 1 章：先建联合分布，再分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E7%94%A8%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE%E6%8D%A2%E5%8F%96%E5%8F%AF%E4%BC%B0%E8%AE%A1%E6%80%A7"><span class="toc-text">第 2 章：朴素贝叶斯：用独立假设换取可估计性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90"><span class="toc-text">第 3 章：高斯判别分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E7%B1%BB%E5%88%AB"><span class="toc-text">第 4 章：如何选类别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E4%BB%8E%E8%AE%A1%E6%95%B0%E5%BE%97%E5%88%B0"><span class="toc-text">第 5 章：朴素贝叶斯参数怎么从计数得到</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E4%BA%AB%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%BA%A7%E7%94%9F%E7%BA%BF%E6%80%A7%E8%BE%B9%E7%95%8C"><span class="toc-text">第 6 章：为什么共享协方差产生线性边界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9AFisher-%E6%8A%95%E5%BD%B1%E4%B8%8E%E6%A6%82%E7%8E%87%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">第 7 章：Fisher 投影与概率分类的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E4%B8%A4%E7%B1%BB%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：一个完整的两类计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E5%88%86%E5%B8%83%E5%81%87%E8%AE%BE%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%A5%BD%E5%A4%84%E4%B8%8E%E4%BB%A3%E4%BB%B7"><span class="toc-text">第 9 章：分布假设带来的好处与代价</span></a></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第3讲｜生成模型与生成式分类"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 3 讲：生成模型与生成式分类"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月3日 晚上
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -502,40 +502,41 @@
                 <p>北京大学《机器学习概论》（2026 秋）的课程笔记。</p>
 <p>第三讲：假设要根据一封邮件里出现的词判断它是不是垃圾邮件。可以先问“垃圾邮件通常会出现什么词”，再反过来判断新邮件属于哪一类。</p>
 <p>这一讲的生成式分类，就是把这个想法写成概率模型。</p>
+<p>**学习路线：**下面按 9 个主题展开：先建联合分布，再分类 → 朴素贝叶斯：用独立假设换取可估计性 → 高斯判别分析 → 如何选类别 → 朴素贝叶斯参数怎么从计数得到 → 为什么共享协方差产生线性边界等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h3 id="先建联合分布，再分类"><a href="#先建联合分布，再分类" class="headerlink" title="先建联合分布，再分类"></a>先建联合分布，再分类</h3><p>生成式分类器把 $p(x,y)$ 分解为 $p(y)p(x\mid y)$。预测时用 $p(y&#x3D;c\mid x)\propto p(y&#x3D;c)p(x\mid y&#x3D;c)$。</p>
+<h2 id="第-1-章：先建联合分布，再分类"><a href="#第-1-章：先建联合分布，再分类" class="headerlink" title="第 1 章：先建联合分布，再分类"></a>第 1 章：先建联合分布，再分类</h2><p>生成式分类器把 $p(x,y)$ 分解为 $p(y)p(x\mid y)$。预测时用 $p(y&#x3D;c\mid x)\propto p(y&#x3D;c)p(x\mid y&#x3D;c)$。</p>
 <p>类别先验 $p(y)$ 告诉我们哪一类常见；类条件分布 $p(x\mid y)$ 告诉我们该类样本长什么样。它能处理缺失特征、生成样本，也能回答比分类更广的问题；代价是必须对数据分布作出假设。</p>
-<h3 id="朴素贝叶斯：用独立假设换取可估计性"><a href="#朴素贝叶斯：用独立假设换取可估计性" class="headerlink" title="朴素贝叶斯：用独立假设换取可估计性"></a>朴素贝叶斯：用独立假设换取可估计性</h3><p>朴素贝叶斯假设给定类别后各维特征条件独立：$p(x\mid y&#x3D;c)&#x3D;\prod_dp(x_d\mid y&#x3D;c)$。现实中词、像素等特征往往相关，所以这是建模近似而非事实。</p>
+<h2 id="第-2-章：朴素贝叶斯：用独立假设换取可估计性"><a href="#第-2-章：朴素贝叶斯：用独立假设换取可估计性" class="headerlink" title="第 2 章：朴素贝叶斯：用独立假设换取可估计性"></a>第 2 章：朴素贝叶斯：用独立假设换取可估计性</h2><p>朴素贝叶斯假设给定类别后各维特征条件独立：$p(x\mid y&#x3D;c)&#x3D;\prod_dp(x_d\mid y&#x3D;c)$。现实中词、像素等特征往往相关，所以这是建模近似而非事实。</p>
 <p>它使参数量从组合爆炸降到按维估计，数据有限时很实用。</p>
 <p>二值特征可用伯努利分布，离散多值特征可用类别分布。分类时最好计算 $\log p(y&#x3D;c)+\sum_d\log p(x_d\mid y&#x3D;c)$，避免许多小概率相乘造成下溢。</p>
 <p>若某条件从未在训练集出现，MLE 会给零概率并使整类得分归零；Dirichlet&#x2F;Beta 先验带来的平滑可缓解。课件中的加一平滑可看作每个结果预先有一个伪计数。</p>
-<h3 id="高斯判别分析"><a href="#高斯判别分析" class="headerlink" title="高斯判别分析"></a>高斯判别分析</h3><p>连续特征可设 $x\mid y&#x3D;c\sim\mathcal N(\mu_c,\Sigma_c)$。类别均值由该类样本平均估计，协方差刻画形状。</p>
+<h2 id="第-3-章：高斯判别分析"><a href="#第-3-章：高斯判别分析" class="headerlink" title="第 3 章：高斯判别分析"></a>第 3 章：高斯判别分析</h2><p>连续特征可设 $x\mid y&#x3D;c\sim\mathcal N(\mu_c,\Sigma_c)$。类别均值由该类样本平均估计，协方差刻画形状。</p>
 <p>如果各类协方差不同，判别边界通常是二次的（QDA）；若共享同一个协方差，二次项相消，得到线性判别边界（LDA）。这也说明“线性”不是说每一类的数据服从一条直线，而是比较类别的判别函数对 $x$ 呈线性。</p>
 <p>高维、小样本时每类协方差难以准确估计，甚至不可逆。共享协方差、对角协方差或在协方差中加入收缩项，都是减少自由度的办法。</p>
 <p>最近类中心分类器只看样本离各类均值的距离；若采用共享协方差的 Mahalanobis 距离，它与高斯模型有紧密联系。</p>
 <p>课件末尾的 Fisher 判别则找投影 $w$，使类间散度相对类内散度尽量大：$\max_w w^TS_Bw&#x2F;(w^TS_Ww)$。</p>
-<h3 id="如何选类别"><a href="#如何选类别" class="headerlink" title="如何选类别"></a>如何选类别</h3><p>取最大后验类别适用于各类错误代价相同的 0–1 损失。若漏诊和误报代价不同，应最小化条件风险 $R(a\mid x)&#x3D;\sum_yL(a,y)p(y\mid x)$。这个决策步骤与估计概率本身不同。</p>
-<h3 id="朴素贝叶斯参数怎么从计数得到"><a href="#朴素贝叶斯参数怎么从计数得到" class="headerlink" title="朴素贝叶斯参数怎么从计数得到"></a>朴素贝叶斯参数怎么从计数得到</h3><p>记 $N_c$ 为类别 $c$ 的样本数，$N_{d,k,c}$ 为类别 $c$ 中第 $d$ 维取值 $k$ 的次数。</p>
+<h2 id="第-4-章：如何选类别"><a href="#第-4-章：如何选类别" class="headerlink" title="第 4 章：如何选类别"></a>第 4 章：如何选类别</h2><p>取最大后验类别适用于各类错误代价相同的 0–1 损失。若漏诊和误报代价不同，应最小化条件风险 $R(a\mid x)&#x3D;\sum_yL(a,y)p(y\mid x)$。这个决策步骤与估计概率本身不同。</p>
+<h2 id="第-5-章：朴素贝叶斯参数怎么从计数得到"><a href="#第-5-章：朴素贝叶斯参数怎么从计数得到" class="headerlink" title="第 5 章：朴素贝叶斯参数怎么从计数得到"></a>第 5 章：朴素贝叶斯参数怎么从计数得到</h2><p>记 $N_c$ 为类别 $c$ 的样本数，$N_{d,k,c}$ 为类别 $c$ 中第 $d$ 维取值 $k$ 的次数。</p>
 <p>类别先验的 MLE 为 $\hat\pi_c&#x3D;N_c&#x2F;N$；类别条件下的类别特征概率为 $\hat\theta_{d,k,c}&#x3D;N_{d,k,c}&#x2F;N_c$。</p>
 <p>若每个取值的 Dirichlet 先验参数均为 $\alpha$，后验预测是 $(N_{d,k,c}+\alpha)&#x2F;(N_c+K_d\alpha)$，其中 $K_d$ 为该维可能取值数。</p>
 <p>分子加一时分母也要加 $K_d$；只在分子加一不能保证概率和为 1。</p>
 <p>例如两类邮件中，“中奖”一词在垃圾邮件里出现多、正常邮件里少，这个词会提高垃圾邮件的后验概率；但如果它在某类训练样本中从未出现，未平滑的乘积概率会直接归零。</p>
 <p>实际分类比较对数得分即可，公共的归一化因子 $p(x)$ 不影响 $\arg\max$。</p>
-<h3 id="为什么共享协方差产生线性边界"><a href="#为什么共享协方差产生线性边界" class="headerlink" title="为什么共享协方差产生线性边界"></a>为什么共享协方差产生线性边界</h3><p>设 $p(x\mid y&#x3D;c)&#x3D;\mathcal N(x;\mu_c,\Sigma)$，$p(y&#x3D;c)&#x3D;\pi_c$。</p>
+<h2 id="第-6-章：为什么共享协方差产生线性边界"><a href="#第-6-章：为什么共享协方差产生线性边界" class="headerlink" title="第 6 章：为什么共享协方差产生线性边界"></a>第 6 章：为什么共享协方差产生线性边界</h2><p>设 $p(x\mid y&#x3D;c)&#x3D;\mathcal N(x;\mu_c,\Sigma)$，$p(y&#x3D;c)&#x3D;\pi_c$。</p>
 <p>去掉对类别相同的项，对数判别分数为 $g_c(x)&#x3D;\mu_c^T\Sigma^{-1}x-\frac12\mu_c^T\Sigma^{-1}\mu_c+\log\pi_c$。</p>
 <p>这里 $x^T\Sigma^{-1}x$ 在所有类别中相同，比较时相消，所以两类分数相等的边界是超平面。若每类用自己的 $\Sigma_c$，二次项不能相消，通常得到二次边界。</p>
 <p>估计参数时 $\hat\mu_c&#x3D;\frac1{N_c}\sum_{n:y_n&#x3D;c}x_n$；共享协方差可对各类中心化残差合并估计。若 $N_c$ 相对维数 $D$ 太小，协方差会不稳定，可采用共享、对角或收缩估计。</p>
 <p>最近中心分类是更强的简化：忽略丰富的协方差信息，仅比较与均值的距离。</p>
-<h3 id="Fisher-投影与概率分类的区别"><a href="#Fisher-投影与概率分类的区别" class="headerlink" title="Fisher 投影与概率分类的区别"></a>Fisher 投影与概率分类的区别</h3><p>二分类时，令类间散度 $S_B&#x3D;(\mu_1-\mu_0)(\mu_1-\mu_0)^T$，类内散度为中心化样本的散度和 $S_W$。</p>
+<h2 id="第-7-章：Fisher-投影与概率分类的区别"><a href="#第-7-章：Fisher-投影与概率分类的区别" class="headerlink" title="第 7 章：Fisher 投影与概率分类的区别"></a>第 7 章：Fisher 投影与概率分类的区别</h2><p>二分类时，令类间散度 $S_B&#x3D;(\mu_1-\mu_0)(\mu_1-\mu_0)^T$，类内散度为中心化样本的散度和 $S_W$。</p>
 <p>Fisher 方法最大化 $J(w)&#x3D;w^TS_Bw&#x2F;(w^TS_Ww)$，即让投影后两类中心远、各类内部紧。若 $S_W$ 可逆，方向与 $S_W^{-1}(\mu_1-\mu_0)$ 成比例。</p>
 <p>这个方法直接寻找有区分力的方向；前述高斯模型则从概率分布出发。</p>
-<h3 id="一个完整的两类计算例子"><a href="#一个完整的两类计算例子" class="headerlink" title="一个完整的两类计算例子"></a>一个完整的两类计算例子</h3><p>假设两类先验 $p(A)&#x3D;0.6,p(B)&#x3D;0.4$，两个二值特征在类条件下独立。</p>
+<h2 id="第-8-章：一个完整的两类计算例子"><a href="#第-8-章：一个完整的两类计算例子" class="headerlink" title="第 8 章：一个完整的两类计算例子"></a>第 8 章：一个完整的两类计算例子</h2><p>假设两类先验 $p(A)&#x3D;0.6,p(B)&#x3D;0.4$，两个二值特征在类条件下独立。</p>
 <p>对样本 $x&#x3D;(1,1)$，设 $p(x_1&#x3D;1\mid A)&#x3D;0.8,p(x_2&#x3D;1\mid A)&#x3D;0.5$；类 B 下分别为 $0.3,0.7$。</p>
 <p>未归一化分数为 $s_A&#x3D;0.6\times0.8\times0.5&#x3D;0.24$，$s_B&#x3D;0.4\times0.3\times0.7&#x3D;0.084$。</p>
 <p>因此 $p(A\mid x)&#x3D;0.24&#x2F;(0.24+0.084)\approx0.741$。</p>
 <p>若按 0–1 损失决策，选择 A；如果把 A 判成 B 与把 B 判成 A 的代价不同，就应比较两种动作的条件风险，而不是直接拿 0.5 当阈值。</p>
-<h3 id="分布假设带来的好处与代价"><a href="#分布假设带来的好处与代价" class="headerlink" title="分布假设带来的好处与代价"></a>分布假设带来的好处与代价</h3><p>生成模型估计联合分布后，面对缺失的某个特征可以对它求和或积分，而不是简单把缺失值当零。例如朴素贝叶斯在某维未观测时，分类分数只乘可见维度对应的概率。代价是类条件独立与高斯形状若严重失真，后验概率可能不准。</p>
+<h2 id="第-9-章：分布假设带来的好处与代价"><a href="#第-9-章：分布假设带来的好处与代价" class="headerlink" title="第 9 章：分布假设带来的好处与代价"></a>第 9 章：分布假设带来的好处与代价</h2><p>生成模型估计联合分布后，面对缺失的某个特征可以对它求和或积分，而不是简单把缺失值当零。例如朴素贝叶斯在某维未观测时，分类分数只乘可见维度对应的概率。代价是类条件独立与高斯形状若严重失真，后验概率可能不准。</p>
 <p>高斯判别的协方差越灵活，需要估计的参数越多：对称 $D\times D$ 协方差有 $D(D+1)&#x2F;2$ 个自由度，这解释了高维小样本时为什么需要共享或收缩。</p>
 <p>朴素贝叶斯与高斯判别都先描述“某类会产生什么样的数据”，再反推类别。下一讲换一个方向：直接学习给定样本时的类别概率。</p>
 
@@ -576,7 +577,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第3讲｜生成模型与生成式分类</div>
+      <div>第 3 讲：生成模型与生成式分类</div>
       <div>https://yjyxfcy.github.io/2026/11/03/itml3/</div>
     </div>
     <div class="license-meta">
@@ -595,7 +596,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月3日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -625,8 +626,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/machine-learning/">← 返回 机器学习概论 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/03/itml2/"><small>上一篇</small><strong>← 第2讲｜统计推断方法</strong></a>
-                    <a href="/2026/11/03/itml4/"><small>下一篇</small><strong>第4讲｜Logistic 回归与判别模型 →</strong></a>
+                    <a href="/2026/11/03/itml2/"><small>上一篇</small><strong>← 第 2 讲：统计推断方法</strong></a>
+                    <a href="/2026/11/03/itml4/"><small>下一篇</small><strong>第 4 讲：Logistic 回归与判别模型 →</strong></a>
                   </div>
                 </nav>
               
@@ -700,7 +701,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%BB%BA%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%EF%BC%8C%E5%86%8D%E5%88%86%E7%B1%BB"><span class="toc-text">先建联合分布，再分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E7%94%A8%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE%E6%8D%A2%E5%8F%96%E5%8F%AF%E4%BC%B0%E8%AE%A1%E6%80%A7"><span class="toc-text">朴素贝叶斯：用独立假设换取可估计性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90"><span class="toc-text">高斯判别分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E7%B1%BB%E5%88%AB"><span class="toc-text">如何选类别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E4%BB%8E%E8%AE%A1%E6%95%B0%E5%BE%97%E5%88%B0"><span class="toc-text">朴素贝叶斯参数怎么从计数得到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E4%BA%AB%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%BA%A7%E7%94%9F%E7%BA%BF%E6%80%A7%E8%BE%B9%E7%95%8C"><span class="toc-text">为什么共享协方差产生线性边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fisher-%E6%8A%95%E5%BD%B1%E4%B8%8E%E6%A6%82%E7%8E%87%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Fisher 投影与概率分类的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E4%B8%A4%E7%B1%BB%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">一个完整的两类计算例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%81%87%E8%AE%BE%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%A5%BD%E5%A4%84%E4%B8%8E%E4%BB%A3%E4%BB%B7"><span class="toc-text">分布假设带来的好处与代价</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%85%88%E5%BB%BA%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%EF%BC%8C%E5%86%8D%E5%88%86%E7%B1%BB"><span class="toc-text">第 1 章：先建联合分布，再分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E7%94%A8%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE%E6%8D%A2%E5%8F%96%E5%8F%AF%E4%BC%B0%E8%AE%A1%E6%80%A7"><span class="toc-text">第 2 章：朴素贝叶斯：用独立假设换取可估计性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90"><span class="toc-text">第 3 章：高斯判别分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E7%B1%BB%E5%88%AB"><span class="toc-text">第 4 章：如何选类别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E4%BB%8E%E8%AE%A1%E6%95%B0%E5%BE%97%E5%88%B0"><span class="toc-text">第 5 章：朴素贝叶斯参数怎么从计数得到</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%B1%E4%BA%AB%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%BA%A7%E7%94%9F%E7%BA%BF%E6%80%A7%E8%BE%B9%E7%95%8C"><span class="toc-text">第 6 章：为什么共享协方差产生线性边界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9AFisher-%E6%8A%95%E5%BD%B1%E4%B8%8E%E6%A6%82%E7%8E%87%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">第 7 章：Fisher 投影与概率分类的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E4%B8%A4%E7%B1%BB%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：一个完整的两类计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E5%88%86%E5%B8%83%E5%81%87%E8%AE%BE%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%A5%BD%E5%A4%84%E4%B8%8E%E4%BB%A3%E4%BB%B7"><span class="toc-text">第 9 章：分布假设带来的好处与代价</span></a></li></ol>
   </div>
 </div>
 

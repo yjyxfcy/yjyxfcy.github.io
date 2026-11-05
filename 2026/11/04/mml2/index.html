@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。 多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。">
+    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。 多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。 **学习路线：**下面按 4 个主题展开：线性层与非线性 → 激活函数 → 损失与优化 → 正则化与归一化。阅读时先抓住每一章要解决的问题，再看公式和方法细节。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 2 讲：深度学习基础">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml2/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。 多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。">
+<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。 多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。 **学习路线：**下面按 4 个主题展开：线性层与非线性 → 激活函数 → 损失与优化 → 正则化与归一化。阅读时先抓住每一章要解决的问题，再看公式和方法细节。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T04:02:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T17:49:00.801Z">
+<meta property="article:modified_time" content="2026-11-05T12:25:26.880Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -312,7 +312,7 @@
         
         
         
-          23 分钟
+          24 分钟
         
       </span>
     
@@ -484,14 +484,14 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>02</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80"><span class="toc-text">深度学习基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%88%B0%E5%A4%9A%E5%B1%82%E7%BD%91%E7%BB%9C"><span class="toc-text">从线性回归到多层网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9A%E5%9B%BE%E5%83%8F%E3%80%81%E5%AF%BC%E6%95%B0%E5%92%8C%E6%98%93%E6%B7%B7%E7%82%B9"><span class="toc-text">激活函数：图像、导数和易混点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E3%80%81%E5%8F%8D%E4%BC%A0%E3%80%81%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF"><span class="toc-text">损失、反传、优化与训练曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A%E7%BB%9F%E8%AE%A1%E8%BD%B4%E4%B8%8E%E5%9D%87%E5%80%BC"><span class="toc-text">正则化与归一化：统计轴与均值</span></a></li></ol></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%88%B0%E5%A4%9A%E5%B1%82%E7%BD%91%E7%BB%9C"><span class="toc-text">第 1 章：从线性回归到多层网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9A%E5%9B%BE%E5%83%8F%E3%80%81%E5%AF%BC%E6%95%B0%E5%92%8C%E6%98%93%E6%B7%B7%E7%82%B9"><span class="toc-text">第 2 章：激活函数：图像、导数和易混点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E6%8D%9F%E5%A4%B1%E3%80%81%E5%8F%8D%E4%BC%A0%E3%80%81%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF"><span class="toc-text">第 3 章：损失、反传、优化与训练曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E6%AD%A3%E5%88%99%E5%8C%96%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A%E7%BB%9F%E8%AE%A1%E8%BD%B4%E4%B8%8E%E5%9D%87%E5%80%BC"><span class="toc-text">第 4 章：正则化与归一化：统计轴与均值</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 2 讲：深度学习基础"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月4日 凌晨
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -501,13 +501,18 @@
                 
                 <p>北京大学《多模态学习》（2026 秋）第 2 讲笔记，依据对应课程课件整理。</p>
 <p>多模态模型离不开神经网络。本讲从非线性、反向传播和优化讲到归一化，重点解释这些工具为何有用。</p>
+<p>**学习路线：**下面按 4 个主题展开：线性层与非线性 → 激活函数 → 损失与优化 → 正则化与归一化。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h2 id="深度学习基础"><a href="#深度学习基础" class="headerlink" title="深度学习基础"></a>深度学习基础</h2><h3 id="从线性回归到多层网络"><a href="#从线性回归到多层网络" class="headerlink" title="从线性回归到多层网络"></a>从线性回归到多层网络</h3><p>单样本线性层：$\hat{\mathbf y}&#x3D;W^\top\mathbf x+\mathbf b$；若输入 $d_{\rm in}$、输出 $d_{\rm out}$，则 $W\in\mathbb R^{d_{\rm in}\times d_{\rm out}}$。矩阵习惯也可写作 $XW+\mathbf 1b^\top$，使用公式时先说明数据按行还是按列。</p>
-<p>均方误差可写 $\mathcal L(W,b)&#x3D;\frac1{2N}\sum_{n&#x3D;1}^N|\hat y_n-y_n|_2^2$。把偏置并入设计矩阵 $\tilde X&#x3D;[X,\mathbf1]$，若 $\tilde X^\top\tilde X$ 可逆，正规方程给出 $\tilde W^*&#x3D;(\tilde X^\top\tilde X)^{-1}\tilde X^\top Y$；不可逆时用伪逆或正则化，不能直接求逆。多层纯线性映射仍等于一个线性映射，所以需要激活函数：$h^{(\ell)}&#x3D;\phi(W^{(\ell)}h^{(\ell-1)}+b^{(\ell)})$。</p>
+<h2 id="第-1-章：从线性回归到多层网络"><a href="#第-1-章：从线性回归到多层网络" class="headerlink" title="第 1 章：从线性回归到多层网络"></a>第 1 章：从线性回归到多层网络</h2><p>单样本线性层：$\hat{\mathbf y}&#x3D;W^\top\mathbf x+\mathbf b$；若输入 $d_{\rm in}$、输出 $d_{\rm out}$，则 $W\in\mathbb R^{d_{\rm in}\times d_{\rm out}}$。矩阵习惯也可写作 $XW+\mathbf 1b^\top$，使用公式时先说明数据按行还是按列。</p>
+<p>均方误差可写 $\mathcal L(W,b)&#x3D;\frac1{2N}\sum_{n&#x3D;1}^N|\hat y_n-y_n|_2^2$。</p>
+<p>把偏置并入设计矩阵 $\tilde X&#x3D;[X,\mathbf1]$，若 $\tilde X^\top\tilde X$ 可逆，正规方程给出 $\tilde W^*&#x3D;(\tilde X^\top\tilde X)^{-1}\tilde X^\top Y$；不可逆时用伪逆或正则化，不能直接求逆。</p>
+<p>多层纯线性映射仍等于一个线性映射，所以需要激活函数：$h^{(\ell)}&#x3D;\phi(W^{(\ell)}h^{(\ell-1)}+b^{(\ell)})$。</p>
 <p>“通用近似”说明某些足够宽&#x2F;深的网络能够逼近一类连续函数，<strong>不保证</strong>给定网络可训练、数据足够、泛化好，也不等于任意函数都能在有限资源下精确表示。</p>
-<p><strong>7–20 页的 Light Theory 动画</strong>：隐藏 Sigmoid 单元 $\sigma(wx+b)$ 当 $|w|$ 很大时形状接近阶跃，阶跃位置约在 $s&#x3D;-b&#x2F;w$；两个方向相反的阶跃相减可近似一个局部“矩形窗”，多个矩形窗按不同高度加权求和，像黎曼和一样逐段逼近目标曲线。图里先改变 bias 移动阶跃，再改变输出权重控制台阶高度，所以“多神经元叠加能拼复杂函数”有直观来源。课件列出三个理论版本：足够宽的<strong>单隐藏层</strong>网络可在适当条件下逼近连续函数；另一类结果用与输入维度相关的有限宽度（图中写 $d+1$）配足够深度；残差网络还有更窄、足够深的近似结果。这些是不同架构&#x2F;激活&#x2F;函数类前提下的存在性结果，不应把“单神经元 ResNet”随意套成任何有限网络都万能。</p>
-<h3 id="激活函数：图像、导数和易混点"><a href="#激活函数：图像、导数和易混点" class="headerlink" title="激活函数：图像、导数和易混点"></a>激活函数：图像、导数和易混点</h3><table>
+<p><strong>7–20 页的 Light Theory 动画</strong>：隐藏 Sigmoid 单元 $\sigma(wx+b)$ 当 $|w|$ 很大时形状接近阶跃，阶跃位置约在 $s&#x3D;-b&#x2F;w$；两个方向相反的阶跃相减可近似一个局部“矩形窗”，多个矩形窗按不同高度加权求和，像黎曼和一样逐段逼近目标曲线。</p>
+<p>图里先改变 bias 移动阶跃，再改变输出权重控制台阶高度，所以“多神经元叠加能拼复杂函数”有直观来源。课件列出三个理论版本：足够宽的<strong>单隐藏层</strong>网络可在适当条件下逼近连续函数；另一类结果用与输入维度相关的有限宽度（图中写 $d+1$）配足够深度；残差网络还有更窄、足够深的近似结果。</p>
+<p>这些是不同架构&#x2F;激活&#x2F;函数类前提下的存在性结果，不应把“单神经元 ResNet”随意套成任何有限网络都万能。</p>
+<h2 id="第-2-章：激活函数：图像、导数和易混点"><a href="#第-2-章：激活函数：图像、导数和易混点" class="headerlink" title="第 2 章：激活函数：图像、导数和易混点"></a>第 2 章：激活函数：图像、导数和易混点</h2><table>
 <thead>
 <tr>
 <th>函数</th>
@@ -552,12 +557,15 @@
 </tr>
 </tbody></table>
 <p><strong>为什么非零中心会影响优化？</strong> 对一层 $z&#x3D;\sum_i w_ix_i+b$，有 $\partial L&#x2F;\partial w_i&#x3D;(\partial L&#x2F;\partial z)x_i$。若上层输出 $x_i$ 全为正，则同一神经元的各个 $w_i$ 梯度同号；优化轨迹可能“之”字形。注意梯度符号<strong>也取决于损失的反传项</strong>，不能说“仅由 $x_i$ 决定”。课件激活曲线可用“饱和区斜率接近零”解释梯度消失。</p>
-<h3 id="损失、反传、优化与训练曲线"><a href="#损失、反传、优化与训练曲线" class="headerlink" title="损失、反传、优化与训练曲线"></a>损失、反传、优化与训练曲线</h3><p>分类常用 softmax $p_k&#x3D;e^{z_k}&#x2F;\sum_j e^{z_j}$ 和交叉熵 $L&#x3D;-\log p_y$。若 $C$ 类初始化近似均匀，初始损失约 $\log C$。链式法则把末端损失对参数的导数逐层传回；梯度下降 $\theta\leftarrow\theta-\eta\nabla_\theta L$，小批量 SGD 用一批样本的平均梯度，<strong>全批量 GD、单样本 SGD、小批量 SGD 不要混叫</strong>。批量平均与求和方向相同，但数值相差批量大小，固定学习率时更新幅度不一样。</p>
-<p><strong>把任务和损失对上号</strong>：回归输出连续值，常用 MSE；二分类可先算 logit $z$，再经 sigmoid 得 $p&#x3D;\sigma(z)$，二元交叉熵 $L&#x3D;-y\log p-(1-y)\log(1-p)$；多类互斥分类用 $C$ 个 logit、softmax 与多类交叉熵。Logit 是尚未归一化的分数，二分类中 $z&#x3D;\log[p&#x2F;(1-p)]$ 是对数几率。多标签任务可对每类独立 sigmoid，而不是把“多类”与“多标签”混同。参数是由训练更新的权重&#x2F;偏置，超参数如学习率、批量大小、dropout 率需另选。课件的计算图用局部导数连乘解释反传，遇到分叉节点要把各条路径贡献相加。</p>
+<h2 id="第-3-章：损失、反传、优化与训练曲线"><a href="#第-3-章：损失、反传、优化与训练曲线" class="headerlink" title="第 3 章：损失、反传、优化与训练曲线"></a>第 3 章：损失、反传、优化与训练曲线</h2><p>分类常用 softmax $p_k&#x3D;e^{z_k}&#x2F;\sum_j e^{z_j}$ 和交叉熵 $L&#x3D;-\log p_y$。若 $C$ 类初始化近似均匀，初始损失约 $\log C$。</p>
+<p>链式法则把末端损失对参数的导数逐层传回；梯度下降 $\theta\leftarrow\theta-\eta\nabla_\theta L$，小批量 SGD 用一批样本的平均梯度，<strong>全批量 GD、单样本 SGD、小批量 SGD 不要混叫</strong>。批量平均与求和方向相同，但数值相差批量大小，固定学习率时更新幅度不一样。</p>
+<p><strong>把任务和损失对上号</strong>：回归输出连续值，常用 MSE；二分类可先算 logit $z$，再经 sigmoid 得 $p&#x3D;\sigma(z)$，二元交叉熵 $L&#x3D;-y\log p-(1-y)\log(1-p)$；多类互斥分类用 $C$ 个 logit、softmax 与多类交叉熵。Logit 是尚未归一化的分数，二分类中 $z&#x3D;\log[p&#x2F;(1-p)]$ 是对数几率。</p>
+<p>多标签任务可对每类独立 sigmoid，而不是把“多类”与“多标签”混同。参数是由训练更新的权重&#x2F;偏置，超参数如学习率、批量大小、dropout 率需另选。课件的计算图用局部导数连乘解释反传，遇到分叉节点要把各条路径贡献相加。</p>
 <p><strong>优化器关系</strong>：普通 SGD 按当前梯度更新；带动量的 SGD 累积历史方向，减少狭长谷地中来回摆动；Adam 按一阶&#x2F;二阶矩估计调节每个参数的步长。不同优化器不会消除数据与学习率选择的重要性。学习率调度可在训练后期下降；warmup 从较小学习率升起以缓和初期不稳定。课件曲线重在能诊断“发散、震荡、下降慢、过拟合”，不是背某条曲线的精确数值。</p>
 <p><strong>看曲线判问题</strong>：训练损失一开始不降，查数据&#x2F;标签、初始化、学习率、梯度；损失变 NaN，先查学习率过大、数值溢出；训练好验证差，查过拟合，考虑增强、正则化、早停；训练和验证都差，查欠拟合&#x2F;优化不足。训练一个极小数据集至近乎零损失是实现检查。学习率过大可震荡，过小下降慢；仅凭曲线不能唯一定位原因。</p>
-<h3 id="正则化与归一化：统计轴与均值"><a href="#正则化与归一化：统计轴与均值" class="headerlink" title="正则化与归一化：统计轴与均值"></a>正则化与归一化：统计轴与均值</h3><p>$L_2$ 正则为 $\lambda|W|_2^2$，倾向缩小所有权重；$L_1$ 为 $\lambda|W|_1$，更易产生稀疏权重。Dropout 训练时随机置零部分激活；倒置 Dropout 保留概率 $q&#x3D;1-p$ 时把保留项除以 $q$，推理时直接使用全部单元。数据增强通过裁剪、翻转、颜色变化等改变训练样本；测试阶段按固定流程预处理。梯度裁剪限制过大梯度，不能从根本上“证明解决”梯度问题。</p>
-<p><strong>训练曲线与增强细节</strong>：随机裁剪在训练中改变视野，测试时通常固定缩放&#x2F;中心裁剪；Mixup 把两张图和标签按同一系数线性混合，$\tilde x&#x3D;\lambda x_i+(1-\lambda)x_j,\ \tilde y&#x3D;\lambda y_i+(1-\lambda)y_j$；CutMix 用一张图的矩形区域替换另一张图的对应区域，并按保留面积调整软标签。二者都不是把混合图硬标成一个类别。DropPath&#x2F;随机深度随机跳过残差分支，适用于深网络；与逐元素 Dropout 不同。对视觉&#x2F;语言&#x2F;生成模型的归一化选择，主要看统计轴、批量大小和条件控制需求。</p>
+<h2 id="第-4-章：正则化与归一化：统计轴与均值"><a href="#第-4-章：正则化与归一化：统计轴与均值" class="headerlink" title="第 4 章：正则化与归一化：统计轴与均值"></a>第 4 章：正则化与归一化：统计轴与均值</h2><p>$L_2$ 正则为 $\lambda|W|_2^2$，倾向缩小所有权重；$L_1$ 为 $\lambda|W|_1$，更易产生稀疏权重。Dropout 训练时随机置零部分激活；倒置 Dropout 保留概率 $q&#x3D;1-p$ 时把保留项除以 $q$，推理时直接使用全部单元。数据增强通过裁剪、翻转、颜色变化等改变训练样本；测试阶段按固定流程预处理。梯度裁剪限制过大梯度，不能从根本上“证明解决”梯度问题。</p>
+<p><strong>训练曲线与增强细节</strong>：随机裁剪在训练中改变视野，测试时通常固定缩放&#x2F;中心裁剪；Mixup 把两张图和标签按同一系数线性混合，$\tilde x&#x3D;\lambda x_i+(1-\lambda)x_j,\ \tilde y&#x3D;\lambda y_i+(1-\lambda)y_j$；CutMix 用一张图的矩形区域替换另一张图的对应区域，并按保留面积调整软标签。</p>
+<p>二者都不是把混合图硬标成一个类别。DropPath&#x2F;随机深度随机跳过残差分支，适用于深网络；与逐元素 Dropout 不同。对视觉&#x2F;语言&#x2F;生成模型的归一化选择，主要看统计轴、批量大小和条件控制需求。</p>
 <p>设 CNN 激活 $x\in\mathbb R^{N\times C\times H\times W}$：</p>
 <ul>
 <li><strong>BatchNorm (BN)</strong>：每个通道 $c$，在 $N,H,W$ 上统计；训练时用当前批统计量，推理时常用移动统计量。$\hat x&#x3D;(x-\mu_c)&#x2F;\sqrt{\sigma_c^2+\epsilon}$，$y&#x3D;\gamma_c\hat x+\beta_c$。</li>
@@ -566,7 +574,7 @@
 <li><strong>GroupNorm (GN)</strong>：每个样本，将通道分组，在组内通道及 $H,W$ 上统计。</li>
 <li><strong>RMSNorm</strong>：不减均值，$y_i&#x3D;\gamma_i x_i&#x2F;\sqrt{d^{-1}\sum_jx_j^2+\epsilon}$。课件也提 AdaLN，核心是条件信号调节归一化后的仿射参数。</li>
 </ul>
-<p><strong>易错</strong>：归一化后 $\hat x$ 才近似零均值&#x2F;单位方差；可学习 $\gamma,\beta$ 后的 $y$ 未必如此。BN 的统计轴不是“只对 batch 维”，CNN 中还包括空间轴。LN 在不同任务中具体统计轴需看张量布局。</p>
+<p>**易错点：**归一化后 $\hat x$ 才近似零均值&#x2F;单位方差；可学习 $\gamma,\beta$ 后的 $y$ 未必如此。BN 的统计轴不是“只对 batch 维”，CNN 中还包括空间轴。LN 在不同任务中具体统计轴需看张量布局。</p>
 
                 
               </div>
@@ -624,7 +632,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月4日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -729,7 +737,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80"><span class="toc-text">深度学习基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%88%B0%E5%A4%9A%E5%B1%82%E7%BD%91%E7%BB%9C"><span class="toc-text">从线性回归到多层网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9A%E5%9B%BE%E5%83%8F%E3%80%81%E5%AF%BC%E6%95%B0%E5%92%8C%E6%98%93%E6%B7%B7%E7%82%B9"><span class="toc-text">激活函数：图像、导数和易混点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E3%80%81%E5%8F%8D%E4%BC%A0%E3%80%81%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF"><span class="toc-text">损失、反传、优化与训练曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A%E7%BB%9F%E8%AE%A1%E8%BD%B4%E4%B8%8E%E5%9D%87%E5%80%BC"><span class="toc-text">正则化与归一化：统计轴与均值</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%88%B0%E5%A4%9A%E5%B1%82%E7%BD%91%E7%BB%9C"><span class="toc-text">第 1 章：从线性回归到多层网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9A%E5%9B%BE%E5%83%8F%E3%80%81%E5%AF%BC%E6%95%B0%E5%92%8C%E6%98%93%E6%B7%B7%E7%82%B9"><span class="toc-text">第 2 章：激活函数：图像、导数和易混点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E6%8D%9F%E5%A4%B1%E3%80%81%E5%8F%8D%E4%BC%A0%E3%80%81%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF"><span class="toc-text">第 3 章：损失、反传、优化与训练曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E6%AD%A3%E5%88%99%E5%8C%96%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A%E7%BB%9F%E8%AE%A1%E8%BD%B4%E4%B8%8E%E5%9D%87%E5%80%BC"><span class="toc-text">第 4 章：正则化与归一化：统计轴与均值</span></a></li></ol>
   </div>
 </div>
 

@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 7 讲笔记，依据对应课程课件整理。 图像里的区域如何对应句子中的词？从图像描述的对齐问题出发，逐步理解注意力与 Transformer。">
+    <meta name="description" content="北京大学《多模态学习》（2026 秋）第 7 讲笔记，依据对应课程课件整理。 图像里的区域如何对应句子中的词？从图像描述的对齐问题出发，逐步理解注意力与 Transformer。 **学习路线：**下面按 2 个主题展开：对齐与图像描述 → Self-attention 与 Transformer。阅读时先抓住每一章要解决的问题，再看公式和方法细节。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第 7 讲：跨模态对齐与注意力">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml7/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 7 讲笔记，依据对应课程课件整理。 图像里的区域如何对应句子中的词？从图像描述的对齐问题出发，逐步理解注意力与 Transformer。">
+<meta property="og:description" content="北京大学《多模态学习》（2026 秋）第 7 讲笔记，依据对应课程课件整理。 图像里的区域如何对应句子中的词？从图像描述的对齐问题出发，逐步理解注意力与 Transformer。 **学习路线：**下面按 2 个主题展开：对齐与图像描述 → Self-attention 与 Transformer。阅读时先抓住每一章要解决的问题，再看公式和方法细节。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T04:07:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T17:49:00.801Z">
+<meta property="article:modified_time" content="2026-11-05T12:25:26.884Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          3.1k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          19 分钟
+          20 分钟
         
       </span>
     
@@ -484,14 +484,14 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>07</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0"><span class="toc-text">对齐与图像描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Self-attention-%E4%B8%8E-Transformer"><span class="toc-text">Self-attention 与 Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E9%81%8D%E7%9C%8B%E6%87%82-Q%E3%80%81K%E3%80%81V"><span class="toc-text">一遍看懂 Q、K、V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E3%80%81%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9E%B6%E6%9E%84"><span class="toc-text">顺序、位置编码与架构</span></a></li></ol></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0"><span class="toc-text">第 1 章：对齐与图像描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9ASelf-attention-%E4%B8%8E-Transformer"><span class="toc-text">第 2 章：Self-attention 与 Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%80%E9%81%8D%E7%9C%8B%E6%87%82-Q%E3%80%81K%E3%80%81V"><span class="toc-text">2.1 一遍看懂 Q、K、V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%A1%BA%E5%BA%8F%E3%80%81%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9E%B6%E6%9E%84"><span class="toc-text">2.2 顺序、位置编码与架构</span></a></li></ol></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 7 讲：跨模态对齐与注意力"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月4日 凌晨
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -501,21 +501,31 @@
                 
                 <p>北京大学《多模态学习》（2026 秋）第 7 讲笔记，依据对应课程课件整理。</p>
 <p>图像里的区域如何对应句子中的词？从图像描述的对齐问题出发，逐步理解注意力与 Transformer。</p>
+<p>**学习路线：**下面按 2 个主题展开：对齐与图像描述 → Self-attention 与 Transformer。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h2 id="对齐与图像描述"><a href="#对齐与图像描述" class="headerlink" title="对齐与图像描述"></a>对齐与图像描述</h2><p>对齐是局部对应：句子中的“狗”对应图像里狗的区域，而整张图与整句话配对只是全局对应。硬对齐选择少数元素，软对齐给每个区域连续权重，后者可用常规反传。图像描述的无注意力模型先用 CNN 得到固定全图向量，再交给 RNN 解码器；随着句子增长，单个固定向量可能成为信息瓶颈。加注意力后，每个生成时刻 $t$ 用隐藏状态与各图像区域特征 $v_i$ 算分数 $e_{ti}$，$\alpha_{ti}&#x3D;\operatorname{softmax}<em>i(e</em>{ti})$，上下文 $c_t&#x3D;\sum_i\alpha_{ti}v_i$，再预测词。注意这里 $c_t$ 通常叫<strong>视觉上下文向量</strong>，不要和 LSTM 的 cell state $c_t$ 混淆，为避免符号混淆，可用 $g_t$ 表示视觉上下文。</p>
+<h2 id="第-1-章：对齐与图像描述"><a href="#第-1-章：对齐与图像描述" class="headerlink" title="第 1 章：对齐与图像描述"></a>第 1 章：对齐与图像描述</h2><p>对齐是局部对应：句子中的“狗”对应图像里狗的区域，而整张图与整句话配对只是全局对应。硬对齐选择少数元素，软对齐给每个区域连续权重，后者可用常规反传。图像描述的无注意力模型先用 CNN 得到固定全图向量，再交给 RNN 解码器；随着句子增长，单个固定向量可能成为信息瓶颈。</p>
+<p>加注意力后，每个生成时刻 $t$ 用隐藏状态与各图像区域特征 $v_i$ 算分数 $e_{ti}$，$\alpha_{ti}&#x3D;\operatorname{softmax}<em>i(e</em>{ti})$，上下文 $c_t&#x3D;\sum_i\alpha_{ti}v_i$，再预测词。</p>
+<p>注意这里 $c_t$ 通常叫<strong>视觉上下文向量</strong>，不要和 LSTM 的 cell state $c_t$ 混淆，为避免符号混淆，可用 $g_t$ 表示视觉上下文。</p>
 <p>课件的注意力热图说明生成不同词时关注区域变化。注意力权重可帮助解释模型，但热图不必然等于人类语义解释。图像描述评价常用 BLEU、METEOR、CIDEr、SPICE 等：基于词&#x2F;短语重叠或语义结构的自动指标可比较大量样本，但同义表达和事实错误可能使自动分数与人判断不同。课件中的失败案例包括遗漏对象、误判关系或属性，以及生成通顺却与图像不符的描述。</p>
-<p><strong>课件 7的视觉案例</strong>：格点特征注意力使用 CNN feature map 的位置，region attention 使用检测器给出的候选物体区域；后者更贴近“物体”但受检测器漏检&#x2F;误检影响。课件的失败图把“物体识别不准”和“物体关系说错”分开：改进检测器只针对前者，后者需建模语义关系（如骑、拿）和空间关系（如左&#x2F;上&#x2F;内）；图网络可在区域之间传播关系信息。Dense image captioning 要为多个局部区域分别描述；video captioning 还要汇总时间信息；dense video description 则需输出事件起止时间与描述。评价指标要分清：BLEU 偏 n-gram 精确率，METEOR 考虑词匹配与顺序，CIDEr 用 TF-IDF 强调有辨识力的 n-gram，SPICE 比较场景图元组的 F1；单个指标不能代替人工事实核查。</p>
-<p><strong>对齐与转换的关系</strong>：局部区域—词的对齐帮助图像到文字的转换，但图像描述输出是完整语言序列，还要决定词序、关系和是否停止。无注意力的 CNN→RNN 可把图像向量用于初始化 $h_0$ 或在每步输入；有注意力的模型在每步重新取视觉上下文。soft attention 的权重是可微概率分布；hard attention 的离散选取通常需要特殊估计或强化学习式训练，不能直接按连续 softmax 路径求普通梯度。课件 4–10 页还强调<strong>上下文化表示</strong>：一个词&#x2F;区域的表征应依赖所在句子&#x2F;图像及另一模态的上下文，而非永远使用固定词向量。</p>
-<h2 id="Self-attention-与-Transformer"><a href="#Self-attention-与-Transformer" class="headerlink" title="Self-attention 与 Transformer"></a>Self-attention 与 Transformer</h2><h3 id="一遍看懂-Q、K、V"><a href="#一遍看懂-Q、K、V" class="headerlink" title="一遍看懂 Q、K、V"></a>一遍看懂 Q、K、V</h3><p>输入 $X\in\mathbb R^{T\times d_{\rm model}}$，$Q&#x3D;XW_Q$、$K&#x3D;XW_K$、$V&#x3D;XW_V$。对每个 query，和所有 key 算匹配分数，沿 key 维 softmax，再加权求 value：</p>
+<p><strong>课件 7的视觉案例</strong>：格点特征注意力使用 CNN feature map 的位置，region attention 使用检测器给出的候选物体区域；后者更贴近“物体”但受检测器漏检&#x2F;误检影响。课件的失败图把“物体识别不准”和“物体关系说错”分开：改进检测器只针对前者，后者需建模语义关系（如骑、拿）和空间关系（如左&#x2F;上&#x2F;内）；图网络可在区域之间传播关系信息。</p>
+<p>Dense image captioning 要为多个局部区域分别描述；video captioning 还要汇总时间信息；dense video description 则需输出事件起止时间与描述。</p>
+<p>评价指标要分清：BLEU 偏 n-gram 精确率，METEOR 考虑词匹配与顺序，CIDEr 用 TF-IDF 强调有辨识力的 n-gram，SPICE 比较场景图元组的 F1；单个指标不能代替人工事实核查。</p>
+<p><strong>对齐与转换的关系</strong>：局部区域—词的对齐帮助图像到文字的转换，但图像描述输出是完整语言序列，还要决定词序、关系和是否停止。无注意力的 CNN→RNN 可把图像向量用于初始化 $h_0$ 或在每步输入；有注意力的模型在每步重新取视觉上下文。</p>
+<p>soft attention 的权重是可微概率分布；hard attention 的离散选取通常需要特殊估计或强化学习式训练，不能直接按连续 softmax 路径求普通梯度。课件 4–10 页还强调<strong>上下文化表示</strong>：一个词&#x2F;区域的表征应依赖所在句子&#x2F;图像及另一模态的上下文，而非永远使用固定词向量。</p>
+<h2 id="第-2-章：Self-attention-与-Transformer"><a href="#第-2-章：Self-attention-与-Transformer" class="headerlink" title="第 2 章：Self-attention 与 Transformer"></a>第 2 章：Self-attention 与 Transformer</h2><h3 id="2-1-一遍看懂-Q、K、V"><a href="#2-1-一遍看懂-Q、K、V" class="headerlink" title="2.1 一遍看懂 Q、K、V"></a>2.1 一遍看懂 Q、K、V</h3><p>输入 $X\in\mathbb R^{T\times d_{\rm model}}$，$Q&#x3D;XW_Q$、$K&#x3D;XW_K$、$V&#x3D;XW_V$。对每个 query，和所有 key 算匹配分数，沿 key 维 softmax，再加权求 value：</p>
 <p>$$A&#x3D;\operatorname{softmax}_{\rm row}\left(\frac{QK^\top}{\sqrt{d_k}}+M\right),\qquad Z&#x3D;AV.$$</p>
-<p>若 $Q\in\mathbb R^{T_q\times d_k}$、$K\in\mathbb R^{T_k\times d_k}$、$V\in\mathbb R^{T_k\times d_v}$，则 $A\in\mathbb R^{T_q\times T_k}$、$Z\in\mathbb R^{T_q\times d_v}$。输出 token 数由 query 决定。$\sqrt{d_k}$ 缩放避免点积随维数增大导致 softmax 过尖锐。mask 中不可见位置加 $-\infty$，softmax 后权重为 0；自回归因果 mask 禁止位置 $t$ 看 $&gt;t$ 的未来位置。</p>
+<p>若 $Q\in\mathbb R^{T_q\times d_k}$、$K\in\mathbb R^{T_k\times d_k}$、$V\in\mathbb R^{T_k\times d_v}$，则 $A\in\mathbb R^{T_q\times T_k}$、$Z\in\mathbb R^{T_q\times d_v}$。输出 token 数由 query 决定。</p>
+<p>$\sqrt{d_k}$ 缩放避免点积随维数增大导致 softmax 过尖锐。mask 中不可见位置加 $-\infty$，softmax 后权重为 0；自回归因果 mask 禁止位置 $t$ 看 $&gt;t$ 的未来位置。</p>
 <p>自注意力 Q&#x2F;K&#x2F;V 来自同一序列；交叉注意力 Q 来自当前解码序列，K&#x2F;V 来自编码器&#x2F;另一模态。多头把特征投到多个子空间，各头独立算注意力，拼接后投影；通常 $d_{\rm model}&#x3D;H d_{\rm head}$，<strong>不是</strong>“头数等于 $d_{\rm model}$&#x2F;头数”。完整自注意力对 $T$ 个 token 的分数矩阵是 $T^2$，内存通常随 $T^2$ 增长。</p>
-<p><strong>为什么缩放、为什么多头</strong>：若 Q&#x2F;K 每维独立、均值近零、方差约 1，点积方差随 $d_k$ 近似线性变大；除以 $\sqrt{d_k}$ 可把分数尺度控制在较稳定范围，减少 softmax 饱和。每个 head 有各自 $W_Q,W_K,W_V$，可以在不同投影子空间关注不同关系；这只提供能力，<strong>不保证</strong>每头自动学到人可解释的独立语法关系。若 $d_{\rm model}&#x3D;Hd_{\rm head}$ 且 Q&#x2F;K&#x2F;V&#x2F;输出投影均为完整矩阵，注意力线性投影的参数数量约 $4d_{\rm model}^2$（忽略 bias），头数变化并不必然同比增加参数总数。</p>
-<h3 id="顺序、位置编码与架构"><a href="#顺序、位置编码与架构" class="headerlink" title="顺序、位置编码与架构"></a>顺序、位置编码与架构</h3><p>不加位置线索时，self-attention 对输入 token 的置换具有<strong>等变性</strong>：重排输入，输出也相应重排；不能严格说输出“完全不变”。绝对位置编码可与 token embedding 相加；经典正弦式为</p>
+<p><strong>为什么缩放、为什么多头</strong>：若 Q&#x2F;K 每维独立、均值近零、方差约 1，点积方差随 $d_k$ 近似线性变大；除以 $\sqrt{d_k}$ 可把分数尺度控制在较稳定范围，减少 softmax 饱和。每个 head 有各自 $W_Q,W_K,W_V$，可以在不同投影子空间关注不同关系；这只提供能力，<strong>不保证</strong>每头自动学到人可解释的独立语法关系。</p>
+<p>若 $d_{\rm model}&#x3D;Hd_{\rm head}$ 且 Q&#x2F;K&#x2F;V&#x2F;输出投影均为完整矩阵，注意力线性投影的参数数量约 $4d_{\rm model}^2$（忽略 bias），头数变化并不必然同比增加参数总数。</p>
+<h3 id="2-2-顺序、位置编码与架构"><a href="#2-2-顺序、位置编码与架构" class="headerlink" title="2.2 顺序、位置编码与架构"></a>2.2 顺序、位置编码与架构</h3><p>不加位置线索时，self-attention 对输入 token 的置换具有<strong>等变性</strong>：重排输入，输出也相应重排；不能严格说输出“完全不变”。绝对位置编码可与 token embedding 相加；经典正弦式为</p>
 <p>$$PE_{(pos,2i)}&#x3D;\sin!\left(pos&#x2F;10000^{2i&#x2F;d}\right),\qquad<br>PE_{(pos,2i+1)}&#x3D;\cos!\left(pos&#x2F;10000^{2i&#x2F;d}\right).$$</p>
-<p>课件架构图：Encoder 层是多头 self-attention + 前馈网络（FFN&#x2F;MLP），每子层配残差与规范化；Decoder 多一个对 Encoder 输出的 cross-attention，自己的 self-attention 加因果 mask。LayerNorm 是每个 token 的特征维归一化；FFN 对每个位置用共享参数单独变换。训练机器翻译可以并行处理目标句位置，但因果 mask 防止未来泄露；生成推理逐 token 产生，仍具有顺序依赖。</p>
-<p><strong>位置编码为何要正弦&#x2F;余弦</strong>：一对正弦余弦可表示平面上的旋转；移动固定距离会对每个频率对应一组确定的旋转变换，因此相对位置信息可从编码之间的关系中读出。对成对的同频率维度，$PE(pos)\cdot PE(pos+\Delta)$ 的贡献为 $\cos(\Delta&#x2F;\omega)$，只依赖位移 $\Delta$；这解释课件“点积与偏移相关”的曲线。不同频率让近距离和远距离位置均有区分。加入位置编码前，self-attention 对重排是置换等变；加入后，模型才有机会区分顺序。课件标题写“permutation invariant”是通俗描述，严格讨论每个位置的输出时应用“等变”。</p>
+<p>课件架构图：Encoder 层是多头 self-attention + 前馈网络（FFN&#x2F;MLP），每子层配残差与规范化；Decoder 多一个对 Encoder 输出的 cross-attention，自己的 self-attention 加因果 mask。LayerNorm 是每个 token 的特征维归一化；FFN 对每个位置用共享参数单独变换。</p>
+<p>训练机器翻译可以并行处理目标句位置，但因果 mask 防止未来泄露；生成推理逐 token 产生，仍具有顺序依赖。</p>
+<p><strong>位置编码为何要正弦&#x2F;余弦</strong>：一对正弦余弦可表示平面上的旋转；移动固定距离会对每个频率对应一组确定的旋转变换，因此相对位置信息可从编码之间的关系中读出。对成对的同频率维度，$PE(pos)\cdot PE(pos+\Delta)$ 的贡献为 $\cos(\Delta&#x2F;\omega)$，只依赖位移 $\Delta$；这解释课件“点积与偏移相关”的曲线。</p>
+<p>不同频率让近距离和远距离位置均有区分。加入位置编码前，self-attention 对重排是置换等变；加入后，模型才有机会区分顺序。课件标题写“permutation invariant”是通俗描述，严格讨论每个位置的输出时应用“等变”。</p>
 
                 
               </div>
@@ -573,7 +583,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月4日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -678,7 +688,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0"><span class="toc-text">对齐与图像描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Self-attention-%E4%B8%8E-Transformer"><span class="toc-text">Self-attention 与 Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E9%81%8D%E7%9C%8B%E6%87%82-Q%E3%80%81K%E3%80%81V"><span class="toc-text">一遍看懂 Q、K、V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E3%80%81%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9E%B6%E6%9E%84"><span class="toc-text">顺序、位置编码与架构</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0"><span class="toc-text">第 1 章：对齐与图像描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9ASelf-attention-%E4%B8%8E-Transformer"><span class="toc-text">第 2 章：Self-attention 与 Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%80%E9%81%8D%E7%9C%8B%E6%87%82-Q%E3%80%81K%E3%80%81V"><span class="toc-text">2.1 一遍看懂 Q、K、V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%A1%BA%E5%BA%8F%E3%80%81%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9E%B6%E6%9E%84"><span class="toc-text">2.2 顺序、位置编码与架构</span></a></li></ol></li></ol>
   </div>
 </div>
 

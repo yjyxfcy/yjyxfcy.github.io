@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="math: true 北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 post-training.pdf 整理。预训练让模型擅长预测文本，但用户希望它按指令完成任务、承认不确定性，并给出有用的回答。后训练就是围绕这些目标继续调整模型。">
+    <meta name="description" content="北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 post-training.pdf 整理。预训练让模型擅长预测文本，但用户希望它按指令完成任务、承认不确定性，并给出有用的回答。后训练就是围绕这些目标继续调整模型。 **学习路线：**下面按 9 个主题展开：为什么“会续写”不等于“会回答” → 监督指令微调（SFT） → 奖励模型 → 强化学习优化 → 怎样看 Instr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="后训练与指令对齐">
+<meta property="og:title" content="第 14 讲：后训练与指令对齐">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/fnlp14/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="math: true 北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 post-training.pdf 整理。预训练让模型擅长预测文本，但用户希望它按指令完成任务、承认不确定性，并给出有用的回答。后训练就是围绕这些目标继续调整模型。">
+<meta property="og:description" content="北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 post-training.pdf 整理。预训练让模型擅长预测文本，但用户希望它按指令完成任务、承认不确定性，并给出有用的回答。后训练就是围绕这些目标继续调整模型。 **学习路线：**下面按 9 个主题展开：为什么“会续写”不等于“会回答” → 监督指令微调（SFT） → 奖励模型 → 强化学习优化 → 怎样看 Instr">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:14:00.000Z">
-<meta property="article:modified_time" content="2026-11-03T17:13:51.543Z">
+<meta property="article:modified_time" content="2026-11-05T12:28:09.954Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>后训练与指令对齐 - Yjy</title>
+  <title>第 14 讲：后训练与指令对齐 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +273,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="14 · 后训练与指令对齐"></span>
+            <span id="subtitle" data-typed-text="14 · 第 14 讲：后训练与指令对齐"></span>
           
         </div>
 
@@ -301,7 +301,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.3k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
         
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -480,55 +480,55 @@
     
       
       
-        <a href="/2026/11/04/fnlp11/" title="语义表示与组合语义"
+        <a href="/2026/11/04/fnlp11/" title="第 11 讲：语义表示与组合语义"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">语义表示与组合语义</span>
+          <span class="category-post">第 11 讲：语义表示与组合语义</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp12/" title="信息检索与文本向量"
+        <a href="/2026/11/04/fnlp12/" title="第 12 讲：信息检索与文本向量"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">信息检索与文本向量</span>
+          <span class="category-post">第 12 讲：信息检索与文本向量</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp13/" title="预训练与微调"
+        <a href="/2026/11/04/fnlp13/" title="第 13 讲：预训练与微调"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">预训练与微调</span>
+          <span class="category-post">第 13 讲：预训练与微调</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp14/" title="后训练与指令对齐"
+        <a href="/2026/11/04/fnlp14/" title="第 14 讲：后训练与指令对齐"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">后训练与指令对齐</span>
+          <span class="category-post">第 14 讲：后训练与指令对齐</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp15/" title="提示学习与检索增强生成"
+        <a href="/2026/11/04/fnlp15/" title="第 15 讲：提示学习与检索增强生成"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">提示学习与检索增强生成</span>
+          <span class="category-post">第 15 讲：提示学习与检索增强生成</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp16/" title="NLP 任务、评测与基准"
+        <a href="/2026/11/04/fnlp16/" title="第 16 讲：NLP 任务、评测与基准"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">NLP 任务、评测与基准</span>
+          <span class="category-post">第 16 讲：NLP 任务、评测与基准</span>
         </a>
       
     
@@ -551,19 +551,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">14 · 后训练与指令对齐</h1>
+            <h1 class="reading-title">14 · 第 14 讲：后训练与指令对齐</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/nlp/">自然语言处理基础</a><span>/</span><span>2026 春</span><span>/</span><span>14</span></nav>
               <a class="reading-course-link" href="/courses/nlp/">← 返回课程目录</a>
               
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E4%BC%9A%E7%BB%AD%E5%86%99%E2%80%9D%E4%B8%8D%E7%AD%89%E4%BA%8E%E2%80%9C%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9D"><span class="toc-text">为什么“会续写”不等于“会回答”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E7%9B%91%E7%9D%A3%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%EF%BC%88SFT%EF%BC%89"><span class="toc-text">第一步：监督指令微调（SFT）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B"><span class="toc-text">第二步：奖励模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96"><span class="toc-text">第三步：强化学习优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E7%9C%8B-InstructGPT-%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="toc-text">怎样看 InstructGPT 的结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%95%B0%E6%8D%AE%E4%BB%8E%E5%93%AA%E9%87%8C%E6%9D%A5"><span class="toc-text">指令数据从哪里来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%96%E5%8A%B1%E4%BD%9C%E5%BC%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0"><span class="toc-text">奖励作弊为什么会出现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94%E6%9C%AC%E8%BA%AB%E6%98%AF%E8%AE%BE%E8%AE%A1%E9%80%89%E6%8B%A9"><span class="toc-text">数据配比本身是设计选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B"><span class="toc-text">回头看</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E4%BC%9A%E7%BB%AD%E5%86%99%E2%80%9D%E4%B8%8D%E7%AD%89%E4%BA%8E%E2%80%9C%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9D"><span class="toc-text">第 1 章：为什么“会续写”不等于“会回答”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%9B%91%E7%9D%A3%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%EF%BC%88SFT%EF%BC%89"><span class="toc-text">第 2 章：监督指令微调（SFT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B"><span class="toc-text">第 3 章：奖励模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96"><span class="toc-text">第 4 章：强化学习优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%80%8E%E6%A0%B7%E7%9C%8B-InstructGPT-%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="toc-text">第 5 章：怎样看 InstructGPT 的结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%8C%87%E4%BB%A4%E6%95%B0%E6%8D%AE%E4%BB%8E%E5%93%AA%E9%87%8C%E6%9D%A5"><span class="toc-text">第 6 章：指令数据从哪里来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%A5%96%E5%8A%B1%E4%BD%9C%E5%BC%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0"><span class="toc-text">第 7 章：奖励作弊为什么会出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94%E6%9C%AC%E8%BA%AB%E6%98%AF%E8%AE%BE%E8%AE%A1%E9%80%89%E6%8B%A9"><span class="toc-text">第 8 章：数据配比本身是设计选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 9 章：本讲小结</span></a></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="后训练与指令对齐"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 14 讲：后训练与指令对齐"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月4日 凌晨
+                    本文最后更新于 2026年11月5日 晚上
                   
                 
               </p>
@@ -571,30 +571,30 @@
             
               <div class="markdown-body">
                 
-                <p>math: true</p>
-<p>北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 <code>post-training.pdf</code> 整理。预训练让模型擅长预测文本，但用户希望它按指令完成任务、承认不确定性，并给出有用的回答。后训练就是围绕这些目标继续调整模型。</p>
+                <p>北京大学《自然语言处理基础》（2026 春）的课程补充笔记，由 AI 依据 <code>post-training.pdf</code> 整理。预训练让模型擅长预测文本，但用户希望它按指令完成任务、承认不确定性，并给出有用的回答。后训练就是围绕这些目标继续调整模型。</p>
+<p>**学习路线：**下面按 9 个主题展开：为什么“会续写”不等于“会回答” → 监督指令微调（SFT） → 奖励模型 → 强化学习优化 → 怎样看 InstructGPT 的结果 → 指令数据从哪里来等。阅读时先抓住每一章要解决的问题，再看公式和方法细节。</p>
 <span id="more"></span>
 
-<h3 id="为什么“会续写”不等于“会回答”"><a href="#为什么“会续写”不等于“会回答”" class="headerlink" title="为什么“会续写”不等于“会回答”"></a>为什么“会续写”不等于“会回答”</h3><p>语言模型优化的是文本概率。给它一道题，它可能续写题目、模仿网页格式，或给出冗长却没有回答问题的文字。预训练目标没有直接告诉模型：用户更看重正确、相关、清楚、合乎边界的回应。</p>
+<h2 id="第-1-章：为什么“会续写”不等于“会回答”"><a href="#第-1-章：为什么“会续写”不等于“会回答”" class="headerlink" title="第 1 章：为什么“会续写”不等于“会回答”"></a>第 1 章：为什么“会续写”不等于“会回答”</h2><p>语言模型优化的是文本概率。给它一道题，它可能续写题目、模仿网页格式，或给出冗长却没有回答问题的文字。预训练目标没有直接告诉模型：用户更看重正确、相关、清楚、合乎边界的回应。</p>
 <p>因此，后训练要定义更贴近使用场景的反馈。但“符合人类偏好”也不是单一客观标签：不同人可能对详略、语气和风险有不同判断，反馈数据需要清楚记录任务与评价标准。</p>
-<h3 id="第一步：监督指令微调（SFT）"><a href="#第一步：监督指令微调（SFT）" class="headerlink" title="第一步：监督指令微调（SFT）"></a>第一步：监督指令微调（SFT）</h3><p>先收集“指令 $x$ — 理想回答 $y$”样本，最大化参考回答的条件概率：</p>
+<h2 id="第-2-章：监督指令微调（SFT）"><a href="#第-2-章：监督指令微调（SFT）" class="headerlink" title="第 2 章：监督指令微调（SFT）"></a>第 2 章：监督指令微调（SFT）</h2><p>先收集“指令 $x$ — 理想回答 $y$”样本，最大化参考回答的条件概率：</p>
 <p>$$L_{\rm SFT}&#x3D;-\sum_{(x,y)\in D}\sum_t\log\pi_\theta(y_t\mid x,y_{&lt;t}).$$</p>
 <p>例如“把这段话概括为一句”配上一句合格概括。SFT 告诉模型回答的格式、任务边界与常见写法，是后续偏好优化的重要起点。它的上限受数据覆盖和示范质量限制：示范中有错，模型也可能学进去。</p>
 <p>课件还讨论把已有 NLP 数据改写成指令格式、由人手写示范、以及让模型生成候选指令再筛选的 Self-Instruct 思路。自动生成可以扩大覆盖，但筛选、去重和质量核验同样重要。</p>
-<h3 id="第二步：奖励模型"><a href="#第二步：奖励模型" class="headerlink" title="第二步：奖励模型"></a>第二步：奖励模型</h3><p>对于同一个提示，先采样多个回答，让标注者比较哪个更好。奖励模型学习一个分数 $r_\phi(x,y)$。若 $y^+$ 比 $y^-$ 更受偏好，常见成对目标是</p>
+<h2 id="第-3-章：奖励模型"><a href="#第-3-章：奖励模型" class="headerlink" title="第 3 章：奖励模型"></a>第 3 章：奖励模型</h2><p>对于同一个提示，先采样多个回答，让标注者比较哪个更好。奖励模型学习一个分数 $r_\phi(x,y)$。若 $y^+$ 比 $y^-$ 更受偏好，常见成对目标是</p>
 <p>$$L_{\rm RM}&#x3D;-\log\sigma\bigl(r_\phi(x,y^+)-r_\phi(x,y^-)\bigr).$$</p>
 <p>模型不需要知道“好回答的绝对分数”；它先学会在同一问题下把更好的回答排在前面。课件以 InstructGPT 的人工排序流程为例。奖励分数只是偏好数据的代理，模型可能学到长度、套话等捷径，并非真正理解所有人的价值判断。</p>
-<h3 id="第三步：强化学习优化"><a href="#第三步：强化学习优化" class="headerlink" title="第三步：强化学习优化"></a>第三步：强化学习优化</h3><p>让当前策略 $\pi_\theta$ 生成回答，奖励模型给出分数，再用 PPO 等算法提高较高奖励回答的概率。实践中常约束新策略不要偏离参考策略太远，例如加入 KL 惩罚：</p>
+<h2 id="第-4-章：强化学习优化"><a href="#第-4-章：强化学习优化" class="headerlink" title="第 4 章：强化学习优化"></a>第 4 章：强化学习优化</h2><p>让当前策略 $\pi_\theta$ 生成回答，奖励模型给出分数，再用 PPO 等算法提高较高奖励回答的概率。实践中常约束新策略不要偏离参考策略太远，例如加入 KL 惩罚：</p>
 <p>$$\max_\theta;\mathbb E_{x,y\sim\pi_\theta}[r_\phi(x,y)]<br>-\beta,\mathbb E_x D_{\rm KL}(\pi_\theta(\cdot\mid x)|\pi_{\rm ref}(\cdot\mid x)).$$</p>
 <p>这表示在“更符合偏好”与“保留原模型能力”之间取舍。上式是便于理解的简化目标，实际 PPO 还有采样、优势估计和裁剪等步骤。若只最大化奖励模型分数，策略可能钻评分器空子；如果约束太强，则又学不到多少新行为。</p>
-<h3 id="怎样看-InstructGPT-的结果"><a href="#怎样看-InstructGPT-的结果" class="headerlink" title="怎样看 InstructGPT 的结果"></a>怎样看 InstructGPT 的结果</h3><p>课件比较了 GPT-3、SFT 和 PPO 模型的人类偏好结果，也讨论了所谓 <strong>alignment tax</strong>：提高指令遵循后，某些原有任务指标可能退步。论文中的模型大小与偏好胜率说明该实验设置下的发现，不能直接推出“小模型总比大模型强”。不同任务、数据和评价者可能给出不同结论。</p>
+<h2 id="第-5-章：怎样看-InstructGPT-的结果"><a href="#第-5-章：怎样看-InstructGPT-的结果" class="headerlink" title="第 5 章：怎样看 InstructGPT 的结果"></a>第 5 章：怎样看 InstructGPT 的结果</h2><p>课件比较了 GPT-3、SFT 和 PPO 模型的人类偏好结果，也讨论了所谓 <strong>alignment tax</strong>：提高指令遵循后，某些原有任务指标可能退步。论文中的模型大小与偏好胜率说明该实验设置下的发现，不能直接推出“小模型总比大模型强”。不同任务、数据和评价者可能给出不同结论。</p>
 <p>真实性、安全性、偏见也不能合成一个笼统的“对齐分数”。某个模型在 TruthfulQA 上改善，并不意味着所有事实题都正确；某项偏见评测没有改善，也不能被整体偏好胜率掩盖。</p>
-<h3 id="指令数据从哪里来"><a href="#指令数据从哪里来" class="headerlink" title="指令数据从哪里来"></a>指令数据从哪里来</h3><p><strong>人工撰写</strong>能控制质量，但成本高、覆盖有限。<strong>已有任务改写</strong>能利用分类、翻译、抽取等数据，却可能让指令风格过于固定。<strong>模型生成再筛选</strong>能扩大题型和措辞，但容易把模型原有错误和重复模式放大。课件中的 Self-Instruct 是最后一种路线的代表。</p>
+<h2 id="第-6-章：指令数据从哪里来"><a href="#第-6-章：指令数据从哪里来" class="headerlink" title="第 6 章：指令数据从哪里来"></a>第 6 章：指令数据从哪里来</h2><p><strong>人工撰写</strong>能控制质量，但成本高、覆盖有限。<strong>已有任务改写</strong>能利用分类、翻译、抽取等数据，却可能让指令风格过于固定。<strong>模型生成再筛选</strong>能扩大题型和措辞，但容易把模型原有错误和重复模式放大。课件中的 Self-Instruct 是最后一种路线的代表。</p>
 <p>数据集还要考虑划分：训练样本若泄漏进评测集，模型看似会遵循新指令，实际只是记住答案。比较不同后训练方法时，应同时看相同基座、相近训练预算和独立评测。</p>
-<h3 id="奖励作弊为什么会出现"><a href="#奖励作弊为什么会出现" class="headerlink" title="奖励作弊为什么会出现"></a>奖励作弊为什么会出现</h3><p>奖励模型只见过有限标注。若它碰巧偏爱某种积极措辞，策略可能反复生成这类句子以拿高分，却没有更好地完成任务。课件举出重复“Excellent!”一类例子。KL 约束让策略别离 SFT 起点太远；课件也提到在优化时混入预训练损失，以缓解公开 NLP 任务上的能力回退。这些是减轻问题的方法，并不能证明奖励模型不会再被利用。</p>
+<h2 id="第-7-章：奖励作弊为什么会出现"><a href="#第-7-章：奖励作弊为什么会出现" class="headerlink" title="第 7 章：奖励作弊为什么会出现"></a>第 7 章：奖励作弊为什么会出现</h2><p>奖励模型只见过有限标注。若它碰巧偏爱某种积极措辞，策略可能反复生成这类句子以拿高分，却没有更好地完成任务。课件举出重复“Excellent!”一类例子。KL 约束让策略别离 SFT 起点太远；课件也提到在优化时混入预训练损失，以缓解公开 NLP 任务上的能力回退。这些是减轻问题的方法，并不能证明奖励模型不会再被利用。</p>
 <p>一份后训练结果至少应分开检查：指令完成率、事实准确性、有害输出、偏见、格式遵循和原有任务能力。人类偏好比较能覆盖一些难写成规则的质量，但评分者盲测、题目抽样和标注一致性都影响结论。</p>
-<h3 id="数据配比本身是设计选择"><a href="#数据配比本身是设计选择" class="headerlink" title="数据配比本身是设计选择"></a>数据配比本身是设计选择</h3><p>同一模型可以混合人工指令、旧 NLP 任务、模型自生成指令和用户分享的对话。比例不同，模型的风格与能力也可能不同。大量易题可能让模型更会遵守固定格式，却不能自动提升复杂推理；少量精心筛选的高质量示范也可能带来明显改进。课件把数据收集与混合放在后训练的重要位置，因为优化算法之外，<strong>模型看到什么样的示范</strong>同样决定它会怎样回答。</p>
-<h3 id="回头看"><a href="#回头看" class="headerlink" title="回头看"></a>回头看</h3><p>预训练主要学习一般语言规律，SFT 给出可模仿的回答范式，偏好建模提供相对质量信号，RL 或其他偏好优化把这种信号反馈给策略。每一步都引入新的假设和误差源。复习时可以拿同一条指令，分别问：示范答案是什么、两份候选回答如何比较、优化后模型会不会为了分数牺牲事实正确性。</p>
+<h2 id="第-8-章：数据配比本身是设计选择"><a href="#第-8-章：数据配比本身是设计选择" class="headerlink" title="第 8 章：数据配比本身是设计选择"></a>第 8 章：数据配比本身是设计选择</h2><p>同一模型可以混合人工指令、旧 NLP 任务、模型自生成指令和用户分享的对话。比例不同，模型的风格与能力也可能不同。大量易题可能让模型更会遵守固定格式，却不能自动提升复杂推理；少量精心筛选的高质量示范也可能带来明显改进。课件把数据收集与混合放在后训练的重要位置，因为优化算法之外，<strong>模型看到什么样的示范</strong>同样决定它会怎样回答。</p>
+<h2 id="第-9-章：本讲小结"><a href="#第-9-章：本讲小结" class="headerlink" title="第 9 章：本讲小结"></a>第 9 章：本讲小结</h2><p>预训练主要学习一般语言规律，SFT 给出可模仿的回答范式，偏好建模提供相对质量信号，RL 或其他偏好优化把这种信号反馈给策略。每一步都引入新的假设和误差源。复习时可以拿同一条指令，分别问：示范答案是什么、两份候选回答如何比较、优化后模型会不会为了分数牺牲事实正确性。</p>
 
                 
               </div>
@@ -633,7 +633,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>后训练与指令对齐</div>
+      <div>第 14 讲：后训练与指令对齐</div>
       <div>https://yjyxfcy.github.io/2026/11/04/fnlp14/</div>
     </div>
     <div class="license-meta">
@@ -652,7 +652,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月4日</div>
+          <div>2026年11月5日</div>
         </div>
       
       
@@ -682,8 +682,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/nlp/">← 返回 自然语言处理基础 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/fnlp13/"><small>上一篇</small><strong>← 预训练与微调</strong></a>
-                    <a href="/2026/11/04/fnlp15/"><small>下一篇</small><strong>提示学习与检索增强生成 →</strong></a>
+                    <a href="/2026/11/04/fnlp13/"><small>上一篇</small><strong>← 第 13 讲：预训练与微调</strong></a>
+                    <a href="/2026/11/04/fnlp15/"><small>下一篇</small><strong>第 15 讲：提示学习与检索增强生成 →</strong></a>
                   </div>
                 </nav>
               
@@ -757,7 +757,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E4%BC%9A%E7%BB%AD%E5%86%99%E2%80%9D%E4%B8%8D%E7%AD%89%E4%BA%8E%E2%80%9C%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9D"><span class="toc-text">为什么“会续写”不等于“会回答”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E7%9B%91%E7%9D%A3%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%EF%BC%88SFT%EF%BC%89"><span class="toc-text">第一步：监督指令微调（SFT）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B"><span class="toc-text">第二步：奖励模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96"><span class="toc-text">第三步：强化学习优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E7%9C%8B-InstructGPT-%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="toc-text">怎样看 InstructGPT 的结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%95%B0%E6%8D%AE%E4%BB%8E%E5%93%AA%E9%87%8C%E6%9D%A5"><span class="toc-text">指令数据从哪里来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%96%E5%8A%B1%E4%BD%9C%E5%BC%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0"><span class="toc-text">奖励作弊为什么会出现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94%E6%9C%AC%E8%BA%AB%E6%98%AF%E8%AE%BE%E8%AE%A1%E9%80%89%E6%8B%A9"><span class="toc-text">数据配比本身是设计选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B"><span class="toc-text">回头看</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E4%BC%9A%E7%BB%AD%E5%86%99%E2%80%9D%E4%B8%8D%E7%AD%89%E4%BA%8E%E2%80%9C%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9D"><span class="toc-text">第 1 章：为什么“会续写”不等于“会回答”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E7%9B%91%E7%9D%A3%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%EF%BC%88SFT%EF%BC%89"><span class="toc-text">第 2 章：监督指令微调（SFT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B"><span class="toc-text">第 3 章：奖励模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96"><span class="toc-text">第 4 章：强化学习优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%80%8E%E6%A0%B7%E7%9C%8B-InstructGPT-%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="toc-text">第 5 章：怎样看 InstructGPT 的结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%8C%87%E4%BB%A4%E6%95%B0%E6%8D%AE%E4%BB%8E%E5%93%AA%E9%87%8C%E6%9D%A5"><span class="toc-text">第 6 章：指令数据从哪里来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%A5%96%E5%8A%B1%E4%BD%9C%E5%BC%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0"><span class="toc-text">第 7 章：奖励作弊为什么会出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94%E6%9C%AC%E8%BA%AB%E6%98%AF%E8%AE%BE%E8%AE%A1%E9%80%89%E6%8B%A9"><span class="toc-text">第 8 章：数据配比本身是设计选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E6%9C%AC%E8%AE%B2%E5%B0%8F%E7%BB%93"><span class="toc-text">第 9 章：本讲小结</span></a></li></ol>
   </div>
 </div>
 

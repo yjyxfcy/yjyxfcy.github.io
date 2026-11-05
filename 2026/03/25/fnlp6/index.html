@@ -21,12 +21,12 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="math: true北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第六讲：Distributional Semantics">
+    <meta name="description" content="math: true 北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第六讲：Distributional Semantics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布语义学">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/03/25/fnlp6/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="math: true北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第六讲：Distributional Semantics">
+<meta property="og:description" content="math: true 北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第六讲：Distributional Semantics">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/03/25/fnlp6/6.1.png">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/03/25/fnlp6/6.2.png">
@@ -56,6 +56,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -309,7 +311,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          3.1k 字
         
       </span>
     
@@ -320,7 +322,7 @@
         
         
         
-          18 分钟
+          20 分钟
         
       </span>
     
@@ -579,57 +581,110 @@
             
               <div class="markdown-body">
                 
-                <p>math: true<br>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
+                <p>math: true<br>
+北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第六讲：Distributional Semantics</p>
 <span id="more"></span>
-<h3 id="词义问题"><a href="#词义问题" class="headerlink" title="词义问题"></a>词义问题</h3><h4 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h4><p>WordNet 是一个大型英语词汇数据库，它将名词、动词、形容词和副词组织成同义词集合(synset)，每个synset代表一个不同的概念。<br>以 bank 为例：<br>Synset 1(河岸)：sloping land beside a body of water<br>Synset 2(金融机构)：depository financial institution<br>每个词可能有多个词义(sense)，WordNet 显式地编码了这些信息</p>
+<h3 id="词义问题">词义问题</h3>
+<h4 id="传统方法">传统方法</h4>
+<p>WordNet 是一个大型英语词汇数据库，它将名词、动词、形容词和副词组织成同义词集合(synset)，每个synset代表一个不同的概念。<br>
+以 bank 为例：<br>
+Synset 1(河岸)：sloping land beside a body of water<br>
+Synset 2(金融机构)：depository financial institution<br>
+每个词可能有多个词义(sense)，WordNet 显式地编码了这些信息</p>
 <p>词之间：同义词、反义词、相似词、相关词、褒义贬义词</p>
-<h4 id="评估数据集"><a href="#评估数据集" class="headerlink" title="评估数据集"></a>评估数据集</h4><p>WordSim353：用于评估词相似度(Similarity)和相关度(Relatedness)的数据集<br>相似度：如 tiger - cat (7.35)，侧重“同类”。<br>相关度：如 computer - keyboard (7.62)，侧重“共现”。</p>
-<p>SimLex-999：另一个数据集，更关注相似度而非相关度<br>(如 vanish - disappear 得分9.8，而 hole - agreement 得分0.3)</p>
+<h4 id="评估数据集">评估数据集</h4>
+<p>WordSim353：用于评估词相似度(Similarity)和相关度(Relatedness)的数据集<br>
+相似度：如 tiger - cat (7.35)，侧重“同类”。<br>
+相关度：如 computer - keyboard (7.62)，侧重“共现”。</p>
+<p>SimLex-999：另一个数据集，更关注相似度而非相关度<br>
+(如 vanish - disappear 得分9.8，而 hole - agreement 得分0.3)</p>
 <p>语义场(Semantic Field)：指某个特定语义域中的一组词，如医院相关的(surgeon, scalpel, nurse)，餐厅相关的(waiter, menu, plate)</p>
-<h3 id="词汇表示"><a href="#词汇表示" class="headerlink" title="词汇表示"></a>词汇表示</h3><p>朴素表示：将每个词视为原子，用独热向量表示<br>例如：$[0,0,…,1,0,…,0]$<br>向量的维度等于词汇表大小(可能达到5万甚至1300万)<br>问题：占用空间大，表述稀疏</p>
-<p>基于特征的POS标注器：<br><img src="6.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>如上，从unigram bigram 前缀 后缀四个方面来提取特征<br>发现低频词的准确率较低，具有挑战性</p>
-<h3 id="分布语义学"><a href="#分布语义学" class="headerlink" title="分布语义学"></a>分布语义学</h3><p>经典问题：buffalo的一词多义<br>Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo.这是一个完整的句子()<br>同义词问题：adept, expert, good, practiced, proficient, skillful<br>全新词汇问题：tezguino这种语言学家胡编乱造的词</p>
-<h4 id="核心理念：分布假说"><a href="#核心理念：分布假说" class="headerlink" title="核心理念：分布假说"></a>核心理念：分布假说</h4><p>一个直觉：可以通过上下文判断词义！<br>(无聊的定义：分布语义学是一套基于语言使用语境来表征词义的技术体系。)</p>
-<p>一阶共现：词与词在文本中邻近出现，如 wrote 和 book<br>二阶共现：词与词有相似的邻居，如 wrote 和 said 都常与某人说话或写作相关</p>
-<h4 id="向量空间模型"><a href="#向量空间模型" class="headerlink" title="向量空间模型"></a>向量空间模型</h4><p>核心思想：将词嵌入到一个低维的实数向量空间中,避免出现独热向量那种维度极高的情况<br>这类模型通常被称为嵌入模型或向量空间模型(VSM)<br>也就是老生常谈的word embeddings</p>
-<p>如何构建：<br>定义上下文：例如，取目标词左右各 $w$ 个词作为上下文。<br>构建共现矩阵：行是目标词，列是上下文词，值为共现次数。</p>
+<h3 id="词汇表示">词汇表示</h3>
+<p>朴素表示：将每个词视为原子，用独热向量表示<br>
+例如：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,0,...,1,0,...,0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose">]</span></span></span></span><br>
+向量的维度等于词汇表大小(可能达到5万甚至1300万)<br>
+问题：占用空间大，表述稀疏</p>
+<p>基于特征的POS标注器：<br>
+<img src="6.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>如上，从unigram bigram 前缀 后缀四个方面来提取特征<br>
+发现低频词的准确率较低，具有挑战性</p>
+<h3 id="分布语义学">分布语义学</h3>
+<p>经典问题：buffalo的一词多义<br>
+Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo.这是一个完整的句子()<br>
+同义词问题：adept, expert, good, practiced, proficient, skillful<br>
+全新词汇问题：tezguino这种语言学家胡编乱造的词</p>
+<h4 id="核心理念：分布假说">核心理念：分布假说</h4>
+<p>一个直觉：可以通过上下文判断词义！<br>
+(无聊的定义：分布语义学是一套基于语言使用语境来表征词义的技术体系。)</p>
+<p>一阶共现：词与词在文本中邻近出现，如 wrote 和 book<br>
+二阶共现：词与词有相似的邻居，如 wrote 和 said 都常与某人说话或写作相关</p>
+<h4 id="向量空间模型">向量空间模型</h4>
+<p>核心思想：将词嵌入到一个低维的实数向量空间中,避免出现独热向量那种维度极高的情况<br>
+这类模型通常被称为嵌入模型或向量空间模型(VSM)<br>
+也就是老生常谈的word embeddings</p>
+<p>如何构建：<br>
+定义上下文：例如，取目标词左右各 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span></span></span></span> 个词作为上下文。<br>
+构建共现矩阵：行是目标词，列是上下文词，值为共现次数。</p>
 <p>例如，语料库中有句子：</p>
 <p>… and the cute kitten purred and then …</p>
 <p>… the cute furry cat purred and miaowed …</p>
 <p>… that the small kitten miaowed and she …</p>
 <p>基于此，可以构建出 kitten 和 cat 的稀疏向量，如：</p>
-<p>$kitten &#x3D; [0, 1, 0, 0, 1, 1, 0, 1]$ (对应上下文词: bit, cute, furry, loud, miaowed, purred, …)</p>
-<p>$cat &#x3D; [0, 1, 1, 0, 1, 0, 0, 0]$</p>
-<p>$dog &#x3D; [1, 0, 1, 1, 0, 0, 1, 0]$</p>
-<p>其中the, that, and, …这种词称为停用词，不计入向量中<br>当然也需要考虑词汇的变形，比如miaow和miaowed,dog和dogs</p>
-<p>窗口大小w的值取决于你的目标：<br>较短窗口对应更多句法表示，较长窗口对应更多语义表示。</p>
-<h4 id="权重：点互信息-PMI"><a href="#权重：点互信息-PMI" class="headerlink" title="权重：点互信息(PMI)"></a>权重：点互信息(PMI)</h4><p>问题：原始共现次数受高频词(如 the, and)影响，无法准确衡量词之间的关联强度<br>所以我们引入Pointwise mutual information(PMI)，即为ai引论中讲过的互信息</p>
-<p>$PMI(X,Y)&#x3D;log\dfrac{P(x,y)}{P(x)P(y)}$</p>
-<p>计算两个事件(词 x 和上下文 y)共现的概率是否高于随机独立共现的概率<br>PPMI：将负的PMI值设为0，只保留正相关。<br>作用：可以凸显出与特定词有强关联的上下文词。例如，apricot 如果只与 sugar 共现，其PMI值就会很高。<br><img src="6.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>i</mi><mi>t</mi><mi>t</mi><mi>e</mi><mi>n</mi><mo>=</mo><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">kitten = [0, 1, 0, 0, 1, 1, 0, 1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mord mathnormal">i</span><span class="mord mathnormal">tt</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span> (对应上下文词: bit, cute, furry, loud, miaowed, purred, …)</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>a</mi><mi>t</mi><mo>=</mo><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">cat = [0, 1, 1, 0, 1, 0, 0, 0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose">]</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>o</mi><mi>g</mi><mo>=</mo><mo stretchy="false">[</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">dog = [1, 0, 1, 1, 0, 0, 1, 0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose">]</span></span></span></span></p>
+<p>其中the, that, and, …这种词称为停用词，不计入向量中<br>
+当然也需要考虑词汇的变形，比如miaow和miaowed,dog和dogs</p>
+<p>窗口大小w的值取决于你的目标：<br>
+较短窗口对应更多句法表示，较长窗口对应更多语义表示。</p>
+<h4 id="权重：点互信息-PMI">权重：点互信息(PMI)</h4>
+<p>问题：原始共现次数受高频词(如 the, and)影响，无法准确衡量词之间的关联强度<br>
+所以我们引入Pointwise mutual information(PMI)，即为ai引论中讲过的互信息</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>M</mi><mi>I</mi><mo stretchy="false">(</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><mi>g</mi><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>P</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">PMI(X,Y)=log\dfrac{P(x,y)}{P(x)P(y)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">Y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>计算两个事件(词 x 和上下文 y)共现的概率是否高于随机独立共现的概率<br>
+PPMI：将负的PMI值设为0，只保留正相关。<br>
+作用：可以凸显出与特定词有强关联的上下文词。例如，apricot 如果只与 sugar 共现，其PMI值就会很高。<br>
+<img src="6.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>上面是一个例子</p>
-<p>$PPMI(apricot,sugar)&#x3D;log_2\dfrac{1×19}{2×2}$</p>
-<p>PMI算法存在对罕见事件的偏差问题，极少数词汇的PMI值会异常偏高。<br>解决方案：采用拉普拉斯平滑法(加一法)处理数据</p>
-<h4 id="相似度计算"><a href="#相似度计算" class="headerlink" title="相似度计算"></a>相似度计算</h4><p>余弦相似度：测量两个向量之间的夹角<br><img src="6.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>夹角越小，余弦值越接近1，表示词越相似<br>该指标忽略了向量的长度(即词频)，只关注方向(即词的分布模式)</p>
-<p>使用句法定义词的上下文(Zellig Harris,1968)<br>若两个词具有相似的句法语境，即定义为相似词，例如duty和responsibility</p>
-<p>对于文档？我们建立文档矩阵<br><img src="6.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>P</mi><mi>M</mi><mi>I</mi><mo stretchy="false">(</mo><mi>a</mi><mi>p</mi><mi>r</mi><mi>i</mi><mi>c</mi><mi>o</mi><mi>t</mi><mo separator="true">,</mo><mi>s</mi><mi>u</mi><mi>g</mi><mi>a</mi><mi>r</mi><mo stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mn>1</mn><mo>×</mo><mn>19</mn></mrow><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">PPMI(apricot,sugar)=log_2\dfrac{1×19}{2×2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal">co</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.0359em;">ug</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0908em;vertical-align:-0.7693em;"></span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">19</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>PMI算法存在对罕见事件的偏差问题，极少数词汇的PMI值会异常偏高。<br>
+解决方案：采用拉普拉斯平滑法(加一法)处理数据</p>
+<h4 id="相似度计算">相似度计算</h4>
+<p>余弦相似度：测量两个向量之间的夹角<br>
+<img src="6.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>夹角越小，余弦值越接近1，表示词越相似<br>
+该指标忽略了向量的长度(即词频)，只关注方向(即词的分布模式)</p>
+<p>使用句法定义词的上下文(Zellig Harris,1968)<br>
+若两个词具有相似的句法语境，即定义为相似词，例如duty和responsibility</p>
+<p>对于文档？我们建立文档矩阵<br>
+<img src="6.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <p>然而该矩阵似乎并不友好，更方便的还是TF-IDF(<a href="https://yjyxfcy.github.io/2026/03/18/fnlp3/">详见之前的笔记</a>)</p>
-<h4 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h4><p>降维的目的在于防止稀疏，PPMI向量仍然是高维且稀疏的<br>目标就是获得低维稠密的向量</p>
-<p>潜在语义分析(LSA)：<br>对词-文档矩阵$A$进行奇异值分解</p>
-<p>$A&#x3D;M × Diag(s) × C^{T}$</p>
-<p>这样一来保留了最大的$k$个奇异值，得到低维词向量$M$</p>
-<p>概率潜在语义分析(PLSA):<br><img src="6.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>引入主题作为隐变量，每篇文档$d$由$K$个主题混合而成<br>但是PLSA 无法为训练数据之外的文本分配概率</p>
-<h4 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h4><p>词嵌入(Word Embeddings)：词被表示为低维、稠密的实数向量，如 $[0.456, 0.193, 5.391, …]$</p>
+<h4 id="降维">降维</h4>
+<p>降维的目的在于防止稀疏，PPMI向量仍然是高维且稀疏的<br>
+目标就是获得低维稠密的向量</p>
+<p>潜在语义分析(LSA)：<br>
+对词-文档矩阵<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span></span></span></span>进行奇异值分解</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><mi>M</mi><mo>×</mo><mi>D</mi><mi>i</mi><mi>a</mi><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>×</mo><msup><mi>C</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">A=M × Diag(s) × C^{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mord mathnormal">ia</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>这样一来保留了最大的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span></span></span></span>个奇异值，得到低维词向量<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span></span></span></span></p>
+<p>概率潜在语义分析(PLSA):<br>
+<img src="6.5.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>引入主题作为隐变量，每篇文档<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span></span></span></span>由<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">K</span></span></span></span>个主题混合而成<br>
+但是PLSA 无法为训练数据之外的文本分配概率</p>
+<h4 id="神经网络">神经网络</h4>
+<p>词嵌入(Word Embeddings)：词被表示为低维、稠密的实数向量，如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0.456</mn><mo separator="true">,</mo><mn>0.193</mn><mo separator="true">,</mo><mn>5.391</mn><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0.456, 0.193, 5.391, ...]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0.456</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0.193</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">5.391</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mclose">]</span></span></span></span></p>
 <p>Word2Vec：一个代表性的预测模型，有两种结构</p>
-<p>连续词袋模型(CBOW)：用上下文词预测中心词，$p(word|context)$<br><img src="6.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>Skip-gram：用中心词预测上下文词，$p(context|word)$<br><img src="6.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>每个词对应两个向量，当词为目标词使用$w$，词为上下文使用$c$</p>
+<p>连续词袋模型(CBOW)：用上下文词预测中心词，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>w</mi><mi>o</mi><mi>r</mi><mi>d</mi><mi mathvariant="normal">∣</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>x</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p(word|context)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mord mathnormal" style="margin-right:0.0278em;">or</span><span class="mord mathnormal">d</span><span class="mord">∣</span><span class="mord mathnormal">co</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">x</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><br>
+<img src="6.6.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>Skip-gram：用中心词预测上下文词，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>x</mi><mi>t</mi><mi mathvariant="normal">∣</mi><mi>w</mi><mi>o</mi><mi>r</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p(context|word)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">co</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">e</span><span class="mord mathnormal">x</span><span class="mord mathnormal">t</span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mord mathnormal" style="margin-right:0.0278em;">or</span><span class="mord mathnormal">d</span><span class="mclose">)</span></span></span></span><br>
+<img src="6.7.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>每个词对应两个向量，当词为目标词使用<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span></span></span></span>，词为上下文使用<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span></p>
 <p>优势：相比基于计数的方法，预测模型能更好地捕捉复杂的语义关系，并在下游任务中表现更好。</p>
-<p>内部评估(Intrinsic)：直接测试词向量的相似度与人类判断的相关性，或进行类比推理测试(如“北京之于中国 相当于 巴黎之于？”)。<br>外部评估(Extrinsic)：将词向量作为特征输入到下游NLP任务(如分类器)中，观察任务性能是否提升。</p>
-<h3 id="上下文表示"><a href="#上下文表示" class="headerlink" title="上下文表示"></a>上下文表示</h3><p>静态的word embedding无法解决一词多义问题<br>所以我们需要上下文表示，即语境化词嵌入(Contextualized Word Embeddings)</p>
+<p>内部评估(Intrinsic)：直接测试词向量的相似度与人类判断的相关性，或进行类比推理测试(如“北京之于中国 相当于 巴黎之于？”)。<br>
+外部评估(Extrinsic)：将词向量作为特征输入到下游NLP任务(如分类器)中，观察任务性能是否提升。</p>
+<h3 id="上下文表示">上下文表示</h3>
+<p>静态的word embedding无法解决一词多义问题<br>
+所以我们需要上下文表示，即语境化词嵌入(Contextualized Word Embeddings)</p>
 
                 
               </div>
@@ -831,7 +886,6 @@
 
   
   
-
 
 
 
@@ -1530,44 +1584,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('li > mjx-container').forEach(node => {
-                    node.parentNode.parentNode.classList.add('has-jax');
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

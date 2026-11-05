@@ -21,12 +21,12 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="math: true北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第七讲：Acceleration">
+    <meta name="description" content="math: true 北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第七讲：Acceleration">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模型加速">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/07/30/gen7/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="math: true北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第七讲：Acceleration">
+<meta property="og:description" content="math: true 北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记 第七讲：Acceleration">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/07/30/gen7/7.1.png">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/07/30/gen7/7.2.png">
@@ -51,6 +51,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -304,7 +306,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2k 字
         
       </span>
     
@@ -315,7 +317,7 @@
         
         
         
-          12 分钟
+          13 分钟
         
       </span>
     
@@ -529,29 +531,58 @@
             
               <div class="markdown-body">
                 
-                <p>math: true<br>北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p>
+                <p>math: true<br>
+北京大学信息科学技术学院 生成模型基础(2025秋)的课程笔记</p>
 <p>第七讲：Acceleration</p>
 <span id="more"></span>
-<p>前面我们已经详细介绍了五种主流生成模型的原理<br>它们分别是：VAE AR GAN Flow Diffusion<br>从这一讲开始我们会介绍一些补充内容，也可称作Special Topic<br>这些内容相对不那么硬核，比较短小精悍，可以作为之前主干知识的拓展</p>
-<h3 id="为什么需要加速"><a href="#为什么需要加速" class="headerlink" title="为什么需要加速"></a>为什么需要加速</h3><p>对于自回归模型来说，每生成下一个token都要进行一次前向传播<br>设当前上下文为$x_{1:t}$，则生成过程为<br>$x_{t+1} \sim p_\theta(x|x_{1:t})$<br>因此生成长度为$T$的文本就需要进行$T$次前向计算<br>耗时耗力，成本高，因此加速必不可少<br>接下来我们会介绍几种主流的加速方法</p>
-<h3 id="推测式解码"><a href="#推测式解码" class="headerlink" title="推测式解码"></a>推测式解码</h3><p>这种方法的核心思想是：<br>使用小模型成本较低，但准确率不够好；使用大模型时则是准确率较高，但成本也高<br>因此我们可以先用小模型生成，然后用大模型验证<br>具体可以分成三步：</p>
+<p>前面我们已经详细介绍了五种主流生成模型的原理<br>
+它们分别是：VAE AR GAN Flow Diffusion<br>
+从这一讲开始我们会介绍一些补充内容，也可称作Special Topic<br>
+这些内容相对不那么硬核，比较短小精悍，可以作为之前主干知识的拓展</p>
+<h3 id="为什么需要加速">为什么需要加速</h3>
+<p>对于自回归模型来说，每生成下一个token都要进行一次前向传播<br>
+设当前上下文为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mn>1</mn><mo>:</mo><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">x_{1:t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mrel mtight">:</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，则生成过程为<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>∼</mo><msub><mi>p</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mrow><mn>1</mn><mo>:</mo><mi>t</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x_{t+1} \sim p_\theta(x|x_{1:t})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mrel mtight">:</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><br>
+因此生成长度为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span>的文本就需要进行<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span>次前向计算<br>
+耗时耗力，成本高，因此加速必不可少<br>
+接下来我们会介绍几种主流的加速方法</p>
+<h3 id="推测式解码">推测式解码</h3>
+<p>这种方法的核心思想是：<br>
+使用小模型成本较低，但准确率不够好；使用大模型时则是准确率较高，但成本也高<br>
+因此我们可以先用小模型生成，然后用大模型验证<br>
+具体可以分成三步：</p>
 <ul>
-<li>Draft Construction：首先给定上下文$s&#x3D;(x_1,x_2,…,x_t)$，由小模型生成$ (x_{t+1},…,x_{t+m}) $，这一步成本很低</li>
+<li>Draft Construction：首先给定上下文<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">s=(x_1,x_2,...,x_t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">...</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，由小模型生成$ (x_{t+1},…,x_{t+m}) $，这一步成本很低</li>
 <li>Draft verification：将小模型生成的 Draft 和 Prompt 一起输入大模型。由于 Transformer 可以并行计算整个序列，因此一次 Forward 即可得到 Draft 每个位置的预测概率。然后判断：哪些 token 可以接受，第一个错误 token 在哪里</li>
 <li>Draft Correction：找到第一个错误的 token，这个 token 改用大模型生成，然后这个 token 之前的内容就可以认为是正确的，全部保留，接着继续让小模型生成新 Draft，如此循环往复</li>
 </ul>
 <p>显然，如果 Draft 能够保证有一定成功率的话，是可以降低成本实现加速的</p>
-<p>那么问题来了：我们是否能确保，用这种方法生成的结果，等价于直接从大模型中采样？<br>我们假设大模型分布$q(x)$，小模型$p(x)$，用下面方法采样<br>ppt上最终用数学推导证明了二者的等价性，这里不再详细说明<br><img src="7.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>那么问题来了：我们是否能确保，用这种方法生成的结果，等价于直接从大模型中采样？<br>
+我们假设大模型分布<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">q(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span>，小模型<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span>，用下面方法采样<br>
+ppt上最终用数学推导证明了二者的等价性，这里不再详细说明<br>
+<img src="7.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <img src="7.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
-
-<h3 id="模型压缩"><a href="#模型压缩" class="headerlink" title="模型压缩"></a>模型压缩</h3><p>除了刚才推理的trick之外，我们还可以直接压缩模型<br>这主要由于现代深度网络通常具有过参数化(Overparameterization)，也即模型参数远大于训练样本数量，存在一些冗余参数，因此删除一部分之后性能通常不会明显下降<br>下面我们将介绍三种常用的压缩方式：</p>
-<h4 id="Pruning-模型剪枝"><a href="#Pruning-模型剪枝" class="headerlink" title="Pruning(模型剪枝)"></a>Pruning(模型剪枝)</h4><p>基本流程大概就是训练、删除部分参数、微调、剪枝<br>具体的剪枝又分为两种：</p>
+<h3 id="模型压缩">模型压缩</h3>
+<p>除了刚才推理的trick之外，我们还可以直接压缩模型<br>
+这主要由于现代深度网络通常具有过参数化(Overparameterization)，也即模型参数远大于训练样本数量，存在一些冗余参数，因此删除一部分之后性能通常不会明显下降<br>
+下面我们将介绍三种常用的压缩方式：</p>
+<h4 id="Pruning-模型剪枝">Pruning(模型剪枝)</h4>
+<p>基本流程大概就是训练、删除部分参数、微调、剪枝<br>
+具体的剪枝又分为两种：</p>
 <ul>
-<li>Unstructured Pruning：删除任意位置的权重<br>精度损失小，但是GPU很难直接加速，稀疏矩阵也没那么好算</li>
-<li>Structured Pruning：按照结构来删除，例如删除一整个channel，layer这样，把3×5的矩阵变成2×5<br>精度损失比较明显，好在计算量确实有减少，GPU能起到一定加速作用</li>
+<li>Unstructured Pruning：删除任意位置的权重<br>
+精度损失小，但是GPU很难直接加速，稀疏矩阵也没那么好算</li>
+<li>Structured Pruning：按照结构来删除，例如删除一整个channel，layer这样，把3×5的矩阵变成2×5<br>
+精度损失比较明显，好在计算量确实有减少，GPU能起到一定加速作用</li>
 </ul>
-<p>对于Transformer的剪枝，有一篇著名论文：<strong>Are Sixteen Heads Really Better Than One</strong><br>主要阐述了对multi-head attention的剪枝<br>实验结果说明了稍微删去一两个head，准确率的下降其实不太明显</p>
-<h4 id="Quantization-模型量化"><a href="#Quantization-模型量化" class="headerlink" title="Quantization(模型量化)"></a>Quantization(模型量化)</h4><p>基本思想就是把高精度参数变成低精度表示<br>例如Float64,32,16到Int8，精度逐渐下降的同时<br>虽然性能会变差，但是显存更小，推理更快<br>因此量化目标就是：用尽可能低的精度，保持模型性能基本不变</p>
+<p>对于Transformer的剪枝，有一篇著名论文：<strong>Are Sixteen Heads Really Better Than One</strong><br>
+主要阐述了对multi-head attention的剪枝<br>
+实验结果说明了稍微删去一两个head，准确率的下降其实不太明显</p>
+<h4 id="Quantization-模型量化">Quantization(模型量化)</h4>
+<p>基本思想就是把高精度参数变成低精度表示<br>
+例如Float64,32,16到Int8，精度逐渐下降的同时<br>
+虽然性能会变差，但是显存更小，推理更快<br>
+因此量化目标就是：用尽可能低的精度，保持模型性能基本不变</p>
 <p>具体可以量化：</p>
 <ul>
 <li>Weight(模型参数)</li>
@@ -559,9 +590,14 @@
 <li>Gradient(训练阶段梯度)</li>
 </ul>
 <p>其中LLM 最常见的是 Weight Quantization。</p>
-<p>总而言之量化是一种十分有效的方法，但需要工程上的大量投入<br>量化之后还需要Fine Tuning来解决不稳定性问题，也需要很多trick</p>
-<h4 id="Knowledge-Distillation-知识蒸馏"><a href="#Knowledge-Distillation-知识蒸馏" class="headerlink" title="Knowledge Distillation(知识蒸馏)"></a>Knowledge Distillation(知识蒸馏)</h4><p>这个应该是出现频率最高的办法了，毕竟现在各大llm厂商天天吵来吵去，说你的模型蒸馏了我的，我的又蒸馏了他的，真可谓百花齐放百家争鸣</p>
-<p>主要思想就是用一个老师模型来指导学生模型<br>假设老师模型是$f()$，学生模型是$g_\theta()$，输入是$x$，ground truth为$y$<br>那么总损失$L&#x3D;loss(g_\theta(x),f(x))+\alpha loss(g_\theta(x),y)$<br>其中第一项保证学生确实学到了老师的知识，第二项保证学生预测的尽可能接近实际</p>
+<p>总而言之量化是一种十分有效的方法，但需要工程上的大量投入<br>
+量化之后还需要Fine Tuning来解决不稳定性问题，也需要很多trick</p>
+<h4 id="Knowledge-Distillation-知识蒸馏">Knowledge Distillation(知识蒸馏)</h4>
+<p>这个应该是出现频率最高的办法了，毕竟现在各大llm厂商天天吵来吵去，说你的模型蒸馏了我的，我的又蒸馏了他的，真可谓百花齐放百家争鸣</p>
+<p>主要思想就是用一个老师模型来指导学生模型<br>
+假设老师模型是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f()</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mclose">)</span></span></span></span>，学生模型是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>g</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g_\theta()</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mclose">)</span></span></span></span>，输入是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>，ground truth为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span><br>
+那么总损失<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mi>l</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo stretchy="false">(</mo><msub><mi>g</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>+</mo><mi>α</mi><mi>l</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo stretchy="false">(</mo><msub><mi>g</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L=loss(g_\theta(x),f(x))+\alpha loss(g_\theta(x),y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">oss</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">))</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">oss</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span></span><br>
+其中第一项保证学生确实学到了老师的知识，第二项保证学生预测的尽可能接近实际</p>
 <p>当然知识蒸馏不仅可以用于language model，也可用于diffusion model，用来减少采样步数</p>
 
                 
@@ -764,7 +800,6 @@
 
   
   
-
 
 
 
@@ -1463,44 +1498,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('li > mjx-container').forEach(node => {
-                    node.parentNode.parentNode.classList.add('has-jax');
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

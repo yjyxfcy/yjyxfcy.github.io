@@ -21,12 +21,12 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="math: true北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第九讲：Syntactic Analysis">
+    <meta name="description" content="math: true 北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第九讲：Syntactic Analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="句法分析Ⅰ">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/04/16/fnlp9/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="math: true北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第九讲：Syntactic Analysis">
+<meta property="og:description" content="math: true 北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记 第九讲：Syntactic Analysis">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/04/16/fnlp9/9.1.png">
 <meta property="og:image" content="https://yjyxfcy.github.io/2026/04/16/fnlp9/9.2.png">
@@ -53,6 +53,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -306,7 +308,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.3k 字
         
       </span>
     
@@ -317,7 +319,7 @@
         
         
         
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -576,34 +578,67 @@
             
               <div class="markdown-body">
                 
-                <p>math: true<br>北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
+                <p>math: true<br>
+北京大学信息科学技术学院 自然语言处理基础(2026春)的课程笔记</p>
 <p>第九讲：Syntactic Analysis</p>
 <span id="more"></span>
-<h3 id="句法结构"><a href="#句法结构" class="headerlink" title="句法结构"></a>句法结构</h3><h4 id="为什么需要句法分析？"><a href="#为什么需要句法分析？" class="headerlink" title="为什么需要句法分析？"></a>为什么需要句法分析？</h4><p>语言不仅仅是词的序列，还遵循隐性的语法规则<br>相同的词序列可能因结构不同而有不同含义：</p>
+<h3 id="句法结构">句法结构</h3>
+<h4 id="为什么需要句法分析？">为什么需要句法分析？</h4>
+<p>语言不仅仅是词的序列，还遵循隐性的语法规则<br>
+相同的词序列可能因结构不同而有不同含义：</p>
 <p>Jane ate spaghetti with fork(用叉子吃)</p>
 <p>Jane ate spaghetti with meatballs(吃肉丸意大利面)</p>
 <p>句法分析可以揭示这种结构差异。</p>
-<h4 id="组成成分-Constituent"><a href="#组成成分-Constituent" class="headerlink" title="组成成分(Constituent)"></a>组成成分(Constituent)</h4><p>一组词可以作为一个整体单元(如名词短语NP、动词短语VP)</p>
+<h4 id="组成成分-Constituent">组成成分(Constituent)</h4>
+<p>一组词可以作为一个整体单元(如名词短语NP、动词短语VP)</p>
 <p>判断是否为成分的方法：</p>
-<p>是否能出现在特定位置(如NP常出现在动词前)<br>是否能整体移动<br>是否能与其他成分并列</p>
+<p>是否能出现在特定位置(如NP常出现在动词前)<br>
+是否能整体移动<br>
+是否能与其他成分并列</p>
 <p>例子：Harry the Horse、a high-class spot 等都是NP</p>
-<h4 id="短语结构树-Phrase-Structure-Tree"><a href="#短语结构树-Phrase-Structure-Tree" class="headerlink" title="短语结构树(Phrase Structure Tree)"></a>短语结构树(Phrase Structure Tree)</h4><p>将句子组织为嵌套结构，形成树状图<br><img src="9.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<h3 id="语法与解析"><a href="#语法与解析" class="headerlink" title="语法与解析"></a>语法与解析</h3><h4 id="上下文无关文法-CFG"><a href="#上下文无关文法-CFG" class="headerlink" title="上下文无关文法(CFG)"></a>上下文无关文法(CFG)</h4><p>形式化定义：</p>
-<p>终结符(单词)<br>非终结符(如NP、VP)<br>起始符号 S<br>产生式规则：A → β</p>
-<p>例子：<br>S → NP VP<br>NP → Det N<br>VP → V NP</p>
-<h4 id="乔姆斯基范式-CNF"><a href="#乔姆斯基范式-CNF" class="headerlink" title="乔姆斯基范式(CNF)"></a>乔姆斯基范式(CNF)</h4><p>每条规则必须是：</p>
+<h4 id="短语结构树-Phrase-Structure-Tree">短语结构树(Phrase Structure Tree)</h4>
+<p>将句子组织为嵌套结构，形成树状图<br>
+<img src="9.1.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h3 id="语法与解析">语法与解析</h3>
+<h4 id="上下文无关文法-CFG">上下文无关文法(CFG)</h4>
+<p>形式化定义：</p>
+<p>终结符(单词)<br>
+非终结符(如NP、VP)<br>
+起始符号 S<br>
+产生式规则：A → β</p>
+<p>例子：<br>
+S → NP VP<br>
+NP → Det N<br>
+VP → V NP</p>
+<h4 id="乔姆斯基范式-CNF">乔姆斯基范式(CNF)</h4>
+<p>每条规则必须是：</p>
 <p>A → B C(两个非终结符)</p>
 <p>A → w(一个终结符)</p>
 <p>任何CFG都可以转换为CNF，便于解析</p>
-<h4 id="概率上下文无关文法-PCFG"><a href="#概率上下文无关文法-PCFG" class="headerlink" title="概率上下文无关文法(PCFG)"></a>概率上下文无关文法(PCFG)</h4><p>为每条产生规则$A_i \rightarrow \beta_i$分配一个概率$$q(A_i \rightarrow \beta_i)$$<br>那么概率树$t$的概率为所有规则概率的乘积<br>$$P(t) &#x3D; \prod_{i} q(A_i \rightarrow \beta_i)$$<br>对于任意非终结符$A_i$，有$$\sum_{\beta} q(A_i \rightarrow \beta |A_i) &#x3D; 1$$<br>下面是一个实例，便于理解<br><img src="9.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
-<p>MLE：从训练数据中估计每个规则的概率<br>$$q_{ML}(A_i \rightarrow \beta) &#x3D; \dfrac{count(A_i \rightarrow \beta)}{count(A_i)}$$</p>
-<h4 id="CKY解析算法"><a href="#CKY解析算法" class="headerlink" title="CKY解析算法"></a>CKY解析算法</h4><p>给出一个PCFG和句子$s$，定义$T(s)$为以$s$为输出结果的树的集合，我们想要找到$$\hat{t} &#x3D; argmax_{t \in T(s)} P(t)$$</p>
-<p>采用CKY算法进行动态规划<br>定义$\pi[i,j,X]$为从词序$i$到$j$生成非终结符$X$的最大概率<br>然后根据规则填充如下表格：<br><img src="9.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<h4 id="概率上下文无关文法-PCFG">概率上下文无关文法(PCFG)</h4>
+<p>为每条产生规则<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>i</mi></msub><mo>→</mo><msub><mi>β</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">A_i \rightarrow \beta_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>分配一个概率$$q(A_i \rightarrow \beta_i)$$<br>
+那么概率树<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span>的概率为所有规则概率的乘积</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo>∏</mo><mi>i</mi></munder><mi>q</mi><mo stretchy="false">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo>→</mo><msub><mi>β</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(t) = \prod_{i} q(A_i \rightarrow \beta_i)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3277em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>对于任意非终结符<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">A_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，有$$\sum_{\beta} q(A_i \rightarrow \beta |A_i) = 1$$<br>
+下面是一个实例，便于理解<br>
+<img src="9.2.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
+<p>MLE：从训练数据中估计每个规则的概率</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>q</mi><mrow><mi>M</mi><mi>L</mi></mrow></msub><mo stretchy="false">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo>→</mo><mi>β</mi><mo stretchy="false">)</mo><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>c</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>t</mi><mo stretchy="false">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo>→</mo><mi>β</mi><mo stretchy="false">)</mo></mrow><mrow><mi>c</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>t</mi><mo stretchy="false">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">q_{ML}(A_i \rightarrow \beta) = \dfrac{count(A_i \rightarrow \beta)}{count(A_i)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.109em;">M</span><span class="mord mathnormal mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">co</span><span class="mord mathnormal">u</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">co</span><span class="mord mathnormal">u</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h4 id="CKY解析算法">CKY解析算法</h4>
+<p>给出一个PCFG和句子<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>，定义<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(s)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span>为以<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>为输出结果的树的集合，我们想要找到$$\hat{t} = argmax_{t \in T(s)} P(t)$$</p>
+<p>采用CKY算法进行动态规划<br>
+定义<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mo stretchy="false">[</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo separator="true">,</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\pi[i,j,X]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mclose">]</span></span></span></span>为从词序<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span></span></span></span>生成非终结符<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span></span></span></span>的最大概率<br>
+然后根据规则填充如下表格：<br>
+<img src="9.3.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;"></p>
 <img src="9.4.png" srcset="/img/loading.gif" lazyload style="max-width: 100%; height: auto;">
+<h3 id="评估">评估</h3>
+<p>使用标注精确率(Labeled Precision)、标注召回率(Labeled Recall)、F1值</p>
+<p>常见做法：<br>
+在Penn Treebank上训练(02-21节),测试在23节上,词性标签序列上的F1通常在70%左右</p>
+<h6 id="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣">笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣</h6>
 
-<h3 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h3><p>使用标注精确率(Labeled Precision)、标注召回率(Labeled Recall)、F1值</p>
-<p>常见做法：<br>在Penn Treebank上训练(02-21节),测试在23节上,词性标签序列上的F1通常在70%左右</p>
-<h6 id="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣"><a href="#笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣" class="headerlink" title="笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣"></a>笔者按：本章主要内容依旧是ai引论的复习，不过相比ai引论的CYK，这里将其换了个顺序改成CKY，并且加入了概率转移PCFG，属于是推陈出新，新瓶装旧酒，温故而知新，可以为师矣</h6>
                 
               </div>
             
@@ -804,7 +839,6 @@
 
   
   
-
 
 
 
@@ -1503,44 +1537,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('li > mjx-container').forEach(node => {
-                    node.parentNode.parentNode.classList.add('has-jax');
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

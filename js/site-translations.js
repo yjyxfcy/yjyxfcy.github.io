@@ -35,7 +35,7 @@
     ["下一篇","Next","Weiter","Siguiente","次の記事","Следующая","下一篇","下一篇"],
     ["本文目录","On this page","Inhaltsverzeichnis","En esta página","目次","На этой странице","本文目錄","本文目錄"],
     ["北京大学","Peking University","Peking-Universität","Universidad de Pekín","北京大学","Пекинский университет","北京大學","北京大學"],
-    ["大作业","Projects","Projekte","Proyectos","プロジェクト","Проекты","專題作業","專題作業"],
+    ["项目","Projects","Projekte","Proyectos","プロジェクト","Проекты","專題","專題"],
     ["小作文","Personal Essays","Persönliche Texte","Ensayos personales","エッセイ","Личные заметки","個人隨筆","個人隨筆"],
     ["测试","Miscellaneous","Sonstiges","Varios","その他","Разное","其他","其他"],
     ["文章","Post","Beitrag","Artículo","記事","Статья","文章","文章"],

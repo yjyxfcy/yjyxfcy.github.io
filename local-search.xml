@@ -4,11 +4,30 @@
   
   
   <entry>
-    <title>Transit Atlas：中国公共交通图谱</title>
-    <link href="/transit-atlas/"/>
-    <url>/transit-atlas/</url>
+    <title>自然语言处理基础 Lab 作业</title>
+    <link href="/projects/fnlp-labs/"/>
+    <url>/projects/fnlp-labs/</url>
     
-    <content type="html"><![CDATA[<p>一个面向中国公共交通信息查询的交互式图谱网站，整合地铁、公交与全国铁路网络。</p><span id="more"></span><p>Transit Atlas 提供线路和站点检索、换乘规划，以及高铁车次的停站与时刻查询。希望把分散在不同交通系统中的信息放到同一张更容易浏览的地图里。</p><p><a href="https://yjyxfcy.github.io/transit-atlas/">打开 Transit Atlas →</a></p>]]></content>
+    <content type="html"><![CDATA[<p>北京大学信息科学技术学院《自然语言处理基础》（2026 春）的四次 Lab 作业整理。</p><span id="more"></span><h2 id="项目简介">项目简介</h2><p>这份仓库记录了课程中的四次实践：分析三个大语言模型容易出错的问题、词性标注、文本检索，以及调用 Qwen3-8B API 解答大学物理和化学题目。</p><p>四次 Lab 的最终成绩分别为 100、92、90、93 分。代码、实验过程和作业材料均保存在仓库中。</p><p>项目地址：<a href="https://github.com/yjyxfcy/pku-fnlp-labs">查看 GitHub 仓库 →</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Transit Atlas：中国公共交通图谱</title>
+    <link href="/projects/transit-atlas/"/>
+    <url>/projects/transit-atlas/</url>
+    
+    <content type="html"><![CDATA[<p>这是一个面向中国公共交通信息查询的交互式图谱网站，整合地铁、公交与全国铁路网络。</p><span id="more"></span><h2 id="项目简介">项目简介</h2><p>Transit Atlas 想把分散在不同交通系统中的信息放到同一张更容易浏览的地图里。目前可以查询地铁和公交线路、站点信息与换乘方案，也支持查看全国铁路网络和高铁车次的停站时刻。</p><p>它既可以用来快速确认一座城市的线网结构，也适合在查线路、找换乘或比较车次时随手打开看看。</p><p>项目地址：<a href="https://yjyxfcy.github.io/transit-atlas/">打开 Transit Atlas →</a></p>]]></content>
     
     
     <categories>

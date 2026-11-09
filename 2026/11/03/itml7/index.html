@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第七讲：一张图片里，同一条边缘出现在左上角或右下角，识别它真的需要两套完全不同的参数吗？ 卷积网络的想法是让同一个小滤波器在整张图上移动。这样既减少参数，也保留了像素之间的空间关系。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.131Z">
-<meta property="article:modified_time" content="2026-11-05T15:22:37.563Z">
+<meta property="article:modified_time" content="2026-11-09T08:58:10.440Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          3k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          18 分钟
+          19 分钟
         
       </span>
     
@@ -378,7 +378,7 @@
         aria-expanded="true"
       >
         机器学习概论
-        <span class="list-group-count">(8)</span>
+        <span class="list-group-count">(9)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -462,6 +462,15 @@
         </a>
       
     
+      
+      
+        <a href="/2026/11/09/itml9/" title="第 9 讲：非参数模型——决策树与支持向量机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 9 讲：非参数模型——决策树与支持向量机</span>
+        </a>
+      
+    
   </div>
 
         
@@ -486,14 +495,14 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>07</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">第 1 章：卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">第 2 章：输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">第 4 章：经典架构与变体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%E5%8D%B7%E7%A7%AF%E5%B0%BA%E5%AF%B8%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">第 5 章：手算一次卷积尺寸和参数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E7%B4%AF%E5%8A%A0%E2%80%9D"><span class="toc-text">第 6 章：反向传播为什么需要“累加”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8F%96%E8%88%8D"><span class="toc-text">第 7 章：几种结构的计算取舍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9C%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">第 8 章：从经典网络看设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E5%9B%BE%E5%83%8F%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84%E8%83%BD%E6%8F%90%E4%BE%9B%E5%A4%9A%E5%B0%91%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D"><span class="toc-text">第 9 章：图像空间结构能提供多少“不变性”</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">第 1 章：卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">第 2 章：输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">第 4 章：经典架构与变体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%E5%8D%B7%E7%A7%AF%E5%B0%BA%E5%AF%B8%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">第 5 章：手算一次卷积尺寸和参数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E7%B4%AF%E5%8A%A0%E2%80%9D"><span class="toc-text">第 6 章：反向传播为什么需要“累加”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8F%96%E8%88%8D"><span class="toc-text">第 7 章：几种结构的计算取舍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9C%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">第 8 章：从经典网络看设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E5%9B%BE%E5%83%8F%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84%E8%83%BD%E6%8F%90%E4%BE%9B%E5%A4%9A%E5%B0%91%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D"><span class="toc-text">第 9 章：图像空间结构能提供多少“不变性”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E5%8D%B7%E7%A7%AF%E5%B1%82%E5%92%8C%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B1%82%E5%B9%B6%E9%9D%9E%E7%BB%9D%E5%AF%B9%E5%AF%B9%E7%AB%8B"><span class="toc-text">补充：卷积层和全连接层并非绝对对立</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 7 讲：卷积神经网络"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月5日 晚上
+                    本文最后更新于 2026年11月9日 下午
                   
                 
               </p>
@@ -548,6 +557,8 @@
 <p>共享卷积核使特征检测具有平移等变性，但边界填充、步长和池化会改变严格的等变关系。图像旋转不变性也不会从普通卷积自动得到，通常需要数据增强、特殊结构或训练数据覆盖旋转情况。</p>
 <p>把这些归纳偏置当作“帮助学习的假设”比当作绝对保证更准确。</p>
 <p>局部连接让网络先看附近像素，参数共享让同一种特征能在不同位置被检测到，层叠卷积和池化再把局部信息逐渐汇总成更大的图像结构。</p>
+<h2 id="补充：卷积层和全连接层并非绝对对立">补充：卷积层和全连接层并非绝对对立</h2>
+<p>全连接层可看成覆盖整个输入的一次卷积；例如对 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mo>×</mo><mn>7</mn><mo>×</mo><mn>512</mn></mrow><annotation encoding="application/x-tex">7\times7\times512</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">512</span></span></span></span> 输入输出 4096 个数的全连接层，等价于 4096 个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mo>×</mo><mn>7</mn><mo>×</mo><mn>512</mn></mrow><annotation encoding="application/x-tex">7\times7\times512</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">512</span></span></span></span> 卷积核。反过来，卷积更强调局部连接与共享参数。这个视角能解释为什么分类网络末端可用卷积和全局平均池化替代大规模全连接层。</p>
 
                 
               </div>
@@ -605,7 +616,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月5日</div>
+          <div>2026年11月9日</div>
         </div>
       
       
@@ -710,7 +721,7 @@
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">第 1 章：卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">第 2 章：输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">第 4 章：经典架构与变体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%E5%8D%B7%E7%A7%AF%E5%B0%BA%E5%AF%B8%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">第 5 章：手算一次卷积尺寸和参数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E7%B4%AF%E5%8A%A0%E2%80%9D"><span class="toc-text">第 6 章：反向传播为什么需要“累加”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8F%96%E8%88%8D"><span class="toc-text">第 7 章：几种结构的计算取舍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9C%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">第 8 章：从经典网络看设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E5%9B%BE%E5%83%8F%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84%E8%83%BD%E6%8F%90%E4%BE%9B%E5%A4%9A%E5%B0%91%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D"><span class="toc-text">第 9 章：图像空间结构能提供多少“不变性”</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">第 1 章：卷积的两条归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8%E3%80%81%E5%A1%AB%E5%85%85%E4%B8%8E%E6%84%9F%E5%8F%97%E9%87%8E"><span class="toc-text">第 2 章：输出尺寸、填充与感受野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：基本网络与训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8F%98%E4%BD%93"><span class="toc-text">第 4 章：经典架构与变体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%E5%8D%B7%E7%A7%AF%E5%B0%BA%E5%AF%B8%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">第 5 章：手算一次卷积尺寸和参数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E7%B4%AF%E5%8A%A0%E2%80%9D"><span class="toc-text">第 6 章：反向传播为什么需要“累加”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%87%A0%E7%A7%8D%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8F%96%E8%88%8D"><span class="toc-text">第 7 章：几种结构的计算取舍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9C%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">第 8 章：从经典网络看设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E5%9B%BE%E5%83%8F%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84%E8%83%BD%E6%8F%90%E4%BE%9B%E5%A4%9A%E5%B0%91%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D"><span class="toc-text">第 9 章：图像空间结构能提供多少“不变性”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E5%8D%B7%E7%A7%AF%E5%B1%82%E5%92%8C%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B1%82%E5%B9%B6%E9%9D%9E%E7%BB%9D%E5%AF%B9%E5%AF%B9%E7%AB%8B"><span class="toc-text">补充：卷积层和全连接层并非绝对对立</span></a></li></ol>
   </div>
 </div>
 

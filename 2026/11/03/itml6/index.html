@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第六讲：线性模型学不出弯曲的边界，可以先手工设计复杂特征。但如果特征也交给模型学习，会发生什么？ 多层感知机给出了答案，同时带来了新的问题：参数那么多，梯度怎样算，深层网络怎样训？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.128Z">
-<meta property="article:modified_time" content="2026-11-05T15:22:37.563Z">
+<meta property="article:modified_time" content="2026-11-09T08:58:10.439Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k 字
+          3.3k 字
         
       </span>
     
@@ -378,7 +378,7 @@
         aria-expanded="true"
       >
         机器学习概论
-        <span class="list-group-count">(8)</span>
+        <span class="list-group-count">(9)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -462,6 +462,15 @@
         </a>
       
     
+      
+      
+        <a href="/2026/11/09/itml9/" title="第 9 讲：非参数模型——决策树与支持向量机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 9 讲：非参数模型——决策树与支持向量机</span>
+        </a>
+      
+    
   </div>
 
         
@@ -486,14 +495,14 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>06</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">第 1 章：从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">第 2 章：反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">第 4 章：优化与防过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%94%A8%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E8%B5%B0%E4%B8%80%E9%81%8D%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">第 5 章：用两层网络走一遍反向传播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%AE%8B%E5%B7%AE%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89"><span class="toc-text">第 6 章：梯度消失、初始化和残差的数学直觉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BB%86%E8%8A%82"><span class="toc-text">第 7 章：归一化和正则化的操作细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">第 8 章：激活函数的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E6%97%A9%E5%81%9C%E4%B8%8E%E6%9D%83%E9%87%8D%E6%83%A9%E7%BD%9A%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-text">第 9 章：早停与权重惩罚的联系与区别</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">第 1 章：从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">第 2 章：反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">第 4 章：优化与防过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%94%A8%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E8%B5%B0%E4%B8%80%E9%81%8D%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">第 5 章：用两层网络走一遍反向传播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%AE%8B%E5%B7%AE%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89"><span class="toc-text">第 6 章：梯度消失、初始化和残差的数学直觉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BB%86%E8%8A%82"><span class="toc-text">第 7 章：归一化和正则化的操作细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">第 8 章：激活函数的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E6%97%A9%E5%81%9C%E4%B8%8E%E6%9D%83%E9%87%8D%E6%83%A9%E7%BD%9A%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-text">第 9 章：早停与权重惩罚的联系与区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%A9%B6%E7%AB%9F%E5%A2%9E%E5%8A%A0%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">补充：非线性究竟增加了什么</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 6 讲：多层感知机与神经网络训练"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月5日 晚上
+                    本文最后更新于 2026年11月9日 下午
                   
                 
               </p>
@@ -558,6 +567,8 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>从较小随机权重开始训练时，早期迭代往往先学到较明显的规律；继续优化可能逐渐追随训练噪声。早停选择验证损失最低附近的参数，它通过限制优化轨迹间接控制复杂度。</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">L_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 在目标函数中显式惩罚权重，Dropout 在训练中随机改变网络结构，三者都可能改善泛化，但不能相互视作完全等价。若类别不平衡，单看准确率还可能掩盖小类错误，验证指标要与任务目标一致。</p>
 <p>反向传播计算各参数的导数，优化器利用这些导数更新参数。初始化、归一化和残差连接有助于训练，正则化、Dropout 和早停则用于改善泛化。</p>
+<h2 id="补充：非线性究竟增加了什么">补充：非线性究竟增加了什么</h2>
+<p>多层线性层可以合并成一层线性变换，深度本身不会让它表示弯曲边界；激活函数才让网络能够表达 XOR 一类线性不可分关系。基函数扩展也能引入非线性，但特征由人预先指定；神经网络的特点是把表示和预测一起从数据中学习。</p>
 
                 
               </div>
@@ -615,7 +626,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月5日</div>
+          <div>2026年11月9日</div>
         </div>
       
       
@@ -720,7 +731,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">第 1 章：从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">第 2 章：反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">第 4 章：优化与防过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%94%A8%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E8%B5%B0%E4%B8%80%E9%81%8D%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">第 5 章：用两层网络走一遍反向传播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%AE%8B%E5%B7%AE%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89"><span class="toc-text">第 6 章：梯度消失、初始化和残差的数学直觉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BB%86%E8%8A%82"><span class="toc-text">第 7 章：归一化和正则化的操作细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">第 8 章：激活函数的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E6%97%A9%E5%81%9C%E4%B8%8E%E6%9D%83%E9%87%8D%E6%83%A9%E7%BD%9A%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-text">第 9 章：早停与权重惩罚的联系与区别</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E4%BB%8E%E5%9B%BA%E5%AE%9A%E7%89%B9%E5%BE%81%E5%88%B0%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81"><span class="toc-text">第 1 章：从固定特征到学习特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%A9%B6%E7%AB%9F%E7%AE%97%E4%BB%80%E4%B9%88"><span class="toc-text">第 2 章：反向传播究竟算什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B7%B1%E5%B1%82%E7%BD%91%E7%BB%9C%E9%9A%BE%E8%AE%AD%E7%BB%83"><span class="toc-text">第 3 章：为什么深层网络难训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9A%E4%BC%98%E5%8C%96%E4%B8%8E%E9%98%B2%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-text">第 4 章：优化与防过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9A%E7%94%A8%E4%B8%A4%E5%B1%82%E7%BD%91%E7%BB%9C%E8%B5%B0%E4%B8%80%E9%81%8D%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">第 5 章：用两层网络走一遍反向传播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%AE%8B%E5%B7%AE%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9B%B4%E8%A7%89"><span class="toc-text">第 6 章：梯度消失、初始化和残差的数学直觉</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96%E7%9A%84%E6%93%8D%E4%BD%9C%E7%BB%86%E8%8A%82"><span class="toc-text">第 7 章：归一化和正则化的操作细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">第 8 章：激活函数的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E6%97%A9%E5%81%9C%E4%B8%8E%E6%9D%83%E9%87%8D%E6%83%A9%E7%BD%9A%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-text">第 9 章：早停与权重惩罚的联系与区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%A9%B6%E7%AB%9F%E5%A2%9E%E5%8A%A0%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">补充：非线性究竟增加了什么</span></a></li></ol>
   </div>
 </div>
 

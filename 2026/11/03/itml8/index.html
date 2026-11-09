@@ -29,7 +29,7 @@
 <meta property="og:description" content="北京大学《机器学习概论》（2026 秋）的课程笔记。 第八讲：读到一句话的末尾时，模型该怎样记住前面的词？如果前文很长，能不能直接去找当前最相关的位置？ RNN 和注意力分别回答了这两个问题，Transformer 则把注意力作为主要计算模块。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:10:26.133Z">
-<meta property="article:modified_time" content="2026-11-05T15:22:37.563Z">
+<meta property="article:modified_time" content="2026-11-09T08:58:10.442Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k 字
+          3.3k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -378,7 +378,7 @@
         aria-expanded="true"
       >
         机器学习概论
-        <span class="list-group-count">(8)</span>
+        <span class="list-group-count">(9)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -462,6 +462,15 @@
         </a>
       
     
+      
+      
+        <a href="/2026/11/09/itml9/" title="第 9 讲：非参数模型——决策树与支持向量机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 9 讲：非参数模型——决策树与支持向量机</span>
+        </a>
+      
+    
   </div>
 
         
@@ -486,14 +495,14 @@
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>08</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
-              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">第 1 章：序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9ARNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">第 2 章：RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">第 3 章：编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9ATransformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">第 4 章：Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9ARNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">第 5 章：RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">第 6 章：注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9ATransformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">第 7 章：Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">第 9 章：训练与生成要分开理解</span></a></li></ol></div></details>
+              <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">第 1 章：序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9ARNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">第 2 章：RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">第 3 章：编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9ATransformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">第 4 章：Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9ARNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">第 5 章：RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">第 6 章：注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9ATransformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">第 7 章：Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">第 9 章：训练与生成要分开理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9ALSTM-%E7%9A%84%E9%97%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E7%94%A8"><span class="toc-text">补充：LSTM 的门为什么有用</span></a></li></ol></div></details>
             
             <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 8 讲：序列神经网络模型"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月5日 晚上
+                    本文最后更新于 2026年11月9日 下午
                   
                 
               </p>
@@ -578,6 +587,8 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>生成时真实后续词未知，只能用已生成的词继续预测，因此逐步生成。训练并行不等于生成也能一次性算完。</p>
 <p>RNN 的计算链天然跨时间，Transformer 训练时的位置计算更易并行，但标准注意力的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>T</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">T^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> 成本在长序列上突出。</p>
 <p>RNN 把过去压进不断更新的状态；注意力让模型按当前需要读取不同位置；Transformer 主要靠自注意力完成位置之间的信息交换，再用位置编码和掩码处理顺序与生成规则。</p>
+<h2 id="补充：LSTM-的门为什么有用">补充：LSTM 的门为什么有用</h2>
+<p>普通 RNN 的状态反复经过同一递推，长距离梯度容易连乘得太小或太大。LSTM 用遗忘门、输入门和输出门控制记忆单元的更新，其中遗忘门接近 1 时，信息可以沿 cell state 较稳定地传递。它缓解而非彻底消除了长序列困难；注意力和 Transformer 则改为让当前位置直接读取远处信息。</p>
 
                 
               </div>
@@ -635,7 +646,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年11月5日</div>
+          <div>2026年11月9日</div>
         </div>
       
       
@@ -666,7 +677,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
                   <a class="course-back" href="/courses/machine-learning/">← 返回 机器学习概论 目录</a>
                   <div class="course-neighbors">
                     <a href="/2026/11/03/itml7/"><small>上一篇</small><strong>← 第 7 讲：卷积神经网络</strong></a>
-                    
+                    <a href="/2026/11/09/itml9/"><small>下一篇</small><strong>第 9 讲：非参数模型——决策树与支持向量机 →</strong></a>
                   </div>
                 </nav>
               
@@ -740,7 +751,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
     </div>
   </div>
   <div class="toc-body" id="toc-body">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">第 1 章：序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9ARNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">第 2 章：RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">第 3 章：编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9ATransformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">第 4 章：Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9ARNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">第 5 章：RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">第 6 章：注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9ATransformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">第 7 章：Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">第 9 章：训练与生成要分开理解</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0%EF%BC%9A%E5%BA%8F%E5%88%97%E4%B8%8E%E5%9B%BA%E5%AE%9A%E7%BB%B4%E5%BA%A6%E8%BE%93%E5%85%A5%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">第 1 章：序列与固定维度输入有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0%EF%BC%9ARNN%EF%BC%9A%E7%94%A8%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9%E8%BF%87%E5%8E%BB"><span class="toc-text">第 2 章：RNN：用状态压缩过去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0%EF%BC%9A%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">第 3 章：编码器—解码器与注意力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0%EF%BC%9ATransformer%EF%BC%9A%E8%AE%A9%E4%BD%8D%E7%BD%AE%E4%B9%8B%E9%97%B4%E7%9B%B4%E6%8E%A5%E4%BA%A4%E4%BA%92"><span class="toc-text">第 4 章：Transformer：让位置之间直接交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0%EF%BC%9ARNN-%E7%9A%84%E6%97%B6%E9%97%B4%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-text">第 5 章：RNN 的时间反向传播为何不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0%EF%BC%9A%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BB%8E%E6%89%93%E5%88%86%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%91%E9%87%8F"><span class="toc-text">第 6 章：注意力从打分到上下文向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0%EF%BC%9ATransformer-%E7%9A%84%E5%BD%A2%E7%8A%B6%E3%80%81%E6%8E%A9%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">第 7 章：Transformer 的形状、掩码和复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0%EF%BC%9A%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%AE%A1%E7%AE%97%E4%BE%8B%E5%AD%90"><span class="toc-text">第 8 章：位置编码的一个可计算例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0%EF%BC%9A%E8%AE%AD%E7%BB%83%E4%B8%8E%E7%94%9F%E6%88%90%E8%A6%81%E5%88%86%E5%BC%80%E7%90%86%E8%A7%A3"><span class="toc-text">第 9 章：训练与生成要分开理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9ALSTM-%E7%9A%84%E9%97%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E7%94%A8"><span class="toc-text">补充：LSTM 的门为什么有用</span></a></li></ol>
   </div>
 </div>
 

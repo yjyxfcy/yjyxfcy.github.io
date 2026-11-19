@@ -29,7 +29,7 @@
 <meta property="og:description" content="复习这一讲的时候我的感受是：它名字叫“概述”，其实把整门课的骨架都塞进去了。老师先讲了一段历史，再用线性回归把“建模—求解—评估”完整走了一遍，最后补了一堆矩阵微分公式。当时听课觉得历史部分可以跳过，复习时才发现后面反复出现的容量、泛化、正则化，全都是在第一讲的历史和例子里第一次露面的。所以这份笔记按讲课顺序走，该推的公式一步不省，也记一下我自己卡过的地方。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T09:19:41.765Z">
+<meta property="article:modified_time" content="2026-11-19T13:50:27.726Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -511,7 +511,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年11月19日 下午
+                    本文最后更新于 2026年11月19日 晚上
                   
                 
               </p>
@@ -526,7 +526,7 @@
 <p>课上给的定义是 CMU 机器学习白皮书那句：针对任务 T 和性能指标 P，系统能通过经验 E，在指标 P 下提升自己执行任务 T 的能力。三个字母缺一不可。拿猫识别器举例：T 是“判断图片里有没有猫”，P 是准确率，E 是一堆带标签的图片。少了 E 就成了人手写规则的传统程序，少了 P 就不知道往哪个方向改进。</p>
 <p>这个定义最早可以追溯到 1952 年 IBM 的 Arthur Samuel 写的跳棋程序——程序自己跟自己下棋，越下越好。1959 年他正式提出“机器学习”这个词，意思就是让计算机不用显式编程也能获得新能力。传统程序是人把规则写死，机器学习是人只规定模型长什么样、用什么标准打分，剩下的参数让数据去定。这个区别是整门课的出发点。</p>
 <h3 id="历史：别背人名，看几条线">历史：别背人名，看几条线</h3>
-<p>发展历程占了十几页 PPT，但复习时不需要背年份，值得记住的是几条并行的线索，因为每条线都对应后面的一讲或几讲。</p>
+<p>发展历程讲得很细，但复习时不需要背年份，值得记住的是几条并行的线索，因为每条线都对应后面的一讲或几讲。</p>
 <p><strong>神经网络线：起落两次。</strong> 1957 年 Rosenblatt 提出感知器，一个可学习的人工神经元，是后来所有神经网络的基本单元。1969 年 Minsky 指出它连异或（XOR）这种简单的非线性问题都解不了，神经网络进入低谷。但出路其实当时就看到了：加非线性激活、把多层感知器叠起来。卡住的是两件事——算力不够，以及多层的权重不知道怎么学。后者要到 1986 年 Rumelhart 和 Hinton 等人提出反向传播才解决，也就是“多层网络的梯度怎么算”。蛰伏期里还有几个奠基工作：1989 年 Cybenko、Hornik 证明万能逼近定理（神经网络理论上能逼近任意函数），同年 LeCun 提出 CNN，1990 年 Elman 提出 RNN，1997 年 Hochreiter 和 Schmidhuber 提出 LSTM 缓解长距离依赖问题，2003 年 Bengio 提出神经语言模型。2006 年 Hinton 用逐层无监督预训练重新点燃深度学习，2012 年 AlexNet 拿下 ImageNet 比赛震撼学界，2016 年 AlphaGo 出圈。中间的节点还有 Word2Vec（2013）、GAN 和 VAE（2014）、ResNet（2015）、Transformer（2017）。2018 年之后进入大模型时代：GPT-1、BERT，2022 年 ChatGPT，再到 SFT、对齐、PEFT、提示与上下文学习、推理、Agent 这些关键词。2025 年 OpenAI 的模型在 IMO 拿到金牌级成绩，IOI 上也只落后五位人类选手。</p>
 <p><strong>统计学习理论线：给“学习”上数学保险。</strong> 1964 年起 Vapnik 等人研究有限样本下的学习问题，到八十年代建成统计学习理论（SLT）。核心成果之一是给真实误差一个上界：</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo><mo>≤</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo><mo>+</mo><mi>O</mi><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><msqrt><mfrac><mrow><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>m</mi><mi mathvariant="normal">/</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><mrow><mi>m</mi><mi mathvariant="normal">/</mi><mi>d</mi></mrow></mfrac></msqrt><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">R(h)\le \hat R(h)+O\!\left(\sqrt{\frac{\log(m/d)}{m/d}}\right)

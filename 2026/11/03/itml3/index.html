@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一讲听课的时候我以为主线是“朴素贝叶斯和高斯判别分析两个模型”，复习时才发现主线其实是另一件事：同一套“先写联合分布、再用贝叶斯公式翻过来、然后估计参数”的流程，被老师用不同的分布假设走了三遍，每走一遍就暴露一个新问题——参数太多、零概率、协方差估不出来——然后各给一个补丁。朴素贝叶斯的独立假设、拉普拉斯平滑、共享协方差、逆威沙特先验、Fisher 降维，全是这些补丁。把这条“问题—补丁”的线抓">
+    <meta name="description" content="生成式分类与朴素贝叶斯 到预测的两条路 预测是监督学习的主要任务：分类输出有限离散值，回归输出连续值。课件拿股市举了个对照的例子——预测大盘涨跌是分类，预测大盘指数是回归。模型这边先分两类：参数模型的参数量固定，效率高，但对数据分布的假设强；非参数模型的参数量随训练数据增长，灵活，但大数据集上算不动。这一讲讲的都在参数模型里。 参数模型里又分两条路。生成模型先建输入输出的联合分布 p(y,x;θ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 3 讲：生成模型与生成式分类">
+<meta property="og:title" content="生成模型与生成式分类">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml3/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="这一讲听课的时候我以为主线是“朴素贝叶斯和高斯判别分析两个模型”，复习时才发现主线其实是另一件事：同一套“先写联合分布、再用贝叶斯公式翻过来、然后估计参数”的流程，被老师用不同的分布假设走了三遍，每走一遍就暴露一个新问题——参数太多、零概率、协方差估不出来——然后各给一个补丁。朴素贝叶斯的独立假设、拉普拉斯平滑、共享协方差、逆威沙特先验、Fisher 降维，全是这些补丁。把这条“问题—补丁”的线抓">
+<meta property="og:description" content="生成式分类与朴素贝叶斯 到预测的两条路 预测是监督学习的主要任务：分类输出有限离散值，回归输出连续值。课件拿股市举了个对照的例子——预测大盘涨跌是分类，预测大盘指数是回归。模型这边先分两类：参数模型的参数量固定，效率高，但对数据分布的假设强；非参数模型的参数量随训练数据增长，灵活，但大数据集上算不动。这一讲讲的都在参数模型里。 参数模型里又分两条路。生成模型先建输入输出的联合分布 p(y,x;θ">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:56:44.569Z">
+<meta property="article:modified_time" content="2026-11-19T14:29:42.164Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 3 讲：生成模型与生成式分类 - Yjy</title>
+  <title>生成模型与生成式分类 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="03 · 第 3 讲：生成模型与生成式分类"></span>
+            <span id="subtitle" data-typed-text="03 · 生成模型与生成式分类"></span>
           
         </div>
 
@@ -314,7 +314,7 @@
         
         
         
-          172 分钟
+          170 分钟
         
       </span>
     
@@ -392,91 +392,91 @@
     
       
       
-        <a href="/2026/11/03/itml1/" title="第 1 讲：课程简介与机器学习概述"
+        <a href="/2026/11/03/itml1/" title="课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 1 讲：课程简介与机器学习概述</span>
+          <span class="category-post">课程简介与机器学习概述</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml2/" title="第 2 讲：统计推断方法"
+        <a href="/2026/11/03/itml2/" title="统计推断方法"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 2 讲：统计推断方法</span>
+          <span class="category-post">统计推断方法</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml3/" title="第 3 讲：生成模型与生成式分类"
+        <a href="/2026/11/03/itml3/" title="生成模型与生成式分类"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 3 讲：生成模型与生成式分类</span>
+          <span class="category-post">生成模型与生成式分类</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml4/" title="第 4 讲：Logistic 回归与判别模型"
+        <a href="/2026/11/03/itml4/" title="Logistic 回归与判别模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 4 讲：Logistic 回归与判别模型</span>
+          <span class="category-post">Logistic 回归与判别模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml5/" title="第 5 讲：线性回归、正则化与贝叶斯回归"
+        <a href="/2026/11/03/itml5/" title="线性回归、正则化与贝叶斯回归"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 5 讲：线性回归、正则化与贝叶斯回归</span>
+          <span class="category-post">线性回归、正则化与贝叶斯回归</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml6/" title="第 6 讲：多层感知机与神经网络训练"
+        <a href="/2026/11/03/itml6/" title="多层感知机与神经网络训练"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 6 讲：多层感知机与神经网络训练</span>
+          <span class="category-post">多层感知机与神经网络训练</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml7/" title="第 7 讲：卷积神经网络"
+        <a href="/2026/11/03/itml7/" title="卷积神经网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 7 讲：卷积神经网络</span>
+          <span class="category-post">卷积神经网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml8/" title="第 8 讲：序列神经网络模型"
+        <a href="/2026/11/03/itml8/" title="序列神经网络模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 8 讲：序列神经网络模型</span>
+          <span class="category-post">序列神经网络模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/09/itml9/" title="第 9 讲：非参数模型——决策树与支持向量机"
+        <a href="/2026/11/09/itml9/" title="非参数模型——决策树与支持向量机"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 9 讲：非参数模型——决策树与支持向量机</span>
+          <span class="category-post">非参数模型——决策树与支持向量机</span>
         </a>
       
     
       
       
-        <a href="/2026/11/14/itml10/" title="第 10 讲：泛化理论与分类器集成"
+        <a href="/2026/11/14/itml10/" title="泛化理论与分类器集成"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 10 讲：泛化理论与分类器集成</span>
+          <span class="category-post">泛化理论与分类器集成</span>
         </a>
       
     
@@ -499,14 +499,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">03 · 第 3 讲：生成模型与生成式分类</h1>
+            <h1 class="reading-title">03 · 生成模型与生成式分类</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>03</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E5%88%86%E7%B1%BB%E4%B8%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="toc-text">生成式分类与朴素贝叶斯</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B0%E9%A2%84%E6%B5%8B%E7%9A%84%E4%B8%A4%E6%9D%A1%E8%B7%AF"><span class="toc-text">到预测的两条路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E7%94%A8%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE%E6%8D%A2%E5%8F%AF%E4%BC%B0%E8%AE%A1%E6%80%A7"><span class="toc-text">朴素贝叶斯：用独立假设换可估计性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AF%E5%8A%AA%E5%88%A9%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%95%B0%E6%95%B0%E5%B0%B1%E6%98%AF%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6"><span class="toc-text">伯努利模型：数数就是最大似然</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%B8%8E%E9%AB%98%E6%96%AF%EF%BC%9A%E5%90%8C%E4%B8%80%E5%A5%97%E6%B5%81%E7%A8%8B%E5%86%8D%E8%B5%B0%E4%B8%A4%E9%81%8D"><span class="toc-text">类型与高斯：同一套流程再走两遍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%87%BA%E6%A6%82%E7%8E%87%E4%B9%8B%E5%90%8E%EF%BC%8C%E9%80%89%E5%93%AA%E4%B8%80%E7%B1%BB"><span class="toc-text">算出概率之后，选哪一类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%AC%E5%B1%B1%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%AE%8C%E6%95%B4%E8%B5%B0%E4%B8%80%E9%81%8D%E6%B5%81%E7%A8%8B"><span class="toc-text">爬山例子：完整走一遍流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E6%B2%A1%E8%A7%81%E8%BF%87%E7%9A%84%E5%8F%96%E5%80%BC%EF%BC%8C%E8%AE%A9%E6%95%B4%E7%B1%BB%E6%B2%89%E8%88%B9"><span class="toc-text">一个没见过的取值，让整类沉船</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E8%A7%86%E8%A7%92%EF%BC%9A%E5%85%88%E9%AA%8C%E4%B8%8E%E9%A2%84%E6%B5%8B%E5%88%86%E5%B8%83"><span class="toc-text">贝叶斯视角：先验与预测分布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E5%8F%82%E6%95%B0%E5%BD%93%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%EF%BC%9A%E7%8B%84%E5%88%A9%E5%85%8B%E9%9B%B7%E5%85%88%E9%AA%8C"><span class="toc-text">把参数当随机变量：狄利克雷先验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E5%8F%82%E6%95%B0%E7%A7%AF%E6%8E%89%EF%BC%9A%E9%A2%84%E6%B5%8B%E5%88%86%E5%B8%83"><span class="toc-text">把参数积掉：预测分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E4%B8%80%E5%B9%B3%E6%BB%91%E5%B0%B1%E6%98%AF%E5%9D%87%E5%8C%80%E5%85%88%E9%AA%8C"><span class="toc-text">加一平滑就是均匀先验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAP%EF%BC%9A%E5%90%8E%E9%AA%8C%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%94%A8%E6%B3%95%EF%BC%8C%E5%92%8C%E4%B8%80%E4%B8%AA%E5%9D%91"><span class="toc-text">MAP：后验的另一种用法，和一个坑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90%EF%BC%9A%E6%94%BE%E5%BC%83%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE"><span class="toc-text">高斯判别分析：放弃独立假设</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90%EF%BC%9A%E6%94%BE%E5%BC%83%E7%8B%AC%E7%AB%8B%E5%81%87%E8%AE%BE-2"><span class="toc-text">高斯判别分析：放弃独立假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GDA-%E7%9A%84%E4%B8%89%E4%B8%AA%E6%A2%AF%E5%BA%A6"><span class="toc-text">GDA 的三个梯度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E6%9C%AC%E6%95%B0%E5%B0%91%E4%BA%8E%E7%BB%B4%E6%95%B0%E6%97%B6%EF%BC%8C%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%BC%9A%E5%A1%8C"><span class="toc-text">样本数少于维数时，协方差会塌</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E5%8D%8F%E6%96%B9%E5%B7%AE%EF%BC%9ALDA-%E7%9A%84%E2%80%9C%E7%BA%BF%E6%80%A7%E2%80%9D%E4%BB%8E%E5%93%AA%E6%9D%A5"><span class="toc-text">共享协方差：LDA 的“线性”从哪来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%99%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B9%9F%E5%8A%A0%E5%85%88%E9%AA%8C%EF%BC%9A%E9%80%86%E5%A8%81%E6%B2%99%E7%89%B9%E4%B8%8E%E6%94%B6%E7%BC%A9"><span class="toc-text">给协方差也加先验：逆威沙特与收缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E-GDA-%E5%88%B0%E6%9C%80%E8%BF%91%E7%B1%BB%E4%B8%AD%E5%BF%83"><span class="toc-text">从 GDA 到最近类中心</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fisher-%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E4%B8%8E%E6%94%B6%E5%B0%BE"><span class="toc-text">Fisher 线性判别与收尾</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fisher-%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%EF%BC%9A%E5%85%88%E6%89%BE%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%96%B9%E5%90%91"><span class="toc-text">Fisher 线性判别：先找一个好方向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B%E8%BF%99%E4%B8%80%E8%AE%B2"><span class="toc-text">回头看这一讲</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 3 讲：生成模型与生成式分类"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="生成模型与生成式分类"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -519,9 +519,7 @@
             
               <div class="markdown-body">
                 
-                <p>这一讲听课的时候我以为主线是“朴素贝叶斯和高斯判别分析两个模型”，复习时才发现主线其实是另一件事：同一套“先写联合分布、再用贝叶斯公式翻过来、然后估计参数”的流程，被老师用不同的分布假设走了三遍，每走一遍就暴露一个新问题——参数太多、零概率、协方差估不出来——然后各给一个补丁。朴素贝叶斯的独立假设、拉普拉斯平滑、共享协方差、逆威沙特先验、Fisher 降维，全是这些补丁。把这条“问题—补丁”的线抓住，公式就不是一堆孤立的推导了。</p>
-<p>笔记按课件顺序走。推导里拉格朗日乘子法和矩阵微分那几步我第一遍都跳过去了，这次补全，因为第 1 讲工具箱里的公式在这里第一次真正干活。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="生成式分类与朴素贝叶斯">生成式分类与朴素贝叶斯</h2>
 <h3 id="到预测的两条路">到预测的两条路</h3>
 <p>预测是监督学习的主要任务：分类输出有限离散值，回归输出连续值。课件拿股市举了个对照的例子——预测大盘涨跌是分类，预测大盘指数是回归。模型这边先分两类：<strong>参数模型</strong>的参数量固定，效率高，但对数据分布的假设强；<strong>非参数模型</strong>的参数量随训练数据增长，灵活，但大数据集上算不动。这一讲讲的都在参数模型里。</p>
@@ -969,7 +967,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 3 讲：生成模型与生成式分类</div>
+      <div>生成模型与生成式分类</div>
       <div>https://yjyxfcy.github.io/2026/11/03/itml3/</div>
     </div>
     <div class="license-meta">
@@ -1018,8 +1016,8 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/machine-learning/">← 返回 机器学习概论 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/03/itml2/"><small>上一篇</small><strong>← 第 2 讲：统计推断方法</strong></a>
-                    <a href="/2026/11/03/itml4/"><small>下一篇</small><strong>第 4 讲：Logistic 回归与判别模型 →</strong></a>
+                    <a href="/2026/11/03/itml2/"><small>上一篇</small><strong>← 统计推断方法</strong></a>
+                    <a href="/2026/11/03/itml4/"><small>下一篇</small><strong>Logistic 回归与判别模型 →</strong></a>
                   </div>
                 </nav>
               

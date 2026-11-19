@@ -310,12 +310,12 @@
           <time class="archive-card-date" datetime="2026-11-04 10:16">
             2026年11月04日
           </time>
-          <h2 class="archive-card-title">16 · 第 16 讲：NLP 任务、评测与基准</h2>
+          <h2 class="archive-card-title">16 · NLP 任务、评测与基准</h2>
           
-            <p class="archive-card-excerpt">复习这一讲的时候我的感受是：它是整门课的“验收环节”——前面学的所有模型和花样，最终都要回答一句“到底好不好”，而这一讲告诉我，这句话远比想象中难答。课件把评测拆成目标、测试床、数据、协议四件</p>
+            <p class="archive-card-excerpt">先定义任务，再谈指标 任务都是 X→Y 映射 课件给一张表：多数 NLP 任务可看作输入 XXX 到输出 YYY 的映射，其中一方或双方是语言——文本分类（文本→固定标签）、语音识别（音频→</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>31 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>28 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -332,12 +332,12 @@
           <time class="archive-card-date" datetime="2026-11-04 10:15">
             2026年11月04日
           </time>
-          <h2 class="archive-card-title">15 · 第 15 讲：提示学习与检索增强生成</h2>
+          <h2 class="archive-card-title">15 · 提示学习与检索增强生成</h2>
           
-            <p class="archive-card-excerpt">复习这一讲的时候我的感受是：它几乎就是我 Lab4 实验报告的理论版。我那三个月折腾 Qwen3-8B 解物理化学填空，准确率从 0.46 拉到 0.7521，一个参数都没改，改的全是输入——</p>
+            <p class="archive-card-excerpt">提示在做什么：不改权重，改输入 什么是提示 课件引 Pengfei Liu 的定义：提示是通过给一段指定任务的文本，鼓励预训练模型做出特定预测；本质是往输入里加文本，更好地利用预训练知识，而</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>28 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>26 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -354,12 +354,12 @@
           <time class="archive-card-date" datetime="2026-11-04 10:14">
             2026年11月04日
           </time>
-          <h2 class="archive-card-title">14 · 第 14 讲：后训练与指令对齐</h2>
+          <h2 class="archive-card-title">14 · 后训练与指令对齐</h2>
           
-            <p class="archive-card-excerpt">复习这一讲的时候我的感受是：它回答了一个我 Lab4 里天天碰到、却从没想清楚的问题——为什么一个“会续写”的模型，不等于一个“会回答”的助手？课件那组追问特别戳我：我要一页摘要、要给五年级小</p>
+            <p class="archive-card-excerpt">为什么“会续写”不等于“会回答” 规模带来的范式转移 课件接着上一讲的规模阶梯：GPT 117M 还要微调才能用，GPT-2 1.5B 有零样本能力，GPT-3 175B 有少样本学习能力，</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>27 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>25 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -376,12 +376,12 @@
           <time class="archive-card-date" datetime="2026-11-04 10:13">
             2026年11月04日
           </time>
-          <h2 class="archive-card-title">13 · 第 13 讲：预训练与微调</h2>
+          <h2 class="archive-card-title">13 · 预训练与微调</h2>
           
-            <p class="archive-card-excerpt">复习这一讲的时候我的感受是：它讲的不是某个模型，而是一次范式的搬家——从“给每个词存一个固定向量”，搬到“先在海量原始文本上学通用表示，再迁移到具体任务”。课件那条路线图我抄了下来：VSM →</p>
+            <p class="archive-card-excerpt">从静态词向量到上下文表示 一个 play，四种意思 课件回顾 word2vec：每个词只有一个向量。课件给例子“Chico Ruiz made a spectacular play on A</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>33 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>30 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -398,12 +398,12 @@
           <time class="archive-card-date" datetime="2026-11-04 10:12">
             2026年11月04日
           </time>
-          <h2 class="archive-card-title">12 · 第 12 讲：信息检索与文本向量</h2>
+          <h2 class="archive-card-title">12 · 信息检索与文本向量</h2>
           
-            <p class="archive-card-excerpt">复习这一讲的时候我的感受是：它把“怎样从海量文档里快速找到有用材料”拆成了一条完整的流水线——相关性怎么定义、稀疏匹配怎么算、稠密向量怎么学、负例怎么挑、近邻怎么近似搜、效果怎么评。课件分两份</p>
+            <p class="archive-card-excerpt">检索任务：先召回，再排序 相关性是什么：从绝对到相对 ir 课件给任务定义：词表 VVV、查询 qqq、文档库 DDD，理想输出是相关文档集合 R(q)R(q)R(q)，系统只能给出近似 R</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>41 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>38 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           
@@ -420,12 +420,12 @@
           <time class="archive-card-date" datetime="2026-11-04 10:11">
             2026年11月04日
           </time>
-          <h2 class="archive-card-title">11 · 第 11 讲：语义表示与组合语义</h2>
+          <h2 class="archive-card-title">11 · 语义表示与组合语义</h2>
           
-            <p class="archive-card-excerpt">复习这一讲的时候我的感受是：它把“语义”从“词向量离得近不远”整个换成了“怎样把一段话变成可以验证真假、可以推理的结构”。课件按三部分走：背景（为什么词向量不够）、意义表示（形式语义与一阶逻辑</p>
+            <p class="archive-card-excerpt">从词向量到意义表示：为什么需要符号结构 分布语义的两个缺口：组合与推理 课件回顾分布语义：它在下游任务和多学科研究里都很有用，但有两个不清楚的地方。一是怎么表示更大的单位——有了 apple</p>
           
           <div class="archive-card-meta">
-            <span><i class="iconfont icon-clock-fill"></i>53 min read</span>
+            <span><i class="iconfont icon-clock-fill"></i>50 min read</span>
             <span><i class="archive-card-lang-icon"></i>Chinese</span>
           </div>
           

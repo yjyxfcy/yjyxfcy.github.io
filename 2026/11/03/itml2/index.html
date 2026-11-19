@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一讲篇幅很长，前一半是概率论工具箱，后一半是三种估计参数的方法：最大似然、最大后验、贝叶斯。听课的时候我以为前一半只是概率课复习，差点跳过，复习时才发现后半的每一个公式都长在前一半上：MLE 是 KL 散度加经验分布，MAP 是贝叶斯公式取众数，共轭先验是贝叶斯公式加上“凑形状”。所以这份笔记按课件顺序走，前半不省略，后半的推导一步不跳。 整讲其实只围着一枚硬币转：抛十次六次正面，正面概率估多少">
+    <meta name="description" content="概率与信息论工具箱 概率基础：游戏规则 概率论研究随机现象的规律。课件从随机试验 EEE 讲起，它要满足三条：可重复性（相同条件下能重复做）、可知性（所有可能结果事先能列全）、不确定性（做一次之前不知道哪个结果出现，但必出现其中之一）。所有基本结果组成样本空间 Ω\OmegaΩ，满足某些条件的样本点集合叫事件 A⊆ΩA\subseteq\OmegaA⊆Ω。掷骰子就是典型场景。 概率是定义在事件上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 2 讲：统计推断方法">
+<meta property="og:title" content="统计推断方法">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml2/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="这一讲篇幅很长，前一半是概率论工具箱，后一半是三种估计参数的方法：最大似然、最大后验、贝叶斯。听课的时候我以为前一半只是概率课复习，差点跳过，复习时才发现后半的每一个公式都长在前一半上：MLE 是 KL 散度加经验分布，MAP 是贝叶斯公式取众数，共轭先验是贝叶斯公式加上“凑形状”。所以这份笔记按课件顺序走，前半不省略，后半的推导一步不跳。 整讲其实只围着一枚硬币转：抛十次六次正面，正面概率估多少">
+<meta property="og:description" content="概率与信息论工具箱 概率基础：游戏规则 概率论研究随机现象的规律。课件从随机试验 EEE 讲起，它要满足三条：可重复性（相同条件下能重复做）、可知性（所有可能结果事先能列全）、不确定性（做一次之前不知道哪个结果出现，但必出现其中之一）。所有基本结果组成样本空间 Ω\OmegaΩ，满足某些条件的样本点集合叫事件 A⊆ΩA\subseteq\OmegaA⊆Ω。掷骰子就是典型场景。 概率是定义在事件上">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:56:44.426Z">
+<meta property="article:modified_time" content="2026-11-19T14:29:38.479Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 2 讲：统计推断方法 - Yjy</title>
+  <title>统计推断方法 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="02 · 第 2 讲：统计推断方法"></span>
+            <span id="subtitle" data-typed-text="02 · 统计推断方法"></span>
           
         </div>
 
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          34k 字
+          33k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          210 分钟
+          208 分钟
         
       </span>
     
@@ -392,91 +392,91 @@
     
       
       
-        <a href="/2026/11/03/itml1/" title="第 1 讲：课程简介与机器学习概述"
+        <a href="/2026/11/03/itml1/" title="课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 1 讲：课程简介与机器学习概述</span>
+          <span class="category-post">课程简介与机器学习概述</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml2/" title="第 2 讲：统计推断方法"
+        <a href="/2026/11/03/itml2/" title="统计推断方法"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 2 讲：统计推断方法</span>
+          <span class="category-post">统计推断方法</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml3/" title="第 3 讲：生成模型与生成式分类"
+        <a href="/2026/11/03/itml3/" title="生成模型与生成式分类"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 3 讲：生成模型与生成式分类</span>
+          <span class="category-post">生成模型与生成式分类</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml4/" title="第 4 讲：Logistic 回归与判别模型"
+        <a href="/2026/11/03/itml4/" title="Logistic 回归与判别模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 4 讲：Logistic 回归与判别模型</span>
+          <span class="category-post">Logistic 回归与判别模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml5/" title="第 5 讲：线性回归、正则化与贝叶斯回归"
+        <a href="/2026/11/03/itml5/" title="线性回归、正则化与贝叶斯回归"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 5 讲：线性回归、正则化与贝叶斯回归</span>
+          <span class="category-post">线性回归、正则化与贝叶斯回归</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml6/" title="第 6 讲：多层感知机与神经网络训练"
+        <a href="/2026/11/03/itml6/" title="多层感知机与神经网络训练"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 6 讲：多层感知机与神经网络训练</span>
+          <span class="category-post">多层感知机与神经网络训练</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml7/" title="第 7 讲：卷积神经网络"
+        <a href="/2026/11/03/itml7/" title="卷积神经网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 7 讲：卷积神经网络</span>
+          <span class="category-post">卷积神经网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml8/" title="第 8 讲：序列神经网络模型"
+        <a href="/2026/11/03/itml8/" title="序列神经网络模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 8 讲：序列神经网络模型</span>
+          <span class="category-post">序列神经网络模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/09/itml9/" title="第 9 讲：非参数模型——决策树与支持向量机"
+        <a href="/2026/11/09/itml9/" title="非参数模型——决策树与支持向量机"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 9 讲：非参数模型——决策树与支持向量机</span>
+          <span class="category-post">非参数模型——决策树与支持向量机</span>
         </a>
       
     
       
       
-        <a href="/2026/11/14/itml10/" title="第 10 讲：泛化理论与分类器集成"
+        <a href="/2026/11/14/itml10/" title="泛化理论与分类器集成"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 10 讲：泛化理论与分类器集成</span>
+          <span class="category-post">泛化理论与分类器集成</span>
         </a>
       
     
@@ -499,14 +499,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">02 · 第 2 讲：统计推断方法</h1>
+            <h1 class="reading-title">02 · 统计推断方法</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>02</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%B7%A5%E5%85%B7%E7%AE%B1"><span class="toc-text">概率与信息论工具箱</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80%EF%BC%9A%E6%B8%B8%E6%88%8F%E8%A7%84%E5%88%99"><span class="toc-text">概率基础：游戏规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%87%E5%80%BC%E3%80%81%E6%96%B9%E5%B7%AE%E3%80%81%E5%8D%8F%E6%96%B9%E5%B7%AE"><span class="toc-text">均值、方差、协方差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E5%9D%91%EF%BC%9A%E4%B8%8D%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C"><span class="toc-text">两个坑：不相关与因果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F%E4%B8%8E%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98"><span class="toc-text">贝叶斯公式与三门问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E5%8F%8D%E5%A4%8D%E4%BD%BF%E7%94%A8%E7%9A%84%E5%88%86%E5%B8%83"><span class="toc-text">几个反复使用的分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%EF%BC%9A%E8%BE%B9%E7%BC%98%E4%B8%8E%E6%9D%A1%E4%BB%B6"><span class="toc-text">多元高斯：边缘与条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%86%B5%EF%BC%9A%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%9A%84%E6%95%B0%E5%80%BC"><span class="toc-text">熵：不确定性的数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%8E-KL-%E6%95%A3%E5%BA%A6"><span class="toc-text">交叉熵与 KL 散度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%EF%BC%9A%E6%8A%8A%E6%A6%82%E7%8E%87%E5%BD%93%E5%88%86%E6%95%B0"><span class="toc-text">最大似然：把概率当分数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%AB%8B%E5%9C%BA"><span class="toc-text">参数的两种立场</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%EF%BC%9A%E6%8A%8A%E6%A6%82%E7%8E%87%E5%BD%93%E5%88%86%E6%95%B0"><span class="toc-text">极大似然：把概率当分数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLE-%E5%8D%B3%E5%9C%A8%E6%9C%80%E5%B0%8F%E5%8C%96%E5%88%B0%E7%BB%8F%E9%AA%8C%E5%88%86%E5%B8%83%E7%9A%84-KL"><span class="toc-text">MLE 即在最小化到经验分布的 KL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA-MLE-%E6%8E%A8%E5%AF%BC%E8%B5%B0%E4%B8%80%E9%81%8D"><span class="toc-text">三个 MLE 推导走一遍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E6%AC%A1%E5%85%A8%E6%AD%A3%E9%9D%A2%EF%BC%9AMLE-%E7%9A%84%E5%9D%91"><span class="toc-text">五次全正面：MLE 的坑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%EF%BC%9A%E7%BB%99%E5%88%86%E6%95%B0%E5%8A%A0%E4%B8%80%E9%A1%B9%E5%85%88%E9%AA%8C"><span class="toc-text">最大后验：给分数加一项先验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MAP%EF%BC%9A%E5%9C%A8%E5%88%86%E6%95%B0%E4%B8%8A%E5%8A%A0%E4%B8%80%E9%A1%B9%E5%85%88%E9%AA%8C"><span class="toc-text">MAP：在分数上加一项先验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E4%B8%80%E5%B9%B3%E6%BB%91%E4%B8%8E%E9%BB%91%E5%A4%A9%E9%B9%85"><span class="toc-text">加一平滑与黑天鹅</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%B8%8E%E5%85%B1%E8%BD%AD%E5%85%88%E9%AA%8C%EF%BC%9ABeta-%E4%B8%8E-Dirichlet"><span class="toc-text">贝叶斯与共轭先验：Beta 与 Dirichlet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%96%B9%E6%B3%95%EF%BC%9A%E5%88%AB%E6%80%A5%E7%9D%80%E9%80%89%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="toc-text">贝叶斯方法：别急着选一个参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%E5%85%88%E9%AA%8C%EF%BC%9A%E8%AE%A9%E5%90%8E%E9%AA%8C%E7%95%99%E5%9C%A8%E5%90%8C%E4%B8%80%E5%AE%B6%E6%97%8F"><span class="toc-text">共轭先验：让后验留在同一家族</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Beta-Bernoulli%EF%BC%9A%E6%8A%8A%E8%AE%A1%E6%95%B0%E5%8A%A0%E8%BF%9B%E5%8F%82%E6%95%B0"><span class="toc-text">Beta-Bernoulli：把计数加进参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E9%AA%8C%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%9F%E8%AE%A1%E9%87%8F%EF%BC%9A%E4%BC%97%E6%95%B0%E3%80%81%E5%9D%87%E5%80%BC%E3%80%81%E6%96%B9%E5%B7%AE"><span class="toc-text">后验的三个统计量：众数、均值、方差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Beta-Bernoulli-%E7%9A%84%E9%A2%84%E6%B5%8B%E4%B8%8E%E8%AF%81%E6%8D%AE"><span class="toc-text">Beta-Bernoulli 的预测与证据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dirichlet-categorical%EF%BC%9A%E5%A4%9A%E7%B1%BB%E7%89%88%E7%9A%84%E5%90%8C%E4%B8%80%E6%95%85%E4%BA%8B"><span class="toc-text">Dirichlet-categorical：多类版的同一故事</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%85%B1%E8%BD%AD%E4%B8%8E%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E7%85%A7"><span class="toc-text">高斯共轭与三种方法对照</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaussian-Gaussian%EF%BC%9A%E9%85%8D%E5%B9%B3%E6%96%B9"><span class="toc-text">Gaussian-Gaussian：配平方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaussian-Gaussian-%E7%9A%84%E9%A2%84%E6%B5%8B%E4%B8%8E%E8%AF%81%E6%8D%AE"><span class="toc-text">Gaussian-Gaussian 的预测与证据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E6%91%86%E5%9C%A8%E4%B8%80%E8%B5%B7"><span class="toc-text">把三种方法摆在一起</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 2 讲：统计推断方法"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="统计推断方法"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -519,9 +519,7 @@
             
               <div class="markdown-body">
                 
-                <p>这一讲篇幅很长，前一半是概率论工具箱，后一半是三种估计参数的方法：最大似然、最大后验、贝叶斯。听课的时候我以为前一半只是概率课复习，差点跳过，复习时才发现后半的每一个公式都长在前一半上：MLE 是 KL 散度加经验分布，MAP 是贝叶斯公式取众数，共轭先验是贝叶斯公式加上“凑形状”。所以这份笔记按课件顺序走，前半不省略，后半的推导一步不跳。</p>
-<p>整讲其实只围着一枚硬币转：抛十次六次正面，正面概率估多少？抛五次全是正面，还敢估 1 吗？先验怎么救场？救完之后为什么干脆别只估一个数？把这条线走通，Beta、Dirichlet、高斯三个共轭模型就都是同一套动作的重复。下面也记一下我自己卡住的地方，以及两处我怀疑课件写错的数字。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="概率与信息论工具箱">概率与信息论工具箱</h2>
 <h3 id="概率基础：游戏规则">概率基础：游戏规则</h3>
 <p>概率论研究随机现象的规律。课件从<strong>随机试验</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0576em;">E</span></span></span></span> 讲起，它要满足三条：可重复性（相同条件下能重复做）、可知性（所有可能结果事先能列全）、不确定性（做一次之前不知道哪个结果出现，但必出现其中之一）。所有基本结果组成<strong>样本空间</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Ω</span></span></span></span>，满足某些条件的样本点集合叫<strong>事件</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊆</mo><mi mathvariant="normal">Ω</mi></mrow><annotation encoding="application/x-tex">A\subseteq\Omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Ω</span></span></span></span>。掷骰子就是典型场景。</p>
@@ -966,7 +964,7 @@ l0,-144c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 2 讲：统计推断方法</div>
+      <div>统计推断方法</div>
       <div>https://yjyxfcy.github.io/2026/11/03/itml2/</div>
     </div>
     <div class="license-meta">
@@ -1015,8 +1013,8 @@ l0,-144c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/machine-learning/">← 返回 机器学习概论 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/03/itml1/"><small>上一篇</small><strong>← 第 1 讲：课程简介与机器学习概述</strong></a>
-                    <a href="/2026/11/03/itml3/"><small>下一篇</small><strong>第 3 讲：生成模型与生成式分类 →</strong></a>
+                    <a href="/2026/11/03/itml1/"><small>上一篇</small><strong>← 课程简介与机器学习概述</strong></a>
+                    <a href="/2026/11/03/itml3/"><small>下一篇</small><strong>生成模型与生成式分类 →</strong></a>
                   </div>
                 </nav>
               

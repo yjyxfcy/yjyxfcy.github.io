@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一讲是全新的一章，课件副标题点明它的定位：镜像、模仿与工具——连接物理与社会的一座桥。复习时我的感受是：它把前面几讲的线索收拢了——第 3 讲埋下的镜像神经元钩子在这里展开，第 5 讲的重定向与 sim-to-real 在这里变成模仿学习的工程细节，第 7 讲的因果在这里以“因果混淆”的身份成为行为克隆的一个坑。我抓的钩子是模仿的三层：L1 回放动作、L2 在轻微变化下复现任务、L3 在新情境下">
+    <meta name="description" content="观察研究：婴儿、动物与文化传递 婴儿是天生的模仿者 课件：婴儿是好的模仿者，引 Meltzoff &amp; Moore 1977（Science）——新生儿能模仿面部和手动姿势。课件给模仿能力的发展线：简单身体动作（新生儿到头几个月）→ 对物体的动作（约 8–9 个月）→ 物体类别化（抽象类别学习）→ 抽象模式与执行功能风格。自己补的备注：这条线和第 6 讲婴儿物理概念时间表平行——模仿不是单">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习">
-<meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/cr9/index.html">
+<meta property="og:title" content="镜像与模仿：从镜像神经元到机器人模仿学习">
+<meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/cr8/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="这一讲是全新的一章，课件副标题点明它的定位：镜像、模仿与工具——连接物理与社会的一座桥。复习时我的感受是：它把前面几讲的线索收拢了——第 3 讲埋下的镜像神经元钩子在这里展开，第 5 讲的重定向与 sim-to-real 在这里变成模仿学习的工程细节，第 7 讲的因果在这里以“因果混淆”的身份成为行为克隆的一个坑。我抓的钩子是模仿的三层：L1 回放动作、L2 在轻微变化下复现任务、L3 在新情境下">
+<meta property="og:description" content="观察研究：婴儿、动物与文化传递 婴儿是天生的模仿者 课件：婴儿是好的模仿者，引 Meltzoff &amp; Moore 1977（Science）——新生儿能模仿面部和手动姿势。课件给模仿能力的发展线：简单身体动作（新生儿到头几个月）→ 对物体的动作（约 8–9 个月）→ 物体类别化（抽象类别学习）→ 抽象模式与执行功能风格。自己补的备注：这条线和第 6 讲婴儿物理概念时间表平行——模仿不是单">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T10:55:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:43:38.337Z">
+<meta property="article:modified_time" content="2026-11-19T14:28:30.623Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习 - Yjy</title>
+  <title>镜像与模仿：从镜像神经元到机器人模仿学习 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -269,13 +269,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/p7.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/p6.avif') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="09 · 第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习"></span>
+            <span id="subtitle" data-typed-text="08 · 镜像与模仿：从镜像神经元到机器人模仿学习"></span>
           
         </div>
 
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.4k 字
+          7.1k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          47 分钟
+          45 分钟
         
       </span>
     
@@ -392,73 +392,73 @@
     
       
       
-        <a href="/2026/11/03/cr1/" title="第 1 讲：导论：认知推理要解决什么问题"
+        <a href="/2026/11/03/cr1/" title="导论：认知推理要解决什么问题"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 1 讲：导论：认知推理要解决什么问题</span>
+          <span class="category-post">导论：认知推理要解决什么问题</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr2/" title="第 2 讲：工程回顾：从最小二乘到大语言模型的训练栈"
+        <a href="/2026/11/03/cr2/" title="工程回顾：从最小二乘到大语言模型的训练栈"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 2 讲：工程回顾：从最小二乘到大语言模型的训练栈</span>
+          <span class="category-post">工程回顾：从最小二乘到大语言模型的训练栈</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr3/" title="第 3 讲：可供性与功能性：看到物体后想到能做什么"
+        <a href="/2026/11/03/cr3/" title="可供性与功能性：看到物体后想到能做什么"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 3 讲：可供性与功能性：看到物体后想到能做什么</span>
+          <span class="category-post">可供性与功能性：看到物体后想到能做什么</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr4/" title="第 4 讲：人—物交互：从检测到三维场景"
+        <a href="/2026/11/03/cr4/" title="人—物交互：从检测到三维场景"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 4 讲：人—物交互：从检测到三维场景</span>
+          <span class="category-post">人—物交互：从检测到三维场景</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr5/" title="第 5 讲：人形机器人：从动作生成到真实控制"
+        <a href="/2026/11/03/cr5/" title="人形机器人：从动作生成到真实控制"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 5 讲：人形机器人：从动作生成到真实控制</span>
+          <span class="category-post">人形机器人：从动作生成到真实控制</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr6/" title="第 6 讲：直觉物理：我们怎样预期世界的变化"
+        <a href="/2026/11/03/cr6/" title="直觉物理：我们怎样预期世界的变化"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 6 讲：直觉物理：我们怎样预期世界的变化</span>
+          <span class="category-post">直觉物理：我们怎样预期世界的变化</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr7/" title="第 7 讲：因果推理：从相关到干预与反事实"
+        <a href="/2026/11/03/cr7/" title="因果推理：从相关到干预与反事实"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 7 讲：因果推理：从相关到干预与反事实</span>
+          <span class="category-post">因果推理：从相关到干预与反事实</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/cr9/" title="第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习"
+        <a href="/2026/11/03/cr8/" title="镜像与模仿：从镜像神经元到机器人模仿学习"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习</span>
+          <span class="category-post">镜像与模仿：从镜像神经元到机器人模仿学习</span>
         </a>
       
     
@@ -481,14 +481,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">09 · 第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习</h1>
+            <h1 class="reading-title">08 · 镜像与模仿：从镜像神经元到机器人模仿学习</h1>
             
-              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/cognitive-reasoning/">认知推理</a><span>/</span><span>2026 秋</span><span>/</span><span>09</span></nav>
+              <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/cognitive-reasoning/">认知推理</a><span>/</span><span>2026 秋</span><span>/</span><span>08</span></nav>
               <a class="reading-course-link" href="/courses/cognitive-reasoning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E7%A0%94%E7%A9%B6%EF%BC%9A%E5%A9%B4%E5%84%BF%E3%80%81%E5%8A%A8%E7%89%A9%E4%B8%8E%E6%96%87%E5%8C%96%E4%BC%A0%E9%80%92"><span class="toc-text">观察研究：婴儿、动物与文化传递</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A9%B4%E5%84%BF%E6%98%AF%E5%A4%A9%E7%94%9F%E7%9A%84%E6%A8%A1%E4%BB%BF%E8%80%85"><span class="toc-text">婴儿是天生的模仿者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E7%89%A9%E6%A8%A1%E4%BB%BF%E4%B8%8E%E7%A4%BE%E4%BC%9A%E8%A7%84%E8%8C%83"><span class="toc-text">动物模仿与社会规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E9%9A%BE%E9%A2%98%E4%B8%8E%E4%B8%A4%E5%A4%A7%E7%90%86%E8%AE%BA%E9%A2%84%E8%A7%88"><span class="toc-text">核心难题与两大理论预览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%88%B6%E4%B9%8B%E4%BA%89%EF%BC%9A%E8%BD%AC%E5%8C%96%E8%AE%BA%E3%80%81%E8%81%94%E6%83%B3%E8%AE%BA%E4%B8%8E%E9%95%9C%E5%83%8F%E7%A5%9E%E7%BB%8F%E5%85%83"><span class="toc-text">机制之争：转化论、联想论与镜像神经元</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E5%8C%96%E8%AE%BA-vs-%E8%81%94%E6%83%B3%E8%AE%BA%E4%B8%8E-Bobo-%E5%A8%83%E5%A8%83"><span class="toc-text">转化论 vs 联想论与 Bobo 娃娃</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E5%AF%BC%E5%90%91%E7%9A%84%E9%87%8F%E5%8C%96%E8%AF%81%E6%8D%AE%EF%BC%9A%E6%91%B8%E8%80%B3%E6%9C%B5%E5%AE%9E%E9%AA%8C"><span class="toc-text">目标导向的量化证据：摸耳朵实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%A5%9E%E7%BB%8F%E5%85%83%EF%BC%9A%E4%BB%8E%E7%8C%B4%E5%AD%90-F5-%E5%88%B0%E4%BA%BA%E8%84%91"><span class="toc-text">镜像神经元：从猴子 F5 到人脑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9-MNS-%E7%9A%84%E6%89%B9%E8%AF%84"><span class="toc-text">对 MNS 的批评</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B-L1%EF%BC%9A%E5%9B%9E%E6%94%BE%E5%8A%A8%E4%BD%9C%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">计算模型 L1：回放动作与重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%B1%82%E6%A8%A1%E4%BB%BF%E4%B8%8E-MDP-%E5%9B%9E%E9%A1%BE"><span class="toc-text">三层模仿与 MDP 回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D-L1-%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">三种 L1 方式对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E5%B7%A7%E6%89%8B%E9%81%A5%E6%93%8D%E4%BD%9C%EF%BC%9AFK-%E8%B7%9D%E7%A6%BB%E4%B8%8E-TSV"><span class="toc-text">灵巧手遥操作：FK 距离与 TSV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8-embodiment-%E8%BF%81%E7%A7%BB%EF%BC%9AManipTrans-%E6%AE%8B%E5%B7%AE%E4%B8%A4%E9%98%B6%E6%AE%B5"><span class="toc-text">跨 embodiment 迁移：ManipTrans 残差两阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E5%BD%A2%E9%81%A5%E6%93%8D%E4%BD%9C"><span class="toc-text">人形遥操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B-L2%EF%BC%9A%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86%E3%80%81DAgger-%E4%B8%8E%E5%9B%9B%E4%B8%AA%E5%9D%91"><span class="toc-text">计算模型 L2：行为克隆、DAgger 与四个坑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0"><span class="toc-text">为什么需要模仿学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%81%8F%E7%A7%BB"><span class="toc-text">行为克隆与分布偏移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAgger%EF%BC%9A%E6%8A%8A-O-%CE%B5T%C2%B2-%E5%8E%8B%E5%88%B0-O-%CE%B5T"><span class="toc-text">DAgger：把 O(εT²) 压到 O(εT)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A6%E5%A4%96%E4%B8%89%E4%B8%AA%E5%9D%91%E4%B8%8E%E2%80%9C%E5%AD%A6%E7%94%9F%E8%B6%85%E8%B6%8A%E8%80%81%E5%B8%88%E2%80%9D"><span class="toc-text">另外三个坑与“学生超越老师”</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B-L3%EF%BC%9A%E6%B3%9B%E5%8C%96%E3%80%81%E5%B8%B8%E8%AF%86%E4%B8%8E%E9%80%86%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="toc-text">计算模型 L3：泛化、常识与逆强化学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E7%9A%84%E7%A7%AF%E6%9C%A8%EF%BC%9A%E5%85%88%E9%AA%8C%E3%80%81VLA-%E4%B8%8E-IRL"><span class="toc-text">泛化的积木：先验、VLA 与 IRL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%91%E6%A0%B7%E6%9C%AC%E9%80%82%E5%BA%94%E4%B8%8E%E6%94%B6%E5%B0%BE"><span class="toc-text">少样本适应与收尾</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="镜像与模仿：从镜像神经元到机器人模仿学习"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -501,8 +501,7 @@
             
               <div class="markdown-body">
                 
-                <p>这一讲是全新的一章，课件副标题点明它的定位：<strong>镜像、模仿与工具——连接物理与社会的一座桥</strong>。复习时我的感受是：它把前面几讲的线索收拢了——第 3 讲埋下的镜像神经元钩子在这里展开，第 5 讲的重定向与 sim-to-real 在这里变成模仿学习的工程细节，第 7 讲的因果在这里以“因果混淆”的身份成为行为克隆的一个坑。我抓的钩子是<strong>模仿的三层</strong>：L1 回放动作、L2 在轻微变化下复现任务、L3 在新情境下泛化；以及行为克隆那条误差累积界 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>ϵ</mi><msup><mi>T</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\epsilon T^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord mathnormal">ϵ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 被 DAgger 压到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>ϵ</mi><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\epsilon T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord mathnormal">ϵ</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span></span></span></span>。也记一下我自己卡过的地方：从没用自己的身体做过的动作怎么模仿（对应问题）、摸耳朵实验为什么“哪只耳朵”比“哪只手”优先、以及为什么 95% 的单步准确率会塌成 18% 的整体成功率——这正好是我们拼图项目踩过的坑。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="观察研究：婴儿、动物与文化传递">观察研究：婴儿、动物与文化传递</h2>
 <h3 id="婴儿是天生的模仿者">婴儿是天生的模仿者</h3>
 <p>课件：婴儿是好的模仿者，引 Meltzoff &amp; Moore 1977（Science）——新生儿能模仿面部和手动姿势。课件给模仿能力的发展线：<strong>简单身体动作（新生儿到头几个月）→ 对物体的动作（约 8–9 个月）→ 物体类别化（抽象类别学习）→ 抽象模式与执行功能风格</strong>。自己补的备注：这条线和第 6 讲婴儿物理概念时间表平行——模仿不是单一能力，而是从运动复刻逐步升到抽象学习。</p>
@@ -621,8 +620,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 9 讲：镜像与模仿：从镜像神经元到机器人模仿学习</div>
-      <div>https://yjyxfcy.github.io/2026/11/03/cr9/</div>
+      <div>镜像与模仿：从镜像神经元到机器人模仿学习</div>
+      <div>https://yjyxfcy.github.io/2026/11/03/cr8/</div>
     </div>
     <div class="license-meta">
       
@@ -670,7 +669,7 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/cognitive-reasoning/">← 返回 认知推理 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/03/cr7/"><small>上一篇</small><strong>← 第 7 讲：因果推理：从相关到干预与反事实</strong></a>
+                    <a href="/2026/11/03/cr7/"><small>上一篇</small><strong>← 因果推理：从相关到干预与反事实</strong></a>
                     
                   </div>
                 </nav>

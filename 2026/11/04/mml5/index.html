@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="复习这一讲的时候我的感受是：它回答了一个很根本的问题——文字怎么变成可学习的表示，又怎么按顺序或关系建模。老师从“词编号不是词义”讲起，用分布式假设引出 word2vec，再讲语言模型、RNN、LSTM，末尾把图神经网络也放进来。我复习时抓的钩子是“表示→序列→关系”三层：词向量解决单个词的语义，RNN&#x2F;LSTM 解决词序和长依赖，GNN 解决节点间的关系。公式和例题我一步不省地推，也记一下我自己">
+    <meta name="description" content="NLP 的目标与词的表示：从编号到词义 NLP 想做什么 课件给的目标很明确：对广泛语言的深度理解，超越字符串处理或关键词匹配。想建的系统分两档：雄心档（语音识别、机器翻译、信息抽取、对话理解、问答）和朴素档（拼写纠正、词性标注、文本分类）。课件列了句法任务：分词、形态分析、词性标注、短语组块、句法分析。课件的“近期进展”我觉得很有时代感，五个问句：真实性（能否给事实准确的信息）、推理（能否可靠">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 5 讲：自然语言、序列与图建模">
+<meta property="og:title" content="自然语言、序列与图建模">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml5/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="复习这一讲的时候我的感受是：它回答了一个很根本的问题——文字怎么变成可学习的表示，又怎么按顺序或关系建模。老师从“词编号不是词义”讲起，用分布式假设引出 word2vec，再讲语言模型、RNN、LSTM，末尾把图神经网络也放进来。我复习时抓的钩子是“表示→序列→关系”三层：词向量解决单个词的语义，RNN&#x2F;LSTM 解决词序和长依赖，GNN 解决节点间的关系。公式和例题我一步不省地推，也记一下我自己">
+<meta property="og:description" content="NLP 的目标与词的表示：从编号到词义 NLP 想做什么 课件给的目标很明确：对广泛语言的深度理解，超越字符串处理或关键词匹配。想建的系统分两档：雄心档（语音识别、机器翻译、信息抽取、对话理解、问答）和朴素档（拼写纠正、词性标注、文本分类）。课件列了句法任务：分词、形态分析、词性标注、短语组块、句法分析。课件的“近期进展”我觉得很有时代感，五个问句：真实性（能否给事实准确的信息）、推理（能否可靠">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T04:05:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:43:38.385Z">
+<meta property="article:modified_time" content="2026-11-19T14:30:39.257Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 5 讲：自然语言、序列与图建模 - Yjy</title>
+  <title>自然语言、序列与图建模 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="05 · 第 5 讲：自然语言、序列与图建模"></span>
+            <span id="subtitle" data-typed-text="05 · 自然语言、序列与图建模"></span>
           
         </div>
 
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.8k 字
+          6.6k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          43 分钟
+          42 分钟
         
       </span>
     
@@ -392,73 +392,73 @@
     
       
       
-        <a href="/2026/11/04/mml1/" title="第 1 讲：多模态学习导论"
+        <a href="/2026/11/04/mml1/" title="多模态学习导论"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 1 讲：多模态学习导论</span>
+          <span class="category-post">多模态学习导论</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml2/" title="第 2 讲：深度学习基础"
+        <a href="/2026/11/04/mml2/" title="深度学习基础"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 2 讲：深度学习基础</span>
+          <span class="category-post">深度学习基础</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml3/" title="第 3 讲：计算机视觉基础与分类网络"
+        <a href="/2026/11/04/mml3/" title="计算机视觉基础与分类网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 3 讲：计算机视觉基础与分类网络</span>
+          <span class="category-post">计算机视觉基础与分类网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml4/" title="第 4 讲：目标检测与图像分割"
+        <a href="/2026/11/04/mml4/" title="目标检测与图像分割"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 4 讲：目标检测与图像分割</span>
+          <span class="category-post">目标检测与图像分割</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml5/" title="第 5 讲：自然语言、序列与图建模"
+        <a href="/2026/11/04/mml5/" title="自然语言、序列与图建模"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 5 讲：自然语言、序列与图建模</span>
+          <span class="category-post">自然语言、序列与图建模</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml6/" title="第 6 讲：多模态表示与融合"
+        <a href="/2026/11/04/mml6/" title="多模态表示与融合"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 6 讲：多模态表示与融合</span>
+          <span class="category-post">多模态表示与融合</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml7/" title="第 7 讲：跨模态对齐与注意力"
+        <a href="/2026/11/04/mml7/" title="跨模态对齐与注意力"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 7 讲：跨模态对齐与注意力</span>
+          <span class="category-post">跨模态对齐与注意力</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml8/" title="第 8 讲：视觉语言基础模型"
+        <a href="/2026/11/04/mml8/" title="视觉语言基础模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 8 讲：视觉语言基础模型</span>
+          <span class="category-post">视觉语言基础模型</span>
         </a>
       
     
@@ -481,14 +481,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">05 · 第 5 讲：自然语言、序列与图建模</h1>
+            <h1 class="reading-title">05 · 自然语言、序列与图建模</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>05</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NLP-%E7%9A%84%E7%9B%AE%E6%A0%87%E4%B8%8E%E8%AF%8D%E7%9A%84%E8%A1%A8%E7%A4%BA%EF%BC%9A%E4%BB%8E%E7%BC%96%E5%8F%B7%E5%88%B0%E8%AF%8D%E4%B9%89"><span class="toc-text">NLP 的目标与词的表示：从编号到词义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NLP-%E6%83%B3%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">NLP 想做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#One-hot-%E4%B8%8E%E8%AF%8D%E8%A2%8B"><span class="toc-text">One-hot 与词袋</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%81%87%E8%AE%BE%E4%B8%8E%E8%AF%8D%E5%90%91%E9%87%8F"><span class="toc-text">分布式假设与词向量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Word2Vec-%E4%B8%8E%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%8A%8A%E8%AF%8D%E4%B9%89%E5%92%8C%E5%BA%8F%E5%88%97%E6%A6%82%E7%8E%87%E5%AD%A6%E5%87%BA%E6%9D%A5"><span class="toc-text">Word2Vec 与语言模型：把词义和序列概率学出来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CBOW-%E4%B8%8E-Skip-gram%EF%BC%9A%E6%96%B9%E5%90%91%E5%BF%85%E5%88%86%E6%B8%85"><span class="toc-text">CBOW 与 Skip-gram：方向必分清</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#n-gram-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">n-gram 语言模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%B0%E6%83%91%E5%BA%A6-PPL"><span class="toc-text">困惑度 PPL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RNN%EF%BC%9A%E7%94%A8%E5%8F%82%E6%95%B0%E5%85%B1%E4%BA%AB%E5%BB%BA%E6%A8%A1%E4%BB%BB%E6%84%8F%E9%95%BF%E5%BA%8F%E5%88%97"><span class="toc-text">RNN：用参数共享建模任意长序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BA%8F%E5%88%97%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%8F%82%E6%95%B0%E5%85%B1%E4%BA%AB"><span class="toc-text">为什么要序列建模与参数共享</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vanilla-RNN-%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%9B%BE"><span class="toc-text">Vanilla RNN 与计算图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Teacher-forcing-%E4%B8%8E-BPTT"><span class="toc-text">Teacher forcing 与 BPTT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E4%B8%8E%E7%88%86%E7%82%B8"><span class="toc-text">梯度消失与爆炸</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LSTM%EF%BC%9A%E7%94%A8%E5%8A%A0%E6%B3%95%E6%9B%B4%E6%96%B0%E6%95%91%E9%95%BF%E4%BE%9D%E8%B5%96"><span class="toc-text">LSTM：用加法更新救长依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E9%97%A8%E4%B8%80%E8%AE%B0%E5%BF%86"><span class="toc-text">三门一记忆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E5%BF%86%E6%9B%B4%E6%96%B0%E4%B8%8E%E5%8A%A0%E6%B3%95%E8%B7%AF%E5%BE%84"><span class="toc-text">记忆更新与加法路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN-%E5%AE%B6%E6%97%8F%E5%B0%8F%E7%BB%93"><span class="toc-text">RNN 家族小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%8A%E5%85%B3%E7%B3%BB%E4%B9%9F%E6%94%BE%E8%BF%9B%E8%A1%A8%E7%A4%BA"><span class="toc-text">图神经网络：把关系也放进表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E4%B8%8E%E4%BB%BB%E5%8A%A1"><span class="toc-text">图与任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E5%9F%9F%E8%81%9A%E5%90%88"><span class="toc-text">邻域聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E5%B0%BE"><span class="toc-text">收尾</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 5 讲：自然语言、序列与图建模"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="自然语言、序列与图建模"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -501,8 +501,7 @@
             
               <div class="markdown-body">
                 
-                <p>复习这一讲的时候我的感受是：它回答了一个很根本的问题——<strong>文字怎么变成可学习的表示，又怎么按顺序或关系建模</strong>。老师从“词编号不是词义”讲起，用分布式假设引出 word2vec，再讲语言模型、RNN、LSTM，末尾把图神经网络也放进来。我复习时抓的钩子是“表示→序列→关系”三层：词向量解决单个词的语义，RNN/LSTM 解决词序和长依赖，GNN 解决节点间的关系。公式和例题我一步不省地推，也记一下我自己卡过的地方，尤其是 CBOW/Skip-gram 的方向和 LSTM 那条加法梯度路径。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="NLP-的目标与词的表示：从编号到词义">NLP 的目标与词的表示：从编号到词义</h2>
 <h3 id="NLP-想做什么">NLP 想做什么</h3>
 <p>课件给的目标很明确：<strong>对广泛语言的深度理解，超越字符串处理或关键词匹配</strong>。想建的系统分两档：雄心档（语音识别、机器翻译、信息抽取、对话理解、问答）和朴素档（拼写纠正、词性标注、文本分类）。课件列了句法任务：分词、形态分析、词性标注、短语组块、句法分析。课件的“近期进展”我觉得很有时代感，五个问句：真实性（能否给事实准确的信息）、推理（能否可靠做复杂推理）、适应（能否获取新知识适应新环境）、接地（能否真正理解语言描述的现实世界）、Agentic AI（能否把语言理解变成可靠动作）——这正好接上第 1 讲五大挑战里的“翻译”和后面基础模型的推理。</p>
@@ -599,7 +598,7 @@ o_t&amp;=\sigma(W_o[h_{t-1};x_t]+b_o),&amp; h_t&amp;=o_t\odot\tanh(c_t).
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 5 讲：自然语言、序列与图建模</div>
+      <div>自然语言、序列与图建模</div>
       <div>https://yjyxfcy.github.io/2026/11/04/mml5/</div>
     </div>
     <div class="license-meta">
@@ -648,8 +647,8 @@ o_t&amp;=\sigma(W_o[h_{t-1};x_t]+b_o),&amp; h_t&amp;=o_t\odot\tanh(c_t).
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/multimodal/">← 返回 多模态学习 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/mml4/"><small>上一篇</small><strong>← 第 4 讲：目标检测与图像分割</strong></a>
-                    <a href="/2026/11/04/mml6/"><small>下一篇</small><strong>第 6 讲：多模态表示与融合 →</strong></a>
+                    <a href="/2026/11/04/mml4/"><small>上一篇</small><strong>← 目标检测与图像分割</strong></a>
+                    <a href="/2026/11/04/mml6/"><small>下一篇</small><strong>多模态表示与融合 →</strong></a>
                   </div>
                 </nav>
               

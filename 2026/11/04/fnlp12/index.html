@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="复习这一讲的时候我的感受是：它把“怎样从海量文档里快速找到有用材料”拆成了一条完整的流水线——相关性怎么定义、稀疏匹配怎么算、稠密向量怎么学、负例怎么挑、近邻怎么近似搜、效果怎么评。课件分两份：lec10_ir.pdf 讲传统检索与 DPR，lec10_ir-embedding.pdf 讲向量学习、ANN 和负例策略。我复习时抓的钩子是 embedding 课件那个“99.9999%”：百万级语料">
+    <meta name="description" content="检索任务：先召回，再排序 相关性是什么：从绝对到相对 ir 课件给任务定义：词表 VVV、查询 qqq、文档库 DDD，理想输出是相关文档集合 R(q)R(q)R(q)，系统只能给出近似 R~(q)\tilde R(q)R~(q)。怎么找？方案一是绝对相关性：对每篇文档判 f(d,q)&#x3D;1f(d,q)&#x3D;1f(d,q)&#x3D;1 是否相关，把相关的都选出来——但“相关”本身难以绝对判定。方案二是相对相关">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 12 讲：信息检索与文本向量">
+<meta property="og:title" content="信息检索与文本向量">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/fnlp12/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="复习这一讲的时候我的感受是：它把“怎样从海量文档里快速找到有用材料”拆成了一条完整的流水线——相关性怎么定义、稀疏匹配怎么算、稠密向量怎么学、负例怎么挑、近邻怎么近似搜、效果怎么评。课件分两份：lec10_ir.pdf 讲传统检索与 DPR，lec10_ir-embedding.pdf 讲向量学习、ANN 和负例策略。我复习时抓的钩子是 embedding 课件那个“99.9999%”：百万级语料">
+<meta property="og:description" content="检索任务：先召回，再排序 相关性是什么：从绝对到相对 ir 课件给任务定义：词表 VVV、查询 qqq、文档库 DDD，理想输出是相关文档集合 R(q)R(q)R(q)，系统只能给出近似 R~(q)\tilde R(q)R~(q)。怎么找？方案一是绝对相关性：对每篇文档判 f(d,q)&#x3D;1f(d,q)&#x3D;1f(d,q)&#x3D;1 是否相关，把相关的都选出来——但“相关”本身难以绝对判定。方案二是相对相关">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:12:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:43:38.343Z">
+<meta property="article:modified_time" content="2026-11-19T14:28:55.934Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 12 讲：信息检索与文本向量 - Yjy</title>
+  <title>信息检索与文本向量 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="12 · 第 12 讲：信息检索与文本向量"></span>
+            <span id="subtitle" data-typed-text="12 · 信息检索与文本向量"></span>
           
         </div>
 
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.4k 字
+          6k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          41 分钟
+          38 分钟
         
       </span>
     
@@ -482,55 +482,55 @@
     
       
       
-        <a href="/2026/11/04/fnlp11/" title="第 11 讲：语义表示与组合语义"
+        <a href="/2026/11/04/fnlp11/" title="语义表示与组合语义"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 11 讲：语义表示与组合语义</span>
+          <span class="category-post">语义表示与组合语义</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp12/" title="第 12 讲：信息检索与文本向量"
+        <a href="/2026/11/04/fnlp12/" title="信息检索与文本向量"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 12 讲：信息检索与文本向量</span>
+          <span class="category-post">信息检索与文本向量</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp13/" title="第 13 讲：预训练与微调"
+        <a href="/2026/11/04/fnlp13/" title="预训练与微调"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 13 讲：预训练与微调</span>
+          <span class="category-post">预训练与微调</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp14/" title="第 14 讲：后训练与指令对齐"
+        <a href="/2026/11/04/fnlp14/" title="后训练与指令对齐"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 14 讲：后训练与指令对齐</span>
+          <span class="category-post">后训练与指令对齐</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp15/" title="第 15 讲：提示学习与检索增强生成"
+        <a href="/2026/11/04/fnlp15/" title="提示学习与检索增强生成"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 15 讲：提示学习与检索增强生成</span>
+          <span class="category-post">提示学习与检索增强生成</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp16/" title="第 16 讲：NLP 任务、评测与基准"
+        <a href="/2026/11/04/fnlp16/" title="NLP 任务、评测与基准"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 16 讲：NLP 任务、评测与基准</span>
+          <span class="category-post">NLP 任务、评测与基准</span>
         </a>
       
     
@@ -553,14 +553,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">12 · 第 12 讲：信息检索与文本向量</h1>
+            <h1 class="reading-title">12 · 信息检索与文本向量</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/nlp/">自然语言处理基础</a><span>/</span><span>2026 春</span><span>/</span><span>12</span></nav>
               <a class="reading-course-link" href="/courses/nlp/">← 返回课程目录</a>
               
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E7%B4%A2%E4%BB%BB%E5%8A%A1%EF%BC%9A%E5%85%88%E5%8F%AC%E5%9B%9E%EF%BC%8C%E5%86%8D%E6%8E%92%E5%BA%8F"><span class="toc-text">检索任务：先召回，再排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9A%E4%BB%8E%E7%BB%9D%E5%AF%B9%E5%88%B0%E7%9B%B8%E5%AF%B9"><span class="toc-text">相关性是什么：从绝对到相对</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E4%B8%8E%E5%9B%9B%E4%B8%AA%E7%BB%84%E4%BB%B6"><span class="toc-text">两阶段与四个组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%97%AE%E7%AD%94%E5%92%8C-RAG-%E9%83%BD%E5%9D%90%E5%9C%A8%E6%A3%80%E7%B4%A2%E4%B8%8A%E9%9D%A2"><span class="toc-text">为什么问答和 RAG 都坐在检索上面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%A3%80%E7%B4%A2%EF%BC%9A%E4%BB%8E%E5%B8%83%E5%B0%94%E5%88%B0-BM25"><span class="toc-text">稀疏检索：从布尔到 BM25</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E6%A8%A1%E5%9E%8B%EF%BC%9A%E8%83%BD%E5%8C%B9%E9%85%8D%EF%BC%8C%E5%8D%B4%E9%9A%BE%E6%8E%92%E5%BA%8F"><span class="toc-text">布尔模型：能匹配，却难排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TF-IDF%EF%BC%9A%E6%96%87%E6%A1%A3%E9%87%8C%E5%B8%B8%E8%A7%81-%C3%97-%E5%85%A8%E5%BA%93%E9%87%8C%E7%A8%80%E6%9C%89"><span class="toc-text">TF-IDF：文档里常见 × 全库里稀有</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BM25%EF%BC%9A%E8%AE%A9%E8%AF%8D%E9%A2%91%E9%A5%B1%E5%92%8C%E3%80%81%E7%BB%99%E6%96%87%E6%A1%A3%E9%95%BF%E5%BA%A6%E8%AE%BE%E9%99%90"><span class="toc-text">BM25：让词频饱和、给文档长度设限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%87%BD%E6%95%B0%E4%B9%9F%E4%BC%9A%E6%94%B9%E5%8F%98%E6%8E%92%E5%BA%8F"><span class="toc-text">相似度函数也会改变排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%A0%E5%AF%86%E6%A3%80%E7%B4%A2%EF%BC%9A%E5%8F%8C%E7%BC%96%E7%A0%81%E5%99%A8%E4%B8%8E-DPR"><span class="toc-text">稠密检索：双编码器与 DPR</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA%E4%B8%AD%E5%BF%83%EF%BC%9A%E6%8A%8A%E4%B8%80%E5%88%87%E9%83%BD%E5%8F%98%E6%88%90%E5%90%91%E9%87%8F"><span class="toc-text">表示中心：把一切都变成向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DPR%EF%BC%9A%E7%94%A8%E5%B0%8F%E9%97%AE%E7%AD%94%E5%AF%B9%E8%AE%AD%E7%BB%83%E7%A8%A0%E5%AF%86%E6%A3%80%E7%B4%A2"><span class="toc-text">DPR：用小问答对训练稠密检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E9%87%8D%E6%8E%92"><span class="toc-text">为什么还要重排</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9F%E4%BE%8B%E6%80%8E%E6%A0%B7%E5%86%B3%E5%AE%9A%E6%A8%A1%E5%9E%8B%E5%AD%A6%E5%88%B0%E4%BB%80%E4%B9%88"><span class="toc-text">负例怎样决定模型学到什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E6%8D%9F%E5%A4%B1%E4%B8%8E%E6%89%B9%E5%86%85%E8%B4%9F%E4%BE%8B"><span class="toc-text">对比损失与批内负例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%B4%9F%E4%BE%8B%E5%A4%AA%E5%BC%B1%EF%BC%9A99-9999-%E9%83%BD%E6%98%BE%E7%84%B6%E6%97%A0%E5%85%B3"><span class="toc-text">随机负例太弱：99.9999% 都显然无关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E8%B4%9F%E4%BE%8B%E4%B8%8E%E8%87%AA%E8%B4%9F%E4%BE%8B-ANCE"><span class="toc-text">稀疏负例与自负例 ANCE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%91%E4%BC%BC%E8%BF%91%E9%82%BB%E4%B8%8E%E8%AF%84%E6%B5%8B"><span class="toc-text">近似近邻与评测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ANNS%EF%BC%9A%E7%94%A8%E4%B8%80%E7%82%B9%E5%8F%AC%E5%9B%9E%E6%8D%A2%E4%BA%9A%E7%BA%BF%E6%80%A7%E9%80%9F%E5%BA%A6"><span class="toc-text">ANNS：用一点召回换亚线性速度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E5%88%A4%E6%96%AD%E6%A3%80%E7%B4%A2%E5%A5%BD%E4%B8%8D%E5%A5%BD"><span class="toc-text">怎样判断检索好不好</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E5%B0%BE%EF%BC%9A%E7%BB%99%E6%A0%A1%E5%9B%AD%E9%97%AE%E7%AD%94%E8%AE%BE%E8%AE%A1%E4%B8%80%E5%A5%97%E6%A3%80%E7%B4%A2"><span class="toc-text">收尾：给校园问答设计一套检索</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 12 讲：信息检索与文本向量"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="信息检索与文本向量"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -573,8 +573,7 @@
             
               <div class="markdown-body">
                 
-                <p>复习这一讲的时候我的感受是：它把“怎样从海量文档里快速找到有用材料”拆成了一条完整的流水线——相关性怎么定义、稀疏匹配怎么算、稠密向量怎么学、负例怎么挑、近邻怎么近似搜、效果怎么评。课件分两份：<code>lec10_ir.pdf</code> 讲传统检索与 DPR，<code>lec10_ir-embedding.pdf</code> 讲向量学习、ANN 和负例策略。我复习时抓的钩子是 embedding 课件那个“99.9999%”：百万级语料里几乎所有文档都显然无关，检索真正要分辨的是极少数“关键词相近却答非所问”的困难负例——这一句话解释了为什么随机负例不管用、为什么 ANCE 要反复刷新索引。也记一下我自己的联系：Lab3 文本检索我亲手搭过召回加排序的两阶段；Lab4 里我试 RAG v1/v2/v3 全都低于 baseline，当时只归因于 prompt 污染，现在回头看，检索回来的材料本身不准，塞进 prompt 只会添噪声。上一讲语义表示问“怎样把句子变成可验证的结构”，这一讲问的是更工程的问题：给定查询，怎样把最相关的文档排在前面。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="检索任务：先召回，再排序">检索任务：先召回，再排序</h2>
 <h3 id="相关性是什么：从绝对到相对">相关性是什么：从绝对到相对</h3>
 <p>ir 课件给任务定义：词表 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">V</span></span></span></span>、查询 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span></span></span></span>、文档库 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span>，理想输出是相关文档集合 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(q)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mclose">)</span></span></span></span>，系统只能给出近似 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>R</mi><mo>~</mo></mover><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tilde R(q)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1702em;vertical-align:-0.25em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9202em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span></span><span style="top:-3.6023em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">~</span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mclose">)</span></span></span></span>。怎么找？方案一是<strong>绝对相关性</strong>：对每篇文档判 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>d</mi><mo separator="true">,</mo><mi>q</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">f(d,q)=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 是否相关，把相关的都选出来——但“相关”本身难以绝对判定。方案二是<strong>相对相关性</strong>：不判单篇，只排序，要求打分函数满足</p>
@@ -679,7 +678,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 12 讲：信息检索与文本向量</div>
+      <div>信息检索与文本向量</div>
       <div>https://yjyxfcy.github.io/2026/11/04/fnlp12/</div>
     </div>
     <div class="license-meta">
@@ -728,8 +727,8 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/nlp/">← 返回 自然语言处理基础 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/fnlp11/"><small>上一篇</small><strong>← 第 11 讲：语义表示与组合语义</strong></a>
-                    <a href="/2026/11/04/fnlp13/"><small>下一篇</small><strong>第 13 讲：预训练与微调 →</strong></a>
+                    <a href="/2026/11/04/fnlp11/"><small>上一篇</small><strong>← 语义表示与组合语义</strong></a>
+                    <a href="/2026/11/04/fnlp13/"><small>下一篇</small><strong>预训练与微调 →</strong></a>
                   </div>
                 </nav>
               

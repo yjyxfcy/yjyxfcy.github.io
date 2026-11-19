@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="复习这一讲的时候我的感受是：它几乎就是我 Lab4 实验报告的理论版。我那三个月折腾 Qwen3-8B 解物理化学填空，准确率从 0.46 拉到 0.7521，一个参数都没改，改的全是输入——这一讲讲的正是这件事。课件分四块：提示基础与流程、少样本上下文学习、提示工程、检索增强生成。我复习时抓的钩子有三个：课件同一个 BERT 情感任务，模板 A 得 0.534、模板 B 得 0.749，措辞直接">
+    <meta name="description" content="提示在做什么：不改权重，改输入 什么是提示 课件引 Pengfei Liu 的定义：提示是通过给一段指定任务的文本，鼓励预训练模型做出特定预测；本质是往输入里加文本，更好地利用预训练知识，而不更新参数。课件给最朴素的例子：把 “When a dog sees a squirrel, it will usually” 喂给 GPT-2，Small 和 XL 续写出完全不同的句子——这都要归功于下一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 15 讲：提示学习与检索增强生成">
+<meta property="og:title" content="提示学习与检索增强生成">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/fnlp15/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="复习这一讲的时候我的感受是：它几乎就是我 Lab4 实验报告的理论版。我那三个月折腾 Qwen3-8B 解物理化学填空，准确率从 0.46 拉到 0.7521，一个参数都没改，改的全是输入——这一讲讲的正是这件事。课件分四块：提示基础与流程、少样本上下文学习、提示工程、检索增强生成。我复习时抓的钩子有三个：课件同一个 BERT 情感任务，模板 A 得 0.534、模板 B 得 0.749，措辞直接">
+<meta property="og:description" content="提示在做什么：不改权重，改输入 什么是提示 课件引 Pengfei Liu 的定义：提示是通过给一段指定任务的文本，鼓励预训练模型做出特定预测；本质是往输入里加文本，更好地利用预训练知识，而不更新参数。课件给最朴素的例子：把 “When a dog sees a squirrel, it will usually” 喂给 GPT-2，Small 和 XL 续写出完全不同的句子——这都要归功于下一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T02:15:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:43:38.349Z">
+<meta property="article:modified_time" content="2026-11-19T14:29:07.818Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 15 讲：提示学习与检索增强生成 - Yjy</title>
+  <title>提示学习与检索增强生成 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="15 · 第 15 讲：提示学习与检索增强生成"></span>
+            <span id="subtitle" data-typed-text="15 · 提示学习与检索增强生成"></span>
           
         </div>
 
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.5k 字
+          4.1k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          28 分钟
+          26 分钟
         
       </span>
     
@@ -482,55 +482,55 @@
     
       
       
-        <a href="/2026/11/04/fnlp11/" title="第 11 讲：语义表示与组合语义"
+        <a href="/2026/11/04/fnlp11/" title="语义表示与组合语义"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 11 讲：语义表示与组合语义</span>
+          <span class="category-post">语义表示与组合语义</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp12/" title="第 12 讲：信息检索与文本向量"
+        <a href="/2026/11/04/fnlp12/" title="信息检索与文本向量"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 12 讲：信息检索与文本向量</span>
+          <span class="category-post">信息检索与文本向量</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp13/" title="第 13 讲：预训练与微调"
+        <a href="/2026/11/04/fnlp13/" title="预训练与微调"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 13 讲：预训练与微调</span>
+          <span class="category-post">预训练与微调</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp14/" title="第 14 讲：后训练与指令对齐"
+        <a href="/2026/11/04/fnlp14/" title="后训练与指令对齐"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 14 讲：后训练与指令对齐</span>
+          <span class="category-post">后训练与指令对齐</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp15/" title="第 15 讲：提示学习与检索增强生成"
+        <a href="/2026/11/04/fnlp15/" title="提示学习与检索增强生成"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 15 讲：提示学习与检索增强生成</span>
+          <span class="category-post">提示学习与检索增强生成</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/fnlp16/" title="第 16 讲：NLP 任务、评测与基准"
+        <a href="/2026/11/04/fnlp16/" title="NLP 任务、评测与基准"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 16 讲：NLP 任务、评测与基准</span>
+          <span class="category-post">NLP 任务、评测与基准</span>
         </a>
       
     
@@ -553,14 +553,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">15 · 第 15 讲：提示学习与检索增强生成</h1>
+            <h1 class="reading-title">15 · 提示学习与检索增强生成</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/nlp/">自然语言处理基础</a><span>/</span><span>2026 春</span><span>/</span><span>15</span></nav>
               <a class="reading-course-link" href="/courses/nlp/">← 返回课程目录</a>
               
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9A%E4%B8%8D%E6%94%B9%E6%9D%83%E9%87%8D%EF%BC%8C%E6%94%B9%E8%BE%93%E5%85%A5"><span class="toc-text">提示在做什么：不改权重，改输入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%8F%90%E7%A4%BA"><span class="toc-text">什么是提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%E5%9B%9B%E6%AD%A5"><span class="toc-text">标准流程四步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%94%E6%A1%88%E6%8F%90%E5%8F%96%E5%B8%B8%E8%A2%AB%E5%BF%BD%E7%95%A5"><span class="toc-text">答案提取常被忽略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%91%E6%A0%B7%E6%9C%AC%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%A6%E4%B9%A0"><span class="toc-text">少样本与上下文学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%B6%E6%A0%B7%E6%9C%AC%E4%B8%8E%E5%B0%91%E6%A0%B7%E6%9C%AC"><span class="toc-text">零样本与少样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E6%95%8F%E6%84%9F%EF%BC%8C%E8%80%8C%E4%B8%94%E5%8F%8D%E7%9B%B4%E8%A7%89"><span class="toc-text">示例敏感，而且反直觉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E9%80%89%E7%A4%BA%E4%BE%8B%E4%B8%8E%E6%8E%92%E5%BA%8F"><span class="toc-text">怎样选示例与排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E9%93%BE%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%8C%96%E6%8E%A8%E7%90%86"><span class="toc-text">思维链与程序化推理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CoT%EF%BC%9A%E5%85%88%E6%8E%A8%E7%90%86%EF%BC%8C%E5%86%8D%E5%9B%9E%E7%AD%94"><span class="toc-text">CoT：先推理，再回答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%8C%96%E8%BE%93%E5%87%BA%EF%BC%9APAL%E3%80%81PoT-%E4%B8%8E-JSON"><span class="toc-text">程序化输出：PAL、PoT 与 JSON</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E6%A0%91%E4%B8%8E%E8%87%AA%E6%B4%BD%E6%8A%95%E7%A5%A8"><span class="toc-text">思维树与自洽投票</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%EF%BC%9A%E6%89%8B%E5%86%99%E4%B8%8E%E8%87%AA%E5%8A%A8"><span class="toc-text">提示工程：手写与自动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%AA%E8%BE%9E%E7%9C%9F%E7%9A%84%E5%86%B3%E5%AE%9A%E5%88%86%E6%95%B0"><span class="toc-text">措辞真的决定分数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%83%8F%E7%BB%99%E4%BA%BA%E4%BA%A4%E4%BB%A3%E4%BB%BB%E5%8A%A1"><span class="toc-text">手工设计：像给人交代任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%90%9C%E7%B4%A2"><span class="toc-text">自动搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90-RAG"><span class="toc-text">检索增强生成 RAG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81-RAG"><span class="toc-text">为什么要 RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%AB%AF%E9%83%BD%E8%83%BD%E6%94%B9"><span class="toc-text">两端都能改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%AF%A5%E6%A3%80%E7%B4%A2"><span class="toc-text">什么时候该检索</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 15 讲：提示学习与检索增强生成"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="提示学习与检索增强生成"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -573,8 +573,7 @@
             
               <div class="markdown-body">
                 
-                <p>复习这一讲的时候我的感受是：它几乎就是我 Lab4 实验报告的理论版。我那三个月折腾 Qwen3-8B 解物理化学填空，准确率从 0.46 拉到 0.7521，<strong>一个参数都没改</strong>，改的全是输入——这一讲讲的正是这件事。课件分四块：提示基础与流程、少样本上下文学习、提示工程、检索增强生成。我复习时抓的钩子有三个：课件同一个 BERT 情感任务，模板 A 得 0.534、模板 B 得 0.749，措辞直接决定分数；课件 Min 2022 的反直觉发现，把示例标签换成随机标签几乎不掉点、示例加多反而可能掉点——这正好解释我 Lab4 里 few-shot CoT 从 0.46 掉到 0.4347、中文 few-shot 掉到 0.4086；课件 CoT 给模型“自适应计算时间”，对应我开 enable_thinking 白捡 16 个点。也记一下跨讲联系：第 14 讲后训练让模型学会遵循指令，这一讲才有得“提示”；第 12 讲检索是 RAG 的前端；第 16 讲评测则告诉我怎样验证这些花样到底有没有用。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="提示在做什么：不改权重，改输入">提示在做什么：不改权重，改输入</h2>
 <h3 id="什么是提示">什么是提示</h3>
 <p>课件引 Pengfei Liu 的定义：提示是通过给一段指定任务的文本，鼓励预训练模型做出特定预测；本质是<strong>往输入里加文本，更好地利用预训练知识</strong>，而不更新参数。课件给最朴素的例子：把 “When a dog sees a squirrel, it will usually” 喂给 GPT-2，Small 和 XL 续写出完全不同的句子——这都要归功于下一词预测目标。自己补的备注：正因为模型只会续写，直接丢“电影很好看”它可能接着编故事；写成“判断下面评论是正面还是负面，只输出标签：电影很好看”，输出形式才明确。</p>
@@ -651,7 +650,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 15 讲：提示学习与检索增强生成</div>
+      <div>提示学习与检索增强生成</div>
       <div>https://yjyxfcy.github.io/2026/11/04/fnlp15/</div>
     </div>
     <div class="license-meta">
@@ -700,8 +699,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/nlp/">← 返回 自然语言处理基础 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/fnlp14/"><small>上一篇</small><strong>← 第 14 讲：后训练与指令对齐</strong></a>
-                    <a href="/2026/11/04/fnlp16/"><small>下一篇</small><strong>第 16 讲：NLP 任务、评测与基准 →</strong></a>
+                    <a href="/2026/11/04/fnlp14/"><small>上一篇</small><strong>← 后训练与指令对齐</strong></a>
+                    <a href="/2026/11/04/fnlp16/"><small>下一篇</small><strong>NLP 任务、评测与基准 →</strong></a>
                   </div>
                 </nav>
               

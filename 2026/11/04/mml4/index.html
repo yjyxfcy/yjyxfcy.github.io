@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="复习这一讲的时候我的感受是：它把第 3 讲的卷积零件真正“用起来”了——分类只问整图是什么，检测还要问在哪儿，分割更要给每个像素定类别。老师的主线很清楚：检测沿着 R-CNN→Fast R-CNN→Faster R-CNN 一步步把“慢”和“不端到端”两个毛病修掉，再岔出 YOLO 这条单阶段快路；损失从 IoU 一路改到 GIoU&#x2F;DIoU&#x2F;CIoU，分类用 Focal 压易样本；分割则从滑窗走">
+    <meta name="description" content="分类、检测、分割：三种任务三种输出 任务区别与框的表示 先把三种任务的输出分清：分类输出整图一个类别；检测输出每个物体的类别加边界框；语义分割给每个像素一个类别、但不区分同类的不同实例；实例分割还要把两个同类物体分开。一个框可以用 (x1,y1,x2,y2)(x_1,y_1,x_2,y_2)(x1​,y1​,x2​,y2​)（两角）或 (cx,cy,w,h)(c_x,c_y,w,h)(cx​,c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 4 讲：目标检测与图像分割">
+<meta property="og:title" content="目标检测与图像分割">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml4/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="复习这一讲的时候我的感受是：它把第 3 讲的卷积零件真正“用起来”了——分类只问整图是什么，检测还要问在哪儿，分割更要给每个像素定类别。老师的主线很清楚：检测沿着 R-CNN→Fast R-CNN→Faster R-CNN 一步步把“慢”和“不端到端”两个毛病修掉，再岔出 YOLO 这条单阶段快路；损失从 IoU 一路改到 GIoU&#x2F;DIoU&#x2F;CIoU，分类用 Focal 压易样本；分割则从滑窗走">
+<meta property="og:description" content="分类、检测、分割：三种任务三种输出 任务区别与框的表示 先把三种任务的输出分清：分类输出整图一个类别；检测输出每个物体的类别加边界框；语义分割给每个像素一个类别、但不区分同类的不同实例；实例分割还要把两个同类物体分开。一个框可以用 (x1,y1,x2,y2)(x_1,y_1,x_2,y_2)(x1​,y1​,x2​,y2​)（两角）或 (cx,cy,w,h)(c_x,c_y,w,h)(cx​,c">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T04:04:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:43:38.380Z">
+<meta property="article:modified_time" content="2026-11-19T14:30:34.577Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 4 讲：目标检测与图像分割 - Yjy</title>
+  <title>目标检测与图像分割 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="04 · 第 4 讲：目标检测与图像分割"></span>
+            <span id="subtitle" data-typed-text="04 · 目标检测与图像分割"></span>
           
         </div>
 
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.2k 字
+          7k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          46 分钟
+          44 分钟
         
       </span>
     
@@ -392,73 +392,73 @@
     
       
       
-        <a href="/2026/11/04/mml1/" title="第 1 讲：多模态学习导论"
+        <a href="/2026/11/04/mml1/" title="多模态学习导论"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 1 讲：多模态学习导论</span>
+          <span class="category-post">多模态学习导论</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml2/" title="第 2 讲：深度学习基础"
+        <a href="/2026/11/04/mml2/" title="深度学习基础"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 2 讲：深度学习基础</span>
+          <span class="category-post">深度学习基础</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml3/" title="第 3 讲：计算机视觉基础与分类网络"
+        <a href="/2026/11/04/mml3/" title="计算机视觉基础与分类网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 3 讲：计算机视觉基础与分类网络</span>
+          <span class="category-post">计算机视觉基础与分类网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml4/" title="第 4 讲：目标检测与图像分割"
+        <a href="/2026/11/04/mml4/" title="目标检测与图像分割"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 4 讲：目标检测与图像分割</span>
+          <span class="category-post">目标检测与图像分割</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml5/" title="第 5 讲：自然语言、序列与图建模"
+        <a href="/2026/11/04/mml5/" title="自然语言、序列与图建模"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 5 讲：自然语言、序列与图建模</span>
+          <span class="category-post">自然语言、序列与图建模</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml6/" title="第 6 讲：多模态表示与融合"
+        <a href="/2026/11/04/mml6/" title="多模态表示与融合"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 6 讲：多模态表示与融合</span>
+          <span class="category-post">多模态表示与融合</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml7/" title="第 7 讲：跨模态对齐与注意力"
+        <a href="/2026/11/04/mml7/" title="跨模态对齐与注意力"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 7 讲：跨模态对齐与注意力</span>
+          <span class="category-post">跨模态对齐与注意力</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml8/" title="第 8 讲：视觉语言基础模型"
+        <a href="/2026/11/04/mml8/" title="视觉语言基础模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 8 讲：视觉语言基础模型</span>
+          <span class="category-post">视觉语言基础模型</span>
         </a>
       
     
@@ -481,14 +481,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">04 · 第 4 讲：目标检测与图像分割</h1>
+            <h1 class="reading-title">04 · 目标检测与图像分割</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>04</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E3%80%81%E6%A3%80%E6%B5%8B%E3%80%81%E5%88%86%E5%89%B2%EF%BC%9A%E4%B8%89%E7%A7%8D%E4%BB%BB%E5%8A%A1%E4%B8%89%E7%A7%8D%E8%BE%93%E5%87%BA"><span class="toc-text">分类、检测、分割：三种任务三种输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%8C%BA%E5%88%AB%E4%B8%8E%E6%A1%86%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-text">任务区别与框的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9A%E8%AE%A4%E5%90%8D%E5%AD%97%E6%9B%B4%E8%A6%81%E8%BE%A8%E4%BB%BB%E5%8A%A1"><span class="toc-text">数据集：认名字更要辨任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IoU-%E4%B8%8E-NMS"><span class="toc-text">IoU 与 NMS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Precision%E3%80%81Recall%E3%80%81AP%E3%80%81mAP-%E4%B8%8E-FPS"><span class="toc-text">Precision、Recall、AP、mAP 与 FPS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#R-CNN-%E5%AE%B6%E6%97%8F%EF%BC%9A%E4%BB%8E%E6%85%A2%E5%88%B0%E7%AB%AF%E5%88%B0%E7%AB%AF"><span class="toc-text">R-CNN 家族：从慢到端到端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E7%9A%84%E4%B8%A4%E6%9D%A1%E8%B7%AF%E4%B8%8E%E5%8C%BA%E5%9F%9F%E6%8F%90%E8%AE%AE"><span class="toc-text">检测的两条路与区域提议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R-CNN%EF%BC%9A%E9%80%90%E6%A1%86%E8%B7%91-CNN"><span class="toc-text">R-CNN：逐框跑 CNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-R-CNN-%E4%B8%8E-ROI-Pooling-Align"><span class="toc-text">Fast R-CNN 与 ROI Pooling&#x2F;Align</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Faster-R-CNN-%E4%B8%8E-RPN"><span class="toc-text">Faster R-CNN 与 RPN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E6%8D%9F%E5%A4%B1%EF%BC%9AFocal-%E4%B8%8E-IoU-%E5%AE%B6%E6%97%8F"><span class="toc-text">检测损失：Focal 与 IoU 家族</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Focal-Loss%EF%BC%9A%E5%8E%8B%E4%BD%8E%E6%98%93%E6%A0%B7%E6%9C%AC"><span class="toc-text">Focal Loss：压低易样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IoU-loss-%E4%B8%8E-GIoU-DIoU-CIoU"><span class="toc-text">IoU loss 与 GIoU&#x2F;DIoU&#x2F;CIoU</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YOLO%EF%BC%9A%E5%8D%95%E9%98%B6%E6%AE%B5%E6%A3%80%E6%B5%8B%E7%9A%84%E8%BF%9B%E5%8C%96"><span class="toc-text">YOLO：单阶段检测的进化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLOv1%EF%BC%9A%E7%BD%91%E6%A0%BC%E4%B8%8E%E8%BE%93%E5%87%BA%E7%BB%B4%E5%BA%A6"><span class="toc-text">YOLOv1：网格与输出维度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLOv2-v3%EF%BC%9Aanchor-%E4%B8%8E%E5%A4%9A%E5%B0%BA%E5%BA%A6"><span class="toc-text">YOLOv2&#x2F;v3：anchor 与多尺度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLOv4%EF%BC%9Abag-of-freebies"><span class="toc-text">YOLOv4：bag of freebies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%89%B2%EF%BC%9AFCN%E3%80%81%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF%E4%B8%8E-U-Net"><span class="toc-text">分割：FCN、转置卷积与 U-Net</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%BB%91%E7%AA%97%E5%88%B0-FCN"><span class="toc-text">从滑窗到 FCN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E9%87%87%E6%A0%B7%EF%BC%9Amax-unpooling-%E4%B8%8E%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF"><span class="toc-text">上采样：max unpooling 与转置卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#U-Net-%E5%AE%B6%E6%97%8F%E4%B8%8E%E6%94%B6%E5%B0%BE"><span class="toc-text">U-Net 家族与收尾</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 4 讲：目标检测与图像分割"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="目标检测与图像分割"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -501,8 +501,7 @@
             
               <div class="markdown-body">
                 
-                <p>复习这一讲的时候我的感受是：它把第 3 讲的卷积零件真正“用起来”了——分类只问整图是什么，检测还要问在哪儿，分割更要给每个像素定类别。老师的主线很清楚：检测沿着 <strong>R-CNN→Fast R-CNN→Faster R-CNN</strong> 一步步把“慢”和“不端到端”两个毛病修掉，再岔出 <strong>YOLO</strong> 这条单阶段快路；损失从 IoU 一路改到 GIoU/DIoU/CIoU，分类用 Focal 压易样本；分割则从滑窗走到 FCN、转置卷积、U-Net。公式和例题我一步不省地推，也记一下我自己卡过的地方，尤其是 ROI 的量化误差和 YOLOv1 那个输出维度。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="分类、检测、分割：三种任务三种输出">分类、检测、分割：三种任务三种输出</h2>
 <h3 id="任务区别与框的表示">任务区别与框的表示</h3>
 <p>先把三种任务的输出分清：<strong>分类</strong>输出整图一个类别；<strong>检测</strong>输出每个物体的类别加边界框；<strong>语义分割</strong>给每个像素一个类别、但不区分同类的不同实例；<strong>实例分割</strong>还要把两个同类物体分开。一个框可以用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x_1,y_1,x_2,y_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>（两角）或 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>c</mi><mi>x</mi></msub><mo separator="true">,</mo><msub><mi>c</mi><mi>y</mi></msub><mo separator="true">,</mo><mi>w</mi><mo separator="true">,</mo><mi>h</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c_x,c_y,w,h)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">h</span><span class="mclose">)</span></span></span></span>（中心加宽高）表示，<strong>计算前先统一格式</strong>，不然 IoU 会算错。</p>
@@ -603,7 +602,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 4 讲：目标检测与图像分割</div>
+      <div>目标检测与图像分割</div>
       <div>https://yjyxfcy.github.io/2026/11/04/mml4/</div>
     </div>
     <div class="license-meta">
@@ -652,8 +651,8 @@
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/multimodal/">← 返回 多模态学习 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/mml3/"><small>上一篇</small><strong>← 第 3 讲：计算机视觉基础与分类网络</strong></a>
-                    <a href="/2026/11/04/mml5/"><small>下一篇</small><strong>第 5 讲：自然语言、序列与图建模 →</strong></a>
+                    <a href="/2026/11/04/mml3/"><small>上一篇</small><strong>← 计算机视觉基础与分类网络</strong></a>
+                    <a href="/2026/11/04/mml5/"><small>下一篇</small><strong>自然语言、序列与图建模 →</strong></a>
                   </div>
                 </nav>
               

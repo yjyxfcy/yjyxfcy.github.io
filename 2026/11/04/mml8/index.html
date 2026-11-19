@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="复习这一讲的时候我的感受是：它把前面七讲的零件终于组装成了“基础模型”。老师按课件的概览分三块——视觉 Transformer（ViT 及改进）、NLP Transformer（BERT、GPT 1&#x2F;2&#x2F;3、LLaMA 1&#x2F;2&#x2F;3、LoRA）、多模态 Transformer（LLaVA、BLIP、InstructBLIP、MiniGPT4）。我复习时抓的钩子是“ViT 是眼睛，BERT&#x2F;GPT 是">
+    <meta name="description" content="ViT：把图像切成词 像素直接进 Transformer 的内存灾难 课件先试“把图像当一组像素值”直接喂标准 Transformer（Generative Pretraining from Pixels, ICML 2020），结构就是 LayerNorm + Self-Attention + MLP 加残差。课件点了死穴：内存。R×RR\times RR×R 的图，每个注意力矩阵要 R4R^">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 8 讲：视觉语言基础模型">
+<meta property="og:title" content="视觉语言基础模型">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/04/mml8/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="复习这一讲的时候我的感受是：它把前面七讲的零件终于组装成了“基础模型”。老师按课件的概览分三块——视觉 Transformer（ViT 及改进）、NLP Transformer（BERT、GPT 1&#x2F;2&#x2F;3、LLaMA 1&#x2F;2&#x2F;3、LoRA）、多模态 Transformer（LLaVA、BLIP、InstructBLIP、MiniGPT4）。我复习时抓的钩子是“ViT 是眼睛，BERT&#x2F;GPT 是">
+<meta property="og:description" content="ViT：把图像切成词 像素直接进 Transformer 的内存灾难 课件先试“把图像当一组像素值”直接喂标准 Transformer（Generative Pretraining from Pixels, ICML 2020），结构就是 LayerNorm + Self-Attention + MLP 加残差。课件点了死穴：内存。R×RR\times RR×R 的图，每个注意力矩阵要 R4R^">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-04T04:08:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:43:38.391Z">
+<meta property="article:modified_time" content="2026-11-19T14:30:53.958Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 8 讲：视觉语言基础模型 - Yjy</title>
+  <title>视觉语言基础模型 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="08 · 第 8 讲：视觉语言基础模型"></span>
+            <span id="subtitle" data-typed-text="08 · 视觉语言基础模型"></span>
           
         </div>
 
@@ -303,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.2k 字
+          5.9k 字
         
       </span>
     
@@ -314,7 +314,7 @@
         
         
         
-          39 分钟
+          38 分钟
         
       </span>
     
@@ -392,73 +392,73 @@
     
       
       
-        <a href="/2026/11/04/mml1/" title="第 1 讲：多模态学习导论"
+        <a href="/2026/11/04/mml1/" title="多模态学习导论"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 1 讲：多模态学习导论</span>
+          <span class="category-post">多模态学习导论</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml2/" title="第 2 讲：深度学习基础"
+        <a href="/2026/11/04/mml2/" title="深度学习基础"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 2 讲：深度学习基础</span>
+          <span class="category-post">深度学习基础</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml3/" title="第 3 讲：计算机视觉基础与分类网络"
+        <a href="/2026/11/04/mml3/" title="计算机视觉基础与分类网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 3 讲：计算机视觉基础与分类网络</span>
+          <span class="category-post">计算机视觉基础与分类网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml4/" title="第 4 讲：目标检测与图像分割"
+        <a href="/2026/11/04/mml4/" title="目标检测与图像分割"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 4 讲：目标检测与图像分割</span>
+          <span class="category-post">目标检测与图像分割</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml5/" title="第 5 讲：自然语言、序列与图建模"
+        <a href="/2026/11/04/mml5/" title="自然语言、序列与图建模"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 5 讲：自然语言、序列与图建模</span>
+          <span class="category-post">自然语言、序列与图建模</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml6/" title="第 6 讲：多模态表示与融合"
+        <a href="/2026/11/04/mml6/" title="多模态表示与融合"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 6 讲：多模态表示与融合</span>
+          <span class="category-post">多模态表示与融合</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml7/" title="第 7 讲：跨模态对齐与注意力"
+        <a href="/2026/11/04/mml7/" title="跨模态对齐与注意力"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 7 讲：跨模态对齐与注意力</span>
+          <span class="category-post">跨模态对齐与注意力</span>
         </a>
       
     
       
       
-        <a href="/2026/11/04/mml8/" title="第 8 讲：视觉语言基础模型"
+        <a href="/2026/11/04/mml8/" title="视觉语言基础模型"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 8 讲：视觉语言基础模型</span>
+          <span class="category-post">视觉语言基础模型</span>
         </a>
       
     
@@ -481,14 +481,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">08 · 第 8 讲：视觉语言基础模型</h1>
+            <h1 class="reading-title">08 · 视觉语言基础模型</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/multimodal/">多模态学习</a><span>/</span><span>2026 秋</span><span>/</span><span>08</span></nav>
               <a class="reading-course-link" href="/courses/multimodal/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ViT%EF%BC%9A%E6%8A%8A%E5%9B%BE%E5%83%8F%E5%88%87%E6%88%90%E8%AF%8D"><span class="toc-text">ViT：把图像切成词</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0%E7%9B%B4%E6%8E%A5%E8%BF%9B-Transformer-%E7%9A%84%E5%86%85%E5%AD%98%E7%81%BE%E9%9A%BE"><span class="toc-text">像素直接进 Transformer 的内存灾难</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#patch-%E5%8C%96%E4%B8%8E-ViT-%E7%BB%93%E6%9E%84"><span class="toc-text">patch 化与 ViT 结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ViT-vs-ResNet%EF%BC%9A%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-text">ViT vs ResNet：数据与归纳偏置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B-ViT%EF%BC%9A%E5%A2%9E%E5%BC%BA%E3%80%81%E6%AD%A3%E5%88%99%E4%B8%8E%E8%92%B8%E9%A6%8F"><span class="toc-text">改进 ViT：增强、正则与蒸馏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%BC%BA%E4%B8%8E%E6%AD%A3%E5%88%99"><span class="toc-text">增强与正则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%92%B8%E9%A6%8F"><span class="toc-text">蒸馏</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BERT-%E4%B8%8E-GPT%EF%BC%9A%E4%B8%A4%E6%9D%A1%E9%A2%84%E8%AE%AD%E7%BB%83%E8%B7%AF%E7%BA%BF"><span class="toc-text">BERT 与 GPT：两条预训练路线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BERT%EF%BC%9A%E5%8F%8C%E5%90%91%E7%BC%96%E7%A0%81%E5%99%A8"><span class="toc-text">BERT：双向编码器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT-1-2-3%EF%BC%9A%E8%87%AA%E5%9B%9E%E5%BD%92%E4%B8%8E%E8%A7%84%E6%A8%A1"><span class="toc-text">GPT-1&#x2F;2&#x2F;3：自回归与规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Encoder-vs-Decoder"><span class="toc-text">Encoder vs Decoder</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LLaMA%E3%80%81GQA-%E4%B8%8E-LoRA%EF%BC%9A%E5%BC%80%E6%BA%90%E4%B8%8E%E9%AB%98%E6%95%88"><span class="toc-text">LLaMA、GQA 与 LoRA：开源与高效</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LLaMA-%E5%AE%B6%E6%97%8F"><span class="toc-text">LLaMA 家族</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GQA%EF%BC%9AMHA-MQA-GQA"><span class="toc-text">GQA：MHA&#x2F;MQA&#x2F;GQA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LoRA%EF%BC%9A%E4%BD%8E%E7%A7%A9%E9%80%82%E9%85%8D"><span class="toc-text">LoRA：低秩适配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81-Transformer-%E4%B8%8E%E6%94%B6%E5%B0%BE"><span class="toc-text">多模态 Transformer 与收尾</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81-LLM-%E9%93%BE%E8%B7%AF"><span class="toc-text">多模态 LLM 链路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E5%B0%BE%EF%BC%9A%E4%BB%8E%E9%9B%B6%E4%BB%B6%E5%88%B0%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">收尾：从零件到基础模型</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 8 讲：视觉语言基础模型"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="视觉语言基础模型"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -501,8 +501,7 @@
             
               <div class="markdown-body">
                 
-                <p>复习这一讲的时候我的感受是：它把前面七讲的零件终于组装成了“基础模型”。老师按课件的概览分三块——视觉 Transformer（ViT 及改进）、NLP Transformer（BERT、GPT 1/2/3、LLaMA 1/2/3、LoRA）、多模态 Transformer（LLaVA、BLIP、InstructBLIP、MiniGPT4）。我复习时抓的钩子是“<strong>ViT 是眼睛，BERT/GPT 是嘴巴，LoRA 是高效适配，连接器把眼和嘴接起来</strong>”。公式和规模数字一步不省地记，也记一下我自己卡过的地方，尤其是 ViT 为什么“数据不够就更难训”、GQA 到底省了哪部分显存，以及课件里 GPT-1 参数量的一个笔误。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="ViT：把图像切成词">ViT：把图像切成词</h2>
 <h3 id="像素直接进-Transformer-的内存灾难">像素直接进 Transformer 的内存灾难</h3>
 <p>课件先试“把图像当一组像素值”直接喂标准 Transformer（Generative Pretraining from Pixels, ICML 2020），结构就是 LayerNorm + Self-Attention + MLP 加残差。课件点了死穴：<strong>内存</strong>。<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>×</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">R\times R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span></span></span></span> 的图，每个注意力矩阵要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">R^4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span> 个元素；<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>128</mn></mrow><annotation encoding="application/x-tex">R=128</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">128</span></span></span></span>、48 层、每层 16 头，<strong>单个样本</strong>的注意力矩阵就要 <strong>768GB</strong>。这显然不行，得先把图像压成更少的 token。</p>
@@ -662,7 +661,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 8 讲：视觉语言基础模型</div>
+      <div>视觉语言基础模型</div>
       <div>https://yjyxfcy.github.io/2026/11/04/mml8/</div>
     </div>
     <div class="license-meta">
@@ -711,7 +710,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/multimodal/">← 返回 多模态学习 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/04/mml7/"><small>上一篇</small><strong>← 第 7 讲：跨模态对齐与注意力</strong></a>
+                    <a href="/2026/11/04/mml7/"><small>上一篇</small><strong>← 跨模态对齐与注意力</strong></a>
                     
                   </div>
                 </nav>

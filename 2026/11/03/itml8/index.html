@@ -21,15 +21,15 @@
   <meta name="author" content="Yjy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一讲是我复习时花时间最多的一讲。前半本课件几乎全是推导：RNN 展开之后，五个参数的梯度要沿着时间一步步往回走，篇幅很长、一步一个中间量，跳着看必然断链。后半本换成了 Transformer，乍看是一堆新零件——自注意力、多头、残差、层规范化、位置编码、掩码——但把讲课顺序捋一遍就会发现，每个零件都是在补 RNN 的某个短板。所以这份笔记按课件顺序走，BPTT 那段我逐步抄了下来，也记了几处自己">
+    <meta name="description" content="序列建模的难点与 RNN 结构 序列数据麻烦在哪 课件开头列了一串例子：视频、音频、文本、股价和经济指标、购物浏览出行这类用户行为、天文观测、DNA。它们的共同点是序列数据：元素有先后，长度不固定。和第 1 讲对照着看，麻烦有三条。其一，序列里的数据不再独立同分布，第 1 讲那个撑起整套推断的 i.i.d. 假定在这里直接失效；其二，长度不定，输入维数固定的全连接网络接不住；其三，前后相关，当前">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第 8 讲：序列神经网络模型">
+<meta property="og:title" content="序列神经网络模型">
 <meta property="og:url" content="https://yjyxfcy.github.io/2026/11/03/itml8/index.html">
 <meta property="og:site_name" content="Yjy">
-<meta property="og:description" content="这一讲是我复习时花时间最多的一讲。前半本课件几乎全是推导：RNN 展开之后，五个参数的梯度要沿着时间一步步往回走，篇幅很长、一步一个中间量，跳着看必然断链。后半本换成了 Transformer，乍看是一堆新零件——自注意力、多头、残差、层规范化、位置编码、掩码——但把讲课顺序捋一遍就会发现，每个零件都是在补 RNN 的某个短板。所以这份笔记按课件顺序走，BPTT 那段我逐步抄了下来，也记了几处自己">
+<meta property="og:description" content="序列建模的难点与 RNN 结构 序列数据麻烦在哪 课件开头列了一串例子：视频、音频、文本、股价和经济指标、购物浏览出行这类用户行为、天文观测、DNA。它们的共同点是序列数据：元素有先后，长度不固定。和第 1 讲对照着看，麻烦有三条。其一，序列里的数据不再独立同分布，第 1 讲那个撑起整套推断的 i.i.d. 假定在这里直接失效；其二，长度不定，输入维数固定的全连接网络接不住；其三，前后相关，当前">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-03T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-19T13:57:04.929Z">
+<meta property="article:modified_time" content="2026-11-19T14:30:03.156Z">
 <meta property="article:author" content="Yjy">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>第 8 讲：序列神经网络模型 - Yjy</title>
+  <title>序列神经网络模型 - Yjy</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -275,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="08 · 第 8 讲：序列神经网络模型"></span>
+            <span id="subtitle" data-typed-text="08 · 序列神经网络模型"></span>
           
         </div>
 
@@ -314,7 +314,7 @@
         
         
         
-          151 分钟
+          150 分钟
         
       </span>
     
@@ -392,91 +392,91 @@
     
       
       
-        <a href="/2026/11/03/itml1/" title="第 1 讲：课程简介与机器学习概述"
+        <a href="/2026/11/03/itml1/" title="课程简介与机器学习概述"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 1 讲：课程简介与机器学习概述</span>
+          <span class="category-post">课程简介与机器学习概述</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml2/" title="第 2 讲：统计推断方法"
+        <a href="/2026/11/03/itml2/" title="统计推断方法"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 2 讲：统计推断方法</span>
+          <span class="category-post">统计推断方法</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml3/" title="第 3 讲：生成模型与生成式分类"
+        <a href="/2026/11/03/itml3/" title="生成模型与生成式分类"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 3 讲：生成模型与生成式分类</span>
+          <span class="category-post">生成模型与生成式分类</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml4/" title="第 4 讲：Logistic 回归与判别模型"
+        <a href="/2026/11/03/itml4/" title="Logistic 回归与判别模型"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 4 讲：Logistic 回归与判别模型</span>
+          <span class="category-post">Logistic 回归与判别模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml5/" title="第 5 讲：线性回归、正则化与贝叶斯回归"
+        <a href="/2026/11/03/itml5/" title="线性回归、正则化与贝叶斯回归"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 5 讲：线性回归、正则化与贝叶斯回归</span>
+          <span class="category-post">线性回归、正则化与贝叶斯回归</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml6/" title="第 6 讲：多层感知机与神经网络训练"
+        <a href="/2026/11/03/itml6/" title="多层感知机与神经网络训练"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 6 讲：多层感知机与神经网络训练</span>
+          <span class="category-post">多层感知机与神经网络训练</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml7/" title="第 7 讲：卷积神经网络"
+        <a href="/2026/11/03/itml7/" title="卷积神经网络"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 7 讲：卷积神经网络</span>
+          <span class="category-post">卷积神经网络</span>
         </a>
       
     
       
       
-        <a href="/2026/11/03/itml8/" title="第 8 讲：序列神经网络模型"
+        <a href="/2026/11/03/itml8/" title="序列神经网络模型"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">第 8 讲：序列神经网络模型</span>
+          <span class="category-post">序列神经网络模型</span>
         </a>
       
     
       
       
-        <a href="/2026/11/09/itml9/" title="第 9 讲：非参数模型——决策树与支持向量机"
+        <a href="/2026/11/09/itml9/" title="非参数模型——决策树与支持向量机"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 9 讲：非参数模型——决策树与支持向量机</span>
+          <span class="category-post">非参数模型——决策树与支持向量机</span>
         </a>
       
     
       
       
-        <a href="/2026/11/14/itml10/" title="第 10 讲：泛化理论与分类器集成"
+        <a href="/2026/11/14/itml10/" title="泛化理论与分类器集成"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">第 10 讲：泛化理论与分类器集成</span>
+          <span class="category-post">泛化理论与分类器集成</span>
         </a>
       
     
@@ -499,14 +499,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 class="reading-title">08 · 第 8 讲：序列神经网络模型</h1>
+            <h1 class="reading-title">08 · 序列神经网络模型</h1>
             
               <nav class="course-breadcrumb post-course-breadcrumb" aria-label="面包屑导航"><a href="/categories/">分类</a><span>/</span><a href="/courses/machine-learning/">机器学习概论</a><span>/</span><span>2026 秋</span><span>/</span><span>08</span></nav>
               <a class="reading-course-link" href="/courses/machine-learning/">← 返回课程目录</a>
               <p class="course-source-note">来源说明：本文由 AI 根据课程课件整理生成。学习和引用时请结合原课件核实。</p>
               <details class="mobile-toc"><summary>本文目录</summary><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%BB%BA%E6%A8%A1%E7%9A%84%E9%9A%BE%E7%82%B9%E4%B8%8E-RNN-%E7%BB%93%E6%9E%84"><span class="toc-text">序列建模的难点与 RNN 结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E9%BA%BB%E7%83%A6%E5%9C%A8%E5%93%AA"><span class="toc-text">序列数据麻烦在哪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E7%8A%B6%E6%80%81%E8%AE%B0%E4%BD%8F%E8%BF%87%E5%8E%BB%EF%BC%8C%E7%94%A8%E5%85%B1%E4%BA%AB%E5%AF%B9%E4%BB%98%E5%8F%98%E9%95%BF"><span class="toc-text">用状态记住过去，用共享对付变长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%95%E5%BC%80%E6%9D%A5%E7%9C%8B%EF%BC%9ARNN-%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%BC%8F%E5%AD%90"><span class="toc-text">展开来看：RNN 的四个式子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BPTT%EF%BC%9A%E6%A2%AF%E5%BA%A6%E6%B2%BF%E6%97%B6%E9%97%B4%E5%BE%80%E5%9B%9E%E8%B5%B0"><span class="toc-text">BPTT：梯度沿时间往回走</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E4%B8%8E%E6%A2%AF%E5%BA%A6%E8%A6%81%E8%B5%B0%E7%9A%84%E8%B7%AF"><span class="toc-text">损失与梯度要走的路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E6%AD%A5%E6%8E%A8%EF%BC%9A%E4%BB%8E%E9%A2%84%E6%B5%8B%E6%A6%82%E7%8E%87%E5%BE%80%E5%9B%9E%E8%B5%B0%E5%88%B0%E9%9A%90%E5%B1%82"><span class="toc-text">逐步推：从预测概率往回走到隐层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E4%B8%AA%E5%8F%82%E6%95%B0%E5%90%84%E8%87%AA%E7%9A%84%E6%A2%AF%E5%BA%A6"><span class="toc-text">五个参数各自的梯度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%BF%E4%BE%9D%E8%B5%96%EF%BC%9A%E9%9B%85%E5%8F%AF%E6%AF%94%E8%BF%9E%E4%B9%98%E6%92%91%E4%B8%8D%E4%BD%8F"><span class="toc-text">长依赖：雅可比连乘撑不住</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LSTM-%E4%B8%8E%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="toc-text">LSTM 与编码器—解码器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LSTM%EF%BC%9A%E7%BB%99%E8%AE%B0%E5%BF%86%E8%A3%85%E4%B8%89%E4%B8%AA%E9%97%A8"><span class="toc-text">LSTM：给记忆装三个门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91-RNN-%E4%B8%8E%E7%BC%96%E7%A0%81%E5%99%A8%E2%80%94%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="toc-text">双向 RNN 与编码器—解码器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%B8%8E%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">注意力与自注意力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%9A%E6%89%93%E5%88%86%E3%80%81%E5%BD%92%E4%B8%80%E3%80%81%E5%8A%A0%E6%9D%83"><span class="toc-text">注意力：打分、归一、加权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%B8%8E%E7%BC%A9%E6%94%BE%E7%82%B9%E7%A7%AF"><span class="toc-text">自注意力与缩放点积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%A4%B4%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%85%B3%E6%B3%A8%E5%85%B3%E7%B3%BB%E4%B8%8D%E5%A4%9F"><span class="toc-text">多头：一种关注关系不够</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformer-%E7%9A%84%E9%9B%B6%E4%BB%B6%E4%B8%8E%E7%BB%84%E8%A3%85"><span class="toc-text">Transformer 的零件与组装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E9%A6%88%E3%80%81%E6%AE%8B%E5%B7%AE%E3%80%81%E5%B1%82%E8%A7%84%E8%8C%83%E5%8C%96%EF%BC%9A%E8%AE%A9%E5%9D%97%E8%83%BD%E5%A0%86%E6%B7%B1"><span class="toc-text">前馈、残差、层规范化：让块能堆深</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%EF%BC%9A%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%B8%8D%E5%88%86%E5%85%88%E5%90%8E"><span class="toc-text">位置编码：自注意力不分先后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%99%A8%E4%B8%8E%E6%8E%A9%E7%A0%81"><span class="toc-text">编码器、解码器与掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%EF%BC%9A%E6%95%B4%E5%8F%A5%E4%B8%80%E8%B5%B7%E7%AE%97%EF%BC%8C%E7%94%9F%E6%88%90%E5%8F%AA%E8%83%BD%E4%B8%80%E6%AD%A5%E6%AD%A5"><span class="toc-text">训练：整句一起算，生成只能一步步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BE%E4%BB%B6%E7%9A%84%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%89%E6%AC%A1%E8%B7%83%E8%BF%81"><span class="toc-text">课件的总结：三次跃迁</span></a></li></ol></li></ol></div></details>
             
-            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="第 8 讲：序列神经网络模型"></strong><span>The original article content is not automatically translated.</span></p>
+            <p class="translation-notice" hidden><strong class="translated-post-title" data-original-title="序列神经网络模型"></strong><span>The original article content is not automatically translated.</span></p>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -519,8 +519,7 @@
             
               <div class="markdown-body">
                 
-                <p>这一讲是我复习时花时间最多的一讲。前半本课件几乎全是推导：RNN 展开之后，五个参数的梯度要沿着时间一步步往回走，篇幅很长、一步一个中间量，跳着看必然断链。后半本换成了 Transformer，乍看是一堆新零件——自注意力、多头、残差、层规范化、位置编码、掩码——但把讲课顺序捋一遍就会发现，每个零件都是在补 RNN 的某个短板。所以这份笔记按课件顺序走，BPTT 那段我逐步抄了下来，也记了几处自己卡住和课件笔误的地方。</p>
-<span id="more"></span>
+                <span id="more"></span>
 <h2 id="序列建模的难点与-RNN-结构">序列建模的难点与 RNN 结构</h2>
 <h3 id="序列数据麻烦在哪">序列数据麻烦在哪</h3>
 <p>课件开头列了一串例子：视频、音频、文本、股价和经济指标、购物浏览出行这类用户行为、天文观测、DNA。它们的共同点是<strong>序列数据</strong>：元素有先后，长度不固定。和第 1 讲对照着看，麻烦有三条。其一，序列里的数据不再独立同分布，第 1 讲那个撑起整套推断的 i.i.d. 假定在这里直接失效；其二，长度不定，输入维数固定的全连接网络接不住；其三，前后相关，当前的输出往往依赖很久以前的输入。</p>
@@ -992,7 +991,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第 8 讲：序列神经网络模型</div>
+      <div>序列神经网络模型</div>
       <div>https://yjyxfcy.github.io/2026/11/03/itml8/</div>
     </div>
     <div class="license-meta">
@@ -1041,8 +1040,8 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
                 <nav class="course-navigation" aria-label="课程章节导航">
                   <a class="course-back" href="/courses/machine-learning/">← 返回 机器学习概论 目录</a>
                   <div class="course-neighbors">
-                    <a href="/2026/11/03/itml7/"><small>上一篇</small><strong>← 第 7 讲：卷积神经网络</strong></a>
-                    <a href="/2026/11/09/itml9/"><small>下一篇</small><strong>第 9 讲：非参数模型——决策树与支持向量机 →</strong></a>
+                    <a href="/2026/11/03/itml7/"><small>上一篇</small><strong>← 卷积神经网络</strong></a>
+                    <a href="/2026/11/09/itml9/"><small>下一篇</small><strong>非参数模型——决策树与支持向量机 →</strong></a>
                   </div>
                 </nav>
               
